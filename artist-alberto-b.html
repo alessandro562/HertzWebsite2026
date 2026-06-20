@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alberto B — HERTZ</title>
+  <meta name="description" content="Alberto B — DJ & Producer. Resident at HERTZ, Bologna.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+    body { background: #08080d; color: #f5f5f3; font-family: 'Bricolage Grotesque', sans-serif; overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #08080d; }
+    ::-webkit-scrollbar-thumb { background: rgba(20,72,137,0.4); }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(20,72,137,0.7); }
+    img { user-select: none; -webkit-user-drag: none; }
+    button { font-family: inherit; border: none; background: none; cursor: pointer; }
+    @media (max-width: 768px) { * { -webkit-tap-highlight-color: transparent; } }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script type="text/babel" src="hertz-shared.jsx"></script>
+<script type="text/babel" src="hertz-artist-page.jsx"></script>
+<script type="text/babel">
+const ARTIST = {
+  name: 'Alberto B',
+  slug: 'alberto-b',
+  role: 'DJ · Producer',
+  n: '03', freq: '125 Hz',
+  origin: 'Bologna, IT',
+  since: '2024',
+  sets: 'Deep Tech, Groove',
+  img: 'assets/dj-alberto.jpg',
+  bio: 'Producer and DJ. Alberto brings a producer\'s ear to every live mix — textured, layered, searching. His sound navigates deep tech and groove with an attention to detail that rewards those paying close attention.',
+  social: {
+    instagram: '#',
+    soundcloud: '#',
+    booking: 'booking@hertz.cc',
+  },
+  mixes: [],
+};
+const EVENTS = [
+  { title: 'Hertz × Undersound', type: 'Collab', day: 'FRI 29.05', date: '29.05.26', venue: 'Cassero', city: 'Bologna', n: '024', status: 'upcoming' },
+  { title: 'Hertz / Kindergarten', type: 'Hertz Event', day: 'FRI 24.04', date: '24.04.26', venue: 'Kindergarten', city: 'Bologna', n: '023', status: 'past' },
+  { title: 'Hertz / Kindergarten', type: 'Hertz Event', day: 'FRI 27.02', date: '27.02.26', venue: 'Kindergarten', city: 'Bologna', n: '022', status: 'past' },
+  { title: 'Hertz / Kindergarten', type: 'Hertz Event', day: 'FRI 26.12', date: '26.12.25', venue: 'Kindergarten', city: 'Bologna', n: '021', status: 'past' },
+  { title: 'Buongiorno Classic Goes To Hertz', type: 'Collab', day: 'SAT 22.11', date: '22.11.25', venue: 'Numa Club', city: 'Bologna', n: '020', status: 'past' },
+  { title: 'Hertz / Kindergarten', type: 'Hertz Event', day: 'FRI 24.10', date: '24.10.25', venue: 'Kindergarten', city: 'Bologna', n: '019', status: 'past' },
+];
+ReactDOM.createRoot(document.getElementById('root')).render(
+  React.createElement(window.ArtistPage, { artist: ARTIST, events: EVENTS })
+);
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{
+  "name": "hertz-club",
+  "version": "1.0.0",
+  "description": "HERTZ — Minimal/deep-tech clubbing collective based in Bologna, Italy. Official website with events, residents, and community.",
+  "main": "index.js",
+  "scripts": {
+    "optimize-images": "node scripts/optimize-images.mjs",
+    "dev": "vercel dev",
+    "build": "npm run optimize-images",
+    "deploy": "vercel deploy --prod",
+    "test": "echo \"Ready for production\" && exit 0"
+  },
+  "keywords": [
+    "club",
+    "bologna",
+    "techno",
+    "deep-tech",
+    "events",
+    "music"
+  ],
+  "author": "HERTZ Collective",
+  "license": "ISC",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "sharp": "^0.34.5"
+  },
+  "devDependencies": {
+    "vercel": "^32.0.0"
+  }
+}

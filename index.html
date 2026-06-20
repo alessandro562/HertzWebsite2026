@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="HERTZ is a minimal/deep-tech clubbing collective based in Bologna, Italy. Real clubbers, real music, real events.">
+  <meta name="keywords" content="club, bologna, techno, deep tech, events, DJ">
+  <meta name="theme-color" content="#08080d">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="HERTZ — From clubbers to clubbers">
+  <meta property="og:description" content="Minimal/deep-tech clubbing collective. Bologna events, residents, and more.">
+  <meta property="og:image" content="https://hertz.club/assets/hertz-logo-official.png">
+  <meta property="og:url" content="https://hertz.club">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HERTZ">
+  <meta name="twitter:description" content="Minimal/deep-tech clubbing collective">
+  <meta name="twitter:image" content="https://hertz.club/assets/hertz-logo-official.png">
+  <link rel="canonical" href="https://hertz.club">
+  <title>HERTZ — From clubbers to clubbers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://unpkg.com">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" as="style">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;600;700&display=block" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+    body {
+      background: #08080d; color: #f5f5f3;
+      font-family: 'Bricolage Grotesque', -apple-system, sans-serif;
+      overflow-x: hidden;
+    }
+    @keyframes scan { 0%,100% { opacity:0.25; } 50% { opacity:0.55; } }
+    @keyframes blink { 0%,50% { opacity:1; } 50.01%,100% { opacity:0; } }
+    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #08080d; }
+    ::-webkit-scrollbar-thumb { background: rgba(0,212,255,0.3); }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(0,212,255,0.6); }
+    ::selection { background: rgba(0,212,255,0.25); color: #f5f5f3; }
+    img { user-select: none; -webkit-user-drag: none; max-width: 100%; height: auto; }
+    button { font-family: inherit; border: none; background: none; cursor: pointer; }
+    canvas { display: block; }
+    
+    /* Mobile optimization */
+    @media (max-width: 768px) {
+      * { -webkit-tap-highlight-color: transparent; }
+      html { font-size: 14px; }
+      body { font-size: 14px; line-height: 1.6; }
+      input, textarea, select { font-size: 16px; }
+      input[type="range"] { -webkit-appearance: slider-horizontal; width: 100%; }
+    }
+    
+    @media (max-width: 480px) {
+      html { font-size: 13px; }
+      body { overflow-x: hidden; }
+      canvas { max-width: 100%; height: auto; }
+      button { min-height: 44px; min-width: 44px; }
+      a { -webkit-touch-callout: none; }
+    }
+
+    /* Prevent iOS 100vh > visible viewport bug — use small viewport height on mobile */
+    @supports (min-height: 100svh) {
+      @media (max-width: 768px) {
+        .hz-mobile-hero { min-height: 100svh !important; }
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    }
+    :focus-visible { outline: 2px solid #144889; outline-offset: 2px; }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "HERTZ",
+    "description": "Minimal/deep-tech clubbing collective based in Bologna, Italy",
+    "url": "https://hertz.club",
+    "logo": "https://hertz.club/assets/hertz-logo-official.png",
+    "sameAs": [],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "Customer Service",
+      "email": "hello@hertz.club"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Bologna"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "HERTZ",
+    "image": "https://hertz.club/assets/hertz-logo-official.png",
+    "description": "Deep-tech clubbing collective",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Bologna",
+      "addressCountry": "IT"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 44.4949,
+      "longitude": 11.3426
+    }
+  }
+  </script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/three@0.149.0/build/three.min.js"></script>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+
+  <script type="text/babel" src="tweaks-panel.jsx"></script>
+  <script type="text/babel" src="hero3d-scenes.jsx"></script>
+  <script type="text/babel" src="hertz-v8-sections.jsx"></script>
+  <script type="text/babel" src="hertz-editorial-components.jsx"></script>
+  <script type="text/babel" src="hertz-v8.jsx"></script>
+  <script type="text/babel">
+    ReactDOM.createRoot(document.getElementById('root')).render(<HertzV8App />);
+  </script>
+</body>
+</html>

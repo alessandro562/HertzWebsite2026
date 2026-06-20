@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HERTZ Media — Editorial, Archive & Club Culture</title>
+  <meta name="description" content="HERTZ editorial, photo archive and club culture writing. Articles on minimal and deep-tech, reportage from Bologna, technical analysis.">
+  <meta name="theme-color" content="#08080d">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="HERTZ Media — Editorial, Archive & Club Culture">
+  <meta property="og:description" content="Editorial, photo archive and club culture writing from HERTZ Bologna.">
+  <meta property="og:image" content="https://hertz.club/assets/hertz-logo-official.png">
+  <meta property="og:url" content="https://hertz.club/media">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HERTZ Media">
+  <meta name="twitter:description" content="Editorial, photo archive and club culture writing from HERTZ Bologna.">
+  <link rel="canonical" href="https://hertz.club/media">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;600;700&display=block" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+    body { background: #08080d; color: #f5f5f3; font-family: 'Bricolage Grotesque', sans-serif; overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #08080d; }
+    ::-webkit-scrollbar-thumb { background: rgba(20,72,137,0.4); }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(20,72,137,0.7); }
+    ::selection { background: rgba(0,212,255,0.25); color: #f5f5f3; }
+    img { user-select: none; -webkit-user-drag: none; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    @media (max-width: 768px) {
+      * { -webkit-tap-highlight-color: transparent; }
+      html { font-size: 14px; }
+      body { font-size: 14px; }
+    }
+    @media (max-width: 480px) { html { font-size: 13px; } }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="hertz-shared.jsx"></script>
+<script type="text/babel" src="hertz-editorial-components.jsx"></script>
+<script type="text/babel">
+
+const ARTICLES = [
+  {
+    slug: 'summer-2026-european-club-season',
+    title: "The European Summer 2026: Two Directions at Once",
+    subtitle: "The circuit is splitting. Understanding which direction matters.",
+    excerpt: "The simplest way to describe what's happening in European club culture this summer: two separate things are occurring simultaneously, and the media covers the first while the second is where the interesting music is.",
+    image: 'assets/art-trends.jpg',
+    metadata: { author: 'HERTZ Redazione', category: 'Trends', publishedAt: '2026-05-26' },
+    content: { readingTimeMinutes: 6 },
+  },
+  {
+    slug: 'art-of-the-warm-up',
+    title: "The Warm-Up Is the Hardest Set of the Night",
+    subtitle: "Opening is not a lesser job. It is the one that decides whether the night has anywhere to go.",
+    excerpt: "The warm-up DJ is the most disrespected role in club culture and one of the most consequential. Anyone can play the peak. Almost no one can build the room that makes a peak possible.",
+    image: 'assets/art-warmup.jpg',
+    metadata: { author: 'HERTZ Redazione', category: 'Editorial', publishedAt: '2026-05-24' },
+    content: { readingTimeMinutes: 5 },
+  },
+  {
+    slug: 'the-door-is-part-of-the-music',
+    title: "The Door Is Part of the Music",
+    subtitle: "Who gets in, and how, is the first curatorial decision a club makes — and the one that protects everything after it.",
+    excerpt: "A door policy is usually discussed as exclusivity theatre. That misses the point. The door is the mechanism by which a club decides what kind of floor it wants to be responsible for.",
+    image: 'assets/art-door.jpg',
+    metadata: { author: 'HERTZ Redazione', category: 'Editorial', publishedAt: '2026-05-23' },
+    content: { readingTimeMinutes: 5 },
+  },
+  {
+    slug: 'authenticity-modern-clubbing',
+    title: "Against Branded Clubbing: Notes on What Authenticity Requires",
+    subtitle: "Authenticity has become a marketing term. The more useful question is what it actually means in practice.",
+    excerpt: "The word has been used so often it has become almost unusable. Clubs describe themselves as authentic. DJs describe their approach as authentic. At some point—probably around 2018—authenticity became a brand value.",
+    image: 'assets/art-authenticity.jpg',
+    metadata: { author: 'HERTZ Redazione', category: 'Editorial', publishedAt: '2026-05-22' },
+    content: { readingTimeMinutes: 5 },
+  },
+  {
+    slug: 'vinyl-digital-friction',
+    title: "Vinyl, Digital, and the Question of Friction",
+    subtitle: "The format war is a distraction. What matters is what each medium does to the way a DJ chooses.",
+    excerpt: "The vinyl-versus-digital argument is usually fought on sound quality and nostalgia. Both are beside the point. The real difference is friction — and friction changes what gets played.",
+    image: 'assets/art-vinyl.jpg',
+    metadata: { author: 'HERTZ Redazione', category: 'Technical', publishedAt: '2026-05-21' },
+    content: { readingTimeMinutes: 5 },
+  },
+  {
+    slug: 'physics-deep-tech-128bpm',
+    title: "128 BPM: What the Number Means and Why It Isn't Arbitrary",
+    subtitle: "The physics and physiology behind deep tech's most persistent convention.",
+    excerpt: "128 beats per minute. If you've spent time in European clubs over the last fifteen years, this number has passed through your body more times than you've consciously noticed. It looks like convention. It isn't.",
+    image: 'assets/art-bpm.jpg',
+    metadata: { author: 'HERTZ Redazione', category: 'Technical', publishedAt: '2026-05-20' },
+    content: { readingTimeMinutes: 7 },
+  },
+  {
+    slug: 'inside-kindergarten-bologna',
+    title: "Kindergarten, Bologna: The Room That Taught Us to Listen",
+    subtitle: "A system is not just hardware. It is an argument about what music is for.",
+    excerpt: "On a Friday in February, we arrived at Kindergarten thirty minutes before opening. The door was still locked. Then, from inside the building, we heard the system start. Not felt it — heard it. The distinction matters.",
+    image: 'assets/floor-1.jpg',
+    metadata: { author: 'HERTZ Redazione', category: 'Reportage', publishedAt: '2026-05-15' },
+    content: { readingTimeMinutes: 5 },
+  },
+];
+
+const CATEGORIES = ['ALL', 'EDITORIAL', 'REPORTAGE', 'TECHNICAL', 'TRENDS'];
+
+const GALLERY = [
+  { src: 'uploads/27.02_Hertz-3.jpg',   label: 'HZ.022 — 27.02', tall: false },
+  { src: 'uploads/27.02_Hertz-4.jpg',   label: 'HZ.022 — 27.02', tall: true  },
+  { src: 'uploads/27.02_Hertz-5.jpg',   label: 'HZ.022 — 27.02', tall: false },
+  { src: 'uploads/27.02_Hertz-6.jpg',   label: 'HZ.022 — 27.02', tall: false },
+  { src: 'uploads/27.02_Hertz-7.jpg',   label: 'HZ.022 — 27.02', tall: true  },
+  { src: 'uploads/27.02_Hertz-8.jpg',   label: 'HZ.022 — 27.02', tall: false },
+  { src: 'uploads/27.02_Hertz-9.jpg',   label: 'HZ.022 — 27.02', tall: false },
+  { src: 'uploads/27.02_Hertz-10.jpg',  label: 'HZ.022 — 27.02', tall: false },
+  { src: 'uploads/27.02_Hertz-11.jpg',  label: 'HZ.022 — 27.02', tall: true  },
+  { src: 'uploads/27.02_Hertz-12.jpg',  label: 'HZ.022 — 27.02', tall: false },
+  { src: 'uploads/27.02_Hertz-13.jpg',  label: 'HZ.022 — 27.02', tall: false },
+  { src: 'uploads/27.02_Hertz-14.jpg',  label: 'HZ.022 — 27.02', tall: false },
+  { src: 'uploads/27.02_Hertz-15.jpg',  label: 'HZ.022 — 27.02', tall: true  },
+  { src: 'uploads/27.02_Hertz-16.jpg',  label: 'HZ.022 — 27.02', tall: false },
+  { src: 'uploads/27.02_Hertz-36.jpg',  label: 'HZ.022 — 27.02', tall: false },
+  { src: 'uploads/27.02_Hertz-76.jpg',  label: 'HZ.022 — 27.02', tall: false },
+  { src: 'uploads/27.02_Hertz-142.jpg', label: 'HZ.022 — 27.02', tall: true  },
+  { src: 'uploads/27.02_Hertz-167.jpg', label: 'HZ.022 — 27.02', tall: false },
+  { src: 'uploads/27.02_Hertz-168.jpg', label: 'HZ.022 — 27.02', tall: false },
+  { src: 'uploads/27.02_Hertz-173.jpg', label: 'HZ.022 — 27.02', tall: false },
+  { src: 'uploads/27.02_Hertz-174.jpg', label: 'HZ.022 — 27.02', tall: true  },
+  { src: 'uploads/27.02_Hertz-176.jpg', label: 'HZ.022 — 27.02', tall: false },
+  { src: 'uploads/27.02_Hertz-197.jpg', label: 'HZ.022 — 27.02', tall: false },
+];
+
+function MediaPage() {
+  const C = window.Cv8;
+  const R = window.R8;
+  const mono = { fontFamily: "'JetBrains Mono', monospace" };
+  const briq = { fontFamily: "'Archivo', sans-serif" };
+  const [filter, setFilter] = React.useState('ALL');
+  const [galleryFilter, setGalleryFilter] = React.useState('ALL');
+  const GALLERY_EVENTS = ['ALL', 'HZ.022'];
+
+  const filtered = filter === 'ALL'
+    ? ARTICLES
+    : ARTICLES.filter(a => a.metadata.category.toUpperCase() === filter);
+
+  const featured = filtered[0] || null;
+  const secondary = filtered.slice(1);
+
+  return (
+    <div style={{ background: C.dark, minHeight: '100vh' }}>
+      <window.Nav8 />
+      <window.PageHero section="// 04 / MEDIA" title="The editorial." sub="Articles · Interviews · Photo archive · Bologna 2023–" />
+
+      {/* ARTICLES SECTION */}
+      <section style={{
+        background: C.light,
+        padding: 'clamp(60px,10vh,120px) clamp(20px,4vw,56px)',
+      }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto' }}>
+
+          {/* Category filter */}
+          <R>
+            <div style={{
+              display: 'flex', gap: 0, marginBottom: 48,
+              borderBottom: `1px solid ${C.dark}0a`,
+            }}>
+              {CATEGORIES.map(cat => (
+                <button key={cat} onClick={() => setFilter(cat)} style={{
+                  padding: '14px 22px', background: 'transparent',
+                  border: 'none', outline: 'none', minHeight: 44,
+                  borderBottom: filter === cat ? `2px solid ${C.blue}` : '2px solid transparent',
+                  ...mono, fontSize: 10, letterSpacing: '0.18em', textTransform: 'uppercase',
+                  color: filter === cat ? C.blue : C.dark + '66',
+                  cursor: 'pointer', transition: 'color 0.2s', whiteSpace: 'nowrap',
+                  marginBottom: -1,
+                }}>{cat}</button>
+              ))}
+            </div>
+          </R>
+
+          {filtered.length === 0 ? (
+            <div style={{ ...mono, fontSize: 11, color: C.dark + '44', letterSpacing: '0.14em', padding: '40px 0' }}>
+              No articles in this category yet.
+            </div>
+          ) : (
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+              gridAutoRows: '1fr',
+              gap: 'clamp(16px,2vw,28px)',
+            }}>
+              {filtered.map((article, i) => (
+                <R key={article.slug} delay={(i % 3) * 0.06}
+                   style={i === 0 ? { gridColumn: '1 / -1' } : {}}>
+                  <window.ArticleCard article={article} featured={i === 0} />
+                </R>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* GALLERY FILTER */}
+      <div style={{ background: C.darkSoft, padding: '0 clamp(20px,4vw,56px)', borderBottom: `1px solid ${C.light}0a` }}>
+        <div style={{ display: 'flex', gap: 0, overflowX: 'auto' }}>
+          {GALLERY_EVENTS.map(ev => (
+            <button key={ev} onClick={() => setGalleryFilter(ev)} style={{
+              padding: '16px 24px', background: 'transparent',
+              border: 'none', outline: 'none', borderBottom: galleryFilter === ev ? `2px solid ${C.blue}` : '2px solid transparent',
+              ...mono, fontSize: 11, letterSpacing: '0.16em', textTransform: 'uppercase',
+              color: galleryFilter === ev ? C.blue : C.light + '44', cursor: 'pointer',
+              transition: 'color 0.2s', whiteSpace: 'nowrap',
+            }}>{ev}</button>
+          ))}
+        </div>
+      </div>
+
+      {/* Gallery grid */}
+      <section style={{ padding: 'clamp(32px,4vh,56px) clamp(20px,4vw,56px)' }}>
+        <div style={{
+          columns: 'clamp(240px, 28vw, 380px)',
+          columnGap: 4,
+          maxWidth: 1400, margin: '0 auto',
+        }}>
+          {(galleryFilter === 'ALL' ? GALLERY : GALLERY.filter(img => img.label.includes(galleryFilter))).map((img, i) => (
+            <div key={i} style={{
+              breakInside: 'avoid', marginBottom: 4,
+              position: 'relative', overflow: 'hidden',
+              cursor: 'pointer',
+            }}
+            onMouseEnter={e => { e.currentTarget.querySelector('img').style.filter = 'saturate(0.8) brightness(0.75) contrast(1.05)'; e.currentTarget.querySelector('.label').style.opacity = '1'; }}
+            onMouseLeave={e => { e.currentTarget.querySelector('img').style.filter = 'saturate(0.45) brightness(0.65) contrast(1.15)'; e.currentTarget.querySelector('.label').style.opacity = '0'; }}
+            >
+              <img src={img.src} alt="" style={{
+                width: '100%', display: 'block',
+                filter: 'saturate(0.45) brightness(0.65) contrast(1.15)',
+                transition: 'filter 0.5s cubic-bezier(.22,1,.36,1)',
+              }} loading="lazy" />
+              <div className="label" style={{
+                position: 'absolute', bottom: 10, left: 10,
+                ...mono, fontSize: 9, letterSpacing: '0.16em', color: C.light + 'cc',
+                opacity: 0, transition: 'opacity 0.3s',
+                background: 'rgba(8,8,13,0.7)', padding: '3px 8px',
+              }}>{img.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Press kit */}
+      <section style={{ background: C.light, padding: 'clamp(48px,6vh,80px) clamp(20px,4vw,56px)' }}>
+        <R>
+          <div style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 48, alignItems: 'center' }}>
+            <div>
+              <div style={{ ...mono, fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 12 }}>// PRESS</div>
+              <h2 style={{ ...briq, fontSize: 'clamp(2rem,5vw,4rem)', fontWeight: 800, lineHeight: 0.9, letterSpacing: '-0.04em', color: C.dark, marginBottom: 20 }}>
+                Press kit<span style={{ color: C.blue }}>.</span>
+              </h2>
+              <p style={{ fontSize: 14, color: C.dark + '88', lineHeight: 1.75, marginBottom: 28, maxWidth: 420, textWrap: 'pretty' }}>
+                Logos, high-res photos, press release and bio available for press and booking inquiries.
+              </p>
+              <a href="mailto:info@hertz.cc" aria-label="Request press kit by email" style={{
+                display: 'inline-block', border: `1px solid ${C.dark}33`,
+                padding: '12px 24px',
+                ...mono, fontSize: 12, letterSpacing: '0.14em', color: C.dark,
+                textTransform: 'uppercase', transition: 'all 0.2s',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = C.blue; e.currentTarget.style.color = C.blue; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = C.dark + '33'; e.currentTarget.style.color = C.dark; }}
+              >Request press kit →</a>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
+              <img src="uploads/27.02_Hertz-173.jpg" alt="HERTZ night at Kindergarten — photo archive" loading="lazy" style={{ width: '100%', aspectRatio: '1', objectFit: 'cover', filter: 'saturate(0.4) brightness(0.7)', display: 'block' }} />
+              <img src="uploads/27.02_Hertz-197.jpg" alt="HERTZ night at Kindergarten — photo archive" loading="lazy" style={{ width: '100%', aspectRatio: '1', objectFit: 'cover', filter: 'saturate(0.4) brightness(0.7)', display: 'block' }} />
+            </div>
+          </div>
+        </R>
+      </section>
+
+      <window.Footer8 />
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<MediaPage />);
+</script>
+</body>
+</html>
