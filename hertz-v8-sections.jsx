@@ -624,11 +624,11 @@ function CollabSection8() {
           <div className="hz-collab-grid">
             {PARTNERS.map((p) => (
               <figure key={p.name} className="hz-collab-card" style={{
-                margin: 0, display: 'flex', flexDirection: 'column',
-                alignItems: 'center', justifyContent: 'center', textAlign: 'center',
+                margin: 0, position: 'relative',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
                 background: 'linear-gradient(180deg, #15151d 0%, #0f0f16 100%)',
                 border: `1px solid ${C.light}10`,
-                padding: 'clamp(40px, 6vw, 72px) clamp(24px, 4vw, 48px)',
+                padding: 'clamp(44px, 6vw, 76px) clamp(24px, 4vw, 48px)',
                 minHeight: 'clamp(220px, 26vw, 300px)',
               }}>
                 <img
@@ -640,11 +640,13 @@ function CollabSection8() {
                   }}
                 />
                 <figcaption style={{
-                  marginTop: 'clamp(24px, 3.5vw, 36px)', paddingTop: 18,
-                  borderTop: `1px solid ${C.light}12`, width: 'min(220px, 80%)',
+                  position: 'absolute',
+                  left: 'clamp(16px, 2vw, 22px)', bottom: 'clamp(16px, 2vw, 22px)',
+                  background: C.blue, color: '#ffffff',
                   fontFamily: "'JetBrains Mono', monospace",
-                  fontSize: 11, letterSpacing: '0.18em', color: C.light + 'aa',
-                  textTransform: 'uppercase',
+                  fontSize: 10, fontWeight: 500, letterSpacing: '0.16em',
+                  textTransform: 'uppercase', lineHeight: 1,
+                  padding: '6px 11px',
                 }}>{p.name}</figcaption>
               </figure>
             ))}
