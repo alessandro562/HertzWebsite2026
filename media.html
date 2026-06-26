@@ -204,7 +204,7 @@ function MediaPage() {
         .hz-noscroll { scrollbar-width: none; }
         @keyframes hzReaderUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
         .hz-reader-panel { animation: hzReaderUp 0.42s cubic-bezier(.22,1,.36,1); }
-        .hz-feedcard:focus-visible { outline: 2px solid ${C.cyan}; outline-offset: 2px; }
+        .hz-feedcard:focus-visible { outline: 2px solid ${C.blue}; outline-offset: 2px; }
         @media (prefers-reduced-motion: reduce) { html { scroll-snap-type: none; } .hz-reader-panel { animation: none; } }
       `}</style>
 
@@ -231,7 +231,7 @@ function MediaPage() {
               <div style={{ position: 'relative', aspectRatio: '4/3', overflow: 'hidden' }}>
                 <img src={a.image} alt="" loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: GRADE }} />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg,rgba(8,8,13,0) 40%,rgba(8,8,13,0.85))' }} />
-                <div style={{ position: 'absolute', left: 10, bottom: 8, ...mono, fontSize: 9, letterSpacing: '0.18em', color: C.cyan }}>// {String(a.metadata.rubric || a.metadata.category).toUpperCase()}</div>
+                <div style={{ position: 'absolute', left: 10, bottom: 8, ...mono, fontSize: 9, letterSpacing: '0.18em', color: C.blue }}>// {String(a.metadata.rubric || a.metadata.category).toUpperCase()}</div>
               </div>
               <div style={{ ...briq, fontSize: 12, fontWeight: 700, lineHeight: 1.2, color: C.light, padding: '10px 12px', letterSpacing: '-0.01em', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{a.title}<span style={{ color: C.blue }}>.</span></div>
             </button>
@@ -247,7 +247,7 @@ function MediaPage() {
             <button key={r.key} onClick={() => pickRubric(r.key)} style={{
               ...mono, fontSize: 11, letterSpacing: '0.16em', textTransform: 'uppercase', whiteSpace: 'nowrap',
               padding: '8px 14px', cursor: 'pointer', background: 'transparent', minHeight: 40,
-              border: `1px solid ${on ? C.cyan : C.light + '18'}`, color: on ? C.cyan : C.light + '77', transition: 'all 0.2s',
+              border: `1px solid ${on ? C.blue : C.light + '18'}`, color: on ? C.blue : C.light + '77', transition: 'all 0.2s',
             }}>{r.label}</button>
           );
         })}
@@ -279,11 +279,11 @@ function MediaPage() {
                   style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: GRADE, transform: on ? 'scale(1.02)' : 'scale(1)', transition: 'transform 0.7s cubic-bezier(.22,1,.36,1)' }} />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg,rgba(8,8,13,0) 30%,rgba(8,8,13,0.92) 100%)' }} />
                 {[['top','left'],['top','right'],['bottom','left'],['bottom','right']].map(([v,h]) => (
-                  <span key={v+h} aria-hidden="true" style={{ position: 'absolute', [v]: 14, [h]: 14, width: 16, height: 16, [v === 'top' ? 'borderTop' : 'borderBottom']: `1px solid ${on ? C.cyan : C.light + '2e'}`, [h === 'left' ? 'borderLeft' : 'borderRight']: `1px solid ${on ? C.cyan : C.light + '2e'}`, transition: 'border-color 0.4s' }} />
+                  <span key={v+h} aria-hidden="true" style={{ position: 'absolute', [v]: 14, [h]: 14, width: 16, height: 16, [v === 'top' ? 'borderTop' : 'borderBottom']: `1px solid ${on ? C.blue : C.light + '2e'}`, [h === 'left' ? 'borderLeft' : 'borderRight']: `1px solid ${on ? C.blue : C.light + '2e'}`, transition: 'border-color 0.4s' }} />
                 ))}
-                {on && <span aria-hidden="true" style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 2, background: C.cyan }} />}
+                {on && <span aria-hidden="true" style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 2, background: C.blue }} />}
                 <div style={{ position: 'absolute', top: 24, left: 24, right: 24, display: 'flex', justifyContent: 'space-between', ...mono, fontSize: 10, letterSpacing: '0.2em' }}>
-                  <span style={{ color: on ? C.cyan : C.blue, fontWeight: 600 }}>// {rub}</span>
+                  <span style={{ color: on ? C.blue : C.blue, fontWeight: 600 }}>// {rub}</span>
                   <span style={{ color: C.light + '66' }}>{codeFor(a)}</span>
                 </div>
                 <div style={{ position: 'absolute', left: 24, right: 24, bottom: 26 }}>
@@ -292,7 +292,7 @@ function MediaPage() {
                   <div style={{ ...mono, fontSize: 10, letterSpacing: '0.14em', color: C.light + '88', textTransform: 'uppercase', marginTop: 16, display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
                     <span>{a.metadata.author}</span><span style={{ color: C.blue }}>·</span>
                     {rt ? <span>Runtime {rt}:00</span> : null}
-                    <span style={{ marginLeft: 'auto', color: on ? C.cyan : C.light + '88' }}>Read ↗</span>
+                    <span style={{ marginLeft: 'auto', color: on ? C.blue : C.light + '88' }}>Read ↗</span>
                   </div>
                 </div>
               </article>

@@ -355,8 +355,8 @@ function ArticleDetail({ slug }) {
       <style>{`
         .article-body p { margin: 0 0 20px; font-size: clamp(16px,1.1vw,18px); line-height: 1.8; color: rgba(236,234,227,0.86); text-wrap: pretty; }
         .article-body h2 { font-family: 'HelveticaNeue','Helvetica Neue',Helvetica,sans-serif; font-size: clamp(1.5rem,3vw,2.1rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.18; margin: 46px 0 14px; color: #f5f5f3; text-wrap: balance; }
-        .article-body strong { color: #00d4ff; font-weight: 700; }
-        .article-body a { color: #00d4ff; text-decoration: none; border-bottom: 1px solid rgba(0,212,255,0.4); }
+        .article-body strong { color: #144889; font-weight: 700; }
+        .article-body a { color: #144889; text-decoration: none; border-bottom: 1px solid rgba(20,72,137,0.55); }
         .article-body blockquote { border: 0; margin: 46px 0; padding: 0 0 0 2px; font-family: 'HelveticaNeue','Helvetica Neue',Helvetica,sans-serif; font-size: clamp(1.5rem,3.2vw,2.2rem); font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; color: #f5f5f3; max-width: 32ch; }
         .article-body > p:first-of-type::first-letter { float: left; font-size: 3.1em; line-height: 0.72; font-weight: 700; margin: 8px 10px 0 0; color: #f5f5f3; }
       `}</style>

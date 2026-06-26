@@ -123,9 +123,9 @@ function ArchivePage() {
           {EDITIONS.map(ev => (
             <button key={ev} onClick={() => setEdition(ev)} style={{
               padding: '15px 22px', background: 'transparent', border: 'none', outline: 'none', minHeight: 44,
-              borderBottom: edition === ev ? `2px solid ${C.cyan}` : '2px solid transparent',
+              borderBottom: edition === ev ? `2px solid ${C.blue}` : '2px solid transparent',
               ...mono, fontSize: 11, letterSpacing: '0.16em', textTransform: 'uppercase',
-              color: edition === ev ? C.cyan : C.light + '55', cursor: 'pointer', transition: 'color 0.2s', whiteSpace: 'nowrap', marginBottom: -1,
+              color: edition === ev ? C.blue : C.light + '55', cursor: 'pointer', transition: 'color 0.2s', whiteSpace: 'nowrap', marginBottom: -1,
             }}>{ev}</button>
           ))}
         </div>
@@ -163,7 +163,7 @@ function ArchivePage() {
                   {['top','bottom'].map(v2 => ['left','right'].map(h2 => (
                     <span key={v2+h2} aria-hidden="true" style={{ position: 'absolute', [v2]: 12, [h2]: 12, width: 14, height: 14, [v2 === 'top' ? 'borderTop' : 'borderBottom']: `1px solid ${C.light}2e`, [h2 === 'left' ? 'borderLeft' : 'borderRight']: `1px solid ${C.light}2e` }} />
                   )))}
-                  <div style={{ position: 'absolute', top: 16, left: 16, ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.cyan }}>// {v.label.toUpperCase()}</div>
+                  <div style={{ position: 'absolute', top: 16, left: 16, ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue }}>// {v.label.toUpperCase()}</div>
                   <figcaption style={{ position: 'absolute', left: 16, right: 16, bottom: 16, ...mono, fontSize: 9, letterSpacing: '0.16em', color: C.light + '88', textTransform: 'uppercase', display: 'flex', justifyContent: 'space-between' }}>
                     <span>{v.code}</span><span>{v.src ? 'Loop' : 'Loop · soon'}</span>
                   </figcaption>
