@@ -276,7 +276,7 @@ function Manifesto8() {
             letterSpacing: '-0.05em', color: C.light,
             marginTop: 24,
           }}>
-            From <span style={{ color: C.blue, fontStyle: 'italic', fontWeight: 500 }}>clubbers</span>,<br />
+            By <span style={{ color: C.blue, fontStyle: 'italic', fontWeight: 500 }}>clubbers</span>,<br />
             for <span style={{ color: C.blue, fontStyle: 'italic', fontWeight: 500 }}>clubbers</span>
             <span style={{ color: C.blue }}>.</span>
           </h2>
@@ -956,7 +956,7 @@ function Footer8() {
           <div style={{
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 16,
-          }}>FROM CLUBBERS FOR CLUBBERS</div>
+          }}>BY CLUBBERS, FOR CLUBBERS</div>
           <h2 style={{
             fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
             fontSize: 'clamp(2.5rem, 8vw, 7rem)',
@@ -1041,7 +1041,7 @@ function Footer8() {
           fontFamily: "'JetBrains Mono', monospace",
           fontSize: 10, color: C.light + '40', letterSpacing: '0.1em',
         }}>
-          <span>© 2026 Hertz, from clubbers to clubbers</span>
+          <span>© 2026 Hertz, by clubbers, for clubbers</span>
           <span>HZ.CC / V8</span>
         </div>
       </div>

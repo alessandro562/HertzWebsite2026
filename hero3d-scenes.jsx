@@ -72,7 +72,7 @@ function makeRaverTex(THREE) {
    ═══════════════════════════════════════════════ */
 function makeLogoFormation(THREE, root, density, opts) {
   const grp = new THREE.Group(); root.add(grp);
-  grp.position.y = 1.8; // raised so bottom copy has plenty of room
+  grp.position.y = 2.2; // raised so bottom copy has plenty of room
 
   const MODE_MAP = {
     flat: 0, chrome: 1, neon: 2, holo: 3,

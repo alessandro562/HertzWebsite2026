@@ -1,7 +1,7 @@
 /* ============================================
    Hertz v8, Main App
    - 3D logo hero (no enter screen, no cursor trail)
-   - Copy: "We are real clubbers." / "from clubbers to clubbers"
+   - Copy: "Clubbing Collective." / "by clubbers, for clubbers"
    ============================================ */
 const { useState, useEffect, useRef, useCallback } = React;
 
