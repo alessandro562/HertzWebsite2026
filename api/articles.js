@@ -44,7 +44,7 @@ const ARTICLES = [
       readingTimeMinutes: 6
     },
 
-    media: { heroImage: "/assets/art-trends.jpg", heroImageAlt: "A hyperclub crowd under stage lights", gallery: [] },
+    media: { heroImage: "/assets/media/two-speed-island.jpg", heroImageAlt: "A hyperclub crowd under stage lights", gallery: [] },
 
     metadata: {
       author: "Hertz Redazione",
@@ -101,7 +101,7 @@ const ARTICLES = [
       readingTimeMinutes: 6
     },
 
-    media: { heroImage: "/assets/floor-5.jpg", heroImageAlt: "A low-lit marathon floor", gallery: [] },
+    media: { heroImage: "/assets/media/sunwaves.jpg", heroImageAlt: "A low-lit marathon floor", gallery: [] },
 
     metadata: {
       author: "Hertz Redazione",
@@ -158,7 +158,7 @@ const ARTICLES = [
       readingTimeMinutes: 6
     },
 
-    media: { heroImage: "/assets/floor-2.jpg", heroImageAlt: "A packed floor deep into a residency night", gallery: [] },
+    media: { heroImage: "/assets/media/music-on-pacha.jpg", heroImageAlt: "A packed floor deep into a residency night", gallery: [] },
 
     metadata: {
       author: "Hertz Redazione",
@@ -223,7 +223,7 @@ const ARTICLES = [
       readingTimeMinutes: 7
     },
 
-    media: { heroImage: "/assets/art-warmup.jpg", heroImageAlt: "A DJ at the booth, close-up", gallery: [] },
+    media: { heroImage: "/assets/media/radar-vol-1.jpg", heroImageAlt: "A DJ at the booth, close-up", gallery: [] },
 
     metadata: {
       author: "Hertz Redazione",
