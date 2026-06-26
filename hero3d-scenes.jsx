@@ -1,5 +1,5 @@
 /* ============================================
-   HERTZ HERO 3D — 5 SCENES
+   Hertz HERO 3D, 5 SCENES
    STACK · CYMATICS · TUNNEL · VINYL · CROWD
    Beat-driven (128 BPM faux clock).
    ============================================ */
@@ -64,9 +64,9 @@ function makeRaverTex(THREE) {
 }
 
 /* ═══════════════════════════════════════════════
-   SCENE 0 — LOGO 3D (voxel extrusion)
+   SCENE 0, LOGO 3D (voxel extrusion)
    InstancedMesh of small boxes shaped from PNG alpha.
-   Real 3D geometry — full 360° rotation possible.
+   Real 3D geometry, full 360° rotation possible.
    4 texture modes: flat / chrome / neon / holo.
    No particles.
    ═══════════════════════════════════════════════ */
@@ -107,7 +107,7 @@ function makeLogoFormation(THREE, root, density, opts) {
     const A = new Uint8Array(sampW * sampH);
     for (let i = 0; i < sampW * sampH; i++) A[i] = data[i*4 + 3];
 
-    /* ── 2. Marching squares — extract oriented contour segments ── */
+    /* ── 2. Marching squares, extract oriented contour segments ── */
     const threshold = 140;
     const segs = [];
     for (let y = 0; y < sampH - 1; y++) {
@@ -173,7 +173,7 @@ function makeLogoFormation(THREE, root, density, opts) {
      -(y / sampH - 0.5) * H,
     ]));
 
-    /* ── 5. Smooth loops — 4 Chaikin passes ── */
+    /* ── 5. Smooth loops, 4 Chaikin passes ── */
     const smoothLoop = (loop) => {
       const out = [];
       for (let i = 0; i < loop.length; i++) {
@@ -281,7 +281,7 @@ function makeLogoFormation(THREE, root, density, opts) {
       shapes.push(shape);
     });
 
-    /* ── 9. Extrude geometry — no bevel for clean flat sides ── */
+    /* ── 9. Extrude geometry, no bevel for clean flat sides ── */
     const geo = new THREE.ExtrudeGeometry(shapes, {
       depth: DEPTH,
       bevelEnabled: false,
@@ -485,7 +485,7 @@ function makeLogoFormation(THREE, root, density, opts) {
     const mesh = new THREE.Mesh(geo, mat);
     grp.add(mesh);
 
-    /* ── Backglow — desktop only (mobile gets total black background) ── */
+    /* ── Backglow, desktop only (mobile gets total black background) ── */
     let glow = null;
     if (!opts?.isMobile) {
       const glowTex = makeGlowTex(THREE);
@@ -562,7 +562,7 @@ function makeLogoFormation(THREE, root, density, opts) {
         dGeo.attributes.position.needsUpdate = true;
       }
 
-      /* Continuous Y rotation — full 360°, real 3D */
+      /* Continuous Y rotation, full 360°, real 3D */
       grp.rotation.y = time * 0.35 * p.speed;
       // gentle X breathing tilt
       grp.rotation.x = Math.sin(time * 0.3) * 0.08;
@@ -589,7 +589,7 @@ function makeLogoFormation(THREE, root, density, opts) {
 }
 
 /* ═══════════════════════════════════════════════
-   SCENE 1 — STACK (subwoofer tower)
+   SCENE 1, STACK (subwoofer tower)
    ═══════════════════════════════════════════════ */
 function makeStack(THREE, root) {
   const grp = new THREE.Group(); root.add(grp);
@@ -761,7 +761,7 @@ function makeStack(THREE, root) {
 }
 
 /* ═══════════════════════════════════════════════
-   SCENE 2 — CYMATICS (Chladni plate)
+   SCENE 2, CYMATICS (Chladni plate)
    ═══════════════════════════════════════════════ */
 function makeCymatics(THREE, root, density) {
   const grp = new THREE.Group(); root.add(grp);
@@ -889,7 +889,7 @@ function makeCymatics(THREE, root, density) {
 }
 
 /* ═══════════════════════════════════════════════
-   SCENE 3 — TUNNEL (waveform rings)
+   SCENE 3, TUNNEL (waveform rings)
    ═══════════════════════════════════════════════ */
 function makeTunnel(THREE, root, density) {
   const grp = new THREE.Group(); root.add(grp);
@@ -986,7 +986,7 @@ function makeTunnel(THREE, root, density) {
 }
 
 /* ═══════════════════════════════════════════════
-   SCENE 4 — VINYL (close-up macro)
+   SCENE 4, VINYL (close-up macro)
    ═══════════════════════════════════════════════ */
 function makeVinyl(THREE, root, density) {
   const grp = new THREE.Group(); root.add(grp);
@@ -1125,7 +1125,7 @@ function makeVinyl(THREE, root, density) {
 }
 
 /* ═══════════════════════════════════════════════
-   SCENE 5 — CROWD (silhouette ravers)
+   SCENE 5, CROWD (silhouette ravers)
    ═══════════════════════════════════════════════ */
 function makeCrowd(THREE, root, density) {
   const grp = new THREE.Group(); root.add(grp);

@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HERTZ Merch — Wear the Frequency</title>
-  <meta name="description" content="HERTZ Drop 01. Limited numbered runs. Coming soon. Built for the dancefloor.">
+  <title>Hertz Merch, Wear the Frequency</title>
+  <meta name="description" content="Hertz Drop 01. Limited numbered runs. Coming soon. Built for the dancefloor.">
   <meta name="theme-color" content="#08080d">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="HERTZ Merch — Wear the Frequency">
-  <meta property="og:description" content="HERTZ Drop 01. Limited numbered runs. Coming soon. A capsule built for the dancefloor.">
+  <meta property="og:title" content="Hertz Merch, Wear the Frequency">
+  <meta property="og:description" content="Hertz Drop 01. Limited numbered runs. Coming soon. A capsule built for the dancefloor.">
   <meta property="og:image" content="https://hertz.club/assets/hertz-logo-official.png">
   <meta property="og:url" content="https://hertz.club/merch">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="HERTZ Merch — Wear the Frequency">
+  <meta name="twitter:title" content="Hertz Merch, Wear the Frequency">
   <meta name="twitter:description" content="Drop 01. Limited numbered runs. Coming soon.">
   <link rel="canonical" href="https://hertz.club/merch">
   <link rel="stylesheet" href="fonts.css">
@@ -51,7 +51,7 @@
 function HertzLanyardMerch() {
   const rows = Array.from({length:15}, (_,i) => ({y: -224 + i*32, flip: i%2===1}));
   return (
-    <svg viewBox="0 0 460 520" style={{width:'100%',height:'100%',display:'block'}} role="img" aria-label="HERTZ woven lanyard preview">
+    <svg viewBox="0 0 460 520" style={{width:'100%',height:'100%',display:'block'}} role="img" aria-label="Hertz woven lanyard preview">
       <defs>
         <linearGradient id="ml-bg" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#d2d0cb"/><stop offset="100%" stopColor="#c3c1bc"/>
@@ -86,7 +86,7 @@ function HertzLanyardMerch() {
               fill={r.flip ? '#c6c2b6' : '#d2cec2'} fontSize="9" fontWeight="800"
               fontFamily="'HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif" letterSpacing="3.5"
               transform={r.flip ? `rotate(180,0,${r.y})` : undefined}
-            >HERTZ</text>
+            >Hertz</text>
           ))}
         </g>
         <polygon points="-27,-238 27,-238 0,-275" fill="#0b0b1e"/>
@@ -142,9 +142,9 @@ function MerchPage() {
   return (
     <div style={{ background: C.dark, minHeight: '100vh' }}>
       <window.Nav8 />
-      <window.PageHero section="// 05 / DROP 01" title={'Wear the\nfrequency'} sub="Coming soon — Limited numbered runs" />
+      <window.PageHero section="// 05 / DROP 01" title={'Wear the\nfrequency'} sub="Coming soon, limited numbered runs" />
 
-      {/* Product — single lanyard card like home */}
+      {/* Product, single lanyard card like home */}
       <section style={{
         background: C.light,
         padding: 'clamp(64px,10vh,120px) clamp(20px,4vw,56px)',
@@ -208,7 +208,7 @@ function MerchPage() {
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     overflow: 'hidden', marginBottom: 20,
                   }}>
-                    <img src="/assets/merch-lanyard-drop01.png" alt="HERTZ lanyard — Drop 01" style={{ width: '75%', objectFit: 'contain' }} />
+                    <img src="/assets/merch-lanyard-drop01.png" alt="Hertz lanyard, Drop 01" style={{ width: '75%', objectFit: 'contain' }} />
                   </div>
                   <div style={{
                     display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12,
@@ -271,7 +271,7 @@ function MerchPage() {
               </form>
             ) : (
               <div role="status" style={{ padding: '16px 22px', border: `1px solid ${C.blue}`, color: C.blue, ...mono, fontSize: 13, letterSpacing: '0.12em' }}>
-                ● ON THE LIST — we'll let you know.
+                ● ON THE LIST, we'll let you know.
               </div>
             )}
           </div>

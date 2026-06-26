@@ -1,5 +1,5 @@
 /* ============================================
-   HERTZ — Artist detail page template
+   Hertz, Artist detail page template
    Requires: hertz-shared.jsx (Nav8, Footer8, Cv8, R8)
    Usage: <window.ArtistPage artist={ARTIST} events={EVENTS} />
    ============================================ */
@@ -98,7 +98,7 @@ function ArtistGallery({ images, name }) {
           >
             <img
               src={src}
-              alt={`${name} — live ${i + 1}`}
+              alt={`${name}, live ${i + 1}`}
               loading={i < 2 ? 'eager' : 'lazy'}
               style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
             />
@@ -188,7 +188,7 @@ function ArtistPage({ artist, events = [] }) {
           }}>
             <div>
               <div style={{ ...mono, fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 12 }}>
-                HZ — {artist.n} / RESIDENT
+                HZ, {artist.n} / RESIDENT
               </div>
               <h1 style={{
                 ...briq,
@@ -302,7 +302,7 @@ function ArtistPage({ artist, events = [] }) {
                         <h3 style={{ ...briq, fontSize: 'clamp(0.9rem,1.5vw,1.1rem)', fontWeight: 700, letterSpacing: '-0.02em', color: C.light, margin: 0 }}>{mix.title}</h3>
                         {playing === i && (
                           <div style={{ marginTop: 12 }} onClick={ev => ev.stopPropagation()}>
-                            <iframe title={`SoundCloud — ${mix.title}`} width="100%" height="120" frameBorder="0" scrolling="no" allow="autoplay" style={{ display: 'block' }}
+                            <iframe title={`SoundCloud, ${mix.title}`} width="100%" height="120" frameBorder="0" scrolling="no" allow="autoplay" style={{ display: 'block' }}
                               src={`https://w.soundcloud.com/player/?url=${encodeURIComponent(mix.url)}&color=%23144889&auto_play=true&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=false`} />
                             <div style={{ ...mono, fontSize: 9, color: C.light + '44', letterSpacing: '0.14em', marginTop: 6 }}>
                               <a href={mix.url} target="_blank" rel="noopener noreferrer" style={{ color: C.blue }}>Open on SoundCloud ↗</a>

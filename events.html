@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HERTZ — Events · Bologna Club Night</title>
-  <meta name="description" content="Upcoming and past events from HERTZ — Bologna's minimal and deep-tech club night. Dates, lineups, venues.">
+  <title>Hertz, Events · Bologna Club Night</title>
+  <meta name="description" content="Upcoming and past events from Hertz, Bologna's minimal and deep-tech club night. Dates, lineups, venues.">
   <meta name="theme-color" content="#08080d">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="HERTZ — Events">
-  <meta property="og:description" content="Upcoming and past events from HERTZ — Bologna's minimal and deep-tech club night.">
+  <meta property="og:title" content="Hertz, Events">
+  <meta property="og:description" content="Upcoming and past events from Hertz, Bologna's minimal and deep-tech club night.">
   <meta property="og:image" content="https://hertz.club/assets/hertz-logo-official.png">
   <meta property="og:url" content="https://hertz.club/events">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="HERTZ — Events">
-  <meta name="twitter:description" content="Upcoming and past events from HERTZ — Bologna's minimal and deep-tech club night.">
+  <meta name="twitter:title" content="Hertz, Events">
+  <meta name="twitter:description" content="Upcoming and past events from Hertz, Bologna's minimal and deep-tech club night.">
   <link rel="canonical" href="https://hertz.club/events">
   <link rel="stylesheet" href="fonts.css">
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=block" rel="stylesheet">
@@ -152,7 +152,7 @@ function EventsPage() {
                     <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                       <a
                         href={e.ctaLink || '#'}
-                        aria-label={`${e.ctaLabel} — ${e.title}`}
+                        aria-label={`${e.ctaLabel}, ${e.title}`}
                         style={{
                           display: 'inline-flex', alignItems: 'center', background: C.blue, color: C.light, padding: '14px 22px',
                           ...mono, fontSize: 11, fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase',
@@ -199,7 +199,7 @@ function EventsPage() {
             <R key={i} delay={i * 0.06}>
               <div style={{ position: 'relative', overflow: 'hidden', cursor: 'default', borderRight: `1px solid ${C.light}0a`, background: C.dark, display: 'flex', flexDirection: 'column' }}>
                 <div style={{ position: 'relative', overflow: 'hidden' }}>
-                  <img src={e.poster} alt={`${e.title} — ${e.date}`} loading="lazy" style={{ width: '100%', aspectRatio: '3875 / 5463', objectFit: 'cover', objectPosition: 'center', display: 'block', filter: 'saturate(0.7) brightness(0.82) contrast(1.04)' }} />
+                  <img src={e.poster} alt={`${e.title}, ${e.date}`} loading="lazy" style={{ width: '100%', aspectRatio: '3875 / 5463', objectFit: 'cover', objectPosition: 'center', display: 'block', filter: 'saturate(0.7) brightness(0.82) contrast(1.04)' }} />
                   <div style={{ position: 'absolute', top: 14, right: 14, ...mono, fontSize: 10, color: C.light + 'cc', letterSpacing: '0.16em', background: 'rgba(8,8,13,0.55)', padding: '3px 8px' }}>HZ.{e.n}</div>
                   {e.tag && <div style={{ position: 'absolute', top: 14, left: 14, background: C.blue, color: C.light, padding: '4px 10px', ...mono, fontSize: 9, letterSpacing: '0.14em' }}>{e.tag}</div>}
                 </div>

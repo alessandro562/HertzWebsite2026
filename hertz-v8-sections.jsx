@@ -1,11 +1,11 @@
 /* ============================================
-   HERTZ v8 — Page sections
+   Hertz v8, Page sections
    Events · Manifesto · Family · Gallery · Merch · Footer
    Uses palette Cv8, hooks R8/useInView from main app file.
    ============================================ */
 
 /* ═══════════════════════════════════════════
-   EVENTS — Upcoming + Archive, polaroid cards
+   EVENTS, Upcoming + Archive, polaroid cards
    ═══════════════════════════════════════════ */
 function EventsHorizontal8() {
   const C = window.Cv8;
@@ -137,7 +137,7 @@ function EventCard8({ card }) {
         e.currentTarget.style.opacity = isPast ? '0.78' : '1';
       }}
     >
-      {/* ── MEDIA ZONE — uniform 4:5, posters cover-cropped ── */}
+      {/* ── MEDIA ZONE, uniform 4:5, posters cover-cropped ── */}
       <div style={{
         aspectRatio: '3875 / 5463',
         background: '#0b0b12',
@@ -234,7 +234,7 @@ function EventCard8({ card }) {
 }
 
 /* ═══════════════════════════════════════════
-   MANIFESTO — clubbers tone
+   MANIFESTO, clubbers tone
    ═══════════════════════════════════════════ */
 function Manifesto8() {
   const C = window.Cv8;
@@ -283,13 +283,13 @@ function Manifesto8() {
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: 10, letterSpacing: '0.2em', color: C.blue,
             marginBottom: 16,
-          }}>// CHAPTER 01 — ORIGIN</div>
+          }}>// CHAPTER 01 / ORIGIN</div>
           <p style={{
             fontSize: 'clamp(15px, 1.5vw, 18px)', lineHeight: 1.8,
             color: C.light + 'cc', marginBottom: 20,
             textWrap: 'pretty',
           }}>
-            HERTZ started in Bologna in 2023. We were tired of nights built for the camera — rooms full of people half-watching, half-filming, with the music stuck somewhere in the background.
+            Hertz started in Bologna in 2023. We were tired of nights built for the camera, rooms full of people half-watching, half-filming, with the music stuck somewhere in the background.
           </p>
           <p style={{
             fontSize: 'clamp(15px, 1.5vw, 18px)', lineHeight: 1.8,
@@ -304,7 +304,7 @@ function Manifesto8() {
             aspectRatio: '3/4', overflow: 'hidden', position: 'relative',
             background: C.darkSoft,
           }}>
-            <img src="/assets/hero-booth.jpg" alt="DJ booth at a HERTZ event" loading="lazy" style={{
+            <img src="/assets/hero-booth.jpg" alt="DJ booth at a Hertz event" loading="lazy" style={{
               width: '100%', height: '100%', objectFit: 'cover',
               filter: 'saturate(0.6) brightness(0.85) contrast(1.1)',
             }} />
@@ -316,7 +316,7 @@ function Manifesto8() {
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: 10, letterSpacing: '0.2em', color: C.blue,
             marginBottom: 16,
-          }}>// CHAPTER 02 — THE ROOM</div>
+          }}>// CHAPTER 02 / THE ROOM</div>
           <p style={{
             fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
             fontSize: 'clamp(17px, 1.9vw, 22px)',
@@ -326,7 +326,7 @@ function Manifesto8() {
           }}>
             A room. A system. A crowd that came to listen. The rest is just volume.
           </p>
-          <img src="/assets/hertz-logo-header.png" alt="HERTZ" style={{
+          <img src="/assets/hertz-logo-header.png" alt="Hertz" style={{
             height: 22, opacity: 0.5, marginTop: 24,
           }} />
         </R>
@@ -395,7 +395,7 @@ function Manifesto8() {
 }
 
 /* ═══════════════════════════════════════════
-   BRAND IDENTITY — Clubbing Collective showcase
+   BRAND IDENTITY, Clubbing Collective showcase
    ═══════════════════════════════════════════ */
 function BrandIdentity8() {
   const C = window.Cv8;
@@ -437,8 +437,8 @@ function BrandIdentity8() {
               onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.boxShadow = '0 30px 60px -24px rgba(8,8,13,0.6)'; }}
               onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 20px 44px -22px rgba(8,8,13,0.5)'; }}
             >
-              <img src={g.img} alt={`HERTZ brand identity — ${g.cap}`} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-              <figcaption style={{ position: 'absolute', left: 12, bottom: 12, ...mono, fontSize: 9, letterSpacing: '0.14em', color: C.light, background: 'rgba(8,8,13,0.6)', backdropFilter: 'blur(6px)', padding: '4px 8px', textTransform: 'uppercase' }}>{String(i + 1).padStart(2, '0')} — {g.cap}</figcaption>
+              <img src={g.img} alt={`Hertz brand identity, ${g.cap}`} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              <figcaption style={{ position: 'absolute', left: 12, bottom: 12, ...mono, fontSize: 9, letterSpacing: '0.14em', color: C.light, background: 'rgba(8,8,13,0.6)', backdropFilter: 'blur(6px)', padding: '4px 8px', textTransform: 'uppercase' }}>{String(i + 1).padStart(2, '0')}, {g.cap}</figcaption>
             </figure>
           ))}
         </div>
@@ -452,7 +452,7 @@ function BrandIdentity8() {
 }
 
 /* ═══════════════════════════════════════════
-   FAMILY — residents
+   FAMILY, residents
    ═══════════════════════════════════════════ */
 function FamilySection8() {
   const C = window.Cv8;
@@ -517,7 +517,7 @@ function FamilySection8() {
               fontFamily: "'JetBrains Mono', monospace",
               fontSize: 11, letterSpacing: '0.2em', color: C.blue,
               marginBottom: 16,
-            }}>// SELECTED — {RESIDENTS[active].n}</div>
+            }}>// SELECTED / {RESIDENTS[active].n}</div>
             <h3 style={{
               fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
               fontSize: 'clamp(2rem, 5vw, 4rem)',
@@ -585,7 +585,7 @@ function FamilySection8() {
 }
 
 /* ═══════════════════════════════════════════
-   COLLAB — partner venues / homes
+   COLLAB, partner venues / homes
    ═══════════════════════════════════════════ */
 function CollabSection8() {
   const C = window.Cv8;
@@ -658,7 +658,7 @@ function CollabSection8() {
 }
 
 /* ═══════════════════════════════════════════
-   GALLERY — horizontal scroll
+   GALLERY, horizontal scroll
    ═══════════════════════════════════════════ */
 function GallerySection8() {
   const C = window.Cv8;
@@ -743,7 +743,7 @@ function GallerySection8() {
             aspectRatio: img.ratio,
             overflow: 'hidden', position: 'relative',
           }}>
-            <img src={img.src} alt="HERTZ night — archive" style={{
+            <img src={img.src} alt="Hertz night, archive" style={{
               width: '100%', height: '100%', objectFit: 'cover',
               filter: 'saturate(0.65) brightness(0.85) contrast(1.1)',
             }} loading="lazy" />
@@ -755,7 +755,7 @@ function GallerySection8() {
 }
 
 /* ═══════════════════════════════════════════
-   MERCH — Drop 01
+   MERCH, Drop 01
    ═══════════════════════════════════════════ */
 function MerchTeaser8() {
   const C = window.Cv8;
@@ -794,7 +794,7 @@ function MerchTeaser8() {
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: 11, letterSpacing: '0.2em', color: C.blue,
             marginBottom: 16,
-          }}>// 05 / DROP 01 — COMING SOON</div>
+          }}>// 05 / DROP 01 · COMING SOON</div>
           <h2 style={{
             fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
             fontSize: 'clamp(2.5rem, 8vw, 7rem)',
@@ -810,7 +810,7 @@ function MerchTeaser8() {
             maxWidth: 540, marginBottom: 32, textWrap: 'pretty',
           }}>
             A capsule built for the dancefloor. Limited numbered runs, no compromise.
-            Coming soon — leave your address to know first.
+            Coming soon, leave your address to know first.
           </p>
           {!joined ? (
             <form onSubmit={submit} style={{
@@ -845,7 +845,7 @@ function MerchTeaser8() {
               padding: '14px 18px', border: `1px solid ${C.blue}`,
               color: C.blue, fontFamily: "'JetBrains Mono', monospace",
               fontSize: 12, letterSpacing: '0.12em', display: 'inline-block',
-            }}>● ON THE LIST — see you on the dancefloor.</div>
+            }}>● ON THE LIST, see you on the dancefloor.</div>
           )}
         </R>
 
@@ -863,7 +863,7 @@ function MerchTeaser8() {
               <span style={{ color: C.blue }}>LIMITED ↗</span>
             </div>
 
-            {/* Dark card — slightly rotated for editorial feel */}
+            {/* Dark card, slightly rotated for editorial feel */}
             <div style={{
               background: C.dark,
               padding: '28px 24px 20px',
@@ -883,7 +883,7 @@ function MerchTeaser8() {
                 textTransform: 'uppercase',
               }}>001/200</div>
 
-              {/* Product photo — transparent PNG on white */}
+              {/* Product photo, transparent PNG on white */}
               <div style={{
                 background: '#ffffff',
                 aspectRatio: '3/4',
@@ -893,7 +893,7 @@ function MerchTeaser8() {
               }}>
                 <img
                   src="/assets/merch-lanyard-drop01.png"
-                  alt="HERTZ lanyard — Drop 01"
+                  alt="Hertz lanyard, Drop 01"
                   style={{ width: '75%', objectFit: 'contain' }}
                 />
               </div>
@@ -980,7 +980,7 @@ function Footer8() {
           gap: 40, marginBottom: 56,
         }}>
           <div>
-            <img src="/assets/hertz-logo-header.png" alt="HERTZ" style={{ height: 30, opacity: 0.9, marginBottom: 16 }} />
+            <img src="/assets/hertz-logo-header.png" alt="Hertz" style={{ height: 30, opacity: 0.9, marginBottom: 16 }} />
             <p style={{
               fontFamily: "'JetBrains Mono', monospace",
               fontSize: 11, color: C.light + '66', lineHeight: 1.8,
@@ -1034,7 +1034,7 @@ function Footer8() {
               marginBottom: 16,
             }}>// SAFE SPACE</h4>
             <p style={{ fontSize: 12, color: C.light + '66', lineHeight: 1.7, textWrap: 'pretty' }}>
-              No harassment, no hate, no discrimination. Respect boundaries — yours and others'. The dancefloor is for everyone.
+              No harassment, no hate, no discrimination. Respect boundaries, yours and others'. The dancefloor is for everyone.
             </p>
           </div>
         </div>
@@ -1044,7 +1044,7 @@ function Footer8() {
           fontFamily: "'JetBrains Mono', monospace",
           fontSize: 10, color: C.light + '40', letterSpacing: '0.1em',
         }}>
-          <span>© 2026 HERTZ — FROM CLUBBERS TO CLUBBERS</span>
+          <span>© 2026 Hertz, from clubbers to clubbers</span>
           <span>HZ.CC / V8</span>
         </div>
       </div>
