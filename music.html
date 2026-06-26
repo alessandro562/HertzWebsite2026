@@ -239,6 +239,7 @@ function MusicPage() {
             {SP_ARTISTS.map((a, i) => (
               <R key={a.id} delay={i * 0.1}>
                 <a href={a.url} target="_blank" rel="noopener noreferrer"
+                  className="hz-card"
                   style={{
                     display: 'grid', gridTemplateColumns: '72px 1fr auto', gap: 20, alignItems: 'center',
                     padding: '20px 24px', background: C.dark, border: `1px solid ${C.light}10`,

@@ -117,6 +117,7 @@ function EventCard8({ card }) {
 
   return (
     <article
+      className="hz-card"
       style={{
         flex: '0 0 auto',
         width: 'clamp(230px, 20vw, 290px)',
@@ -621,7 +622,7 @@ function CollabSection8() {
         <R delay={0.08}>
           <div className="hz-collab-grid">
             {PARTNERS.map((p) => (
-              <figure key={p.name} className="hz-collab-card" style={{
+              <figure key={p.name} className="hz-collab-card hz-card" style={{
                 margin: 0, position: 'relative',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 background: 'linear-gradient(180deg, #15151d 0%, #0f0f16 100%)',

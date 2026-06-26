@@ -106,6 +106,7 @@ function ArtistsPage() {
                 </div>
               ) : (
                 <a
+                  className="hz-card"
                   href={`/artist-${r.slug}.html`}
                   onMouseEnter={() => setHovered(i)}
                   onMouseLeave={() => setHovered(null)}

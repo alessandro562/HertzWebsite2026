@@ -152,6 +152,7 @@ function ArticleCard({ article, featured = false, dark = false }) {
 
   return (
     <a
+      className="hz-card"
       href={`/media/${article.slug}`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
