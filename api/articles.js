@@ -59,7 +59,7 @@ const ARTICLES = [
 
     engagement: { shareCount: 0, viewCount: 0, featured: true },
 
-    relatedArticles: ["two-people-one-booth-b2b", "sunwaves-left-home-rominimal"]
+    relatedArticles: ["sunwaves-left-home-rominimal"]
   },
 
   {
@@ -116,7 +116,7 @@ const ARTICLES = [
 
     engagement: { shareCount: 0, viewCount: 0, featured: false },
 
-    relatedArticles: ["two-speed-island-ibiza-2026", "two-people-one-booth-b2b"]
+    relatedArticles: ["two-speed-island-ibiza-2026"]
   },
 
   {
@@ -239,63 +239,6 @@ const ARTICLES = [
     engagement: { shareCount: 0, viewCount: 0, featured: false },
 
     relatedArticles: ["music-on-pacha-long-residency", "two-speed-island-ibiza-2026"]
-  },
-
-  {
-    _id: "hertz-crossfade-01",
-    slug: "two-people-one-booth-b2b",
-    title: "Two People, One Booth: What the B2B Reveals About the Split",
-    subtitle: "Everything Always and RPR Soundsystem are both \"two artists, back to back.\" They are not the same thing, and the difference is the whole argument.",
-    excerpt: "The b2b has become the scene's basic unit. We pull apart two models — the American mainstage supergroup and the European b2b-as-conversation — and what each one says about where clubbing is going.",
-    rubric: "CROSSFADE",
-
-    content: {
-      body: `<p>The back-to-back is everywhere now. The b2b, the alias, the duo, the "supergroup" — two or more names sharing a booth has become one of the scene's basic units, on posters from Miami to Mamaia. Which is interesting, because the format hides a fault line. Two things both described as "a b2b" can be opposite in everything that matters. Pull two of them apart and you get the cleanest possible picture of the split this whole publication is about.</p>
-
-<h2>Exhibit A: the supergroup</h2>
-
-<p>In March 2025, John Summit and Dom Dolla debuted <strong>Everything Always</strong> on the Ultra Miami main stage. Two of the biggest names in American dance music, combining into a single brand-name project, built for the largest stage at the largest US festival.</p>
-
-<p>It works on its own terms, and those terms are specific. It's a team-up in the way a blockbuster crossover is a team-up — two franchises in one film, marketed as an event, engineered to read at scale. The set is a sequence of recognisable peaks, the records mostly built for exactly that. When Resident Advisor reviewed Summit's recent album, it reached for a label that's stuck: it placed him at the head of an "epoch of frat house," describing a kind of tech house assembled from its most festival-ready parts — the Ibiza-fied groove, a trance lift, the occasional bass wobble, a vapid vocal on top.</p>
-
-<p>We're not interested in trashing it. People love it; the craft of moving forty thousand people is real and rare. But be clear about what the b2b is doing here: it's a <strong>marketing combination</strong>. Two audiences fused into one ticket. The unit of value is the lineup, not the conversation.</p>
-
-<h2>Exhibit B: the conversation</h2>
-
-<p>Now the other kind. <strong>RPR Soundsystem</strong> — Rhadoo, Raresh and Petre Inspirescu, the three Romanians at the core of the [a:rpia:r] world. When they play back to back, it isn't a crossover event. It's a single organism playing a set that can run six, eight hours, with no setlist and no peaks engineered for distance. One selector lays a record, the next answers it, the groove gets handed around and slowly mutated. You can't tell, most of the time, who's playing what. That's the point.</p>
-
-<p>This is the b2b as <strong>conversation</strong> — the unit of value is the dialogue, the patience, the risk of two or three people improvising in public for half a night. You see the same logic in Apollonia's marathon sets, and in the long Music On pairings at Pacha, the kind of Capriati-and-Carola back-to-back that people remember a specific record from years later. The names matter less than the exchange between them.</p>
-
-<h2>The difference is duration and risk</h2>
-
-<p>Here's the test, and it's simple. A marketing b2b optimises for the moment of combination — the announcement, the poster, the first twenty minutes that confirm the hype. A conversation b2b optimises for duration — it's only any good if it can sustain itself for hours, because the whole form is about where two musicians can take each other when there's no clock and no script.</p>
-
-<p>One is built to be seen. The other is built to be inside of. One reads at two hundred metres. The other only really exists up close, in a room where the booth can hear the floor. That's not a coincidence — it's the same split as the hyperclub versus the ecosystem, just expressed through two people instead of two business models.</p>
-
-<h2>What we book, and why</h2>
-
-<p>When we put a b2b on, this is the distinction we're actually making, even if the flyer doesn't spell it out. We're not asking "which two names sell." We're asking "do these two have a conversation in them" — can they hand a groove back and forth for long enough that something happens neither would have reached alone. Sometimes that's two residents who've played together for years. Sometimes it's a careful pairing of a known head with someone from Radar. It's never just addition.</p>
-
-<p>The supergroup is a product. The conversation is a practice. Both are called a b2b. Only one of them needs the room we believe in — and that's the whole reason we keep building it.</p>`,
-      readingTimeMinutes: 6
-    },
-
-    media: { heroImage: "/assets/man-room.jpg", heroImageAlt: "Two selectors sharing one booth", gallery: [] },
-
-    metadata: {
-      author: "Hertz Redazione",
-      category: "Editorial",
-      rubric: "CROSSFADE",
-      tags: ["b2b", "collaboration", "everything-always", "rpr-soundsystem", "tech-house", "scene"],
-      publishedAt: new Date("2026-06-06"),
-      updatedAt: new Date("2026-06-06")
-    },
-
-    seo: { metaDescription: "The b2b has become the scene's basic unit. We pull apart two models — the American mainstage supergroup and the European b2b-as-conversation — and what each one says about where clubbing is going.", keywords: ["b2b", "collaboration", "everything-always", "rpr-soundsystem", "tech-house", "scene"] },
-
-    engagement: { shareCount: 0, viewCount: 0, featured: false },
-
-    relatedArticles: ["two-speed-island-ibiza-2026", "sunwaves-left-home-rominimal"]
   },
 ];
 
