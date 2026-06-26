@@ -406,7 +406,7 @@ function ArtistPage({ artist, events = [] }) {
         </div>
       </section>
 
-      <window.Footer8 />
+      <window.Footer8 banner={false} />
     </div>
   );
 }
