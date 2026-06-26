@@ -153,8 +153,8 @@ function Nav8() {
             );
           })}
           <a
-            href="#"
-            aria-label="Buy tickets for the next event"
+            href="/bookings.html"
+            aria-label="Book Hertz or a resident"
             style={{
               fontFamily: "'JetBrains Mono', monospace",
               fontSize: 11, fontWeight: 600, letterSpacing: '0.16em',
@@ -167,7 +167,7 @@ function Nav8() {
             }}
             onMouseEnter={e => { e.currentTarget.style.borderColor = C.blue; e.currentTarget.style.color = C.blue; }}
             onMouseLeave={e => { e.currentTarget.style.borderColor = C.light + '33'; e.currentTarget.style.color = C.light; }}
-          >Tickets ↗</a>
+          >Bookings ↗</a>
         </div>
       )}
     </nav>
@@ -208,8 +208,8 @@ function Nav8() {
         >{item.label}</a>
       ))}
       <a
-        href="#"
-        aria-label="Buy tickets"
+        href="/bookings.html"
+        aria-label="Book Hertz or a resident"
         style={{
           marginTop: 24, display: 'inline-block',
           fontFamily: "'JetBrains Mono', monospace",
@@ -221,7 +221,7 @@ function Nav8() {
           transform: menuOpen ? 'translateY(0)' : 'translateY(20px)',
           transition: `all 0.4s cubic-bezier(.22,1,.36,1) ${items.length * 0.05}s`,
         }}
-      >Tickets ↗</a>
+      >Bookings ↗</a>
     </div>
     </>
   );
@@ -330,7 +330,7 @@ function Footer8({ banner = true, bannerLight = true }) {
           display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8,
           fontFamily: "'JetBrains Mono', monospace", fontSize: 10, color: C.light + '40', letterSpacing: '0.1em',
         }}>
-          <span>© 2026 Hertz, from clubbers to clubbers</span>
+          <span>© 2026 Hertz, by clubbers, for clubbers</span>
           <span>HZ.CLUB / V8</span>
         </div>
       </div>

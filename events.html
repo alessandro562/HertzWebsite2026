@@ -151,8 +151,8 @@ function EventsPage() {
                     </div>
                     <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                       <a
-                        href={e.ctaLink || '#'}
-                        aria-label={`${e.ctaLabel}, ${e.title}`}
+                        href={`/guestlist.html?e=${encodeURIComponent(e.n)}&t=${encodeURIComponent(e.title)}&d=${encodeURIComponent(e.date)}`}
+                        aria-label={`Join the guest list for ${e.title}`}
                         style={{
                           display: 'inline-flex', alignItems: 'center', background: C.blue, color: C.light, padding: '14px 22px',
                           ...mono, fontSize: 11, fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase',
@@ -161,7 +161,7 @@ function EventsPage() {
                         onMouseEnter={e2 => e2.currentTarget.style.background = '#1a5aaf'}
                         onMouseLeave={e2 => e2.currentTarget.style.background = C.blue}
                       >
-                        {e.ctaLabel} ↗
+                        Join the list ↗
                       </a>
                       {(e.address || e.venue) && (
                         <a

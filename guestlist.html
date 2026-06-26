@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hertz — Join the list</title>
+  <meta name="description" content="Hertz works on guest lists. Register for the night.">
+  <meta name="theme-color" content="#08080d">
+  <meta name="robots" content="noindex">
+  <link rel="stylesheet" href="fonts.css">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=block" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+    body { background: #08080d; color: #f5f5f3; font-family: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif; overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-thumb { background: rgba(20,72,137,0.4); }
+    ::selection { background: rgba(20,72,137,0.30); color: #f5f5f3; }
+    a { color: inherit; text-decoration: none; }
+    input { font-family: inherit; }
+    @media (max-width: 768px) { html { font-size: 14px; } input { font-size: 16px; } }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script type="text/babel" src="hertz-shared.jsx"></script>
+<script type="text/babel">
+function GuestlistPage() {
+  const C = window.Cv8;
+  const R = window.R8;
+  const mono = { fontFamily: "'JetBrains Mono', monospace" };
+  const briq = { fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif" };
+
+  const p = (k) => { try { return new URLSearchParams(window.location.search).get(k) || ''; } catch (e) { return ''; } };
+  const event = p('e');
+  const eventTitle = p('t') || 'Hertz';
+  const eventDate = p('d');
+
+  const [f, setF] = React.useState({ name: '', surname: '', email: '' });
+  const [status, setStatus] = React.useState('idle'); // idle | sending | done | already | error | failed
+  const set = (k) => (e) => setF(s => ({ ...s, [k]: e.target.value }));
+
+  const submit = (e) => {
+    e.preventDefault();
+    if (!f.name.trim() || !f.surname.trim() || !/.+@.+\..+/.test(f.email.trim())) { setStatus('error'); return; }
+    setStatus('sending');
+    fetch('/api/guestlist', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ event, eventTitle, name: f.name, surname: f.surname, email: f.email }) })
+      .then(r => r.json())
+      .then(d => setStatus(d.ok ? (d.already ? 'already' : 'done') : 'failed'))
+      .catch(() => setStatus('failed'));
+  };
+
+  const label = { ...mono, fontSize: 10, letterSpacing: '0.18em', textTransform: 'uppercase', color: C.light + '88', marginBottom: 8, display: 'block' };
+  const field = { width: '100%', background: 'transparent', border: `1px solid ${C.light}22`, color: C.light, padding: '13px 14px', ...mono, fontSize: 13, letterSpacing: '0.03em', outline: 'none' };
+  const done = status === 'done' || status === 'already';
+
+  return (
+    <div style={{ background: C.dark, minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <window.Nav8 />
+      <main style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 'clamp(96px,16vh,140px) clamp(20px,4vw,56px) clamp(48px,8vh,80px)' }}>
+        <div style={{ width: '100%', maxWidth: 520 }}>
+          <R>
+            <div className="hz-card hz-card--panel" style={{ position: 'relative', padding: 'clamp(28px,5vw,48px)' }}>
+              <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 16 }}>// GUEST LIST{event ? ` · HZ.${event}` : ''}</div>
+
+              {done ? (
+                <div>
+                  <h1 style={{ ...briq, fontSize: 'clamp(1.9rem,5vw,2.8rem)', fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1, color: C.light, marginBottom: 14 }}>
+                    {status === 'already' ? "You're already in" : "You're on the list"}<span style={{ color: C.blue }}>.</span>
+                  </h1>
+                  <p style={{ fontSize: 15, lineHeight: 1.7, color: C.light + 'aa' }}>{eventTitle}{eventDate ? ` · ${eventDate}` : ''}. See you on the floor.</p>
+                </div>
+              ) : (
+                <div>
+                  <h1 style={{ ...briq, fontSize: 'clamp(1.9rem,5vw,2.8rem)', fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1.02, color: C.light, marginBottom: 8 }}>Join the list<span style={{ color: C.blue }}>.</span></h1>
+                  <p style={{ fontSize: 14, lineHeight: 1.6, color: C.light + '99', marginBottom: 28 }}>{eventTitle}{eventDate ? ` · ${eventDate}` : ''}. Hertz works on guest lists, add your name below.</p>
+                  <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                      <div><label style={label}>Name *</label><input value={f.name} onChange={set('name')} style={field} required /></div>
+                      <div><label style={label}>Surname *</label><input value={f.surname} onChange={set('surname')} style={field} required /></div>
+                    </div>
+                    <div><label style={label}>Email *</label><input value={f.email} onChange={set('email')} type="email" style={field} required /></div>
+                    {(status === 'error' || status === 'failed') && (
+                      <div style={{ ...mono, fontSize: 11, letterSpacing: '0.08em', color: '#d06a6a' }}>{status === 'error' ? '// Fill name, surname and a valid email' : '// Something went wrong — try again'}</div>
+                    )}
+                    <button type="submit" disabled={status === 'sending'} style={{ background: C.blue, color: C.light, border: 'none', padding: '14px 28px', cursor: 'pointer', ...mono, fontSize: 12, letterSpacing: '0.16em', textTransform: 'uppercase', opacity: status === 'sending' ? 0.6 : 1 }}>
+                      {status === 'sending' ? 'Sending…' : "I'm in →"}
+                    </button>
+                  </form>
+                </div>
+              )}
+            </div>
+            <a href="/events.html" style={{ ...mono, fontSize: 10, letterSpacing: '0.16em', color: C.light + '55', textTransform: 'uppercase', display: 'inline-block', marginTop: 22 }}>← All events</a>
+          </R>
+        </div>
+      </main>
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<GuestlistPage />);
+</script>
+</body>
+</html>

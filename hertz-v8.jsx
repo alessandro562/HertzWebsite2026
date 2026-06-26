@@ -447,8 +447,8 @@ function Nav8() {
             );
           })}
           <a
-            href="#"
-            aria-label="Buy tickets for the next event"
+            href="/bookings.html"
+            aria-label="Book Hertz or a resident"
             style={{
               fontFamily: "'JetBrains Mono', monospace",
               fontSize: 11, fontWeight: 600, letterSpacing: '0.16em',
@@ -462,7 +462,7 @@ function Nav8() {
             }}
             onMouseEnter={e => { e.currentTarget.style.borderColor = Cv8.blue; e.currentTarget.style.color = Cv8.blue; }}
             onMouseLeave={e => { e.currentTarget.style.borderColor = Cv8.light + '33'; e.currentTarget.style.color = Cv8.light; }}
-          >Tickets ↗</a>
+          >Bookings ↗</a>
         </div>
       )}
     </nav>
@@ -501,8 +501,8 @@ function Nav8() {
         >{item.label}</a>
       ))}
       <a
-        href="#"
-        aria-label="Buy tickets"
+        href="/bookings.html"
+        aria-label="Book Hertz or a resident"
         style={{
           marginTop: 24, display: 'inline-block',
           fontFamily: "'JetBrains Mono', monospace",
@@ -513,7 +513,7 @@ function Nav8() {
           transform: menuOpen ? 'translateY(0)' : 'translateY(20px)',
           transition: `all 0.4s cubic-bezier(.22,1,.36,1) ${items.length * 0.05}s`,
         }}
-      >Tickets ↗</a>
+      >Bookings ↗</a>
     </div>
     </>
   );
@@ -572,14 +572,18 @@ function Hero8({ countdown, primary, accent, tweaks }) {
             fontWeight: 700, lineHeight: 1.05,
             letterSpacing: '-0.025em', color: Cv8.light,
           }}>
-            We are real{' '}
-            <span style={{ color: primary, fontStyle: 'italic', fontWeight: 500 }}>clubbers</span>
+            Clubbing{' '}
+            <span style={{ color: primary, fontStyle: 'italic', fontWeight: 500 }}>Collective</span>
             <span style={{ color: accent }}>.</span>
           </h1>
           <p style={{
             ...mono, fontSize: 11, color: Cv8.gray, marginTop: 10,
-            textTransform: 'uppercase',
-          }}>// from clubbers to clubbers · bologna est. 2023</p>
+            textTransform: 'uppercase', textAlign: 'center', lineHeight: 1.7,
+          }}>
+            // by clubbers, for clubbers
+            <br />
+            bologna est. 2023
+          </p>
         </div>
 
         <div style={{

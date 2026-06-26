@@ -219,15 +219,15 @@ function EventCard8({ card }) {
           fontSize: 10, letterSpacing: '0.08em',
           color: C.gray, textTransform: 'uppercase',
         }}>{card.comingSoon ? card.city : `${card.venue} · ${card.city}`}</div>
-        {!isPast && card.ctaLabel && (
-          <a href={card.ctaLink || '#'} style={{
+        {!isPast && !card.comingSoon && (
+          <a href={`/guestlist.html?e=${encodeURIComponent(card.n)}&t=${encodeURIComponent(card.title)}&d=${encodeURIComponent(card.date)}`} style={{
             marginTop: 8,
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: 10, letterSpacing: '0.16em',
             color: C.blue, textDecoration: 'none',
             textTransform: 'uppercase', display: 'inline-flex',
             alignItems: 'center', minHeight: 36,
-          }}>{card.ctaLabel} →</a>
+          }}>Join the list →</a>
         )}
       </div>
     </article>

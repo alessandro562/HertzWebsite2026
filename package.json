@@ -25,6 +25,7 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
+    "@vercel/kv": "^1.0.1",
     "sharp": "^0.34.5"
   },
   "devDependencies": {
