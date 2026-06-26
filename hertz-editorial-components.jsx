@@ -147,7 +147,7 @@ function ArticleCard({ article, featured = false, dark = false }) {
   const textMute = `rgba(${dim},0.45)`;
   const hairline = `rgba(${dim},0.14)`;
 
-  const cat = (article.metadata && article.metadata.category ? article.metadata.category : 'Editorial').toUpperCase();
+  const cat = ((article.metadata && (article.metadata.rubric || article.metadata.category)) || 'Editorial').toUpperCase();
   const rt = article.content && article.content.readingTimeMinutes;
 
   return (
@@ -366,7 +366,7 @@ function ArticleDetail({ slug }) {
           {/* HEADER */}
           <header style={{ marginBottom: 40 }}>
             <div style={{ ...MONO, fontSize: 11, letterSpacing: '0.24em', color: C.blue, textTransform: 'uppercase', fontWeight: 600, marginBottom: 18 }}>
-              {article.metadata.category}
+              {article.metadata.rubric || article.metadata.category}
             </div>
             <h1 style={{ ...HN, fontSize: 'clamp(2.1rem, 5vw, 3.4rem)', fontWeight: 700, lineHeight: 1.04, letterSpacing: '-0.035em', color: C.light, margin: 0 }}>
               {article.title}
@@ -385,6 +385,22 @@ function ArticleDetail({ slug }) {
 
           {/* BODY */}
           <div className="article-body" style={{ ...HN }} dangerouslySetInnerHTML={{ __html: article.content.body }} />
+
+          {/* TOPICS */}
+          {article.metadata.tags && article.metadata.tags.length > 0 && (
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 44 }}>
+              {article.metadata.tags.map(t => (
+                <a key={t} href={`/media?tag=${encodeURIComponent(t)}`} style={{
+                  ...MONO, fontSize: 10, letterSpacing: '0.06em', padding: '6px 12px',
+                  border: `1px solid rgba(236,234,227,0.18)`, color: 'rgba(236,234,227,0.6)',
+                  textDecoration: 'none', transition: 'all 0.2s',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = C.blue; e.currentTarget.style.color = C.blue; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(236,234,227,0.18)'; e.currentTarget.style.color = 'rgba(236,234,227,0.6)'; }}
+                >#{t}</a>
+              ))}
+            </div>
+          )}
 
           {/* BYLINE / SHARE */}
           <footer style={{ borderTop: `1px solid rgba(236,234,227,0.12)`, paddingTop: 28, marginTop: 56, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
