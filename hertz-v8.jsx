@@ -564,7 +564,7 @@ function Hero8({ countdown, primary, accent, tweaks }) {
       <div style={{ flex: 1 }} />
 
       {/* BOTTOM, tagline + next event + countdown */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 36 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
         <div style={{ textAlign: 'center', maxWidth: 900, margin: '0 auto' }}>
           <h1 style={{
             fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
@@ -577,8 +577,8 @@ function Hero8({ countdown, primary, accent, tweaks }) {
             <span style={{ color: accent }}>.</span>
           </h1>
           <p style={{
-            ...mono, fontSize: 11, color: Cv8.gray, marginTop: 10,
-            textTransform: 'uppercase', textAlign: 'center', lineHeight: 1.7,
+            ...mono, fontSize: 11, color: Cv8.gray, marginTop: 12,
+            textTransform: 'uppercase', textAlign: 'center', lineHeight: 1.65,
           }}>
             // by clubbers, for clubbers
             <br />
