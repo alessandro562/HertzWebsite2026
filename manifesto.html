@@ -81,7 +81,7 @@ function ManifestoPage() {
   return (
     <div style={{ background: C.dark, minHeight: '100vh' }}>
       <window.Nav8 />
-      <window.PageHero section="// 02 / MANIFESTO" title={"From clubbers,\nfor clubbers"} />
+      <window.PageHero section="02. MANIFESTO" title={"From clubbers,\nfor clubbers"} />
 
       {/* Full-bleed photo */}
       <div style={{ position: 'relative', height: 'clamp(320px,50vh,620px)', overflow: 'hidden' }}>
@@ -108,7 +108,7 @@ function ManifestoPage() {
           <R>
             <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: 'clamp(24px,4vw,64px)' }}>
               <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: isMobile ? 0 : 'clamp(8px,2vw,32px) 0' }}>
-                <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 18 }}>// CHAPTER 01 / ORIGIN</div>
+                <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 18 }}>CHAPTER 01. ORIGIN</div>
                 <p style={{ fontSize: 'clamp(15px,1.4vw,17px)', lineHeight: 1.8, color: C.dark + 'cc', marginBottom: 18, textWrap: 'pretty' }}>
                   The Hertz collective was born in Bologna in 2023, out of one simple conviction: the night was turning into something to watch, and less and less something to live, rooms built for the camera, with the music stuck somewhere in the background.
                 </p>
@@ -129,7 +129,7 @@ function ManifestoPage() {
                 <img src="assets/man-room.jpg" alt="Hertz booth and crowd" loading="lazy" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block', filter: 'saturate(0.7) contrast(1.05)' }} />
               </div>
               <div style={{ order: isMobile ? 1 : 2, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: isMobile ? 0 : 'clamp(8px,2vw,32px) 0' }}>
-                <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 18 }}>// CHAPTER 02 / THE ROOM</div>
+                <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 18 }}>CHAPTER 02. THE ROOM</div>
                 <p style={{ ...briq, fontSize: 'clamp(18px,2.2vw,26px)', fontWeight: 700, lineHeight: 1.3, color: C.dark, letterSpacing: '-0.02em', marginBottom: 18, textWrap: 'pretty' }}>
                   A room. A system. A crowd that came to listen. The rest is just volume.
                 </p>
@@ -143,7 +143,7 @@ function ManifestoPage() {
           {/* Chapter 03, The Code · full-width climax */}
           <R delay={0.1}>
             <div style={{ marginTop: 'clamp(64px,11vw,150px)', maxWidth: 960 }}>
-              <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 24 }}>// CHAPTER 03 / THE FLOOR</div>
+              <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 24 }}>CHAPTER 03. THE FLOOR</div>
               <p style={{ ...briq, fontSize: 'clamp(1.9rem,5vw,4rem)', fontWeight: 700, lineHeight: 0.95, letterSpacing: '-0.04em', color: C.dark, textWrap: 'pretty', margin: 0 }}>
                 Turn the lights down, the system up, and let the record run. The floor knows what to do.
               </p>
@@ -172,7 +172,7 @@ function ManifestoPage() {
         <div style={{ maxWidth: 1080, margin: '0 auto', position: 'relative' }}>
           <R delay={0.08}>
            <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1.12fr 0.88fr', gap: isMobile ? 16 : 'clamp(18px,2.4vw,28px)', alignItems: 'stretch' }}>
-            <figure className="hz-card" style={{ position: 'relative', margin: 0, textAlign: 'left', background: 'linear-gradient(180deg, #16161f 0%, #0f0f16 100%)', border: `1px solid ${C.light}0f`, padding: 'clamp(36px,5vw,72px) clamp(28px,5vw,68px) clamp(32px,4vw,56px)', overflow: 'hidden' }}>
+            <figure className="hz-card hz-card--panel" style={{ position: 'relative', margin: 0, textAlign: 'left', border: `1px solid ${C.light}0f`, padding: 'clamp(36px,5vw,72px) clamp(28px,5vw,68px) clamp(32px,4vw,56px)', overflow: 'hidden' }}>
               <div aria-hidden="true" style={{ position: 'absolute', top: 0, left: 0, height: 2, width: 64, background: C.blue }} />
 
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 20, marginBottom: 'clamp(20px,3vw,32px)' }}>
@@ -270,6 +270,7 @@ function ManifestoPage() {
           <div style={{ ...mono, fontSize: 10, letterSpacing: '0.18em', color: C.dark + '44', marginBottom: 28, display: 'flex', alignItems: 'center', gap: 8 }}>
             <span>←</span><span>DRAG · SWIPE</span><span>→</span>
           </div>
+          <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 14 }}>// HERTZ &amp; KINDERGARTEN POLICY</div>
           <p style={{ fontSize: 'clamp(13px,1.3vw,15px)', color: C.dark + '88', lineHeight: 1.85, maxWidth: 560, textWrap: 'pretty' }}>
             No harassment, no hate, no discrimination of any kind. Respect boundaries, yours and others'. We hold each other accountable. Everyone is welcome on the dancefloor.
           </p>

@@ -116,7 +116,7 @@ function MusicPage() {
         }} />
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 1080, margin: '0 auto', width: '100%' }}>
           <R>
-            <div style={{ ...mono, fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 16 }}>// 04 / MUSIC</div>
+            <div style={{ ...mono, fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 16 }}>04. MUSIC</div>
             <h1 style={{ ...briq, fontSize: 'clamp(3rem,10vw,8rem)', fontWeight: 700, lineHeight: 0.88, letterSpacing: '-0.04em', color: C.light }}>
               The sound<span style={{ color: C.blue }}>.</span>
             </h1>
@@ -239,10 +239,10 @@ function MusicPage() {
             {SP_ARTISTS.map((a, i) => (
               <R key={a.id} delay={i * 0.1}>
                 <a href={a.url} target="_blank" rel="noopener noreferrer"
-                  className="hz-card"
+                  className="hz-card hz-card--panel"
                   style={{
                     display: 'grid', gridTemplateColumns: '72px 1fr auto', gap: 20, alignItems: 'center',
-                    padding: '20px 24px', background: C.dark, border: `1px solid ${C.light}10`,
+                    padding: '20px 24px', border: `1px solid ${C.light}10`,
                     textDecoration: 'none', transition: 'border-color 0.2s',
                   }}
                   onMouseEnter={e => e.currentTarget.style.borderColor = '#1DB954'}

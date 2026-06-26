@@ -44,7 +44,7 @@ function EventsHorizontal8() {
           <div style={{
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: 11, letterSpacing: '0.2em', color: C.dark + '66', marginBottom: 8,
-          }}>// 01 / EVENTS</div>
+          }}>01. EVENTS</div>
           <h2 style={{
             fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
             fontSize: 'clamp(2.5rem, 8vw, 7rem)',
@@ -250,7 +250,7 @@ function Manifesto8() {
         position: 'absolute', top: 40, right: 40,
         fontFamily: "'JetBrains Mono', monospace",
         fontSize: 11, letterSpacing: '0.2em', color: C.light + '44',
-      }}>// 02 / MANIFESTO</div>
+      }}>02. MANIFESTO</div>
 
       <style>{`
         .hz-grid-12 { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; max-width: 1400px; margin: 0 auto; }
@@ -287,7 +287,7 @@ function Manifesto8() {
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: 10, letterSpacing: '0.2em', color: C.blue,
             marginBottom: 18,
-          }}>// CHAPTER 01 / ORIGIN</div>
+          }}>CHAPTER 01. ORIGIN</div>
           <p style={{
             fontSize: 'clamp(16px, 1.55vw, 19px)', lineHeight: 1.75,
             color: C.light + 'd0', marginBottom: 20, maxWidth: '60ch',
@@ -308,7 +308,7 @@ function Manifesto8() {
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: 10, letterSpacing: '0.2em', color: C.blue,
             marginBottom: 16,
-          }}>// CHAPTER 02 / THE ROOM</div>
+          }}>CHAPTER 02. THE ROOM</div>
           <p style={{
             fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
             fontSize: 'clamp(22px, 2.6vw, 34px)',
@@ -469,7 +469,7 @@ function FamilySection8() {
         position: 'absolute', top: 40, right: 40,
         fontFamily: "'JetBrains Mono', monospace",
         fontSize: 11, letterSpacing: '0.2em', color: C.dark + '55',
-      }}>// 03 / THE FAMILY</div>
+      }}>03. THE FAMILY</div>
 
       <R>
         <div style={{
@@ -516,7 +516,7 @@ function FamilySection8() {
               fontFamily: "'JetBrains Mono', monospace",
               fontSize: 11, letterSpacing: '0.2em', color: C.blue,
               marginBottom: 16,
-            }}>// SELECTED / {RESIDENTS[active].n}</div>
+            }}>SELECTED. {RESIDENTS[active].n}</div>
             <h3 style={{
               fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
               fontSize: 'clamp(2rem, 5vw, 4rem)',
@@ -622,10 +622,9 @@ function CollabSection8() {
         <R delay={0.08}>
           <div className="hz-collab-grid">
             {PARTNERS.map((p) => (
-              <figure key={p.name} className="hz-collab-card hz-card" style={{
+              <figure key={p.name} className="hz-collab-card hz-card hz-card--panel" style={{
                 margin: 0, position: 'relative',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                background: 'linear-gradient(180deg, #15151d 0%, #0f0f16 100%)',
                 border: `1px solid ${C.light}10`,
                 padding: 'clamp(44px, 6vw, 76px) clamp(24px, 4vw, 48px)',
                 minHeight: 'clamp(220px, 26vw, 300px)',
@@ -714,7 +713,7 @@ function GallerySection8() {
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: 11, letterSpacing: '0.2em', color: C.blue,
             marginBottom: 12,
-          }}>// 04 / THE ARCHIVE</div>
+          }}>04. THE ARCHIVE</div>
           <h2 style={{
             fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
             fontSize: 'clamp(2.5rem, 7vw, 6rem)',
@@ -793,7 +792,7 @@ function MerchTeaser8() {
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: 11, letterSpacing: '0.2em', color: C.blue,
             marginBottom: 16,
-          }}>// 05 / DROP 01 · COMING SOON</div>
+          }}>05. DROP 01 · COMING SOON</div>
           <h2 style={{
             fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
             fontSize: 'clamp(2.5rem, 8vw, 7rem)',
