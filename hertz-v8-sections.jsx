@@ -324,7 +324,7 @@ function Manifesto8() {
             color: C.light, letterSpacing: '-0.01em',
             textWrap: 'pretty',
           }}>
-            A club is a room. A system. A crowd close to the booth. A bassline that hits the body before it reaches the mind.
+            A room. A system. A crowd that came to listen. The rest is just volume.
           </p>
           <img src="/assets/hertz-logo-header.png" alt="HERTZ" style={{
             height: 22, opacity: 0.5, marginTop: 24,
