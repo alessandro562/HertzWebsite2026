@@ -184,18 +184,26 @@ function ArticleCard({ article, featured = false, dark = false }) {
           background: `linear-gradient(180deg, rgba(20,72,137,0.06), rgba(8,8,13,0.28))`,
           opacity: hovered ? 0.5 : 1, transition: 'opacity 0.5s',
         }} />
+        {/* read hint */}
+        <div style={{
+          position: 'absolute', right: 12, bottom: 10, ...MONO, fontSize: 10,
+          letterSpacing: '0.18em', color: C.light, textTransform: 'uppercase', pointerEvents: 'none',
+          opacity: hovered ? 1 : 0, transform: hovered ? 'translateX(0)' : 'translateX(-4px)',
+          transition: 'opacity 0.3s, transform 0.3s', textShadow: '0 1px 10px rgba(8,8,13,0.7)',
+        }}>Read →</div>
       </div>
 
       {/* TEXT */}
       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: horizontal ? 'center' : 'flex-start' }}>
-        <div style={{ ...MONO, fontSize: 10, letterSpacing: '0.22em', fontWeight: 600, color: C.blue, textTransform: 'uppercase', marginBottom: featured ? 14 : 10 }}>
-          {cat}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 12, marginBottom: featured ? 14 : 10 }}>
+          <span style={{ ...MONO, fontSize: 10, letterSpacing: '0.22em', fontWeight: 600, color: C.blue, textTransform: 'uppercase' }}>// {cat}</span>
+          {rt ? <span style={{ ...MONO, fontSize: 10, letterSpacing: '0.14em', color: textMute, textTransform: 'uppercase' }}>{rt} min</span> : null}
         </div>
         <h3 style={{
-          ...HN, margin: 0, color: ink, textWrap: 'pretty',
+          ...HN, margin: 0, color: ink, textWrap: 'balance',
           fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1.05,
           fontSize: featured ? 'clamp(1.8rem, 3.4vw, 3rem)' : 'clamp(1.2rem, 1.7vw, 1.5rem)',
-        }}>{article.title}</h3>
+        }}>{article.title}<span style={{ color: C.blue }}>.</span></h3>
 
         {featured && article.subtitle && (
           <p style={{ ...HN, fontSize: 'clamp(15px,1.2vw,18px)', color: textDim, lineHeight: 1.5, marginTop: 16, marginBottom: 0, maxWidth: '46ch', textWrap: 'pretty' }}>
@@ -208,8 +216,11 @@ function ArticleCard({ article, featured = false, dark = false }) {
           <CardWave active={hovered} />
         </div>
 
-        <div style={{ ...MONO, fontSize: 10, letterSpacing: '0.12em', color: textMute, textTransform: 'uppercase' }}>
-          {article.metadata.author} · {fmtDate(article.metadata.publishedAt)}{rt ? ` · ${rt} MIN` : ''}
+        <div style={{ ...MONO, fontSize: 10, letterSpacing: '0.12em', color: textMute, textTransform: 'uppercase', display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'baseline' }}>
+          <span>{article.metadata.author} · {fmtDate(article.metadata.publishedAt)}</span>
+          {(article.metadata.tags || []).slice(0, 2).map(t => (
+            <span key={t} style={{ color: C.blue }}>#{t}</span>
+          ))}
         </div>
       </div>
     </a>
@@ -341,6 +352,14 @@ function ArticleDetail({ slug }) {
   return (
     <>
       <ReadingProgress />
+      <style>{`
+        .article-body p { margin: 0 0 20px; font-size: clamp(16px,1.1vw,18px); line-height: 1.8; color: rgba(236,234,227,0.86); text-wrap: pretty; }
+        .article-body h2 { font-family: 'HelveticaNeue','Helvetica Neue',Helvetica,sans-serif; font-size: clamp(1.5rem,3vw,2.1rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.18; margin: 46px 0 14px; color: #f5f5f3; text-wrap: balance; }
+        .article-body strong { color: #00d4ff; font-weight: 700; }
+        .article-body a { color: #00d4ff; text-decoration: none; border-bottom: 1px solid rgba(0,212,255,0.4); }
+        .article-body blockquote { border: 0; margin: 46px 0; padding: 0 0 0 2px; font-family: 'HelveticaNeue','Helvetica Neue',Helvetica,sans-serif; font-size: clamp(1.5rem,3.2vw,2.2rem); font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; color: #f5f5f3; max-width: 32ch; }
+        .article-body > p:first-of-type::first-letter { float: left; font-size: 3.1em; line-height: 0.72; font-weight: 700; margin: 8px 10px 0 0; color: #f5f5f3; }
+      `}</style>
 
       {/* Reading column */}
       <div style={{ maxWidth: READ, margin: '0 auto' }}>
@@ -366,10 +385,10 @@ function ArticleDetail({ slug }) {
           {/* HEADER */}
           <header style={{ marginBottom: 40 }}>
             <div style={{ ...MONO, fontSize: 11, letterSpacing: '0.24em', color: C.blue, textTransform: 'uppercase', fontWeight: 600, marginBottom: 18 }}>
-              {article.metadata.rubric || article.metadata.category}
+              {article.metadata.rubric ? `// ${article.metadata.rubric} · ${article.metadata.category}` : `// ${article.metadata.category}`}
             </div>
-            <h1 style={{ ...HN, fontSize: 'clamp(2.1rem, 5vw, 3.4rem)', fontWeight: 700, lineHeight: 1.04, letterSpacing: '-0.035em', color: C.light, margin: 0 }}>
-              {article.title}
+            <h1 style={{ ...HN, fontSize: 'clamp(2.1rem, 5vw, 3.4rem)', fontWeight: 700, lineHeight: 1.04, letterSpacing: '-0.035em', color: C.light, margin: 0, textWrap: 'balance' }}>
+              {article.title}<span style={{ color: C.blue }}>.</span>
             </h1>
             {article.subtitle && (
               <p style={{ ...HN, fontSize: 'clamp(1.05rem, 1.6vw, 1.35rem)', color: warm + '0.62)', lineHeight: 1.5, fontWeight: 400, marginTop: 20 }}>
@@ -385,6 +404,12 @@ function ArticleDetail({ slug }) {
 
           {/* BODY */}
           <div className="article-body" style={{ ...HN }} dangerouslySetInnerHTML={{ __html: article.content.body }} />
+
+          {/* END MARK */}
+          <div style={{ ...MONO, fontSize: 11, letterSpacing: '0.24em', color: C.light + '33', textTransform: 'uppercase', marginTop: 44, display: 'flex', alignItems: 'center', gap: 12 }}>
+            <span style={{ flex: '0 0 28px', height: 1, background: C.light + '22' }} />
+            End of transmission<span style={{ color: C.blue }}>.</span>
+          </div>
 
           {/* TOPICS */}
           {article.metadata.tags && article.metadata.tags.length > 0 && (

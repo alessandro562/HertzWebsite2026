@@ -254,8 +254,8 @@ function MediaPage() {
           </R>
 
           {filtered.length === 0 ? (
-            <div style={{ ...mono, fontSize: 11, color: C.dark + '44', letterSpacing: '0.14em', padding: '40px 0' }}>
-              Nothing matches. Try another column, topic, or search.
+            <div style={{ ...mono, fontSize: 12, color: C.dark + '55', letterSpacing: '0.16em', textTransform: 'uppercase', padding: '40px 0' }}>
+              // No transmissions match{q ? ` "${query.trim()}"` : tag ? ` #${tag}` : ''}
             </div>
           ) : (
             <div>
@@ -264,6 +264,14 @@ function MediaPage() {
                 <R style={{ marginBottom: 'clamp(40px,5vw,72px)', paddingBottom: 'clamp(40px,5vw,72px)', borderBottom: `1px solid ${C.dark}14` }}>
                   <window.ArticleCard article={featured} featured={true} />
                 </R>
+              )}
+              {/* LATEST bar */}
+              {secondary.length > 0 && (
+                <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 'clamp(28px,3vw,40px)' }}>
+                  <span style={{ ...mono, fontSize: 11, letterSpacing: '0.22em', color: C.blue, textTransform: 'uppercase', whiteSpace: 'nowrap' }}>// {rubric === 'ALL' ? 'Latest' : activeRubric.label}</span>
+                  <span style={{ flex: 1, height: 1, background: `${C.dark}14` }} />
+                  <span style={{ ...mono, fontSize: 10, letterSpacing: '0.16em', color: C.dark + '55' }}>{String(filtered.length).padStart(2, '0')}</span>
+                </div>
               )}
               {/* SECONDARY GRID */}
               {secondary.length > 0 && (
