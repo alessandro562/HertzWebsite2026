@@ -691,6 +691,7 @@ function HertzV8App() {
         <window.FamilySection8 />
         <window.GallerySection8 />
         <window.MerchTeaser8 />
+        <window.CollabSection8 />
         <window.Footer8 />
       </div>
 

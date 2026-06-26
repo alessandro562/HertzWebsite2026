@@ -585,6 +585,77 @@ function FamilySection8() {
 }
 
 /* ═══════════════════════════════════════════
+   COLLAB — partner venues / homes
+   ═══════════════════════════════════════════ */
+function CollabSection8() {
+  const C = window.Cv8;
+  const R = window.R8;
+
+  const PARTNERS = [
+    { logo: '/assets/collab-kindergarten.png',       name: 'Kindergarten' },
+    { logo: '/assets/collab-buongiorno-classic.png', name: 'Buongiorno Classic' },
+  ];
+
+  return (
+    <section id="partners" style={{
+      background: C.dark, color: C.light,
+      padding: 'clamp(64px, 11vh, 130px) clamp(20px, 4vw, 56px)',
+      borderTop: `1px solid ${C.light}0a`,
+      position: 'relative', overflow: 'hidden',
+    }}>
+      <style>{`
+        .hz-collab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2.4vw, 28px); max-width: 920px; margin: 0 auto; }
+        @media (max-width: 600px) { .hz-collab-grid { grid-template-columns: 1fr; } }
+        .hz-collab-card { transition: transform .45s cubic-bezier(.22,1,.36,1), border-color .45s; }
+        .hz-collab-card:hover { transform: translateY(-6px); border-color: ${C.blue}66; }
+        .hz-collab-card:hover img { opacity: 1; }
+      `}</style>
+
+      <div style={{ maxWidth: 920, margin: '0 auto' }}>
+        <R>
+          <div style={{
+            fontFamily: "'JetBrains Mono', monospace",
+            fontSize: 11, letterSpacing: '0.2em', color: C.blue,
+            marginBottom: 'clamp(28px, 5vw, 48px)',
+          }}>// COLLABORIAMO CON</div>
+        </R>
+
+        <R delay={0.08}>
+          <div className="hz-collab-grid">
+            {PARTNERS.map((p) => (
+              <figure key={p.name} className="hz-collab-card" style={{
+                margin: 0, display: 'flex', flexDirection: 'column',
+                alignItems: 'center', justifyContent: 'center', textAlign: 'center',
+                background: 'linear-gradient(180deg, #15151d 0%, #0f0f16 100%)',
+                border: `1px solid ${C.light}10`,
+                padding: 'clamp(40px, 6vw, 72px) clamp(24px, 4vw, 48px)',
+                minHeight: 'clamp(220px, 26vw, 300px)',
+              }}>
+                <img
+                  src={p.logo} alt={p.name} loading="lazy"
+                  style={{
+                    height: 'clamp(60px, 8.5vw, 100px)', width: 'auto', maxWidth: '74%',
+                    objectFit: 'contain', opacity: 0.9, transition: 'opacity .45s',
+                    filter: 'drop-shadow(0 8px 28px rgba(0,0,0,0.45))',
+                  }}
+                />
+                <figcaption style={{
+                  marginTop: 'clamp(24px, 3.5vw, 36px)', paddingTop: 18,
+                  borderTop: `1px solid ${C.light}12`, width: 'min(220px, 80%)',
+                  fontFamily: "'JetBrains Mono', monospace",
+                  fontSize: 11, letterSpacing: '0.18em', color: C.light + 'aa',
+                  textTransform: 'uppercase',
+                }}>{p.name}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </R>
+      </div>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════════════
    GALLERY — horizontal scroll
    ═══════════════════════════════════════════ */
 function GallerySection8() {
@@ -982,5 +1053,5 @@ function Footer8() {
 /* Export to window so the main app can compose them */
 Object.assign(window, {
   EventsHorizontal8, EventCard8, Manifesto8, BrandIdentity8, FamilySection8,
-  GallerySection8, MerchTeaser8, Footer8,
+  CollabSection8, GallerySection8, MerchTeaser8, Footer8,
 });
