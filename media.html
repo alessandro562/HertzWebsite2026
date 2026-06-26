@@ -121,32 +121,6 @@ const RUBRICS = [
 ];
 const ALL_TAGS = Array.from(new Set(ARTICLES.flatMap(a => (a.metadata.tags || [])))).sort();
 
-const GALLERY = [
-  { src: 'uploads/27.02_Hertz-3.jpg',   label: 'HZ.022, 27.02', tall: false },
-  { src: 'uploads/27.02_Hertz-4.jpg',   label: 'HZ.022, 27.02', tall: true  },
-  { src: 'uploads/27.02_Hertz-5.jpg',   label: 'HZ.022, 27.02', tall: false },
-  { src: 'uploads/27.02_Hertz-6.jpg',   label: 'HZ.022, 27.02', tall: false },
-  { src: 'uploads/27.02_Hertz-7.jpg',   label: 'HZ.022, 27.02', tall: true  },
-  { src: 'uploads/27.02_Hertz-8.jpg',   label: 'HZ.022, 27.02', tall: false },
-  { src: 'uploads/27.02_Hertz-9.jpg',   label: 'HZ.022, 27.02', tall: false },
-  { src: 'uploads/27.02_Hertz-10.jpg',  label: 'HZ.022, 27.02', tall: false },
-  { src: 'uploads/27.02_Hertz-11.jpg',  label: 'HZ.022, 27.02', tall: true  },
-  { src: 'uploads/27.02_Hertz-12.jpg',  label: 'HZ.022, 27.02', tall: false },
-  { src: 'uploads/27.02_Hertz-13.jpg',  label: 'HZ.022, 27.02', tall: false },
-  { src: 'uploads/27.02_Hertz-14.jpg',  label: 'HZ.022, 27.02', tall: false },
-  { src: 'uploads/27.02_Hertz-15.jpg',  label: 'HZ.022, 27.02', tall: true  },
-  { src: 'uploads/27.02_Hertz-16.jpg',  label: 'HZ.022, 27.02', tall: false },
-  { src: 'uploads/27.02_Hertz-36.jpg',  label: 'HZ.022, 27.02', tall: false },
-  { src: 'uploads/27.02_Hertz-76.jpg',  label: 'HZ.022, 27.02', tall: false },
-  { src: 'uploads/27.02_Hertz-142.jpg', label: 'HZ.022, 27.02', tall: true  },
-  { src: 'uploads/27.02_Hertz-167.jpg', label: 'HZ.022, 27.02', tall: false },
-  { src: 'uploads/27.02_Hertz-168.jpg', label: 'HZ.022, 27.02', tall: false },
-  { src: 'uploads/27.02_Hertz-173.jpg', label: 'HZ.022, 27.02', tall: false },
-  { src: 'uploads/27.02_Hertz-174.jpg', label: 'HZ.022, 27.02', tall: true  },
-  { src: 'uploads/27.02_Hertz-176.jpg', label: 'HZ.022, 27.02', tall: false },
-  { src: 'uploads/27.02_Hertz-197.jpg', label: 'HZ.022, 27.02', tall: false },
-];
-
 function MediaReader({ slug, onClose }) {
   const C = window.Cv8;
   const MONO = { fontFamily: "'JetBrains Mono', monospace" };
@@ -188,10 +162,8 @@ function MediaPage() {
   const [rubric, setRubric] = React.useState(() => (param('rubric') || 'ALL').toUpperCase());
   const [query, setQuery] = React.useState(() => param('q') || '');
   const [tag, setTag] = React.useState(() => param('tag'));
-  const [galleryFilter, setGalleryFilter] = React.useState('ALL');
   const [openSlug, setOpenSlug] = React.useState(null);
   const [activeIdx, setActiveIdx] = React.useState(0);
-  const GALLERY_EVENTS = ['ALL', 'HZ.022'];
 
   const codeFor = (a) => 'HZ.' + String(ARTICLES.length - ARTICLES.indexOf(a)).padStart(3, '0');
 
@@ -329,84 +301,7 @@ function MediaPage() {
         </div>
       </section>
 
-      {/* GALLERY FILTER */}
-      <div style={{ background: C.darkSoft, padding: '0 clamp(20px,4vw,56px)', borderBottom: `1px solid ${C.light}0a` }}>
-        <div style={{ display: 'flex', gap: 0, overflowX: 'auto' }}>
-          {GALLERY_EVENTS.map(ev => (
-            <button key={ev} onClick={() => setGalleryFilter(ev)} style={{
-              padding: '16px 24px', background: 'transparent',
-              border: 'none', outline: 'none', borderBottom: galleryFilter === ev ? `2px solid ${C.blue}` : '2px solid transparent',
-              ...mono, fontSize: 11, letterSpacing: '0.16em', textTransform: 'uppercase',
-              color: galleryFilter === ev ? C.blue : C.light + '44', cursor: 'pointer',
-              transition: 'color 0.2s', whiteSpace: 'nowrap',
-            }}>{ev}</button>
-          ))}
-        </div>
-      </div>
-
-      {/* Gallery grid */}
-      <section style={{ padding: 'clamp(32px,4vh,56px) clamp(20px,4vw,56px)' }}>
-        <div style={{
-          columns: 'clamp(240px, 28vw, 380px)',
-          columnGap: 4,
-          maxWidth: 1400, margin: '0 auto',
-        }}>
-          {(galleryFilter === 'ALL' ? GALLERY : GALLERY.filter(img => img.label.includes(galleryFilter))).map((img, i) => (
-            <div key={i} style={{
-              breakInside: 'avoid', marginBottom: 4,
-              position: 'relative', overflow: 'hidden',
-              cursor: 'pointer',
-            }}
-            onMouseEnter={e => { e.currentTarget.querySelector('img').style.filter = 'saturate(0.8) brightness(0.75) contrast(1.05)'; e.currentTarget.querySelector('.label').style.opacity = '1'; }}
-            onMouseLeave={e => { e.currentTarget.querySelector('img').style.filter = 'saturate(0.45) brightness(0.65) contrast(1.15)'; e.currentTarget.querySelector('.label').style.opacity = '0'; }}
-            >
-              <img src={img.src} alt="" style={{
-                width: '100%', display: 'block',
-                filter: 'saturate(0.45) brightness(0.65) contrast(1.15)',
-                transition: 'filter 0.5s cubic-bezier(.22,1,.36,1)',
-              }} loading="lazy" />
-              <div className="label" style={{
-                position: 'absolute', bottom: 10, left: 10,
-                ...mono, fontSize: 9, letterSpacing: '0.16em', color: C.light + 'cc',
-                opacity: 0, transition: 'opacity 0.3s',
-                background: 'rgba(8,8,13,0.7)', padding: '3px 8px',
-              }}>{img.label}</div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Press kit */}
-      <section style={{ background: C.light, padding: 'clamp(48px,6vh,80px) clamp(20px,4vw,56px)' }}>
-        <R>
-          <div style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 48, alignItems: 'center' }}>
-            <div>
-              <div style={{ ...mono, fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 12 }}>// PRESS</div>
-              <h2 style={{ ...briq, fontSize: 'clamp(2rem,5vw,4rem)', fontWeight: 700, lineHeight: 0.83, letterSpacing: '-0.04em', color: C.dark, marginBottom: 20 }}>
-                Press kit<span style={{ color: C.blue }}>.</span>
-              </h2>
-              <p style={{ fontSize: 14, color: C.dark + '88', lineHeight: 1.75, marginBottom: 28, maxWidth: 420, textWrap: 'pretty' }}>
-                Logos, high-res photos, press release and bio available for press and booking inquiries.
-              </p>
-              <a href="mailto:info@hertz.cc" aria-label="Request press kit by email" style={{
-                display: 'inline-block', border: `1px solid ${C.dark}33`,
-                padding: '12px 24px',
-                ...mono, fontSize: 12, letterSpacing: '0.14em', color: C.dark,
-                textTransform: 'uppercase', transition: 'all 0.2s',
-              }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = C.blue; e.currentTarget.style.color = C.blue; }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = C.dark + '33'; e.currentTarget.style.color = C.dark; }}
-              >Request press kit →</a>
-            </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
-              <img src="uploads/27.02_Hertz-173.jpg" alt="Hertz night at Kindergarten, photo archive" loading="lazy" style={{ width: '100%', aspectRatio: '1', objectFit: 'cover', filter: 'saturate(0.4) brightness(0.7)', display: 'block' }} />
-              <img src="uploads/27.02_Hertz-197.jpg" alt="Hertz night at Kindergarten, photo archive" loading="lazy" style={{ width: '100%', aspectRatio: '1', objectFit: 'cover', filter: 'saturate(0.4) brightness(0.7)', display: 'block' }} />
-            </div>
-          </div>
-        </R>
-      </section>
-
-      <window.Footer8 bannerLight={false} />
+      <window.Footer8 />
 
       {openSlug && <MediaReader slug={openSlug} onClose={() => setOpenSlug(null)} />}
     </div>

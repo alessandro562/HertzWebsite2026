@@ -991,7 +991,7 @@ function Footer8() {
               fontSize: 10, letterSpacing: '0.2em', color: C.light + '55',
               marginBottom: 16,
             }}>// NAVIGATE</h4>
-            {[['Events','/events.html'],['Manifesto','/manifesto.html'],['Artists','/artists.html'],['Music','/music.html'],['Merch','/merch.html'],['Media','/media.html']].map(([l,h]) => (
+            {[['Events','/events.html'],['Manifesto','/manifesto.html'],['Artists','/artists.html'],['Music','/music.html'],['Merch','/merch.html'],['Media','/media.html'],['Archive','/archive.html']].map(([l,h]) => (
               <a key={l} href={h} style={{
                 display: 'block', color: C.light + '99', textDecoration: 'none',
                 fontSize: 14, padding: '7px 0', transition: 'color 0.2s',
