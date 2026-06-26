@@ -1,5 +1,5 @@
 /* ============================================
-   HERTZ — Shared components for sub-pages
+   Hertz, Shared components for sub-pages
    Nav8 · Footer8 · PageHero · Cv8 · R8
    ============================================ */
 
@@ -114,7 +114,7 @@ function Nav8() {
       transition: 'all 0.4s cubic-bezier(.22,1,.36,1)',
     }}>
       <a href="/index.html" style={{ textDecoration: 'none', zIndex: 101 }}>
-        <img src="/assets/hertz-logo-header.png" alt="HERTZ" style={{ height: 36, opacity: 0.95 }} />
+        <img src="/assets/hertz-logo-header.png" alt="Hertz" style={{ height: 36, opacity: 0.95 }} />
       </a>
 
       {isMobile ? (
@@ -288,7 +288,7 @@ function Footer8() {
           gap: 40, marginBottom: 48,
         }}>
           <div>
-            <img src="/assets/hertz-logo-header.png" alt="HERTZ" style={{ height: 30, opacity: 0.9, marginBottom: 16 }} />
+            <img src="/assets/hertz-logo-header.png" alt="Hertz" style={{ height: 30, opacity: 0.9, marginBottom: 16 }} />
             <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: C.light + '66', lineHeight: 1.8 }}>
               hertz.club<br />info@hertz.cc<br />Bologna · IT
             </p>
@@ -312,7 +312,7 @@ function Footer8() {
           <div>
             <h4 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.2em', color: C.light + '55', marginBottom: 16 }}>// SAFE SPACE</h4>
             <p style={{ fontSize: 12, color: C.light + '66', lineHeight: 1.7, textWrap: 'pretty' }}>
-              No harassment. No hate. No discrimination. Respect boundaries — yours and others'. The dancefloor is for everyone.
+              No harassment. No hate. No discrimination. Respect boundaries, yours and others'. The dancefloor is for everyone.
             </p>
           </div>
         </div>
@@ -321,7 +321,7 @@ function Footer8() {
           display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8,
           fontFamily: "'JetBrains Mono', monospace", fontSize: 10, color: C.light + '40', letterSpacing: '0.1em',
         }}>
-          <span>© 2026 HERTZ — FROM CLUBBERS TO CLUBBERS</span>
+          <span>© 2026 Hertz, from clubbers to clubbers</span>
           <span>HZ.CLUB / V8</span>
         </div>
       </div>

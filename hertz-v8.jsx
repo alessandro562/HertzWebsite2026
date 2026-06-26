@@ -1,5 +1,5 @@
 /* ============================================
-   HERTZ v8 — Main App
+   Hertz v8, Main App
    - 3D logo hero (no enter screen, no cursor trail)
    - Copy: "We are real clubbers." / "from clubbers to clubbers"
    ============================================ */
@@ -18,7 +18,7 @@ const Cv8 = {
 };
 window.Cv8 = Cv8;
 
-/* ─── Tweak defaults — single source of truth ─ */
+/* ─── Tweak defaults, single source of truth ─ */
 const V8_DEFAULTS = /*EDITMODE-BEGIN*/{
   "logoTexture": "chrome",
   "speed": 1.0,
@@ -194,7 +194,7 @@ const RESIDENTS_DATA = [
 window.RESIDENTS_DATA = RESIDENTS_DATA;
 
 /* ═══════════════════════════════════════════
-   3D LOGO STAGE — mounts the voxel/extrusion scene
+   3D LOGO STAGE, mounts the voxel/extrusion scene
    from hero3d-scenes.jsx into a fixed bg layer
    ═══════════════════════════════════════════ */
 function LogoStage({ tweaks }) {
@@ -282,7 +282,7 @@ function LogoStage({ tweaks }) {
     const startTime = performance.now() / 1000;
     let raf;
 
-    /* fake beat clock — kept for scene shader continuity */
+    /* fake beat clock, kept for scene shader continuity */
     const BPM = 128;
     const beatPeriod = 60 / BPM;
     let lastBeatIdx = -1, kickEnv = 0, snareEnv = 0;
@@ -354,7 +354,7 @@ function LogoStage({ tweaks }) {
 window.LogoStage = LogoStage;
 
 /* ═══════════════════════════════════════════
-   NAV — always visible, logo top-left
+   NAV, always visible, logo top-left
    ═══════════════════════════════════════════ */
 function Nav8() {
   const [scrolled, setScrolled] = useState(false);
@@ -404,7 +404,7 @@ function Nav8() {
       transition: 'all 0.4s cubic-bezier(.22,1,.36,1)',
     }}>
       <a href="/index.html" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none', zIndex: 101 }}>
-        <img src="/assets/hertz-logo-header.png" alt="HERTZ" style={{ height: 36, opacity: 0.95 }} />
+        <img src="/assets/hertz-logo-header.png" alt="Hertz" style={{ height: 36, opacity: 0.95 }} />
       </a>
       
       {isMobile ? (
@@ -520,7 +520,7 @@ function Nav8() {
 window.Nav8 = Nav8;
 
 /* ═══════════════════════════════════════════
-   HERO 8 — full viewport, 3D logo behind copy
+   HERO 8, full viewport, 3D logo behind copy
    ═══════════════════════════════════════════ */
 function Hero8({ countdown, primary, accent, tweaks }) {
   const mono = { fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.15em' };
@@ -538,7 +538,7 @@ function Hero8({ countdown, primary, accent, tweaks }) {
         justifyContent: 'space-between',
         padding: 'clamp(96px, 12vh, 130px) clamp(20px, 4vw, 56px) clamp(40px, 6vh, 70px)',
       }}>
-      {/* TOP — live transmission strip */}
+      {/* TOP, live transmission strip */}
       <div style={{
         display: 'flex', justifyContent: 'space-between',
         ...mono, fontSize: 10, color: Cv8.gray,
@@ -559,10 +559,10 @@ function Hero8({ countdown, primary, accent, tweaks }) {
         </div>
       </div>
 
-      {/* CENTER — fills */}
+      {/* CENTER, fills */}
       <div style={{ flex: 1 }} />
 
-      {/* BOTTOM — tagline + next event + countdown */}
+      {/* BOTTOM, tagline + next event + countdown */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 36 }}>
         <div style={{ textAlign: 'center', maxWidth: 900, margin: '0 auto' }}>
           <h1 style={{
@@ -684,13 +684,14 @@ function HertzV8App() {
       <div style={{ position: 'relative', zIndex: 1 }}>
         <Nav8 />
         <Hero8 countdown={countdown} primary={primary} accent={accent} tweaks={tweaks} />
-        {/* Sections below — defined in hertz-v8-sections.jsx */}
+        {/* Sections below, defined in hertz-v8-sections.jsx */}
         <window.EventsHorizontal8 />
         <window.Manifesto8 />
         <window.BrandIdentity8 />
         <window.FamilySection8 />
         <window.GallerySection8 />
         <window.MerchTeaser8 />
+        <window.CollabSection8 />
         <window.Footer8 />
       </div>
 

@@ -1,7 +1,7 @@
 const { useState, useEffect, useRef } = React;
 
 /* ============================================================
-   HERTZ — Editorial components
+   Hertz, Editorial components
    Brand tokens (Helvetica Neue + JetBrains Mono + blue #144889)
    applied to the editorial design principles:
    - asymmetric index (lead + cards), kicker rubrics
@@ -30,7 +30,7 @@ const DUOTONE_REST = 'saturate(0.45) brightness(0.6) contrast(1.08)';
 const DUOTONE_HOVER = 'saturate(0.95) brightness(0.8) contrast(1.0)';
 
 /* ─────────────────────────────────────────── */
-/* HOVER WAVE — the card micro-interaction      */
+/* HOVER WAVE, the card micro-interaction      */
 /* ─────────────────────────────────────────── */
 function CardWave({ active }) {
   const C = window.Cv8;
@@ -55,8 +55,8 @@ function CardWave({ active }) {
 }
 
 /* ─────────────────────────────────────────── */
-/* READING PROGRESS — waveform that "plays"     */
-/* (the signature — only on the article page)   */
+/* READING PROGRESS, waveform that "plays"     */
+/* (the signature, only on the article page)   */
 /* ─────────────────────────────────────────── */
 function ReadingProgress() {
   const C = window.Cv8;
@@ -123,7 +123,7 @@ function ReadingProgress() {
 window.ReadingProgress = ReadingProgress;
 
 /* ─────────────────────────────────────────── */
-/* ARTICLE CARD — editorial, borderless         */
+/* ARTICLE CARD, editorial, borderless         */
 /* lead = large feature; otherwise compact       */
 /* dark = card sits on a dark background          */
 /* ─────────────────────────────────────────── */
@@ -164,7 +164,7 @@ function ArticleCard({ article, featured = false, dark = false }) {
         height: '100%',
       }}
     >
-      {/* IMAGE — house duotone */}
+      {/* IMAGE, house duotone */}
       <div style={{
         position: 'relative', overflow: 'hidden',
         aspectRatio: horizontal ? '3/2' : (featured ? '16/9' : '4/5'),
@@ -218,7 +218,7 @@ function ArticleCard({ article, featured = false, dark = false }) {
 window.ArticleCard = ArticleCard;
 
 /* ─────────────────────────────────────────── */
-/* ARTICLE LIST (fetches API) — kept for compat */
+/* ARTICLE LIST (fetches API), kept for compat */
 /* ─────────────────────────────────────────── */
 function ArticleList({ featured = false, limit = 10, dark = false }) {
   const C = window.Cv8;
@@ -247,7 +247,7 @@ function ArticleList({ featured = false, limit = 10, dark = false }) {
 window.ArticleList = ArticleList;
 
 /* ─────────────────────────────────────────── */
-/* ARTICLE DETAIL — reading-first article page  */
+/* ARTICLE DETAIL, reading-first article page  */
 /* ─────────────────────────────────────────── */
 function ArticleDetail({ slug }) {
   const C = window.Cv8;
@@ -268,7 +268,7 @@ function ArticleDetail({ slug }) {
   useEffect(() => {
     if (!article) return;
     const prevTitle = document.title;
-    document.title = `${article.title} — HERTZ`;
+    document.title = `${article.title}, Hertz`;
 
     const setMeta = (sel, attr, val) => {
       let el = document.head.querySelector(sel);
@@ -300,7 +300,7 @@ function ArticleDetail({ slug }) {
       description: desc,
       image: hero || undefined,
       author: { '@type': 'Organization', name: article.metadata.author },
-      publisher: { '@type': 'Organization', name: 'HERTZ' },
+      publisher: { '@type': 'Organization', name: 'Hertz' },
       datePublished: new Date(article.metadata.publishedAt).toISOString(),
       dateModified: new Date(article.metadata.updatedAt || article.metadata.publishedAt).toISOString(),
       mainEntityOfPage: window.location.href,
@@ -404,7 +404,7 @@ function ArticleDetail({ slug }) {
         </article>
       </div>
 
-      {/* KEEP READING — related, full editorial system */}
+      {/* KEEP READING, related, full editorial system */}
       {article.relatedArticles && article.relatedArticles.length > 0 && (
         <section style={{ maxWidth: 1100, margin: '96px auto 0', borderTop: `1px solid rgba(236,234,227,0.1)`, paddingTop: 48 }}>
           <div style={{ ...MONO, fontSize: 11, letterSpacing: '0.24em', color: C.blue, textTransform: 'uppercase', marginBottom: 36 }}>Keep reading</div>

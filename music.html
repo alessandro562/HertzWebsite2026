@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HERTZ Music — Resident Sets & Mixes</title>
-  <meta name="description" content="HERTZ music: resident sets and live recordings on SoundCloud. Minimal and deep-tech mixes from Bologna — straight from the booth.">
+  <title>Hertz Music, Resident Sets & Mixes</title>
+  <meta name="description" content="Hertz music: resident sets and live recordings on SoundCloud. Minimal and deep-tech mixes from Bologna, straight from the booth.">
   <meta name="theme-color" content="#08080d">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="HERTZ Music — Resident Sets & Mixes">
+  <meta property="og:title" content="Hertz Music, Resident Sets & Mixes">
   <meta property="og:description" content="Resident sets and live recordings. Minimal and deep-tech, from the booth in Bologna.">
   <meta property="og:image" content="https://hertz.club/assets/hertz-logo-official.png">
   <meta property="og:url" content="https://hertz.club/music">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="HERTZ Music — Resident Sets & Mixes">
+  <meta name="twitter:title" content="Hertz Music, Resident Sets & Mixes">
   <meta name="twitter:description" content="Resident sets and live recordings. Minimal and deep-tech, from the booth.">
   <link rel="canonical" href="https://hertz.club/music">
   <link rel="stylesheet" href="fonts.css">
@@ -201,7 +201,7 @@ function MusicPage() {
                       <h3 style={{ ...briq, fontSize: 'clamp(0.9rem,1.5vw,1.1rem)', fontWeight: 700, letterSpacing: '-0.02em', color: C.light, margin: 0 }}>{mix.title}</h3>
                       {playing === i && (
                         <div style={{ marginTop: 12 }} onClick={e => e.stopPropagation()}>
-                          <iframe title={`SoundCloud — ${mix.title}`} width="100%" height="120" frameBorder="0" scrolling="no" allow="autoplay" style={{ display: 'block' }}
+                          <iframe title={`SoundCloud, ${mix.title}`} width="100%" height="120" frameBorder="0" scrolling="no" allow="autoplay" style={{ display: 'block' }}
                             src={`https://w.soundcloud.com/player/?url=${encodeURIComponent(mix.url)}&color=%23144889&auto_play=true&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=false`} />
                           <div style={{ ...mono, fontSize: 9, color: C.light + '44', letterSpacing: '0.14em', marginTop: 6 }}>
                             <a href={mix.url} target="_blank" rel="noopener noreferrer" style={{ color: C.blue }}>Open on SoundCloud ↗</a>
@@ -219,7 +219,7 @@ function MusicPage() {
                 style={{ ...mono, fontSize: 11, letterSpacing: '0.14em', color: C.light + '55', transition: 'color 0.2s', display: 'inline-flex', alignItems: 'center', minHeight: 44 }}
                 onMouseEnter={e => e.currentTarget.style.color = C.blue}
                 onMouseLeave={e => e.currentTarget.style.color = C.light + '55'}
-              >HERTZ on SoundCloud ↗</a>
+              >Hertz on SoundCloud ↗</a>
             </div>
           </R>
           </div>
