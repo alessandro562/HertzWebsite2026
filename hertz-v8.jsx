@@ -86,11 +86,13 @@ window.R8 = R8;
 /* ─── Next event + data ───────────────────── */
 // Placeholder — poster, lineup & set time to be announced.
 const NEXT_EVENT = {
-  title: 'Hertz / Dumbo',
-  type: 'Hertz Night',
-  date: '21.06.26', day: 'SUN 21.06',
-  venue: 'Dumbo', city: 'Bologna',
-  iso: '2026-06-21T23:00:00',
+  title: 'Hertz × Atrium',
+  type: 'Guest',
+  date: '28.06.26', day: 'SUN 28.06', time: 'H18 → late',
+  venue: "Noah's Dream", city: 'Ortona',
+  iso: '2026-06-28T18:00:00',
+  lineup: ["Danilo D'Arrezzo", 'Federico Apadula', 'Adime'],
+  poster: 'assets/poster-v3-28giu-atrium.jpg',
   n: '026',
   ctaLabel: 'Info', ctaLink: '#',
 };
@@ -98,11 +100,12 @@ window.NEXT_EVENT = NEXT_EVENT;
 
 const UPCOMING_EVENTS = [
   NEXT_EVENT,
-  { title: 'Hertz / Il Pallone',         type: 'Hertz Night', date: '04.07.26', day: 'SAT 04.07', venue: 'Il Pallone',         city: 'Bologna',     iso: '2026-07-04T23:00:00', n: '027', ctaLabel: 'Info', ctaLink: '#' },
-  { title: 'Hertz / Barracuda Club',     type: 'Guest',       date: '25.07.26', day: 'SAT 25.07', venue: 'Barracuda Club',     city: 'Ferrara',     iso: '2026-07-25T23:00:00', n: '028', ctaLabel: 'Info', ctaLink: '#' },
-  { title: 'Hertz × Buongiorno Classic', type: 'Guest',       date: '26.07.26', day: 'SUN 26.07', venue: 'Buongiorno Classic', city: 'Rimini',      iso: '2026-07-26T16:00:00', n: '029', ctaLabel: 'Info', ctaLink: '#' },
-  { title: 'Hertz × Buongiorno Classic', type: 'Guest',       date: '28.07.26', day: 'TUE 28.07', venue: 'Buongiorno Classic', city: 'Rimini',      iso: '2026-07-28T16:00:00', n: '030', ctaLabel: 'Info', ctaLink: '#' },
-  { title: "Hertz / Noah's Dream",       type: 'Guest',       date: '28.07.26', day: 'TUE 28.07', venue: "Noah's Dream",       city: 'Lido Riccio', iso: '2026-07-28T18:00:00', n: '031', ctaLabel: 'Info', ctaLink: '#' },
+  { title: 'Hertz × Buongiorno Classic', type: 'Collaboration', date: '28.06.26', day: 'SUN 28.06', time: '17:00 → 00:00', venue: 'Buongiorno Classic', city: 'Rimini', iso: '2026-06-28T17:00:00', lineup: ['Tommaso Mancò', 'Alberto B'], poster: 'assets/poster-v3-28giu-buongiorno.jpg', n: '027', ctaLabel: 'Info', ctaLink: '#' },
+  { title: 'Hertz Downtown / Il Pallone', type: 'Downtown Gig', date: '04.07.26', day: 'SAT 04.07', time: '19:30 → 23:30', venue: 'Il Pallone', city: 'Bologna', iso: '2026-07-04T19:30:00', lineup: ['Federico Apadula', 'Leonardo Giusti', 'SeaRock'], poster: 'assets/poster-v3-04lug-pallone.jpg', n: '028', ctaLabel: 'Info', ctaLink: '#' },
+  { title: 'Hertz / Barracuda Club',     type: 'Collaboration', date: '25.07', day: 'SAT 25.07', city: 'Ferrara', n: '029', comingSoon: true },
+  { title: 'Hertz × Buongiorno Classic', type: 'Collaboration', date: '26.07.26', day: 'SUN 26.07', time: '05:00 → 00:00', venue: 'Buongiorno Classic', city: 'Rimini', iso: '2026-07-26T05:00:00', lineup: ['Antonio Pica', 'Da Vid', 'Jay De Lys', 'Joey Daniel', 'Hertz'], poster: 'assets/poster-v3-26lug-buongiorno.jpg', n: '030', ctaLabel: 'Info', ctaLink: '#' },
+  { title: 'Hertz × Buongiorno Classic', type: 'Collaboration', date: '14.08', day: 'FRI 14.08', city: 'Rimini',  n: '031', comingSoon: true },
+  { title: 'Hertz / Barracuda Club',     type: 'Collaboration', date: '15.08', day: 'SAT 15.08', city: 'Ferrara', n: '032', comingSoon: true },
 ];
 window.UPCOMING_EVENTS = UPCOMING_EVENTS;
 
@@ -113,7 +116,7 @@ const PAST_EVENTS = [
     date: '31.05.26', day: 'SUN 31.05', time: '16:00 → 06:00',
     venue: 'Buongiorno Classic', city: 'Rimini',
     lineup: ['Mahony', 'Wheats', 'AG Swifty', 'Brad Brunner', 'Kov', 'Hertz', 'Jaco Etch × Chory', 'Lenny Krazyz × Lucangelini', 'Matteo Gatti', 'Tynx'],
-    poster: 'assets/poster-31mag26-take notes x buongiorno classic.png',
+    poster: 'assets/poster-v3-31mag-takenotes.jpg',
     n: '025',
   },
   {
@@ -122,7 +125,7 @@ const PAST_EVENTS = [
     date: '29.05.26', day: 'FRI 29.05', time: '23:30 → LATE',
     venue: 'Cassero', city: 'Bologna',
     lineup: ['Federico Apadula', 'SeaRock', 'Tommaso Mancò', 'Alberto B'],
-    poster: 'assets/poster-29mag26-cassero.png',
+    poster: 'assets/poster-v3-29mag-cassero.jpg',
     n: '024',
   },
   {
@@ -131,7 +134,7 @@ const PAST_EVENTS = [
     date: '24.04.26', day: 'FRI 24.04', time: '23:59 → late',
     venue: 'Kindergarten', city: 'Bologna',
     lineup: ['Federico Apadula', 'Luca Paolella', 'Alberto B', 'Tommaso Mancò', 'Matteo Fava', 'Leonardo Giusti'],
-    poster: 'assets/poster-24apr26-kindergarten.png',
+    poster: 'assets/poster-v3-24apr-kindergarten.jpg',
     n: '023',
   },
   {
@@ -140,7 +143,7 @@ const PAST_EVENTS = [
     date: '27.02.26', day: 'FRI 27.02', time: '23:59 → late',
     venue: 'Kindergarten', city: 'Bologna',
     lineup: ['Federico Apadula', 'Groover', 'Adime', 'Tommaso Mancò', 'Alberto B', 'TommyTerzi'],
-    poster: 'assets/poster-27feb26-kindergarten.png',
+    poster: 'assets/poster-v3-27feb-kindergarten.jpg',
     n: '022',
   },
   {
@@ -149,7 +152,7 @@ const PAST_EVENTS = [
     date: '26.12.25', day: 'FRI 26.12', time: '23:59 → late',
     venue: 'Kindergarten', city: 'Bologna',
     lineup: ['Federico Apadula', 'Tommaso Mancò', 'Alberto B', 'Matteo Fava', 'Leonardo Giusti'],
-    poster: 'assets/poster-26dic25-kindergarten.png',
+    poster: 'assets/poster-v3-26dic-kindergarten.jpg',
     n: '021',
   },
   {
@@ -158,7 +161,7 @@ const PAST_EVENTS = [
     date: '22.11.25', day: 'SAT 22.11', time: '23:59 → late',
     venue: 'Numa Club', city: 'Bologna',
     lineup: ['Tomi & Kesh', 'Matteo Gatti × Ocular', 'Federico Apadula', 'Tommaso Mancò × Alberto B'],
-    poster: 'assets/poster-22nov25-hertz x buongiorno classic at numa club.png',
+    poster: 'assets/poster-v3-22nov-numa.jpg',
     n: '020',
   },
   {
@@ -167,7 +170,7 @@ const PAST_EVENTS = [
     date: '24.10.25', day: 'FRI 24.10', time: '23:59 → late',
     venue: 'Kindergarten', city: 'Bologna',
     lineup: ['Federico Apadula', 'Alberto B', 'Nesh b2b Dante Bi', 'Matteo Fava', 'Gemi'],
-    poster: 'assets/poster-24ott25-kindergarten.png',
+    poster: 'assets/poster-v3-24ott-kindergarten.jpg',
     n: '019',
   },
   {
@@ -176,7 +179,7 @@ const PAST_EVENTS = [
     date: '21.09.25', day: 'SUN 21.09', time: '07:00 → 22:00',
     venue: 'Classic Airlines', city: 'Rimini',
     lineup: ['Fletch Modular', 'Esmito × Andrea Mili', 'Hertz', 'K.A.M.A.', "Kiss 'N' Fly", 'Phil-O'],
-    poster: 'assets/poster-21set25-buongiorno classic pres. classic airlines.png',
+    poster: 'assets/poster-v3-21set-classicairlines.jpg',
     n: '018',
   },
 ];
@@ -486,7 +489,7 @@ function Nav8() {
           onClick={() => setMenuOpen(false)}
           style={{
             color: Cv8.light, textDecoration: 'none',
-            fontFamily: "'Archivo', sans-serif",
+            fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
             fontSize: 'clamp(2.5rem, 8vw, 4rem)', fontWeight: 700,
             letterSpacing: '-0.02em',
             transform: menuOpen ? 'translateY(0)' : 'translateY(20px)',
@@ -563,7 +566,7 @@ function Hero8({ countdown, primary, accent, tweaks }) {
       <div style={{ display: 'flex', flexDirection: 'column', gap: 36 }}>
         <div style={{ textAlign: 'center', maxWidth: 900, margin: '0 auto' }}>
           <h1 style={{
-            fontFamily: "'Archivo', sans-serif",
+            fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
             fontSize: 'clamp(2rem, 4vw, 3.2rem)',
             fontWeight: 700, lineHeight: 1.05,
             letterSpacing: '-0.025em', color: Cv8.light,
@@ -588,12 +591,12 @@ function Hero8({ countdown, primary, accent, tweaks }) {
               ...mono, fontSize: 10, color: Cv8.gray, marginBottom: 10,
             }}>↓ NEXT EVENT</div>
             <div style={{
-              fontFamily: "'Archivo', sans-serif",
+              fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
               fontSize: 'clamp(18px, 2vw, 28px)', fontWeight: 700,
               color: Cv8.light, letterSpacing: '-0.02em', marginBottom: 6,
             }}>{NEXT_EVENT.title}</div>
             <div style={{ ...mono, fontSize: 11, color: Cv8.gray }}>
-              {NEXT_EVENT.day}{NEXT_EVENT.time ? ` · ${NEXT_EVENT.time}` : ''} · <span style={{ color: accent }}>@{NEXT_EVENT.venue}, BO</span>
+              {NEXT_EVENT.day}{NEXT_EVENT.time ? ` · ${NEXT_EVENT.time}` : ''} · <span style={{ color: accent }}>@{NEXT_EVENT.venue}, {NEXT_EVENT.city}</span>
             </div>
           </div>
 
@@ -618,7 +621,7 @@ function Hero8({ countdown, primary, accent, tweaks }) {
                 { v: countdown.s, l: 's' },
               ].map(({ v, l }) => (
                 <div key={l} style={{
-                  fontFamily: "'Archivo', sans-serif",
+                  fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
                   fontSize: 'clamp(18px, 4vw, 22px)', fontWeight: 700, color: primary,
                   letterSpacing: '-0.02em',
                 }}>{String(v || 0).padStart(2, '0')}<span style={{
@@ -660,7 +663,7 @@ function BeatBadge8({ accent }) {
         opacity: on ? 1 : 0.25,
         transition: 'opacity 0.08s',
       }} />
-      <span>128 BPM · 4/4 · DEEP-TECH</span>
+      <span>128 BPM</span>
     </div>
   );
 }

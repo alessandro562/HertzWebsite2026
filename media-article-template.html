@@ -5,17 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="HERTZ Editorial - Deep insights into clubbing culture, sound design, and minimal music">
   <meta property="og:type" content="article">
-  <meta property="og:site_name" content="HERTZ">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;600;700&display=block" rel="stylesheet">
+  <meta property="og:site_name" content="HERTZ">  <link rel="stylesheet" href="fonts.css">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=block" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
     body {
       background: #08080d;
       color: #f5f5f3;
-      font-family: 'Bricolage Grotesque', sans-serif;
+      font-family: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       overflow-x: hidden;
     }
     
@@ -38,47 +36,77 @@
     img { user-select: none; max-width: 100%; height: auto; }
     a { color: inherit; text-decoration: none; }
     
-    /* Article content styling */
-    article h2 {
-      font-size: clamp(1.8rem, 4vw, 2.5rem);
-      margin: 32px 0 16px;
+    /* ── Editorial reading typography ── */
+    .article-body {
+      color: rgba(236,234,227,0.86);   /* warm off-white, never pure #fff */
+      font-size: clamp(18px, 0.6vw + 16px, 20px);
+      line-height: 1.7;
+      letter-spacing: -0.005em;
+    }
+    .article-body p { margin: 0 0 1.4em; }
+    .article-body strong { font-weight: 700; color: #f3f1ea; }
+    .article-body em { font-style: italic; }
+
+    /* opening "in scene" — drop cap on first paragraph */
+    .article-body > p:first-of-type::first-letter {
+      float: left;
+      font-size: 3.6em;
+      line-height: 0.74;
+      font-weight: 800;
+      padding: 6px 14px 0 0;
+      color: #f5f5f3;
+      font-family: 'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif;
+    }
+
+    .article-body h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      margin: 2em 0 0.6em;
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      color: #f5f5f3;
+    }
+    .article-body h3 {
+      font-size: clamp(1.25rem, 2vw, 1.5rem);
+      margin: 1.6em 0 0.5em;
       font-weight: 700;
       line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: #f5f5f3;
     }
-    
-    article h3 {
-      font-size: clamp(1.4rem, 2vw, 1.8rem);
-      margin: 24px 0 12px;
-      font-weight: 700;
-      line-height: 1.3;
-    }
-    
-    article p {
-      margin-bottom: 16px;
-    }
-    
-    article strong { font-weight: 700; color: #f5f5f3; }
-    article em { font-style: italic; opacity: 0.88; }
-    article blockquote {
+
+    /* pull quote — breaks the measure, blue rule, no cliché quotes */
+    .article-body blockquote {
+      margin: 2.2em 0;
+      padding-left: 22px;
       border-left: 3px solid #144889;
-      padding: 16px 24px;
-      margin: 32px 0;
-      background: rgba(20,72,137,0.06);
-      font-style: italic;
-      font-size: 1.08em;
-      line-height: 1.7;
-      color: #f5f5f3cc;
+      font-size: clamp(1.5rem, 2.6vw, 2.05rem);
+      font-weight: 700;
+      line-height: 1.22;
+      letter-spacing: -0.02em;
+      color: #f5f5f3;
+      font-style: normal;
     }
-    
-    @media (max-width: 768px) {
-      article {
-        grid-template-columns: 1fr !important;
+    .article-body blockquote p { margin: 0; }
+    @media (min-width: 1040px) {
+      .article-body blockquote {
+        margin-left: -130px;
+        padding-left: 28px;
+        max-width: calc(100% + 130px);
       }
-      aside {
-        position: static !important;
-        top: auto !important;
-        margin-top: 48px;
-      }
+    }
+
+    /* in-body images */
+    .article-body figure { margin: 2.4em 0; }
+    .article-body figure img {
+      width: 100%; display: block;
+      filter: saturate(0.55) brightness(0.8) contrast(1.04);
+    }
+    .article-body figcaption {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; letter-spacing: 0.08em;
+      color: rgba(236,234,227,0.42);
+      margin-top: 10px;
     }
   </style>
 </head>

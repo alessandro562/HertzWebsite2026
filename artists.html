@@ -15,13 +15,12 @@
   <meta name="twitter:title" content="HERTZ Artists — Residents & Guests">
   <meta name="twitter:description" content="Four residents. One direction. Bologna minimal and deep-tech.">
   <link rel="canonical" href="https://hertz.club/artists">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;600;700&display=block" rel="stylesheet">
+  <link rel="stylesheet" href="fonts.css">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=block" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
-    body { background: #f5f5f3; color: #08080d; font-family: 'Bricolage Grotesque', sans-serif; overflow-x: hidden; }
+    body { background: #f5f5f3; color: #08080d; font-family: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif; overflow-x: hidden; }
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: #08080d; }
     ::-webkit-scrollbar-thumb { background: rgba(20,72,137,0.4); }
@@ -48,10 +47,10 @@
 <script type="text/babel" src="hertz-shared.jsx"></script>
 <script type="text/babel">
 const RESIDENTS = [
-  { name: 'Federico Apadula', slug: 'federico-apadula', role: 'Founder · Art Director · DJ & Producer', img: 'assets/dj-apadula.jpg', n: '01', freq: '120 Hz', origin: 'Bologna, IT', since: '2023', sets: 'Deep, Minimal, Atmospheric' },
-  { name: 'Tommaso Mancò',    slug: 'tommaso-manco',    role: 'DJ',                                     img: 'assets/dj-manco.jpg',   n: '02', freq: '128 Hz', origin: 'Bologna, IT', since: '2023', sets: 'Tech, Driving, Raw' },
+  { name: 'Federico Apadula', slug: 'federico-apadula', role: 'Founder · Art Director · DJ & Producer', img: 'assets/federico-apadula.png', n: '01', freq: '120 Hz', origin: 'Bologna, IT', since: '2023', sets: 'Deep, Minimal, Atmospheric' },
+  { name: 'Tommaso Mancò',    slug: 'tommaso-manco',    role: 'DJ',                                     img: 'assets/dj-manco.jpg',   n: '02', freq: '128 Hz', origin: 'Bologna, IT', since: '2023', sets: 'Tech, Driving, Raw',   soon: true },
   { name: 'Alberto B',        slug: 'alberto-b',        role: 'DJ · Producer',                         img: 'assets/dj-alberto.jpg', n: '03', freq: '125 Hz', origin: 'Bologna, IT', since: '2024', sets: 'Deep Tech, Groove' },
-  { name: 'Leonardo Giusti',  slug: 'leonardo-giusti',  role: 'DJ',                                    img: 'assets/dj-giusti.jpg',  n: '04', freq: '126 Hz', origin: 'Bologna, IT', since: '2024', sets: 'Deep, Melodic' },
+  { name: 'Leonardo Giusti',  slug: 'leonardo-giusti',  role: 'DJ · Resident',                         img: 'assets/leonardo-giusti.jpg', n: '04', freq: '126 Hz', origin: 'Bologna, IT', since: '2025', sets: 'Tech House, Minimal Deep Tech' },
 ];
 
 const GUESTS = [
@@ -66,7 +65,7 @@ function ArtistsPage() {
   const C = window.Cv8;
   const R = window.R8;
   const mono = { fontFamily: "'JetBrains Mono', monospace" };
-  const briq = { fontFamily: "'Archivo', sans-serif" };
+  const briq = { fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif" };
   const [hovered, setHovered] = React.useState(null);
   const [isMobile, setIsMobile] = React.useState(window.innerWidth < 768);
   React.useEffect(() => {
@@ -85,41 +84,62 @@ function ArtistsPage() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(280px,1fr))', gap: 2, maxWidth: 1400, margin: '0 auto' }}>
           {RESIDENTS.map((r, i) => (
             <R key={r.name} delay={i * 0.08}>
-              <a
-                href={`/artist-${r.slug}.html`}
-                onMouseEnter={() => setHovered(i)}
-                onMouseLeave={() => setHovered(null)}
-                aria-label={`View ${r.name}'s profile`}
-                style={{ position: 'relative', overflow: 'hidden', background: C.dark, display: 'block' }}
-              >
-                <img
-                  src={r.img} alt={r.name}
-                  loading={i < 2 ? 'eager' : 'lazy'}
-                  style={{
-                    width: '100%', aspectRatio: '3/4', objectFit: 'cover', display: 'block',
-                    filter: `saturate(0.65) brightness(${hovered === i ? 0.5 : 0.75}) contrast(1.1)`,
-                    transform: hovered === i ? 'scale(1.03)' : 'scale(1)',
-                    transition: 'filter 0.6s cubic-bezier(.22,1,.36,1), transform 0.6s cubic-bezier(.22,1,.36,1)',
-                  }}
-                />
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg,transparent 35%,rgba(8,8,13,0.92) 100%)' }} />
-                <div style={{ position: 'absolute', top: 18, left: 18, ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.light + '88' }}>HZ — {r.n}</div>
-                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '0 22px 24px' }}>
-                  <div style={{ ...mono, fontSize: 10, color: C.light + '77', letterSpacing: '0.14em', marginBottom: 6 }}>{r.role}</div>
-                  <h3 style={{ ...briq, fontSize: 'clamp(1.4rem,2.5vw,1.9rem)', fontWeight: 800, letterSpacing: '-0.03em', color: C.light, lineHeight: 1.0 }}>{r.name}</h3>
-                  <div style={{
-                    height: (isMobile || hovered === i) ? 'auto' : 0,
-                    overflow: 'hidden',
-                    transition: 'height 0.4s cubic-bezier(.22,1,.36,1)',
-                    marginTop: (isMobile || hovered === i) ? 0 : 0,
-                  }}>
-                    <div style={{ paddingTop: 14, borderTop: `1px solid ${C.light}18`, marginTop: 12 }}>
-                      <div style={{ ...mono, fontSize: 10, color: C.light + '66', letterSpacing: '0.16em', marginBottom: 4 }}>// SOUND</div>
-                      <div style={{ fontSize: 12, color: C.light + '99' }}>{r.sets}</div>
-                    </div>
+              {r.soon ? (
+                <div
+                  style={{ position: 'relative', overflow: 'hidden', background: C.dark, display: 'block', cursor: 'default' }}
+                >
+                  <img
+                    src={r.img} alt={r.name}
+                    loading={i < 2 ? 'eager' : 'lazy'}
+                    style={{
+                      width: '100%', aspectRatio: '3/4', objectFit: 'cover', display: 'block',
+                      filter: 'saturate(0.3) brightness(0.45) contrast(1.05)',
+                    }}
+                  />
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg,transparent 35%,rgba(8,8,13,0.95) 100%)' }} />
+                  <div style={{ position: 'absolute', top: 18, left: 18, ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.light + '44' }}>HZ — {r.n}</div>
+                  <div style={{ position: 'absolute', top: 18, right: 18, ...mono, fontSize: 9, letterSpacing: '0.16em', color: C.light + '44', border: `1px solid ${C.light}22`, padding: '4px 10px' }}>SOON</div>
+                  <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '0 22px 24px' }}>
+                    <div style={{ ...mono, fontSize: 10, color: C.light + '44', letterSpacing: '0.14em', marginBottom: 6 }}>{r.role}</div>
+                    <h3 style={{ ...briq, fontSize: 'clamp(1.4rem,2.5vw,1.9rem)', fontWeight: 700, letterSpacing: '-0.03em', color: C.light + '66', lineHeight: 1.0 }}>{r.name}</h3>
                   </div>
                 </div>
-              </a>
+              ) : (
+                <a
+                  href={`/artist-${r.slug}.html`}
+                  onMouseEnter={() => setHovered(i)}
+                  onMouseLeave={() => setHovered(null)}
+                  aria-label={`View ${r.name}'s profile`}
+                  style={{ position: 'relative', overflow: 'hidden', background: C.dark, display: 'block' }}
+                >
+                  <img
+                    src={r.img} alt={r.name}
+                    loading={i < 2 ? 'eager' : 'lazy'}
+                    style={{
+                      width: '100%', aspectRatio: '3/4', objectFit: 'cover', display: 'block',
+                      filter: `saturate(0.65) brightness(${hovered === i ? 0.5 : 0.75}) contrast(1.1)`,
+                      transform: hovered === i ? 'scale(1.03)' : 'scale(1)',
+                      transition: 'filter 0.6s cubic-bezier(.22,1,.36,1), transform 0.6s cubic-bezier(.22,1,.36,1)',
+                    }}
+                  />
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg,transparent 35%,rgba(8,8,13,0.92) 100%)' }} />
+                  <div style={{ position: 'absolute', top: 18, left: 18, ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.light + '88' }}>HZ — {r.n}</div>
+                  <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '0 22px 24px' }}>
+                    <div style={{ ...mono, fontSize: 10, color: C.light + '77', letterSpacing: '0.14em', marginBottom: 6 }}>{r.role}</div>
+                    <h3 style={{ ...briq, fontSize: 'clamp(1.4rem,2.5vw,1.9rem)', fontWeight: 700, letterSpacing: '-0.03em', color: C.light, lineHeight: 1.0 }}>{r.name}</h3>
+                    <div style={{
+                      height: (isMobile || hovered === i) ? 'auto' : 0,
+                      overflow: 'hidden',
+                      transition: 'height 0.4s cubic-bezier(.22,1,.36,1)',
+                    }}>
+                      <div style={{ paddingTop: 14, borderTop: `1px solid ${C.light}18`, marginTop: 12 }}>
+                        <div style={{ ...mono, fontSize: 10, color: C.light + '66', letterSpacing: '0.16em', marginBottom: 4 }}>// SOUND</div>
+                        <div style={{ fontSize: 12, color: C.light + '99' }}>{r.sets}</div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              )}
             </R>
           ))}
         </div>
@@ -131,7 +151,7 @@ function ArtistsPage() {
           <div style={{ maxWidth: 1400, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 48, alignItems: 'start' }}>
             <div>
               <div style={{ ...mono, fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 16 }}>// ON OUR DANCEFLOOR</div>
-              <h2 style={{ ...briq, fontSize: 'clamp(2rem,6vw,5rem)', fontWeight: 800, lineHeight: 0.9, letterSpacing: '-0.04em', color: C.light, marginBottom: 24 }}>
+              <h2 style={{ ...briq, fontSize: 'clamp(2rem,6vw,5rem)', fontWeight: 700, lineHeight: 0.83, letterSpacing: '-0.04em', color: C.light, marginBottom: 24 }}>
                 Every name on<br />the dancefloor<span style={{ color: C.blue }}>.</span>
               </h2>
               <p style={{ fontSize: 'clamp(14px,1.4vw,16px)', color: C.light + '88', lineHeight: 1.8, maxWidth: 480, textWrap: 'pretty' }}>

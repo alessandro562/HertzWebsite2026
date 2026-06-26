@@ -196,9 +196,9 @@ function Nav8() {
           onClick={() => setMenuOpen(false)}
           style={{
             color: C.light, textDecoration: 'none',
-            fontFamily: "'Archivo', sans-serif",
+            fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
             fontSize: 'clamp(2.5rem, 8vw, 4rem)', fontWeight: 700,
-            letterSpacing: '-0.02em',
+            letterSpacing: '-0.04em',
             transform: menuOpen ? 'translateY(0)' : 'translateY(20px)',
             transition: `all 0.4s cubic-bezier(.22,1,.36,1) ${i * 0.05}s`,
           }}
@@ -245,9 +245,9 @@ function PageHero({ section, title, sub, light = false }) {
         fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 16,
       }}>{section}</div>
       <h1 style={{
-        fontFamily: "'Archivo', sans-serif",
+        fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
         fontSize: 'clamp(3rem, 10vw, 9rem)',
-        fontWeight: 800, lineHeight: 0.88,
+        fontWeight: 700, lineHeight: 0.83,
         letterSpacing: '-0.05em', color: fg,
         whiteSpace: 'pre-line',
       }}>{title}<span style={{ color: C.blue }}>.</span></h1>
@@ -278,9 +278,9 @@ function Footer8() {
             fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 16,
           }}>FROM CLUBBERS FOR CLUBBERS</div>
           <h2 style={{
-            fontFamily: "'Archivo', sans-serif",
+            fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
             fontSize: 'clamp(2.5rem,8vw,7rem)',
-            fontWeight: 800, lineHeight: 0.9, letterSpacing: '-0.05em', color: C.light,
+            fontWeight: 700, lineHeight: 0.83, letterSpacing: '-0.05em', color: C.light,
           }}>Groove is<br />the key<span style={{ color: C.blue }}>.</span></h2>
         </div>
         <div style={{
@@ -296,7 +296,7 @@ function Footer8() {
           <div>
             <h4 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.2em', color: C.light + '55', marginBottom: 16 }}>// NAVIGATE</h4>
             {[['Events','/events.html'],['Manifesto','/manifesto.html'],['Artists','/artists.html'],['Music','/music.html'],['Merch','/merch.html'],['Media','/media.html']].map(([l,h]) => (
-              <a key={l} href={h} style={{ display: 'block', color: C.light + '99', textDecoration: 'none', fontSize: 14, padding: '7px 0', fontFamily: "'Archivo', sans-serif", fontWeight: 500, transition: 'color 0.2s' }}
+              <a key={l} href={h} style={{ display: 'block', color: C.light + '99', textDecoration: 'none', fontSize: 14, padding: '7px 0', fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif", fontWeight: 500, transition: 'color 0.2s' }}
               onMouseEnter={e => e.currentTarget.style.color = C.blue}
               onMouseLeave={e => e.currentTarget.style.color = C.light + '99'}>{l} →</a>
             ))}
@@ -304,7 +304,7 @@ function Footer8() {
           <div>
             <h4 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.2em', color: C.light + '55', marginBottom: 16 }}>// FREQUENCIES</h4>
             {[['Instagram','https://instagram.com/hertz.cc'],['Spotify','#'],['SoundCloud','#'],['Mixcloud','#']].map(([l,h]) => (
-              <a key={l} href={h} target={h.startsWith('http') ? '_blank' : undefined} rel={h.startsWith('http') ? 'noopener noreferrer' : undefined} style={{ display: 'block', color: C.light + '99', textDecoration: 'none', fontSize: 14, padding: '7px 0', fontFamily: "'Archivo', sans-serif", fontWeight: 500, transition: 'color 0.2s' }}
+              <a key={l} href={h} target={h.startsWith('http') ? '_blank' : undefined} rel={h.startsWith('http') ? 'noopener noreferrer' : undefined} style={{ display: 'block', color: C.light + '99', textDecoration: 'none', fontSize: 14, padding: '7px 0', fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif", fontWeight: 500, transition: 'color 0.2s' }}
               onMouseEnter={e => e.currentTarget.style.color = C.blue}
               onMouseLeave={e => e.currentTarget.style.color = C.light + '99'}>{l} →</a>
             ))}

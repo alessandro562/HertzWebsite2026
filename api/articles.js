@@ -506,7 +506,11 @@ export default async function handler(req, res) {
     const relatedArticles = (article.relatedArticles || [])
       .map(s => ARTICLES.find(a => a.slug === s))
       .filter(Boolean)
-      .map(({ slug, title, metadata }) => ({ slug, title, metadata }));
+      .map(({ slug, title, subtitle, excerpt, metadata, content, media }) => ({
+        slug, title, subtitle, excerpt, metadata,
+        content: { readingTimeMinutes: content.readingTimeMinutes },
+        image: media && media.heroImage,
+      }));
 
     return res.status(200).json({ ok: true, article: { ...article, relatedArticles } });
   }

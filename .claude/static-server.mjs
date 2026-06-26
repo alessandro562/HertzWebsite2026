@@ -9,7 +9,27 @@ const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.jsx': 'text/ba
 http.createServer(async (req, res) => {
   try {
     let p = decodeURIComponent(req.url.split('?')[0]);
+
+    // Local shim for the Vercel serverless API (dev only)
+    if (p.startsWith('/api/articles')) {
+      const src = await readFile(join(ROOT, 'api/articles.js'), 'utf8');
+      const mod = await import('data:text/javascript,' + encodeURIComponent(src));
+      const query = Object.fromEntries(new URL(req.url, 'http://x').searchParams);
+      const fakeRes = {
+        statusCode: 200,
+        setHeader() {},
+        status(c) { this.statusCode = c; return this; },
+        json(obj) { res.writeHead(this.statusCode, { 'Content-Type': 'application/json' }); res.end(JSON.stringify(obj)); return this; },
+        end() { res.writeHead(this.statusCode); res.end(); },
+      };
+      await mod.default({ method: 'GET', query }, fakeRes);
+      return;
+    }
+
+    // Mirror the Vercel rewrite /media/:slug -> template
+    if (/^\/media\/[^/]+$/.test(p)) p = '/media-article-template.html';
     if (p === '/') p = '/index.html';
+
     const file = join(ROOT, normalize(p));
     const data = await readFile(file);
     res.writeHead(200, { 'Content-Type': TYPES[extname(file)] || 'application/octet-stream' });

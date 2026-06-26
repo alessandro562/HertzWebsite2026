@@ -1,125 +1,215 @@
-const { useState, useEffect } = React;
+const { useState, useEffect, useRef } = React;
+
+/* ============================================================
+   HERTZ — Editorial components
+   Brand tokens (Helvetica Neue + JetBrains Mono + blue #144889)
+   applied to the editorial design principles:
+   - asymmetric index (lead + cards), kicker rubrics
+   - house-style duotone images, restrained signal
+   - reading-progress WAVEFORM (the signature)
+   - narrow reading column, drop cap, breakout pull quotes
+   ============================================================ */
+
+const MONO = { fontFamily: "'JetBrains Mono', monospace" };
+const HN = { fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif" };
+
+function prefersReducedMotion() {
+  return typeof window !== 'undefined'
+    && window.matchMedia
+    && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+function fmtDate(d, long) {
+  return new Date(d).toLocaleDateString('en-GB', long
+    ? { day: 'numeric', month: 'long', year: 'numeric' }
+    : { day: '2-digit', month: 'short', year: 'numeric' });
+}
+
+/* House-style duotone for all editorial photography */
+const DUOTONE_REST = 'saturate(0.45) brightness(0.6) contrast(1.08)';
+const DUOTONE_HOVER = 'saturate(0.95) brightness(0.8) contrast(1.0)';
 
 /* ─────────────────────────────────────────── */
-/* ARTICLE CARD — Editorial text card */
+/* HOVER WAVE — the card micro-interaction      */
 /* ─────────────────────────────────────────── */
-function ArticleCard({ article, featured = false }) {
+function CardWave({ active }) {
   const C = window.Cv8;
-  const mono = { fontFamily: "'JetBrains Mono', monospace" };
-  const briq = { fontFamily: "'Archivo', sans-serif" };
-  const [hovered, setHovered] = useState(false);
-  const [isWide, setIsWide] = useState(typeof window !== 'undefined' ? window.innerWidth >= 760 : true);
+  const N = 32;
+  return (
+    <div aria-hidden="true" style={{
+      display: 'flex', alignItems: 'center', gap: 2, height: 10,
+      width: active ? '100%' : '0%',
+      overflow: 'hidden',
+      opacity: active ? 1 : 0,
+      transition: 'width 0.45s cubic-bezier(.22,1,.36,1), opacity 0.3s',
+    }}>
+      {Array.from({ length: N }).map((_, i) => {
+        const amp = 0.25 + Math.abs(Math.sin(i * 0.7)) * 0.75;
+        return <span key={i} style={{
+          flex: 1, height: `${amp * 100}%`, minWidth: 1,
+          background: C.blue, borderRadius: 1,
+        }} />;
+      })}
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────── */
+/* READING PROGRESS — waveform that "plays"     */
+/* (the signature — only on the article page)   */
+/* ─────────────────────────────────────────── */
+function ReadingProgress() {
+  const C = window.Cv8;
+  const [pct, setPct] = useState(0);
+  const reduce = prefersReducedMotion();
 
   useEffect(() => {
-    const r = () => setIsWide(window.innerWidth >= 760);
+    const getPct = () => {
+      const doc = document.documentElement;
+      const body = document.body;
+      const top = window.pageYOffset || doc.scrollTop || body.scrollTop || 0;
+      const full = (doc.scrollHeight || body.scrollHeight) - window.innerHeight;
+      return full > 0 ? Math.min(1, Math.max(0, top / full)) : 0;
+    };
+    let raf = null;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => { setPct(getPct()); raf = null; });
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    document.body.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      document.body.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  if (reduce) {
+    return (
+      <div aria-hidden="true" style={{ position: 'fixed', top: 0, left: 0, right: 0, height: 3, zIndex: 300, background: 'rgba(245,245,243,0.08)' }}>
+        <div style={{ height: '100%', width: `${pct * 100}%`, background: C.blue }} />
+      </div>
+    );
+  }
+
+  const N = 170;
+  const playhead = pct * N;
+  return (
+    <div aria-hidden="true" style={{
+      position: 'fixed', top: 0, left: 0, right: 0, height: 8, zIndex: 300,
+      display: 'flex', alignItems: 'center',
+      background: 'rgba(8,8,13,0.55)', backdropFilter: 'blur(4px)',
+      padding: '0 2px',
+    }}>
+      {Array.from({ length: N }).map((_, i) => {
+        const amp = 0.28 + Math.abs(Math.sin(i * 0.5)) * 0.5 + ((i * 13) % 7) / 22;
+        const played = i <= playhead;
+        const atHead = Math.abs(i - playhead) < 1.2;
+        return <span key={i} style={{
+          flex: 1, margin: '0 0.5px', borderRadius: 1,
+          height: `${Math.min(1, amp) * 100}%`,
+          background: played ? C.blue : 'rgba(245,245,243,0.12)',
+          boxShadow: atHead ? `0 0 6px ${C.blue}` : 'none',
+          transition: 'background 0.15s linear',
+        }} />;
+      })}
+    </div>
+  );
+}
+window.ReadingProgress = ReadingProgress;
+
+/* ─────────────────────────────────────────── */
+/* ARTICLE CARD — editorial, borderless         */
+/* lead = large feature; otherwise compact       */
+/* dark = card sits on a dark background          */
+/* ─────────────────────────────────────────── */
+function ArticleCard({ article, featured = false, dark = false }) {
+  const C = window.Cv8;
+  const [hovered, setHovered] = useState(false);
+  const [isWide, setIsWide] = useState(typeof window !== 'undefined' ? window.innerWidth >= 820 : true);
+
+  useEffect(() => {
+    const r = () => setIsWide(window.innerWidth >= 820);
     window.addEventListener('resize', r, { passive: true });
     return () => window.removeEventListener('resize', r);
   }, []);
 
-  const date = new Date(article.metadata.publishedAt).toLocaleDateString('en-GB', {
-    day: '2-digit', month: 'short', year: 'numeric'
-  });
-
   const img = article.image || (article.media && article.media.heroImage) || 'uploads/27.02_Hertz-9.jpg';
   const horizontal = featured && isWide;
+
+  const ink = dark ? C.light : C.dark;
+  const dim = (dark ? '236,234,227' : '8,8,13');
+  const textDim = `rgba(${dim},0.62)`;
+  const textMute = `rgba(${dim},0.45)`;
+  const hairline = `rgba(${dim},0.14)`;
+
+  const cat = (article.metadata && article.metadata.category ? article.metadata.category : 'Editorial').toUpperCase();
+  const rt = article.content && article.content.readingTimeMinutes;
 
   return (
     <a
       href={`/media/${article.slug}`}
-      style={{
-        display: 'flex',
-        flexDirection: horizontal ? 'row' : 'column',
-        textDecoration: 'none',
-        color: 'inherit',
-        background: C.dark,
-        border: `1px solid ${C.dark}12`,
-        overflow: 'hidden',
-        cursor: 'pointer',
-        height: '100%',
-        transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
-        boxShadow: hovered ? '0 24px 60px rgba(8,8,13,0.28)' : '0 2px 12px rgba(8,8,13,0.06)',
-        transition: 'transform 0.4s cubic-bezier(.22,1,.36,1), box-shadow 0.4s cubic-bezier(.22,1,.36,1)',
-      }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      style={{
+        display: 'grid',
+        gridTemplateColumns: horizontal ? '1.15fr 1fr' : '1fr',
+        gap: horizontal ? 'clamp(24px,3vw,48px)' : 18,
+        alignItems: horizontal ? 'center' : 'stretch',
+        textDecoration: 'none', color: 'inherit',
+        height: '100%',
+      }}
     >
-      {/* IMAGE with overlaid title */}
+      {/* IMAGE — house duotone */}
       <div style={{
-        position: 'relative',
-        overflow: 'hidden',
-        flex: horizontal ? '0 0 56%' : 'none',
-        aspectRatio: horizontal ? 'auto' : (featured ? '16/9' : '4/5'),
-        minHeight: horizontal ? 420 : 'auto',
+        position: 'relative', overflow: 'hidden',
+        aspectRatio: horizontal ? '3/2' : (featured ? '16/9' : '4/5'),
+        background: dark ? '#0e0e16' : '#dcdcd6',
+        transform: hovered ? 'translateY(-2px)' : 'translateY(0)',
+        transition: 'transform 0.4s cubic-bezier(.22,1,.36,1)',
       }}>
         <img src={img} alt="" loading="lazy" style={{
-          position: 'absolute', inset: 0,
-          width: '100%', height: '100%', objectFit: 'cover',
-          filter: hovered ? 'saturate(0.85) brightness(0.62)' : 'saturate(0.6) brightness(0.5) contrast(1.05)',
-          transform: hovered ? 'scale(1.05)' : 'scale(1)',
-          transition: 'transform 0.7s cubic-bezier(.22,1,.36,1), filter 0.5s',
+          position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover',
+          filter: hovered ? DUOTONE_HOVER : DUOTONE_REST,
+          transform: hovered ? 'scale(1.04)' : 'scale(1)',
+          transition: 'transform 0.7s cubic-bezier(.22,1,.36,1), filter 0.5s ease',
         }} />
-        {/* gradient for legibility */}
+        {/* faint blue duotone wash toward ink */}
         <div style={{
-          position: 'absolute', inset: 0,
-          background: 'linear-gradient(0deg, rgba(8,8,13,0.92) 0%, rgba(8,8,13,0.45) 42%, rgba(8,8,13,0.1) 100%)',
+          position: 'absolute', inset: 0, pointerEvents: 'none',
+          background: `linear-gradient(180deg, rgba(20,72,137,0.06), rgba(8,8,13,0.28))`,
+          opacity: hovered ? 0.5 : 1, transition: 'opacity 0.5s',
         }} />
-        {/* top meta row */}
-        <div style={{
-          position: 'absolute', top: 16, left: 16, right: 16,
-          display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-        }}>
-          <span style={{
-            ...mono, fontSize: 9, letterSpacing: '0.2em', fontWeight: 600,
-            color: C.light, textTransform: 'uppercase',
-            background: C.blue, padding: '5px 10px',
-          }}>{article.metadata.category}</span>
-          <span style={{
-            ...mono, fontSize: 9, letterSpacing: '0.14em', color: C.light + 'cc',
-            background: 'rgba(8,8,13,0.55)', padding: '5px 9px',
-          }}>{article.content.readingTimeMinutes} MIN</span>
-        </div>
-        {/* title overlaid bottom */}
-        <h3 style={{
-          position: 'absolute', left: featured ? 28 : 22, right: featured ? 28 : 22, bottom: featured ? 26 : 20,
-          ...briq,
-          fontSize: featured ? 'clamp(1.7rem, 3vw, 2.7rem)' : 'clamp(1.25rem, 1.7vw, 1.55rem)',
-          fontWeight: 800, lineHeight: 1.08, letterSpacing: '-0.03em',
-          color: C.light, textWrap: 'pretty', margin: 0,
-          textShadow: '0 2px 24px rgba(0,0,0,0.5)',
-        }}>{article.title}</h3>
       </div>
 
-      {/* BODY — summary + meta */}
-      <div style={{
-        flex: horizontal ? '1 1 44%' : '1 0 auto',
-        background: C.light,
-        padding: featured ? 'clamp(24px,3vw,40px)' : '22px 24px 24px',
-        display: 'flex', flexDirection: 'column', justifyContent: horizontal ? 'center' : 'flex-start',
-      }}>
-        {article.subtitle && featured && (
-          <div style={{ ...mono, fontSize: 10, letterSpacing: '0.16em', color: C.blue, marginBottom: 16, textTransform: 'uppercase' }}>
-            {article.metadata.category} · Editorial
-          </div>
+      {/* TEXT */}
+      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: horizontal ? 'center' : 'flex-start' }}>
+        <div style={{ ...MONO, fontSize: 10, letterSpacing: '0.22em', fontWeight: 600, color: C.blue, textTransform: 'uppercase', marginBottom: featured ? 14 : 10 }}>
+          {cat}
+        </div>
+        <h3 style={{
+          ...HN, margin: 0, color: ink, textWrap: 'pretty',
+          fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1.05,
+          fontSize: featured ? 'clamp(1.8rem, 3.4vw, 3rem)' : 'clamp(1.2rem, 1.7vw, 1.5rem)',
+        }}>{article.title}</h3>
+
+        {featured && article.subtitle && (
+          <p style={{ ...HN, fontSize: 'clamp(15px,1.2vw,18px)', color: textDim, lineHeight: 1.5, marginTop: 16, marginBottom: 0, maxWidth: '46ch', textWrap: 'pretty' }}>
+            {article.subtitle}
+          </p>
         )}
-        <p style={{
-          ...briq, fontSize: featured ? 'clamp(15px,1.2vw,17px)' : 14,
-          color: C.dark + 'aa', lineHeight: 1.6, margin: 0,
-          display: '-webkit-box', WebkitLineClamp: featured ? 5 : 3, WebkitBoxOrient: 'vertical', overflow: 'hidden',
-        }}>
-          {article.excerpt}
-        </p>
-        <div style={{
-          display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-          marginTop: featured ? 28 : 18, paddingTop: 16,
-          borderTop: `1px solid ${C.dark}12`,
-        }}>
-          <span style={{ ...mono, fontSize: 9, color: C.dark + '66', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
-            {article.metadata.author} · {date}
-          </span>
-          <span style={{
-            ...mono, fontSize: 10, letterSpacing: '0.14em', fontWeight: 600,
-            color: hovered ? C.blue : C.dark + '88', transition: 'color 0.2s', whiteSpace: 'nowrap',
-          }}>READ →</span>
+
+        {/* signature hover wave */}
+        <div style={{ marginTop: featured ? 20 : 14, marginBottom: featured ? 18 : 12, height: 10 }}>
+          <CardWave active={hovered} />
+        </div>
+
+        <div style={{ ...MONO, fontSize: 10, letterSpacing: '0.12em', color: textMute, textTransform: 'uppercase' }}>
+          {article.metadata.author} · {fmtDate(article.metadata.publishedAt)}{rt ? ` · ${rt} MIN` : ''}
         </div>
       </div>
     </a>
@@ -128,65 +218,43 @@ function ArticleCard({ article, featured = false }) {
 window.ArticleCard = ArticleCard;
 
 /* ─────────────────────────────────────────── */
-/* ARTICLE LIST — used by media.html listing   */
+/* ARTICLE LIST (fetches API) — kept for compat */
 /* ─────────────────────────────────────────── */
-function ArticleList({ featured = false, limit = 10 }) {
+function ArticleList({ featured = false, limit = 10, dark = false }) {
   const C = window.Cv8;
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const url = featured
-      ? '/api/articles?featured=true&limit=' + limit
-      : '/api/articles?limit=' + limit;
-    fetch(url)
-      .then(r => r.json())
+    const url = featured ? '/api/articles?featured=true&limit=' + limit : '/api/articles?limit=' + limit;
+    fetch(url).then(r => r.json())
       .then(d => { if (d.ok) setArticles(d.articles); else setError(d.error || 'Failed'); })
       .catch(() => setError('Error loading articles'))
       .finally(() => setLoading(false));
   }, [featured, limit]);
 
-  if (loading) return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-      {[1,2,3].map(i => (
-        <div key={i} style={{
-          height: 120, background: C.darkSoft,
-          animation: 'pulse 1.6s ease-in-out infinite',
-          opacity: 1 - i * 0.15,
-        }} />
-      ))}
-    </div>
-  );
-  if (error) return <div style={{ padding: 32, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: C.light + '44' }}>{error}</div>;
-  if (!articles.length) return <div style={{ padding: 32, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: C.light + '44' }}>No articles yet.</div>;
+  if (loading) return <div style={{ ...MONO, fontSize: 11, color: (dark ? C.light : C.dark) + '44', padding: 32 }}>Loading…</div>;
+  if (error) return <div style={{ ...MONO, fontSize: 11, color: (dark ? C.light : C.dark) + '44', padding: 32 }}>{error}</div>;
+  if (!articles.length) return <div style={{ ...MONO, fontSize: 11, color: (dark ? C.light : C.dark) + '44', padding: 32 }}>No articles yet.</div>;
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-      {articles.map(a => <ArticleCard key={a.slug} article={a} featured={featured} />)}
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 'clamp(28px,3vw,48px)' }}>
+      {articles.map(a => <ArticleCard key={a.slug} article={a} dark={dark} />)}
     </div>
   );
 }
 window.ArticleList = ArticleList;
 
 /* ─────────────────────────────────────────── */
-/* ARTICLE DETAIL — full article page          */
+/* ARTICLE DETAIL — reading-first article page  */
 /* ─────────────────────────────────────────── */
 function ArticleDetail({ slug }) {
   const C = window.Cv8;
-  const mono = { fontFamily: "'JetBrains Mono', monospace" };
-  const briq = { fontFamily: "'Archivo', sans-serif" };
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [copied, setCopied] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 900);
-
-  useEffect(() => {
-    const r = () => setIsMobile(window.innerWidth < 900);
-    window.addEventListener('resize', r, { passive: true });
-    return () => window.removeEventListener('resize', r);
-  }, []);
 
   useEffect(() => {
     fetch(`/api/articles?slug=${slug}`)
@@ -196,20 +264,68 @@ function ArticleDetail({ slug }) {
       .finally(() => setLoading(false));
   }, [slug]);
 
+  /* SEO: title, meta description, OG, JSON-LD */
+  useEffect(() => {
+    if (!article) return;
+    const prevTitle = document.title;
+    document.title = `${article.title} — HERTZ`;
+
+    const setMeta = (sel, attr, val) => {
+      let el = document.head.querySelector(sel);
+      if (!el) {
+        el = document.createElement('meta');
+        const [a, v] = sel.replace(/meta\[|\]/g, '').split('=');
+        el.setAttribute(a, v.replace(/["']/g, ''));
+        document.head.appendChild(el);
+      }
+      el.setAttribute(attr, val);
+      return el;
+    };
+    const desc = (article.seo && article.seo.metaDescription) || article.excerpt || '';
+    const hero = article.media && article.media.heroImage ? `https://hertzclubbing.com${article.media.heroImage}` : '';
+    setMeta('meta[name="description"]', 'content', desc);
+    setMeta('meta[property="og:title"]', 'content', article.title);
+    setMeta('meta[property="og:description"]', 'content', desc);
+    if (hero) setMeta('meta[property="og:image"]', 'content', hero);
+    setMeta('meta[name="twitter:title"]', 'content', article.title);
+    setMeta('meta[name="twitter:description"]', 'content', desc);
+
+    const ld = document.createElement('script');
+    ld.type = 'application/ld+json';
+    ld.id = 'ld-article';
+    ld.text = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: article.title,
+      description: desc,
+      image: hero || undefined,
+      author: { '@type': 'Organization', name: article.metadata.author },
+      publisher: { '@type': 'Organization', name: 'HERTZ' },
+      datePublished: new Date(article.metadata.publishedAt).toISOString(),
+      dateModified: new Date(article.metadata.updatedAt || article.metadata.publishedAt).toISOString(),
+      mainEntityOfPage: window.location.href,
+    });
+    const old = document.getElementById('ld-article');
+    if (old) old.remove();
+    document.head.appendChild(ld);
+
+    return () => { document.title = prevTitle; const e = document.getElementById('ld-article'); if (e) e.remove(); };
+  }, [article]);
+
   if (loading) return (
-    <div style={{ maxWidth: 760, margin: '0 auto' }}>
-      <div style={{ height: 12, background: C.darkSoft, width: '30%', marginBottom: 40 }} />
-      <div style={{ height: 56, background: C.darkSoft, width: '80%', marginBottom: 16 }} />
-      <div style={{ height: 20, background: C.darkSoft, width: '60%', marginBottom: 48 }} />
-      {[1,2,3,4].map(i => <div key={i} style={{ height: 16, background: C.darkSoft, width: `${70 + i * 5}%`, marginBottom: 10 }} />)}
+    <div style={{ maxWidth: 720, margin: '0 auto' }}>
+      <div style={{ height: 12, background: '#13131c', width: '30%', marginBottom: 40 }} />
+      <div style={{ height: 56, background: '#13131c', width: '85%', marginBottom: 16 }} />
+      <div style={{ height: 20, background: '#13131c', width: '60%', marginBottom: 48 }} />
+      {[1, 2, 3, 4].map(i => <div key={i} style={{ height: 16, background: '#13131c', width: `${70 + i * 5}%`, marginBottom: 12 }} />)}
     </div>
   );
 
   if (error || !article) return (
     <div style={{ textAlign: 'center', padding: '80px 24px' }}>
-      <div style={{ ...mono, fontSize: 10, color: C.light + '44', letterSpacing: '0.2em', marginBottom: 16 }}>// 404</div>
-      <p style={{ ...briq, fontSize: '1.2rem', color: C.light + '88' }}>{error || 'Article not found'}</p>
-      <a href="/media.html" style={{ ...mono, fontSize: 11, color: C.blue, letterSpacing: '0.14em', marginTop: 24, display: 'inline-block' }}>← Back to Media</a>
+      <div style={{ ...MONO, fontSize: 10, color: C.light + '44', letterSpacing: '0.2em', marginBottom: 16 }}>// 404</div>
+      <p style={{ ...HN, fontSize: '1.2rem', color: C.light + '88' }}>{error || 'Article not found'}</p>
+      <a href="/media.html" style={{ ...MONO, fontSize: 11, color: C.blue, letterSpacing: '0.14em', marginTop: 24, display: 'inline-block' }}>← Back to Editorial</a>
     </div>
   );
 
@@ -219,162 +335,85 @@ function ArticleDetail({ slug }) {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const publishDate = new Date(article.metadata.publishedAt).toLocaleDateString('en-GB', {
-    day: 'numeric', month: 'long', year: 'numeric'
-  });
+  const warm = 'rgba(236,234,227,'; // warm off-white, never pure white
+  const READ = 720;
 
   return (
-    <div>
-      {/* Back nav */}
-      <a href="/media.html" style={{
-        ...mono, fontSize: 12, color: C.light + '44', letterSpacing: '0.16em',
-        textDecoration: 'none', display: 'inline-flex', alignItems: 'center',
-        marginBottom: 48, minHeight: 44, transition: 'color 0.2s',
-      }}
-      onMouseEnter={e => e.currentTarget.style.color = C.blue}
-      onMouseLeave={e => e.currentTarget.style.color = C.light + '44'}
-      >
-        ← MEDIA
-      </a>
+    <>
+      <ReadingProgress />
 
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: isMobile ? '1fr' : '1fr 280px',
-        gap: isMobile ? 48 : 80,
-        maxWidth: 1200,
-      }}>
-        {/* MAIN */}
+      {/* Reading column */}
+      <div style={{ maxWidth: READ, margin: '0 auto' }}>
+        <a href="/media.html" style={{
+          ...MONO, fontSize: 11, color: C.light + '44', letterSpacing: '0.18em',
+          textDecoration: 'none', display: 'inline-flex', alignItems: 'center',
+          marginBottom: 40, minHeight: 44, textTransform: 'uppercase', transition: 'color 0.2s',
+        }}
+        onMouseEnter={e => e.currentTarget.style.color = C.blue}
+        onMouseLeave={e => e.currentTarget.style.color = C.light + '44'}
+        >← Editorial</a>
+
         <article>
-          {/* Hero image */}
+          {/* HERO */}
           {article.media && article.media.heroImage && (
-            <div style={{
-              position: 'relative', width: '100%', aspectRatio: '16/9',
-              overflow: 'hidden', marginBottom: 40,
-            }}>
-              <img src={article.media.heroImage} alt={article.media.heroImageAlt || ''} style={{
-                width: '100%', height: '100%', objectFit: 'cover',
-                filter: 'saturate(0.7) brightness(0.7) contrast(1.05)',
-              }} />
-              <div style={{
-                position: 'absolute', inset: 0,
-                background: 'linear-gradient(0deg, rgba(8,8,13,0.55) 0%, rgba(8,8,13,0.1) 60%)',
-              }} />
-            </div>
+            <figure style={{ position: 'relative', width: '100%', aspectRatio: '16/9', overflow: 'hidden', margin: '0 0 40px' }}>
+              <img src={article.media.heroImage} alt={article.media.heroImageAlt || ''} fetchpriority="high"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'saturate(0.55) brightness(0.72) contrast(1.05)' }} />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(20,72,137,0.05), rgba(8,8,13,0.4))' }} />
+            </figure>
           )}
-          {/* Article header */}
-          <header style={{ marginBottom: 48, borderLeft: `3px solid ${C.blue}`, paddingLeft: 24 }}>
-            <div style={{
-              ...mono, fontSize: 10, letterSpacing: '0.22em',
-              color: C.blue, textTransform: 'uppercase', fontWeight: 600,
-              marginBottom: 16,
-            }}>
-              {article.metadata.category} · {article.content.readingTimeMinutes} min read
+
+          {/* HEADER */}
+          <header style={{ marginBottom: 40 }}>
+            <div style={{ ...MONO, fontSize: 11, letterSpacing: '0.24em', color: C.blue, textTransform: 'uppercase', fontWeight: 600, marginBottom: 18 }}>
+              {article.metadata.category}
             </div>
-            <h1 style={{
-              ...briq,
-              fontSize: 'clamp(2rem, 5vw, 3.2rem)',
-              fontWeight: 800, lineHeight: 1.05,
-              letterSpacing: '-0.03em', color: C.light, marginBottom: 16,
-            }}>
+            <h1 style={{ ...HN, fontSize: 'clamp(2.1rem, 5vw, 3.4rem)', fontWeight: 700, lineHeight: 1.04, letterSpacing: '-0.035em', color: C.light, margin: 0 }}>
               {article.title}
             </h1>
             {article.subtitle && (
-              <p style={{
-                ...briq, fontSize: 'clamp(1rem, 1.3vw, 1.2rem)',
-                color: C.light + 'bb', lineHeight: 1.45, fontWeight: 500,
-              }}>
+              <p style={{ ...HN, fontSize: 'clamp(1.05rem, 1.6vw, 1.35rem)', color: warm + '0.62)', lineHeight: 1.5, fontWeight: 400, marginTop: 20 }}>
                 {article.subtitle}
               </p>
             )}
+            <div style={{ ...MONO, fontSize: 10, letterSpacing: '0.14em', color: warm + '0.45)', textTransform: 'uppercase', marginTop: 24, display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
+              <span>{article.metadata.author}</span><span style={{ color: C.blue }}>·</span>
+              <time dateTime={new Date(article.metadata.publishedAt).toISOString().slice(0, 10)}>{fmtDate(article.metadata.publishedAt, true)}</time>
+              {article.content.readingTimeMinutes ? (<><span style={{ color: C.blue }}>·</span><span>{article.content.readingTimeMinutes} min read</span></>) : null}
+            </div>
           </header>
 
-          {/* Body */}
-          <div
-            style={{
-              ...briq,
-              fontSize: 'clamp(15px, 1.05vw, 17px)',
-              lineHeight: 1.85,
-              color: C.light + 'cc',
-            }}
-            dangerouslySetInnerHTML={{ __html: article.content.body }}
-          />
+          {/* BODY */}
+          <div className="article-body" style={{ ...HN }} dangerouslySetInnerHTML={{ __html: article.content.body }} />
 
-          {/* Footer */}
-          <footer style={{
-            borderTop: `1px solid ${C.light}12`,
-            paddingTop: 32, marginTop: 56,
-            display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-            flexWrap: 'wrap', gap: 16,
-          }}>
+          {/* BYLINE / SHARE */}
+          <footer style={{ borderTop: `1px solid rgba(236,234,227,0.12)`, paddingTop: 28, marginTop: 56, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
             <div>
-              <div style={{ ...mono, fontSize: 9, color: C.light + '55', letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 4 }}>
-                {article.metadata.author}
-              </div>
-              <div style={{ ...mono, fontSize: 9, color: C.light + '44' }}>{publishDate}</div>
+              <div style={{ ...MONO, fontSize: 10, color: warm + '0.62)', letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 4 }}>{article.metadata.author}</div>
+              <div style={{ ...MONO, fontSize: 10, color: warm + '0.42)' }}>{fmtDate(article.metadata.publishedAt, true)}</div>
             </div>
-            <div style={{ display: 'flex', gap: 10 }}>
-              <button onClick={handleCopyLink} style={{
-                ...mono, fontSize: 10, padding: '12px 18px',
-                background: 'transparent',
-                border: `1px solid ${C.light}22`,
-                color: copied ? C.blue : C.light + '55',
-                cursor: 'pointer', letterSpacing: '0.12em', textTransform: 'uppercase',
-                transition: 'all 0.2s', minHeight: 44,
-              }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = C.blue; e.currentTarget.style.color = C.blue; }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = C.light + '22'; e.currentTarget.style.color = copied ? C.blue : C.light + '55'; }}
-              >
-                {copied ? 'Copied' : 'Copy link'}
-              </button>
-            </div>
+            <button onClick={handleCopyLink} style={{
+              ...MONO, fontSize: 10, padding: '12px 18px', background: 'transparent',
+              border: `1px solid rgba(236,234,227,0.22)`, color: copied ? C.blue : warm + '0.55)',
+              cursor: 'pointer', letterSpacing: '0.14em', textTransform: 'uppercase', transition: 'all 0.2s', minHeight: 44,
+            }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = C.blue; e.currentTarget.style.color = C.blue; }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(236,234,227,0.22)'; e.currentTarget.style.color = copied ? C.blue : warm + '0.55)'; }}
+            >{copied ? 'Link copied' : 'Share'}</button>
           </footer>
         </article>
-
-        {/* SIDEBAR */}
-        <aside style={{ position: isMobile ? 'static' : 'sticky', top: 100, height: 'fit-content' }}>
-          {/* Related */}
-          {article.relatedArticles && article.relatedArticles.length > 0 && (
-            <div style={{ borderTop: `2px solid ${C.blue}`, paddingTop: 20, marginBottom: 32 }}>
-              <div style={{ ...mono, fontSize: 9, letterSpacing: '0.22em', color: C.blue, marginBottom: 20, textTransform: 'uppercase' }}>
-                // Also read
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
-                {article.relatedArticles.map(rel => (
-                  <a key={rel.slug} href={`/media/${rel.slug}`} style={{
-                    textDecoration: 'none', color: 'inherit',
-                    padding: '14px 0',
-                    borderBottom: `1px solid ${C.light}0a`,
-                    transition: 'color 0.2s',
-                  }}
-                  onMouseEnter={e => e.currentTarget.style.color = C.blue}
-                  onMouseLeave={e => e.currentTarget.style.color = 'inherit'}
-                  >
-                    <div style={{ ...mono, fontSize: 10, color: C.blue, letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: 6 }}>
-                      {rel.metadata ? rel.metadata.category : ''}
-                    </div>
-                    <div style={{ ...briq, fontSize: 13, fontWeight: 700, lineHeight: 1.25, color: C.light + 'cc' }}>
-                      {rel.title}
-                    </div>
-                  </a>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Back */}
-          <a href="/media.html" style={{
-            ...mono, fontSize: 10, color: C.light + '33',
-            textDecoration: 'none', letterSpacing: '0.14em',
-            display: 'block', transition: 'color 0.2s',
-          }}
-          onMouseEnter={e => e.currentTarget.style.color = C.light}
-          onMouseLeave={e => e.currentTarget.style.color = C.light + '33'}
-          >
-            ← All articles
-          </a>
-        </aside>
       </div>
-    </div>
+
+      {/* KEEP READING — related, full editorial system */}
+      {article.relatedArticles && article.relatedArticles.length > 0 && (
+        <section style={{ maxWidth: 1100, margin: '96px auto 0', borderTop: `1px solid rgba(236,234,227,0.1)`, paddingTop: 48 }}>
+          <div style={{ ...MONO, fontSize: 11, letterSpacing: '0.24em', color: C.blue, textTransform: 'uppercase', marginBottom: 36 }}>Keep reading</div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 'clamp(28px,3vw,48px)' }}>
+            {article.relatedArticles.map(rel => <ArticleCard key={rel.slug} article={rel} dark={true} />)}
+          </div>
+        </section>
+      )}
+    </>
   );
 }
 window.ArticleDetail = ArticleDetail;

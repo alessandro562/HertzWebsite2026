@@ -15,13 +15,12 @@
   <meta name="twitter:title" content="HERTZ Music — Resident Sets & Mixes">
   <meta name="twitter:description" content="Resident sets and live recordings. Minimal and deep-tech, from the booth.">
   <link rel="canonical" href="https://hertz.club/music">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;600;700&display=block" rel="stylesheet">
+  <link rel="stylesheet" href="fonts.css">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=block" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
-    body { background: #08080d; color: #f5f5f3; font-family: 'Bricolage Grotesque', sans-serif; overflow-x: hidden; }
+    body { background: #08080d; color: #f5f5f3; font-family: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif; overflow-x: hidden; }
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: #08080d; }
     ::-webkit-scrollbar-thumb { background: rgba(20,72,137,0.4); }
@@ -92,7 +91,7 @@ function MusicPage() {
   const C = window.Cv8;
   const R = window.R8;
   const mono = { fontFamily: "'JetBrains Mono', monospace" };
-  const briq = { fontFamily: "'Archivo', sans-serif" };
+  const briq = { fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif" };
   const [playing, setPlaying] = React.useState(null);
 
   return (
@@ -118,11 +117,11 @@ function MusicPage() {
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 1080, margin: '0 auto', width: '100%' }}>
           <R>
             <div style={{ ...mono, fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 16 }}>// 04 / MUSIC</div>
-            <h1 style={{ ...briq, fontSize: 'clamp(3rem,10vw,8rem)', fontWeight: 800, lineHeight: 0.88, letterSpacing: '-0.04em', color: C.light }}>
+            <h1 style={{ ...briq, fontSize: 'clamp(3rem,10vw,8rem)', fontWeight: 700, lineHeight: 0.88, letterSpacing: '-0.04em', color: C.light }}>
               The sound<span style={{ color: C.blue }}>.</span>
             </h1>
             <p style={{ fontSize: 'clamp(15px,1.5vw,18px)', lineHeight: 1.7, color: C.light + 'aa', maxWidth: 520, marginTop: 24 }}>
-              Sets, tracks and live recordings from the residents. From the booth to the dancefloor — this is what HERTZ sounds like.
+              Recorded sets, studio cuts and live nights from the residents. Straight from the booth.
             </p>
           </R>
         </div>

@@ -1,17 +1,6 @@
-# Dependencies
 node_modules/
-
-# Build / OS
-.DS_Store
-*.log
-
-# Vercel (local project link)
-.vercel/
-
-# Secrets — never commit real env files
 .env
-.env.local
-.env*.local
-
-# Claude Code local settings (machine-specific)
-.claude/settings.local.json
+.DS_Store
+dist/
+build/
+.next/

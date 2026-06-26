@@ -15,13 +15,12 @@
   <meta name="twitter:title" content="HERTZ Manifesto">
   <meta name="twitter:description" content="Why we started, what we believe, and what the dancefloor means to us.">
   <link rel="canonical" href="https://hertz.club/manifesto">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;600;700&display=block" rel="stylesheet">
+  <link rel="stylesheet" href="fonts.css">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=block" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
-    body { background: #08080d; color: #f5f5f3; font-family: 'Bricolage Grotesque', sans-serif; overflow-x: hidden; }
+    body { background: #08080d; color: #f5f5f3; font-family: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif; overflow-x: hidden; }
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: #08080d; }
     ::-webkit-scrollbar-thumb { background: rgba(20,72,137,0.4); }
@@ -52,7 +51,7 @@ function ManifestoPage() {
   const C = window.Cv8;
   const R = window.R8;
   const mono = { fontFamily: "'JetBrains Mono', monospace" };
-  const briq = { fontFamily: "'Archivo', sans-serif" };
+  const briq = { fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif" };
   const [isMobile, setIsMobile] = React.useState(window.innerWidth < 768);
   React.useEffect(() => {
     const r = () => setIsMobile(window.innerWidth < 768);
@@ -65,7 +64,7 @@ function ManifestoPage() {
     { label: 'Sound', value: 'Minimal & Deep-Tech' },
     { label: 'Active since', value: '2023' },
     { label: 'Editions', value: '024+' },
-    { label: 'Homes', value: 'Kindergarten · Cocoricò · Cassero' },
+    { label: 'Homes', value: 'Kindergarten · Buongiorno Classic' },
   ];
 
   const FLOOR_GALLERY = [
@@ -107,8 +106,8 @@ function ManifestoPage() {
 
           {/* Chapter 01 — Origin · text left / photo right */}
           <R>
-            <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: 'clamp(28px,5vw,72px)', alignItems: 'center' }}>
-              <div style={{ maxWidth: 520 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: 'clamp(24px,4vw,64px)' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: isMobile ? 0 : 'clamp(8px,2vw,32px) 0' }}>
                 <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 18 }}>// CHAPTER 01 — ORIGIN</div>
                 <p style={{ fontSize: 'clamp(15px,1.4vw,17px)', lineHeight: 1.8, color: C.dark + 'cc', marginBottom: 18, textWrap: 'pretty' }}>
                   Hertz was born in Bologna in 2023, out of a clear feeling: too many nights were filling up with image and emptying out of listening.
@@ -117,18 +116,22 @@ function ManifestoPage() {
                   We didn't want to build another night to watch from the outside. We wanted a space where music is the reason to leave the house — and the dancefloor is the only place that matters.
                 </p>
               </div>
-              <img src="assets/man-origin.jpg" alt="HERTZ dancefloor, Bologna" loading="lazy" style={{ width: '100%', aspectRatio: '4/5', objectFit: 'cover', display: 'block', filter: 'saturate(0.7) contrast(1.05)', border: `1px solid ${C.dark}10` }} />
+              <div style={{ position: 'relative', overflow: 'hidden', borderRadius: 2, minHeight: isMobile ? 'auto' : 'clamp(300px,30vw,430px)', aspectRatio: isMobile ? '4/3' : 'auto', border: `1px solid ${C.dark}10` }}>
+                <img src="assets/man-origin.jpg" alt="HERTZ dancefloor, Bologna" loading="lazy" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block', filter: 'saturate(0.7) contrast(1.05)' }} />
+              </div>
             </div>
           </R>
 
           {/* Chapter 02 — The Room · photo left / text right */}
           <R delay={0.05}>
-            <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: 'clamp(28px,5vw,72px)', alignItems: 'center', marginTop: 'clamp(56px,9vw,120px)' }}>
-              <img src="assets/man-room.jpg" alt="HERTZ booth and crowd" loading="lazy" style={{ order: isMobile ? 2 : 1, width: '100%', aspectRatio: '4/5', objectFit: 'cover', display: 'block', filter: 'saturate(0.7) contrast(1.05)', border: `1px solid ${C.dark}10` }} />
-              <div style={{ order: isMobile ? 1 : 2, maxWidth: 520 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: 'clamp(24px,4vw,64px)', marginTop: 'clamp(48px,8vw,104px)' }}>
+              <div style={{ order: isMobile ? 2 : 1, position: 'relative', overflow: 'hidden', borderRadius: 2, minHeight: isMobile ? 'auto' : 'clamp(300px,30vw,430px)', aspectRatio: isMobile ? '4/3' : 'auto', border: `1px solid ${C.dark}10` }}>
+                <img src="assets/man-room.jpg" alt="HERTZ booth and crowd" loading="lazy" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block', filter: 'saturate(0.7) contrast(1.05)' }} />
+              </div>
+              <div style={{ order: isMobile ? 1 : 2, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: isMobile ? 0 : 'clamp(8px,2vw,32px) 0' }}>
                 <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 18 }}>// CHAPTER 02 — THE ROOM</div>
                 <p style={{ ...briq, fontSize: 'clamp(18px,2.2vw,26px)', fontWeight: 700, lineHeight: 1.3, color: C.dark, letterSpacing: '-0.02em', marginBottom: 18, textWrap: 'pretty' }}>
-                  A club is a room. A system. An audience close to the booth.
+                  A club is a room. A system. An audience close to the booth. A bassline that hits the body before it reaches the mind.
                 </p>
                 <p style={{ fontSize: 'clamp(15px,1.4vw,17px)', lineHeight: 1.8, color: C.dark + '88', textWrap: 'pretty' }}>
                   We book artists we believe in, not names we owe a favour to. We choose rooms for their sound, not their size. We keep things small enough to feel it, but big enough to lose yourself.
@@ -141,7 +144,7 @@ function ManifestoPage() {
           <R delay={0.1}>
             <div style={{ marginTop: 'clamp(64px,11vw,150px)', maxWidth: 960 }}>
               <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 24 }}>// CHAPTER 03 — THE CODE</div>
-              <p style={{ ...briq, fontSize: 'clamp(1.9rem,5vw,4rem)', fontWeight: 800, lineHeight: 0.96, letterSpacing: '-0.04em', color: C.dark, textWrap: 'pretty', margin: 0 }}>
+              <p style={{ ...briq, fontSize: 'clamp(1.9rem,5vw,4rem)', fontWeight: 700, lineHeight: 0.83, letterSpacing: '-0.04em', color: C.dark, textWrap: 'pretty', margin: 0 }}>
                 No performance. No hierarchy. No watching from a distance. Just music, bodies, and the right system.
               </p>
             </div>
@@ -208,7 +211,7 @@ function ManifestoPage() {
       <section style={{ background: C.light, padding: 'clamp(56px,8vh,96px) clamp(20px,4vw,56px)' }}>
         <R>
           <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 12 }}>// THE DANCEFLOOR IS FOR EVERYONE</div>
-          <h2 style={{ ...briq, fontSize: 'clamp(2rem,6vw,5rem)', fontWeight: 800, lineHeight: 0.9, letterSpacing: '-0.04em', color: C.dark, marginBottom: 48 }}>
+          <h2 style={{ ...briq, fontSize: 'clamp(2rem,6vw,5rem)', fontWeight: 700, lineHeight: 0.9, letterSpacing: '-0.04em', color: C.dark, marginBottom: 48 }}>
             The dancefloor belongs<br />to everyone<span style={{ color: C.blue }}>.</span>
           </h2>
         </R>

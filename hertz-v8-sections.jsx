@@ -46,9 +46,9 @@ function EventsHorizontal8() {
             fontSize: 11, letterSpacing: '0.2em', color: C.dark + '66', marginBottom: 8,
           }}>// 01 / EVENTS</div>
           <h2 style={{
-            fontFamily: "'Archivo', sans-serif",
+            fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
             fontSize: 'clamp(2.5rem, 8vw, 7rem)',
-            fontWeight: 800, lineHeight: 0.88,
+            fontWeight: 700, lineHeight: 0.83,
             letterSpacing: '-0.05em', color: C.dark,
           }}>What's next<span style={{ color: C.blue }}>.</span></h2>
         </div>
@@ -137,9 +137,9 @@ function EventCard8({ card }) {
         e.currentTarget.style.opacity = isPast ? '0.78' : '1';
       }}
     >
-      {/* ── MEDIA ZONE — 4:5, object-fit: contain ── */}
+      {/* ── MEDIA ZONE — uniform 4:5, posters cover-cropped ── */}
       <div style={{
-        aspectRatio: '4/5',
+        aspectRatio: '3875 / 5463',
         background: '#0b0b12',
         position: 'relative',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -150,9 +150,17 @@ function EventCard8({ card }) {
             src={card.poster}
             alt={card.title}
             onError={() => setImgFailed(true)}
-            style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
+            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
             loading="lazy"
           />
+        ) : card.comingSoon ? (
+          <div style={{
+            fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
+            lineHeight: 0.92, letterSpacing: '0.02em', textAlign: 'center', color: C.light, textTransform: 'uppercase',
+          }}>
+            <span style={{ display: 'block', fontSize: 'clamp(14px, 2.2vw, 18px)', fontWeight: 200, color: C.light + 'cc' }}>COMING</span>
+            <span style={{ display: 'block', fontSize: 'clamp(24px, 4.2vw, 34px)', fontWeight: 700 }}>SOON<span style={{ color: C.blue }}>.</span></span>
+          </div>
         ) : (
           <div style={{
             display: 'flex', flexDirection: 'column',
@@ -160,8 +168,8 @@ function EventCard8({ card }) {
             gap: 10, padding: 24, textAlign: 'center',
           }}>
             <div style={{
-              fontFamily: "'Archivo', sans-serif",
-              fontSize: 'clamp(20px, 3.5vw, 34px)', fontWeight: 800,
+              fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
+              fontSize: 'clamp(20px, 3.5vw, 34px)', fontWeight: 700,
               letterSpacing: '-0.04em', color: C.light + '1e',
             }}>{card.date}</div>
             <div style={{
@@ -187,6 +195,8 @@ function EventCard8({ card }) {
         padding: '14px 16px 18px',
         borderTop: `1px solid ${C.light}15`,
         display: 'flex', flexDirection: 'column', gap: 5,
+        alignItems: card.comingSoon ? 'center' : 'flex-start',
+        textAlign: card.comingSoon ? 'center' : 'left',
       }}>
         <div style={{
           fontFamily: "'JetBrains Mono', monospace",
@@ -195,17 +205,19 @@ function EventCard8({ card }) {
         }}>
           {isPast ? '// PAST' : '// UPCOMING'} · {card.date}
         </div>
-        <div style={{
-          fontFamily: "'Archivo', sans-serif",
-          fontSize: 'clamp(13px, 1.1vw, 15px)', fontWeight: 700,
-          letterSpacing: '-0.02em', lineHeight: 1.2,
-          color: isPast ? C.light + 'aa' : C.light,
-        }}>{card.title}</div>
+        {!card.comingSoon && (
+          <div style={{
+            fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
+            fontSize: 'clamp(13px, 1.1vw, 15px)', fontWeight: 700,
+            letterSpacing: '-0.02em', lineHeight: 1.2,
+            color: isPast ? C.light + 'aa' : C.light,
+          }}>{card.title}</div>
+        )}
         <div style={{
           fontFamily: "'JetBrains Mono', monospace",
           fontSize: 10, letterSpacing: '0.08em',
           color: C.gray, textTransform: 'uppercase',
-        }}>{card.venue} · {card.city}</div>
+        }}>{card.comingSoon ? card.city : `${card.venue} · ${card.city}`}</div>
         {!isPast && card.ctaLabel && (
           <a href={card.ctaLink || '#'} style={{
             marginTop: 8,
@@ -254,9 +266,9 @@ function Manifesto8() {
       <div className="hz-grid-12">
         <R className="hz-span-full" style={{ marginBottom: 56 }}>
           <h2 style={{
-            fontFamily: "'Archivo', sans-serif",
+            fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
             fontSize: 'clamp(2.5rem, 9vw, 9rem)',
-            fontWeight: 800, lineHeight: 0.88,
+            fontWeight: 700, lineHeight: 0.83,
             letterSpacing: '-0.05em', color: C.light,
             marginTop: 24,
           }}>
@@ -306,7 +318,7 @@ function Manifesto8() {
             marginBottom: 16,
           }}>// CHAPTER 02 — THE ROOM</div>
           <p style={{
-            fontFamily: "'Archivo', sans-serif",
+            fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
             fontSize: 'clamp(17px, 1.9vw, 22px)',
             fontWeight: 600, lineHeight: 1.4,
             color: C.light, letterSpacing: '-0.01em',
@@ -334,7 +346,7 @@ function Manifesto8() {
                 marginBottom: 10,
               }}>// BASED IN</div>
               <div style={{
-                fontFamily: "'Archivo', sans-serif",
+                fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
                 fontSize: 'clamp(20px, 2vw, 28px)', fontWeight: 700,
                 color: C.light, letterSpacing: '-0.02em',
               }}>Bologna, IT</div>
@@ -346,7 +358,7 @@ function Manifesto8() {
                 marginBottom: 10,
               }}>// SOUND</div>
               <div style={{
-                fontFamily: "'Archivo', sans-serif",
+                fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
                 fontSize: 'clamp(20px, 2vw, 28px)', fontWeight: 700,
                 color: C.light, letterSpacing: '-0.02em',
               }}>Minimal &amp; deep-tech</div>
@@ -358,7 +370,7 @@ function Manifesto8() {
                 marginBottom: 10,
               }}>// ACTIVE SINCE</div>
               <div style={{
-                fontFamily: "'Archivo', sans-serif",
+                fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
                 fontSize: 'clamp(20px, 2vw, 28px)', fontWeight: 700,
                 color: C.light, letterSpacing: '-0.02em',
               }}>2023</div>
@@ -370,10 +382,10 @@ function Manifesto8() {
                 marginBottom: 10,
               }}>// HOMES</div>
               <div style={{
-                fontFamily: "'Archivo', sans-serif",
+                fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
                 fontSize: 'clamp(20px, 2vw, 28px)', fontWeight: 700,
                 color: C.light, letterSpacing: '-0.02em',
-              }}>Kindergarten &middot; Cocoricò &middot; Cassero</div>
+              }}>Kindergarten &middot; Buongiorno Classic</div>
             </div>
           </div>
         </R>
@@ -389,7 +401,7 @@ function BrandIdentity8() {
   const C = window.Cv8;
   const R = window.R8;
   const mono = { fontFamily: "'JetBrains Mono', monospace" };
-  const briq = { fontFamily: "'Archivo', sans-serif" };
+  const briq = { fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif" };
   const GRAPHICS = [
     { img: 'assets/brand-1.jpg', cap: 'Made in (BO)' },
     { img: 'assets/brand-4.jpg', cap: 'Positive energy · Quality sound' },
@@ -403,7 +415,7 @@ function BrandIdentity8() {
       <div style={{ padding: '0 clamp(20px,4vw,56px)', marginBottom: 48 }}>
         <R>
           <div style={{ ...mono, fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 14 }}>// VISUAL IDENTITY</div>
-          <h2 style={{ ...briq, fontSize: 'clamp(2.5rem,8vw,7rem)', fontWeight: 800, lineHeight: 0.86, letterSpacing: '-0.05em', color: C.dark }}>
+          <h2 style={{ ...briq, fontSize: 'clamp(2.5rem,8vw,7rem)', fontWeight: 700, lineHeight: 0.83, letterSpacing: '-0.05em', color: C.dark }}>
             Clubbing<br />Collective<span style={{ color: C.blue }}>.</span>
           </h2>
         </R>
@@ -467,9 +479,9 @@ function FamilySection8() {
           marginBottom: 12,
         }}>// THE RESIDENTS</div>
         <h2 style={{
-          fontFamily: "'Archivo', sans-serif",
+          fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
           fontSize: 'clamp(2.5rem, 8vw, 7rem)',
-          fontWeight: 800, lineHeight: 0.9,
+          fontWeight: 700, lineHeight: 0.83,
           letterSpacing: '-0.05em', color: C.dark,
           marginBottom: 64, maxWidth: 1200,
         }}>
@@ -507,9 +519,9 @@ function FamilySection8() {
               marginBottom: 16,
             }}>// SELECTED — {RESIDENTS[active].n}</div>
             <h3 style={{
-              fontFamily: "'Archivo', sans-serif",
+              fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
               fontSize: 'clamp(2rem, 5vw, 4rem)',
-              fontWeight: 800, lineHeight: 0.95,
+              fontWeight: 700, lineHeight: 0.83,
               letterSpacing: '-0.04em', color: C.dark,
               marginBottom: 16, transition: 'all 0.5s',
             }}>{RESIDENTS[active].name}</h3>
@@ -548,7 +560,7 @@ function FamilySection8() {
                       fontSize: 11, color: C.dark + '55',
                     }}>{r.n}</span>
                     <span style={{
-                      fontFamily: "'Archivo', sans-serif",
+                      fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
                       fontSize: 'clamp(16px, 2vw, 22px)',
                       fontWeight: 700,
                       color: i === active ? C.blue : C.dark + 'dd',
@@ -632,9 +644,9 @@ function GallerySection8() {
             marginBottom: 12,
           }}>// 04 / THE ARCHIVE</div>
           <h2 style={{
-            fontFamily: "'Archivo', sans-serif",
+            fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
             fontSize: 'clamp(2.5rem, 7vw, 6rem)',
-            fontWeight: 800, lineHeight: 0.88,
+            fontWeight: 700, lineHeight: 0.83,
             letterSpacing: '-0.05em', color: C.light,
           }}>Nights on<br />record<span style={{ color: C.blue }}>.</span></h2>
         </div>
@@ -711,9 +723,9 @@ function MerchTeaser8() {
             marginBottom: 16,
           }}>// 05 / DROP 01 — COMING SOON</div>
           <h2 style={{
-            fontFamily: "'Archivo', sans-serif",
+            fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
             fontSize: 'clamp(2.5rem, 8vw, 7rem)',
-            fontWeight: 800, lineHeight: 0.88,
+            fontWeight: 700, lineHeight: 0.83,
             letterSpacing: '-0.05em', color: C.dark,
             marginBottom: 24,
           }}>
@@ -747,7 +759,7 @@ function MerchTeaser8() {
               <button type="submit" style={{
                 background: C.dark, color: C.light, border: 'none',
                 padding: '14px 24px', cursor: 'pointer',
-                fontFamily: "'Archivo', sans-serif",
+                fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
                 fontWeight: 700, fontSize: 12, letterSpacing: '0.12em',
                 textTransform: 'uppercase', transition: 'background 0.2s',
               }}
@@ -831,7 +843,7 @@ function MerchTeaser8() {
                       color: C.light + '3a', marginBottom: 4,
                     }}>{k}</div>
                     <div style={{
-                      fontFamily: "'Archivo', sans-serif",
+                      fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
                       fontSize: 12, fontWeight: 700,
                       color: k === 'STATUS' ? C.blue : C.light,
                       letterSpacing: '-0.01em',
@@ -878,14 +890,14 @@ function Footer8() {
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: 11, letterSpacing: '0.2em', color: C.blue,
             marginBottom: 16,
-          }}>// END OF TRANSMISSION</div>
+          }}>FROM CLUBBERS FOR CLUBBERS</div>
           <h2 style={{
-            fontFamily: "'Archivo', sans-serif",
+            fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
             fontSize: 'clamp(2.5rem, 8vw, 7rem)',
-            fontWeight: 800, lineHeight: 0.9,
+            fontWeight: 700, lineHeight: 0.83,
             letterSpacing: '-0.05em', color: C.light,
           }}>
-            See you<br />on the dancefloor<span style={{ color: C.blue }}>.</span>
+            Groove is<br />the key<span style={{ color: C.blue }}>.</span>
           </h2>
         </div>
 
@@ -913,7 +925,7 @@ function Footer8() {
               <a key={l} href={h} style={{
                 display: 'block', color: C.light + '99', textDecoration: 'none',
                 fontSize: 14, padding: '7px 0', transition: 'color 0.2s',
-                fontFamily: "'Archivo', sans-serif", fontWeight: 500,
+                fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif", fontWeight: 500,
               }}
               onMouseEnter={e => e.currentTarget.style.color = C.blue}
               onMouseLeave={e => e.currentTarget.style.color = C.light + '99'}
@@ -935,7 +947,7 @@ function Footer8() {
               <a key={x.l} href={x.href} target={x.href.startsWith('http') ? '_blank' : undefined} rel={x.href.startsWith('http') ? 'noopener noreferrer' : undefined} style={{
                 display: 'block', color: C.light + '99', textDecoration: 'none',
                 fontSize: 14, padding: '7px 0', transition: 'color 0.2s',
-                fontFamily: "'Archivo', sans-serif", fontWeight: 500,
+                fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif", fontWeight: 500,
               }}
               onMouseEnter={e => e.currentTarget.style.color = C.blue}
               onMouseLeave={e => e.currentTarget.style.color = C.light + '99'}

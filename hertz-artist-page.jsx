@@ -4,6 +4,111 @@
    Usage: <window.ArtistPage artist={ARTIST} events={EVENTS} />
    ============================================ */
 
+function ArtistGallery({ images, name }) {
+  const C = window.Cv8;
+  const scrollRef = React.useRef(null);
+  const [atStart, setAtStart] = React.useState(true);
+  const [atEnd, setAtEnd] = React.useState(false);
+
+  const updateEdges = React.useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setAtStart(el.scrollLeft <= 4);
+    setAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 4);
+  }, []);
+
+  React.useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    updateEdges();
+    el.addEventListener('scroll', updateEdges, { passive: true });
+    window.addEventListener('resize', updateEdges, { passive: true });
+    return () => {
+      el.removeEventListener('scroll', updateEdges);
+      window.removeEventListener('resize', updateEdges);
+    };
+  }, [updateEdges]);
+
+  const scrollBy = (dir) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const card = el.querySelector('[data-gallery-card]');
+    const step = card ? card.offsetWidth + 14 : el.clientWidth * 0.8;
+    el.scrollBy({ left: dir * step, behavior: 'smooth' });
+  };
+
+  const arrowStyle = (disabled) => ({
+    width: 44, height: 44, flexShrink: 0,
+    display: 'flex', alignItems: 'center', justifyContent: 'center',
+    background: 'transparent', cursor: disabled ? 'default' : 'pointer',
+    border: `1px solid ${C.light}${disabled ? '14' : '33'}`,
+    color: C.light + (disabled ? '33' : 'aa'),
+    fontSize: 18, transition: 'all 0.2s', outline: 'none',
+  });
+
+  return (
+    <section style={{
+      background: C.dark,
+      padding: 'clamp(48px, 8vh, 80px) 0 clamp(48px, 8vh, 80px)',
+      borderTop: `1px solid ${C.light}0e`,
+    }}>
+      <style>{`.hz-gallery-scroll::-webkit-scrollbar { display: none; }`}</style>
+      <div style={{
+        maxWidth: 1400, margin: '0 auto',
+        padding: '0 clamp(20px, 4vw, 56px)',
+        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+        gap: 16, marginBottom: 28,
+      }}>
+        <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.2em', color: C.blue }}>// GALLERY</div>
+        <div style={{ display: 'flex', gap: 8 }}>
+          <button aria-label="Previous" onClick={() => scrollBy(-1)} disabled={atStart} style={arrowStyle(atStart)}
+            onMouseEnter={e => { if (!atStart) { e.currentTarget.style.borderColor = C.blue; e.currentTarget.style.color = C.blue; } }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = C.light + (atStart ? '14' : '33'); e.currentTarget.style.color = C.light + (atStart ? '33' : 'aa'); }}
+          >←</button>
+          <button aria-label="Next" onClick={() => scrollBy(1)} disabled={atEnd} style={arrowStyle(atEnd)}
+            onMouseEnter={e => { if (!atEnd) { e.currentTarget.style.borderColor = C.blue; e.currentTarget.style.color = C.blue; } }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = C.light + (atEnd ? '14' : '33'); e.currentTarget.style.color = C.light + (atEnd ? '33' : 'aa'); }}
+          >→</button>
+        </div>
+      </div>
+      <div
+        ref={scrollRef}
+        className="hz-gallery-scroll"
+        style={{
+          display: 'flex', gap: 14,
+          overflowX: 'auto', overflowY: 'hidden',
+          scrollSnapType: 'x mandatory',
+          WebkitOverflowScrolling: 'touch',
+          scrollbarWidth: 'none',
+          padding: '0 clamp(20px, 4vw, 56px)',
+        }}
+      >
+        {images.map((src, i) => (
+          <div
+            key={i}
+            data-gallery-card
+            style={{
+              flex: '0 0 auto',
+              width: 'clamp(260px, 34vw, 420px)',
+              aspectRatio: '4/5',
+              background: C.darkSoft,
+              scrollSnapAlign: 'start',
+              overflow: 'hidden',
+            }}
+          >
+            <img
+              src={src}
+              alt={`${name} — live ${i + 1}`}
+              loading={i < 2 ? 'eager' : 'lazy'}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function EventAppearanceRow({ ev }) {
   const C = window.Cv8;
   const isPast = ev.status === 'past';
@@ -22,7 +127,7 @@ function EventAppearanceRow({ ev }) {
         minWidth: 88,
       }}>{ev.day}</span>
       <span style={{
-        fontFamily: "'Archivo', sans-serif",
+        fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
         fontSize: 'clamp(14px, 1.6vw, 17px)', fontWeight: 700,
         color: C.light, letterSpacing: '-0.02em',
         flex: 1, minWidth: 160,
@@ -43,8 +148,9 @@ function ArtistPage({ artist, events = [] }) {
   const C = window.Cv8;
   const R = window.R8;
   const mono = { fontFamily: "'JetBrains Mono', monospace" };
-  const briq = { fontFamily: "'Archivo', sans-serif" };
+  const briq = { fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif" };
   const [imgFailed, setImgFailed] = React.useState(false);
+  const [playing, setPlaying] = React.useState(null);
 
   const upcoming = events.filter(e => e.status === 'upcoming');
   const past = events.filter(e => e.status === 'past');
@@ -65,7 +171,7 @@ function ArtistPage({ artist, events = [] }) {
               position: 'absolute', inset: 0,
               backgroundImage: `url(${artist.img})`,
               backgroundSize: 'cover', backgroundPosition: 'center 20%',
-              filter: 'saturate(0.4) brightness(0.3) contrast(1.15)',
+              filter: 'saturate(0.6) brightness(0.65) contrast(1.1)',
             }} />
             <img src={artist.img} alt="" onError={() => setImgFailed(true)} style={{ display: 'none' }} />
           </>
@@ -87,7 +193,7 @@ function ArtistPage({ artist, events = [] }) {
               <h1 style={{
                 ...briq,
                 fontSize: 'clamp(2.2rem, 9vw, 9rem)',
-                fontWeight: 800, lineHeight: 0.88, letterSpacing: '-0.04em',
+                fontWeight: 700, lineHeight: 0.83, letterSpacing: '-0.04em',
                 color: C.light,
               }}>{artist.name}<span style={{ color: C.blue }}>.</span></h1>
               <p style={{
@@ -111,10 +217,13 @@ function ArtistPage({ artist, events = [] }) {
         }}>
           <R>
             <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 20 }}>// BIOGRAPHY</div>
-            <p style={{
-              fontSize: 'clamp(15px, 1.5vw, 18px)', lineHeight: 1.85,
-              color: C.light + 'bb', textWrap: 'pretty',
-            }}>{artist.bio}</p>
+            {artist.bio.split('\n\n').map((para, i, arr) => (
+              <p key={i} style={{
+                fontSize: 'clamp(15px, 1.5vw, 18px)', lineHeight: 1.85,
+                color: C.light + 'bb', textWrap: 'pretty',
+                marginBottom: i < arr.length - 1 ? '1.3em' : 0,
+              }}>{para}</p>
+            ))}
           </R>
 
           <R delay={0.12}>
@@ -129,7 +238,6 @@ function ArtistPage({ artist, events = [] }) {
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginTop: 8 }}>
                 {[
                   artist.social.instagram && ['Instagram', artist.social.instagram],
-                  artist.social.soundcloud && ['SoundCloud', artist.social.soundcloud],
                   artist.social.booking   && ['Booking',   `mailto:${artist.social.booking}`],
                 ].filter(Boolean).map(([label, href]) => (
                   <a key={label} href={href}
@@ -151,8 +259,13 @@ function ArtistPage({ artist, events = [] }) {
         </div>
       </section>
 
-      {/* ── FEATURED SETS ── */}
-      {artist.mixes && artist.mixes.length > 0 && (
+      {/* ── GALLERY ── */}
+      {artist.gallery && artist.gallery.length > 0 && (
+        <ArtistGallery images={artist.gallery} name={artist.name} />
+      )}
+
+      {/* ── MUSIC ── */}
+      {(artist.mixes?.length > 0 || artist.social?.spotify || artist.social?.soundcloud) && (
         <section style={{
           background: C.darkSoft,
           padding: 'clamp(48px, 8vh, 80px) clamp(20px, 4vw, 56px)',
@@ -160,24 +273,62 @@ function ArtistPage({ artist, events = [] }) {
         }}>
           <R>
             <div style={{ maxWidth: 1400, margin: '0 auto' }}>
-              <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 24 }}>// FEATURED SETS</div>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
-                {artist.mixes.map((mix, i) => (
-                  <a key={i} href={mix.url} target="_blank" rel="noopener noreferrer" style={{
-                    background: C.dark, border: `1px solid ${C.light}18`,
-                    padding: '20px 24px', textDecoration: 'none',
-                    flex: '1 0 220px', maxWidth: 360,
-                    transition: 'border-color 0.2s',
-                  }}
-                  onMouseEnter={e => e.currentTarget.style.borderColor = C.blue}
-                  onMouseLeave={e => e.currentTarget.style.borderColor = C.light + '18'}
-                  >
-                    <div style={{ ...mono, fontSize: 10, color: C.light + '33', letterSpacing: '0.16em', marginBottom: 8, textTransform: 'uppercase' }}>{mix.platform}</div>
-                    <div style={{ ...briq, fontSize: 17, fontWeight: 700, color: C.light, letterSpacing: '-0.02em', marginBottom: 6 }}>{mix.title}</div>
-                    {mix.duration && <div style={{ ...mono, fontSize: 10, color: C.gray }}>{mix.duration}</div>}
-                    <div style={{ ...mono, fontSize: 10, color: C.blue, marginTop: 12 }}>Listen →</div>
-                  </a>
-                ))}
+              <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 32 }}>// MUSIC</div>
+              {artist.mixes && artist.mixes.length > 0 && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 1, marginBottom: 32 }} role="list">
+                  {artist.mixes.map((mix, i) => (
+                    <div
+                      key={i}
+                      role="listitem"
+                      onClick={() => setPlaying(playing === i ? null : i)}
+                      aria-label={`${playing === i ? 'Close' : 'Play'} ${mix.title} by ${artist.name}`}
+                      tabIndex={0}
+                      onKeyDown={ev => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); setPlaying(playing === i ? null : i); } }}
+                      style={{ display: 'grid', gridTemplateColumns: '56px 1fr', gap: 16, alignItems: 'center', padding: '14px 0', borderBottom: `1px solid ${C.light}0e`, cursor: 'pointer', transition: 'background 0.2s', outline: 'none' }}
+                      onMouseEnter={ev => ev.currentTarget.style.background = C.dark}
+                      onMouseLeave={ev => ev.currentTarget.style.background = 'transparent'}
+                      onFocus={ev => ev.currentTarget.style.background = C.dark}
+                      onBlur={ev => ev.currentTarget.style.background = 'transparent'}
+                    >
+                      <div style={{ position: 'relative', width: 56, height: 56, overflow: 'hidden', flexShrink: 0 }}>
+                        <img src={mix.img || artist.img} alt={artist.name} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'saturate(0.5) brightness(0.7)' }} />
+                        <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.35)' }}>
+                          <span aria-hidden="true" style={{ fontSize: 18, color: C.light, opacity: playing === i ? 1 : 0.7 }}>{playing === i ? '⏸' : '▶'}</span>
+                        </div>
+                        {mix.tag && <div style={{ position: 'absolute', top: 0, left: 0, background: C.blue, padding: '2px 5px', ...mono, fontSize: 8, color: C.light, letterSpacing: '0.12em', textTransform: 'uppercase' }}>{mix.tag}</div>}
+                      </div>
+                      <div>
+                        <div style={{ ...mono, fontSize: 9, color: C.light + '55', letterSpacing: '0.16em', marginBottom: 4, textTransform: 'uppercase' }}>{artist.name}</div>
+                        <h3 style={{ ...briq, fontSize: 'clamp(0.9rem,1.5vw,1.1rem)', fontWeight: 700, letterSpacing: '-0.02em', color: C.light, margin: 0 }}>{mix.title}</h3>
+                        {playing === i && (
+                          <div style={{ marginTop: 12 }} onClick={ev => ev.stopPropagation()}>
+                            <iframe title={`SoundCloud — ${mix.title}`} width="100%" height="120" frameBorder="0" scrolling="no" allow="autoplay" style={{ display: 'block' }}
+                              src={`https://w.soundcloud.com/player/?url=${encodeURIComponent(mix.url)}&color=%23144889&auto_play=true&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=false`} />
+                            <div style={{ ...mono, fontSize: 9, color: C.light + '44', letterSpacing: '0.14em', marginTop: 6 }}>
+                              <a href={mix.url} target="_blank" rel="noopener noreferrer" style={{ color: C.blue }}>Open on SoundCloud ↗</a>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+                {artist.social?.soundcloud && (
+                  <a href={artist.social.soundcloud} target="_blank" rel="noopener noreferrer"
+                    style={{ ...mono, fontSize: 10, letterSpacing: '0.14em', color: C.light + '77', textDecoration: 'none', border: `1px solid ${C.light}1a`, padding: '12px 18px', textTransform: 'uppercase', transition: 'all 0.2s', minHeight: 44, display: 'inline-flex', alignItems: 'center' }}
+                    onMouseEnter={e => { e.currentTarget.style.color = C.blue; e.currentTarget.style.borderColor = C.blue; }}
+                    onMouseLeave={e => { e.currentTarget.style.color = C.light + '77'; e.currentTarget.style.borderColor = C.light + '1a'; }}
+                  >SoundCloud ↗</a>
+                )}
+                {artist.social?.spotify && (
+                  <a href={artist.social.spotify} target="_blank" rel="noopener noreferrer"
+                    style={{ ...mono, fontSize: 10, letterSpacing: '0.14em', color: C.light + '77', textDecoration: 'none', border: `1px solid ${C.light}1a`, padding: '12px 18px', textTransform: 'uppercase', transition: 'all 0.2s', minHeight: 44, display: 'inline-flex', alignItems: 'center' }}
+                    onMouseEnter={e => { e.currentTarget.style.color = C.blue; e.currentTarget.style.borderColor = C.blue; }}
+                    onMouseLeave={e => { e.currentTarget.style.color = C.light + '77'; e.currentTarget.style.borderColor = C.light + '1a'; }}
+                  >Spotify ↗</a>
+                )}
               </div>
             </div>
           </R>
@@ -195,7 +346,7 @@ function ArtistPage({ artist, events = [] }) {
               <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 8 }}>// APPEARANCES</div>
               <h2 style={{
                 ...briq, fontSize: 'clamp(2.5rem, 6vw, 5rem)',
-                fontWeight: 800, lineHeight: 0.9, letterSpacing: '-0.04em',
+                fontWeight: 700, lineHeight: 0.83, letterSpacing: '-0.04em',
                 color: C.light, marginBottom: 48,
               }}>On the dancefloor<span style={{ color: C.blue }}>.</span></h2>
 
