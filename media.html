@@ -147,17 +147,53 @@ const GALLERY = [
   { src: 'uploads/27.02_Hertz-197.jpg', label: 'HZ.022, 27.02', tall: false },
 ];
 
+function MediaReader({ slug, onClose }) {
+  const C = window.Cv8;
+  const MONO = { fontFamily: "'JetBrains Mono', monospace" };
+  const startY = React.useRef(null);
+  const panelRef = React.useRef(null);
+  React.useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.removeEventListener('keydown', onKey); document.body.style.overflow = prev; };
+  }, [onClose]);
+  return (
+    <div role="dialog" aria-modal="true"
+      onTouchStart={(e) => { startY.current = (panelRef.current && panelRef.current.scrollTop <= 0) ? e.touches[0].clientY : null; }}
+      onTouchMove={(e) => { if (startY.current != null && panelRef.current) { const dy = e.touches[0].clientY - startY.current; panelRef.current.style.transform = dy > 0 ? `translateY(${Math.min(dy, 180)}px)` : 'none'; } }}
+      onTouchEnd={(e) => { if (startY.current != null && panelRef.current) { const dy = e.changedTouches[0].clientY - startY.current; panelRef.current.style.transform = 'none'; if (dy > 130) onClose(); } startY.current = null; }}
+      style={{ position: 'fixed', inset: 0, zIndex: 200, background: C.dark }}>
+      <div ref={panelRef} className="hz-reader-panel hz-noscroll" style={{ position: 'absolute', inset: 0, overflowY: 'auto', WebkitOverflowScrolling: 'touch', transition: 'transform 0.3s cubic-bezier(.22,1,.36,1)' }}>
+        <div style={{ position: 'sticky', top: 0, zIndex: 5, display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px clamp(20px,4vw,56px)', background: 'rgba(8,8,13,0.82)', backdropFilter: 'blur(8px)', borderBottom: `1px solid ${C.light}10` }}>
+          <span style={{ ...MONO, fontSize: 10, letterSpacing: '0.2em', color: C.light + '55', textTransform: 'uppercase' }}>// Reader</span>
+          <button onClick={onClose} aria-label="Close reader" style={{ ...MONO, fontSize: 11, letterSpacing: '0.14em', color: C.light, background: 'transparent', border: `1px solid ${C.light}22`, padding: '8px 14px', cursor: 'pointer', textTransform: 'uppercase', minHeight: 40 }}>Close ✕</button>
+        </div>
+        <main style={{ padding: 'clamp(28px,5vh,64px) clamp(20px,4vw,56px) 110px', maxWidth: 1400, margin: '0 auto' }}>
+          <window.ArticleDetail slug={slug} />
+        </main>
+      </div>
+    </div>
+  );
+}
+
 function MediaPage() {
   const C = window.Cv8;
   const R = window.R8;
   const mono = { fontFamily: "'JetBrains Mono', monospace" };
   const briq = { fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif" };
+  const GRADE = 'saturate(0.55) brightness(0.62) contrast(1.10)';
   const param = (k) => { try { return new URLSearchParams(window.location.search).get(k); } catch (e) { return null; } };
-  const [rubric, setRubric] = React.useState('ALL');
+  const [rubric, setRubric] = React.useState(() => (param('rubric') || 'ALL').toUpperCase());
   const [query, setQuery] = React.useState(() => param('q') || '');
   const [tag, setTag] = React.useState(() => param('tag'));
   const [galleryFilter, setGalleryFilter] = React.useState('ALL');
+  const [openSlug, setOpenSlug] = React.useState(null);
+  const [activeIdx, setActiveIdx] = React.useState(0);
   const GALLERY_EVENTS = ['ALL', 'HZ.022'];
+
+  const codeFor = (a) => 'HZ.' + String(ARTICLES.length - ARTICLES.indexOf(a)).padStart(3, '0');
 
   const q = query.trim().toLowerCase();
   const filtered = ARTICLES.filter(a => {
@@ -171,124 +207,125 @@ function MediaPage() {
     return true;
   });
 
-  const featured = filtered[0] || null;
-  const secondary = filtered.slice(1);
-  const activeRubric = RUBRICS.find(r => r.key === rubric) || RUBRICS[0];
+  const latest = ARTICLES.slice(0, 6);
+  const cardRefs = React.useRef([]);
+  React.useEffect(() => {
+    cardRefs.current = cardRefs.current.slice(0, filtered.length);
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { const i = Number(e.target.dataset.idx); if (!Number.isNaN(i)) setActiveIdx(i); } });
+    }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+    cardRefs.current.forEach(el => el && io.observe(el));
+    return () => io.disconnect();
+  }, [rubric, tag, q, filtered.length]);
+
+  const pickRubric = (k) => {
+    setRubric(k); setActiveIdx(0);
+    try { const u = new URL(window.location); if (k === 'ALL') u.searchParams.delete('rubric'); else u.searchParams.set('rubric', k); window.history.replaceState(null, '', u); } catch (e) {}
+  };
 
   return (
     <div style={{ background: C.dark, minHeight: '100vh' }}>
       <window.Nav8 />
-      <window.PageHero section="// 04 / MEDIA" title="The editorial." sub="Articles · Interviews · Photo archive · Bologna 2023–" />
+      <style>{`
+        html { scroll-snap-type: y proximity; scroll-padding-top: 122px; }
+        .hz-noscroll::-webkit-scrollbar { display: none; }
+        .hz-noscroll { scrollbar-width: none; }
+        @keyframes hzReaderUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        .hz-reader-panel { animation: hzReaderUp 0.42s cubic-bezier(.22,1,.36,1); }
+        .hz-feedcard:focus-visible { outline: 2px solid ${C.cyan}; outline-offset: 2px; }
+        @media (prefers-reduced-motion: reduce) { html { scroll-snap-type: none; } .hz-reader-panel { animation: none; } }
+      `}</style>
 
-      {/* ARTICLES SECTION */}
-      <section style={{
-        background: C.light,
-        padding: 'clamp(60px,10vh,120px) clamp(20px,4vw,56px)',
-      }}>
+      {/* COMPACT HEADER */}
+      <header style={{ padding: 'calc(68px + clamp(20px,5vh,44px)) clamp(20px,4vw,56px) 0' }}>
         <div style={{ maxWidth: 1400, margin: '0 auto' }}>
-
-          {/* Editorial system intro */}
-          <R>
-            <div style={{ marginBottom: 'clamp(26px,3vw,38px)', maxWidth: 720 }}>
-              <div style={{ ...mono, fontSize: 10, letterSpacing: '0.22em', color: C.blue, marginBottom: 14 }}>// THE EDITORIAL SYSTEM</div>
-              <p style={{ ...briq, fontSize: 'clamp(16px,1.5vw,20px)', lineHeight: 1.5, color: C.dark + 'cc', letterSpacing: '-0.01em', textWrap: 'pretty' }}>
-                One scene splitting into two: clubbing as spectacle, clubbing as ecosystem. Five recurring columns, each a different angle on that split.
-              </p>
-            </div>
-          </R>
-
-          {/* Controls: rubric tabs + search */}
-          <R>
-            <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: 12, borderBottom: `1px solid ${C.dark}14`, marginBottom: 14 }}>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 0, marginBottom: -1 }}>
-                {RUBRICS.map(r => (
-                  <button key={r.key} onClick={() => setRubric(r.key)} style={{
-                    padding: '12px 16px', background: 'transparent', border: 'none', outline: 'none', minHeight: 44,
-                    borderBottom: rubric === r.key ? `2px solid ${C.blue}` : '2px solid transparent',
-                    ...mono, fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase',
-                    color: rubric === r.key ? C.blue : C.dark + '66', cursor: 'pointer', transition: 'color 0.2s', whiteSpace: 'nowrap', marginBottom: -1,
-                  }}>{r.label}</button>
-                ))}
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', flex: '0 1 280px', minWidth: 190, paddingBottom: 6 }}>
-                <span style={{ ...mono, fontSize: 13, color: C.dark + '55', marginRight: 8 }}>⌕</span>
-                <input
-                  value={query} onChange={e => setQuery(e.target.value)}
-                  placeholder="SEARCH ARTICLES" aria-label="Search articles"
-                  style={{
-                    flex: 1, background: 'transparent', border: 'none', outline: 'none',
-                    ...mono, fontSize: 11, letterSpacing: '0.12em', color: C.dark,
-                    borderBottom: `1px solid ${C.dark}22`, padding: '8px 0',
-                  }}
-                />
-                {query && (
-                  <button onClick={() => setQuery('')} aria-label="Clear search" style={{ ...mono, fontSize: 12, color: C.dark + '66', background: 'transparent', border: 'none', cursor: 'pointer', padding: '0 4px' }}>✕</button>
-                )}
-              </div>
-            </div>
-          </R>
-
-          {/* Active rubric remit */}
-          <R>
-            <div style={{ ...mono, fontSize: 11, letterSpacing: '0.03em', color: C.dark + '77', marginBottom: 22 }}>
-              {activeRubric.desc}
-            </div>
-          </R>
-
-          {/* Topic chips */}
-          <R>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 'clamp(36px,4vw,52px)' }}>
-              {ALL_TAGS.map(t => (
-                <button key={t} onClick={() => setTag(tag === t ? null : t)} style={{
-                  ...mono, fontSize: 10, letterSpacing: '0.06em',
-                  padding: '6px 11px', cursor: 'pointer', transition: 'all 0.2s',
-                  border: `1px solid ${tag === t ? C.blue : C.dark + '1e'}`,
-                  background: tag === t ? C.blue : 'transparent',
-                  color: tag === t ? C.light : C.dark + '88',
-                }}>#{t}</button>
-              ))}
-              {tag && (
-                <button onClick={() => setTag(null)} style={{ ...mono, fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', padding: '6px 10px', cursor: 'pointer', border: 'none', background: 'transparent', color: C.dark + '66' }}>clear ✕</button>
-              )}
-            </div>
-          </R>
-
-          {filtered.length === 0 ? (
-            <div style={{ ...mono, fontSize: 12, color: C.dark + '55', letterSpacing: '0.16em', textTransform: 'uppercase', padding: '40px 0' }}>
-              // No transmissions match{q ? ` "${query.trim()}"` : tag ? ` #${tag}` : ''}
-            </div>
-          ) : (
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 20, flexWrap: 'wrap' }}>
             <div>
-              {/* LEAD */}
-              {featured && (
-                <R style={{ marginBottom: 'clamp(40px,5vw,72px)', paddingBottom: 'clamp(40px,5vw,72px)', borderBottom: `1px solid ${C.dark}14` }}>
-                  <window.ArticleCard article={featured} featured={true} />
-                </R>
-              )}
-              {/* LATEST bar */}
-              {secondary.length > 0 && (
-                <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 'clamp(28px,3vw,40px)' }}>
-                  <span style={{ ...mono, fontSize: 11, letterSpacing: '0.22em', color: C.blue, textTransform: 'uppercase', whiteSpace: 'nowrap' }}>// {rubric === 'ALL' ? 'Latest' : activeRubric.label}</span>
-                  <span style={{ flex: 1, height: 1, background: `${C.dark}14` }} />
-                  <span style={{ ...mono, fontSize: 10, letterSpacing: '0.16em', color: C.dark + '55' }}>{String(filtered.length).padStart(2, '0')}</span>
-                </div>
-              )}
-              {/* SECONDARY GRID */}
-              {secondary.length > 0 && (
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
-                  gap: 'clamp(32px,3.2vw,56px)',
-                }}>
-                  {secondary.map((article, i) => (
-                    <R key={article.slug} delay={(i % 3) * 0.06}>
-                      <window.ArticleCard article={article} />
-                    </R>
-                  ))}
-                </div>
-              )}
+              <div style={{ ...mono, fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 12 }}>// 04 / MEDIA</div>
+              <h1 style={{ ...briq, fontSize: 'clamp(2.4rem,7vw,5rem)', fontWeight: 800, lineHeight: 0.9, letterSpacing: '-0.04em', color: C.light, margin: 0 }}>The feed<span style={{ color: C.blue }}>.</span></h1>
             </div>
+            <div style={{ display: 'flex', alignItems: 'center', flex: '0 1 300px', minWidth: 180, paddingBottom: 8 }}>
+              <span style={{ ...mono, fontSize: 13, color: C.light + '55', marginRight: 8 }}>⌕</span>
+              <input value={query} onChange={e => setQuery(e.target.value)} placeholder="SEARCH" aria-label="Search articles"
+                style={{ flex: 1, background: 'transparent', border: 'none', outline: 'none', ...mono, fontSize: 12, letterSpacing: '0.1em', color: C.light, borderBottom: `1px solid ${C.light}22`, padding: '8px 0' }} />
+              {query && <button onClick={() => setQuery('')} aria-label="Clear search" style={{ ...mono, fontSize: 12, color: C.light + '66', background: 'transparent', border: 'none', cursor: 'pointer', padding: '0 4px' }}>✕</button>}
+            </div>
+          </div>
+          <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.light + '55', margin: '30px 0 12px', textTransform: 'uppercase' }}>// Latest</div>
+        </div>
+        <div className="hz-noscroll" style={{ display: 'flex', gap: 12, overflowX: 'auto', scrollSnapType: 'x mandatory', WebkitOverflowScrolling: 'touch', padding: '0 clamp(20px,4vw,56px) 4px' }}>
+          {latest.map(a => (
+            <button key={a.slug} onClick={() => setOpenSlug(a.slug)} className="hz-feedcard" style={{ flex: '0 0 auto', width: 'clamp(148px,40vw,208px)', scrollSnapAlign: 'start', background: C.darkSoft, border: `1px solid ${C.light}10`, padding: 0, cursor: 'pointer', textAlign: 'left' }}>
+              <div style={{ position: 'relative', aspectRatio: '4/3', overflow: 'hidden' }}>
+                <img src={a.image} alt="" loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: GRADE }} />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg,rgba(8,8,13,0) 40%,rgba(8,8,13,0.85))' }} />
+                <div style={{ position: 'absolute', left: 10, bottom: 8, ...mono, fontSize: 9, letterSpacing: '0.18em', color: C.cyan }}>// {String(a.metadata.rubric || a.metadata.category).toUpperCase()}</div>
+              </div>
+              <div style={{ ...briq, fontSize: 12, fontWeight: 700, lineHeight: 1.2, color: C.light, padding: '10px 12px', letterSpacing: '-0.01em', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{a.title}<span style={{ color: C.blue }}>.</span></div>
+            </button>
+          ))}
+        </div>
+      </header>
+
+      {/* STICKY RUBRIC PILLS */}
+      <div className="hz-noscroll" style={{ position: 'sticky', top: 68, zIndex: 50, background: 'rgba(8,8,13,0.86)', backdropFilter: 'blur(8px)', borderBottom: `1px solid ${C.light}10`, display: 'flex', gap: 8, overflowX: 'auto', padding: '12px clamp(20px,4vw,56px)', marginTop: 30 }}>
+        {RUBRICS.map(r => {
+          const on = rubric === r.key;
+          return (
+            <button key={r.key} onClick={() => pickRubric(r.key)} style={{
+              ...mono, fontSize: 11, letterSpacing: '0.16em', textTransform: 'uppercase', whiteSpace: 'nowrap',
+              padding: '8px 14px', cursor: 'pointer', background: 'transparent', minHeight: 40,
+              border: `1px solid ${on ? C.cyan : C.light + '18'}`, color: on ? C.cyan : C.light + '77', transition: 'all 0.2s',
+            }}>{r.label}</button>
+          );
+        })}
+      </div>
+
+      {/* THE FEED */}
+      <section style={{ padding: 'clamp(20px,4vh,40px) clamp(16px,4vw,56px) clamp(40px,8vh,96px)' }}>
+        <div style={{ maxWidth: 980, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 'clamp(18px,3vh,30px)' }}>
+          {filtered.length === 0 && (
+            <div style={{ ...mono, fontSize: 12, color: C.light + '55', letterSpacing: '0.16em', textTransform: 'uppercase', padding: '60px 0' }}>// No transmissions match{q ? ` "${query.trim()}"` : tag ? ` #${tag}` : ''}</div>
           )}
+          {filtered.map((a, i) => {
+            const on = activeIdx === i;
+            const rub = String(a.metadata.rubric || a.metadata.category).toUpperCase();
+            const rt = a.content && a.content.readingTimeMinutes;
+            return (
+              <article key={a.slug} data-idx={i} ref={el => { cardRefs.current[i] = el; }}
+                className="hz-feedcard" role="button" tabIndex={0} aria-label={`Read: ${a.title}`}
+                onClick={() => setOpenSlug(a.slug)}
+                onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setOpenSlug(a.slug); } }}
+                style={{
+                  position: 'relative', scrollSnapAlign: 'start', cursor: 'pointer',
+                  minHeight: 'clamp(540px,84vh,860px)', overflow: 'hidden', background: C.darkSoft,
+                  transform: on ? 'scale(1)' : 'scale(0.985)', opacity: on ? 1 : 0.72,
+                  transition: 'transform 0.5s cubic-bezier(.22,1,.36,1), opacity 0.5s cubic-bezier(.22,1,.36,1)',
+                  willChange: on ? 'transform' : 'auto',
+                }}>
+                <img src={a.image} alt={(a.media && a.media.heroImageAlt) || ''} loading={i < 2 ? 'eager' : 'lazy'} decoding="async"
+                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: GRADE, transform: on ? 'scale(1.02)' : 'scale(1)', transition: 'transform 0.7s cubic-bezier(.22,1,.36,1)' }} />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg,rgba(8,8,13,0) 30%,rgba(8,8,13,0.92) 100%)' }} />
+                {[['top','left'],['top','right'],['bottom','left'],['bottom','right']].map(([v,h]) => (
+                  <span key={v+h} aria-hidden="true" style={{ position: 'absolute', [v]: 14, [h]: 14, width: 16, height: 16, [v === 'top' ? 'borderTop' : 'borderBottom']: `1px solid ${on ? C.cyan : C.light + '2e'}`, [h === 'left' ? 'borderLeft' : 'borderRight']: `1px solid ${on ? C.cyan : C.light + '2e'}`, transition: 'border-color 0.4s' }} />
+                ))}
+                {on && <span aria-hidden="true" style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 2, background: C.cyan }} />}
+                <div style={{ position: 'absolute', top: 24, left: 24, right: 24, display: 'flex', justifyContent: 'space-between', ...mono, fontSize: 10, letterSpacing: '0.2em' }}>
+                  <span style={{ color: on ? C.cyan : C.blue, fontWeight: 600 }}>// {rub}</span>
+                  <span style={{ color: C.light + '66' }}>{codeFor(a)}</span>
+                </div>
+                <div style={{ position: 'absolute', left: 24, right: 24, bottom: 26 }}>
+                  <h2 style={{ ...briq, fontSize: 'clamp(1.7rem,4.5vw,3rem)', fontWeight: 800, lineHeight: 1.02, letterSpacing: '-0.03em', color: C.light, margin: 0, textWrap: 'balance', maxWidth: '20ch' }}>{a.title}<span style={{ color: C.blue }}>.</span></h2>
+                  <p style={{ ...briq, fontSize: 'clamp(14px,1.4vw,16px)', color: C.light + 'cc', lineHeight: 1.45, margin: '12px 0 0', maxWidth: '46ch', textWrap: 'pretty', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{a.subtitle || a.excerpt}</p>
+                  <div style={{ ...mono, fontSize: 10, letterSpacing: '0.14em', color: C.light + '88', textTransform: 'uppercase', marginTop: 16, display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
+                    <span>{a.metadata.author}</span><span style={{ color: C.blue }}>·</span>
+                    {rt ? <span>Runtime {rt}:00</span> : null}
+                    <span style={{ marginLeft: 'auto', color: on ? C.cyan : C.light + '88' }}>Read ↗</span>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </section>
 
@@ -370,6 +407,8 @@ function MediaPage() {
       </section>
 
       <window.Footer8 bannerLight={false} />
+
+      {openSlug && <MediaReader slug={openSlug} onClose={() => setOpenSlug(null)} />}
     </div>
   );
 }
