@@ -289,13 +289,13 @@ function Manifesto8() {
             color: C.light + 'cc', marginBottom: 20,
             textWrap: 'pretty',
           }}>
-            Hertz was born in Bologna in 2023, out of a clear feeling: too many nights were filling up with image and emptying out of listening.
+            HERTZ started in Bologna in 2023. We were tired of nights built for the camera — rooms full of people half-watching, half-filming, with the music stuck somewhere in the background.
           </p>
           <p style={{
             fontSize: 'clamp(15px, 1.5vw, 18px)', lineHeight: 1.8,
             color: C.light + '99', textWrap: 'pretty',
           }}>
-            We didn't want to build another night to watch from the outside. We wanted a space where music is the reason to leave the house — and the dancefloor is the only place that matters.
+            So we built the opposite: a floor where the record does the talking, and a good one can <span style={{ color: C.light }}>roll for nine minutes</span> before anyone thinks to check the time.
           </p>
         </R>
 
@@ -324,7 +324,7 @@ function Manifesto8() {
             color: C.light, letterSpacing: '-0.01em',
             textWrap: 'pretty',
           }}>
-            A club is a room. A system. An audience close to the booth. A bassline that hits the body before it reaches the mind.
+            A club is a room. A system. A crowd close to the booth. A bassline that hits the body before it reaches the mind.
           </p>
           <img src="/assets/hertz-logo-header.png" alt="HERTZ" style={{
             height: 22, opacity: 0.5, marginTop: 24,
