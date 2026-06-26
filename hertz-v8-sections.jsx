@@ -259,8 +259,11 @@ function Manifesto8() {
         .hz-span-5 { grid-column: span 5; }
         .hz-span-4 { grid-column: span 4; }
         .hz-span-3 { grid-column: span 3; }
+        .hz-man-photo { position: relative; overflow: hidden; height: 100%; min-height: 480px; background: ${C.darkSoft}; }
+        .hz-man-divider { border-top: 1px solid ${C.light}1a; margin: clamp(28px, 4vw, 44px) 0 clamp(22px, 3vw, 32px); }
         @media (max-width: 850px) {
           .hz-grid-12, .hz-grid-2 { display: flex !important; flex-direction: column !important; gap: 48px !important; }
+          .hz-man-photo { height: auto; min-height: 0; aspect-ratio: 4/5; }
         }
       `}</style>
       <div className="hz-grid-12">
@@ -278,40 +281,28 @@ function Manifesto8() {
           </h2>
         </R>
 
-        <R delay={0.1} className="hz-span-5">
+        <R delay={0.1} className="hz-span-7" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
           <div style={{
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: 10, letterSpacing: '0.2em', color: C.blue,
-            marginBottom: 16,
+            marginBottom: 18,
           }}>// CHAPTER 01 / ORIGIN</div>
           <p style={{
-            fontSize: 'clamp(15px, 1.5vw, 18px)', lineHeight: 1.8,
-            color: C.light + 'cc', marginBottom: 20,
+            fontSize: 'clamp(16px, 1.55vw, 19px)', lineHeight: 1.75,
+            color: C.light + 'd0', marginBottom: 20, maxWidth: '60ch',
             textWrap: 'pretty',
           }}>
-            Hertz started in Bologna in 2023. We were tired of nights built for the camera, rooms full of people half-watching, half-filming, with the music stuck somewhere in the background.
+            The Hertz collective was born in Bologna in 2023, out of one simple conviction: the night was turning into something to watch, and less and less something to live, rooms built for the camera, with the music stuck somewhere in the background.
           </p>
           <p style={{
-            fontSize: 'clamp(15px, 1.5vw, 18px)', lineHeight: 1.8,
-            color: C.light + '99', textWrap: 'pretty',
+            fontSize: 'clamp(16px, 1.55vw, 19px)', lineHeight: 1.75,
+            color: C.light + '9c', maxWidth: '60ch', textWrap: 'pretty',
           }}>
-            So we built the opposite: a floor where the record does the talking, and a good one can <span style={{ color: C.light }}>roll for nine minutes</span> before anyone thinks to check the time.
+            So we put the attention back on what actually matters: the selection, the dancefloor, and the energy shared between clubbers. A floor where the record does the talking, where a good one can <span style={{ color: C.light }}>roll for nine minutes</span> before anyone checks the time, and the only reason to leave the house is one, to let the sound take over.
           </p>
-        </R>
 
-        <R delay={0.2} className="hz-span-4">
-          <div style={{
-            aspectRatio: '3/4', overflow: 'hidden', position: 'relative',
-            background: C.darkSoft,
-          }}>
-            <img src="/assets/hero-booth.jpg" alt="DJ booth at a Hertz event" loading="lazy" style={{
-              width: '100%', height: '100%', objectFit: 'cover',
-              filter: 'saturate(0.6) brightness(0.85) contrast(1.1)',
-            }} />
-          </div>
-        </R>
+          <div className="hz-man-divider" />
 
-        <R delay={0.3} className="hz-span-3">
           <div style={{
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: 10, letterSpacing: '0.2em', color: C.blue,
@@ -319,16 +310,23 @@ function Manifesto8() {
           }}>// CHAPTER 02 / THE ROOM</div>
           <p style={{
             fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
-            fontSize: 'clamp(17px, 1.9vw, 22px)',
-            fontWeight: 600, lineHeight: 1.4,
-            color: C.light, letterSpacing: '-0.01em',
-            textWrap: 'pretty',
+            fontSize: 'clamp(22px, 2.6vw, 34px)',
+            fontWeight: 700, lineHeight: 1.18,
+            color: C.light, letterSpacing: '-0.025em',
+            maxWidth: '18ch', textWrap: 'balance',
           }}>
             A room. A system. A crowd that came to listen. The rest is just volume.
           </p>
-          <img src="/assets/hertz-logo-header.png" alt="Hertz" style={{
-            height: 22, opacity: 0.5, marginTop: 24,
-          }} />
+        </R>
+
+        <R delay={0.2} className="hz-span-5" style={{ height: '100%' }}>
+          <div className="hz-man-photo">
+            <img src="/assets/hero-booth.jpg" alt="DJ booth at a Hertz night" loading="lazy" style={{
+              position: 'absolute', inset: 0,
+              width: '100%', height: '100%', objectFit: 'cover',
+              filter: 'saturate(0.6) brightness(0.85) contrast(1.1)',
+            }} />
+          </div>
         </R>
 
         <R delay={0.4} className="hz-span-full" style={{ marginTop: 64 }}>
