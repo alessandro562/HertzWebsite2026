@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hertz, Events · Bologna Club Night</title>
-  <meta name="description" content="Upcoming and past events from Hertz, Bologna's minimal and deep-tech club night. Dates, lineups, venues.">
+  <title>Techno & Minimal Events in Bologna — Hertz</title>
+  <meta name="description" content="Upcoming events and the full archive of Hertz's minimal and deep-tech nights in Bologna and Rimini. Lineups, dates and guest lists.">
   <meta name="theme-color" content="#08080d">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Hertz, Events">
@@ -218,6 +218,41 @@ function EventsPage() {
   );
 }
 ReactDOM.createRoot(document.getElementById('root')).render(<EventsPage />);
+
+/* SEO — Event structured data, generated from the real upcoming events */
+(function () {
+  try {
+    var M = { Jan:'01', Feb:'02', Mar:'03', Apr:'04', May:'05', Jun:'06', Jul:'07', Aug:'08', Sep:'09', Oct:'10', Nov:'11', Dec:'12' };
+    var events = UPCOMING.filter(function (e) { return !e.comingSoon && e.date; }).map(function (e) {
+      var dm = String(e.date).match(/(\d{1,2}) (\w{3}) (\d{4})/);
+      var hm = String(e.time || '').match(/(\d{1,2}):(\d{2})/);
+      var iso = null;
+      if (dm) {
+        var dd = ('0' + dm[1]).slice(-2), mm = M[dm[2]] || '01', yy = dm[3];
+        var hh = hm ? ('0' + hm[1]).slice(-2) : '22', mi = hm ? hm[2] : '00';
+        iso = yy + '-' + mm + '-' + dd + 'T' + hh + ':' + mi + ':00+02:00';
+      }
+      var ev = {
+        '@context': 'https://schema.org', '@type': 'Event',
+        name: e.title + (e.venue ? ' @ ' + e.venue : ''),
+        startDate: iso,
+        eventStatus: 'https://schema.org/EventScheduled',
+        eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+        location: { '@type': 'Place', name: e.venue || e.city, address: { '@type': 'PostalAddress', addressLocality: e.city, addressCountry: 'IT' } },
+        performer: (e.lineup || []).map(function (p) { return { '@type': 'Person', name: p }; }),
+        organizer: { '@type': 'Organization', name: 'Hertz', url: 'https://hertzclubbing.com' }
+      };
+      if (e.poster) ev.image = 'https://hertzclubbing.com/' + e.poster;
+      return ev;
+    });
+    if (events.length) {
+      var s = document.createElement('script');
+      s.type = 'application/ld+json';
+      s.text = JSON.stringify(events);
+      document.head.appendChild(s);
+    }
+  } catch (err) {}
+})();
 </script>
 </body>
 </html>
