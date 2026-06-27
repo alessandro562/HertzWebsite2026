@@ -109,37 +109,55 @@ function ArtistGallery({ images, name }) {
   );
 }
 
-function EventAppearanceRow({ ev }) {
+const HZ_MONTHS = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+
+function EventAppearanceRow({ ev, last }) {
   const C = window.Cv8;
+  const mono = { fontFamily: "'JetBrains Mono', monospace" };
+  const briq = { fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif" };
   const isPast = ev.status === 'past';
+  const [dd, mm] = String(ev.date || '').split('.');
+  const wk = String(ev.day || '').split(' ')[0];
+  const monthName = HZ_MONTHS[(parseInt(mm, 10) || 1) - 1] || '';
+  const accent = isPast ? C.light + '40' : C.blue;
+
   return (
     <div style={{
-      display: 'flex', flexWrap: 'wrap', gap: '8px 24px',
-      padding: '16px 0',
-      borderBottom: `1px solid ${C.light}0e`,
-      alignItems: 'baseline',
-      opacity: isPast ? 0.6 : 1,
+      display: 'grid',
+      gridTemplateColumns: 'auto 1fr auto',
+      gap: 'clamp(14px, 2.2vw, 30px)',
+      alignItems: 'center',
+      padding: 'clamp(14px, 1.8vw, 20px) 0',
+      borderBottom: last ? 'none' : `1px solid ${C.light}10`,
+      opacity: isPast ? 0.62 : 1,
     }}>
-      <span style={{
-        fontFamily: "'JetBrains Mono', monospace",
-        fontSize: 10, letterSpacing: '0.14em',
-        color: isPast ? C.light + '33' : C.blue,
-        minWidth: 88,
-      }}>{ev.day}</span>
-      <span style={{
-        fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
-        fontSize: 'clamp(14px, 1.6vw, 17px)', fontWeight: 700,
-        color: C.light, letterSpacing: '-0.02em',
-        flex: 1, minWidth: 160,
-      }}>{ev.title}</span>
-      <span style={{
-        fontFamily: "'JetBrains Mono', monospace",
-        fontSize: 10, color: C.gray, letterSpacing: '0.1em',
-      }}>{ev.venue}</span>
-      <span style={{
-        fontFamily: "'JetBrains Mono', monospace",
-        fontSize: 10, color: C.light + '22',
-      }}>#{ev.n}</span>
+      {/* date cell */}
+      <div style={{
+        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+        width: 'clamp(60px, 8vw, 80px)', padding: '9px 0',
+        border: `1px solid ${isPast ? C.light + '16' : C.blue}`,
+        background: isPast ? 'transparent' : 'rgba(20,72,137,0.10)',
+      }}>
+        <div style={{ ...mono, fontSize: 9, letterSpacing: '0.14em', color: accent, marginBottom: 3 }}>{wk}</div>
+        <div style={{ ...briq, fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 700, lineHeight: 0.85, letterSpacing: '-0.03em', color: C.light }}>{dd}</div>
+        <div style={{ ...mono, fontSize: 9, letterSpacing: '0.14em', color: C.light + '66', marginTop: 3 }}>{monthName}</div>
+      </div>
+
+      {/* event */}
+      <div style={{ minWidth: 0 }}>
+        <h3 style={{ ...briq, fontSize: 'clamp(15px, 1.9vw, 20px)', fontWeight: 700, letterSpacing: '-0.02em', color: C.light, margin: 0, lineHeight: 1.12 }}>{ev.title}</h3>
+        <div style={{ ...mono, fontSize: 10, letterSpacing: '0.08em', color: C.gray, marginTop: 6, textTransform: 'uppercase' }}>
+          {ev.venue}{ev.city ? ` · ${ev.city}` : ''}{ev.note ? <span style={{ color: accent }}> · {ev.note}</span> : null}
+        </div>
+      </div>
+
+      {/* status + code */}
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 8 }}>
+        {!isPast
+          ? <span style={{ ...mono, fontSize: 8, letterSpacing: '0.16em', color: C.light, background: C.blue, padding: '4px 8px', textTransform: 'uppercase' }}>Upcoming</span>
+          : <span style={{ ...mono, fontSize: 8, letterSpacing: '0.16em', color: C.light + '44', border: `1px solid ${C.light}16`, padding: '4px 8px', textTransform: 'uppercase' }}>Played</span>}
+        <span style={{ ...mono, fontSize: 9, letterSpacing: '0.1em', color: C.light + '2e' }}>HZ.{ev.n}</span>
+      </div>
     </div>
   );
 }
@@ -275,33 +293,48 @@ function ArtistPage({ artist, events = [] }) {
             <div style={{ maxWidth: 1400, margin: '0 auto' }}>
               <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 32 }}>// MUSIC</div>
               {artist.mixes && artist.mixes.length > 0 && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 1, marginBottom: 32 }} role="list">
-                  {artist.mixes.map((mix, i) => (
-                    <div
-                      key={i}
-                      role="listitem"
-                      onClick={() => setPlaying(playing === i ? null : i)}
-                      aria-label={`${playing === i ? 'Close' : 'Play'} ${mix.title} by ${artist.name}`}
-                      tabIndex={0}
-                      onKeyDown={ev => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); setPlaying(playing === i ? null : i); } }}
-                      style={{ display: 'grid', gridTemplateColumns: '56px 1fr', gap: 16, alignItems: 'center', padding: '14px 0', borderBottom: `1px solid ${C.light}0e`, cursor: 'pointer', transition: 'background 0.2s', outline: 'none' }}
-                      onMouseEnter={ev => ev.currentTarget.style.background = C.dark}
-                      onMouseLeave={ev => ev.currentTarget.style.background = 'transparent'}
-                      onFocus={ev => ev.currentTarget.style.background = C.dark}
-                      onBlur={ev => ev.currentTarget.style.background = 'transparent'}
-                    >
-                      <div style={{ position: 'relative', width: 56, height: 56, overflow: 'hidden', flexShrink: 0 }}>
-                        <img src={mix.img || artist.img} alt={artist.name} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'saturate(0.5) brightness(0.7)' }} />
-                        <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.35)' }}>
-                          <span aria-hidden="true" style={{ fontSize: 18, color: C.light, opacity: playing === i ? 1 : 0.7 }}>{playing === i ? '⏸' : '▶'}</span>
+                <div style={{ display: 'flex', flexDirection: 'column', marginBottom: 36, border: `1px solid ${C.light}10` }} role="list">
+                  {artist.mixes.map((mix, i) => {
+                    const open = playing === i;
+                    const featured = mix.tag && String(mix.tag).toLowerCase() === 'featured';
+                    const baseBg = featured ? 'rgba(20,72,137,0.07)' : 'transparent';
+                    return (
+                      <div key={i} role="listitem" style={{ borderTop: i ? `1px solid ${C.light}10` : 'none' }}>
+                        <div
+                          onClick={() => setPlaying(open ? null : i)}
+                          aria-label={`${open ? 'Close' : 'Play'} ${mix.title} by ${artist.name}`}
+                          tabIndex={0}
+                          onKeyDown={ev => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); setPlaying(open ? null : i); } }}
+                          style={{
+                            display: 'grid', gridTemplateColumns: 'clamp(60px,7vw,76px) 1fr auto', gap: 'clamp(14px,1.6vw,20px)', alignItems: 'center',
+                            padding: 'clamp(12px,1.5vw,16px) clamp(12px,1.5vw,18px)',
+                            cursor: 'pointer', transition: 'background 0.2s', outline: 'none',
+                            background: baseBg, borderLeft: `2px solid ${featured ? C.blue : 'transparent'}`,
+                          }}
+                          onMouseEnter={ev => ev.currentTarget.style.background = featured ? 'rgba(20,72,137,0.13)' : C.dark}
+                          onMouseLeave={ev => ev.currentTarget.style.background = baseBg}
+                          onFocus={ev => ev.currentTarget.style.background = featured ? 'rgba(20,72,137,0.13)' : C.dark}
+                          onBlur={ev => ev.currentTarget.style.background = baseBg}
+                        >
+                          <div style={{ position: 'relative', width: 'clamp(60px,7vw,76px)', aspectRatio: '1', overflow: 'hidden', flexShrink: 0 }}>
+                            <img src={mix.img || artist.img} alt={artist.name} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'saturate(0.5) brightness(0.65)' }} />
+                            <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: open ? 'rgba(20,72,137,0.5)' : 'rgba(0,0,0,0.35)', transition: 'background 0.2s' }}>
+                              <span aria-hidden="true" style={{ fontSize: 16, color: C.light }}>{open ? '⏸' : '▶'}</span>
+                            </div>
+                          </div>
+                          <div style={{ minWidth: 0 }}>
+                            <div style={{ ...mono, fontSize: 9, color: C.light + '55', letterSpacing: '0.16em', marginBottom: 6, textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+                              {artist.name}
+                              {featured && <span style={{ background: C.blue, color: C.light, padding: '2px 6px', fontSize: 8, letterSpacing: '0.14em' }}>FEATURED</span>}
+                            </div>
+                            <h3 style={{ ...briq, fontSize: 'clamp(1rem,1.7vw,1.25rem)', fontWeight: 700, letterSpacing: '-0.02em', color: C.light, margin: 0, lineHeight: 1.15 }}>{mix.title}</h3>
+                          </div>
+                          <div style={{ ...mono, fontSize: 9, letterSpacing: '0.16em', color: open ? C.blue : C.light + '55', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
+                            {open ? '⏸ Playing' : '▶ Play'}
+                          </div>
                         </div>
-                        {mix.tag && <div style={{ position: 'absolute', top: 0, left: 0, background: C.blue, padding: '2px 5px', ...mono, fontSize: 8, color: C.light, letterSpacing: '0.12em', textTransform: 'uppercase' }}>{mix.tag}</div>}
-                      </div>
-                      <div>
-                        <div style={{ ...mono, fontSize: 9, color: C.light + '55', letterSpacing: '0.16em', marginBottom: 4, textTransform: 'uppercase' }}>{artist.name}</div>
-                        <h3 style={{ ...briq, fontSize: 'clamp(0.9rem,1.5vw,1.1rem)', fontWeight: 700, letterSpacing: '-0.02em', color: C.light, margin: 0 }}>{mix.title}</h3>
-                        {playing === i && (
-                          <div style={{ marginTop: 12 }} onClick={ev => ev.stopPropagation()}>
+                        {open && (
+                          <div style={{ padding: '0 clamp(12px,1.5vw,18px) 18px', background: baseBg }} onClick={ev => ev.stopPropagation()}>
                             <iframe title={`SoundCloud, ${mix.title}`} width="100%" height="120" frameBorder="0" scrolling="no" allow="autoplay" style={{ display: 'block' }}
                               src={`https://w.soundcloud.com/player/?url=${encodeURIComponent(mix.url)}&color=%23144889&auto_play=true&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=false`} />
                             <div style={{ ...mono, fontSize: 9, color: C.light + '44', letterSpacing: '0.14em', marginTop: 6 }}>
@@ -310,8 +343,8 @@ function ArtistPage({ artist, events = [] }) {
                           </div>
                         )}
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
@@ -360,14 +393,14 @@ function ArtistPage({ artist, events = [] }) {
                     <span style={{ width: 5, height: 5, borderRadius: '50%', background: C.blue, display: 'inline-block' }} />
                     UPCOMING
                   </div>
-                  {upcoming.map((ev, i) => <EventAppearanceRow key={i} ev={ev} />)}
+                  {upcoming.map((ev, i) => <EventAppearanceRow key={i} ev={ev} last={i === upcoming.length - 1} />)}
                 </div>
               )}
 
               {past.length > 0 && (
                 <div>
                   <div style={{ ...mono, fontSize: 10, color: C.light + '33', letterSpacing: '0.2em', marginBottom: 16 }}>// ARCHIVE</div>
-                  {past.map((ev, i) => <EventAppearanceRow key={i} ev={ev} />)}
+                  {past.map((ev, i) => <EventAppearanceRow key={i} ev={ev} last={i === past.length - 1} />)}
                 </div>
               )}
             </div>
