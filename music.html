@@ -28,245 +28,494 @@
     ::selection { background: rgba(20,72,137,0.30); color: #f5f5f3; }
     img { user-select: none; -webkit-user-drag: none; max-width: 100%; height: auto; }
     a { color: inherit; text-decoration: none; }
-    @keyframes waveAnim { 0%,100% { transform: scaleY(0.4); } 50% { transform: scaleY(1); } }
-    @media (max-width: 768px) {
-      * { -webkit-tap-highlight-color: transparent; }
-      html { font-size: 14px; }
-      body { font-size: 14px; }
-    }
+    button { font-family: inherit; }
+    @keyframes waveAnim { 0%,100% { transform: scaleY(0.55); } 50% { transform: scaleY(1); } }
+    @keyframes pulseDot { 0%,100% { opacity: 1; } 50% { opacity: 0.25; } }
+    button:focus-visible, a:focus-visible, [role=slider]:focus-visible { outline: 2px solid #144889; outline-offset: 3px; }
+    @media (max-width: 768px) { html { font-size: 14px; } body { font-size: 14px; } }
     @media (max-width: 480px) { html { font-size: 13px; } }
-    @media (max-width: 860px) {
-      .music-grid { grid-template-columns: 1fr !important; }
-      .music-grid .side-photo { display: none; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
-    }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
   </style>
 </head>
 <body>
 <div id="root"></div>
+<script src="https://w.soundcloud.com/player/api.js"></script>
 <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
 <script type="text/babel" src="hertz-shared.jsx"></script>
 <script type="text/babel">
-// SoundCloud — recorded sets, guest mixes, live recordings.
-const SC_SETS = [
-  { artist: 'Federico Apadula', title: 'Tomi & Kesh × Federico Apadula',          img: 'assets/dj-apadula.jpg', tag: 'FEATURED', url: 'https://soundcloud.com/tomi-and-kesh/tomi-kesh-federico-apadula' },
-  { artist: 'Federico Apadula', title: 'Live @ Sonder — City Hall, Barcelona',     img: 'assets/dj-apadula.jpg', url: 'https://soundcloud.com/hertzclubbingcollective/federico-apadula-sonder-city-hall-barcelona-16-03-24-opening-chicks-luv-us' },
-  { artist: 'Federico Apadula', title: 'MMM077 — Special Guest Mix',               img: 'assets/dj-apadula.jpg', url: 'https://soundcloud.com/lambertogabrieli/mmm077-federico-apadula-special-guest-mix-jun-2021' },
-  { artist: 'Alberto B',        title: 'Hot Girl',                                 img: 'assets/dj-alberto.jpg', url: 'https://soundcloud.com/alberto-baccianti/alberto-b-hot-girl' },
-  { artist: 'Alberto B',        title: 'In My Zone',                               img: 'assets/dj-alberto.jpg', url: 'https://soundcloud.com/alberto-baccianti/in-my-zone' },
-  { artist: 'Alberto B',        title: 'You Should B Dancing',                     img: 'assets/dj-alberto.jpg', url: 'https://soundcloud.com/alberto-baccianti/alberto-b-you-should-b-dancing' },
-];
+/* ============================================================
+   HERTZ — Music / The Sound
+   Featured deck · catalogue · subscribe · docked player.
+   Real audio via the SoundCloud Widget API: play/pause/seek/skip
+   and the progress/duration read-outs all drive one hidden
+   SoundCloud iframe. Each mix's `url` is its real set.
+   ============================================================ */
 
 const SC_PROFILE = 'https://soundcloud.com/hertzclubbingcollective';
 
-// Spotify — artist profiles with embed IDs.
-const SP_ARTISTS = [
-  { name: 'Federico Apadula', role: 'Resident', id: '0hS1cnWGJvml5gSHRKHtGi', img: 'assets/dj-apadula.jpg', url: 'https://open.spotify.com/artist/0hS1cnWGJvml5gSHRKHtGi' },
-  { name: 'Alberto B',        role: 'Resident', id: '7kHLiQODROJuJtGEgAYd8d', img: 'assets/dj-alberto.jpg', url: 'https://open.spotify.com/artist/7kHLiQODROJuJtGEgAYd8d' },
+const MIXES = [
+  { artist: 'Federico Apadula', title: 'Tomi & Kesh × Federico Apadula',      img: 'assets/dj-apadula.jpg', tag: 'FEATURED', url: 'https://soundcloud.com/tomi-and-kesh/tomi-kesh-federico-apadula' },
+  { artist: 'Federico Apadula', title: 'Live @ Sonder — City Hall, Barcelona', img: 'assets/dj-apadula.jpg', url: 'https://soundcloud.com/hertzclubbingcollective/federico-apadula-sonder-city-hall-barcelona-16-03-24-opening-chicks-luv-us' },
+  { artist: 'Federico Apadula', title: 'MMM077 — Special Guest Mix',           img: 'assets/dj-apadula.jpg', url: 'https://soundcloud.com/lambertogabrieli/mmm077-federico-apadula-special-guest-mix-jun-2021' },
+  { artist: 'Alberto B',        title: 'Hot Girl',                             img: 'assets/dj-alberto.jpg', url: 'https://soundcloud.com/alberto-baccianti/alberto-b-hot-girl' },
+  { artist: 'Alberto B',        title: 'In My Zone',                           img: 'assets/dj-alberto.jpg', url: 'https://soundcloud.com/alberto-baccianti/in-my-zone' },
+  { artist: 'Alberto B',        title: 'You Should B Dancing',                 img: 'assets/dj-alberto.jpg', url: 'https://soundcloud.com/alberto-baccianti/alberto-b-you-should-b-dancing' },
 ];
 
-function Waveform({ playing, color }) {
-  const bars = Array.from({ length: 28 }, (_, i) => i);
+const PLATFORMS = [
+  { name: 'SoundCloud',       meta: 'Hertz Clubbing Collective · full archive', href: SC_PROFILE },
+  { name: 'Federico Apadula', meta: 'Spotify · resident',                       href: 'https://open.spotify.com/artist/0hS1cnWGJvml5gSHRKHtGi' },
+  { name: 'Alberto B',        meta: 'Spotify · resident',                       href: 'https://open.spotify.com/artist/7kHLiQODROJuJtGEgAYd8d' },
+];
+
+const GLOW = '#144889';
+const mono = { fontFamily: "'JetBrains Mono', monospace" };
+const briq = { fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif" };
+const numOf = (i) => String(i + 1).padStart(2, '0');
+
+/* ─── sharp transport icons ─────────────────────────────────── */
+const Icon = {
+  play:  (s, c) => <svg width={s} height={s} viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5l13 7.5-13 7.5V4.5z" fill={c}/></svg>,
+  pause: (s, c) => <svg width={s} height={s} viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="4.5" width="4" height="15" fill={c}/><rect x="14" y="4.5" width="4" height="15" fill={c}/></svg>,
+  prev:  (s, c) => <svg width={s} height={s} viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="2.6" height="14" fill={c}/><path d="M20 5l-11 7 11 7V5z" fill={c}/></svg>,
+  next:  (s, c) => <svg width={s} height={s} viewBox="0 0 24 24" aria-hidden="true"><rect x="16.4" y="5" width="2.6" height="14" fill={c}/><path d="M4 5l11 7L4 19V5z" fill={c}/></svg>,
+  close: (s, c) => <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>,
+};
+
+/* ─── deterministic waveform envelope per mix ───────────────── */
+function seededHeights(seed, n) {
+  let s = 0;
+  for (let i = 0; i < seed.length; i++) s = (s * 31 + seed.charCodeAt(i)) >>> 0;
+  const rand = () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; };
+  const out = [];
+  for (let i = 0; i < n; i++) {
+    const t = i / (n - 1);
+    const arc = Math.sin(Math.PI * t);
+    const struct = 0.5 + 0.27 * Math.sin(t * Math.PI * 6 + 0.6) + 0.17 * Math.sin(t * Math.PI * 13 + 1.7) + 0.11 * Math.sin(t * Math.PI * 23);
+    const jitter = 0.78 + 0.44 * rand();
+    out.push(Math.max(0.1, Math.min(1, (0.24 + 0.76 * arc) * struct * jitter)));
+  }
+  return out;
+}
+
+function fmt(sec) {
+  sec = Math.max(0, Math.floor(sec));
+  const h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60;
+  const p = x => String(x).padStart(2, '0');
+  return h > 0 ? `${h}:${p(m)}:${p(s)}` : `${m}:${p(s)}`;
+}
+
+/* ─── waveform scrubber (click + drag to seek) ──────────────── */
+function Waveform({ heights, progress, onSeek, playing, height, dim, bright, gap = 2 }) {
+  const ref = React.useRef(null);
+  const dragging = React.useRef(false);
+  const n = heights.length;
+  const played = progress * n;
+
+  const seekAt = clientX => {
+    const el = ref.current;
+    if (!el || !onSeek) return;
+    const r = el.getBoundingClientRect();
+    onSeek(Math.max(0, Math.min(1, (clientX - r.left) / r.width)));
+  };
+  React.useEffect(() => {
+    if (!onSeek) return;
+    const mv = e => { if (dragging.current) seekAt(e.clientX); };
+    const up = () => { dragging.current = false; };
+    window.addEventListener('pointermove', mv);
+    window.addEventListener('pointerup', up);
+    return () => { window.removeEventListener('pointermove', mv); window.removeEventListener('pointerup', up); };
+  }, [onSeek]);
+
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 2, height: 28 }} aria-hidden="true">
-      {bars.map(i => (
-        <div key={i} style={{
-          width: 2, borderRadius: 1,
-          background: color || '#144889',
-          height: `${20 + Math.sin(i * 0.8) * 14}px`,
-          opacity: playing ? 1 : 0.35,
-          animation: playing ? `waveAnim ${0.6 + (i % 5) * 0.12}s ease-in-out infinite` : 'none',
-          animationDelay: `${(i % 7) * 0.06}s`,
-        }} />
-      ))}
+    <div ref={ref}
+      onPointerDown={onSeek ? e => { dragging.current = true; seekAt(e.clientX); } : undefined}
+      role={onSeek ? 'slider' : undefined}
+      aria-label={onSeek ? 'Seek through mix' : undefined}
+      aria-valuemin={onSeek ? 0 : undefined} aria-valuemax={onSeek ? 100 : undefined}
+      aria-valuenow={onSeek ? Math.round(progress * 100) : undefined}
+      tabIndex={onSeek ? 0 : undefined}
+      onKeyDown={onSeek ? e => {
+        if (e.key === 'ArrowRight') onSeek(Math.min(1, progress + 0.02));
+        if (e.key === 'ArrowLeft')  onSeek(Math.max(0, progress - 0.02));
+      } : undefined}
+      style={{ display: 'flex', alignItems: 'center', gap, height, width: '100%', overflow: 'hidden', cursor: onSeek ? 'pointer' : 'default', touchAction: 'none' }}>
+      {heights.map((h, i) => {
+        const on = i <= played;
+        const near = playing && on && (played - i) < 5;
+        return <div key={i} style={{
+          flex: '1 1 0', minWidth: 0, height: Math.max(3, h * height),
+          background: on ? bright : dim, transformOrigin: 'center',
+          animation: near ? `waveAnim ${0.7 + (i % 5) * 0.1}s ease-in-out infinite` : 'none',
+          animationDelay: `${(i % 6) * 0.05}s`,
+        }} />;
+      })}
     </div>
   );
 }
 
+/* ─── square transport button ───────────────────────────────── */
+function Tbtn({ icon, size = 44, glyph, label, onClick, primary, light, pressed }) {
+  const C = window.Cv8;
+  const restBorder = light ? C.dark + '22' : C.light + '2a';
+  return (
+    <button onClick={onClick} aria-label={label} title={label} aria-pressed={pressed}
+      onMouseEnter={e => { if (primary) { e.currentTarget.style.background = C.blue; e.currentTarget.style.borderColor = C.blue; } e.currentTarget.querySelector('span').style.opacity = 1; }}
+      onMouseLeave={e => { if (primary) { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = restBorder; } e.currentTarget.querySelector('span').style.opacity = primary ? 1 : 0.66; }}
+      style={{ width: size, height: size, display: 'grid', placeItems: 'center', cursor: 'pointer', flexShrink: 0, transition: 'all 0.18s', background: 'transparent', border: `1px solid ${primary ? restBorder : 'transparent'}` }}>
+      <span style={{ display: 'grid', placeItems: 'center', opacity: primary ? 1 : 0.66, transition: 'opacity 0.18s' }}>
+        {icon(glyph, light ? C.dark : C.light)}
+      </span>
+    </button>
+  );
+}
+
+/* ─── FEATURED DECK ─────────────────────────────────────────── */
+function Deck({ mix, num, heights, playing, progress, total, onToggle, onPrev, onNext, onSeek, isMobile }) {
+  const C = window.Cv8;
+  return (
+    <div style={{ border: `1px solid ${C.light}14`, background: '#0b0b12', display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'minmax(0,0.95fr) minmax(0,1.05fr)' }}>
+      {/* image cell */}
+      <div onClick={onToggle} style={{ position: 'relative', overflow: 'hidden', cursor: 'pointer', aspectRatio: isMobile ? '4/3' : 'auto', minHeight: isMobile ? 0 : 460 }}>
+        <img src={mix.img} alt={mix.artist} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 28%', filter: 'saturate(0.6) brightness(0.64) contrast(1.1)' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg,rgba(8,8,13,0.5) 0%,rgba(8,8,13,0.05) 26%,rgba(8,8,13,0.55) 70%,rgba(8,8,13,0.9) 100%)' }} />
+        <div style={{ position: 'absolute', top: 18, left: 18, right: 18, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <span style={{ background: C.blue, color: C.light, padding: '4px 9px', ...mono, fontSize: 9, letterSpacing: '0.16em' }}>{mix.tag || 'HERTZ SET'}</span>
+            <span style={{ ...mono, fontSize: 9, letterSpacing: '0.18em', color: C.light + '88' }}>HZ — {num}</span>
+          </div>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, ...mono, fontSize: 9, letterSpacing: '0.16em', color: C.light + '99' }}>
+            <span style={{ width: 6, height: 6, background: playing ? GLOW : C.light + '55', borderRadius: '50%', animation: playing ? 'pulseDot 1.4s ease-in-out infinite' : 'none' }} />
+            {playing ? 'ON AIR' : 'ON THE DECK'}
+          </span>
+        </div>
+        <div style={{ position: 'absolute', left: 16, bottom: 2, ...briq, fontSize: 'clamp(4.2rem,12vw,9rem)', fontWeight: 700, lineHeight: 0.78, letterSpacing: '-0.05em', color: 'transparent', WebkitTextStroke: '1.5px rgba(245,245,243,0.22)', pointerEvents: 'none' }}>{num}</div>
+        <button onClick={e => { e.stopPropagation(); onToggle(); }} aria-label={playing ? 'Pause' : 'Play'} aria-pressed={playing}
+          onMouseEnter={e => { e.currentTarget.style.background = C.blue; e.currentTarget.style.borderColor = C.blue; }}
+          onMouseLeave={e => { e.currentTarget.style.background = 'rgba(8,8,13,0.55)'; e.currentTarget.style.borderColor = C.light + '33'; }}
+          style={{ position: 'absolute', right: 18, bottom: 18, width: 62, height: 62, display: 'grid', placeItems: 'center', background: 'rgba(8,8,13,0.55)', border: `1px solid ${C.light}33`, cursor: 'pointer', transition: 'all 0.2s', backdropFilter: 'blur(4px)' }}>
+          {(playing ? Icon.pause : Icon.play)(24, C.light)}
+        </button>
+      </div>
+
+      {/* control cell */}
+      <div style={{ padding: isMobile ? '28px 22px 30px' : 'clamp(34px,3vw,48px)', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 16 }}>// ON THE DECK</div>
+        <h2 style={{ ...briq, fontSize: 'clamp(1.9rem,3.4vw,3rem)', fontWeight: 700, lineHeight: 0.98, letterSpacing: '-0.035em', color: C.light, marginBottom: 14 }}>{mix.title}</h2>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, flexWrap: 'wrap', marginBottom: 28 }}>
+          <span style={{ ...briq, fontSize: 'clamp(1rem,1.6vw,1.25rem)', fontWeight: 600, color: C.light }}>{mix.artist}</span>
+          <span style={{ ...mono, fontSize: 11, color: C.light + '55', letterSpacing: '0.1em' }}>HZ.{num}</span>
+        </div>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 18 }}>
+          <Tbtn icon={Icon.prev} glyph={20} size={42} label="Previous mix" onClick={onPrev} />
+          <Tbtn icon={playing ? Icon.pause : Icon.play} glyph={24} size={56} label={playing ? 'Pause' : 'Play'} onClick={onToggle} primary pressed={playing} />
+          <Tbtn icon={Icon.next} glyph={20} size={42} label="Next mix" onClick={onNext} />
+        </div>
+
+        <Waveform heights={heights} progress={progress} onSeek={onSeek} playing={playing} height={isMobile ? 52 : 64} dim={C.light + '22'} bright={GLOW} />
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 10, ...mono, fontSize: 11, color: C.light + '66', letterSpacing: '0.08em' }}>
+          <span style={{ color: playing ? GLOW : C.light + '88' }}>{fmt(progress * total)}</span>
+          <span>{total ? fmt(total) : '—:—'}</span>
+        </div>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginTop: 28, flexWrap: 'wrap' }}>
+          <span style={{ ...mono, fontSize: 9, letterSpacing: '0.2em', color: C.light + '44' }}>FULL SET ON</span>
+          <a href={mix.url} target="_blank" rel="noopener noreferrer" style={{ ...mono, fontSize: 11, color: C.light + 'aa', letterSpacing: '0.06em', textDecoration: 'none', transition: 'color 0.2s' }}
+            onMouseEnter={e => e.currentTarget.style.color = GLOW} onMouseLeave={e => e.currentTarget.style.color = C.light + 'aa'}>SoundCloud ↗</a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── catalogue row ─────────────────────────────────────────── */
+function Row({ mix, num, heights, index, active, playing, progress, durSec, onPlay, isMobile }) {
+  const C = window.Cv8;
+  const [hover, setHover] = React.useState(false);
+  const cols = isMobile ? '58px 1fr auto' : '48px 112px minmax(0,1fr) 86px';
+
+  return (
+    <div onClick={() => onPlay(index)} aria-current={active ? 'true' : undefined}
+      onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
+      style={{
+        display: 'grid', gridTemplateColumns: cols, gap: isMobile ? 14 : 20, alignItems: 'center',
+        padding: isMobile ? '14px 0' : '15px 0', paddingLeft: active ? 14 : 0,
+        borderLeft: `2px solid ${active ? GLOW : 'transparent'}`, borderBottom: `1px solid ${C.light}0e`,
+        background: active ? '#0e0e18' : (hover ? '#13131e' : 'transparent'),
+        cursor: 'pointer', transition: 'background 0.2s, padding 0.25s cubic-bezier(.22,1,.36,1)',
+      }}>
+
+      <div style={{ ...mono, fontSize: isMobile ? 11 : 13, fontWeight: 600, letterSpacing: '0.06em', color: active ? GLOW : C.light + (hover ? 'cc' : '55'), transition: 'color 0.2s' }}>{num}</div>
+
+      {!isMobile && (
+        <div style={{ position: 'relative', width: 112, height: 74, overflow: 'hidden' }}>
+          <img src={mix.img} alt={mix.artist} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 25%', filter: `saturate(0.55) brightness(${hover || active ? 0.55 : 0.72}) contrast(1.08)`, transform: hover ? 'scale(1.05)' : 'scale(1)', transition: 'all 0.5s cubic-bezier(.22,1,.36,1)' }} />
+          <div style={{ position: 'absolute', inset: 0, display: 'grid', placeItems: 'center', background: 'rgba(8,8,13,0.22)' }}>
+            <span style={{ width: 34, height: 34, display: 'grid', placeItems: 'center', background: active ? C.blue : 'rgba(8,8,13,0.5)', border: `1px solid ${active ? C.blue : C.light + '33'}`, transition: 'all 0.2s' }}>
+              {(active && playing ? Icon.pause : Icon.play)(15, C.light)}
+            </span>
+          </div>
+          {mix.tag && <div style={{ position: 'absolute', top: 0, left: 0, background: C.blue, color: C.light, padding: '2px 6px', ...mono, fontSize: 8, letterSpacing: '0.12em' }}>{mix.tag}</div>}
+        </div>
+      )}
+
+      <div style={{ minWidth: 0, display: 'flex', alignItems: 'center', gap: 14 }}>
+        {isMobile && (
+          <div style={{ position: 'relative', width: 58, height: 58, overflow: 'hidden', flexShrink: 0 }}>
+            <img src={mix.img} alt={mix.artist} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 25%', filter: 'saturate(0.55) brightness(0.62) contrast(1.08)' }} />
+            <div style={{ position: 'absolute', inset: 0, display: 'grid', placeItems: 'center', background: 'rgba(8,8,13,0.25)' }}>
+              {(active && playing ? Icon.pause : Icon.play)(14, C.light)}
+            </div>
+          </div>
+        )}
+        <div style={{ minWidth: 0, width: '100%' }}>
+          <h3 style={{ ...briq, fontSize: isMobile ? '1.02rem' : 'clamp(1.05rem,1.5vw,1.28rem)', fontWeight: 700, letterSpacing: '-0.02em', color: active ? C.light : C.light + (hover ? 'ff' : 'dd'), lineHeight: 1.1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', transition: 'color 0.2s' }}>{mix.title}</h3>
+          <div style={{ fontSize: 13, color: C.light + '99', marginTop: 3, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{mix.artist}</div>
+          {!isMobile && (
+            <div style={{ marginTop: 9, maxWidth: 260, height: 16 }}>
+              <Waveform heights={heights} progress={active ? progress : 0} playing={active && playing} height={16} dim={C.light + (active ? '22' : '12')} bright={active ? GLOW : C.light + '12'} gap={2} />
+            </div>
+          )}
+          {isMobile && <div style={{ ...mono, fontSize: 10, color: C.light + '55', letterSpacing: '0.08em', marginTop: 6 }}>SoundCloud{durSec ? ` · ${fmt(durSec)}` : ''}</div>}
+        </div>
+      </div>
+
+      {!isMobile && (
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 7, ...mono, fontSize: 12, color: active ? GLOW : C.light + '66', letterSpacing: '0.08em' }}>
+          {active && playing && <span style={{ width: 5, height: 5, background: GLOW, borderRadius: '50%', animation: 'pulseDot 1.4s ease-in-out infinite' }} />}
+          {durSec ? fmt(durSec) : '—'}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ─── docked player ─────────────────────────────────────────── */
+function Dock({ mix, num, heights, playing, progress, total, onToggle, onPrev, onNext, onSeek, onClose, isMobile }) {
+  const C = window.Cv8;
+  return (
+    <div style={{ position: 'fixed', left: 0, right: 0, bottom: 0, zIndex: 120, background: 'rgba(10,10,17,0.94)', backdropFilter: 'blur(14px)', borderTop: `1px solid ${C.light}16`, height: isMobile ? 66 : 92 }}>
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: C.light + '12' }}>
+        <div style={{ height: '100%', width: `${progress * 100}%`, background: GLOW, transition: 'width 0.25s linear' }} />
+      </div>
+      <div style={{ height: '100%', maxWidth: 1500, margin: '0 auto', padding: isMobile ? '0 14px' : '0 clamp(20px,4vw,56px)', display: 'grid', gridTemplateColumns: isMobile ? 'auto 1fr auto' : 'minmax(200px,0.9fr) auto minmax(0,1.4fr) auto auto', gap: isMobile ? 12 : 22, alignItems: 'center' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 10 : 14, minWidth: 0 }}>
+          <div style={{ position: 'relative', width: isMobile ? 44 : 52, height: isMobile ? 44 : 52, flexShrink: 0, overflow: 'hidden' }}>
+            <img src={mix.img} alt={mix.artist} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 25%', filter: 'saturate(0.6) brightness(0.8)' }} />
+          </div>
+          <div style={{ minWidth: 0 }}>
+            <div style={{ ...briq, fontSize: isMobile ? 13 : 14, fontWeight: 700, letterSpacing: '-0.01em', color: C.light, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{mix.title}</div>
+            <div style={{ ...mono, fontSize: 10, color: C.light + '88', letterSpacing: '0.06em', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', marginTop: 2 }}>{mix.artist}</div>
+          </div>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+          {!isMobile && <Tbtn icon={Icon.prev} glyph={18} size={38} label="Previous mix" onClick={onPrev} />}
+          <Tbtn icon={playing ? Icon.pause : Icon.play} glyph={22} size={isMobile ? 42 : 46} label={playing ? 'Pause' : 'Play'} onClick={onToggle} primary pressed={playing} />
+          {!isMobile && <Tbtn icon={Icon.next} glyph={18} size={38} label="Next mix" onClick={onNext} />}
+        </div>
+        {!isMobile && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 14, minWidth: 0 }}>
+            <span style={{ ...mono, fontSize: 11, color: GLOW, letterSpacing: '0.06em', width: 56, textAlign: 'right', flexShrink: 0 }}>{fmt(progress * total)}</span>
+            <Waveform heights={heights} progress={progress} onSeek={onSeek} playing={playing} height={34} dim={C.light + '20'} bright={GLOW} />
+            <span style={{ ...mono, fontSize: 11, color: C.light + '66', letterSpacing: '0.06em', width: 56, flexShrink: 0 }}>{total ? fmt(total) : '—:—'}</span>
+          </div>
+        )}
+        {!isMobile && <div style={{ ...mono, fontSize: 10, color: C.light + '44', letterSpacing: '0.14em' }}>HZ.{num}</div>}
+        <Tbtn icon={Icon.close} glyph={18} size={isMobile ? 38 : 40} label="Close player" onClick={onClose} />
+      </div>
+    </div>
+  );
+}
+
+/* ─── PAGE ──────────────────────────────────────────────────── */
 function MusicPage() {
   const C = window.Cv8;
   const R = window.R8;
-  const mono = { fontFamily: "'JetBrains Mono', monospace" };
-  const briq = { fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif" };
-  const [playing, setPlaying] = React.useState(null);
+  const [current, setCurrent] = React.useState(0);
+  const [playing, setPlaying] = React.useState(false);
+  const [started, setStarted] = React.useState(false);
+  const [posMs, setPosMs] = React.useState(0);
+  const [durMs, setDurMs] = React.useState(0);
+  const [durations, setDurations] = React.useState({});
+  const [vw, setVw] = React.useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
+
+  const isMobile = vw < 760;
+  const waves = React.useMemo(() => MIXES.map((m, i) => seededHeights(m.title + i, 96)), []);
+  const mix = MIXES[current];
+  const progress = durMs ? Math.min(1, posMs / durMs) : 0;
+  const total = durMs / 1000;
+
+  const widgetRef = React.useRef(null);
+  const iframeRef = React.useRef(null);
+  const currentRef = React.useRef(0);
+  const playingRef = React.useRef(false);
+  const stepRef = React.useRef(() => {});
+  React.useEffect(() => { currentRef.current = current; }, [current]);
+  React.useEffect(() => { playingRef.current = playing; }, [playing]);
+
+  React.useEffect(() => {
+    const r = () => setVw(window.innerWidth);
+    window.addEventListener('resize', r, { passive: true });
+    return () => window.removeEventListener('resize', r);
+  }, []);
+
+  // init SoundCloud Widget once the API + iframe are ready
+  React.useEffect(() => {
+    let tries = 0, timer = null;
+    const init = () => {
+      if (!window.SC || !window.SC.Widget || !iframeRef.current) {
+        if (tries++ < 120) { timer = setTimeout(init, 120); } return;
+      }
+      const w = window.SC.Widget(iframeRef.current);
+      widgetRef.current = w;
+      const E = window.SC.Widget.Events;
+      const grabDur = () => w.getDuration(d => { if (d) { setDurMs(d); setDurations(p => ({ ...p, [currentRef.current]: d })); } });
+      w.bind(E.READY, grabDur);
+      w.bind(E.PLAY, () => { setPlaying(true); setStarted(true); grabDur(); });
+      w.bind(E.PAUSE, () => setPlaying(false));
+      w.bind(E.PLAY_PROGRESS, e => { setPosMs(e.currentPosition); });
+      w.bind(E.FINISH, () => stepRef.current(1, true));
+    };
+    init();
+    return () => { if (timer) clearTimeout(timer); };
+  }, []);
+
+  const loadIdx = (i, autoplay) => {
+    const w = widgetRef.current; if (!w) return;
+    setPosMs(0); setDurMs(durations[i] || 0);
+    w.load(MIXES[i].url, {
+      auto_play: autoplay, single_active: false, visual: false,
+      callback: () => w.getDuration(d => { if (d) { setDurMs(d); setDurations(p => ({ ...p, [i]: d })); } }),
+    });
+  };
+
+  const toggle = () => { setStarted(true); const w = widgetRef.current; if (w) w.toggle(); };
+  const playIndex = (i) => {
+    setStarted(true);
+    if (i === current) { const w = widgetRef.current; if (w) w.toggle(); }
+    else { setCurrent(i); loadIdx(i, true); }
+  };
+  const step = (dir, forcePlay) => {
+    const ni = (currentRef.current + dir + MIXES.length) % MIXES.length;
+    setCurrent(ni); setStarted(true); loadIdx(ni, forcePlay || playingRef.current);
+  };
+  stepRef.current = step;
+  const seek = (frac) => { const w = widgetRef.current; if (w && durMs) { w.seekTo(frac * durMs); setPosMs(frac * durMs); } };
+  const closeDock = () => { const w = widgetRef.current; if (w) w.pause(); setStarted(false); setPlaying(false); };
 
   return (
-    <div style={{ background: C.dark, minHeight: '100vh' }}>
+    <div style={{ background: C.dark, minHeight: '100vh', paddingBottom: started ? (isMobile ? 66 : 92) : 0 }}>
       <window.Nav8 />
+      <window.PageHero section="04. MUSIC" title="The sound" sub="Resident sets · guest mixes · live recordings" />
 
-      {/* ── HERO with photo ── */}
-      <section style={{
-        minHeight: '80vh', position: 'relative', overflow: 'hidden',
-        display: 'flex', alignItems: 'flex-end',
-        padding: 'clamp(100px,15vh,140px) clamp(20px,4vw,56px) clamp(48px,8vh,80px)',
-      }}>
-        <div style={{
-          position: 'absolute', inset: 0,
-          backgroundImage: 'url(assets/music-hero.jpg?v=2)',
-          backgroundSize: 'cover', backgroundPosition: 'center 30%',
-          filter: 'saturate(0.6) brightness(0.65) contrast(1.05)',
-        }} />
-        <div style={{
-          position: 'absolute', inset: 0,
-          background: 'linear-gradient(0deg, rgba(8,8,13,0.9) 0%, rgba(8,8,13,0.3) 50%, rgba(8,8,13,0.1) 100%)',
-        }} />
-        <div style={{ position: 'relative', zIndex: 2, maxWidth: 1080, margin: '0 auto', width: '100%' }}>
+      {/* FEATURED DECK */}
+      <section style={{ background: C.dark, padding: 'clamp(36px,5vh,64px) clamp(20px,4vw,56px) clamp(40px,5vh,72px)' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <R>
-            <div style={{ ...mono, fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 16 }}>04. MUSIC</div>
-            <h1 style={{ ...briq, fontSize: 'clamp(3rem,10vw,8rem)', fontWeight: 700, lineHeight: 0.88, letterSpacing: '-0.04em', color: C.light }}>
-              The sound<span style={{ color: C.blue }}>.</span>
-            </h1>
-            <p style={{ fontSize: 'clamp(15px,1.5vw,18px)', lineHeight: 1.7, color: C.light + 'aa', maxWidth: 520, marginTop: 24 }}>
-              Recorded sets, studio cuts and live nights from the residents. Straight from the booth.
-            </p>
+            <Deck mix={mix} num={numOf(current)} heights={waves[current]} playing={playing} progress={progress} total={total}
+              onToggle={toggle} onPrev={() => step(-1)} onNext={() => step(1)} onSeek={seek} isMobile={isMobile} />
           </R>
         </div>
       </section>
 
-      {/* ── DJ CAROUSEL ── */}
-      <section style={{ background: C.light, padding: 'clamp(32px,5vh,56px) 0', overflow: 'hidden' }}>
-        <div style={{ maxWidth: 1080, margin: '0 auto', padding: '0 clamp(20px,4vw,56px)' }}>
+      {/* THE SERIES — catalogue */}
+      <section style={{ background: C.dark, padding: '0 clamp(20px,4vw,56px) clamp(48px,7vh,88px)' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <R>
-            <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.dark + '44', marginBottom: 16 }}>// FROM THE BOOTH</div>
-          </R>
-        </div>
-        <R delay={0.1}>
-          <div style={{
-            display: 'flex', gap: 12, overflowX: 'auto', scrollSnapType: 'x mandatory',
-            padding: '0 clamp(20px,4vw,56px)', scrollbarWidth: 'none', msOverflowStyle: 'none',
-            WebkitOverflowScrolling: 'touch',
-          }}>
-            {[
-              { src: 'assets/dj-apadula.jpg', label: 'Federico Apadula' },
-              { src: 'assets/dj-alberto.jpg', label: 'Alberto B' },
-              { src: 'assets/dj-manco.jpg', label: 'Tommaso Mancò' },
-              { src: 'assets/dj-giusti.jpg', label: 'Leonardo Giusti' },
-              { src: 'assets/dj-01.jpg', label: null },
-              { src: 'assets/dj-02.jpg', label: null },
-              { src: 'assets/dj-03.jpg', label: null },
-              { src: 'assets/dj-04.jpg', label: null },
-              { src: 'assets/dj-05.jpg', label: null },
-              { src: 'assets/dj-fava.jpg', label: null },
-            ].map((photo, i) => (
-              <div key={i} style={{ flexShrink: 0, scrollSnapAlign: 'start', width: 'clamp(200px,22vw,280px)', position: 'relative', overflow: 'hidden' }}>
-                <img src={photo.src} alt={photo.label || 'DJ'} loading="lazy" style={{ width: '100%', aspectRatio: '3/4', objectFit: 'cover', filter: 'saturate(0.45) brightness(0.75)', display: 'block' }} />
-                {photo.label && (
-                  <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '24px 12px 10px', background: 'linear-gradient(0deg, rgba(8,8,13,0.85) 0%, transparent 100%)' }}>
-                    <div style={{ ...mono, fontSize: 9, color: C.light + '88', letterSpacing: '0.14em' }}>{photo.label}</div>
-                  </div>
-                )}
+            <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16, marginBottom: 28 }}>
+              <div>
+                <div style={{ ...mono, fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 12 }}>// THE SERIES</div>
+                <h2 style={{ ...briq, fontSize: 'clamp(2rem,5.5vw,4.2rem)', fontWeight: 700, lineHeight: 0.9, letterSpacing: '-0.04em', color: C.light }}>
+                  Sets &amp; mixes<span style={{ color: C.blue }}>.</span>
+                </h2>
               </div>
-            ))}
-          </div>
-        </R>
-      </section>
-
-      {/* ── SOUNDCLOUD ── */}
-      <section style={{ background: C.dark, padding: 'clamp(48px,6vh,80px) clamp(20px,4vw,56px)' }}>
-        <div style={{ maxWidth: 1080, margin: '0 auto' }}>
-          <R>
-            <div style={{ ...mono, fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 16 }}>// SOUNDCLOUD</div>
-            <img src="assets/logo-soundcloud.png" alt="SoundCloud" style={{ height: 'clamp(32px,5vw,48px)', width: 'auto', display: 'block', marginBottom: 12, opacity: 0.9 }} />
-            <p style={{ ...mono, fontSize: 11, color: C.light + '55', letterSpacing: '0.08em', marginBottom: 48 }}>Sets, recordings & guest mixes</p>
-          </R>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }} role="list">
-              {SC_SETS.map((mix, i) => (
-                <R key={i} delay={i * 0.05}>
-                  <div
-                    role="listitem"
-                    onClick={() => setPlaying(playing === i ? null : i)}
-                    aria-label={`${playing === i ? 'Close' : 'Play'} ${mix.title} by ${mix.artist}`}
-                    tabIndex={0}
-                    onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setPlaying(playing === i ? null : i); } }}
-                    style={{ display: 'grid', gridTemplateColumns: '56px 1fr', gap: 16, alignItems: 'center', padding: '14px 0', borderBottom: `1px solid ${C.light}0e`, cursor: 'pointer', transition: 'background 0.2s', outline: 'none' }}
-                    onMouseEnter={e => e.currentTarget.style.background = C.darkSoft}
-                    onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
-                    onFocus={e => e.currentTarget.style.background = C.darkSoft}
-                    onBlur={e => e.currentTarget.style.background = 'transparent'}
-                  >
-                    <div style={{ position: 'relative', width: 56, height: 56, overflow: 'hidden', flexShrink: 0 }}>
-                      <img src={mix.img} alt={mix.artist} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'saturate(0.5) brightness(0.7)' }} />
-                      <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.35)' }}>
-                        <span aria-hidden="true" style={{ fontSize: 18, color: C.light, opacity: playing === i ? 1 : 0.7 }}>{playing === i ? '⏸' : '▶'}</span>
-                      </div>
-                      {mix.tag && <div style={{ position: 'absolute', top: 0, left: 0, background: C.blue, padding: '2px 5px', ...mono, fontSize: 8, color: C.light, letterSpacing: '0.12em' }}>{mix.tag}</div>}
-                    </div>
-                    <div>
-                      <div style={{ ...mono, fontSize: 9, color: C.light + '55', letterSpacing: '0.16em', marginBottom: 4, textTransform: 'uppercase' }}>{mix.artist}</div>
-                      <h3 style={{ ...briq, fontSize: 'clamp(0.9rem,1.5vw,1.1rem)', fontWeight: 700, letterSpacing: '-0.02em', color: C.light, margin: 0 }}>{mix.title}</h3>
-                      {playing === i && (
-                        <div style={{ marginTop: 12 }} onClick={e => e.stopPropagation()}>
-                          <iframe title={`SoundCloud, ${mix.title}`} width="100%" height="120" frameBorder="0" scrolling="no" allow="autoplay" style={{ display: 'block' }}
-                            src={`https://w.soundcloud.com/player/?url=${encodeURIComponent(mix.url)}&color=%23144889&auto_play=true&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=false`} />
-                          <div style={{ ...mono, fontSize: 9, color: C.light + '44', letterSpacing: '0.14em', marginTop: 6 }}>
-                            <a href={mix.url} target="_blank" rel="noopener noreferrer" style={{ color: C.blue }}>Open on SoundCloud ↗</a>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </R>
-              ))}
-
-          <R delay={0.2}>
-            <div style={{ marginTop: 32, paddingTop: 20, borderTop: `1px solid ${C.light}0e` }}>
-              <a href={SC_PROFILE} target="_blank" rel="noopener noreferrer"
-                style={{ ...mono, fontSize: 11, letterSpacing: '0.14em', color: C.light + '55', transition: 'color 0.2s', display: 'inline-flex', alignItems: 'center', minHeight: 44 }}
-                onMouseEnter={e => e.currentTarget.style.color = C.blue}
-                onMouseLeave={e => e.currentTarget.style.color = C.light + '55'}
-              >Hertz on SoundCloud ↗</a>
+              <div style={{ ...mono, fontSize: 11, color: C.light + '55', letterSpacing: '0.1em' }}>{MIXES.length} recordings · residents &amp; guests</div>
             </div>
           </R>
+
+          {!isMobile && (
+            <R>
+              <div style={{ display: 'grid', gridTemplateColumns: '48px 112px minmax(0,1fr) 86px', gap: 20, padding: '0 0 12px', borderBottom: `1px solid ${C.light}12`, ...mono, fontSize: 9, letterSpacing: '0.2em', color: C.light + '40' }}>
+                <span>// #</span><span></span><span>// SET</span><span style={{ textAlign: 'right' }}>// LEN</span>
+              </div>
+            </R>
+          )}
+
+          <div>
+            {MIXES.map((m, i) => (
+              <R key={i} delay={i * 0.04}>
+                <Row mix={m} num={numOf(i)} heights={waves[i]} index={i} active={current === i && started} playing={playing} progress={progress} durSec={durations[i] ? durations[i] / 1000 : 0} onPlay={playIndex} isMobile={isMobile} />
+              </R>
+            ))}
           </div>
+
+          <R delay={0.1}>
+            <div style={{ marginTop: 28 }}>
+              <a href={SC_PROFILE} target="_blank" rel="noopener noreferrer"
+                style={{ ...mono, fontSize: 11, letterSpacing: '0.14em', color: C.light + '55', transition: 'color 0.2s', display: 'inline-flex', alignItems: 'center', minHeight: 44 }}
+                onMouseEnter={e => e.currentTarget.style.color = C.blue} onMouseLeave={e => e.currentTarget.style.color = C.light + '55'}
+              >Full archive on SoundCloud ↗</a>
+            </div>
+          </R>
         </div>
       </section>
 
-      {/* ── SPOTIFY ── */}
-      <section style={{ background: C.light, padding: 'clamp(48px,6vh,80px) clamp(20px,4vw,56px)' }}>
-        <div style={{ maxWidth: 1080, margin: '0 auto' }}>
+      {/* SUBSCRIBE — light */}
+      <section style={{ background: C.light, color: C.dark, padding: 'clamp(56px,9vh,104px) clamp(20px,4vw,56px)' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <R>
-            <div style={{ ...mono, fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 16 }}>// SPOTIFY</div>
-            <img src="assets/logo-spotify.png" alt="Spotify" style={{ height: 'clamp(28px,4vw,40px)', width: 'auto', display: 'block', marginBottom: 12, opacity: 0.9, filter: 'invert(1)' }} />
-            <p style={{ ...mono, fontSize: 11, color: C.dark + '55', letterSpacing: '0.08em', marginBottom: 48 }}>Original tracks & releases</p>
+            <div style={{ ...mono, fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 14 }}>// FREQUENCIES</div>
+            <h2 style={{ ...briq, fontSize: 'clamp(2.2rem,6vw,5rem)', fontWeight: 700, lineHeight: 0.9, letterSpacing: '-0.045em', color: C.dark, marginBottom: 12 }}>
+              Where to listen<span style={{ color: C.blue }}>.</span>
+            </h2>
+            <p style={{ fontSize: 'clamp(14px,1.4vw,16px)', color: C.dark + '99', lineHeight: 1.7, maxWidth: 520, marginBottom: 48, textWrap: 'pretty' }}>
+              Every set lands on SoundCloud first. The residents' original tracks live on Spotify. Follow the channel that fits you.
+            </p>
           </R>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-            {SP_ARTISTS.map((a, i) => (
-              <R key={a.id} delay={i * 0.1}>
-                <a href={a.url} target="_blank" rel="noopener noreferrer"
-                  className="hz-card hz-card--panel"
-                  style={{
-                    display: 'grid', gridTemplateColumns: '72px 1fr auto', gap: 20, alignItems: 'center',
-                    padding: '20px 24px', border: `1px solid ${C.light}10`,
-                    textDecoration: 'none', transition: 'border-color 0.2s',
-                  }}
-                  onMouseEnter={e => e.currentTarget.style.borderColor = '#1DB954'}
-                  onMouseLeave={e => e.currentTarget.style.borderColor = C.light + '10'}
-                >
-                  <div style={{ width: 72, height: 72, borderRadius: '50%', overflow: 'hidden', flexShrink: 0 }}>
-                    <img src={a.img} alt={a.name} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'saturate(0.5) brightness(0.75)' }} />
+          <div style={{ borderTop: `1px solid ${C.dark}1a` }}>
+            {PLATFORMS.map((p, i) => (
+              <R key={p.name} delay={i * 0.05}>
+                <a href={p.href} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, padding: 'clamp(18px,2.4vw,28px) 0', borderBottom: `1px solid ${C.dark}1a`, textDecoration: 'none', transition: 'padding 0.25s' }}
+                  onMouseEnter={e => { e.currentTarget.style.paddingLeft = '16px'; e.currentTarget.querySelector('.pn').style.color = C.blue; e.currentTarget.querySelector('.arr').style.transform = 'translateX(6px)'; e.currentTarget.querySelector('.arr').style.color = C.blue; }}
+                  onMouseLeave={e => { e.currentTarget.style.paddingLeft = '0px'; e.currentTarget.querySelector('.pn').style.color = C.dark; e.currentTarget.querySelector('.arr').style.transform = 'translateX(0)'; e.currentTarget.querySelector('.arr').style.color = C.dark; }}>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 16, flexWrap: 'wrap' }}>
+                    <span className="pn" style={{ ...briq, fontSize: 'clamp(1.5rem,3.4vw,2.4rem)', fontWeight: 700, letterSpacing: '-0.03em', color: C.dark, transition: 'color 0.2s' }}>{p.name}</span>
+                    <span style={{ ...mono, fontSize: 11, color: C.dark + '77', letterSpacing: '0.08em' }}>{p.meta}</span>
                   </div>
-                  <div>
-                    <div style={{ ...mono, fontSize: 9, color: C.light + '55', letterSpacing: '0.16em', marginBottom: 5, textTransform: 'uppercase' }}>{a.role}</div>
-                    <div style={{ ...briq, fontSize: 'clamp(1rem,1.8vw,1.25rem)', fontWeight: 700, letterSpacing: '-0.02em', color: C.light }}>{a.name}</div>
-                  </div>
-                  <div style={{
-                    ...mono, fontSize: 10, letterSpacing: '0.14em', color: '#1DB954',
-                    whiteSpace: 'nowrap',
-                  }}>Listen ↗</div>
+                  <span className="arr" style={{ ...briq, fontSize: 'clamp(1.4rem,3vw,2rem)', fontWeight: 400, color: C.dark, transition: 'transform 0.25s, color 0.2s' }}>↗</span>
                 </a>
               </R>
             ))}
           </div>
+
+          <R delay={0.1}>
+            <div style={{ marginTop: 48, display: 'flex', alignItems: 'center', gap: 18, flexWrap: 'wrap' }}>
+              <span style={{ ...mono, fontSize: 11, letterSpacing: '0.16em', color: C.dark + '66' }}>// DJ?</span>
+              <a href="mailto:info@hertz.cc?subject=Guest%20mix%20—%20Hertz" style={{ ...mono, fontSize: 12, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: C.dark, textDecoration: 'none', border: `1px solid ${C.dark}2a`, padding: '13px 22px', transition: 'all 0.2s' }}
+                onMouseEnter={e => { e.currentTarget.style.background = C.blue; e.currentTarget.style.borderColor = C.blue; e.currentTarget.style.color = C.light; }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = C.dark + '2a'; e.currentTarget.style.color = C.dark; }}>
+                Send a guest mix ↗
+              </a>
+            </div>
+          </R>
         </div>
       </section>
 
       <window.Footer8 bannerLight={false} />
+
+      {started && (
+        <Dock mix={mix} num={numOf(current)} heights={waves[current]} playing={playing} progress={progress} total={total}
+          onToggle={toggle} onPrev={() => step(-1)} onNext={() => step(1)} onSeek={seek} onClose={closeDock} isMobile={isMobile} />
+      )}
+
+      {/* hidden SoundCloud player — the real audio engine */}
+      <iframe ref={iframeRef} title="Hertz audio player" allow="autoplay" tabIndex={-1} aria-hidden="true"
+        src={`https://w.soundcloud.com/player/?url=${encodeURIComponent(MIXES[0].url)}&color=%23144889&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=false`}
+        style={{ position: 'fixed', width: 1, height: 1, opacity: 0, pointerEvents: 'none', left: -9999, bottom: 0, border: 0 }} />
     </div>
   );
 }
