@@ -59,7 +59,7 @@ function ArtistGallery({ images, name }) {
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
         gap: 16, marginBottom: 28,
       }}>
-        <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.2em', color: C.blue }}>// GALLERY</div>
+        <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.2em', color: C.blue }}>{(window.useT ? window.useT() : (e) => e)('// GALLERY', '// GALLERIA')}</div>
         <div style={{ display: 'flex', gap: 8 }}>
           <button aria-label="Previous" onClick={() => scrollBy(-1)} disabled={atStart} style={arrowStyle(atStart)}
             onMouseEnter={e => { if (!atStart) { e.currentTarget.style.borderColor = C.blue; e.currentTarget.style.color = C.blue; } }}
@@ -154,8 +154,8 @@ function EventAppearanceRow({ ev, last }) {
       {/* status + code */}
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 8 }}>
         {!isPast
-          ? <span style={{ ...mono, fontSize: 8, letterSpacing: '0.16em', color: C.light, background: C.blue, padding: '4px 8px', textTransform: 'uppercase' }}>Upcoming</span>
-          : <span style={{ ...mono, fontSize: 8, letterSpacing: '0.16em', color: C.light + '44', border: `1px solid ${C.light}16`, padding: '4px 8px', textTransform: 'uppercase' }}>Played</span>}
+          ? <span style={{ ...mono, fontSize: 8, letterSpacing: '0.16em', color: C.light, background: C.blue, padding: '4px 8px', textTransform: 'uppercase' }}>{(window.useT ? window.useT() : (e) => e)('Upcoming', 'In arrivo')}</span>
+          : <span style={{ ...mono, fontSize: 8, letterSpacing: '0.16em', color: C.light + '44', border: `1px solid ${C.light}16`, padding: '4px 8px', textTransform: 'uppercase' }}>{(window.useT ? window.useT() : (e) => e)('Played', 'Suonato')}</span>}
         <span style={{ ...mono, fontSize: 9, letterSpacing: '0.1em', color: C.light + '2e' }}>HZ.{ev.n}</span>
       </div>
     </div>
@@ -167,6 +167,7 @@ function ArtistPage({ artist, events = [] }) {
   const R = window.R8;
   const mono = { fontFamily: "'JetBrains Mono', monospace" };
   const briq = { fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif" };
+  const T = window.useT ? window.useT() : ((en) => en);
   const [imgFailed, setImgFailed] = React.useState(false);
   const [playing, setPlaying] = React.useState(null);
 
@@ -234,8 +235,8 @@ function ArtistPage({ artist, events = [] }) {
           gap: 'clamp(40px, 6vw, 96px)',
         }}>
           <R>
-            <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 20 }}>// BIOGRAPHY</div>
-            {artist.bio.split('\n\n').map((para, i, arr) => (
+            <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 20 }}>{T('// BIOGRAPHY', '// BIOGRAFIA')}</div>
+            {T(artist.bio, artist.bioIt || artist.bio).split('\n\n').map((para, i, arr) => (
               <p key={i} style={{
                 fontSize: 'clamp(15px, 1.5vw, 18px)', lineHeight: 1.85,
                 color: C.light + 'bb', textWrap: 'pretty',
@@ -245,8 +246,8 @@ function ArtistPage({ artist, events = [] }) {
           </R>
 
           <R delay={0.12}>
-            <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 20 }}>// SOUND PROFILE</div>
-            {[['Style', artist.sets], ['Based in', artist.origin], ['With Hertz since', artist.since]].map(([k, v]) => (
+            <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 20 }}>{T('// SOUND PROFILE', '// PROFILO SONORO')}</div>
+            {[[T('Style', 'Stile'), artist.sets], [T('Based in', 'Sede'), artist.origin], [T('With Hertz since', 'In Hertz dal'), artist.since]].map(([k, v]) => (
               <div key={k} style={{ borderBottom: `1px solid ${C.light}0e`, paddingBottom: 16, marginBottom: 16 }}>
                 <div style={{ ...mono, fontSize: 10, color: C.light + '33', letterSpacing: '0.16em', marginBottom: 4, textTransform: 'uppercase' }}>{k}</div>
                 <div style={{ ...briq, fontSize: 'clamp(17px, 1.9vw, 22px)', fontWeight: 700, color: C.light, letterSpacing: '-0.02em' }}>{v}</div>
@@ -291,7 +292,7 @@ function ArtistPage({ artist, events = [] }) {
         }}>
           <R>
             <div style={{ maxWidth: 1400, margin: '0 auto' }}>
-              <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 32 }}>// MUSIC</div>
+              <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 32 }}>{T('// MUSIC', '// MUSICA')}</div>
               {artist.mixes && artist.mixes.length > 0 && (
                 <div style={{ display: 'flex', flexDirection: 'column', marginBottom: 36, border: `1px solid ${C.light}10` }} role="list">
                   {artist.mixes.map((mix, i) => {
@@ -376,7 +377,7 @@ function ArtistPage({ artist, events = [] }) {
         }}>
           <R>
             <div style={{ maxWidth: 1400, margin: '0 auto' }}>
-              <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 8 }}>// APPEARANCES</div>
+              <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 8 }}>{T('// APPEARANCES', '// DATE')}</div>
               <h2 style={{
                 ...briq, fontSize: 'clamp(2.5rem, 6vw, 5rem)',
                 fontWeight: 700, lineHeight: 0.83, letterSpacing: '-0.04em',
@@ -391,7 +392,7 @@ function ArtistPage({ artist, events = [] }) {
                     display: 'flex', alignItems: 'center', gap: 8,
                   }}>
                     <span style={{ width: 5, height: 5, borderRadius: '50%', background: C.blue, display: 'inline-block' }} />
-                    UPCOMING
+                    {T('UPCOMING', 'IN ARRIVO')}
                   </div>
                   {upcoming.map((ev, i) => <EventAppearanceRow key={i} ev={ev} last={i === upcoming.length - 1} />)}
                 </div>
@@ -399,7 +400,7 @@ function ArtistPage({ artist, events = [] }) {
 
               {past.length > 0 && (
                 <div>
-                  <div style={{ ...mono, fontSize: 10, color: C.light + '33', letterSpacing: '0.2em', marginBottom: 16 }}>// ARCHIVE</div>
+                  <div style={{ ...mono, fontSize: 10, color: C.light + '33', letterSpacing: '0.2em', marginBottom: 16 }}>{T('// ARCHIVE', '// ARCHIVIO')}</div>
                   {past.map((ev, i) => <EventAppearanceRow key={i} ev={ev} last={i === past.length - 1} />)}
                 </div>
               )}
@@ -426,7 +427,7 @@ function ArtistPage({ artist, events = [] }) {
           }}
           onMouseEnter={e => e.currentTarget.style.color = C.blue}
           onMouseLeave={e => e.currentTarget.style.color = C.light + '66'}
-          >← All artists</a>
+          >{T('← All artists', '← Tutti gli artisti')}</a>
           <a href="/index.html" style={{
             ...mono, fontSize: 11, letterSpacing: '0.16em',
             color: C.light + '66', textDecoration: 'none',
