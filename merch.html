@@ -109,6 +109,7 @@ function MerchPage() {
   const R = window.R8;
   const mono = { fontFamily: "'JetBrains Mono', monospace" };
   const briq = { fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif" };
+  const T = window.useT ? window.useT() : ((en) => en);
   const [isMobile, setIsMobile] = React.useState(window.innerWidth < 860);
   const [email, setEmail] = React.useState('');
   const [joined, setJoined] = React.useState(false);
@@ -143,7 +144,7 @@ function MerchPage() {
   return (
     <div style={{ background: C.dark, minHeight: '100vh' }}>
       <window.Nav8 />
-      <window.PageHero section="05. DROP 01" title={'Wear the\nfrequency'} sub="Coming soon, limited numbered runs" />
+      <window.PageHero section="05. DROP 01" title={'Wear the\nfrequency'} sub={T("Coming soon, limited numbered runs","In arrivo, tirature limitate e numerate")} />
 
       {/* Product, single lanyard card like home */}
       <section style={{
@@ -160,12 +161,12 @@ function MerchPage() {
             }}>
               {/* Text side */}
               <div>
-                <div style={{ ...mono, fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 16 }}>// COMING SOON</div>
+                <div style={{ ...mono, fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 16 }}>{T('// COMING SOON','// IN ARRIVO')}</div>
                 <h2 style={{ ...briq, fontSize: 'clamp(2rem,5vw,3.5rem)', fontWeight: 700, lineHeight: 0.83, letterSpacing: '-0.04em', color: C.dark, marginBottom: 20 }}>
                   Hertz Lanyard<span style={{ color: C.blue }}>.</span>
                 </h2>
                 <p style={{ fontSize: 'clamp(15px,1.4vw,17px)', color: C.dark + '88', lineHeight: 1.75, marginBottom: 28, maxWidth: 480, textWrap: 'pretty' }}>
-                  A capsule built for the dancefloor. Limited numbered runs, no restocks. Coming soon.
+                  {T('A capsule built for the dancefloor. Limited numbered runs, no restocks. Coming soon.','Una capsule pensata per la pista. Tirature limitate e numerate, niente restock. In arrivo.')}
                 </p>
                 <div style={{
                   display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16,
@@ -233,12 +234,12 @@ function MerchPage() {
       <section style={{ background: C.dark, padding: 'clamp(64px,10vh,110px) clamp(20px,4vw,56px)' }}>
         <R>
           <div style={{ maxWidth: 680, margin: '0 auto', textAlign: 'center' }}>
-            <div style={{ ...mono, fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 16 }}>// GET NOTIFIED</div>
+            <div style={{ ...mono, fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 16 }}>{T('// GET NOTIFIED','// FATTI AVVISARE')}</div>
             <h2 style={{ ...briq, fontSize: 'clamp(2rem,6vw,4.5rem)', fontWeight: 700, lineHeight: 0.83, letterSpacing: '-0.04em', color: C.light, marginBottom: 16 }}>
               First to know<span style={{ color: C.blue }}>.</span>
             </h2>
             <p style={{ fontSize: 15, color: C.light + '88', lineHeight: 1.75, marginBottom: 36, textWrap: 'pretty' }}>
-              Coming soon. Limited numbered runs, no restocks. Leave your email and we'll let you know when it's available.
+              {T("Coming soon. Limited numbered runs, no restocks. Leave your email and we'll let you know when it's available.",'In arrivo. Tirature limitate e numerate, niente restock. Lascia la tua email e ti avvisiamo appena è disponibile.')}
             </p>
             {!joined ? (
               <form onSubmit={submit} aria-label="Merch waitlist signup">
@@ -264,7 +265,7 @@ function MerchPage() {
                   }}
                   onMouseEnter={e => { if (!submitting) e.currentTarget.style.background = '#1a5aaf'; }}
                   onMouseLeave={e => { e.currentTarget.style.background = submitting ? C.blue + 'aa' : C.blue; }}
-                  >{submitting ? '...' : 'Notify me →'}</button>
+                  >{submitting ? '...' : T('Notify me →','Avvisami →')}</button>
                 </div>
                 {error && (
                   <p role="alert" style={{ ...mono, fontSize: 11, color: '#ff6b6b', marginTop: 10, letterSpacing: '0.1em' }}>{error}</p>

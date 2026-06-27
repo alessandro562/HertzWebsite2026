@@ -38,6 +38,7 @@ function BookingsPage() {
   const R = window.R8;
   const mono = { fontFamily: "'JetBrains Mono', monospace" };
   const briq = { fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif" };
+  const T = window.useT ? window.useT() : ((en) => en);
 
   const [f, setF] = React.useState({ firstName: '', lastName: '', phone: '', email: '', type: 'hertz', artist: RESIDENTS[0], eventName: '', date: '', city: '', budget: '', message: '' });
   const [status, setStatus] = React.useState('idle'); // idle | sending | done | error
@@ -58,7 +59,7 @@ function BookingsPage() {
   return (
     <div style={{ background: C.dark, minHeight: '100vh' }}>
       <window.Nav8 />
-      <window.PageHero section="// BOOKINGS" title="Book Hertz" sub="The Hertz format, or one of the residents, for your night." />
+      <window.PageHero section="// BOOKINGS" title="Book Hertz" sub={T("The Hertz format, or one of the residents, for your night.","Il format Hertz, o uno dei resident, per la tua serata.")} />
 
       <section style={{ padding: 'clamp(40px,6vh,72px) clamp(20px,4vw,56px) clamp(72px,12vh,140px)' }}>
         <div style={{ maxWidth: 1120, margin: '0 auto' }}>
@@ -66,9 +67,9 @@ function BookingsPage() {
             <R>
               <div style={{ maxWidth: 620 }}>
                 <div className="hz-card hz-card--panel" style={{ position: 'relative', padding: 'clamp(32px,5vw,56px)' }}>
-                  <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 14 }}>// REQUEST RECEIVED</div>
+                  <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 14 }}>{T('// REQUEST RECEIVED','// RICHIESTA RICEVUTA')}</div>
                   <h2 style={{ ...briq, fontSize: 'clamp(1.8rem,4vw,2.8rem)', fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1, color: C.light, marginBottom: 16 }}>We're on it<span style={{ color: C.blue }}>.</span></h2>
-                  <p style={{ fontSize: 15, lineHeight: 1.7, color: C.light + 'aa', maxWidth: 440 }}>Thanks {f.firstName.trim()}. We'll get back to {f.email.trim()} shortly to talk dates and details.</p>
+                  <p style={{ fontSize: 15, lineHeight: 1.7, color: C.light + 'aa', maxWidth: 440 }}>{T(`Thanks ${f.firstName.trim()}. We'll get back to ${f.email.trim()} shortly to talk dates and details.`, `Grazie ${f.firstName.trim()}. Ti scriviamo a ${f.email.trim()} a breve per parlare di date e dettagli.`)}</p>
                 </div>
               </div>
             </R>
@@ -81,19 +82,19 @@ function BookingsPage() {
                   {/* LEFT, who's asking */}
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(20px,2.4vw,26px)' }}>
                     <div>
-                      <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 16 }}>// GENERAL INFO</div>
+                      <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 16 }}>{T('// GENERAL INFO','// INFO GENERALI')}</div>
                       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 16 }}>
-                        <div><label style={label}>First name *</label><input value={f.firstName} onChange={set('firstName')} style={field} required /></div>
-                        <div><label style={label}>Last name *</label><input value={f.lastName} onChange={set('lastName')} style={field} required /></div>
-                        <div><label style={label}>Phone *</label><input value={f.phone} onChange={set('phone')} type="tel" style={field} required /></div>
+                        <div><label style={label}>{T('First name *','Nome *')}</label><input value={f.firstName} onChange={set('firstName')} style={field} required /></div>
+                        <div><label style={label}>{T('Last name *','Cognome *')}</label><input value={f.lastName} onChange={set('lastName')} style={field} required /></div>
+                        <div><label style={label}>{T('Phone *','Telefono *')}</label><input value={f.phone} onChange={set('phone')} type="tel" style={field} required /></div>
                         <div><label style={label}>Email *</label><input value={f.email} onChange={set('email')} type="email" style={field} required /></div>
                       </div>
                     </div>
 
                     <div>
-                      <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 14 }}>// INTERESTED IN</div>
+                      <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 14 }}>{T('// INTERESTED IN','// SEI INTERESSATO A')}</div>
                       <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-                        {[['hertz', 'Hertz format'], ['artist', 'Single artist']].map(([v, l]) => (
+                        {[['hertz', T('Hertz format','Format Hertz')], ['artist', T('Single artist','Singolo artista')]].map(([v, l]) => (
                           <button type="button" key={v} onClick={() => setF(s => ({ ...s, type: v }))} style={{
                             ...mono, fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', padding: '11px 18px', cursor: 'pointer',
                             border: `1px solid ${f.type === v ? C.blue : C.light + '22'}`, background: f.type === v ? C.blue : 'transparent', color: f.type === v ? C.light : C.light + '88', transition: 'all 0.2s',
@@ -102,7 +103,7 @@ function BookingsPage() {
                       </div>
                       {f.type === 'artist' && (
                         <div style={{ marginTop: 16 }}>
-                          <label style={label}>Which resident</label>
+                          <label style={label}>{T('Which resident','Quale resident')}</label>
                           <select value={f.artist} onChange={set('artist')} style={field}>
                             {RESIDENTS.map(r => <option key={r} value={r} style={{ background: C.dark }}>{r}</option>)}
                           </select>
@@ -114,16 +115,16 @@ function BookingsPage() {
                   {/* RIGHT, the event */}
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(20px,2.4vw,26px)' }}>
                     <div>
-                      <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 16 }}>// THE EVENT</div>
+                      <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 16 }}>{T('// THE EVENT',"// L'EVENTO")}</div>
                       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 16 }}>
-                        <div><label style={label}>Event name</label><input value={f.eventName} onChange={set('eventName')} style={field} /></div>
-                        <div><label style={label}>Date</label><input value={f.date} onChange={set('date')} placeholder="DD.MM.YYYY" style={field} /></div>
-                        <div><label style={label}>City / venue</label><input value={f.city} onChange={set('city')} style={field} /></div>
-                        <div><label style={label}>Budget (optional)</label><input value={f.budget} onChange={set('budget')} style={field} /></div>
+                        <div><label style={label}>{T('Event name','Nome evento')}</label><input value={f.eventName} onChange={set('eventName')} style={field} /></div>
+                        <div><label style={label}>{T('Date','Data')}</label><input value={f.date} onChange={set('date')} placeholder="DD.MM.YYYY" style={field} /></div>
+                        <div><label style={label}>{T('City / venue','Città / locale')}</label><input value={f.city} onChange={set('city')} style={field} /></div>
+                        <div><label style={label}>{T('Budget (optional)','Budget (facoltativo)')}</label><input value={f.budget} onChange={set('budget')} style={field} /></div>
                       </div>
                     </div>
                     <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                      <label style={label}>Message</label>
+                      <label style={label}>{T('Message','Messaggio')}</label>
                       <textarea value={f.message} onChange={set('message')} rows={5} style={{ ...field, resize: 'vertical', flex: 1, minHeight: 120 }} />
                     </div>
                   </div>
@@ -132,14 +133,14 @@ function BookingsPage() {
 
                 {(status === 'error' || status === 'failed') && (
                   <div style={{ ...mono, fontSize: 11, letterSpacing: '0.08em', color: '#d06a6a' }}>
-                    {status === 'error' ? '// Fill name, phone and a valid email' : '// Something went wrong — try again or write to info@hertzbookings.com'}
+                    {status === 'error' ? T('// Fill name, phone and a valid email','// Inserisci nome, telefono e una email valida') : T('// Something went wrong — try again or write to info@hertzbookings.com','// Qualcosa è andato storto — riprova o scrivi a info@hertzbookings.com')}
                   </div>
                 )}
 
                 <button type="submit" disabled={status === 'sending'} style={{
                   alignSelf: 'flex-start', background: C.blue, color: C.light, border: 'none', padding: '15px 36px', cursor: 'pointer',
                   ...mono, fontSize: 12, letterSpacing: '0.16em', textTransform: 'uppercase', opacity: status === 'sending' ? 0.6 : 1,
-                }}>{status === 'sending' ? 'Sending…' : 'Send request →'}</button>
+                }}>{status === 'sending' ? T('Sending…','Invio…') : T('Send request →','Invia richiesta →')}</button>
               </form>
             </R>
           )}

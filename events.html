@@ -77,6 +77,7 @@ function EventsPage() {
   const R = window.R8;
   const mono = { fontFamily: "'JetBrains Mono', monospace" };
   const briq = { fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif" };
+  const T = window.useT ? window.useT() : ((en) => en);
 
   return (
     <div style={{ background: C.dark, minHeight: '100vh' }}>
@@ -86,7 +87,7 @@ function EventsPage() {
       {/* UPCOMING */}
       <section style={{ background: C.light, padding: 'clamp(56px,8vh,96px) clamp(20px,4vw,56px)' }}>
         <R>
-          <div style={{ ...mono, fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 12 }}>// UPCOMING</div>
+          <div style={{ ...mono, fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 12 }}>{T('// UPCOMING','// IN ARRIVO')}</div>
           <h2 style={{ ...briq, fontSize: 'clamp(2rem,6vw,5rem)', fontWeight: 700, lineHeight: 0.9, letterSpacing: '-0.04em', color: C.dark, marginBottom: 48 }}>
             What's next<span style={{ color: C.blue }}>.</span>
           </h2>
@@ -139,7 +140,7 @@ function EventsPage() {
                     {e.subtitle && <p style={{ fontSize: 13, color: C.light + 'aa', marginBottom: 12 }}>{e.subtitle}</p>}
                     <div style={{ ...mono, fontSize: 11, color: C.light + '88', marginBottom: 20 }}>@ {e.venue}, {e.city}</div>
                     <div style={{ borderTop: `1px solid ${C.light}18`, paddingTop: 16, marginBottom: 20 }}>
-                      <div style={{ ...mono, fontSize: 9, color: C.light + '55', letterSpacing: '0.2em', marginBottom: 8 }}>// LINEUP</div>
+                      <div style={{ ...mono, fontSize: 9, color: C.light + '55', letterSpacing: '0.2em', marginBottom: 8 }}>{T('// LINEUP','// LINEUP')}</div>
                       {e.lineup ? (
                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                           {e.lineup.map(a => (
@@ -147,7 +148,7 @@ function EventsPage() {
                           ))}
                         </div>
                       ) : (
-                        <span style={{ ...mono, fontSize: 11, color: C.light + '99', letterSpacing: '0.08em' }}>Announced soon</span>
+                        <span style={{ ...mono, fontSize: 11, color: C.light + '99', letterSpacing: '0.08em' }}>{T('Announced soon','In arrivo')}</span>
                       )}
                     </div>
                     <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
@@ -162,7 +163,7 @@ function EventsPage() {
                         onMouseEnter={e2 => e2.currentTarget.style.background = '#1a5aaf'}
                         onMouseLeave={e2 => e2.currentTarget.style.background = C.blue}
                       >
-                        Join the list ↗
+                        {T('Join the list ↗','Entra in lista ↗')}
                       </a>
                       {(e.address || e.venue) && (
                         <a
@@ -176,7 +177,7 @@ function EventsPage() {
                           }}
                           onMouseEnter={e2 => { e2.currentTarget.style.borderColor = C.light + '55'; e2.currentTarget.style.color = C.light; }}
                           onMouseLeave={e2 => { e2.currentTarget.style.borderColor = C.light + '22'; e2.currentTarget.style.color = C.light + '88'; }}
-                        >Maps ↗</a>
+                        >{T('Maps ↗','Mappa ↗')}</a>
                       )}
                     </div>
                   </div>
@@ -190,7 +191,7 @@ function EventsPage() {
       {/* PAST EVENTS */}
       <section style={{ background: C.dark, padding: 'clamp(56px,8vh,96px) clamp(20px,4vw,56px)' }}>
         <R>
-          <div style={{ ...mono, fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 12 }}>// THE ARCHIVE</div>
+          <div style={{ ...mono, fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 12 }}>{T('// THE ARCHIVE',"// L'ARCHIVIO")}</div>
           <h2 style={{ ...briq, fontSize: 'clamp(2rem,6vw,5rem)', fontWeight: 700, lineHeight: 0.9, letterSpacing: '-0.04em', color: C.light, marginBottom: 48 }}>
             Past nights<span style={{ color: C.blue }}>.</span>
           </h2>
