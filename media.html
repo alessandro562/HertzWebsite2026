@@ -54,7 +54,9 @@ const ARTICLES = [
     slug: "two-speed-island-ibiza-2026",
     title: "The Two-Speed Island: What Ibiza 2026 Is Actually Telling Us",
     subtitle: "A €70 million hyperclub topped the world poll in year one. Read the rest of the calendar and the split becomes impossible to miss.",
+    subtitleIt: "Un hyperclub da 70 milioni di euro ha vinto il sondaggio mondiale al primo anno. Leggi il resto del calendario e la spaccatura diventa impossibile da ignorare.",
     excerpt: "UNVRS didn't just open big — it rewrote the rules in a single season. We read the 2026 Ibiza calendar as two scenes running on the same island at different speeds, and ask what that leaves for everyone who isn't building an arena.",
+    excerptIt: "UNVRS non ha solo aperto in grande: ha riscritto le regole in una sola stagione. Leggiamo il calendario di Ibiza 2026 come due scene che corrono sulla stessa isola a velocità diverse, e ci chiediamo cosa resta per chi non sta costruendo un'arena.",
     image: "assets/media/two-speed-island.jpg",
     rubric: "SIGNAL",
     metadata: { author: 'Hertz Redazione', category: "Editorial", rubric: "SIGNAL", tags: ["ibiza", "unvrs", "hyperclub", "tech-house", "scene", "2026"], publishedAt: "2026-06-26" },
@@ -64,7 +66,9 @@ const ARTICLES = [
     slug: "sunwaves-left-home-rominimal",
     title: "Sunwaves Left Home: The Format That Refuses to Scale",
     subtitle: "After 18 years on the Black Sea, the cathedral of the marathon set was pushed out of Romania. What that says about the music we care about most.",
+    subtitleIt: "Dopo 18 anni sul Mar Nero, la cattedrale del marathon set è stata cacciata dalla Romania. Cosa dice della musica a cui teniamo di più.",
     excerpt: "Sunwaves — no VIP, booth close, six-hour sets — just lost its home to permits and pressure and decamped to Spain. We look at why the most music-first format in our world is also the most structurally fragile, and what it means to keep it alive in a city like ours.",
+    excerptIt: "Sunwaves — niente VIP, console vicina, set di sei ore — ha appena perso la sua casa tra permessi e pressioni, traslocando in Spagna. Guardiamo perché il format più music-first del nostro mondo è anche il più fragile, e cosa significa tenerlo in vita in una città come la nostra.",
     image: "assets/media/sunwaves.jpg",
     rubric: "DISPATCH",
     metadata: { author: 'Hertz Redazione', category: "Reportage", rubric: "DISPATCH", tags: ["sunwaves", "rominimal", "minimal", "romania", "marathon-set", "scene"], publishedAt: "2026-06-21" },
@@ -74,7 +78,9 @@ const ARTICLES = [
     slug: "music-on-pacha-long-residency",
     title: "Music On at Pacha: The Case for the Long Residency",
     subtitle: "Eight years on the same Friday, despite every rumour of a move. In an age of one-off spectacles, that's not nostalgia — it's a different technology.",
+    subtitleIt: "Otto anni sullo stesso venerdì, nonostante ogni voce di trasloco. In un'epoca di spettacoli usa e getta, non è nostalgia: è una tecnologia diversa.",
     excerpt: "Music On stayed at Pacha for 2026. We make the case that the long residency builds something a festival headline slot never can — a crowd, a sound, a room — and ask what it teaches anyone running their own night.",
+    excerptIt: "Music On è rimasta al Pacha per il 2026. Sosteniamo che la lunga residency costruisce qualcosa che uno slot da headliner non potrà mai: un pubblico, un suono, una sala. E ci chiediamo cosa insegna a chiunque gestisca una propria serata.",
     image: "assets/media/music-on-pacha.jpg",
     rubric: "RESIDENT",
     metadata: { author: 'Hertz Redazione', category: "Reportage", rubric: "RESIDENT", tags: ["music-on", "marco-carola", "pacha", "residency", "ibiza", "tech-house"], publishedAt: "2026-06-16" },
@@ -84,7 +90,9 @@ const ARTICLES = [
     slug: "radar-vol-1-eight-names",
     title: "Radar Vol. 1: Eight Names Moving the Groove Right Now",
     subtitle: "Not the most-streamed. The ones whose records keep ending up in our sets — across deep-tech, Latin tech, and the line where they cross.",
+    subtitleIt: "Non i più streammati. Quelli i cui dischi continuano a finire nei nostri set — tra deep-tech, Latin tech e la linea dove si incrociano.",
     excerpt: "Our first artist column. Eight producers we're actually playing, from UK deep-tech and the Italian groove to Peru and the festival crossover — with the releases, the labels, and an honest read on where each one sits.",
+    excerptIt: "La nostra prima rubrica sugli artisti. Otto producer che suoniamo davvero, dal deep-tech UK e dal groove italiano fino al Perù e al crossover da festival — con le uscite, le etichette e una lettura onesta di dove si colloca ciascuno.",
     image: "assets/media/radar-vol-1.jpg",
     rubric: "RADAR",
     metadata: { author: 'Hertz Redazione', category: "Trends", rubric: "RADAR", tags: ["radar", "emerging-artists", "tech-house", "deep-tech", "minimal", "new-music"], publishedAt: "2026-06-11" },
@@ -93,17 +101,18 @@ const ARTICLES = [
 ];
 
 const RUBRICS = [
-  { key: 'ALL',       label: 'All',       desc: 'The full editorial: five recurring columns reading one split scene.' },
-  { key: 'SIGNAL',    label: 'Signal',    desc: 'The macro read: where the scene is structurally going.' },
-  { key: 'RADAR',     label: 'Radar',     desc: 'Emerging artists we actually play.' },
-  { key: 'RESIDENT',  label: 'Resident',  desc: 'The labels and residencies that built the sound.' },
-  { key: 'CROSSFADE', label: 'Crossfade', desc: 'The collabs, the b2bs, the aliases, the label moves.' },
-  { key: 'DISPATCH',  label: 'Dispatch',  desc: 'Field reportage, from the floor, not the press list.' },
+  { key: 'ALL',       label: 'All',       desc: 'The full editorial: five recurring columns reading one split scene.', descIt: "L'editoriale completo: cinque rubriche ricorrenti che leggono una scena spaccata in due." },
+  { key: 'SIGNAL',    label: 'Signal',    desc: 'The macro read: where the scene is structurally going.', descIt: "La lettura macro: dove sta andando la scena a livello strutturale." },
+  { key: 'RADAR',     label: 'Radar',     desc: 'Emerging artists we actually play.', descIt: "Artisti emergenti che suoniamo davvero." },
+  { key: 'RESIDENT',  label: 'Resident',  desc: 'The labels and residencies that built the sound.', descIt: "Le etichette e le residency che hanno costruito il suono." },
+  { key: 'CROSSFADE', label: 'Crossfade', desc: 'The collabs, the b2bs, the aliases, the label moves.', descIt: "Le collaborazioni, i b2b, gli alias, le mosse delle etichette." },
+  { key: 'DISPATCH',  label: 'Dispatch',  desc: 'Field reportage, from the floor, not the press list.', descIt: "Reportage dal campo, dalla pista, non dalla press list." },
 ];
 const ALL_TAGS = Array.from(new Set(ARTICLES.flatMap(a => (a.metadata.tags || [])))).sort();
 
 function MediaReader({ slug, onClose }) {
   const C = window.Cv8;
+  const T = window.useT ? window.useT() : ((en) => en);
   const MONO = { fontFamily: "'JetBrains Mono', monospace" };
   const startY = React.useRef(null);
   const panelRef = React.useRef(null);
@@ -122,7 +131,7 @@ function MediaReader({ slug, onClose }) {
       style={{ position: 'fixed', inset: 0, zIndex: 200, background: C.dark }}>
       <div ref={panelRef} className="hz-reader-panel hz-noscroll" style={{ position: 'absolute', inset: 0, overflowY: 'auto', WebkitOverflowScrolling: 'touch', transition: 'transform 0.3s cubic-bezier(.22,1,.36,1)' }}>
         <div style={{ position: 'sticky', top: 0, zIndex: 5, display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px clamp(20px,4vw,56px)', background: 'rgba(8,8,13,0.82)', backdropFilter: 'blur(8px)', borderBottom: `1px solid ${C.light}10` }}>
-          <span style={{ ...MONO, fontSize: 10, letterSpacing: '0.2em', color: C.light + '55', textTransform: 'uppercase' }}>// Reader</span>
+          <span style={{ ...MONO, fontSize: 10, letterSpacing: '0.2em', color: C.light + '55', textTransform: 'uppercase' }}>{T('// Reader','// Lettore')}</span>
           <button onClick={onClose} aria-label="Close reader" style={{ ...MONO, fontSize: 11, letterSpacing: '0.14em', color: C.light, background: 'transparent', border: `1px solid ${C.light}22`, padding: '8px 14px', cursor: 'pointer', textTransform: 'uppercase', minHeight: 40 }}>Close ✕</button>
         </div>
         <main style={{ padding: 'clamp(28px,5vh,64px) clamp(20px,4vw,56px) 110px', maxWidth: 1400, margin: '0 auto' }}>
@@ -136,6 +145,7 @@ function MediaReader({ slug, onClose }) {
 function MediaPage() {
   const C = window.Cv8;
   const R = window.R8;
+  const T = window.useT ? window.useT() : ((en) => en);
   const mono = { fontFamily: "'JetBrains Mono', monospace" };
   const briq = { fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif" };
   const GRADE = 'saturate(0.55) brightness(0.62) contrast(1.10)';
@@ -199,7 +209,7 @@ function MediaPage() {
             </div>
             <div style={{ display: 'flex', alignItems: 'center', flex: '0 1 300px', minWidth: 180, paddingBottom: 8 }}>
               <span style={{ ...mono, fontSize: 13, color: C.light + '55', marginRight: 8 }}>⌕</span>
-              <input value={query} onChange={e => setQuery(e.target.value)} placeholder="SEARCH" aria-label="Search articles"
+              <input value={query} onChange={e => setQuery(e.target.value)} placeholder={T("SEARCH","CERCA")} aria-label="Search articles"
                 style={{ flex: 1, background: 'transparent', border: 'none', outline: 'none', ...mono, fontSize: 12, letterSpacing: '0.1em', color: C.light, borderBottom: `1px solid ${C.light}22`, padding: '8px 0' }} />
               {query && <button onClick={() => setQuery('')} aria-label="Clear search" style={{ ...mono, fontSize: 12, color: C.light + '66', background: 'transparent', border: 'none', cursor: 'pointer', padding: '0 4px' }}>✕</button>}
             </div>
@@ -229,7 +239,7 @@ function MediaPage() {
               ...mono, fontSize: 11, letterSpacing: '0.16em', textTransform: 'uppercase', whiteSpace: 'nowrap',
               padding: '8px 14px', cursor: 'pointer', background: 'transparent', minHeight: 40,
               border: `1px solid ${on ? C.blue : C.light + '18'}`, color: on ? C.blue : C.light + '77', transition: 'all 0.2s',
-            }}>{r.label}</button>
+            }}>{r.key === 'ALL' ? T('All','Tutti') : r.label}</button>
           );
         })}
       </div>
@@ -238,7 +248,7 @@ function MediaPage() {
       <section style={{ padding: 'clamp(20px,4vh,40px) clamp(16px,4vw,56px) clamp(40px,8vh,96px)' }}>
         <div style={{ maxWidth: 980, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 'clamp(18px,3vh,30px)' }}>
           {filtered.length === 0 && (
-            <div style={{ ...mono, fontSize: 12, color: C.light + '55', letterSpacing: '0.16em', textTransform: 'uppercase', padding: '60px 0' }}>// No transmissions match{q ? ` "${query.trim()}"` : tag ? ` #${tag}` : ''}</div>
+            <div style={{ ...mono, fontSize: 12, color: C.light + '55', letterSpacing: '0.16em', textTransform: 'uppercase', padding: '60px 0' }}>{T('// No transmissions match','// Nessuna trasmissione corrisponde')}{q ? ` "${query.trim()}"` : tag ? ` #${tag}` : ''}</div>
           )}
           {filtered.map((a, i) => {
             const on = activeIdx === i;
@@ -269,11 +279,11 @@ function MediaPage() {
                 </div>
                 <div style={{ position: 'absolute', left: 24, right: 24, bottom: 26 }}>
                   <h2 style={{ ...briq, fontSize: 'clamp(1.7rem,4.5vw,3rem)', fontWeight: 800, lineHeight: 1.02, letterSpacing: '-0.03em', color: C.light, margin: 0, textWrap: 'balance', maxWidth: '20ch' }}>{a.title}<span style={{ color: C.blue }}>.</span></h2>
-                  <p style={{ ...briq, fontSize: 'clamp(14px,1.4vw,16px)', color: C.light + 'cc', lineHeight: 1.45, margin: '12px 0 0', maxWidth: '46ch', textWrap: 'pretty', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{a.subtitle || a.excerpt}</p>
+                  <p style={{ ...briq, fontSize: 'clamp(14px,1.4vw,16px)', color: C.light + 'cc', lineHeight: 1.45, margin: '12px 0 0', maxWidth: '46ch', textWrap: 'pretty', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{T(a.subtitle || a.excerpt, a.subtitleIt || a.excerptIt || a.subtitle || a.excerpt)}</p>
                   <div style={{ ...mono, fontSize: 10, letterSpacing: '0.14em', color: C.light + '88', textTransform: 'uppercase', marginTop: 16, display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
                     <span>{a.metadata.author}</span><span style={{ color: C.blue }}>·</span>
-                    {rt ? <span>Runtime {rt}:00</span> : null}
-                    <span style={{ marginLeft: 'auto', color: on ? C.blue : C.light + '88' }}>Read ↗</span>
+                    {rt ? <span>{T('Runtime','Durata')} {rt}:00</span> : null}
+                    <span style={{ marginLeft: 'auto', color: on ? C.blue : C.light + '88' }}>{T('Read ↗','Leggi ↗')}</span>
                   </div>
                 </div>
               </article>
