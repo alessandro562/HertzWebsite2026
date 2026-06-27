@@ -168,6 +168,7 @@ function Nav8() {
             onMouseEnter={e => { e.currentTarget.style.borderColor = C.blue; e.currentTarget.style.color = C.blue; }}
             onMouseLeave={e => { e.currentTarget.style.borderColor = C.light + '33'; e.currentTarget.style.color = C.light; }}
           >Bookings ↗</a>
+          {window.LangToggle && <window.LangToggle />}
         </div>
       )}
     </nav>
@@ -222,6 +223,7 @@ function Nav8() {
           transition: `all 0.4s cubic-bezier(.22,1,.36,1) ${items.length * 0.05}s`,
         }}
       >Bookings ↗</a>
+      <div style={{ marginTop: 20 }}>{window.LangToggle && <window.LangToggle />}</div>
     </div>
     </>
   );
@@ -267,6 +269,7 @@ window.PageHero = PageHero;
 /* ─── Footer ───────────────────────────────── */
 function Footer8({ banner = true, bannerLight = true }) {
   const C = Cv8;
+  const T = window.useT ? window.useT() : ((en) => en);
   return (
     <>
       {banner && (
@@ -303,7 +306,7 @@ function Footer8({ banner = true, bannerLight = true }) {
             </p>
           </div>
           <div>
-            <h4 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.2em', color: C.light + '55', marginBottom: 16 }}>// NAVIGATE</h4>
+            <h4 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.2em', color: C.light + '55', marginBottom: 16 }}>{T('// NAVIGATE', '// NAVIGA')}</h4>
             {[['Events','/events.html'],['Manifesto','/manifesto.html'],['Artists','/artists.html'],['Music','/music.html'],['Merch','/merch.html'],['Media','/media.html'],['Archive','/archive.html']].map(([l,h]) => (
               <a key={l} href={h} style={{ display: 'block', color: C.light + '99', textDecoration: 'none', fontSize: 14, padding: '7px 0', fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif", fontWeight: 500, transition: 'color 0.2s' }}
               onMouseEnter={e => e.currentTarget.style.color = C.light}
@@ -311,7 +314,7 @@ function Footer8({ banner = true, bannerLight = true }) {
             ))}
           </div>
           <div>
-            <h4 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.2em', color: C.light + '55', marginBottom: 16 }}>// FREQUENCIES</h4>
+            <h4 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.2em', color: C.light + '55', marginBottom: 16 }}>{T('// FREQUENCIES', '// FREQUENZE')}</h4>
             {[['Instagram','https://instagram.com/hertz.cc'],['Spotify','#'],['SoundCloud','#'],['Mixcloud','#']].map(([l,h]) => (
               <a key={l} href={h} target={h.startsWith('http') ? '_blank' : undefined} rel={h.startsWith('http') ? 'noopener noreferrer' : undefined} style={{ display: 'block', color: C.light + '99', textDecoration: 'none', fontSize: 14, padding: '7px 0', fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif", fontWeight: 500, transition: 'color 0.2s' }}
               onMouseEnter={e => e.currentTarget.style.color = C.light}
@@ -321,7 +324,8 @@ function Footer8({ banner = true, bannerLight = true }) {
           <div>
             <h4 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.2em', color: C.light + '55', marginBottom: 16 }}>// SAFE SPACE</h4>
             <p style={{ fontSize: 12, color: C.light + '66', lineHeight: 1.7, textWrap: 'pretty' }}>
-              No harassment. No hate. No discrimination. Respect boundaries, yours and others'. The dancefloor is for everyone.
+              {T("No harassment. No hate. No discrimination. Respect boundaries, yours and others'. The dancefloor is for everyone.",
+                 'Niente molestie. Niente odio. Niente discriminazioni. Rispetta i limiti, i tuoi e quelli degli altri. La pista è di tutti.')}
             </p>
           </div>
         </div>

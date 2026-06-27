@@ -463,6 +463,7 @@ function Nav8() {
             onMouseEnter={e => { e.currentTarget.style.borderColor = Cv8.blue; e.currentTarget.style.color = Cv8.blue; }}
             onMouseLeave={e => { e.currentTarget.style.borderColor = Cv8.light + '33'; e.currentTarget.style.color = Cv8.light; }}
           >Bookings ↗</a>
+          {window.LangToggle && <window.LangToggle />}
         </div>
       )}
     </nav>
@@ -514,6 +515,7 @@ function Nav8() {
           transition: `all 0.4s cubic-bezier(.22,1,.36,1) ${items.length * 0.05}s`,
         }}
       >Bookings ↗</a>
+      <div style={{ marginTop: 20 }}>{window.LangToggle && <window.LangToggle />}</div>
     </div>
     </>
   );
