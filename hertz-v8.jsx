@@ -76,7 +76,7 @@ function R8({ children, delay = 0, y = 60, style = {}, className = '' }) {
     <div ref={ref} className={className} style={{
       opacity: vis ? 1 : 0,
       transform: vis ? 'translateY(0)' : `translateY(${y}px)`,
-      transition: `opacity 1.1s cubic-bezier(.22,1,.36,1) ${delay}s, transform 1.1s cubic-bezier(.22,1,.36,1) ${delay}s`,
+      transition: `opacity 0.7s cubic-bezier(.22,1,.36,1) ${delay}s, transform 0.7s cubic-bezier(.22,1,.36,1) ${delay}s`,
       ...style,
     }}>{children}</div>
   );
@@ -441,7 +441,7 @@ function Nav8() {
                 borderBottom: active ? `1px solid ${Cv8.blue}` : '1px solid transparent',
                 paddingBottom: 2,
               }}
-              onMouseEnter={e => { e.currentTarget.style.color = Cv8.blue; e.currentTarget.style.transform = 'translateY(-1px)'; }}
+              onMouseEnter={e => { e.currentTarget.style.color = Cv8.light; e.currentTarget.style.transform = 'translateY(-1px)'; }}
               onMouseLeave={e => { e.currentTarget.style.color = active ? Cv8.light : Cv8.light + 'aa'; e.currentTarget.style.transform = 'translateY(0)'; }}
               >{item.label}</a>
             );
@@ -677,6 +677,12 @@ window.Hero8 = Hero8;
 /* ═══════════════════════════════════════════
    APP ROOT
    ═══════════════════════════════════════════ */
+function useTweaks(defaults) {
+  const [tweaks, setTweaks] = React.useState(defaults);
+  const setTweak = React.useCallback((k, v) => setTweaks(s => ({ ...s, [k]: v })), []);
+  return [tweaks, setTweak];
+}
+
 function HertzV8App() {
   const [tweaks, setTweak] = useTweaks(V8_DEFAULTS);
   const countdown = useCountdown(NEXT_EVENT.iso);
@@ -699,36 +705,6 @@ function HertzV8App() {
         <window.CollabSection8 />
         <window.Footer8 />
       </div>
-
-      <TweaksPanel>
-        <TweakSection label="Hero 3D logo" />
-        <TweakSelect
-          label="Texture" value={tweaks.logoTexture}
-          options={[
-            { value: 'chrome',   label: 'Chrome' },
-            { value: 'mercury',  label: 'Mercury (fluid)' },
-            { value: 'steel',    label: 'Brushed steel' },
-            { value: 'marble',   label: 'Marble' },
-            { value: 'concrete', label: 'Concrete' },
-            { value: 'glass',    label: 'Glass' },
-            { value: 'neon',     label: 'Neon' },
-            { value: 'holo',     label: 'Holographic' },
-            { value: 'flat',     label: 'Flat white' },
-          ]}
-          onChange={(v) => setTweak('logoTexture', v)}
-        />
-        <TweakSlider label="Speed" value={tweaks.speed} min={0.1} max={3} step={0.05}
-          onChange={(v) => setTweak('speed', v)} />
-        <TweakSlider label="Glow" value={tweaks.bloom} min={0} max={2.5} step={0.05}
-          onChange={(v) => setTweak('bloom', v)} />
-        <TweakSection label="Color" />
-        <TweakRadio label="Accent" value={tweaks.accent}
-          options={['cyan','yellow','blue','white']}
-          onChange={(v) => setTweak('accent', v)} />
-        <TweakRadio label="Primary" value={tweaks.primary}
-          options={['cyan','yellow','blue','white']}
-          onChange={(v) => setTweak('primary', v)} />
-      </TweaksPanel>
     </div>
   );
 }

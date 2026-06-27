@@ -982,7 +982,7 @@ function Footer8() {
               fontFamily: "'JetBrains Mono', monospace",
               fontSize: 11, color: C.light + '66', lineHeight: 1.8,
             }}>
-              hertz.cc<br />info@hertz.cc<br />Bologna · IT
+              hertzclubbing.com<br />info@hertz.cc<br />Bologna · IT
             </p>
           </div>
           <div>
@@ -997,7 +997,7 @@ function Footer8() {
                 fontSize: 14, padding: '7px 0', transition: 'color 0.2s',
                 fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif", fontWeight: 500,
               }}
-              onMouseEnter={e => e.currentTarget.style.color = C.blue}
+              onMouseEnter={e => e.currentTarget.style.color = C.light}
               onMouseLeave={e => e.currentTarget.style.color = C.light + '99'}
               >{l} →</a>
             ))}
@@ -1019,7 +1019,7 @@ function Footer8() {
                 fontSize: 14, padding: '7px 0', transition: 'color 0.2s',
                 fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif", fontWeight: 500,
               }}
-              onMouseEnter={e => e.currentTarget.style.color = C.blue}
+              onMouseEnter={e => e.currentTarget.style.color = C.light}
               onMouseLeave={e => e.currentTarget.style.color = C.light + '99'}
               >{x.l} →</a>
             ))}
@@ -1042,7 +1042,7 @@ function Footer8() {
           fontSize: 10, color: C.light + '40', letterSpacing: '0.1em',
         }}>
           <span>© 2026 Hertz, by clubbers, for clubbers</span>
-          <span>HZ.CC / V8</span>
+          <span>HZ // CLUBBING.COM</span>
         </div>
       </div>
     </footer>

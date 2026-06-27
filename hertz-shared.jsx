@@ -51,7 +51,7 @@ function R8({ children, delay = 0, y = 50, style = {}, className = '' }) {
     <div ref={ref} className={className} style={{
       opacity: vis ? 1 : 0,
       transform: vis ? 'translateY(0)' : `translateY(${y}px)`,
-      transition: `opacity 1.1s cubic-bezier(.22,1,.36,1) ${delay}s, transform 1.1s cubic-bezier(.22,1,.36,1) ${delay}s`,
+      transition: `opacity 0.7s cubic-bezier(.22,1,.36,1) ${delay}s, transform 0.7s cubic-bezier(.22,1,.36,1) ${delay}s`,
       ...style,
     }}>{children}</div>
   );
@@ -147,7 +147,7 @@ function Nav8() {
                 borderBottom: active ? `1px solid ${C.blue}` : '1px solid transparent',
                 paddingBottom: 2,
               }}
-              onMouseEnter={e => { e.currentTarget.style.color = C.blue; e.currentTarget.style.transform = 'translateY(-1px)'; }}
+              onMouseEnter={e => { e.currentTarget.style.color = C.light; e.currentTarget.style.transform = 'translateY(-1px)'; }}
               onMouseLeave={e => { e.currentTarget.style.color = active ? C.light : C.light + 'aa'; e.currentTarget.style.transform = 'translateY(0)'; }}
               >{item.label}</a>
             );
@@ -299,14 +299,14 @@ function Footer8({ banner = true, bannerLight = true }) {
           <div>
             <img src="/assets/hertz-logo-header.png" alt="Hertz" style={{ height: 30, opacity: 0.9, marginBottom: 16 }} />
             <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: C.light + '66', lineHeight: 1.8 }}>
-              hertz.club<br />info@hertz.cc<br />Bologna · IT
+              hertzclubbing.com<br />info@hertz.cc<br />Bologna · IT
             </p>
           </div>
           <div>
             <h4 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.2em', color: C.light + '55', marginBottom: 16 }}>// NAVIGATE</h4>
             {[['Events','/events.html'],['Manifesto','/manifesto.html'],['Artists','/artists.html'],['Music','/music.html'],['Merch','/merch.html'],['Media','/media.html'],['Archive','/archive.html']].map(([l,h]) => (
               <a key={l} href={h} style={{ display: 'block', color: C.light + '99', textDecoration: 'none', fontSize: 14, padding: '7px 0', fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif", fontWeight: 500, transition: 'color 0.2s' }}
-              onMouseEnter={e => e.currentTarget.style.color = C.blue}
+              onMouseEnter={e => e.currentTarget.style.color = C.light}
               onMouseLeave={e => e.currentTarget.style.color = C.light + '99'}>{l} →</a>
             ))}
           </div>
@@ -314,7 +314,7 @@ function Footer8({ banner = true, bannerLight = true }) {
             <h4 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.2em', color: C.light + '55', marginBottom: 16 }}>// FREQUENCIES</h4>
             {[['Instagram','https://instagram.com/hertz.cc'],['Spotify','#'],['SoundCloud','#'],['Mixcloud','#']].map(([l,h]) => (
               <a key={l} href={h} target={h.startsWith('http') ? '_blank' : undefined} rel={h.startsWith('http') ? 'noopener noreferrer' : undefined} style={{ display: 'block', color: C.light + '99', textDecoration: 'none', fontSize: 14, padding: '7px 0', fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif", fontWeight: 500, transition: 'color 0.2s' }}
-              onMouseEnter={e => e.currentTarget.style.color = C.blue}
+              onMouseEnter={e => e.currentTarget.style.color = C.light}
               onMouseLeave={e => e.currentTarget.style.color = C.light + '99'}>{l} →</a>
             ))}
           </div>
@@ -331,7 +331,7 @@ function Footer8({ banner = true, bannerLight = true }) {
           fontFamily: "'JetBrains Mono', monospace", fontSize: 10, color: C.light + '40', letterSpacing: '0.1em',
         }}>
           <span>© 2026 Hertz, by clubbers, for clubbers</span>
-          <span>HZ.CLUB / V8</span>
+          <span>HZ // CLUBBING.COM</span>
         </div>
       </div>
     </footer>
