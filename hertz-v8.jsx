@@ -383,6 +383,7 @@ function Nav8() {
     { label: 'Music',     href: '/music.html' },
     { label: 'Merch',     href: '/merch.html' },
     { label: 'Media',     href: '/media.html' },
+    { label: 'Archive',   href: '/archive.html' },
   ];
   const path = (typeof location !== 'undefined') ? location.pathname : '/';
   const filename = path.split('/').pop();

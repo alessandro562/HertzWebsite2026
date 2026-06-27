@@ -91,6 +91,7 @@ function Nav8() {
     { label: 'Music',     href: '/music.html' },
     { label: 'Merch',     href: '/merch.html' },
     { label: 'Media',     href: '/media.html' },
+    { label: 'Archive',   href: '/archive.html' },
   ];
 
   const path = typeof location !== 'undefined' ? location.pathname : '/';
@@ -264,25 +265,33 @@ function PageHero({ section, title, sub, light = false }) {
 window.PageHero = PageHero;
 
 /* ─── Footer ───────────────────────────────── */
-function Footer8() {
+function Footer8({ banner = true, bannerLight = true }) {
   const C = Cv8;
   return (
+    <>
+      {banner && (
+        <section style={{
+          background: bannerLight ? C.light : C.dark, color: bannerLight ? C.dark : C.light,
+          padding: 'clamp(60px,10vh,100px) clamp(20px,4vw,56px)',
+        }}>
+          <div style={{ maxWidth: 1400, margin: '0 auto' }}>
+            <div style={{
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 16,
+            }}>FROM CLUBBERS FOR CLUBBERS</div>
+            <h2 style={{
+              fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
+              fontSize: 'clamp(2.5rem,8vw,7rem)',
+              fontWeight: 700, lineHeight: 0.83, letterSpacing: '-0.05em', color: bannerLight ? C.dark : C.light,
+            }}>Groove is<br />the key<span style={{ color: C.blue }}>.</span></h2>
+          </div>
+        </section>
+      )}
     <footer style={{
       background: C.dark, color: C.light,
       padding: 'clamp(60px,10vh,100px) clamp(20px,4vw,56px) clamp(24px,4vh,48px)',
     }}>
       <div style={{ maxWidth: 1400, margin: '0 auto' }}>
-        <div style={{ marginBottom: 72, paddingBottom: 56, borderBottom: `1px solid ${C.light}1a` }}>
-          <div style={{
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 16,
-          }}>FROM CLUBBERS FOR CLUBBERS</div>
-          <h2 style={{
-            fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
-            fontSize: 'clamp(2.5rem,8vw,7rem)',
-            fontWeight: 700, lineHeight: 0.83, letterSpacing: '-0.05em', color: C.light,
-          }}>Groove is<br />the key<span style={{ color: C.blue }}>.</span></h2>
-        </div>
         <div style={{
           display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(180px,1fr))',
           gap: 40, marginBottom: 48,
@@ -295,7 +304,7 @@ function Footer8() {
           </div>
           <div>
             <h4 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.2em', color: C.light + '55', marginBottom: 16 }}>// NAVIGATE</h4>
-            {[['Events','/events.html'],['Manifesto','/manifesto.html'],['Artists','/artists.html'],['Music','/music.html'],['Merch','/merch.html'],['Media','/media.html']].map(([l,h]) => (
+            {[['Events','/events.html'],['Manifesto','/manifesto.html'],['Artists','/artists.html'],['Music','/music.html'],['Merch','/merch.html'],['Media','/media.html'],['Archive','/archive.html']].map(([l,h]) => (
               <a key={l} href={h} style={{ display: 'block', color: C.light + '99', textDecoration: 'none', fontSize: 14, padding: '7px 0', fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif", fontWeight: 500, transition: 'color 0.2s' }}
               onMouseEnter={e => e.currentTarget.style.color = C.blue}
               onMouseLeave={e => e.currentTarget.style.color = C.light + '99'}>{l} →</a>
@@ -326,6 +335,7 @@ function Footer8() {
         </div>
       </div>
     </footer>
+    </>
   );
 }
 window.Footer8 = Footer8;

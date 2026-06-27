@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hertz Archive — Photos, Footage & Press Kit</title>
+  <meta name="description" content="The Hertz visual archive: photos and footage from the nights, plus the press kit. Bologna, minimal and deep-tech.">
+  <meta name="theme-color" content="#08080d">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Hertz Archive — Photos, Footage & Press Kit">
+  <meta property="og:description" content="Photos and footage from the floor, plus the Hertz press kit.">
+  <meta property="og:image" content="https://hertz.club/assets/hertz-logo-official.png">
+  <meta property="og:url" content="https://hertz.club/archive">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hertz Archive">
+  <link rel="canonical" href="https://hertz.club/archive">
+  <link rel="stylesheet" href="fonts.css">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=block" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+    body { background: #08080d; color: #f5f5f3; font-family: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif; overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #08080d; }
+    ::-webkit-scrollbar-thumb { background: rgba(20,72,137,0.4); }
+    ::selection { background: rgba(20,72,137,0.30); color: #f5f5f3; }
+    img, video { user-select: none; -webkit-user-drag: none; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    @media (max-width: 768px) { * { -webkit-tap-highlight-color: transparent; } html { font-size: 14px; } body { font-size: 14px; } input { font-size: 16px; } }
+    @media (max-width: 480px) { html { font-size: 13px; } }
+    @media (prefers-reduced-motion: reduce) { * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script type="text/babel" src="hertz-shared.jsx"></script>
+<script type="text/babel">
+
+// ← Replace this with the share link of the Google Drive press-kit folder.
+const PRESS_KIT_LINK = '#';
+
+const GALLERY = [
+    {"src": "uploads/24.04_Hertz-17.jpg", "code": "HZ.023", "date": "24.04"},
+    {"src": "uploads/24.04_Hertz-18.jpg", "code": "HZ.023", "date": "24.04"},
+    {"src": "uploads/24.04_Hertz-24.jpg", "code": "HZ.023", "date": "24.04"},
+    {"src": "uploads/24.04_Hertz-58.jpg", "code": "HZ.023", "date": "24.04"},
+    {"src": "uploads/24.04_Hertz-62.jpg", "code": "HZ.023", "date": "24.04"},
+    {"src": "uploads/24.04_Hertz-71.jpg", "code": "HZ.023", "date": "24.04"},
+    {"src": "uploads/24.04_Hertz-73.jpg", "code": "HZ.023", "date": "24.04"},
+    {"src": "uploads/24.04_Hertz-86.jpg", "code": "HZ.023", "date": "24.04"},
+    {"src": "uploads/24.04_Hertz-95.jpg", "code": "HZ.023", "date": "24.04"},
+    {"src": "uploads/24.04_Hertz-129.jpg", "code": "HZ.023", "date": "24.04"},
+    {"src": "uploads/27.02_Hertz-3.jpg", "code": "HZ.022", "date": "27.02"},
+    {"src": "uploads/27.02_Hertz-4.jpg", "code": "HZ.022", "date": "27.02"},
+    {"src": "uploads/27.02_Hertz-5.jpg", "code": "HZ.022", "date": "27.02"},
+    {"src": "uploads/27.02_Hertz-6.jpg", "code": "HZ.022", "date": "27.02"},
+    {"src": "uploads/27.02_Hertz-7.jpg", "code": "HZ.022", "date": "27.02"},
+    {"src": "uploads/27.02_Hertz-8.jpg", "code": "HZ.022", "date": "27.02"},
+    {"src": "uploads/27.02_Hertz-9.jpg", "code": "HZ.022", "date": "27.02"},
+    {"src": "uploads/27.02_Hertz-10.jpg", "code": "HZ.022", "date": "27.02"},
+    {"src": "uploads/27.02_Hertz-11.jpg", "code": "HZ.022", "date": "27.02"},
+    {"src": "uploads/27.02_Hertz-12.jpg", "code": "HZ.022", "date": "27.02"},
+    {"src": "uploads/27.02_Hertz-13.jpg", "code": "HZ.022", "date": "27.02"},
+    {"src": "uploads/27.02_Hertz-14.jpg", "code": "HZ.022", "date": "27.02"},
+    {"src": "uploads/27.02_Hertz-15.jpg", "code": "HZ.022", "date": "27.02"},
+    {"src": "uploads/27.02_Hertz-16.jpg", "code": "HZ.022", "date": "27.02"},
+    {"src": "uploads/27.02_Hertz-36.jpg", "code": "HZ.022", "date": "27.02"},
+    {"src": "uploads/27.02_Hertz-76.jpg", "code": "HZ.022", "date": "27.02"},
+    {"src": "uploads/27.02_Hertz-142.jpg", "code": "HZ.022", "date": "27.02"},
+    {"src": "uploads/27.02_Hertz-167.jpg", "code": "HZ.022", "date": "27.02"},
+    {"src": "uploads/27.02_Hertz-168.jpg", "code": "HZ.022", "date": "27.02"},
+    {"src": "uploads/27.02_Hertz-173.jpg", "code": "HZ.022", "date": "27.02"},
+    {"src": "uploads/27.02_Hertz-174.jpg", "code": "HZ.022", "date": "27.02"},
+    {"src": "uploads/27.02_Hertz-176.jpg", "code": "HZ.022", "date": "27.02"},
+    {"src": "uploads/27.02_Hertz-197.jpg", "code": "HZ.022", "date": "27.02"},
+    {"src": "uploads/26.12_Hertz-28.jpg", "code": "HZ.021", "date": "26.12"},
+    {"src": "uploads/26.12_Hertz-55.jpg", "code": "HZ.021", "date": "26.12"},
+    {"src": "uploads/26.12_Hertz-86.jpg", "code": "HZ.021", "date": "26.12"}
+  ];
+const EDITIONS = ['ALL'].concat(Array.from(new Set(GALLERY.map(g => g.code))));
+
+// Video loops — drop a file in /assets and set `src` to go live. Until then,
+// each card shows a graded poster with a "loop coming" tag.
+const VIDEOS = [
+  { src: null, poster: 'uploads/27.02_Hertz-7.jpg',  code: 'HZ.022', label: 'Floor' },
+  { src: null, poster: 'uploads/24.04_Hertz-62.jpg', code: 'HZ.023', label: 'Booth' },
+  { src: null, poster: 'uploads/27.02_Hertz-142.jpg', code: 'HZ.022', label: 'Lights' },
+];
+
+function ArchivePage() {
+  const C = window.Cv8;
+  const R = window.R8;
+  const mono = { fontFamily: "'JetBrains Mono', monospace" };
+  const briq = { fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif" };
+  const GRADE = 'saturate(0.5) brightness(0.62) contrast(1.12)';
+
+  const [edition, setEdition] = React.useState('ALL');
+  const [email, setEmail] = React.useState('');
+  const [status, setStatus] = React.useState('idle'); // idle | sending | done | error
+  const photos = edition === 'ALL' ? GALLERY : GALLERY.filter(g => g.code === edition);
+
+  const submit = (e) => {
+    e.preventDefault();
+    const ok = /.+@.+\..+/.test(email.trim());
+    if (!ok) { setStatus('error'); return; }
+    setStatus('sending');
+    fetch('/api/waitlist', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: email.trim(), source: 'press-kit' }) })
+      .catch(() => {})
+      .finally(() => setStatus('done'));
+  };
+
+  return (
+    <div style={{ background: C.dark, minHeight: '100vh' }}>
+      <window.Nav8 />
+      <window.PageHero section="05. ARCHIVE" title="The archive" sub="Frames and footage from the floor, plus the press kit." />
+
+      {/* PHOTO ARCHIVE */}
+      <div style={{ background: C.darkSoft, padding: '0 clamp(20px,4vw,56px)', borderBottom: `1px solid ${C.light}0a`, position: 'sticky', top: 68, zIndex: 40 }}>
+        <div className="hz-edrow" style={{ display: 'flex', gap: 0, overflowX: 'auto', maxWidth: 1400, margin: '0 auto' }}>
+          {EDITIONS.map(ev => (
+            <button key={ev} onClick={() => setEdition(ev)} style={{
+              padding: '15px 22px', background: 'transparent', border: 'none', outline: 'none', minHeight: 44,
+              borderBottom: edition === ev ? `2px solid ${C.blue}` : '2px solid transparent',
+              ...mono, fontSize: 11, letterSpacing: '0.16em', textTransform: 'uppercase',
+              color: edition === ev ? C.blue : C.light + '55', cursor: 'pointer', transition: 'color 0.2s', whiteSpace: 'nowrap', marginBottom: -1,
+            }}>{ev}</button>
+          ))}
+        </div>
+      </div>
+      <style>{`.hz-edrow::-webkit-scrollbar{display:none}.hz-edrow{scrollbar-width:none}`}</style>
+
+      <section style={{ padding: 'clamp(28px,4vh,52px) clamp(16px,4vw,56px) clamp(40px,7vh,80px)' }}>
+        <div style={{ columns: 'clamp(220px, 26vw, 340px)', columnGap: 4, maxWidth: 1400, margin: '0 auto' }}>
+          {photos.map((img, i) => (
+            <figure key={i} style={{ breakInside: 'avoid', margin: '0 0 4px', position: 'relative', overflow: 'hidden', cursor: 'pointer' }}
+              onMouseEnter={e => { const im = e.currentTarget.querySelector('img'); if (im) im.style.filter = 'saturate(0.78) brightness(0.78) contrast(1.06)'; const l = e.currentTarget.querySelector('.lab'); if (l) l.style.opacity = '1'; }}
+              onMouseLeave={e => { const im = e.currentTarget.querySelector('img'); if (im) im.style.filter = GRADE; const l = e.currentTarget.querySelector('.lab'); if (l) l.style.opacity = '0'; }}>
+              <img src={img.src} alt={`Hertz night — ${img.code}`} loading="lazy" decoding="async" style={{ width: '100%', display: 'block', filter: GRADE, transition: 'filter 0.5s cubic-bezier(.22,1,.36,1)' }} />
+              <figcaption className="lab" style={{ position: 'absolute', bottom: 10, left: 10, ...mono, fontSize: 9, letterSpacing: '0.16em', color: C.light + 'cc', opacity: 0, transition: 'opacity 0.3s', background: 'rgba(8,8,13,0.7)', padding: '3px 8px' }}>{img.code} · {img.date}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+
+      {/* VIDEO LOOPS */}
+      <section style={{ background: C.dark, padding: 'clamp(48px,7vh,90px) clamp(20px,4vw,56px)', borderTop: `1px solid ${C.light}0a` }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto' }}>
+          <R>
+            <div style={{ ...mono, fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 14 }}>// MOTION</div>
+            <h2 style={{ ...briq, fontSize: 'clamp(1.8rem,4.5vw,3.2rem)', fontWeight: 700, lineHeight: 0.92, letterSpacing: '-0.03em', color: C.light, marginBottom: 'clamp(28px,4vw,44px)' }}>In motion<span style={{ color: C.blue }}>.</span></h2>
+          </R>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 'clamp(12px,1.6vw,20px)' }}>
+            {VIDEOS.map((v, i) => (
+              <R key={i} delay={i * 0.06}>
+                <figure style={{ position: 'relative', margin: 0, aspectRatio: '9/16', overflow: 'hidden', background: C.darkSoft, border: `1px solid ${C.light}0f` }}>
+                  {v.src
+                    ? <video src={v.src} poster={v.poster} autoPlay loop muted playsInline style={{ width: '100%', height: '100%', objectFit: 'cover', filter: GRADE }} />
+                    : <img src={v.poster} alt={`Hertz ${v.label} loop`} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: GRADE }} />}
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg,rgba(8,8,13,0) 40%,rgba(8,8,13,0.85))', pointerEvents: 'none' }} />
+                  {['top','bottom'].map(v2 => ['left','right'].map(h2 => (
+                    <span key={v2+h2} aria-hidden="true" style={{ position: 'absolute', [v2]: 12, [h2]: 12, width: 14, height: 14, [v2 === 'top' ? 'borderTop' : 'borderBottom']: `1px solid ${C.light}2e`, [h2 === 'left' ? 'borderLeft' : 'borderRight']: `1px solid ${C.light}2e` }} />
+                  )))}
+                  <div style={{ position: 'absolute', top: 16, left: 16, ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue }}>// {v.label.toUpperCase()}</div>
+                  <figcaption style={{ position: 'absolute', left: 16, right: 16, bottom: 16, ...mono, fontSize: 9, letterSpacing: '0.16em', color: C.light + '88', textTransform: 'uppercase', display: 'flex', justifyContent: 'space-between' }}>
+                    <span>{v.code}</span><span>{v.src ? 'Loop' : 'Loop · soon'}</span>
+                  </figcaption>
+                </figure>
+              </R>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* PRESS KIT — email gate */}
+      <section style={{ background: C.light, padding: 'clamp(56px,9vh,110px) clamp(20px,4vw,56px)' }}>
+        <div style={{ maxWidth: 640, margin: '0 auto', textAlign: 'left' }}>
+          <R>
+            <div style={{ ...mono, fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 14 }}>// PRESS KIT</div>
+            <h2 style={{ ...briq, fontSize: 'clamp(2.2rem,6vw,4.5rem)', fontWeight: 700, lineHeight: 0.86, letterSpacing: '-0.04em', color: C.dark, marginBottom: 20 }}>Download the kit<span style={{ color: C.blue }}>.</span></h2>
+            <p style={{ fontSize: 'clamp(14px,1.3vw,16px)', color: C.dark + '99', lineHeight: 1.75, marginBottom: 32, maxWidth: 460, textWrap: 'pretty' }}>
+              Logos, high-res photos, footage and the press release. Leave an email and we'll hand you the link to the full folder.
+            </p>
+          </R>
+          <R delay={0.08}>
+            {status === 'done' ? (
+              <div style={{ border: `1px solid ${C.dark}1e`, padding: 'clamp(24px,3vw,32px)', background: '#ffffff' }}>
+                <div style={{ ...mono, fontSize: 10, letterSpacing: '0.2em', color: C.blue, marginBottom: 12, textTransform: 'uppercase' }}>// Access granted</div>
+                <a href={PRESS_KIT_LINK} target="_blank" rel="noopener noreferrer" style={{
+                  display: 'inline-block', background: C.dark, color: C.light, padding: '14px 26px',
+                  ...mono, fontSize: 12, letterSpacing: '0.14em', textTransform: 'uppercase', transition: 'background 0.2s',
+                }}
+                onMouseEnter={e => e.currentTarget.style.background = C.blue}
+                onMouseLeave={e => e.currentTarget.style.background = C.dark}
+                >Open the press kit ↗</a>
+                <p style={{ ...mono, fontSize: 10, color: C.dark + '66', letterSpacing: '0.08em', marginTop: 16 }}>Sent to {email.trim()}. Keep the link — it's private.</p>
+              </div>
+            ) : (
+              <form onSubmit={submit} style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'stretch', maxWidth: 520 }}>
+                <input type="email" value={email} onChange={e => { setEmail(e.target.value); if (status === 'error') setStatus('idle'); }}
+                  placeholder="your@email.com" aria-label="Email address" required
+                  style={{ flex: '1 1 240px', minWidth: 0, background: 'transparent', border: `1px solid ${status === 'error' ? '#b04545' : C.dark + '33'}`, color: C.dark, padding: '14px 16px', ...mono, fontSize: 13, letterSpacing: '0.04em', outline: 'none' }} />
+                <button type="submit" disabled={status === 'sending'} style={{
+                  flex: '0 0 auto', background: C.dark, color: C.light, padding: '14px 26px', border: 'none', cursor: 'pointer',
+                  ...mono, fontSize: 12, letterSpacing: '0.14em', textTransform: 'uppercase', opacity: status === 'sending' ? 0.6 : 1, transition: 'background 0.2s',
+                }}
+                onMouseEnter={e => { if (status !== 'sending') e.currentTarget.style.background = C.blue; }}
+                onMouseLeave={e => e.currentTarget.style.background = C.dark}
+                >{status === 'sending' ? 'Sending…' : 'Get the link →'}</button>
+                {status === 'error' && <div style={{ flexBasis: '100%', ...mono, fontSize: 10, letterSpacing: '0.1em', color: '#b04545', textTransform: 'uppercase' }}>// Enter a valid email</div>}
+              </form>
+            )}
+          </R>
+        </div>
+      </section>
+
+      <window.Footer8 bannerLight={false} />
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<ArchivePage />);
+</script>
+</body>
+</html>

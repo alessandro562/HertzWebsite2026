@@ -1,148 +1,301 @@
 const ARTICLES = [
   {
-    _id: "hertz-004",
-    slug: "summer-2026-european-club-season",
-    title: "The European Summer 2026: Two Directions at Once",
-    subtitle: "The circuit is splitting. Understanding which direction matters.",
-    excerpt: "The simplest way to describe what's happening in European club culture this summer: two separate things are occurring simultaneously, and the media covers the first while the second is where the interesting music is.",
+    _id: "hertz-signal-01",
+    slug: "two-speed-island-ibiza-2026",
+    title: "The Two-Speed Island: What Ibiza 2026 Is Actually Telling Us",
+    subtitle: "A €70 million hyperclub topped the world poll in year one. Read the rest of the calendar and the split becomes impossible to miss.",
+    excerpt: "UNVRS didn't just open big — it rewrote the rules in a single season. We read the 2026 Ibiza calendar as two scenes running on the same island at different speeds, and ask what that leaves for everyone who isn't building an arena.",
+    rubric: "SIGNAL",
 
     content: {
-      body: `<p>The simplest way to describe what's happening in European club culture this summer: two separate things are occurring simultaneously, and the media largely covers the first while the second is where the interesting music is.</p>
+      body: `<p>Something happened on Ibiza in 2025 that hadn't happened in over two decades of the DJ Mag Top 100 Clubs poll: a club that opened that same year went straight to number one. Not climbed. Debuted there. UNVRS — the "hyperclub" built on the bones of the old Privilege, reportedly for somewhere between 40 and 70 million euros, with room for around ten thousand people — walked in and took the top spot in its first season, and held it into 2026.</p>
 
-<h2>Direction One</h2>
+<p>You can read that as a one-off. We read it as a verdict.</p>
 
-<p>Afterlife has sold out arenas. Anyma played a residency at a venue purpose-built for spectacle. Tale Of Us, who spent a decade making genuinely good music for small rooms, are now producing cinematic experiences for audiences of thousands. The production values are extraordinary—light rigs that cost more than most clubs see in a year, visual design that extends into film and fashion, sets that are choreographed experiences rather than improvised selections.</p>
+<p>Because the number-one club in the world is now, structurally, an arena. It has a control room positioned like a cinema projection box. It has a custom L-Acoustics rig, kinetic lighting that reshapes the room nightly, a drone for the crowd shots, and a VIP balcony sold, in the club's own language, as the best seat in the house — a private table with a minimum spend redeemed against bottles. That last detail is the one that matters most, because it tells you what the room is optimised for. The best view at UNVRS is not on the floor near the booth. It's above it, with a bottle.</p>
 
-<p>This is one legitimate direction for electronic music. It is not inherently worse because it is large. But it has a specific relationship to the music that underpins it, and that relationship is worth naming: the music becomes a vehicle for an experience that is partially, or primarily, visual and spatial. The bass drop lands harder when the light cue hits. The arrangement serves the show.</p>
+<h2>Read the rest of the calendar</h2>
 
-<p>For an audience that came to Afterlife or Anyma to have an experience, this is exactly what they wanted. The question is whether the club culture that produced Tale Of Us, Dixon, and the early Innervisions roster—the rooms, the listening, the hours—is in any way continuous with what's being built at stadium scale.</p>
+<p>The hyperclub isn't an anomaly on the island. It's the loudest expression of where the whole top tier is heading, and the 2026 calendar makes the direction legible.</p>
 
-<h2>Direction Two</h2>
+<p>UNVRS itself runs a week of headline machinery: Jamie Jones brings Paradise on Wednesdays, FISHER on Thursdays, David Guetta on Fridays, elrow on Saturdays, Carl Cox on Sundays. And on Mondays — this is the tell — John Summit lands a nine-week residency under his Experts Only banner. An American festival headliner, fresh off back-to-back mainstages, taking a residency at the world's number-one club. Five years ago that sentence wouldn't have parsed. Elsewhere: Amnesia turns 50 and absorbs Glitterbox; Defected moves to Chinois; Swedish House Mafia takes its longest-ever Ibiza residency at Ushuaïa; Tomorrowland takes over Ushuaïa Wednesdays. The machine is getting bigger, more produced, more expensive, and more comfortable describing a night out as a "world-class experience."</p>
 
-<p>Simultaneously, the underground strand of European club culture is doing something different. The nights generating the most word-of-mouth this summer are not at arenas. They're in 200–400 person venues, at parties without large social media footprints, built around sound systems and programming decisions rather than spectacle.</p>
+<p>The price followed the production. Over the last decade Ibiza entry roughly doubled — from the 40-to-60-euro range to 80 to 150 — and a full night, by the time you've added drinks and transport, now averages somewhere near 270 euros. VIP tables run into the tens of thousands. None of this is hidden. The island has, fairly openly, repositioned itself from a party destination into a luxury entertainment capital. That's a legitimate business. We just want to be precise about what it is.</p>
 
-<p>In Berlin, the post-pandemic consolidation of venues has resolved into something interesting: the large clubs—Berghain, Tresor, OHM—continue operating at their specific pitch, while the illegal and semi-legal party scene that grew during COVID has produced a generation of organizers and artists who built their cultural capital entirely outside institutional structures. The parties that travel by word-of-mouth in Berlin this summer are run by people who learned during three years when clubs were closed.</p>
+<h2>The honest part: the hyperclub is honest</h2>
 
-<p>In the UK, Fabric's survival has been accompanied by a broader recognition that the London club scene's center of gravity is not what it was five years ago. The promoters generating consistent interest are the smaller ones—running nights in spaces that hold hundreds, not thousands, built around specific artistic premises rather than broad commercial appeal.</p>
+<p>Here's where we break from the easy take. The lazy move is to call UNVRS the death of the underground and walk off feeling pure. We won't, because it isn't true and it isn't interesting.</p>
 
-<p>In Italy, the shift is most visible because it's most recent. The scene that was considered peripheral five years ago is now producing artists who are being booked internationally. Panorama festival, which has operated from a small mountain venue since its founding, has become a reference point for European promoters trying to understand what the Italian underground is producing. The connection between this scene and the Bologna context—specifically the relationship between the city's academic music culture and its club scene—is real, though hard to quantify.</p>
+<p>UNVRS is honest about being a spectacle. It promises a stadium-grade audiovisual event with hospitality bolted on, and it delivers exactly that. People come out genuinely moved. There's craft in it. The problem was never the hyperclub being clear about what it sells.</p>
 
-<h2>What the Split Means Sonically</h2>
+<p>The danger is the imitation. The real risk in a two-speed island is the middle tier — the 500-to-1,500-capacity rooms — looking up at the number-one club and deciding the way to survive is to copy it. More LEDs, more table service, more production budget chasing a "premium experience," all of it sub-scaled and underfunded, none of it the thing those rooms are actually good at. A mid-size club that tries to out-spectacle an arena loses on the arena's terms. It has the one advantage the arena can never buy, and it spends its money pretending it doesn't.</p>
 
-<p>The divergence in scale corresponds to a divergence in sound. The stadium-scale events work best with music that has clear dynamic peaks, dramatic buildups, and arrangement logic that translates to a visual timeline. The music serving these events is technically sophisticated but structurally conservative—it needs to be readable by an audience processing many inputs simultaneously.</p>
+<h2>What a room does that an arena can't</h2>
 
-<p>The underground strand is moving in the opposite direction. The tracks getting played in smaller rooms this summer are denser, more polyrhythmic, and less interested in conventional peak moments. The influence of Villalobos-era minimal—the idea that a track can sustain interest through textural development rather than arrangement drama—is more present this summer than at any point in the last five years.</p>
+<p>That advantage is proximity, and the kind of programming proximity allows.</p>
 
-<p>The 303 is back in a specific way: buried in mixes as textural sub-content rather than as lead voice. Percussion patterns increasingly use odd subdivisions against the 4/4 grid. The tracks working in rooms like Kindergarten are not buildups; they're ecosystems.</p>
+<p>In a ten-thousand-cap room, the set has to be legible from two hundred metres away, which means it has to be built out of peaks — moments designed to read at distance and on a phone screen. The music narrows to fit the architecture. That's not a moral failing; it's physics. A drop has to do a lot of work in a space that big.</p>
 
-<blockquote>"The parties that travel by word-of-mouth in Berlin this summer are run by people who learned their trade during three years when clubs were closed."</blockquote>
+<p>In a room of a few hundred, none of that is necessary. The DJ can take an hour to get somewhere. They can play a record that risks losing you, because if it lands, everyone feels it at once and the booth knows immediately. The crowd is close enough to be part of the take. That's where a long set lives, where a hypnotic groove makes sense, where a selector can actually select instead of just deliver. It's the whole reason the deep, minimal end of this music exists — it was built for rooms where you don't need to shout.</p>
 
-<h2>What This Means for Autumn</h2>
+<p>So the question Ibiza 2026 poses to anyone running a small collective isn't "how do we get bigger." It's the opposite, and it's harder: <strong>what is the thing only a room can do, and are we actually doing it, or are we quietly imitating the arena with a smaller budget?</strong></p>
 
-<p>For HERTZ, the direction is clear. The summer programme—Cassero, Classic Club, Kindergarten residencies—has been built around the second strand: artists making dense, rhythmically sophisticated music for rooms where the sound system allows it to function properly.</p>
-
-<p>The autumn follows that logic. The specific names and dates will be announced in sequence, but the framework is fixed: small capacity, calibrated rooms, programming that assumes an audience there to listen rather than to experience a spectacle. The European scene is splitting into two things. We know which one we're part of.</p>`,
+<p>We know which side of the split we're on. The island just made the two sides easier to see. The honest response to a number-one hyperclub isn't to resent it. It's to be unmistakably, structurally different — and to make that difference the reason people come.</p>`,
       readingTimeMinutes: 6
     },
 
-    media: { heroImage: "/assets/art-trends.jpg", heroImageAlt: "Festival crowd under stage lights", gallery: [] },
+    media: { heroImage: "/assets/art-trends.jpg", heroImageAlt: "A hyperclub crowd under stage lights", gallery: [] },
 
     metadata: {
-      author: "HERTZ Redazione",
-      category: "Trends",
-      tags: ["trends", "summer-2026", "european-scene", "minimal", "afterlife", "underground"],
-      publishedAt: new Date("2026-05-26"),
-      updatedAt: new Date("2026-05-26")
+      author: "Hertz Redazione",
+      category: "Editorial",
+      rubric: "SIGNAL",
+      tags: ["ibiza", "unvrs", "hyperclub", "tech-house", "scene", "2026"],
+      publishedAt: new Date("2026-06-26"),
+      updatedAt: new Date("2026-06-26")
     },
 
-    seo: {
-      metaDescription: "European club culture summer 2026: the split between stadium-scale spectacle and the underground strand where the interesting music is happening.",
-      keywords: ["club trends 2026", "afterlife", "european clubs", "underground", "minimal"]
-    },
+    seo: { metaDescription: "UNVRS didn't just open big — it rewrote the rules in a single season. We read the 2026 Ibiza calendar as two scenes running on the same island at different speeds, and ask what that leaves for everyone who isn't building an arena.", keywords: ["ibiza", "unvrs", "hyperclub", "tech-house", "scene", "2026"] },
 
     engagement: { shareCount: 0, viewCount: 0, featured: true },
 
-    relatedArticles: ["authenticity-modern-clubbing", "inside-kindergarten-bologna"]
+    relatedArticles: ["two-people-one-booth-b2b", "sunwaves-left-home-rominimal"]
   },
 
   {
-    _id: "hertz-003",
-    slug: "authenticity-modern-clubbing",
-    title: "Against Branded Clubbing: Notes on What Authenticity Requires",
-    subtitle: "Authenticity has become a marketing term. The more useful question is what it actually means in practice.",
-    excerpt: "The word has been used so often it has become almost unusable. Clubs describe themselves as authentic. DJs describe their approach as authentic. At some point—probably around 2018—authenticity became a brand value, and at that point its use as a meaningful descriptor became difficult.",
+    _id: "hertz-dispatch-01",
+    slug: "sunwaves-left-home-rominimal",
+    title: "Sunwaves Left Home: The Format That Refuses to Scale",
+    subtitle: "After 18 years on the Black Sea, the cathedral of the marathon set was pushed out of Romania. What that says about the music we care about most.",
+    excerpt: "Sunwaves — no VIP, booth close, six-hour sets — just lost its home to permits and pressure and decamped to Spain. We look at why the most music-first format in our world is also the most structurally fragile, and what it means to keep it alive in a city like ours.",
+    rubric: "DISPATCH",
 
     content: {
-      body: `<p>The word has been used so often it has become almost unusable. Clubs describe themselves as authentic. DJs describe their approach as authentic. Promoters use it to distinguish their nights from the commercial circuit. At some point—probably around 2018—authenticity became a brand value, and at that point its use as a meaningful descriptor became difficult.</p>
+      body: `<p>In May 2025, Sunwaves held its thirty-fifth edition on the beach at Mamaia, on Romania's Black Sea coast, and it was the last one there. After eighteen years, the festival that more or less built modern Romanian minimal announced it was leaving the country — pushed out, in the organisers' careful phrasing, by circumstances out of their control, widely understood to mean years of friction with local authorities and police over permits. The festival decamped to Spain, to Roquetas de Mar.</p>
 
-<p>This is an attempt to describe what the word could still mean in concrete terms: not as an identity or a vibe, but as a series of observable decisions.</p>
+<p>If you don't move in this end of the music, that might read as one more festival relocation. For us it's a loss with a lesson in it, because of what Sunwaves *is*.</p>
 
-<h2>When It Went Wrong</h2>
+<h2>What the format actually is</h2>
 
-<p>The shift happened gradually and then all at once. Instagram launched in 2010. By 2013, the clubs generating the most cultural capital were the ones generating the most documentation. The incentive structure changed.</p>
+<p>Sunwaves is the purest live expression of a specific idea about clubbing. The sets run long — four, six, eight hours, occasionally the legendary fifteen-hour marathon. There's effectively no VIP culture. The booth sits close to the crowd. The music — the loopy, hypnotic, stripped house and techno that grew out of Bucharest and Cluj, the sound people tag <strong>RoMinimal</strong> — is built on a kick, a hat, and a fragment of melody that surfaces and dissolves. No build to a climax every eight bars. No hands-in-the-air moment shaped for a phone. The groove sits low and rewards patience.</p>
 
-<p>Before social media documentation, a club's reputation was built through attendance, through the physical experience of being in the room, through the social networks of people who went regularly. After it, a club's reputation was increasingly built through images—the queue, the door, the DJ, the crowd—and through the scale of documentation. The experience became partly a means of producing content.</p>
+<p>The names that defined it are the names that define the form: Rhadoo, Raresh, Petre Inspirescu, Priku, Praslea, with Villalobos and Sonja Moonear among the regulars. And the festival was only ever the gathering — the everyday version lived in rooms like Guesthouse, the Bucharest afterhours small enough that the DJ could read every face in front of the booth. That detail tells you everything about the scale this music is built for.</p>
 
-<p>This is not a moral failing. It's a structural response to incentives. But the consequence was that club culture began to optimize for documentation alongside experience. Decisions about lighting, architecture, artist booking, and even music selection were increasingly inflected by how they would appear rather than how they would function.</p>
+<h2>Why the format is so fragile</h2>
 
-<h2>Berghain as Reference Point</h2>
+<p>Here's the uncomfortable part. Everything that makes RoMinimal precious is also what makes it structurally fragile.</p>
 
-<p>Berghain is cited so frequently in discussions of club culture that using it as a reference feels lazy. I'm going to use it anyway, because the specific choices Berghain makes are instructive.</p>
+<p>It depends on long sets — which need tolerant licensing and venues willing to run past dawn. It depends on a patient crowd — which doesn't form on its own and can't be rushed. It depends on the absence of spectacle — no production budget to recoup, but also no production spectacle to sell. And it depends, more than almost any other format, on authorities leaving it alone, because an all-night party with a quiet, hypnotic floor and no commercial flash is exactly the kind of thing that looks, to a permitting office, like a problem rather than an asset.</p>
 
-<p>No photography. No consistent schedule—sets run for hours without announced end times. No social media presence that reveals what's happening inside. A door selection policy that prioritizes behavior over appearance. Tickets sold at the door, not online, for the main dance floors.</p>
+<p>Put it next to the hyperclub and the asymmetry is stark. UNVRS opened for tens of millions and topped the world. Sunwaves, the cathedral of the opposite philosophy, did everything right for eighteen years and still got pushed off its own coast. The model that generates hospitality revenue scales and gets protected. The model that generates only music doesn't, and doesn't. That's not a moral judgment on either — it's just the mechanics, and the mechanics run against the format we love most.</p>
 
-<p>Each of these decisions is expensive. They cost revenue, they cost media exposure, they cost the ability to build a documented brand. The argument for them is not nostalgic or ideological. It is that they create conditions under which the music can function as the primary experience. When you cannot photograph what's happening, the photograph cannot become the reason for being there.</p>
+<p>The form isn't dying, to be clear. The next Romanian edition's lineup — Raresh, Rhadoo, Carola, Loco Dice, Paco Osuna — sold its first ticket phase out fast, and the sound has never been healthier in the records. It's the *infrastructure* that's fragile: the rooms, the permits, the tolerant authorities. The music travels. The conditions it needs don't.</p>
 
-<blockquote>"When you cannot photograph what's happening, the photograph cannot become the reason for being there."</blockquote>
+<h2>Why this is on us</h2>
 
-<h2>What Authenticity Looks Like in Practice</h2>
+<p>We run RoMinimal nights. This is our lineage, not a genre we're observing from outside — which means Sunwaves leaving Romania isn't news to us, it's family business. And it lands as a direct question: what does it take to keep this format alive in a city like Bologna?</p>
 
-<p>The concrete form of authenticity is not about refusing technology or communication. It's about a specific ordering of priorities.</p>
+<p>The honest answer is that you can't out-fund the problem and you shouldn't try. What you can do is the unglamorous infrastructure work — protect the long set where the licensing allows it, build the patient crowd one night at a time, keep the booth close to the floor on purpose, and refuse to dress the room up as a spectacle just because spectacle is what gets protected. Keep it small enough to feel and serious enough to last.</p>
 
-<p>An authentic booking decision is made on the basis of musical fit—what will this artist do to the floor at 3am in this room for this audience—rather than on the basis of who is currently generating buzz, who will bring their own following, who will post content that extends reach.</p>
-
-<p>An authentic venue decision is made on the basis of acoustic quality, room character, and the relationship between the space and the music being played in it—rather than on the basis of capacity, location visibility, or photographic potential.</p>
-
-<p>An authentic communication decision is made on the basis of what the audience needs to know to decide whether to attend—rather than on maximizing reach, building a following, or producing content that performs well algorithmically.</p>
-
-<p>None of these are radical. They're basic. But they're harder to maintain than they sound, because the pressure in club culture runs in the opposite direction.</p>
-
-<h2>Bologna as a Specific Case</h2>
-
-<p>Bologna's club scene has structural advantages that make this kind of prioritization easier than in larger cities.</p>
-
-<p>The audience is local. The community of people who attend regularly are connected to each other in ways that don't require social media mediation—they have relationships, they talk to each other, they develop taste through direct experience. This creates accountability. A bad booking choice doesn't just generate negative posts; it changes whether people come back.</p>
-
-<p>The scene is not yet fully documented. There are no major media outlets covering what happens here on a weekly basis. The nights that work are the ones that people who were there remember and tell other people about. The loop of influence is human rather than algorithmic.</p>
-
-<p>This won't last forever. Every scene that generates enough cultural interest eventually generates the infrastructure of documentation around it. The question is whether the decisions made now—about scale, communication, what kinds of events to produce—will survive that transition.</p>
-
-<h2>A Practical Manifesto</h2>
-
-<p>Book artists because of their music. Choose venues because of their acoustics. Keep capacity manageable. Communicate what people need to know. Let the night be its own argument.</p>
-
-<p>That's it. It's not complicated in theory. In practice, it requires resisting every incentive that the current attention economy places on events. The clubs that will still be worth attending in ten years are the ones doing this now.</p>`,
-      readingTimeMinutes: 5
+<p>Sunwaves had to cross a border to keep going. Most of us won't have to. But the lesson travels with it: the music that asks the least of a room — no VIP, no production, just time and a low, hypnotic groove — is the music that needs the most defending. So we defend it. That's the job.</p>`,
+      readingTimeMinutes: 6
     },
 
-    media: { heroImage: "/assets/art-authenticity.jpg", heroImageAlt: "Dark club, distant stage lights", gallery: [] },
+    media: { heroImage: "/assets/floor-5.jpg", heroImageAlt: "A low-lit marathon floor", gallery: [] },
 
     metadata: {
-      author: "HERTZ Redazione",
-      category: "Editorial",
-      tags: ["editorial", "authenticity", "club-culture", "berghain", "bologna"],
-      publishedAt: new Date("2026-05-22"),
-      updatedAt: new Date("2026-05-22")
+      author: "Hertz Redazione",
+      category: "Reportage",
+      rubric: "DISPATCH",
+      tags: ["sunwaves", "rominimal", "minimal", "romania", "marathon-set", "scene"],
+      publishedAt: new Date("2026-06-21"),
+      updatedAt: new Date("2026-06-21")
     },
 
-    seo: {
-      metaDescription: "Against branded clubbing: what authenticity actually requires in practice, from booking decisions to venue selection to communication.",
-      keywords: ["club authenticity", "berghain", "club culture", "bologna", "underground"]
-    },
+    seo: { metaDescription: "Sunwaves — no VIP, booth close, six-hour sets — just lost its home to permits and pressure and decamped to Spain. We look at why the most music-first format in our world is also the most structurally fragile, and what it means to keep it alive in a city like ours.", keywords: ["sunwaves", "rominimal", "minimal", "romania", "marathon-set", "scene"] },
 
     engagement: { shareCount: 0, viewCount: 0, featured: false },
 
-    relatedArticles: ["summer-2026-european-club-season", "inside-kindergarten-bologna"]
+    relatedArticles: ["two-speed-island-ibiza-2026", "two-people-one-booth-b2b"]
+  },
+
+  {
+    _id: "hertz-resident-01",
+    slug: "music-on-pacha-long-residency",
+    title: "Music On at Pacha: The Case for the Long Residency",
+    subtitle: "Eight years on the same Friday, despite every rumour of a move. In an age of one-off spectacles, that's not nostalgia — it's a different technology.",
+    excerpt: "Music On stayed at Pacha for 2026. We make the case that the long residency builds something a festival headline slot never can — a crowd, a sound, a room — and ask what it teaches anyone running their own night.",
+    rubric: "RESIDENT",
+
+    content: {
+      body: `<p>Every winter there's a rumour that Marco Carola is moving Music On. Every spring it turns out he isn't. For 2026 it's confirmed again: Music On stays at Pacha, every Friday from 15 May to 9 October — its eighth consecutive season under the cherries, after the move from Amnesia in 2019.</p>
+
+<p>In a scene that increasingly runs on the one-off — the pop-up, the festival headline, the "this lineup will never happen again" — eight years in the same room on the same night looks almost stubborn. We think it's the opposite of stubborn. We think the long residency is a piece of technology the rest of the industry has half-forgotten how to use, and Music On is the clearest working example of it.</p>
+
+<h2>What a residency actually builds</h2>
+
+<p>A festival slot is a transaction. You fly in, you play ninety minutes shaped for a crowd you'll never see again, you fly out. It can be brilliant. It builds almost nothing.</p>
+
+<p>A residency compounds. Play the same room every week for a season, for eight seasons, and three things accumulate that no headline booking can buy. You build a <strong>crowd</strong> that learns the night — that knows the last two hours are the point, that doesn't leave early, that trusts the floor enough to follow you somewhere difficult. You build a <strong>sound</strong> with room to evolve in public: Carola's selections have drifted noticeably over the years toward tech and vocal house, and that drift only reads as evolution because there's a continuous body of nights to measure it against. And you build <strong>room knowledge</strong> — an understanding of exactly how Pacha's floor behaves at 5am that you simply cannot develop parachuting between cities.</p>
+
+<p>Carola's actual technique is the residency logic made physical: the three-deck mixing, the marathon set, the refusal to peak early. The whole thing is engineered for duration. The crowd that turns up for it — heavily international, with the loyal Italian contingent you'd expect for a Neapolitan — turns up knowing the magic is in the hours most clubs are already closing.</p>
+
+<h2>The lineup as a map</h2>
+
+<p>There's a second reason Music On earns a RESIDENT deep-dive rather than a listing: its guest book is, more or less, a map of where this music actually is. The 2026 season runs names across the full width of the groove — the Martinez Brothers, Jamie Jones, Loco Dice, Seth Troxler, Paco Osuna, Michael Bibi, Dennis Cruz, East End Dubs, Chris Stussy, ANOTR, Cloonee, Black Coffee. Established heads and the breakout class in the same room, week after week.</p>
+
+<p>Read that against our Radar column and the picture closes: the young producers we're watching are, almost to a person, supported by Carola and aiming — consciously or not — at this ecosystem. Music On isn't just a party. It's a piece of infrastructure that a whole generation of the sound orients around. When the residency picks up a new name, it moves them. That's institutional power, and it's earned through longevity, not spend.</p>
+
+<h2>The honest caveat</h2>
+
+<p>Long residencies have a failure mode, and we'd be dishonest not to name it: they calcify. The same night, the same room, the same circle of guests can curdle from "institution" into "comfortable." The thing that keeps a residency alive is the one discipline that's hard to sustain across eight years — actual curation, the willingness to keep booking risk, to keep moving the sound rather than serving the crowd back exactly what it already knows it likes. The residency is only a virtue as long as it's still making decisions.</p>
+
+<h2>Why this is our model too</h2>
+
+<p>We run our own residency logic — a recurring night, a home room, a relationship with a venue we return to rather than a string of one-offs — for exactly the reasons above. At our scale it's not eight years at Pacha; it's the same principle, smaller: build the crowd, build the sound, learn the room, keep curating. The spectacle economy can't do this, because the spectacle is built to be singular and unrepeatable by design. The residency is the patient opposite. It's how you build something that's still there next year.</p>
+
+<p>Music On at Pacha is the biggest version of a small idea we believe in completely: stay in the room long enough to make it yours.</p>`,
+      readingTimeMinutes: 6
+    },
+
+    media: { heroImage: "/assets/floor-2.jpg", heroImageAlt: "A packed floor deep into a residency night", gallery: [] },
+
+    metadata: {
+      author: "Hertz Redazione",
+      category: "Reportage",
+      rubric: "RESIDENT",
+      tags: ["music-on", "marco-carola", "pacha", "residency", "ibiza", "tech-house"],
+      publishedAt: new Date("2026-06-16"),
+      updatedAt: new Date("2026-06-16")
+    },
+
+    seo: { metaDescription: "Music On stayed at Pacha for 2026. We make the case that the long residency builds something a festival headline slot never can — a crowd, a sound, a room — and ask what it teaches anyone running their own night.", keywords: ["music-on", "marco-carola", "pacha", "residency", "ibiza", "tech-house"] },
+
+    engagement: { shareCount: 0, viewCount: 0, featured: false },
+
+    relatedArticles: ["radar-vol-1-eight-names", "two-speed-island-ibiza-2026"]
+  },
+
+  {
+    _id: "hertz-radar-01",
+    slug: "radar-vol-1-eight-names",
+    title: "Radar Vol. 1: Eight Names Moving the Groove Right Now",
+    subtitle: "Not the most-streamed. The ones whose records keep ending up in our sets — across deep-tech, Latin tech, and the line where they cross.",
+    excerpt: "Our first artist column. Eight producers we're actually playing, from UK deep-tech and the Italian groove to Peru and the festival crossover — with the releases, the labels, and an honest read on where each one sits.",
+    rubric: "RADAR",
+
+    content: {
+      body: `<p>Radar is the column where we name names. Not a most-streamed list, not a poll. These are producers whose records keep surfacing in our sets and in the sets of the people we trust, and who are at the point in their arc where you should know them before the festival posters do. Eight, for the first one, grouped by the lane they're cutting.</p>
+
+<h2>The UK deep-tech wave</h2>
+
+<p><strong>Wheats.</strong> If you want one name for where the hypnotic, groove-first end of UK house is going, it's this one. Discovered by Kerri Chandler at eighteen, Wheats has built a catalogue on Hottrax, Kaluki, Circus, Solid Grooves and Hot Creations, and runs his own label, <strong>BOX RED</strong>, which has already put several tracks at the top of the minimal/deep-tech charts. He's played DC10, Amnesia, Creamfields, BPM. The sound is rolling, stripped, patient — records built to sit in the middle of a long set rather than detonate at the front of a short one. Exactly our register.</p>
+
+<p><strong>Murphy's Law.</strong> Brothers Sonny and Finn Murphy out of Leicester, raised in their dad's studio on grime and dubstep before raves pulled them into tech house. Groove and soul up front, UK garage threaded through it. Releases on Ministry of Sound, Kaluki, Deeperfect and Bamboleo, three Beatport number-ones, regular Radio 1 play, and backing from Carola, Capriati, Jamie Jones and Patrick Topping. In early 2025 they launched their own label, <strong>Lawless</strong>, with a four-city UK tour and a ten-track compilation — the move of a duo building infrastructure, not just chasing singles. Their hometown Full House parties are the kind of grassroots operation we recognise instantly.</p>
+
+<p><strong>RSquared.</strong> The most on-the-nose name on this list, for us: Ryan and Rory, who met at university in Bournemouth and built their sound, by their own account, on <strong>Music On and Paradise</strong> plus a love of disco and funk. That lineage is audible. Sharp percussion, rolling drums, the occasional disco sample done right. Their track "Fantasy" on Defected has racked up millions of streams, and they've already played Paco Osuna's Now Here showcase. Tipped widely for a breakout 2026, and we'd agree.</p>
+
+<h2>The groove, from Italy</h2>
+
+<p><strong>Cyava.</strong> Home advantage, and earned. An Italian DJ and producer working the line between tech house and minimal, always groove-led. Carola, Capriati, the Martinez Brothers and Paco Osuna all play his stuff; his edits of "Around" and "Cola" travelled fast across the scene, and Deeperfect put out a Cyava Artist Series sample pack — a quiet signal that the genre's producers want his drums in their own tracks. He co-founded and co-directs the label <strong>Famillia Recordings</strong>. He's played Hï, Eden and Tantra in Ibiza and Nook in Bucharest. The kind of Italian artist who proves the groove doesn't only come from London or Buenos Aires.</p>
+
+<h2>Spain, peak time</h2>
+
+<p><strong>Angel Heredia.</strong> A different lane, and worth being honest about it. Heredia, out of Málaga, is a high-volume, peak-time machine — hundreds of releases, a permanent fixture in the Beatport tech house charts, his own label <strong>KoBBoK</strong>, and a festival CV that runs through Elrow and Dreambeach. This is the funkier, harder-hitting, Latin-tinged end of the spectrum, built for big-room energy more than the slow burn. We're watching him because he's one of the most consistent engines of that sound in Spain, and because knowing the peak-time end keeps your read on the whole genre honest.</p>
+
+<h2>Where UK meets Barcelona</h2>
+
+<p><strong>Goosey.</strong> Manchester-raised, Barcelona-based, and on a steep climb. Releases on Hot Creations, Paradise and Kaluki, a number-one on Hot Creations with "Funky Shit," and support from Jamie Jones, the Martinez Brothers, Michael Bibi and Carola. 2025 was his breakout year on paper: a Creamfields debut on the Paradise stage, a main-room set at UNVRS, and a first US tour including ARC in Chicago. He sits right on the line between underground credibility and festival-ready — the interesting place to watch a young artist navigate.</p>
+
+<h2>Latin tech, from Peru</h2>
+
+<p><strong>Chinonegro.</strong> From Chiclayo, Peru, and one of the clearest examples of how far the Latin American underground now reaches. He's released on Damian Lazarus's Crosstown Rebels, on Kaluki, on Deeperfect, on Steve Lawler's VIVA, on Chus &amp; Ceballos's Stereo Productions — and plays Elrow Chile, Lost Beach, Bahrein in Buenos Aires. The sound carries the percussive, hip-driven groove that the "Latin tech" tag was invented to describe. Proof that the most exciting movement in this music isn't always coming from the obvious capitals.</p>
+
+<h2>The crossover</h2>
+
+<p><strong>Chico Rose.</strong> The outlier, named because the crossover is part of the story. A Dutch producer who came up in the big-festival EDM world — work with Tiësto, Hardwell and Afrojack, sets at Ultra and Tomorrowland — and who has turned toward tech house, building his own imprint, <strong>Story Starters</strong>. He's the most commercial name here, sitting where festival production meets the groove, and that's exactly why he's on the radar: he's a clean read on where the mainstream is pulling the sound from above, the same current we track in SIGNAL. Watch him to understand the pressure on the genre's pop end.</p>
+
+<h2>What links them</h2>
+
+<p>Two things. First, look at who keeps appearing as a supporter across these very different artists: <strong>Marco Carola</strong>, again and again. The Music On ecosystem is still the gravitational centre of this sound, which is the whole reason it gets its own RESIDENT piece this month. Second, the groove is being pushed from everywhere at once — a Leicester studio, a Barcelona flat, a label in Peru, a festival stage in the Netherlands — and that's healthy. Our job isn't to crown one lane. It's to book the rooms where you can actually hear the difference between them.</p>
+
+<p>Next volume, eight more. Send us records.</p>`,
+      readingTimeMinutes: 7
+    },
+
+    media: { heroImage: "/assets/art-warmup.jpg", heroImageAlt: "A DJ at the booth, close-up", gallery: [] },
+
+    metadata: {
+      author: "Hertz Redazione",
+      category: "Trends",
+      rubric: "RADAR",
+      tags: ["radar", "emerging-artists", "tech-house", "deep-tech", "minimal", "new-music"],
+      publishedAt: new Date("2026-06-11"),
+      updatedAt: new Date("2026-06-11")
+    },
+
+    seo: { metaDescription: "Our first artist column. Eight producers we're actually playing, from UK deep-tech and the Italian groove to Peru and the festival crossover — with the releases, the labels, and an honest read on where each one sits.", keywords: ["radar", "emerging-artists", "tech-house", "deep-tech", "minimal", "new-music"] },
+
+    engagement: { shareCount: 0, viewCount: 0, featured: false },
+
+    relatedArticles: ["music-on-pacha-long-residency", "two-speed-island-ibiza-2026"]
+  },
+
+  {
+    _id: "hertz-crossfade-01",
+    slug: "two-people-one-booth-b2b",
+    title: "Two People, One Booth: What the B2B Reveals About the Split",
+    subtitle: "Everything Always and RPR Soundsystem are both \"two artists, back to back.\" They are not the same thing, and the difference is the whole argument.",
+    excerpt: "The b2b has become the scene's basic unit. We pull apart two models — the American mainstage supergroup and the European b2b-as-conversation — and what each one says about where clubbing is going.",
+    rubric: "CROSSFADE",
+
+    content: {
+      body: `<p>The back-to-back is everywhere now. The b2b, the alias, the duo, the "supergroup" — two or more names sharing a booth has become one of the scene's basic units, on posters from Miami to Mamaia. Which is interesting, because the format hides a fault line. Two things both described as "a b2b" can be opposite in everything that matters. Pull two of them apart and you get the cleanest possible picture of the split this whole publication is about.</p>
+
+<h2>Exhibit A: the supergroup</h2>
+
+<p>In March 2025, John Summit and Dom Dolla debuted <strong>Everything Always</strong> on the Ultra Miami main stage. Two of the biggest names in American dance music, combining into a single brand-name project, built for the largest stage at the largest US festival.</p>
+
+<p>It works on its own terms, and those terms are specific. It's a team-up in the way a blockbuster crossover is a team-up — two franchises in one film, marketed as an event, engineered to read at scale. The set is a sequence of recognisable peaks, the records mostly built for exactly that. When Resident Advisor reviewed Summit's recent album, it reached for a label that's stuck: it placed him at the head of an "epoch of frat house," describing a kind of tech house assembled from its most festival-ready parts — the Ibiza-fied groove, a trance lift, the occasional bass wobble, a vapid vocal on top.</p>
+
+<p>We're not interested in trashing it. People love it; the craft of moving forty thousand people is real and rare. But be clear about what the b2b is doing here: it's a <strong>marketing combination</strong>. Two audiences fused into one ticket. The unit of value is the lineup, not the conversation.</p>
+
+<h2>Exhibit B: the conversation</h2>
+
+<p>Now the other kind. <strong>RPR Soundsystem</strong> — Rhadoo, Raresh and Petre Inspirescu, the three Romanians at the core of the [a:rpia:r] world. When they play back to back, it isn't a crossover event. It's a single organism playing a set that can run six, eight hours, with no setlist and no peaks engineered for distance. One selector lays a record, the next answers it, the groove gets handed around and slowly mutated. You can't tell, most of the time, who's playing what. That's the point.</p>
+
+<p>This is the b2b as <strong>conversation</strong> — the unit of value is the dialogue, the patience, the risk of two or three people improvising in public for half a night. You see the same logic in Apollonia's marathon sets, and in the long Music On pairings at Pacha, the kind of Capriati-and-Carola back-to-back that people remember a specific record from years later. The names matter less than the exchange between them.</p>
+
+<h2>The difference is duration and risk</h2>
+
+<p>Here's the test, and it's simple. A marketing b2b optimises for the moment of combination — the announcement, the poster, the first twenty minutes that confirm the hype. A conversation b2b optimises for duration — it's only any good if it can sustain itself for hours, because the whole form is about where two musicians can take each other when there's no clock and no script.</p>
+
+<p>One is built to be seen. The other is built to be inside of. One reads at two hundred metres. The other only really exists up close, in a room where the booth can hear the floor. That's not a coincidence — it's the same split as the hyperclub versus the ecosystem, just expressed through two people instead of two business models.</p>
+
+<h2>What we book, and why</h2>
+
+<p>When we put a b2b on, this is the distinction we're actually making, even if the flyer doesn't spell it out. We're not asking "which two names sell." We're asking "do these two have a conversation in them" — can they hand a groove back and forth for long enough that something happens neither would have reached alone. Sometimes that's two residents who've played together for years. Sometimes it's a careful pairing of a known head with someone from Radar. It's never just addition.</p>
+
+<p>The supergroup is a product. The conversation is a practice. Both are called a b2b. Only one of them needs the room we believe in — and that's the whole reason we keep building it.</p>`,
+      readingTimeMinutes: 6
+    },
+
+    media: { heroImage: "/assets/man-room.jpg", heroImageAlt: "Two selectors sharing one booth", gallery: [] },
+
+    metadata: {
+      author: "Hertz Redazione",
+      category: "Editorial",
+      rubric: "CROSSFADE",
+      tags: ["b2b", "collaboration", "everything-always", "rpr-soundsystem", "tech-house", "scene"],
+      publishedAt: new Date("2026-06-06"),
+      updatedAt: new Date("2026-06-06")
+    },
+
+    seo: { metaDescription: "The b2b has become the scene's basic unit. We pull apart two models — the American mainstage supergroup and the European b2b-as-conversation — and what each one says about where clubbing is going.", keywords: ["b2b", "collaboration", "everything-always", "rpr-soundsystem", "tech-house", "scene"] },
+
+    engagement: { shareCount: 0, viewCount: 0, featured: false },
+
+    relatedArticles: ["two-speed-island-ibiza-2026", "sunwaves-left-home-rominimal"]
   },
 
   {
@@ -223,264 +376,7 @@ const ARTICLES = [
     engagement: { shareCount: 0, viewCount: 0, featured: false },
 
     relatedArticles: ["inside-kindergarten-bologna", "summer-2026-european-club-season"]
-  },
-
-  {
-    _id: "hertz-001",
-    slug: "inside-kindergarten-bologna",
-    title: "Kindergarten, Bologna: The Room That Taught Us to Listen",
-    subtitle: "A system is not just hardware. It is an argument about what music is for.",
-    excerpt: "On a Friday in February, we arrived at Kindergarten thirty minutes before opening. The door was still locked. Then, from inside the building, we heard the system start. Not felt it — heard it. The distinction matters.",
-
-    content: {
-      body: `<p>On a Friday in February, we arrived at Kindergarten thirty minutes before opening. The door was still locked, the street outside Porta Saragozza quiet in the way Bologna streets are quiet before midnight—empty, but carrying a specific anticipation. Then, from inside the building, we heard the system start.</p>
-
-<p>Not felt it. Heard it. The distinction matters.</p>
-
-<p>Most sound systems in European clubs make themselves known through the body first. You walk in, the sub registers in your sternum before your ears have adjusted. It is impact before information. Kindergarten's Funktion-One rig does something different. The first thing you notice is clarity—individual frequencies sitting in their correct place, nothing compressed into an undifferentiated mass. By the time the low end arrives, you're already inside the music.</p>
-
-<h2>The Room</h2>
-
-<p>Kindergarten has a capacity around 300. This is not a compromise. It is an architectural decision about what kind of listening is possible in a given space.</p>
-
-<p>The room is a converted warehouse space in the Bolognese periphery—exposed concrete, low ceiling on the main floor, the speaker array configured for near-field coverage rather than projection. What this means in practice: the system is loud but not brutal. You can hold a conversation near the bar without shouting. You can move to the edges and still be inside the music rather than underneath it.</p>
-
-<p>The Funktion-One stack at Kindergarten uses a configuration common in smaller European venues—a V-SUB system for sub frequencies, Resolution cabinets for mid and high. The result is a frequency response that reproduces what the producer intended rather than what a larger space would impose. The kick drum sounds like a kick drum, not a pulse. The hi-hats are where they should be. The room doesn't color the music.</p>
-
-<p>This sounds like a technical feature. It is more than that. It is a philosophical position: the venue's job is to transmit, not to transform. The best rooms in Europe—OHM, fabric's Room One, the Funktion-One installations at Panorama—share this quality. They are transparent. Kindergarten is transparent.</p>
-
-<h2>What the System Does to the Crowd</h2>
-
-<p>There is a theory in club culture that a good sound system makes people forget to take photographs. We've tested this casually across dozens of nights at different venues, and it holds more often than not.</p>
-
-<p>At Kindergarten, the phone-checking that defines the first two hours of most club nights drops off earlier than anywhere else we've played. We've attributed this, tentatively, to the quality of the monitoring. When the music is genuinely reproduced—when what you're hearing is what was made—there is more reason to pay attention to it. The contrast with a mediocre system is that the mediocre system makes the experience partially available, and a partially available experience leaves room for other inputs.</p>
-
-<p>This isn't a moral argument about phones in clubs. It's an acoustic one.</p>
-
-<blockquote>"We heard the system start from outside. Not felt it—heard it. The distinction is the whole argument."</blockquote>
-
-<h2>What Kindergarten Taught HERTZ</h2>
-
-<p>We've been playing Kindergarten since 2023. The residency has shaped the programming decisions we make now in ways that are hard to separate cleanly.</p>
-
-<p>The main one: venue size is not a proxy for seriousness. A 300-person room with a Funktion-One rig and an audience that drove 40 minutes to be there will produce a better night than a 1,000-person venue with a competent touring system and a crowd that walked in because the entry price was right. This sounds obvious. In practice, the pressure is always to grow—more capacity, more tickets, more scale.</p>
-
-<p>Kindergarten resists this. It has done so consistently for five years. The result is a club night that is technically a small event and culturally one of the most important things happening in Bologna on the nights it runs.</p>
-
-<p>The programming logic that Kindergarten imposes is also clarifying. A 300-person room on a Friday night is not the right context for music that requires spectacle. The best sets we've heard there—and the best sets we've played there—are ones that use the room's intimacy: long, slowly developing tracks that reward sustained attention, mixes that don't rely on peak moments, sound design calibrated for a system where everything is audible.</p>
-
-<h2>The Room as Instrument</h2>
-
-<p>The analogy we return to: a room is an instrument, not a container. Every instrument has a range and a character. The mistake most club production makes is treating the room as neutral—a box to fill. A room like Kindergarten's imposes constraints that are, in practice, creative. You can't play music at Kindergarten that doesn't work at 128 BPM in a concrete space with an educated audience and a 3am time signature. That constraint is a gift.</p>
-
-<p>The argument for building a club culture around rooms like this is not nostalgic. It is not about rejecting scale or technology. It is about the specific kind of attention that a properly configured room makes possible—and the specific kind of music that emerges from artists who know they're going to be heard.</p>
-
-<p>Kindergarten taught us to think about every booking in terms of the room. Not: is this artist good? But: will this artist's music function in this specific space for this specific audience? The question sounds narrow. It produces better nights.</p>`,
-      readingTimeMinutes: 5
-    },
-
-    media: { heroImage: "/assets/floor-1.jpg", heroImageAlt: "Kindergarten, Bologna — the room", gallery: [] },
-
-    metadata: {
-      author: "HERTZ Redazione",
-      category: "Reportage",
-      tags: ["reportage", "kindergarten", "bologna", "funktion-one", "sound-system"],
-      publishedAt: new Date("2026-05-15"),
-      updatedAt: new Date("2026-05-15")
-    },
-
-    seo: {
-      metaDescription: "Inside Kindergarten, Bologna's most important club room: how the Funktion-One system, the 300-person capacity, and the acoustic transparency shaped HERTZ.",
-      keywords: ["kindergarten bologna", "funktion-one", "club reportage", "bologna clubbing", "sound system"]
-    },
-
-    engagement: { shareCount: 0, viewCount: 0, featured: false },
-
-    relatedArticles: ["physics-deep-tech-128bpm", "authenticity-modern-clubbing"]
-  },
-
-  {
-    _id: "hertz-005",
-    slug: "art-of-the-warm-up",
-    title: "The Warm-Up Is the Hardest Set of the Night",
-    subtitle: "Opening is not a lesser job. It is the one that decides whether the night has anywhere to go.",
-    excerpt: "The warm-up DJ is the most disrespected role in club culture and one of the most consequential. Anyone can play the peak. Almost no one can build the room that makes a peak possible.",
-
-    content: {
-      body: `<p>The warm-up DJ is the most disrespected role in club culture and one of the most consequential. It is the set that gets handed to the newest resident, the favour, the friend of the promoter. It is the set people arrive late for and talk over. And it is the set that, more than any other, determines whether the night becomes anything at all.</p>
-
-<p>Anyone can play the peak. The records are louder, the room is full, the crowd is already committed. Almost no one can build the room that makes a peak possible.</p>
-
-<h2>The Misunderstanding</h2>
-
-<p>The mistake most opening DJs make is treating the warm-up as a smaller version of the headline set. They play the same kind of records at lower energy, waiting for permission to do what they actually want to do. The result is a room that is neither warming up nor doing anything else—a holding pattern.</p>
-
-<p>The warm-up is not a diluted peak. It is a different job with different tools. The headliner's job is to take a committed room somewhere. The opener's job is to manufacture commitment out of nothing: an empty floor, a handful of people who arrived too early, a sound system that hasn't been pushed yet. These are not the same skill. The second is harder.</p>
-
-<h2>Reading an Empty Room</h2>
-
-<p>A full room tells you what it wants. It responds, it pushes back, it gives you information on every record. An empty room tells you nothing. The opener has to play to a space that hasn't formed an opinion yet, and the temptation—to fill the silence with energy, to force the issue—is exactly the wrong instinct.</p>
-
-<p>The good opener plays as if the room is already what they want it to become. Slower than feels comfortable. Quieter than the system allows. Records that don't demand attention but reward it. The first hour is not about the twenty people on the floor. It is about the two hundred who will be there at 2am, and the atmosphere they will walk into.</p>
-
-<h2>The Discipline of Restraint</h2>
-
-<p>Everything about a club night pressures the opener to play their best material early. The empty floor is uncomfortable. The promoter is anxious. The DJ wants to be remembered. Restraint—holding the good records, keeping the tempo down, leaving headroom on the system—is an act of discipline that goes mostly unrewarded in the moment.</p>
-
-<p>Tempo is the clearest example. A set that opens at 120 BPM has somewhere to travel. A set that opens at 128 has already arrived, and the headliner inherits a room with no gradient left to climb. The best openers we have heard treat tempo as a budget to be spent slowly over hours, not a setting to be chosen once.</p>
-
-<blockquote>"The opener's job is to manufacture commitment out of nothing. The headliner's job is to spend it. Only one of those is hard."</blockquote>
-
-<h2>What the Headliner Inherits</h2>
-
-<p>A headliner walking into a well-warmed room inherits something invisible and decisive: a floor that already trusts the booth. The crowd has been taught, over two or three hours, that the records will make sense, that the tempo will move with intention, that nothing will be wasted. That trust is the actual product of a warm-up, and a headliner who has it can do things that would empty a cold room.</p>
-
-<p>A headliner walking into a badly-warmed room—peaked too early, drained, over-lit—has to spend the first forty minutes undoing damage. Most of them can't, and the night never recovers. The warm-up did that, and nobody will blame the warm-up.</p>
-
-<h2>Why HERTZ Books Openers First</h2>
-
-<p>We have started thinking about the opening set before the headline set, not after. The question is no longer "who closes" but "who can build the room we want by midnight." It changes who we book and how we brief them: the opener is given the room's character to construct, not a slot to fill until the real DJ arrives.</p>
-
-<p>It is the least glamorous decision we make and one of the most important. A night is only as good as the floor it builds early. Everything after the warm-up is spending what the warm-up earned.</p>`,
-      readingTimeMinutes: 5
-    },
-
-    media: { heroImage: "/assets/art-warmup.jpg", heroImageAlt: "DJ at the booth during the warm-up", gallery: [] },
-
-    metadata: {
-      author: "HERTZ Redazione",
-      category: "Editorial",
-      tags: ["editorial", "warm-up", "dj-craft", "set-building", "residents"],
-      publishedAt: new Date("2026-05-24"),
-      updatedAt: new Date("2026-05-24")
-    },
-
-    seo: {
-      metaDescription: "The warm-up is the hardest set of the night: reading an empty room, the discipline of restraint, and why HERTZ books openers first.",
-      keywords: ["warm-up dj", "opening set", "dj craft", "set building", "club culture"]
-    },
-
-    engagement: { shareCount: 0, viewCount: 0, featured: false },
-
-    relatedArticles: ["physics-deep-tech-128bpm", "inside-kindergarten-bologna"]
-  },
-
-  {
-    _id: "hertz-006",
-    slug: "the-door-is-part-of-the-music",
-    title: "The Door Is Part of the Music",
-    subtitle: "Who gets in, and how, is the first curatorial decision a club makes — and the one that protects everything after it.",
-    excerpt: "A door policy is usually discussed as exclusivity theatre. That misses the point. The door is the mechanism by which a club decides what kind of floor it wants to be responsible for.",
-
-    content: {
-      body: `<p>The door is the most misread part of club culture. Discussed publicly, it is almost always framed as exclusivity theatre—velvet rope, arbitrary power, a bouncer's mood deciding your night. That framing exists because it is sometimes true. But it obscures what a door actually is: the first curatorial decision a club makes, and the one that protects every decision after it.</p>
-
-<h2>Not Exclusivity. Curation.</h2>
-
-<p>A booking decides what plays. A door decides who it plays to. These are the same kind of act. A promoter who spends months choosing artists, calibrating a room, and building a sound and then lets the floor fill with whoever happens to arrive has curated only half the night. The other half walks in through the door.</p>
-
-<p>This is not about keeping people out for the sake of scarcity. A good door is not selecting for status, money, or appearance. It is selecting for intention—for people who came for the music and understand what kind of room they are entering. The question a door should ask is not "are you important enough" but "are you here for the same thing the rest of this floor is here for."</p>
-
-<h2>The Floor Is a Social Contract</h2>
-
-<p>A dancefloor works because everyone on it has agreed, implicitly, to the same terms: pay attention to the music, respect the people around you, leave your hierarchy at the entrance. That agreement is fragile. It takes a few people who haven't agreed to it—there to be seen, to film, to dominate the space—to break it for everyone.</p>
-
-<p>The door is where that contract is enforced, because it cannot be enforced anywhere else without ruining the night. Once someone is on the floor, removing them is disruptive and rare. The door is the only low-cost moment to decide who the room is responsible for.</p>
-
-<h2>Safe Space Is an Operational Decision</h2>
-
-<p>Clubs talk about being a safe space. Most mean it. But a safe space is not produced by a sentence on a poster or a line in an Instagram bio. It is produced by decisions, and the first and most important one happens at the door.</p>
-
-<p>No harassment, no aggression, no predatory behaviour—these are outcomes, and outcomes have mechanisms. The mechanism is a door that turns away people who arrive already breaking the contract, and staff trained to act on behaviour rather than appearance. A floor where people feel free to lose themselves is downstream of a door that took that freedom seriously as an operational problem, not a slogan.</p>
-
-<blockquote>"A booking decides what plays. A door decides who it plays to. They are the same kind of act."</blockquote>
-
-<h2>The Bologna Advantage</h2>
-
-<p>Bologna makes this easier than most cities, for a reason that won't last forever: the community is still largely known to itself. The people who come regularly are connected—they have relationships, they vouch for each other, they carry the contract with them. A door in a city like this is less a filter than a recognition.</p>
-
-<p>That advantage erodes the moment a scene gets large enough to attract people who have no relationship to it. Which is precisely why the decisions made now—about how the door works, what it selects for, what it refuses to compromise—matter more than they appear to. We are setting the terms of the floor while it is still small enough to set them deliberately.</p>`,
-      readingTimeMinutes: 5
-    },
-
-    media: { heroImage: "/assets/art-door.jpg", heroImageAlt: "Club floor crowd under coloured light", gallery: [] },
-
-    metadata: {
-      author: "HERTZ Redazione",
-      category: "Editorial",
-      tags: ["editorial", "door-policy", "safe-space", "club-culture", "bologna"],
-      publishedAt: new Date("2026-05-23"),
-      updatedAt: new Date("2026-05-23")
-    },
-
-    seo: {
-      metaDescription: "The door is part of the music: door policy as curation, the dancefloor as a social contract, and why safe space is an operational decision.",
-      keywords: ["door policy", "safe space", "club culture", "dancefloor", "bologna clubbing"]
-    },
-
-    engagement: { shareCount: 0, viewCount: 0, featured: false },
-
-    relatedArticles: ["authenticity-modern-clubbing", "inside-kindergarten-bologna"]
-  },
-
-  {
-    _id: "hertz-007",
-    slug: "vinyl-digital-friction",
-    title: "Vinyl, Digital, and the Question of Friction",
-    subtitle: "The format war is a distraction. What matters is what each medium does to the way a DJ chooses.",
-    excerpt: "The vinyl-versus-digital argument is usually fought on sound quality and nostalgia. Both are beside the point. The real difference is friction — and friction changes what gets played.",
-
-    content: {
-      body: `<p>The vinyl-versus-digital argument is one of the most tired in club culture, and one of the least useful in the form it usually takes. It is fought over sound quality—whether analogue warmth is real or imagined—and over authenticity, which by now means almost nothing. Both are beside the point. The interesting difference between the two is not how they sound. It is what they do to the way a DJ chooses.</p>
-
-<h2>The Argument Everyone Has</h2>
-
-<p>Vinyl partisans claim superior sound. In a club, on a calibrated system, blind, almost no one can reliably tell the difference between a well-mastered digital file and a record. The mastering and the room matter far more than the medium. The sound-quality argument is mostly a proxy for an aesthetic loyalty, and it should be retired.</p>
-
-<p>Digital partisans claim freedom: every record ever made, in a bag that weighs nothing, with sync and loops and instant access. This is true, and it is exactly where the real question starts—because freedom, in selection, is not obviously a good thing.</p>
-
-<h2>Friction as a Feature</h2>
-
-<p>Vinyl imposes friction at every level. You can only carry so many records. You committed to them before you left the house. Mixing takes physical attention—beatmatching by ear, managing the pitch, riding the moment. Every one of these constraints is, on paper, a limitation. In practice, each one forces a decision.</p>
-
-<p>A DJ with sixty records has already made ninety per cent of their selections at home, under no pressure, thinking clearly about the night. The limited bag is a form of pre-commitment. And the physical effort of mixing keeps the DJ inside the music—there is no screen to retreat into, no waveform to read instead of listening to the room.</p>
-
-<h2>The Cost of Infinite Choice</h2>
-
-<p>Digital removes the friction, and removes the pre-commitment with it. Access to everything at every moment sounds like power. It often produces paralysis, or its opposite: the safe choice. When any record is available instantly, the DJ tends to reach for the one that is guaranteed to work, because there is no cost to changing course and no commitment to a direction. The set becomes reactive—a sequence of locally optimal decisions that never adds up to an argument.</p>
-
-<p>The waveform display is the clearest symptom. A DJ watching the track scroll across a screen is reading the music with their eyes instead of their ears. The mix gets technically cleaner and emotionally flatter. The screen is a place to hide from the room, and the room can tell.</p>
-
-<blockquote>"Freedom in selection is not obviously a good thing. A limited bag is a form of pre-commitment, and commitment is most of what makes a set an argument rather than a playlist."</blockquote>
-
-<h2>What We Actually Do</h2>
-
-<p>HERTZ is not a vinyl-only night, and we are suspicious of clubs that make the format a moral position. Most of our residents play digitally, and they play well. The medium is not the point. The discipline is.</p>
-
-<p>What we ask of a set—whether it comes off records, USBs, or a laptop—is that it be committed: that it go somewhere, that the selector is listening to the floor rather than scrolling a library, that the choices add up. Vinyl enforces that discipline structurally. Digital requires the DJ to impose it on themselves. The best digital DJs we book play as if their bag were finite—they decide in advance, they commit, they stay out of the screen. They have rebuilt the friction by hand, because they understand that the friction was never the problem. It was the point.</p>`,
-      readingTimeMinutes: 5
-    },
-
-    media: { heroImage: "/assets/art-vinyl.jpg", heroImageAlt: "Vinyl record on a turntable", gallery: [] },
-
-    metadata: {
-      author: "HERTZ Redazione",
-      category: "Technical",
-      tags: ["technical", "vinyl", "digital", "dj-craft", "selection"],
-      publishedAt: new Date("2026-05-21"),
-      updatedAt: new Date("2026-05-21")
-    },
-
-    seo: {
-      metaDescription: "Vinyl, digital, and friction: why the format war misses the point, what infinite choice costs a DJ, and the discipline HERTZ asks of every set.",
-      keywords: ["vinyl vs digital", "dj craft", "selection", "club culture", "mixing"]
-    },
-
-    engagement: { shareCount: 0, viewCount: 0, featured: false },
-
-    relatedArticles: ["physics-deep-tech-128bpm", "art-of-the-warm-up"]
-  },
-];
+  }];
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
