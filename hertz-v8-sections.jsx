@@ -982,7 +982,7 @@ function Footer8() {
               fontFamily: "'JetBrains Mono', monospace",
               fontSize: 11, color: C.light + '66', lineHeight: 1.8,
             }}>
-              hertzclubbing.com<br />info@hertz.cc<br />Bologna · IT
+              hertzclubbing.com<br />hertzbologna@gmail.com<br />Bologna · IT
             </p>
           </div>
           <div>

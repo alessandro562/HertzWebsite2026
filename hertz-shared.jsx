@@ -299,7 +299,7 @@ function Footer8({ banner = true, bannerLight = true }) {
           <div>
             <img src="/assets/hertz-logo-header.png" alt="Hertz" style={{ height: 30, opacity: 0.9, marginBottom: 16 }} />
             <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: C.light + '66', lineHeight: 1.8 }}>
-              hertzclubbing.com<br />info@hertz.cc<br />Bologna · IT
+              hertzclubbing.com<br />hertzbologna@gmail.com<br />Bologna · IT
             </p>
           </div>
           <div>
