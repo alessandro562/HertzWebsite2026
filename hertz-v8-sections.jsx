@@ -263,7 +263,7 @@ function Manifesto8() {
         .hz-man-photo { position: relative; overflow: hidden; height: 100%; min-height: 480px; background: ${C.darkSoft}; }
         .hz-man-divider { border-top: 1px solid ${C.light}1a; margin: clamp(28px, 4vw, 44px) 0 clamp(22px, 3vw, 32px); }
         @media (max-width: 850px) {
-          .hz-grid-12, .hz-grid-2 { display: flex !important; flex-direction: column !important; gap: 48px !important; }
+          .hz-grid-12, .hz-grid-2 { display: flex !important; flex-direction: column !important; align-items: stretch !important; gap: 48px !important; }
           .hz-man-photo { height: auto; min-height: 0; aspect-ratio: 4/5; }
         }
       `}</style>
