@@ -23,7 +23,7 @@
   var FREQ=[['Instagram','https://instagram.com/hertz.cc'],['Spotify','#'],['SoundCloud','#'],['Mixcloud','#']];
   foot.innerHTML=
     '<section class="hz-coda"><div style="max-width:1320px;margin:0 auto">'
-    +'<div class="k">FROM CLUBBERS FOR CLUBBERS</div>'
+    +'<div class="k">CLUBBING COLLECTIVE</div>'
     +'<h2><span class="w2">Keep the</span><br><span class="w9 it">groove</span><span class="blue">.</span></h2>'
     +'</div></section>'
     +'<footer class="hz-foot"><div class="cols">'

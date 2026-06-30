@@ -956,7 +956,7 @@ function Footer8() {
           <div style={{
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 16,
-          }}>FROM CLUBBERS FOR CLUBBERS</div>
+          }}>CLUBBING COLLECTIVE</div>
           <h2 style={{
             fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
             fontSize: 'clamp(2.5rem, 8vw, 7rem)',
