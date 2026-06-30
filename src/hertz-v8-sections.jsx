@@ -373,7 +373,7 @@ function CollabSection8() {
    ═══════════════════════════════════════════ */
 function Footer8() {
   const NAV = [['Events', 'events.html'], ['Manifesto', 'manifesto.html'], ['Artists', 'artists.html'], ['Music', '#'], ['Merch', 'merch.html'], ['Media', 'media.html'], ['Archive', 'archive.html']];
-  const FREQ = [['Instagram', 'https://instagram.com/hertz.cc'], ['Spotify', '#'], ['SoundCloud', '#'], ['Mixcloud', '#']];
+  const FREQ = [['Instagram', 'https://instagram.com/hertz.cc'], ['Spotify', '#'], ['SoundCloud', '#']];
   return (
     <React.Fragment>
       <section className="hz-coda">

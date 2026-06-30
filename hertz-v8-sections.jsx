@@ -1012,7 +1012,6 @@ function Footer8() {
               { l: 'Instagram', href: 'https://instagram.com/hertz.cc' },
               { l: 'Spotify', href: '#' },
               { l: 'SoundCloud', href: '#' },
-              { l: 'Mixcloud', href: '#' },
             ].map(x => (
               <a key={x.l} href={x.href} target={x.href.startsWith('http') ? '_blank' : undefined} rel={x.href.startsWith('http') ? 'noopener noreferrer' : undefined} style={{
                 display: 'block', color: C.light + '99', textDecoration: 'none',

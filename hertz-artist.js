@@ -36,7 +36,7 @@
       mixes:[{t:'Tomi & Kesh × Federico Apadula', tag:'Featured', url:'https://soundcloud.com/tomi-and-kesh/tomi-kesh-federico-apadula'},
         {t:'Live @ Sonder — City Hall, Barcelona', url:'https://soundcloud.com/hertzclubbingcollective/federico-apadula-sonder-city-hall-barcelona-16-03-24-opening-chicks-luv-us'},
         {t:'MMM077 — Special Guest Mix', url:'https://soundcloud.com/lambertogabrieli/mmm077-federico-apadula-special-guest-mix-jun-2021'}],
-      social:{ soundcloud:'https://soundcloud.com/hertzclubbingcollective', spotify:'https://open.spotify.com/artist/0hS1cnWGJvml5gSHRKHtGi', booking:'booking@hertz.cc' },
+      social:{ soundcloud:'https://soundcloud.com/federico-apadula', spotify:'https://open.spotify.com/artist/0hS1cnWGJvml5gSHRKHtGi', booking:'booking@hertz.cc' },
       events: evs(['024','023','022','021','020','019','018']),
     },
     'tommaso-manco': {
@@ -123,18 +123,29 @@
       + '</div></section>';
   }
 
-  /* 4 · MIXES (page / riso) */
-  if(A.mixes && A.mixes.length){
+  /* 4 · LISTEN — SoundCloud / Spotify (page / riso) */
+  if((A.mixes && A.mixes.length) || A.social.soundcloud || A.social.spotify){
+    var scList = (A.mixes||[]).map(function(m){
+      return '<a class="hz-mixrow" href="'+m.url+'" target="_blank" rel="noopener noreferrer">'
+        + '<span class="ico">▶</span><span class="t">'+esc(m.t)+'</span>'
+        + (m.tag?'<span class="tag">'+esc(m.tag)+'</span>':'')+'<span class="ar">↗</span></a>';
+    }).join('');
     html += '<section class="hz-sec hz-page riso"><span class="reg"><b class="a"></b><b class="b2"></b><b class="c"></b><b class="d"></b></span>'
       + '<div class="hz-wrap">'
-      + '<div class="hz-ix"><h2 class="hz-num">+</h2><div><div class="hz-kick"><span class="ln"></span>// SELECTED MIXES</div>'
+      + '<div class="hz-ix"><h2 class="hz-num">+</h2><div><div class="hz-kick"><span class="ln"></span>// LISTEN</div>'
       + '<h3 class="hz-h2"><span class="w2">On</span> <span class="w9 it">record</span><span class="blue">.</span></h3></div>'
-      + '<div class="hz-meta">SOUNDCLOUD<br>'+A.mixes.length+' SELECTED</div></div>'
-      + '<div class="hz-mixlist">'+A.mixes.map(function(m){
-          return '<a class="hz-mixrow" href="'+m.url+'" target="_blank" rel="noopener noreferrer">'
-            + '<span class="ico">▶</span><span class="t">'+esc(m.t)+'</span>'
-            + (m.tag?'<span class="tag">'+esc(m.tag)+'</span>':'')+'<span class="ar">↗</span></a>';
-        }).join('')+'</div>'
+      + '<div class="hz-meta">SOUNDCLOUD<br>SPOTIFY</div></div>'
+      + '<div class="hz-listen">'
+      + '<div class="hz-listcol">'
+      + '<div class="hz-listhead"><img src="assets/logo-soundcloud.svg" alt="SoundCloud"><div class="lx"><b>SoundCloud</b><span>Mixes, sets &amp; resident tracks</span></div></div>'
+      + (scList ? '<div class="hz-mixlist">'+scList+'</div>' : '<div class="hz-listempty">Selected mixes coming soon<span class="blue">.</span></div>')
+      + (A.social.soundcloud ? '<a class="hz-listmore" href="'+A.social.soundcloud+'" target="_blank" rel="noopener noreferrer">Open profile <span class="ar">↗</span></a>' : '')
+      + '</div>'
+      + '<div class="hz-listcol">'
+      + '<div class="hz-listhead"><img src="assets/logo-spotify.svg" alt="Spotify"><div class="lx"><b>Spotify</b><span>Tracks released on labels</span></div></div>'
+      + (A.social.spotify ? '<div class="hz-listempty">Original productions, out on label<span class="blue">.</span></div><a class="hz-listmore" href="'+A.social.spotify+'" target="_blank" rel="noopener noreferrer">Open profile <span class="ar">↗</span></a>' : '<div class="hz-listempty">Label releases coming soon<span class="blue">.</span></div>')
+      + '</div>'
+      + '</div>'
       + '</div></section>';
   }
 

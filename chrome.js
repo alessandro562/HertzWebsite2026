@@ -20,7 +20,7 @@
 
   /* footer */
   var foot=document.createElement('div');
-  var FREQ=[['Instagram','https://instagram.com/hertz.cc'],['Spotify','#'],['SoundCloud','#'],['Mixcloud','#']];
+  var FREQ=[['Instagram','https://instagram.com/hertz.cc'],['Spotify','#'],['SoundCloud','#']];
   foot.innerHTML=
     '<section class="hz-coda"><div style="max-width:1320px;margin:0 auto">'
     +'<div class="k">CLUBBING COLLECTIVE</div>'
