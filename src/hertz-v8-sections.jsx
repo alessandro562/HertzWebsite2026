@@ -289,7 +289,7 @@ function MerchTeaser8() {
       <div className="hz-scanband" />
       <Reg8 />
       <div className="hz-wrap">
-        <IxHead8 num={'0<span class="sl">5</span>'} kick="// 05. HZ.SUPPLY · COMING SOON"
+        <IxHead8 num={'0<span class="sl">5</span>'} kick="// 05. MERCH · COMING SOON"
           title={'<span class="w2">Wear the</span> <span class="w9 it">frequency</span><span class="blue">.</span>'} />
         <R className="hz-merch">
           <div>
@@ -311,7 +311,7 @@ function MerchTeaser8() {
             )}
           </div>
           <div className="hz-drop">
-            <div className="lab"><span>HZ.SUPPLY / DROP 01 · ACCESSORIES</span><span className="lim">LIMITED ↗</span></div>
+            <div className="lab"><span>DROP 01 · ACCESSORIES</span><span className="lim">LIMITED ↗</span></div>
             <div className="hz-dropcard">
               <div className="ed">001/200</div>
               <div className="pic"><img src="assets/merch-lanyard-drop01.png" alt="Hertz lanyard, Drop 01" /></div>

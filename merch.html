@@ -15,9 +15,9 @@
   <div class="hz-scanband"></div>
   <span class="reg"><b class="a"></b><b class="b2"></b><b class="c"></b><b class="d"></b></span>
   <div class="hz-wrap">
-    <div class="hz-kick" style="margin-bottom:18px"><span class="ln"></span>// HZ.SUPPLY · STREETWEAR &amp; ACCESSORIES</div>
+    <div class="hz-kick" style="margin-bottom:18px"><span class="ln"></span>// STREETWEAR &amp; ACCESSORIES</div>
     <h1 style="font-family:var(--disp);font-size:clamp(2.6rem,8vw,6rem);line-height:.82;letter-spacing:-.055em;margin:0 0 14px"><span class="w2">Wear the</span> <span class="w9 it">frequency</span><span class="blue">.</span></h1>
-    <p class="mono" style="font-size:10px;color:var(--gray);margin:0">FROM CLUBBERS, FOR CLUBBERS · LIMITED NUMBERED RUNS · NO COMPROMISE</p>
+    <p class="mono" style="font-size:10px;color:var(--gray);margin:0">EVERY DROP IS LIMITED, NUMBERED AND BUILT TO SURVIVE THE NIGHT.</p>
   </div>
 </section>
 
@@ -70,10 +70,18 @@
     </div>
     <div class="hz-merch rise" style="color:var(--ink)">
       <div>
-        <p class="lede" style="color:rgba(8,8,13,.72)">The capsule opens with an accessory: a woven lanyard, numbered to 200. Clip it to your keys, your pass, your life — built to be worn, not framed. Apparel follows. Coming soon; leave your address to know first.</p>
-        <form class="hz-form" data-waitlist style="border-color:var(--line-l)">
-          <input type="email" placeholder="your@email.cc" aria-label="Email" style="color:var(--ink)">
-          <button type="submit">Notify me →</button>
+        <p class="lede" style="color:rgba(8,8,13,.72)">The capsule opens with an accessory: a woven lanyard, numbered to 200. Clip it to your keys, your pass, your life — built to be worn, not framed. Reserve yours below — we'll confirm by email.</p>
+        <form class="hz-reserve" data-reserve>
+          <div class="r2">
+            <input name="name" type="text" placeholder="Name" autocomplete="name" required>
+            <input name="email" type="email" placeholder="your@email.cc" autocomplete="email" required>
+          </div>
+          <div class="r2">
+            <input name="quantity" type="number" min="1" max="10" value="1" aria-label="Quantity" placeholder="Qty">
+            <input name="note" type="text" placeholder="Note — size, pickup… (optional)">
+          </div>
+          <button type="submit">Prenota ora →</button>
+          <div class="msg" data-msg aria-live="polite"></div>
         </form>
         <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:18px 28px;margin-top:clamp(28px,4vw,44px);max-width:460px">
           <div style="border-top:1px solid var(--line-l);padding-top:10px"><div style="font-family:var(--mono);font-size:9px;letter-spacing:.16em;color:rgba(8,8,13,.5)">ITEM</div><div style="font-family:var(--disp);font-weight:700;font-size:15px">Lanyard</div></div>
@@ -83,7 +91,7 @@
         </div>
       </div>
       <div class="hz-drop">
-        <div class="lab"><span>HZ.SUPPLY / DROP 01 · ACCESSORIES</span><span class="lim">LIMITED ↗</span></div>
+        <div class="lab"><span>DROP 01 · ACCESSORIES</span><span class="lim">LIMITED ↗</span></div>
         <div class="hz-dropcard">
           <div class="ed">001/200</div>
           <div class="pic"><img src="assets/merch-lanyard-drop01.png" alt="Hertz lanyard, Drop 01"></div>
@@ -99,6 +107,26 @@
 </section>
 
 <div id="site-footer"></div>
+<script>
+(function(){
+  var f=document.querySelector('[data-reserve]'); if(!f) return;
+  var msg=f.querySelector('[data-msg]'), btn=f.querySelector('button');
+  var val=function(n){ var el=f.querySelector('[name="'+n+'"]'); return el?(el.value||'').trim():''; };
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var data={ item:'Lanyard · Drop 01', name:val('name'), email:val('email'), quantity:val('quantity')||1, note:val('note') };
+    if(data.name.length<2 || data.email.indexOf('@')<1){ msg.textContent='Add your name and a valid email.'; msg.className='msg err'; return; }
+    btn.disabled=true; var old=btn.textContent; btn.textContent='Sending…'; msg.textContent=''; msg.className='msg';
+    fetch('/api/reserve',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
+      .then(function(r){ return r.json().catch(function(){ return { ok:r.ok }; }); })
+      .then(function(d){
+        if(d&&d.ok){ f.reset(); msg.textContent='Reserved — we’ll confirm by email shortly.'; msg.className='msg ok'; btn.textContent='Reserved ✓'; }
+        else { msg.textContent=(d&&d.error)||'Something went wrong. Please try again.'; msg.className='msg err'; btn.disabled=false; btn.textContent=old; }
+      })
+      .catch(function(){ msg.textContent='Network error. Please try again.'; msg.className='msg err'; btn.disabled=false; btn.textContent=old; });
+  });
+})();
+</script>
 <script src="chrome.js"></script>
 <script src="hertz-system.js"></script>
 </body>
