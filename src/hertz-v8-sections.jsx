@@ -401,7 +401,7 @@ function Footer8() {
             <p className="safe">No harassment, no hate, no discrimination. Respect boundaries, yours and others'. The dancefloor is for everyone.</p>
           </div>
         </div>
-        <div className="legal"><span>© 2026 Hertz, from clubbers to clubbers</span><span>HZ.CC / V8 · WE LIVE IN FREQUENCY</span></div>
+        <div className="legal"><span>© 2026 Hertz Clubbing Collective</span></div>
       </footer>
     </React.Fragment>
   );

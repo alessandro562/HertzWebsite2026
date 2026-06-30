@@ -330,8 +330,8 @@ function Footer8({ banner = true, bannerLight = true }) {
           display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8,
           fontFamily: "'JetBrains Mono', monospace", fontSize: 10, color: C.light + '40', letterSpacing: '0.1em',
         }}>
-          <span>© 2026 Hertz, from clubbers to clubbers</span>
-          <span>HZ.CLUB / V8</span>
+          <span>© 2026 Hertz Clubbing Collective</span>
+          
         </div>
       </div>
     </footer>

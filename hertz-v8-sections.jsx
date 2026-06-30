@@ -1040,8 +1040,8 @@ function Footer8() {
           fontFamily: "'JetBrains Mono', monospace",
           fontSize: 10, color: C.light + '40', letterSpacing: '0.1em',
         }}>
-          <span>© 2026 Hertz, from clubbers to clubbers</span>
-          <span>HZ.CC / V8</span>
+          <span>© 2026 Hertz Clubbing Collective</span>
+          
         </div>
       </div>
     </footer>
