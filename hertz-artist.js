@@ -41,10 +41,10 @@
     },
     'tommaso-manco': {
       name:'Tommaso Mancò', role:'DJ', n:'02', freq:'128 Hz',
-      origin:'Bologna, IT', since:'2023', sets:'Tech · Driving · Raw', img:'assets/dj-manco.jpg',
+      origin:'Abruzzo, IT', since:'2023', sets:'Tech House · Minimal Deep Tech', img:'assets/dj-manco.jpg',
       gallery:['assets/tommaso-manco-live-1.jpg','assets/tommaso-manco-live-2.jpg','assets/tommaso-manco-live-3.jpg','assets/tommaso-manco-live-4.jpg'],
-      bio:["Tommaso Mancò approaches the booth the way a craftsman approaches a workbench: methodical, committed, no shortcuts. His sets are driving and technical, built on a raw reading of minimal that keeps the floor in constant forward motion.",
-        "Part of Hertz since the project's early days in 2023, he has become one of the most recognisable hands behind the collective's Bologna nights, a regular face at Kindergarten and across the events that built the Hertz sound. His direction is straightforward and uncompromising: records picked for the groove, sequenced to build pressure and never let it drop."],
+      bio:["Born in 2001, Tommaso Mancò is a DJ from Abruzzo who discovered his passion for electronic music among the iconic parties of the Romagna riviera. It was there that he started building his musical culture and shaping his artistic identity.",
+        "He later moved to Bologna, where he joined the Hertz collective and still plays as a resident DJ today. His sound lives in tech house and minimal deep tech — the register that defines his style. In recent years he has performed at some of the area's most important stages and clubs, including Cima Festival, Kindergarten and Numa Club, as well as Buongiorno Classic — a place he has always called home, and one that, over the years, gave him the inspiration to develop and define his musical identity."],
       mixes:[],
       social:{ booking:'booking@hertz.cc' },
       events: evs(['024','023','022','021','020']),
