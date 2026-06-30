@@ -526,7 +526,7 @@ a{ color:inherit; }
 .hz-listcol{ display:flex; flex-direction:column; }
 .hz-listhead{ display:flex; align-items:center; gap:16px; padding-bottom:15px; margin-bottom:4px; border-bottom:1px solid var(--ink); }
 .hz-room .hz-listhead{ border-bottom-color:rgba(245,245,243,.6); }
-.hz-listhead .lg{ height:20px; width:auto; flex:0 0 auto; }
+.hz-listhead .lg{ height:26px; width:auto; flex:0 0 auto; }
 .hz-room .hz-listhead .lg{ filter:invert(1); }
 .hz-listhead .sub{ font-family:var(--mono); font-size:8.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--gray); }
 .hz-trk{ list-style:none; margin:0; padding:0; }
@@ -544,9 +544,9 @@ a{ color:inherit; }
 .hz-listempty{ font-family:var(--mono); font-size:11px; letter-spacing:.04em; color:var(--gray); margin:14px 0 0; }
 /* platform tag (logo + label under a section heading) */
 .hz-plattag{ display:inline-flex; align-items:center; gap:10px; margin-top:14px; font-family:var(--mono); font-size:10px; letter-spacing:.13em; text-transform:uppercase; color:var(--gray); }
-.hz-plattag img{ width:24px; height:24px; }
+.hz-plattag img{ height:19px; width:auto; }
 .hz-platform .ic{ display:block; margin-bottom:12px; }
-.hz-platform .ic img{ width:30px; height:30px; }
+.hz-platform .ic img{ height:26px; width:auto; }
 .hz-applist{ display:flex; flex-direction:column; }
 .hz-applabel{ font-family:var(--mono); font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--blue2); margin:clamp(22px,3vw,32px) 0 8px; }
 .hz-applabel:first-child{ margin-top:clamp(8px,1.5vw,16px); }
