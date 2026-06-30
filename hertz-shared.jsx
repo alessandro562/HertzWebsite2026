@@ -283,7 +283,7 @@ function Footer8({ banner = true, bannerLight = true }) {
               fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
               fontSize: 'clamp(2.5rem,8vw,7rem)',
               fontWeight: 700, lineHeight: 0.83, letterSpacing: '-0.05em', color: bannerLight ? C.dark : C.light,
-            }}>Groove is<br />the key<span style={{ color: C.blue }}>.</span></h2>
+            }}>Keep the<br />groove<span style={{ color: C.blue }}>.</span></h2>
           </div>
         </section>
       )}

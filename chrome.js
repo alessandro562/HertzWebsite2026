@@ -24,7 +24,7 @@
   foot.innerHTML=
     '<section class="hz-coda"><div style="max-width:1320px;margin:0 auto">'
     +'<div class="k">FROM CLUBBERS FOR CLUBBERS</div>'
-    +'<h2><span class="w2">Groove is</span><br><span class="w9 it">the key</span><span class="blue">.</span></h2>'
+    +'<h2><span class="w2">Keep the</span><br><span class="w9 it">groove</span><span class="blue">.</span></h2>'
     +'</div></section>'
     +'<footer class="hz-foot"><div class="cols">'
     +'<div><img src="assets/hertz-logo-header.png" alt="Hertz"><p class="blurb">hertz.cc<br>hertzbologna@gmail.com<br>Bologna · IT</p></div>'

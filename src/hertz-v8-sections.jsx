@@ -379,7 +379,7 @@ function Footer8() {
       <section className="hz-coda">
         <div style={{ maxWidth: 1320, margin: '0 auto' }}>
           <div className="k">FROM CLUBBERS FOR CLUBBERS</div>
-          <h2><span className="w2">Groove is</span><br /><span className="w9 it">the key</span><span className="blue">.</span></h2>
+          <h2><span className="w2">Keep the</span><br /><span className="w9 it">groove</span><span className="blue">.</span></h2>
         </div>
       </section>
       <footer className="hz-foot">
