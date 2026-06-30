@@ -292,7 +292,7 @@ a{ color:inherit; }
 /* ── HERO · mobile tightening (override desktop inline layout) ── */
 @media (max-width:640px){
   .hz-hero-inner{ padding-top:clamp(70px,10vh,88px) !important; padding-bottom:clamp(26px,5vh,40px) !important; }
-  .hz-hero-mark{ margin-top:clamp(120px,24vh,220px) !important; }
+  .hz-hero-mark{ margin-top:clamp(140px,28vh,260px) !important; }
   .hz-hero-mark h1{ font-size:clamp(2rem,9vw,2.6rem) !important; }
   .hz-hero-spacer{ flex:0 0 auto !important; min-height:clamp(40px,8vh,72px) !important; }
   .hz-hero-foot{ gap:18px !important; }

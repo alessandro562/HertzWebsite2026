@@ -250,7 +250,7 @@ function LogoStage({ tweaks }) {
     });
     renderer.setClearColor(0x08080d, 1);
     renderer.setSize(W, H);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2.5));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2.5));
     mount.appendChild(renderer.domElement);
 
     const root = new T.Group();
