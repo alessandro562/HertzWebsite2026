@@ -159,7 +159,7 @@
       + '<div class="hz-wrap">'
       + '<div class="hz-ix"><h2 class="hz-num">+</h2><div><div class="hz-kick"><span class="ln"></span>// APPEARANCES</div>'
       + '<h3 class="hz-h2"><span class="w2">On the</span> <span class="w9 it">calendar</span><span class="blue">.</span></h3></div>'
-      + '<div class="hz-meta">'+appearances.length+' DATES<br>'+(upcoming.length?upcoming.length+' UPCOMING':'HERTZ NIGHTS')+'</div></div>'
+      + '</div>'
       + listHtml
       + '</div></section>';
   }
