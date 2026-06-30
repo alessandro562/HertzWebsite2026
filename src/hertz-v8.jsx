@@ -569,7 +569,7 @@ function Hero8({ countdown, primary, accent, tweaks }) {
           <h1 style={{
             fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
             fontSize: 'clamp(2rem, 4vw, 3.2rem)',
-            fontWeight: 700, lineHeight: 1.05,
+            fontWeight: 700, lineHeight: 1.05, margin: 0,
             letterSpacing: '-0.025em', color: Cv8.light,
           }}>
             Clubbing{' '}
