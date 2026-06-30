@@ -565,7 +565,7 @@ function Hero8({ countdown, primary, accent, tweaks }) {
          next-event row can grow or shrink without ever pushing the wordmark
          up into the rotating logo. This is the definitive lock — editing the
          bottom content can no longer move this. */}
-      <div style={{ textAlign: 'center', maxWidth: 900, margin: 'clamp(176px, 37vh, 430px) auto 0', flex: '0 0 auto' }}>
+      <div style={{ textAlign: 'center', maxWidth: 900, margin: 'clamp(148px, 32vh, 370px) auto 0', flex: '0 0 auto' }}>
           <h1 style={{
             fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
             fontSize: 'clamp(2rem, 4vw, 3.2rem)',
@@ -577,7 +577,7 @@ function Hero8({ countdown, primary, accent, tweaks }) {
             <span style={{ color: accent }}>.</span>
           </h1>
           <p style={{
-            ...mono, fontSize: 11, color: Cv8.gray, marginTop: 10,
+            ...mono, fontSize: 11, color: Cv8.gray, marginTop: 4,
             textTransform: 'uppercase',
           }}>// from clubbers to clubbers · bologna est. 2023</p>
         </div>
