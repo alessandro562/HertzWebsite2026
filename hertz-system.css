@@ -512,6 +512,7 @@ a{ color:inherit; }
 .hz-galleryrail .g img{ width:100%; height:100%; object-fit:cover; filter:saturate(.65) brightness(.92) contrast(1.06); transition:transform 1s var(--ease); }
 .hz-galleryrail .g:hover img{ transform:scale(1.05); }
 .hz-galleryrail .g::after{ content:''; position:absolute; inset:0; background:repeating-linear-gradient(180deg,transparent 0 2px,rgba(8,8,13,.12) 2px 3px); mix-blend-mode:multiply; }
+.hz-galleryrail .g .cap{ position:absolute; left:8px; bottom:8px; z-index:2; font-family:var(--mono); font-size:8px; letter-spacing:.14em; color:#fff; background:rgba(8,8,13,.55); padding:3px 6px; }
 .hz-mixlist{ display:flex; flex-direction:column; }
 .hz-mixrow{ display:flex; align-items:center; gap:16px; padding:18px 4px; border-bottom:1px solid var(--line-l); text-decoration:none; color:inherit; transition:padding-left .3s var(--ease); }
 .hz-page .hz-mixrow{ border-color:var(--line-l); } .hz-room .hz-mixrow{ border-color:var(--line-d); }
