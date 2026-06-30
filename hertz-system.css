@@ -193,9 +193,14 @@ a{ color:inherit; }
 .hz-ticket .body{ padding:clamp(16px,2vw,22px); display:flex; flex-direction:column; gap:14px; }
 .hz-ticket .r1{ display:flex; justify-content:space-between; align-items:center; font-family:var(--mono); font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:rgba(8,8,13,.55); }
 .hz-ticket .win{ position:relative; aspect-ratio:16/10; background:var(--ink); overflow:hidden; display:flex; align-items:center; justify-content:center; }
-.hz-ticket .win .lines{ position:absolute; inset:0; z-index:2; background:repeating-linear-gradient(180deg, transparent 0 2px, rgba(0,0,0,.4) 2px 3px); opacity:.4; }
-.hz-ticket .win .rings{ position:absolute; left:50%; top:50%; width:150%; aspect-ratio:1; transform:translate(-50%,-50%); z-index:1; background:repeating-radial-gradient(circle at center, rgba(28,92,173,.26) 0 1px, transparent 1px 22px); -webkit-mask-image:radial-gradient(circle,#000 12%,transparent 64%); mask-image:radial-gradient(circle,#000 12%,transparent 64%); transition:background .5s; }
-.hz-ticket:hover .win .rings{ background:repeating-radial-gradient(circle at center, rgba(28,92,173,.5) 0 1px, transparent 1px 18px); }
+/* CRT scanlines — now scroll slowly (faster on hover) */
+.hz-ticket .win .lines{ position:absolute; inset:0; z-index:2; background:repeating-linear-gradient(180deg, transparent 0 2px, rgba(0,0,0,.4) 2px 3px); background-size:100% 3px; opacity:.35; animation:tk-scroll 6s linear infinite; }
+/* a soft light beam sweeping down the window — replaces the old blue rings */
+.hz-ticket .win .rings{ position:absolute; left:0; right:0; top:0; height:46%; z-index:1; background:linear-gradient(180deg, transparent 0%, rgba(28,92,173,.10) 42%, rgba(245,245,243,.13) 50%, rgba(28,92,173,.10) 58%, transparent 100%); transform:translateY(-110%); animation:tk-sweep 5.5s cubic-bezier(.45,0,.2,1) infinite; pointer-events:none; }
+.hz-ticket:hover .win .rings{ animation-duration:2.8s; }
+.hz-ticket:hover .win .lines{ animation-duration:3s; }
+@keyframes tk-scroll{ from{ background-position:0 0; } to{ background-position:0 60px; } }
+@keyframes tk-sweep{ 0%{ transform:translateY(-110%); } 100%{ transform:translateY(340%); } }
 .hz-ticket .win img{ position:relative; z-index:3; max-width:56%; max-height:56%; width:auto; object-fit:contain; opacity:.95; filter:drop-shadow(0 8px 24px rgba(0,0,0,.6)); }
 .hz-ticket .win .hz{ position:absolute; top:10px; right:10px; z-index:4; font-family:var(--mono); font-size:8px; letter-spacing:.16em; text-transform:uppercase; color:rgba(245,245,243,.4); }
 .hz-ticket .data{ display:grid; grid-template-columns:1fr 1fr; gap:7px 18px; }
