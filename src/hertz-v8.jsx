@@ -556,7 +556,7 @@ function Hero8({ countdown, primary, accent, tweaks }) {
       color: Cv8.light,
     }}>
       <LogoStage tweaks={tweaks} />
-      <div className="hz-mobile-hero" style={{
+      <div className="hz-mobile-hero hz-hero-inner" style={{
         position: 'relative', zIndex: 2,
         minHeight: '100vh',
         display: 'flex', flexDirection: 'column',
@@ -589,7 +589,7 @@ function Hero8({ countdown, primary, accent, tweaks }) {
          next-event row can grow or shrink without ever pushing the wordmark
          up into the rotating logo. This is the definitive lock — editing the
          bottom content can no longer move this. */}
-      <div style={{ textAlign: 'center', maxWidth: 900, margin: 'clamp(200px, 42vh, 480px) auto 0', flex: '0 0 auto' }}>
+      <div className="hz-hero-mark" style={{ textAlign: 'center', maxWidth: 900, margin: 'clamp(200px, 42vh, 480px) auto 0', flex: '0 0 auto' }}>
           <h1 style={{
             fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
             fontSize: 'clamp(2rem, 4vw, 3.2rem)',
@@ -608,9 +608,9 @@ function Hero8({ countdown, primary, accent, tweaks }) {
 
         {/* flexible gap — absorbs ALL variation below the wordmark, so the
            row below never shifts the wordmark. */}
-        <div style={{ flex: 1, minHeight: 'clamp(28px, 7vh, 80px)' }} />
+        <div className="hz-hero-spacer" style={{ flex: 1, minHeight: 'clamp(28px, 7vh, 80px)' }} />
 
-        <div style={{
+        <div className="hz-hero-foot" style={{
           display: 'flex', justifyContent: 'space-between',
           alignItems: 'flex-end', flexWrap: 'wrap', gap: 20,
         }}>
