@@ -1,0 +1,313 @@
+/* ════════════════════════════════════════════════════════════
+   Hertz — vendored design-system base (tokens + fonts)
+   Self-contained replacement for the cross-project styles.css.
+   Generated from the design system; load BEFORE hertz-system.css.
+   ════════════════════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+/* ============================================================
+   Hertz — Webfonts
+   Display + body: Helvetica Neue (licensed; shipped from codebase)
+   Mono / labels: JetBrains Mono (Google Fonts, loaded in styles.css)
+   ============================================================ */
+
+@font-face {
+  font-family: 'HelveticaNeue';
+  src: url('assets/fonts/HelveticaNeueUltraLight.otf') format('opentype');
+  font-weight: 100; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'HelveticaNeue';
+  src: url('assets/fonts/HelveticaNeueThin.otf') format('opentype');
+  font-weight: 200; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'HelveticaNeue';
+  src: url('assets/fonts/HelveticaNeueLight.otf') format('opentype');
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'HelveticaNeue';
+  src: url('assets/fonts/HelveticaNeueRoman.otf') format('opentype');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'HelveticaNeue';
+  src: url('assets/fonts/HelveticaNeueItalic.ttf') format('truetype');
+  font-weight: 400; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: 'HelveticaNeue';
+  src: url('assets/fonts/HelveticaNeueMedium.otf') format('opentype');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'HelveticaNeue';
+  src: url('assets/fonts/HelveticaNeueMediumItalic.otf') format('opentype');
+  font-weight: 500; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: 'HelveticaNeue';
+  src: url('assets/fonts/HelveticaNeueBold.otf') format('opentype');
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'HelveticaNeue';
+  src: url('assets/fonts/HelveticaNeueHeavy.otf') format('opentype');
+  font-weight: 800; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'HelveticaNeue';
+  src: url('assets/fonts/HelveticaNeueBlack.otf') format('opentype');
+  font-weight: 900; font-style: normal; font-display: swap;
+}
+
+
+/* ===== tokens/colors.css ===== */
+/* ============================================================
+   Hertz — Color tokens
+   "We live in frequency." Bologna minimal / deep-tech collective.
+   A near-black room, a bone-white page, one signal blue.
+   ============================================================ */
+
+:root {
+  /* ── Base palette (raw values) ───────────────────────────── */
+  --hz-dark:        #08080d;  /* the room — near-black, faint blue cast */
+  --hz-dark-soft:   #15151d;  /* raised surface on dark                 */
+  --hz-light:       #f5f5f3;  /* the page — warm bone white             */
+  --hz-light-soft:  #e8e8e3;  /* recessed surface on light              */
+  --hz-gray:        #9a9a9f;  /* mono labels, captions, metadata        */
+
+  /* Signal blue — RAL 5010 Enzianblau (gentian blue). The ONE accent. */
+  --hz-blue:        #144889;
+  --hz-blue-bright: #1c5cad;  /* hover lift of the blue                 */
+
+  /* Secondary signals — used sparingly, mostly in the 3D hero / tweaks */
+  --hz-cyan:        #00d4ff;
+  --hz-yellow:      #f5f00d;
+
+  /* Pure white for text sitting on the blue capsule */
+  --hz-white:       #ffffff;
+
+  /* ── Alpha ramps (built on the base, for borders & veils) ── */
+  --hz-light-a08:   rgba(245,245,243,0.08);
+  --hz-light-a15:   rgba(245,245,243,0.15);
+  --hz-light-a40:   rgba(245,245,243,0.40);
+  --hz-light-a66:   rgba(245,245,243,0.66);
+  --hz-dark-a05:    rgba(8,8,13,0.05);
+  --hz-dark-a15:    rgba(8,8,13,0.15);
+  --hz-dark-a55:    rgba(8,8,13,0.55);
+  --hz-dark-a76:    rgba(8,8,13,0.76);
+  --hz-blue-a30:    rgba(20,72,137,0.30);
+
+  /* ── Semantic aliases (use these in components) ──────────── */
+  --surface-base:        var(--hz-dark);     /* default app bg          */
+  --surface-raised:      var(--hz-dark-soft);
+  --surface-inverse:     var(--hz-light);    /* light editorial sections */
+  --surface-inverse-2:   var(--hz-light-soft);
+
+  --text-strong:         var(--hz-light);    /* headlines on dark        */
+  --text-body:           var(--hz-light-a66);
+  --text-muted:          var(--hz-gray);
+  --text-on-light:       var(--hz-dark);     /* headlines on light       */
+  --text-on-light-muted: rgba(8,8,13,0.53);
+
+  --accent:              var(--hz-blue);     /* the period, links, marks */
+  --accent-hover:        var(--hz-blue-bright);
+  --on-accent:           var(--hz-white);
+
+  --border-on-dark:      var(--hz-light-a15);
+  --border-on-light:     var(--hz-dark-a15);
+  --focus-ring:          var(--hz-blue);
+
+  /* Grid wash printed behind editorial sections (the 40px tech grid) */
+  --grid-line-dark:      var(--hz-dark-a05);
+  --grid-line-light:     var(--hz-light-a08);
+}
+
+
+/* ===== tokens/typography.css ===== */
+/* ============================================================
+   Hertz — Typography tokens
+   Two voices only:
+   · Helvetica Neue — tight, heavy display + clean body.
+     Headlines run BOLD (700), line-height 0.83, tracking -0.05em.
+   · JetBrains Mono — every label, tag, caption, coordinate, BPM.
+     UPPERCASE, wide tracking (0.2em), tiny (10–12px).
+   ============================================================ */
+
+:root {
+  /* ── Families ────────────────────────────────────────────── */
+  --font-display: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-body:    'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* ── Weights ───────────────────────────── /* @kind font */
+  --fw-ultralight: 100; /* @kind font */
+  --fw-thin:       200; /* @kind font */
+  --fw-light:      300; /* @kind font */
+  --fw-regular:    400; /* @kind font */
+  --fw-medium:     500; /* @kind font */
+  --fw-bold:       700; /* @kind font */
+  --fw-heavy:      800; /* @kind font */
+  --fw-black:      900; /* @kind font */
+
+  /* ── Display scale (fluid; headlines) ────────────────────── */
+  --fs-display-xl: clamp(3rem, 10vw, 9rem);    /* @kind font */
+  --fs-display-lg: clamp(2.5rem, 8vw, 7rem);   /* @kind font */
+  --fs-display-md: clamp(2rem, 5vw, 4rem);     /* @kind font */
+  --fs-display-sm: clamp(1.4rem, 2.6vw, 2.1rem); /* @kind font */
+
+  /* ── Body scale ──────────────────────────────────────────── */
+  --fs-lead:   clamp(16px, 1.55vw, 19px);  /* @kind font */
+  --fs-body:   16px; /* @kind font */
+  --fs-small:  14px; /* @kind font */
+
+  /* ── Mono / label scale ──────────────────────────────────── */
+  --fs-mono-lg: 12px; /* @kind font */
+  --fs-mono:    11px; /* @kind font */
+  --fs-mono-sm: 10px; /* @kind font */
+  --fs-mono-xs: 9px; /* @kind font */
+
+  /* ── Line heights ────────────────────────────────────────── */
+  --lh-display: 0.83;   /* @kind font */
+  --lh-tight:   1.05; /* @kind font */
+  --lh-snug:    1.2; /* @kind font */
+  --lh-body:    1.7; /* @kind font */
+  --lh-loose:   1.8; /* @kind font */
+
+  /* ── Letter-spacing ──────────────────────────────────────── */
+  --tracking-display: -0.05em;  /* @kind font */
+  --tracking-tight:   -0.02em; /* @kind font */
+  --tracking-mono:    0.2em;     /* @kind font */
+  --tracking-mono-sm: 0.14em; /* @kind font */
+}
+
+
+/* ===== tokens/spacing.css ===== */
+/* ============================================================
+   Hertz — Spacing, radius, border, shadow, motion
+   The system is mostly SQUARE: radius is near-zero by design.
+   Cards are hard-edged panels with hairline borders, lifted on
+   hover. Rhythm is driven by a fluid section-padding scale and a
+   40px technical grid.
+   ============================================================ */
+
+:root {
+  /* ── Spacing scale (px) ──────────────────────────────────── */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  24px;
+  --sp-6:  32px;
+  --sp-7:  48px;
+  --sp-8:  56px;
+  --sp-9:  80px;
+  --sp-10: 120px;
+
+  /* Fluid section padding (vertical / horizontal gutter) */
+  --section-y: clamp(60px, 10vh, 120px); /* @kind spacing */
+  --gutter-x:  clamp(20px, 4vw, 56px); /* @kind spacing */
+
+  /* The technical background grid */
+  --grid-cell: 40px;
+
+  /* Content max width */
+  --maxw-content: 1400px;
+
+  /* ── Radius — deliberately minimal ───────────────────────── */
+  --radius-none: 0px;        /* default: hard square panels        */
+  --radius-xs:   2px;        /* inputs / small chips, barely there */
+  --radius-pill: 999px;      /* status dots, BPM beacons only       */
+
+  /* ── Borders ─────────────────────────────────────────────── */
+  --border-hairline: 1px;    /* the only weight used for panels     */
+
+  /* ── Shadows — only on lift, never resting ───────────────── */
+  --shadow-card:  0 20px 44px -22px rgba(8,8,13,0.50);
+  --shadow-lift:  0 24px 48px -18px rgba(0,0,0,0.66);
+  --shadow-merch: 10px 20px 60px rgba(0,0,0,0.22);
+
+  /* ── Motion ──────────────────────────────────────────────── */
+  /* The house easing — used for nearly every transition + reveal */
+  --ease-hz: cubic-bezier(.22, 1, .36, 1); /* @kind other */
+  --dur-fast:   0.18s; /* @kind other */
+  --dur-base:   0.25s; /* @kind other */
+  --dur-slow:   0.45s; /* @kind other */
+  --dur-reveal: 1.1s;   /* @kind other */
+
+  /* ── Z-index ─────────────────────────────────────────────── */
+  --z-nav:     100; /* @kind other */
+  --z-overlay: 99; /* @kind other */
+  --z-hero:    2; /* @kind other */
+}
+
+
+/* ===== tokens/base.css ===== */
+/* ============================================================
+   Hertz — Base resets + the site-wide HZ card system
+   The "signal-panel": hard-edged dark panel, corner registration
+   marks that extend into a blue perimeter trace on hover, a single
+   scan sweep, and a 4px lift. Hertz blue only. Pure pseudo-elements.
+   ============================================================ */
+
+::selection { background: var(--hz-blue-a30); color: var(--hz-light); }
+
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: var(--hz-dark); }
+::-webkit-scrollbar-thumb { background: rgba(20,72,137,0.4); }
+::-webkit-scrollbar-thumb:hover { background: rgba(20,72,137,0.7); }
+
+:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+
+/* ── Beat / scan keyframes used across the brand ─────────────── */
+@keyframes hz-scan  { 0%,100% { opacity: 0.25; } 50% { opacity: 0.55; } }
+@keyframes hz-blink { 0%,50% { opacity: 1; } 50.01%,100% { opacity: 0; } }
+
+/* ── HZ signal-panel card system ─────────────────────────────── */
+.hz-card { position: relative; isolation: isolate;
+  transition: transform .45s var(--ease-hz), box-shadow .45s var(--ease-hz); }
+.hz-card::before {
+  content: ''; position: absolute; inset: 0; z-index: 4; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(245,245,243,.20),rgba(245,245,243,.20)), linear-gradient(rgba(245,245,243,.20),rgba(245,245,243,.20)),
+    linear-gradient(rgba(245,245,243,.20),rgba(245,245,243,.20)), linear-gradient(rgba(245,245,243,.20),rgba(245,245,243,.20)),
+    linear-gradient(rgba(245,245,243,.20),rgba(245,245,243,.20)), linear-gradient(rgba(245,245,243,.20),rgba(245,245,243,.20)),
+    linear-gradient(rgba(245,245,243,.20),rgba(245,245,243,.20)), linear-gradient(rgba(245,245,243,.20),rgba(245,245,243,.20));
+  background-repeat: no-repeat;
+  background-position: 0 0, 0 0, 100% 0, 100% 0, 0 100%, 0 100%, 100% 100%, 100% 100%;
+  background-size: 15px 1px, 1px 15px, 15px 1px, 1px 15px, 15px 1px, 1px 15px, 15px 1px, 1px 15px;
+  transition: background-size .55s var(--ease-hz), background-image .55s var(--ease-hz);
+}
+.hz-card:hover::before, .hz-card:focus-visible::before {
+  background-image:
+    linear-gradient(var(--hz-blue),var(--hz-blue)), linear-gradient(var(--hz-blue),var(--hz-blue)),
+    linear-gradient(var(--hz-blue),var(--hz-blue)), linear-gradient(var(--hz-blue),var(--hz-blue)),
+    linear-gradient(var(--hz-blue),var(--hz-blue)), linear-gradient(var(--hz-blue),var(--hz-blue)),
+    linear-gradient(var(--hz-blue),var(--hz-blue)), linear-gradient(var(--hz-blue),var(--hz-blue));
+  background-size: 50% 1px, 1px 50%, 50% 1px, 1px 50%, 50% 1px, 1px 50%, 50% 1px, 1px 50%;
+}
+.hz-card::after {
+  content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none; opacity: 0;
+  background: linear-gradient(105deg, transparent 42%, rgba(20,72,137,.30) 50%, transparent 58%);
+  background-size: 240% 100%; background-position: 160% 0;
+}
+.hz-card:hover::after { animation: hzScan .85s var(--ease-hz); }
+@keyframes hzScan { 0% { opacity: 1; background-position: 160% 0; } 100% { opacity: 0; background-position: -60% 0; } }
+.hz-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
+.hz-card:focus-visible { outline: 2px solid var(--hz-blue); outline-offset: 3px; }
+
+/* Solid-surface variant: total black + fine underground grain + faint top light */
+.hz-card--panel {
+  background-color: var(--hz-dark);
+  background-image:
+    radial-gradient(135% 95% at 50% -12%, rgba(245,245,243,.05), rgba(245,245,243,0) 56%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  box-shadow: inset 0 1px 0 rgba(245,245,243,.04);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hz-card, .hz-card::before, .hz-card::after { transition: none !important; animation: none !important; }
+  .hz-card:hover { transform: none; box-shadow: none; }
+}

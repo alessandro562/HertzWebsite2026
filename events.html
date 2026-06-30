@@ -1,223 +1,110 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-accent="yellow">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hertz, Events · Bologna Club Night</title>
-  <meta name="description" content="Upcoming and past events from Hertz, Bologna's minimal and deep-tech club night. Dates, lineups, venues.">
-  <meta name="theme-color" content="#08080d">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Hertz, Events">
-  <meta property="og:description" content="Upcoming and past events from Hertz, Bologna's minimal and deep-tech club night.">
-  <meta property="og:image" content="https://hertz.club/assets/hertz-logo-official.png">
-  <meta property="og:url" content="https://hertz.club/events">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Hertz, Events">
-  <meta name="twitter:description" content="Upcoming and past events from Hertz, Bologna's minimal and deep-tech club night.">
-  <link rel="canonical" href="https://hertz.club/events">
-  <link rel="stylesheet" href="fonts.css">
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=block" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
-    body { background: #08080d; color: #f5f5f3; font-family: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif; overflow-x: hidden; }
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: #08080d; }
-    ::-webkit-scrollbar-thumb { background: rgba(20,72,137,0.4); }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(20,72,137,0.7); }
-    ::selection { background: rgba(20,72,137,0.30); color: #f5f5f3; }
-    img { user-select: none; -webkit-user-drag: none; max-width: 100%; height: auto; }
-    a { color: inherit; text-decoration: none; }
-    button { font-family: inherit; }
-    @media (max-width: 768px) {
-      * { -webkit-tap-highlight-color: transparent; }
-      html { font-size: 14px; }
-      body { font-size: 14px; }
-      input, textarea, select { font-size: 16px; }
-      button { min-height: 44px; }
-    }
-    @media (max-width: 480px) { html { font-size: 13px; } }
-    @media (prefers-reduced-motion: reduce) {
-      * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Events — Hertz Clubbing Collective</title>
+<meta name="description" content="Upcoming Hertz events and past nights in Bologna — lineups, venues and tickets.">
+<meta name="theme-color" content="#08080d">
+<link rel="canonical" href="https://hertzclubbing.com/events">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hertz">
+<meta property="og:title" content="Events — Hertz">
+<meta property="og:description" content="Upcoming Hertz events and past nights in Bologna — lineups, venues and tickets.">
+<meta property="og:image" content="https://hertzclubbing.com/assets/hertz-logo-official.png">
+<meta property="og:url" content="https://hertzclubbing.com/events">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Events — Hertz">
+<meta name="twitter:image" content="https://hertzclubbing.com/assets/hertz-logo-official.png">
+<link rel="stylesheet" href="ds-base.css">
+<link rel="stylesheet" href="hertz-system.css">
+<style> html,body{ margin:0; background:#08080d; } </style>
 </head>
 <body>
-<div id="root"></div>
-<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-<script type="text/babel" src="hertz-shared.jsx"></script>
-<script type="text/babel">
-// Upcoming — events with a poster show full info; poster-less show "coming soon" + city only.
-const UPCOMING = [
-  { title: 'Hertz × Atrium', type: 'Guest', day: 'SUN 28.06', date: '28 Jun 2026', time: 'H18 → late', venue: "Noah's Dream", city: 'Ortona', n: '026', lineup: ["Danilo D'Arrezzo", 'Federico Apadula', 'Adime'], poster: 'assets/poster-v3-28giu-atrium.jpg', ctaLabel: 'Info', ctaLink: '#' },
-  { title: 'Hertz × Buongiorno Classic', type: 'Collaboration', day: 'SUN 28.06', date: '28 Jun 2026', time: '17:00 → 00:00', venue: 'Buongiorno Classic', city: 'Rimini', n: '027', lineup: ['Tommaso Mancò', 'Alberto B'], poster: 'assets/poster-v3-28giu-buongiorno.jpg', ctaLabel: 'Info', ctaLink: '#' },
-  { title: 'Hertz Downtown / Il Pallone', type: 'Downtown Gig', day: 'SAT 04.07', date: '04 Jul 2026', time: '19:30 → 23:30', venue: 'Il Pallone', city: 'Bologna', n: '028', lineup: ['Federico Apadula', 'Leonardo Giusti', 'SeaRock'], poster: 'assets/poster-v3-04lug-pallone.jpg', ctaLabel: 'Info', ctaLink: '#' },
-  { title: 'Hertz / Barracuda Club',     type: 'Collaboration', day: 'SAT 25.07', city: 'Ferrara', n: '029', comingSoon: true },
-  { title: 'Hertz × Buongiorno Classic', type: 'Collaboration', day: 'SUN 26.07', date: '26 Jul 2026', time: '05:00 → 00:00', venue: 'Buongiorno Classic', city: 'Rimini', n: '030', lineup: ['Antonio Pica', 'Da Vid', 'Jay De Lys', 'Joey Daniel', 'Hertz'], poster: 'assets/poster-v3-26lug-buongiorno.jpg', ctaLabel: 'Info', ctaLink: '#' },
-  { title: 'Hertz × Buongiorno Classic', type: 'Collaboration', day: 'FRI 14.08', city: 'Rimini',  n: '031', comingSoon: true },
-  { title: 'Hertz / Barracuda Club',     type: 'Collaboration', day: 'SAT 15.08', city: 'Ferrara', n: '032', comingSoon: true },
-];
 
-const PAST = [
-  { title: 'Take Notes × Buongiorno Classic',        type: 'Guest / Showcase', date: '31 May 2026', venue: 'Buongiorno Classic', city: 'Rimini',  n: '025', poster: 'assets/poster-v3-31mag-takenotes.jpg' },
-  { title: 'Hertz × Undersound',                     type: 'Collab',      date: '29 May 2026', venue: 'Cassero',     city: 'Bologna', n: '024', poster: 'assets/poster-v3-29mag-cassero.jpg' },
-  { title: 'Hertz / Kindergarten',                   type: 'Hertz Event', date: '24 Apr 2026', venue: 'Kindergarten', city: 'Bologna', n: '023', poster: 'assets/poster-v3-24apr-kindergarten.jpg', tag: 'Sold Out' },
-  { title: 'Hertz / Kindergarten',                   type: 'Hertz Event', date: '27 Feb 2026', venue: 'Kindergarten', city: 'Bologna', n: '022', poster: 'assets/poster-v3-27feb-kindergarten.jpg' },
-  { title: 'Hertz / Kindergarten',                   type: 'Hertz Event', date: '26 Dec 2025', venue: 'Kindergarten', city: 'Bologna', n: '021', poster: 'assets/poster-v3-26dic-kindergarten.jpg' },
-  { title: 'Buongiorno Classic Goes To Hertz',       type: 'Collab',      date: '22 Nov 2025', venue: 'Numa Club',    city: 'Bologna', n: '020', poster: 'assets/poster-v3-22nov-numa.jpg' },
-  { title: 'Hertz / Kindergarten',                   type: 'Hertz Event', date: '24 Oct 2025', venue: 'Kindergarten', city: 'Bologna', n: '019', poster: 'assets/poster-v3-24ott-kindergarten.jpg' },
-  { title: 'Classic Airlines / Boarding Pass',       type: 'Collab',      date: '21 Sep 2025', venue: 'Classic Airlines', city: 'Rimini', n: '018', poster: 'assets/poster-v3-21set-classicairlines.jpg' },
-];
+<!-- ═══════════ DEPARTURES (room / CRT) ═══════════ -->
+<section class="hz-sec hz-room crt flick hz-pageintro">
+  <div class="hz-scanband"></div>
+  <span class="reg"><b class="a"></b><b class="b2"></b><b class="c"></b><b class="d"></b></span>
+  <div class="hz-wrap hz-wide">
+    <div class="hz-kick" style="margin-bottom:18px"><span class="ln"></span>// DEPARTURES · LIVE BOARD</div>
+    <h1 style="font-family:var(--disp);font-size:clamp(2.6rem,7vw,5.6rem);line-height:.82;letter-spacing:-.05em;margin:0 0 14px"><span class="w2">What's</span> <span class="w9 it">next</span><span class="blue">.</span></h1>
+    <p class="mono" style="font-size:10px;color:var(--gray);margin:0 0 clamp(28px,4vw,48px)">UPCOMING TRANSMISSIONS · BOLOGNA · RIMINI · FERRARA · ORTONA · 125–128 BPM</p>
 
-function EventsPage() {
-  const C = window.Cv8;
-  const R = window.R8;
-  const mono = { fontFamily: "'JetBrains Mono', monospace" };
-  const briq = { fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif" };
-
-  return (
-    <div style={{ background: C.dark, minHeight: '100vh' }}>
-      <window.Nav8 />
-      <window.PageHero section="01. EVENTS" title="Every night" sub="Bologna · Rimini · Ferrara · Adriatic Coast" />
-
-      {/* UPCOMING */}
-      <section style={{ background: C.light, padding: 'clamp(56px,8vh,96px) clamp(20px,4vw,56px)' }}>
-        <R>
-          <div style={{ ...mono, fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 12 }}>// UPCOMING</div>
-          <h2 style={{ ...briq, fontSize: 'clamp(2rem,6vw,5rem)', fontWeight: 700, lineHeight: 0.9, letterSpacing: '-0.04em', color: C.dark, marginBottom: 48 }}>
-            What's next<span style={{ color: C.blue }}>.</span>
-          </h2>
-        </R>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(320px,1fr))', gap: 24 }}>
-          {UPCOMING.map((e, i) => (
-            <R key={i} delay={i * 0.1}>
-              {e.comingSoon ? (
-                <div style={{ background: C.dark, color: C.light, overflow: 'hidden', position: 'relative', border: `1px solid ${C.light}12`, display: 'flex', flexDirection: 'column' }}>
-                  <div style={{ position: 'relative', aspectRatio: '3875 / 5463', background: `linear-gradient(150deg, ${C.darkSoft} 0%, ${C.dark} 70%)`, borderBottom: `1px solid ${C.blue}`, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: 24, overflow: 'hidden', textAlign: 'center' }}>
-                    <div style={{ position: 'absolute', top: 14, left: 14, background: C.blue, color: C.light, padding: '4px 10px', ...mono, fontSize: 9, letterSpacing: '0.14em', textTransform: 'uppercase' }}>{e.type}</div>
-                    <div style={{ ...briq, lineHeight: 0.92, letterSpacing: '0.02em', color: C.light, textTransform: 'uppercase' }}>
-                      <span style={{ display: 'block', fontSize: 'clamp(1.4rem,4.4vw,2.1rem)', fontWeight: 200 }}>COMING</span>
-                      <span style={{ display: 'block', fontSize: 'clamp(2.4rem,7vw,3.6rem)', fontWeight: 700 }}>SOON<span style={{ color: C.blue }}>.</span></span>
-                    </div>
-                  </div>
-                  <div style={{ padding: 24, textAlign: 'center' }}>
-                    <div style={{ ...mono, fontSize: 10, color: C.light + 'aa', letterSpacing: '0.18em', marginBottom: 8, textTransform: 'uppercase' }}>
-                      HZ.{e.n} · {e.day}
-                    </div>
-                    <div style={{ ...mono, fontSize: 12, color: C.light + '99', letterSpacing: '0.1em', textTransform: 'uppercase' }}>{e.city}</div>
-                  </div>
-                </div>
-              ) : (
-                <div style={{ background: C.dark, color: C.light, overflow: 'hidden', position: 'relative', border: `1px solid ${C.light}12` }}>
-                  {e.poster ? (
-                    <div style={{ position: 'relative', overflow: 'hidden' }}>
-                      <img
-                        src={e.poster} alt={e.title}
-                        loading="lazy"
-                        style={{ width: '100%', aspectRatio: '3875 / 5463', objectFit: 'cover', objectPosition: 'center', display: 'block', filter: 'brightness(0.9)' }}
-                      />
-                      <div style={{ position: 'absolute', top: 14, left: 14, background: C.blue, color: C.light, padding: '4px 10px', ...mono, fontSize: 9, letterSpacing: '0.14em', textTransform: 'uppercase' }}>{e.type}</div>
-                    </div>
-                  ) : (
-                    <div style={{ position: 'relative', aspectRatio: '3875 / 5463', background: `linear-gradient(150deg, ${C.darkSoft} 0%, ${C.dark} 70%)`, borderBottom: `1px solid ${C.blue}`, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: 24, overflow: 'hidden' }}>
-                      <div style={{ position: 'absolute', top: 14, left: 14, background: C.blue, color: C.light, padding: '4px 10px', ...mono, fontSize: 9, letterSpacing: '0.14em', textTransform: 'uppercase' }}>{e.type}</div>
-                      <div aria-hidden="true" style={{ position: 'absolute', right: -8, top: '34%', ...briq, fontSize: 'clamp(7rem,18vw,11rem)', fontWeight: 700, lineHeight: 0.8, letterSpacing: '-0.06em', color: C.light + '08', pointerEvents: 'none', userSelect: 'none' }}>HZ</div>
-                      <div style={{ position: 'relative' }}>
-                        <div style={{ ...mono, fontSize: 11, color: C.blue, letterSpacing: '0.24em', marginBottom: 8 }}>{e.day.split(' ')[0]}</div>
-                        <div style={{ ...briq, fontSize: 'clamp(3rem,8vw,4.5rem)', fontWeight: 700, lineHeight: 0.83, letterSpacing: '-0.04em', color: C.light }}>{e.day.split(' ')[1]}</div>
-                      </div>
-                    </div>
-                  )}
-                  <div style={{ padding: 24 }}>
-                    <div style={{ ...mono, fontSize: 10, color: C.light + 'aa', letterSpacing: '0.18em', marginBottom: 8, textTransform: 'uppercase' }}>
-                      HZ.{e.n} · {e.day}{e.time ? ` · ${e.time}` : ''}
-                    </div>
-                    <h3 style={{ ...briq, fontSize: 'clamp(1.3rem,2.5vw,1.8rem)', fontWeight: 700, letterSpacing: '-0.03em', marginBottom: 4, color: C.light }}>{e.title}</h3>
-                    {e.subtitle && <p style={{ fontSize: 13, color: C.light + 'aa', marginBottom: 12 }}>{e.subtitle}</p>}
-                    <div style={{ ...mono, fontSize: 11, color: C.light + '88', marginBottom: 20 }}>@ {e.venue}, {e.city}</div>
-                    <div style={{ borderTop: `1px solid ${C.light}18`, paddingTop: 16, marginBottom: 20 }}>
-                      <div style={{ ...mono, fontSize: 9, color: C.light + '55', letterSpacing: '0.2em', marginBottom: 8 }}>// LINEUP</div>
-                      {e.lineup ? (
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-                          {e.lineup.map(a => (
-                            <span key={a} style={{ ...mono, fontSize: 11, color: C.light + 'cc', letterSpacing: '0.08em' }}>{a}</span>
-                          ))}
-                        </div>
-                      ) : (
-                        <span style={{ ...mono, fontSize: 11, color: C.light + '99', letterSpacing: '0.08em' }}>Announced soon</span>
-                      )}
-                    </div>
-                    <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                      <a
-                        href={e.ctaLink || '#'}
-                        aria-label={`${e.ctaLabel}, ${e.title}`}
-                        style={{
-                          display: 'inline-flex', alignItems: 'center', background: C.blue, color: C.light, padding: '14px 22px',
-                          ...mono, fontSize: 11, fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase',
-                          transition: 'background 0.2s', minHeight: 44,
-                        }}
-                        onMouseEnter={e2 => e2.currentTarget.style.background = '#1a5aaf'}
-                        onMouseLeave={e2 => e2.currentTarget.style.background = C.blue}
-                      >
-                        {e.ctaLabel} ↗
-                      </a>
-                      {(e.address || e.venue) && (
-                        <a
-                          href={`https://maps.google.com/?q=${encodeURIComponent((e.address || e.venue) + ', ' + e.city)}`}
-                          target="_blank" rel="noopener noreferrer"
-                          aria-label={`Map for ${e.venue}, ${e.city}`}
-                          style={{
-                            display: 'inline-flex', alignItems: 'center', border: `1px solid ${C.light}22`, color: C.light + '88', padding: '14px 22px',
-                            ...mono, fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase',
-                            transition: 'all 0.2s', minHeight: 44,
-                          }}
-                          onMouseEnter={e2 => { e2.currentTarget.style.borderColor = C.light + '55'; e2.currentTarget.style.color = C.light; }}
-                          onMouseLeave={e2 => { e2.currentTarget.style.borderColor = C.light + '22'; e2.currentTarget.style.color = C.light + '88'; }}
-                        >Maps ↗</a>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              )}
-            </R>
-          ))}
-        </div>
-      </section>
-
-      {/* PAST EVENTS */}
-      <section style={{ background: C.dark, padding: 'clamp(56px,8vh,96px) clamp(20px,4vw,56px)' }}>
-        <R>
-          <div style={{ ...mono, fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 12 }}>// THE ARCHIVE</div>
-          <h2 style={{ ...briq, fontSize: 'clamp(2rem,6vw,5rem)', fontWeight: 700, lineHeight: 0.9, letterSpacing: '-0.04em', color: C.light, marginBottom: 48 }}>
-            Past nights<span style={{ color: C.blue }}>.</span>
-          </h2>
-        </R>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(260px,1fr))', gap: 1, border: `1px solid ${C.light}0a` }}>
-          {PAST.map((e, i) => (
-            <R key={i} delay={i * 0.06}>
-              <div style={{ position: 'relative', overflow: 'hidden', cursor: 'default', borderRight: `1px solid ${C.light}0a`, background: C.dark, display: 'flex', flexDirection: 'column' }}>
-                <div style={{ position: 'relative', overflow: 'hidden' }}>
-                  <img src={e.poster} alt={`${e.title}, ${e.date}`} loading="lazy" style={{ width: '100%', aspectRatio: '3875 / 5463', objectFit: 'cover', objectPosition: 'center', display: 'block', filter: 'saturate(0.7) brightness(0.82) contrast(1.04)' }} />
-                  <div style={{ position: 'absolute', top: 14, right: 14, ...mono, fontSize: 10, color: C.light + 'cc', letterSpacing: '0.16em', background: 'rgba(8,8,13,0.55)', padding: '3px 8px' }}>HZ.{e.n}</div>
-                  {e.tag && <div style={{ position: 'absolute', top: 14, left: 14, background: C.blue, color: C.light, padding: '4px 10px', ...mono, fontSize: 9, letterSpacing: '0.14em' }}>{e.tag}</div>}
-                </div>
-                <div style={{ padding: '16px 18px 20px' }}>
-                  <div style={{ ...mono, fontSize: 10, color: C.light + '77', letterSpacing: '0.14em', marginBottom: 6, textTransform: 'uppercase' }}>{e.date} · {e.venue}</div>
-                  <h3 style={{ ...briq, fontSize: 'clamp(1.05rem,1.7vw,1.3rem)', fontWeight: 700, letterSpacing: '-0.02em', color: C.light, lineHeight: 1.1 }}>{e.title}</h3>
-                </div>
-              </div>
-            </R>
-          ))}
-        </div>
-      </section>
-
-      <window.Footer8 />
+    <div class="hz-board" data-board="board-data">
+      <div class="hz-brow head">
+        <span>Date</span><span>Transmission</span><span class="hv">Venue</span><span class="hc">City</span><span style="text-align:right">Status</span>
+      </div>
     </div>
-  );
-}
-ReactDOM.createRoot(document.getElementById('root')).render(<EventsPage />);
+    <div class="hz-railhint" style="margin-top:14px"><span class="hz-dot"></span><span>FLAPS LOAD ON SCROLL · NEXT MARKED ▸</span></div>
+  </div>
+</section>
+
+<!-- ═══════════ UPCOMING grid (page / riso) ═══════════ -->
+<section class="hz-sec hz-page riso">
+  <span class="reg"><b class="a"></b><b class="b2"></b><b class="c"></b><b class="d"></b></span>
+  <div class="hz-wrap hz-wide">
+    <div class="hz-ix rise">
+      <h2 class="hz-num">0<span class="sl">1</span></h2>
+      <div>
+        <div class="hz-kick"><span class="ln"></span>// UPCOMING</div>
+        <h3 class="hz-h2"><span class="w2">On the</span> <span class="w9 it">calendar</span><span class="blue">.</span></h3>
+      </div>
+      <div class="hz-meta">07 DATES<br>SUMMER 2026<br>FROM N°026</div>
+    </div>
+    <div class="hz-postergrid rise">
+      <a class="hz-poster" href="#"><div class="img"><span class="reg" style="color:#fff"><b class="a"></b><b class="d"></b></span><img src="assets/poster-v3-28giu-atrium.jpg" alt="Hertz × Atrium"><div class="badge">Guest</div><div class="n">N°026</div></div><div class="foot"><div class="d">// 28.06.26 · SUN · H18 → LATE</div><div class="ti">Hertz × Atrium</div><div class="v">Noah's Dream · Ortona</div><div class="lineup">Danilo D'Arrezzo · Federico Apadula · Adime</div><span class="cta">Info →</span></div></a>
+      <a class="hz-poster" href="#"><div class="img"><span class="reg" style="color:#fff"><b class="a"></b><b class="d"></b></span><img src="assets/poster-v3-28giu-buongiorno.jpg" alt="Hertz × Buongiorno Classic"><div class="badge">Collaboration</div><div class="n">N°027</div></div><div class="foot"><div class="d">// 28.06.26 · SUN · 17:00 → 00:00</div><div class="ti">Hertz × Buongiorno Classic</div><div class="v">Buongiorno Classic · Rimini</div><div class="lineup">Tommaso Mancò · Alberto B</div><span class="cta">Info →</span></div></a>
+      <a class="hz-poster" href="#"><div class="img"><span class="reg" style="color:#fff"><b class="a"></b><b class="d"></b></span><img src="assets/poster-v3-04lug-pallone.jpg" alt="Hertz Downtown / Il Pallone"><div class="badge">Downtown Gig</div><div class="n">N°028</div></div><div class="foot"><div class="d">// 04.07.26 · SAT · 19:30 → 23:30</div><div class="ti">Hertz Downtown / Il Pallone</div><div class="v">Il Pallone · Bologna</div><div class="lineup">Federico Apadula · Leonardo Giusti · SeaRock</div><span class="cta">Info →</span></div></a>
+      <a class="hz-poster coming" href="#"><div class="img"><span class="reg" style="color:#fff"><b class="a"></b><b class="d"></b></span><div class="soon"><b>COMING</b><strong>SOON<span class="blue">.</span></strong></div><div class="badge">Collaboration</div><div class="n">N°029</div></div><div class="foot"><div class="d">// 25.07 · TBA</div><div class="ti">Hertz / Barracuda Club</div><div class="v">Ferrara</div></div></a>
+      <a class="hz-poster" href="#"><div class="img"><span class="reg" style="color:#fff"><b class="a"></b><b class="d"></b></span><img src="assets/poster-v3-26lug-buongiorno.jpg" alt="Hertz × Buongiorno Classic"><div class="badge">Collaboration</div><div class="n">N°030</div></div><div class="foot"><div class="d">// 26.07.26 · SUN · 05:00 → 00:00</div><div class="ti">Hertz × Buongiorno Classic</div><div class="v">Buongiorno Classic · Rimini</div><div class="lineup">Antonio Pica · Da Vid · Jay De Lys · Joey Daniel · Hertz</div><span class="cta">Info →</span></div></a>
+      <a class="hz-poster coming" href="#"><div class="img"><span class="reg" style="color:#fff"><b class="a"></b><b class="d"></b></span><div class="soon"><b>COMING</b><strong>SOON<span class="blue">.</span></strong></div><div class="badge">Collaboration</div><div class="n">N°031</div></div><div class="foot"><div class="d">// 14.08 · TBA</div><div class="ti">Hertz × Buongiorno Classic</div><div class="v">Rimini</div></div></a>
+      <a class="hz-poster coming" href="#"><div class="img"><span class="reg" style="color:#fff"><b class="a"></b><b class="d"></b></span><div class="soon"><b>COMING</b><strong>SOON<span class="blue">.</span></strong></div><div class="badge">Collaboration</div><div class="n">N°032</div></div><div class="foot"><div class="d">// 15.08 · TBA</div><div class="ti">Hertz / Barracuda Club</div><div class="v">Ferrara</div></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ARCHIVE grid (room / dark) ═══════════ -->
+<section class="hz-sec hz-room crt flick">
+  <div class="hz-scanband"></div>
+  <span class="reg"><b class="a"></b><b class="b2"></b><b class="c"></b><b class="d"></b></span>
+  <div class="hz-wrap hz-wide">
+    <div class="hz-ix rise">
+      <h2 class="hz-num">0<span class="sl">2</span></h2>
+      <div>
+        <div class="hz-kick"><span class="ln"></span>// THE ARCHIVE</div>
+        <h3 class="hz-h2"><span class="w2">Nights on</span> <span class="w9 it">record</span><span class="blue">.</span></h3>
+      </div>
+      <div class="hz-meta">PAST TRANSMISSIONS<br>2025 — 2026<br>N°018 → 025</div>
+    </div>
+    <div class="hz-postergrid rise">
+      <a class="hz-poster past" href="#"><div class="img"><span class="reg" style="color:#fff"><b class="a"></b><b class="d"></b></span><img src="assets/poster-v3-31mag-takenotes.jpg" alt="Take Notes × Buongiorno Classic"><div class="badge">Guest / Showcase</div><div class="n">N°025</div></div><div class="foot"><div class="d" style="color:var(--gray)">// past · 31.05.26</div><div class="ti">Take Notes × Buongiorno Classic</div><div class="v">Buongiorno Classic · Rimini</div></div></a>
+      <a class="hz-poster past" href="#"><div class="img"><span class="reg" style="color:#fff"><b class="a"></b><b class="d"></b></span><img src="assets/poster-v3-29mag-cassero.jpg" alt="Hertz × Undersound"><div class="badge">Collab</div><div class="n">N°024</div></div><div class="foot"><div class="d" style="color:var(--gray)">// past · 29.05.26</div><div class="ti">Hertz × Undersound</div><div class="v">Cassero · Bologna</div></div></a>
+      <a class="hz-poster past" href="#"><div class="img"><span class="reg" style="color:#fff"><b class="a"></b><b class="d"></b></span><img src="assets/poster-v3-24apr-kindergarten.jpg" alt="Hertz / Kindergarten"><div class="badge">Hertz Event</div><div class="n">N°023</div></div><div class="foot"><div class="d" style="color:var(--gray)">// past · 24.04.26</div><div class="ti">Hertz / Kindergarten</div><div class="v">Kindergarten · Bologna</div></div></a>
+      <a class="hz-poster past" href="#"><div class="img"><span class="reg" style="color:#fff"><b class="a"></b><b class="d"></b></span><img src="assets/poster-v3-27feb-kindergarten.jpg" alt="Hertz / Kindergarten"><div class="badge">Hertz Event</div><div class="n">N°022</div></div><div class="foot"><div class="d" style="color:var(--gray)">// past · 27.02.26</div><div class="ti">Hertz / Kindergarten</div><div class="v">Kindergarten · Bologna</div></div></a>
+      <a class="hz-poster past" href="#"><div class="img"><span class="reg" style="color:#fff"><b class="a"></b><b class="d"></b></span><img src="assets/poster-v3-26dic-kindergarten.jpg" alt="Hertz / Kindergarten"><div class="badge">Hertz Event</div><div class="n">N°021</div></div><div class="foot"><div class="d" style="color:var(--gray)">// past · 26.12.25</div><div class="ti">Hertz / Kindergarten</div><div class="v">Kindergarten · Bologna</div></div></a>
+      <a class="hz-poster past" href="#"><div class="img"><span class="reg" style="color:#fff"><b class="a"></b><b class="d"></b></span><img src="assets/poster-v3-22nov-numa.jpg" alt="Buongiorno Classic Goes To Hertz"><div class="badge">Collab</div><div class="n">N°020</div></div><div class="foot"><div class="d" style="color:var(--gray)">// past · 22.11.25</div><div class="ti">Buongiorno Classic Goes To Hertz</div><div class="v">Numa Club · Bologna</div></div></a>
+      <a class="hz-poster past" href="#"><div class="img"><span class="reg" style="color:#fff"><b class="a"></b><b class="d"></b></span><img src="assets/poster-v3-24ott-kindergarten.jpg" alt="Hertz / Kindergarten"><div class="badge">Hertz Event</div><div class="n">N°019</div></div><div class="foot"><div class="d" style="color:var(--gray)">// past · 24.10.25</div><div class="ti">Hertz / Kindergarten</div><div class="v">Kindergarten · Bologna</div></div></a>
+      <a class="hz-poster past" href="#"><div class="img"><span class="reg" style="color:#fff"><b class="a"></b><b class="d"></b></span><img src="assets/poster-v3-21set-classicairlines.jpg" alt="Classic Airlines / Boarding Pass"><div class="badge">Collab</div><div class="n">N°018</div></div><div class="foot"><div class="d" style="color:var(--gray)">// past · 21.09.25</div><div class="ti">Classic Airlines / Boarding Pass</div><div class="v">Classic Airlines · Rimini</div></div></a>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script type="application/json" id="board-data">
+[
+  {"d":"28.06","t":"HERTZ × ATRIUM","v":"NOAH'S DREAM","c":"ORTONA","s":"ON SALE","next":true},
+  {"d":"28.06","t":"HERTZ × BUONGIORNO CLASSIC","v":"BUONGIORNO CL.","c":"RIMINI","s":"ON SALE"},
+  {"d":"04.07","t":"HERTZ DOWNTOWN / IL PALLONE","v":"IL PALLONE","c":"BOLOGNA","s":"ON SALE"},
+  {"d":"25.07","t":"HERTZ / BARRACUDA CLUB","v":"BARRACUDA","c":"FERRARA","s":"SOON"},
+  {"d":"26.07","t":"HERTZ × BUONGIORNO CLASSIC","v":"BUONGIORNO CL.","c":"RIMINI","s":"ON SALE"},
+  {"d":"14.08","t":"HERTZ × BUONGIORNO CLASSIC","v":"BUONGIORNO CL.","c":"RIMINI","s":"SOON"},
+  {"d":"15.08","t":"HERTZ / BARRACUDA CLUB","v":"BARRACUDA","c":"FERRARA","s":"SOON"}
+]
 </script>
+
+<script src="chrome.js"></script>
+<script src="hertz-system.js"></script>
 </body>
 </html>

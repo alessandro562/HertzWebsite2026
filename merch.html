@@ -1,288 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-accent="yellow">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hertz Merch, Wear the Frequency</title>
-  <meta name="description" content="Hertz Drop 01. Limited numbered runs. Coming soon. Built for the dancefloor.">
-  <meta name="theme-color" content="#08080d">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Hertz Merch, Wear the Frequency">
-  <meta property="og:description" content="Hertz Drop 01. Limited numbered runs. Coming soon. A capsule built for the dancefloor.">
-  <meta property="og:image" content="https://hertz.club/assets/hertz-logo-official.png">
-  <meta property="og:url" content="https://hertz.club/merch">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Hertz Merch, Wear the Frequency">
-  <meta name="twitter:description" content="Drop 01. Limited numbered runs. Coming soon.">
-  <link rel="canonical" href="https://hertz.club/merch">
-  <link rel="stylesheet" href="fonts.css">
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=block" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
-    body { background: #f5f5f3; color: #08080d; font-family: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif; overflow-x: hidden; }
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: #08080d; }
-    ::-webkit-scrollbar-thumb { background: rgba(20,72,137,0.4); }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(20,72,137,0.7); }
-    ::selection { background: rgba(20,72,137,0.30); }
-    img { user-select: none; -webkit-user-drag: none; max-width: 100%; height: auto; }
-    a { color: inherit; text-decoration: none; }
-    @media (max-width: 768px) {
-      * { -webkit-tap-highlight-color: transparent; }
-      html { font-size: 14px; }
-      body { font-size: 14px; }
-      input, textarea, select { font-size: 16px; }
-      button { min-height: 44px; }
-    }
-    @media (max-width: 480px) { html { font-size: 13px; } }
-    @media (prefers-reduced-motion: reduce) {
-      * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Merch — Hertz Clubbing Collective</title>
+<meta name="description" content="Hertz Drop 01 — wear the frequency. Join the waitlist.">
+<meta name="theme-color" content="#08080d">
+<link rel="canonical" href="https://hertzclubbing.com/merch">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hertz">
+<meta property="og:title" content="Merch — Hertz">
+<meta property="og:description" content="Hertz Drop 01 — wear the frequency. Join the waitlist.">
+<meta property="og:image" content="https://hertzclubbing.com/assets/hertz-logo-official.png">
+<meta property="og:url" content="https://hertzclubbing.com/merch">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Merch — Hertz">
+<meta name="twitter:image" content="https://hertzclubbing.com/assets/hertz-logo-official.png">
+<link rel="stylesheet" href="ds-base.css">
+<link rel="stylesheet" href="hertz-system.css">
+<style> html,body{ margin:0; background:#08080d; } </style>
 </head>
 <body>
-<div id="root"></div>
-<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-<script type="text/babel" src="hertz-shared.jsx"></script>
-<script type="text/babel">
-function HertzLanyardMerch() {
-  const rows = Array.from({length:15}, (_,i) => ({y: -224 + i*32, flip: i%2===1}));
-  return (
-    <svg viewBox="0 0 460 520" style={{width:'100%',height:'100%',display:'block'}} role="img" aria-label="Hertz woven lanyard preview">
-      <defs>
-        <linearGradient id="ml-bg" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#d2d0cb"/><stop offset="100%" stopColor="#c3c1bc"/>
-        </linearGradient>
-        <radialGradient id="ml-vgn" cx="50%" cy="50%" r="65%">
-          <stop offset="40%" stopColor="transparent"/><stop offset="100%" stopColor="rgba(0,0,0,0.22)"/>
-        </radialGradient>
-        <linearGradient id="ml-str" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#050510"/><stop offset="12%" stopColor="#14142a"/>
-          <stop offset="30%" stopColor="#101022"/><stop offset="50%" stopColor="#0c0c1e"/>
-          <stop offset="70%" stopColor="#101022"/><stop offset="88%" stopColor="#14142a"/>
-          <stop offset="100%" stopColor="#050510"/>
-        </linearGradient>
-        <linearGradient id="ml-crb" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#252535"/><stop offset="100%" stopColor="#0a0a1a"/>
-        </linearGradient>
-        <filter id="ml-shd" x="-50%" y="-25%" width="200%" height="160%">
-          <feDropShadow dx="5" dy="22" stdDeviation="26" floodColor="#000" floodOpacity="0.42"/>
-        </filter>
-        <clipPath id="ml-cp"><rect x="-33" y="-238" width="66" height="446" rx="4"/></clipPath>
-      </defs>
-      <rect width="460" height="520" fill="url(#ml-bg)"/>
-      <rect width="460" height="520" fill="url(#ml-vgn)"/>
-      <g transform="translate(225, 262) rotate(-43)" filter="url(#ml-shd)">
-        <rect x="-33" y="-238" width="66" height="446" rx="4" fill="url(#ml-str)"/>
-        <line x1="-25" y1="-238" x2="-25" y2="208" stroke="#1a1a32" strokeWidth="0.85" strokeDasharray="5,5"/>
-        <line x1="25"  y1="-238" x2="25"  y2="208" stroke="#1a1a32" strokeWidth="0.85" strokeDasharray="5,5"/>
-        <rect x="-33" y="-238" width="3.5" height="446" rx="1" fill="rgba(255,255,255,0.06)"/>
-        <g clipPath="url(#ml-cp)">
-          {rows.map((r,i) => (
-            <text key={i} x="0" y={r.y} textAnchor="middle" dominantBaseline="middle"
-              fill={r.flip ? '#c6c2b6' : '#d2cec2'} fontSize="9" fontWeight="800"
-              fontFamily="'HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif" letterSpacing="3.5"
-              transform={r.flip ? `rotate(180,0,${r.y})` : undefined}
-            >Hertz</text>
-          ))}
-        </g>
-        <polygon points="-27,-238 27,-238 0,-275" fill="#0b0b1e"/>
-        <line x1="-19" y1="-238" x2="0" y2="-267" stroke="#1a1a2e" strokeWidth="0.7"/>
-        <line x1="19"  y1="-238" x2="0" y2="-267" stroke="#1a1a2e" strokeWidth="0.7"/>
-        <rect x="-29" y="208" width="58" height="19" rx="3" fill="url(#ml-crb)"/>
-        <line x1="-23" y1="218" x2="23" y2="218" stroke="#2a2a3e" strokeWidth="0.8"/>
-        <rect x="-21" y="227" width="42" height="60" rx="21" fill="none" stroke="#12121e" strokeWidth="11"/>
-        <rect x="-21" y="227" width="42" height="60" rx="21" fill="none" stroke="#2a2a40" strokeWidth="1.5"/>
-        <rect x="4"   y="251" width="17" height="5" rx="1.5" fill="#12121e"/>
-        <rect x="7"   y="249" width="7"  height="9" rx="1"   fill="#08081a"/>
-      </g>
-    </svg>
-  );
-}
 
-function MerchPage() {
-  const C = window.Cv8;
-  const R = window.R8;
-  const mono = { fontFamily: "'JetBrains Mono', monospace" };
-  const briq = { fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif" };
-  const [isMobile, setIsMobile] = React.useState(window.innerWidth < 860);
-  const [email, setEmail] = React.useState('');
-  const [joined, setJoined] = React.useState(false);
-  const [submitting, setSubmitting] = React.useState(false);
-  const [error, setError] = React.useState(null);
+<!-- ═══════════ INTRO (room / CRT) ═══════════ -->
+<section class="hz-sec hz-room crt flick hz-pageintro" style="padding-bottom:clamp(36px,5vh,60px)">
+  <div class="hz-scanband"></div>
+  <span class="reg"><b class="a"></b><b class="b2"></b><b class="c"></b><b class="d"></b></span>
+  <div class="hz-wrap">
+    <div class="hz-kick" style="margin-bottom:18px"><span class="ln"></span>// DROP 01 · COMING SOON</div>
+    <h1 style="font-family:var(--disp);font-size:clamp(2.6rem,8vw,6rem);line-height:.82;letter-spacing:-.055em;margin:0 0 14px"><span class="w2">Wear the</span> <span class="w9 it">frequency</span><span class="blue">.</span></h1>
+    <p class="mono" style="font-size:10px;color:var(--gray);margin:0">HZ.MERCH · LIMITED NUMBERED RUNS · NO COMPROMISE</p>
+  </div>
+</section>
 
-  React.useEffect(() => {
-    const r = () => setIsMobile(window.innerWidth < 860);
-    window.addEventListener('resize', r, { passive: true });
-    return () => window.removeEventListener('resize', r);
-  }, []);
-
-  const submit = async (e) => {
-    e.preventDefault();
-    if (!email || !email.includes('@') || submitting) return;
-    setSubmitting(true);
-    setError(null);
-    try {
-      const res = await fetch('/api/waitlist', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
-      if (!res.ok) throw new Error();
-      setJoined(true);
-    } catch (_) {
-      setError('Signal lost. Try again.');
-    }
-    setSubmitting(false);
-  };
-
-  return (
-    <div style={{ background: C.dark, minHeight: '100vh' }}>
-      <window.Nav8 />
-      <window.PageHero section="05. DROP 01" title={'Wear the\nfrequency'} sub="Coming soon, limited numbered runs" />
-
-      {/* Product, single lanyard card like home */}
-      <section style={{
-        background: C.light,
-        padding: 'clamp(64px,10vh,120px) clamp(20px,4vw,56px)',
-      }}>
-        <div style={{ maxWidth: 1080, margin: '0 auto' }}>
-          <R>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
-              gap: 'clamp(32px,5vw,72px)',
-              alignItems: 'center',
-            }}>
-              {/* Text side */}
-              <div>
-                <div style={{ ...mono, fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 16 }}>// COMING SOON</div>
-                <h2 style={{ ...briq, fontSize: 'clamp(2rem,5vw,3.5rem)', fontWeight: 700, lineHeight: 0.83, letterSpacing: '-0.04em', color: C.dark, marginBottom: 20 }}>
-                  Hertz Lanyard<span style={{ color: C.blue }}>.</span>
-                </h2>
-                <p style={{ fontSize: 'clamp(15px,1.4vw,17px)', color: C.dark + '88', lineHeight: 1.75, marginBottom: 28, maxWidth: 480, textWrap: 'pretty' }}>
-                  A capsule built for the dancefloor. Limited numbered runs, no restocks. Coming soon.
-                </p>
-                <div style={{
-                  display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16,
-                  paddingTop: 20, borderTop: `1px solid ${C.dark}15`, maxWidth: 400,
-                }}>
-                  {[
-                    ['ITEM',     'LANYARD'],
-                    ['MATERIAL', 'WOVEN NYLON'],
-                    ['STATUS',   'COMING SOON'],
-                  ].map(([k, v]) => (
-                    <div key={k}>
-                      <div style={{ ...mono, fontSize: 9, letterSpacing: '0.16em', color: C.dark + '44', marginBottom: 4 }}>{k}</div>
-                      <div style={{ ...briq, fontSize: 12, fontWeight: 700, color: k === 'STATUS' ? C.blue : C.dark, letterSpacing: '-0.01em' }}>{v}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Product card */}
-              <div style={{ position: 'relative' }}>
-                <div style={{
-                  display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                  marginBottom: 12, ...mono, fontSize: 10, letterSpacing: '0.16em', color: C.dark + '55',
-                }}>
-                  <span>HZ.MERCH / DROP 01</span>
-                  <span style={{ color: C.blue }}>LIMITED</span>
-                </div>
-                <div style={{
-                  background: C.dark, padding: '28px 24px 20px',
-                  transform: 'rotate(-1.5deg)', transformOrigin: '50% 100%',
-                  boxShadow: '10px 20px 60px rgba(0,0,0,0.22)',
-                  position: 'relative',
-                }}>
-                  <div style={{
-                    position: 'absolute', top: 16, right: 16,
-                    background: C.blue, ...mono, fontSize: 9, letterSpacing: '0.22em',
-                    color: C.light, padding: '5px 10px', textTransform: 'uppercase',
-                  }}>001/200</div>
-                  <div style={{
-                    background: '#ffffff', aspectRatio: '3/4',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    overflow: 'hidden', marginBottom: 20,
-                  }}>
-                    <img src="/assets/merch-lanyard-drop01.png" alt="Hertz lanyard, Drop 01" style={{ width: '75%', objectFit: 'contain' }} />
-                  </div>
-                  <div style={{
-                    display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12,
-                    paddingTop: 16, borderTop: `1px solid ${C.light}1a`,
-                  }}>
-                    {[['ITEM','LANYARD'],['MATERIAL','WOVEN NYLON'],['STATUS','COMING SOON']].map(([k,v]) => (
-                      <div key={k}>
-                        <div style={{ ...mono, fontSize: 9, letterSpacing: '0.16em', color: C.light + '3a', marginBottom: 4 }}>{k}</div>
-                        <div style={{ ...briq, fontSize: 12, fontWeight: 700, color: k === 'STATUS' ? C.blue : C.light, letterSpacing: '-0.01em' }}>{v}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </R>
-        </div>
-      </section>
-
-      {/* Waitlist form */}
-      <section style={{ background: C.dark, padding: 'clamp(64px,10vh,110px) clamp(20px,4vw,56px)' }}>
-        <R>
-          <div style={{ maxWidth: 680, margin: '0 auto', textAlign: 'center' }}>
-            <div style={{ ...mono, fontSize: 11, letterSpacing: '0.2em', color: C.blue, marginBottom: 16 }}>// GET NOTIFIED</div>
-            <h2 style={{ ...briq, fontSize: 'clamp(2rem,6vw,4.5rem)', fontWeight: 700, lineHeight: 0.83, letterSpacing: '-0.04em', color: C.light, marginBottom: 16 }}>
-              First to know<span style={{ color: C.blue }}>.</span>
-            </h2>
-            <p style={{ fontSize: 15, color: C.light + '88', lineHeight: 1.75, marginBottom: 36, textWrap: 'pretty' }}>
-              Coming soon. Limited numbered runs, no restocks. Leave your email and we'll let you know when it's available.
-            </p>
-            {!joined ? (
-              <form onSubmit={submit} aria-label="Merch waitlist signup">
-                <div style={{ display: 'flex', gap: 0, border: `1px solid ${C.light}22` }}>
-                  <label htmlFor="merch-email" style={{ display: 'none' }}>Email address</label>
-                  <input
-                    id="merch-email"
-                    type="email" value={email}
-                    onChange={e => { setEmail(e.target.value); setError(null); }}
-                    placeholder="your@email.cc"
-                    required
-                    style={{
-                      flex: 1, padding: '14px 18px', border: 'none', outline: 'none',
-                      background: 'transparent', color: C.light,
-                      ...mono, fontSize: 13, letterSpacing: '0.06em',
-                    }}
-                  />
-                  <button type="submit" disabled={submitting} style={{
-                    background: submitting ? C.blue + 'aa' : C.blue, color: C.light, border: 'none',
-                    padding: '14px 26px', cursor: submitting ? 'default' : 'pointer',
-                    ...briq, fontWeight: 700, fontSize: 13, letterSpacing: '0.1em',
-                    textTransform: 'uppercase', transition: 'background 0.2s', whiteSpace: 'nowrap',
-                  }}
-                  onMouseEnter={e => { if (!submitting) e.currentTarget.style.background = '#1a5aaf'; }}
-                  onMouseLeave={e => { e.currentTarget.style.background = submitting ? C.blue + 'aa' : C.blue; }}
-                  >{submitting ? '...' : 'Notify me →'}</button>
-                </div>
-                {error && (
-                  <p role="alert" style={{ ...mono, fontSize: 11, color: '#ff6b6b', marginTop: 10, letterSpacing: '0.1em' }}>{error}</p>
-                )}
-              </form>
-            ) : (
-              <div role="status" style={{ padding: '16px 22px', border: `1px solid ${C.blue}`, color: C.blue, ...mono, fontSize: 13, letterSpacing: '0.12em' }}>
-                ● ON THE LIST, we'll let you know.
-              </div>
-            )}
-          </div>
-        </R>
-      </section>
-
-      <window.Footer8 />
+<!-- ═══════════ DROP 01 (page / riso) ═══════════ -->
+<section class="hz-sec hz-page riso">
+  <span class="reg"><b class="a"></b><b class="b2"></b><b class="c"></b><b class="d"></b></span>
+  <div class="hz-wrap hz-wide">
+    <div class="hz-ix rise">
+      <h2 class="hz-num">0<span class="sl">1</span></h2>
+      <div>
+        <div class="hz-kick"><span class="ln"></span>// FIRST DROP</div>
+        <h3 class="hz-h2"><span class="w2">The</span> <span class="w9 it">lanyard</span><span class="blue">.</span></h3>
+      </div>
+      <div class="hz-meta">001 / 200<br>WOVEN NYLON<br>BLACK · 5CM</div>
     </div>
-  );
-}
-ReactDOM.createRoot(document.getElementById('root')).render(<MerchPage />);
-</script>
+    <div class="hz-merch rise" style="color:var(--ink)">
+      <div>
+        <p class="lede" style="color:rgba(8,8,13,.72)">A capsule built for the dancefloor. Limited numbered runs, no compromise. The first drop is a woven lanyard — built to be worn, not displayed. Coming soon; leave your address to know first.</p>
+        <form class="hz-form" data-waitlist style="border-color:var(--line-l)">
+          <input type="email" placeholder="your@email.cc" aria-label="Email" style="color:var(--ink)">
+          <button type="submit">Notify me →</button>
+        </form>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:18px 28px;margin-top:clamp(28px,4vw,44px);max-width:460px">
+          <div style="border-top:1px solid var(--line-l);padding-top:10px"><div style="font-family:var(--mono);font-size:9px;letter-spacing:.16em;color:rgba(8,8,13,.5)">ITEM</div><div style="font-family:var(--disp);font-weight:700;font-size:15px">Lanyard</div></div>
+          <div style="border-top:1px solid var(--line-l);padding-top:10px"><div style="font-family:var(--mono);font-size:9px;letter-spacing:.16em;color:rgba(8,8,13,.5)">MATERIAL</div><div style="font-family:var(--disp);font-weight:700;font-size:15px">Woven nylon</div></div>
+          <div style="border-top:1px solid var(--line-l);padding-top:10px"><div style="font-family:var(--mono);font-size:9px;letter-spacing:.16em;color:rgba(8,8,13,.5)">WIDTH</div><div style="font-family:var(--disp);font-weight:700;font-size:15px">5 cm · Black</div></div>
+          <div style="border-top:1px solid var(--line-l);padding-top:10px"><div style="font-family:var(--mono);font-size:9px;letter-spacing:.16em;color:rgba(8,8,13,.5)">STATUS</div><div style="font-family:var(--disp);font-weight:700;font-size:15px;color:var(--blue2)">Coming soon</div></div>
+        </div>
+      </div>
+      <div class="hz-drop">
+        <div class="lab"><span>HZ.MERCH / DROP 01</span><span class="lim">LIMITED ↗</span></div>
+        <div class="hz-dropcard">
+          <div class="ed">001/200</div>
+          <div class="pic"><img src="assets/merch-lanyard-drop01.png" alt="Hertz lanyard, Drop 01"></div>
+          <div class="specs">
+            <div><div class="k">ITEM</div><div class="v">LANYARD</div></div>
+            <div><div class="k">MATERIAL</div><div class="v">WOVEN NYLON</div></div>
+            <div><div class="k">STATUS</div><div class="v blue">COMING SOON</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="chrome.js"></script>
+<script src="hertz-system.js"></script>
 </body>
 </html>

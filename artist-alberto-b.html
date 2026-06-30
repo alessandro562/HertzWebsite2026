@@ -1,72 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-accent="yellow">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alberto B, Hertz</title>
-  <meta name="description" content="Alberto B, DJ & Producer. Resident at Hertz, Bologna.">
-  <link rel="stylesheet" href="fonts.css">
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=block" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
-    body { background: #08080d; color: #f5f5f3; font-family: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif; overflow-x: hidden; }
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: #08080d; }
-    ::-webkit-scrollbar-thumb { background: rgba(20,72,137,0.4); }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(20,72,137,0.7); }
-    img { user-select: none; -webkit-user-drag: none; }
-    button { font-family: inherit; border: none; background: none; cursor: pointer; }
-    @media (max-width: 768px) { * { -webkit-tap-highlight-color: transparent; } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artist — Hertz Clubbing Collective</title>
+<meta name="description" content="Alberto B, Hertz resident — biography, sound and live sets.">
+<meta name="theme-color" content="#08080d">
+<link rel="canonical" href="https://hertzclubbing.com/artist-alberto-b">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hertz">
+<meta property="og:title" content="Alberto B — Hertz">
+<meta property="og:description" content="Alberto B, Hertz resident — biography, sound and live sets.">
+<meta property="og:image" content="https://hertzclubbing.com/assets/hertz-logo-official.png">
+<meta property="og:url" content="https://hertzclubbing.com/artist-alberto-b">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Alberto B — Hertz">
+<meta name="twitter:image" content="https://hertzclubbing.com/assets/hertz-logo-official.png">
+<link rel="stylesheet" href="ds-base.css">
+<link rel="stylesheet" href="hertz-system.css">
+<style> html,body{ margin:0; background:#08080d; } </style>
 </head>
-<body>
-<div id="root"></div>
-<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
-<script type="text/babel" src="hertz-shared.jsx"></script>
-<script type="text/babel" src="hertz-artist-page.jsx"></script>
-<script type="text/babel">
-const ARTIST = {
-  name: 'Alberto B',
-  slug: 'alberto-b',
-  role: 'DJ · Producer',
-  n: '03', freq: '125 Hz',
-  origin: 'Bologna, IT',
-  since: '2024',
-  sets: 'Deep Tech, Groove',
-  img: 'assets/dj-alberto.jpg',
-  gallery: [
-    'assets/alberto-b-live-1.jpg',
-    'assets/alberto-b-live-2.jpg',
-    'assets/alberto-b-live-3.jpg',
-    'assets/alberto-b-live-4.jpg',
-  ],
-  bio: 'Producer and DJ based in Bologna, Alberto B brings a producer\'s ear to every set: textured, layered, always searching. His sound moves through deep tech and groove with a level of detail that rewards close listening.\n\nActive with Hertz since 2024, he has played across the collective\'s residencies and collaborations, from the Kindergarten nights to the Buongiorno Classic dates. Alongside his DJ sets he produces his own material, with tracks like \'Hot Girl\', \'In My Zone\' and \'You Should B Dancing\' already out on SoundCloud.',
-  social: {
-    instagram: '#',
-    soundcloud: 'https://soundcloud.com/alberto-baccianti',
-    spotify: 'https://open.spotify.com/artist/7kHLiQODROJuJtGEgAYd8d',
-    booking: 'booking@hertz.cc',
-  },
-  mixes: [
-    { title: 'Hot Girl', url: 'https://soundcloud.com/alberto-baccianti/alberto-b-hot-girl' },
-    { title: 'In My Zone', url: 'https://soundcloud.com/alberto-baccianti/in-my-zone' },
-    { title: 'You Should B Dancing', url: 'https://soundcloud.com/alberto-baccianti/alberto-b-you-should-b-dancing' },
-  ],
-};
-const EVENTS = [
-  { title: 'Hertz × Undersound', type: 'Collab', day: 'FRI 29.05', date: '29.05.26', venue: 'Cassero', city: 'Bologna', n: '024', status: 'upcoming' },
-  { title: 'Hertz / Kindergarten', type: 'Hertz Event', day: 'FRI 24.04', date: '24.04.26', venue: 'Kindergarten', city: 'Bologna', n: '023', status: 'past' },
-  { title: 'Hertz / Kindergarten', type: 'Hertz Event', day: 'FRI 27.02', date: '27.02.26', venue: 'Kindergarten', city: 'Bologna', n: '022', status: 'past' },
-  { title: 'Hertz / Kindergarten', type: 'Hertz Event', day: 'FRI 26.12', date: '26.12.25', venue: 'Kindergarten', city: 'Bologna', n: '021', status: 'past' },
-  { title: 'Buongiorno Classic Goes To Hertz', type: 'Collab', day: 'SAT 22.11', date: '22.11.25', venue: 'Numa Club', city: 'Bologna', n: '020', status: 'past' },
-  { title: 'Hertz / Kindergarten', type: 'Hertz Event', day: 'FRI 24.10', date: '24.10.25', venue: 'Kindergarten', city: 'Bologna', n: '019', status: 'past' },
-];
-ReactDOM.createRoot(document.getElementById('root')).render(
-  React.createElement(window.ArtistPage, { artist: ARTIST, events: EVENTS })
-);
-</script>
+<body data-artist="alberto-b">
+<main id="artist-root"></main>
+<div id="site-footer"></div>
+<script src="chrome.js"></script>
+<script src="hertz-artist.js"></script>
+<script src="hertz-system.js"></script>
 </body>
 </html>

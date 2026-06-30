@@ -1,82 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://hertz.club/</loc>
+    <loc>https://hertzclubbing.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://hertz.club/events.html</loc>
+    <loc>https://hertzclubbing.com/events</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://hertz.club/manifesto.html</loc>
+    <loc>https://hertzclubbing.com/media</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://hertzclubbing.com/music</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hertzclubbing.com/manifesto</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://hertz.club/media.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://hertz.club/archive.html</loc>
+    <loc>https://hertzclubbing.com/artists</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- Editorial Articles -->
   <url>
-    <loc>https://hertz.club/media/two-speed-island-ibiza-2026</loc>
+    <loc>https://hertzclubbing.com/merch</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hertzclubbing.com/archive</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://hertzclubbing.com/bookings</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hertzclubbing.com/artist-federico-apadula</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hertzclubbing.com/artist-tommaso-manco</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hertzclubbing.com/artist-alberto-b</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hertzclubbing.com/artist-leonardo-giusti</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://hertzclubbing.com/media/two-speed-island-ibiza-2026</loc>
     <lastmod>2026-06-26</lastmod>
     <changefreq>never</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://hertz.club/media/sunwaves-left-home-rominimal</loc>
+    <loc>https://hertzclubbing.com/media/sunwaves-left-home-rominimal</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>never</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://hertz.club/media/music-on-pacha-long-residency</loc>
+    <loc>https://hertzclubbing.com/media/music-on-pacha-long-residency</loc>
     <lastmod>2026-06-16</lastmod>
     <changefreq>never</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://hertz.club/media/radar-vol-1-eight-names</loc>
+    <loc>https://hertzclubbing.com/media/radar-vol-1-eight-names</loc>
     <lastmod>2026-06-11</lastmod>
     <changefreq>never</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://hertz.club/media/two-people-one-booth-b2b</loc>
+    <loc>https://hertzclubbing.com/media/two-people-one-booth-b2b</loc>
     <lastmod>2026-06-06</lastmod>
     <changefreq>never</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://hertz.club/media/physics-deep-tech-128bpm</loc>
+    <loc>https://hertzclubbing.com/media/physics-deep-tech-128bpm</loc>
     <lastmod>2026-05-20</lastmod>
     <changefreq>never</changefreq>
     <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>https://hertz.club/music.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://hertz.club/artists.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://hertz.club/merch.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
   </url>
 </urlset>

@@ -1,67 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-accent="yellow">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Leonardo Giusti, Hertz</title>
-  <meta name="description" content="Leonardo Giusti, DJ. Resident at Hertz, Bologna.">
-  <link rel="stylesheet" href="fonts.css">
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=block" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
-    body { background: #08080d; color: #f5f5f3; font-family: 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif; overflow-x: hidden; }
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: #08080d; }
-    ::-webkit-scrollbar-thumb { background: rgba(20,72,137,0.4); }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(20,72,137,0.7); }
-    img { user-select: none; -webkit-user-drag: none; }
-    button { font-family: inherit; border: none; background: none; cursor: pointer; }
-    @media (max-width: 768px) { * { -webkit-tap-highlight-color: transparent; } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artist — Hertz Clubbing Collective</title>
+<meta name="description" content="Leonardo Giusti, Hertz resident — biography, sound and live sets.">
+<meta name="theme-color" content="#08080d">
+<link rel="canonical" href="https://hertzclubbing.com/artist-leonardo-giusti">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hertz">
+<meta property="og:title" content="Leonardo Giusti — Hertz">
+<meta property="og:description" content="Leonardo Giusti, Hertz resident — biography, sound and live sets.">
+<meta property="og:image" content="https://hertzclubbing.com/assets/hertz-logo-official.png">
+<meta property="og:url" content="https://hertzclubbing.com/artist-leonardo-giusti">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Leonardo Giusti — Hertz">
+<meta name="twitter:image" content="https://hertzclubbing.com/assets/hertz-logo-official.png">
+<link rel="stylesheet" href="ds-base.css">
+<link rel="stylesheet" href="hertz-system.css">
+<style> html,body{ margin:0; background:#08080d; } </style>
 </head>
-<body>
-<div id="root"></div>
-<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
-<script type="text/babel" src="hertz-shared.jsx"></script>
-<script type="text/babel" src="hertz-artist-page.jsx"></script>
-<script type="text/babel">
-const ARTIST = {
-  name: 'Leonardo Giusti',
-  slug: 'leonardo-giusti',
-  role: 'DJ · Resident',
-  n: '04', freq: '126 Hz',
-  origin: 'Bologna, IT',
-  since: '2025',
-  sets: 'Tech House, Minimal Deep Tech',
-  img: 'assets/dj-giusti.jpg',
-  bio: 'Born in Bologna in 2004, Leonardo Giusti was drawn to electronic music from a very young age, gradually shaping a sonic identity rooted in the more groove-driven shades of Tech House and Minimal Deep Tech.\n\nDespite his youth, he has already built experience across events and clubs on the Bologna scene, performing in venues such as Kindergarten and taking part in several Hertz nights. Since late 2025 he has been a Hertz resident DJ, a home in which he is consolidating his artistic path and refining an increasingly recognisable musical direction.\n\nAmbitious, driven and constantly evolving, Leonardo is one of the emerging names of Bologna\'s new electronic scene: a young DJ with a clear vision, a strong desire to grow, and the goal of turning every set into a genuine experience for the floor.',
-  social: {
-    instagram: '#',
-    soundcloud: 'https://soundcloud.com/leonardo-giusti-286676267',
-    booking: 'booking@hertz.cc',
-  },
-  gallery: [
-    'assets/leonardo-giusti-live-1.jpg',
-    'assets/leonardo-giusti-live-2.jpg',
-    'assets/leonardo-giusti-live-3.jpg',
-    'assets/leonardo-giusti-live-4.jpg',
-  ],
-  mixes: [
-    { title: 'Live @ Hertz / Kindergarten — 26.12.2025', tag: 'Featured', url: 'https://soundcloud.com/leonardo-giusti-286676267/leonardo-giusti-live-hertz-kindergarten-italy-26122025' },
-    { title: 'Live @ Zanzibar', url: 'https://soundcloud.com/leonardo-giusti-286676267/leonardo-giusti-live-zanzibar' },
-    { title: 'REC013', url: 'https://soundcloud.com/leonardo-giusti-286676267/rec013' },
-  ],
-};
-const EVENTS = [
-  { title: 'Hertz / Kindergarten', type: 'Hertz Event', day: 'FRI 24.04', date: '24.04.26', venue: 'Kindergarten', city: 'Bologna', n: '023', status: 'past' },
-  { title: 'Hertz / Kindergarten', type: 'Hertz Event', day: 'FRI 26.12', date: '26.12.25', venue: 'Kindergarten', city: 'Bologna', n: '021', status: 'past' },
-];
-ReactDOM.createRoot(document.getElementById('root')).render(
-  React.createElement(window.ArtistPage, { artist: ARTIST, events: EVENTS })
-);
-</script>
+<body data-artist="leonardo-giusti">
+<main id="artist-root"></main>
+<div id="site-footer"></div>
+<script src="chrome.js"></script>
+<script src="hertz-artist.js"></script>
+<script src="hertz-system.js"></script>
 </body>
 </html>
