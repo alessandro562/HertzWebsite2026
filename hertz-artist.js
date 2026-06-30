@@ -7,12 +7,12 @@
   // Add `iso` (YYYY-MM-DD) to every appearance — past/upcoming is derived from
   // today's date, so finished gigs flip to PAST automatically (no manual edits).
   var EVENTS_ALL = [
-    { title:'Hertz × Undersound', type:'Collab', dt:'FRI 29.05', venue:'Cassero', city:'Bologna', n:'024', iso:'2026-05-29' },
-    { title:'Hertz / Kindergarten', type:'Hertz Event', dt:'FRI 24.04', venue:'Kindergarten', city:'Bologna', n:'023', iso:'2026-04-24' },
-    { title:'Hertz / Kindergarten', type:'Hertz Event', dt:'FRI 27.02', venue:'Kindergarten', city:'Bologna', n:'022', iso:'2026-02-27' },
-    { title:'Hertz / Kindergarten', type:'Hertz Event', dt:'FRI 26.12', venue:'Kindergarten', city:'Bologna', n:'021', iso:'2025-12-26' },
+    { title:'Hertz at Undersound', type:'Collab', dt:'FRI 29.05', venue:'Cassero', city:'Bologna', n:'024', iso:'2026-05-29' },
+    { title:'Hertz at Kindergarten', type:'Hertz Event', dt:'FRI 24.04', venue:'Kindergarten', city:'Bologna', n:'023', iso:'2026-04-24' },
+    { title:'Hertz at Kindergarten', type:'Hertz Event', dt:'FRI 27.02', venue:'Kindergarten', city:'Bologna', n:'022', iso:'2026-02-27' },
+    { title:'Hertz at Kindergarten', type:'Hertz Event', dt:'FRI 26.12', venue:'Kindergarten', city:'Bologna', n:'021', iso:'2025-12-26' },
     { title:'Buongiorno Classic Goes To Hertz', type:'Collab', dt:'SAT 22.11', venue:'Numa Club', city:'Bologna', n:'020', iso:'2025-11-22' },
-    { title:'Hertz / Kindergarten', type:'Hertz Event', dt:'FRI 24.10', venue:'Kindergarten', city:'Bologna', n:'019', iso:'2025-10-24' },
+    { title:'Hertz at Kindergarten', type:'Hertz Event', dt:'FRI 24.10', venue:'Kindergarten', city:'Bologna', n:'019', iso:'2025-10-24' },
     { title:'Classic Airlines / Boarding Pass', type:'Collab', dt:'SUN 21.09', venue:'Classic Airlines', city:'Rimini', n:'018', iso:'2025-09-21' },
   ];
   var _now = new Date();
