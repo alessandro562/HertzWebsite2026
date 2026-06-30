@@ -502,7 +502,7 @@ function Nav8() {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center', alignItems: 'center',
-        gap: 32, opacity: menuOpen ? 1 : 0,
+        gap: 'clamp(20px, 3.4vh, 30px)', opacity: menuOpen ? 1 : 0,
         pointerEvents: menuOpen ? 'auto' : 'none',
         transition: 'opacity 0.3s',
       }}
@@ -514,9 +514,9 @@ function Nav8() {
           onClick={() => setMenuOpen(false)}
           style={{
             color: Cv8.light, textDecoration: 'none',
-            fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
-            fontSize: 'clamp(2.5rem, 8vw, 4rem)', fontWeight: 700,
-            letterSpacing: '-0.02em',
+            fontFamily: "'JetBrains Mono', monospace",
+            fontSize: 'clamp(1.15rem, 5vw, 1.5rem)', fontWeight: 500,
+            letterSpacing: '0.2em', textTransform: 'uppercase',
             transform: menuOpen ? 'translateY(0)' : 'translateY(20px)',
             transition: `all 0.4s cubic-bezier(.22,1,.36,1) ${i * 0.05}s`,
           }}
