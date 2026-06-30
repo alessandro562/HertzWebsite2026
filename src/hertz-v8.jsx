@@ -83,33 +83,22 @@ function R8({ children, delay = 0, y = 60, style = {}, className = '' }) {
 }
 window.R8 = R8;
 
-/* ─── Next event + data ───────────────────── */
-// Placeholder — poster, lineup & set time to be announced.
-const NEXT_EVENT = {
-  title: 'Hertz × Atrium',
-  type: 'Guest',
-  date: '28.06.26', day: 'SUN 28.06', time: 'H18 → late',
-  venue: "Noah's Dream", city: 'Ortona',
-  iso: '2026-06-28T18:00:00',
-  lineup: ["Danilo D'Arrezzo", 'Federico Apadula', 'Adime'],
-  poster: 'assets/poster-v3-28giu-atrium.jpg',
-  n: '026',
-  ctaLabel: 'Info', ctaLink: '#',
-};
-window.NEXT_EVENT = NEXT_EVENT;
-
-const UPCOMING_EVENTS = [
-  NEXT_EVENT,
+/* ─── Events — single source of truth + automatic date split ───
+   Add every event here ONCE, with an `iso` date (timed events) or, for
+   coming-soon / TBA entries, an `iso` set to midnight of the expected day.
+   The site then derives — automatically, from the current date — which
+   events are UPCOMING and which have moved to the PAST archive, and which
+   one is the hero's NEXT event. No more manually moving events between lists. */
+const EVENT_POOL = [
+  // ── scheduled / announced ──────────────────────────────────────────
+  { title: 'Hertz × Atrium', type: 'Guest', date: '28.06.26', day: 'SUN 28.06', time: 'H18 → late', venue: "Noah's Dream", city: 'Ortona', iso: '2026-06-28T18:00:00', lineup: ["Danilo D'Arrezzo", 'Federico Apadula', 'Adime'], poster: 'assets/poster-v3-28giu-atrium.jpg', n: '026', ctaLabel: 'Info', ctaLink: '#' },
   { title: 'Hertz × Buongiorno Classic', type: 'Collaboration', date: '28.06.26', day: 'SUN 28.06', time: '17:00 → 00:00', venue: 'Buongiorno Classic', city: 'Rimini', iso: '2026-06-28T17:00:00', lineup: ['Tommaso Mancò', 'Alberto B'], poster: 'assets/poster-v3-28giu-buongiorno.jpg', n: '027', ctaLabel: 'Info', ctaLink: '#' },
   { title: 'Hertz Downtown / Il Pallone', type: 'Downtown Gig', date: '04.07.26', day: 'SAT 04.07', time: '19:30 → 23:30', venue: 'Il Pallone', city: 'Bologna', iso: '2026-07-04T19:30:00', lineup: ['Federico Apadula', 'Leonardo Giusti', 'SeaRock'], poster: 'assets/poster-v3-04lug-pallone.jpg', n: '028', ctaLabel: 'Info', ctaLink: '#' },
-  { title: 'Hertz / Barracuda Club',     type: 'Collaboration', date: '25.07', day: 'SAT 25.07', city: 'Ferrara', n: '029', comingSoon: true },
+  { title: 'Hertz / Barracuda Club',     type: 'Collaboration', date: '25.07', day: 'SAT 25.07', city: 'Ferrara', iso: '2026-07-25T00:00:00', n: '029', comingSoon: true },
   { title: 'Hertz × Buongiorno Classic', type: 'Collaboration', date: '26.07.26', day: 'SUN 26.07', time: '05:00 → 00:00', venue: 'Buongiorno Classic', city: 'Rimini', iso: '2026-07-26T05:00:00', lineup: ['Antonio Pica', 'Da Vid', 'Jay De Lys', 'Joey Daniel', 'Hertz'], poster: 'assets/poster-v3-26lug-buongiorno.jpg', n: '030', ctaLabel: 'Info', ctaLink: '#' },
-  { title: 'Hertz × Buongiorno Classic', type: 'Collaboration', date: '14.08', day: 'FRI 14.08', city: 'Rimini',  n: '031', comingSoon: true },
-  { title: 'Hertz / Barracuda Club',     type: 'Collaboration', date: '15.08', day: 'SAT 15.08', city: 'Ferrara', n: '032', comingSoon: true },
-];
-window.UPCOMING_EVENTS = UPCOMING_EVENTS;
-
-const PAST_EVENTS = [
+  { title: 'Hertz × Buongiorno Classic', type: 'Collaboration', date: '14.08', day: 'FRI 14.08', city: 'Rimini',  iso: '2026-08-14T00:00:00', n: '031', comingSoon: true },
+  { title: 'Hertz / Barracuda Club',     type: 'Collaboration', date: '15.08', day: 'SAT 15.08', city: 'Ferrara', iso: '2026-08-15T00:00:00', n: '032', comingSoon: true },
+  // ── archive ────────────────────────────────────────────────────────
   {
     title: 'Take Notes × Buongiorno Classic',
     type: 'Guest / Showcase',
@@ -183,7 +172,42 @@ const PAST_EVENTS = [
     n: '018',
   },
 ];
+
+/* Automatic split — an event is "past" once its calendar day is over, so it
+   stays in UPCOMING (and can remain the hero's NEXT event) throughout its own
+   day, then moves to the archive the next morning. Recomputed on every load. */
+function hzEventEndMs(e) {
+  if (!e) return null;
+  var y, mo, d;
+  if (e.iso) {
+    var dt = new Date(e.iso);
+    if (isNaN(dt)) return null;
+    y = dt.getFullYear(); mo = dt.getMonth(); d = dt.getDate();
+  } else if (e.date) {
+    var p = e.date.split('.');          // dd.mm.yy  (dd.mm without a year = TBA → kept upcoming)
+    if (p.length < 3) return null;
+    d = parseInt(p[0], 10); mo = parseInt(p[1], 10) - 1; y = 2000 + parseInt(p[2], 10);
+  } else return null;
+  return new Date(y, mo, d, 23, 59, 59, 999).getTime();
+}
+const HZ_NOW = Date.now();
+const _events = EVENT_POOL.map(function (e) { return { e: e, ms: hzEventEndMs(e) }; });
+const UPCOMING_EVENTS = _events
+  .filter(function (x) { return x.ms == null || x.ms >= HZ_NOW; })
+  .sort(function (a, b) { return (a.ms == null ? Infinity : a.ms) - (b.ms == null ? Infinity : b.ms); })
+  .map(function (x) { return x.e; });
+const PAST_EVENTS = _events
+  .filter(function (x) { return x.ms != null && x.ms < HZ_NOW; })
+  .sort(function (a, b) { return b.ms - a.ms; })
+  .map(function (x) { return x.e; });
+// Hero's next event: soonest upcoming with a confirmed date/time (skip TBA).
+const NEXT_EVENT = UPCOMING_EVENTS.find(function (e) { return e.iso && !e.comingSoon; })
+  || UPCOMING_EVENTS[0]
+  || PAST_EVENTS[0]
+  || { title: 'TBA', day: '', venue: '', city: '', iso: '2099-01-01T00:00:00' };
+window.UPCOMING_EVENTS = UPCOMING_EVENTS;
 window.PAST_EVENTS = PAST_EVENTS;
+window.NEXT_EVENT = NEXT_EVENT;
 
 const RESIDENTS_DATA = [
   { name: 'Federico Apadula', slug: 'federico-apadula', role: 'Founder · Art Director · DJ & Producer', img: 'assets/dj-apadula.jpg', n: '01', freq: '120 Hz' },

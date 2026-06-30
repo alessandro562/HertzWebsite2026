@@ -4,15 +4,24 @@
    builds the reskinned page into #artist-root. Real bios/data.
    ════════════════════════════════════════════════════════════ */
 (function(){
+  // Add `iso` (YYYY-MM-DD) to every appearance — past/upcoming is derived from
+  // today's date, so finished gigs flip to PAST automatically (no manual edits).
   var EVENTS_ALL = [
-    { title:'Hertz × Undersound', type:'Collab', dt:'FRI 29.05', venue:'Cassero', city:'Bologna', n:'024', status:'upcoming' },
-    { title:'Hertz / Kindergarten', type:'Hertz Event', dt:'FRI 24.04', venue:'Kindergarten', city:'Bologna', n:'023', status:'past' },
-    { title:'Hertz / Kindergarten', type:'Hertz Event', dt:'FRI 27.02', venue:'Kindergarten', city:'Bologna', n:'022', status:'past' },
-    { title:'Hertz / Kindergarten', type:'Hertz Event', dt:'FRI 26.12', venue:'Kindergarten', city:'Bologna', n:'021', status:'past' },
-    { title:'Buongiorno Classic Goes To Hertz', type:'Collab', dt:'SAT 22.11', venue:'Numa Club', city:'Bologna', n:'020', status:'past' },
-    { title:'Hertz / Kindergarten', type:'Hertz Event', dt:'FRI 24.10', venue:'Kindergarten', city:'Bologna', n:'019', status:'past' },
-    { title:'Classic Airlines / Boarding Pass', type:'Collab', dt:'SUN 21.09', venue:'Classic Airlines', city:'Rimini', n:'018', status:'past' },
+    { title:'Hertz × Undersound', type:'Collab', dt:'FRI 29.05', venue:'Cassero', city:'Bologna', n:'024', iso:'2026-05-29' },
+    { title:'Hertz / Kindergarten', type:'Hertz Event', dt:'FRI 24.04', venue:'Kindergarten', city:'Bologna', n:'023', iso:'2026-04-24' },
+    { title:'Hertz / Kindergarten', type:'Hertz Event', dt:'FRI 27.02', venue:'Kindergarten', city:'Bologna', n:'022', iso:'2026-02-27' },
+    { title:'Hertz / Kindergarten', type:'Hertz Event', dt:'FRI 26.12', venue:'Kindergarten', city:'Bologna', n:'021', iso:'2025-12-26' },
+    { title:'Buongiorno Classic Goes To Hertz', type:'Collab', dt:'SAT 22.11', venue:'Numa Club', city:'Bologna', n:'020', iso:'2025-11-22' },
+    { title:'Hertz / Kindergarten', type:'Hertz Event', dt:'FRI 24.10', venue:'Kindergarten', city:'Bologna', n:'019', iso:'2025-10-24' },
+    { title:'Classic Airlines / Boarding Pass', type:'Collab', dt:'SUN 21.09', venue:'Classic Airlines', city:'Rimini', n:'018', iso:'2025-09-21' },
   ];
+  var _now = new Date();
+  var _today = new Date(_now.getFullYear(), _now.getMonth(), _now.getDate()).getTime();
+  function evIsPast(e){
+    if(!e || !e.iso) return e && e.status === 'past';   // fallback to manual flag
+    var p = e.iso.split('-');
+    return new Date(+p[0], +p[1]-1, +p[2], 23, 59, 59, 999).getTime() < _today;
+  }
   function evs(ns){ return ns.map(function(n){ return EVENTS_ALL.filter(function(e){return e.n===n;})[0]; }).filter(Boolean); }
 
   var ARTISTS = {
@@ -138,10 +147,11 @@
       + '<h3 class="hz-h2"><span class="w2">On the</span> <span class="w9 it">calendar</span><span class="blue">.</span></h3></div>'
       + '<div class="hz-meta">'+A.events.length+' DATES<br>HERTZ NIGHTS</div></div>'
       + '<div class="hz-applist">'+A.events.map(function(e){
-          return '<div class="hz-approw'+(e.status==='past'?' past':'')+'">'
+          var past = evIsPast(e);
+          return '<div class="hz-approw'+(past?' past':'')+'">'
             + '<span class="dt">'+esc(e.dt)+'</span><span class="ti">'+esc(e.title)+'</span>'
             + '<span class="vn">'+esc(e.venue)+' · '+esc(e.city)+'</span>'
-            + '<span class="st">'+(e.status==='past'?'PAST':'UPCOMING')+'</span></div>';
+            + '<span class="st">'+(past?'PAST':'UPCOMING')+'</span></div>';
         }).join('')+'</div>'
       + '</div></section>';
   }
