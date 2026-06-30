@@ -69,7 +69,8 @@ function renderNotFound(slug) {
 
 export default async function handler(req, res) {
   const slugParam = req.query.slug;
-  const slug = Array.isArray(slugParam) ? slugParam[0] : slugParam;
+  let slug = Array.isArray(slugParam) ? slugParam[0] : slugParam;
+  if (slug && slug.endsWith('.html')) slug = slug.slice(0, -5); // tolerate old bookmarked .html links
   const article = slug && ARTICLES.find(a => a.slug === slug);
 
   res.setHeader('Content-Type', 'text/html; charset=utf-8');

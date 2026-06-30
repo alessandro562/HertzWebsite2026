@@ -84,7 +84,7 @@
   var MONTHS=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
   function fdate(iso){ var d=new Date(iso); return d.getDate()+' '+MONTHS[d.getMonth()]+' '+d.getFullYear(); }
   function esc(s){ return String(s).replace(/"/g,'&quot;'); }
-  function href(a){ return 'media/'+a.slug+'.html'; }
+  function href(a){ return 'media/'+a.slug; }
   function chip(a){ return a.rubric ? '<span class="rub">'+a.rubric+'</span>' : '<span class="rub none">NOTE</span>'; }
   function reg(){ return '<span class="reg" style="color:#fff"><b class="a"></b><b class="d"></b></span>'; }
 
