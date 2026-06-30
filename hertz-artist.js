@@ -4,25 +4,9 @@
    builds the reskinned page into #artist-root. Real bios/data.
    ════════════════════════════════════════════════════════════ */
 (function(){
-  // Add `iso` (YYYY-MM-DD) to every appearance — past/upcoming is derived from
-  // today's date, so finished gigs flip to PAST automatically (no manual edits).
-  var EVENTS_ALL = [
-    { title:'Hertz at Undersound', type:'Collab', dt:'FRI 29.05', venue:'Cassero', city:'Bologna', n:'024', iso:'2026-05-29' },
-    { title:'Hertz at Kindergarten', type:'Hertz Event', dt:'FRI 24.04', venue:'Kindergarten', city:'Bologna', n:'023', iso:'2026-04-24' },
-    { title:'Hertz at Kindergarten', type:'Hertz Event', dt:'FRI 27.02', venue:'Kindergarten', city:'Bologna', n:'022', iso:'2026-02-27' },
-    { title:'Hertz at Kindergarten', type:'Hertz Event', dt:'FRI 26.12', venue:'Kindergarten', city:'Bologna', n:'021', iso:'2025-12-26' },
-    { title:'Buongiorno Classic Goes To Hertz', type:'Collab', dt:'SAT 22.11', venue:'Numa Club', city:'Bologna', n:'020', iso:'2025-11-22' },
-    { title:'Hertz at Kindergarten', type:'Hertz Event', dt:'FRI 24.10', venue:'Kindergarten', city:'Bologna', n:'019', iso:'2025-10-24' },
-    { title:'Classic Airlines / Boarding Pass', type:'Collab', dt:'SUN 21.09', venue:'Classic Airlines', city:'Rimini', n:'018', iso:'2025-09-21' },
-  ];
-  var _now = new Date();
-  var _today = new Date(_now.getFullYear(), _now.getMonth(), _now.getDate()).getTime();
-  function evIsPast(e){
-    if(!e || !e.iso) return e && e.status === 'past';   // fallback to manual flag
-    var p = e.iso.split('-');
-    return new Date(+p[0], +p[1]-1, +p[2], 23, 59, 59, 999).getTime() < _today;
-  }
-  function evs(ns){ return ns.map(function(n){ return EVENTS_ALL.filter(function(e){return e.n===n;})[0]; }).filter(Boolean); }
+  // Appearances are derived from the shared single source (events-data.js):
+  // each resident's dates come from HZEvents.forResident(slug), so adding a new
+  // event/poster there updates every artist's calendar automatically.
 
   var ARTISTS = {
     'federico-apadula': {
@@ -37,7 +21,6 @@
         {t:'Live @ Sonder — City Hall, Barcelona', url:'https://soundcloud.com/hertzclubbingcollective/federico-apadula-sonder-city-hall-barcelona-16-03-24-opening-chicks-luv-us'},
         {t:'MMM077 — Special Guest Mix', url:'https://soundcloud.com/lambertogabrieli/mmm077-federico-apadula-special-guest-mix-jun-2021'}],
       social:{ soundcloud:'https://soundcloud.com/federico-apadula', spotify:'https://open.spotify.com/artist/0hS1cnWGJvml5gSHRKHtGi', booking:'booking@hertz.cc' },
-      events: evs(['024','023','022','021','020','019','018']),
     },
     'tommaso-manco': {
       name:'Tommaso Mancò', role:'DJ', n:'02', freq:'128 Hz',
@@ -47,7 +30,6 @@
         "He later moved to Bologna, where he joined the Hertz collective and still plays as a resident DJ today. His sound lives in tech house and minimal deep tech — the register that defines his style. In recent years he has performed at some of the area's most important stages and clubs, including Cima Festival, Kindergarten and Numa Club, as well as Buongiorno Classic — a place he has always called home, and one that, over the years, gave him the inspiration to develop and define his musical identity."],
       mixes:[],
       social:{ booking:'booking@hertz.cc' },
-      events: evs(['024','023','022','021','020']),
     },
     'alberto-b': {
       name:'Alberto B', role:'DJ · Producer', n:'03', freq:'125 Hz',
@@ -59,7 +41,6 @@
         {t:'In My Zone', url:'https://soundcloud.com/alberto-baccianti/in-my-zone'},
         {t:'You Should B Dancing', url:'https://soundcloud.com/alberto-baccianti/alberto-b-you-should-b-dancing'}],
       social:{ soundcloud:'https://soundcloud.com/alberto-baccianti', spotify:'https://open.spotify.com/artist/7kHLiQODROJuJtGEgAYd8d', booking:'booking@hertz.cc' },
-      events: evs(['024','023','022','021','020','019']),
     },
     'leonardo-giusti': {
       name:'Leonardo Giusti', role:'DJ · Resident', n:'04', freq:'126 Hz',
@@ -72,7 +53,6 @@
         {t:'Live @ Zanzibar', url:'https://soundcloud.com/leonardo-giusti-286676267/leonardo-giusti-live-zanzibar'},
         {t:'REC013', url:'https://soundcloud.com/leonardo-giusti-286676267/rec013'}],
       social:{ soundcloud:'https://soundcloud.com/leonardo-giusti-286676267', booking:'booking@hertz.cc' },
-      events: evs(['023','021']),
     },
   };
 
@@ -149,20 +129,36 @@
       + '</div></section>';
   }
 
-  /* 5 · APPEARANCES (room / CRT) */
-  if(A.events && A.events.length){
+  /* 5 · APPEARANCES (room / CRT) — auto-derived from events-data.js */
+  var HZ = window.HZEvents;
+  var appearances = HZ ? HZ.forResident(slug) : [];
+  if(appearances.length){
+    var upcoming = appearances.filter(function(e){ return !HZ.isPast(e); })
+                              .sort(function(a,b){ return (HZ.ms(a)||0)-(HZ.ms(b)||0); }); // soonest first
+    var past = appearances.filter(function(e){ return HZ.isPast(e); });                    // newest first
+    function poster(e){
+      return e.poster
+        ? '<span class="pf"><img src="'+e.poster+'" alt="'+esc(e.title)+' poster" loading="lazy"></span>'
+        : '<span class="pf none"></span>';
+    }
+    function row(e){
+      var p = HZ.isPast(e);
+      return '<a class="hz-approw'+(p?' past':' next')+'" href="events.html">'
+        + poster(e)
+        + '<span class="dt">'+esc(HZ.dowDate(e))+'</span>'
+        + '<span class="ti">'+esc(e.title)+'</span>'
+        + '<span class="vn">'+esc(e.venue)+' · '+esc(e.city)+'</span>'
+        + '<span class="st">'+(p?'PAST':'UPCOMING')+'</span></a>';
+    }
+    var listHtml = '';
+    if(upcoming.length){ listHtml += '<div class="hz-applabel">// Upcoming</div><div class="hz-applist">'+upcoming.map(row).join('')+'</div>'; }
+    if(past.length){ listHtml += '<div class="hz-applabel past">// Past</div><div class="hz-applist">'+past.map(row).join('')+'</div>'; }
     html += '<section class="hz-sec hz-room crt flick"><div class="hz-scanband"></div><span class="reg"><b class="a"></b><b class="b2"></b><b class="c"></b><b class="d"></b></span>'
       + '<div class="hz-wrap">'
       + '<div class="hz-ix"><h2 class="hz-num">+</h2><div><div class="hz-kick"><span class="ln"></span>// APPEARANCES</div>'
       + '<h3 class="hz-h2"><span class="w2">On the</span> <span class="w9 it">calendar</span><span class="blue">.</span></h3></div>'
-      + '<div class="hz-meta">'+A.events.length+' DATES<br>HERTZ NIGHTS</div></div>'
-      + '<div class="hz-applist">'+A.events.map(function(e){
-          var past = evIsPast(e);
-          return '<div class="hz-approw'+(past?' past':'')+'">'
-            + '<span class="dt">'+esc(e.dt)+'</span><span class="ti">'+esc(e.title)+'</span>'
-            + '<span class="vn">'+esc(e.venue)+' · '+esc(e.city)+'</span>'
-            + '<span class="st">'+(past?'PAST':'UPCOMING')+'</span></div>';
-        }).join('')+'</div>'
+      + '<div class="hz-meta">'+appearances.length+' DATES<br>'+(upcoming.length?upcoming.length+' UPCOMING':'HERTZ NIGHTS')+'</div></div>'
+      + listHtml
       + '</div></section>';
   }
 
