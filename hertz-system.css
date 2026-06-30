@@ -250,7 +250,7 @@ a{ color:inherit; }
 .hz-credo-photo::after{ content:''; position:absolute; inset:0; background:repeating-linear-gradient(180deg, transparent 0 2px, rgba(8,8,13,.16) 2px 3px), linear-gradient(180deg, transparent 45%, rgba(8,8,13,.6)); }
 
 /* ════════════════ MERCH ════════════════ */
-.hz-merch{ display:grid; grid-template-columns:1.1fr .9fr; gap:clamp(28px,5vw,72px); align-items:center; }
+.hz-merch{ display:grid; grid-template-columns:1.1fr .9fr; gap:clamp(28px,5vw,72px); align-items:start; }
 @media (max-width:850px){ .hz-merch{ grid-template-columns:1fr; } }
 .hz-merch p.lede{ font-family:var(--disp); font-weight:300; font-size:clamp(15px,1.5vw,18px); color:rgba(245,245,243,.7); line-height:1.7; max-width:540px; margin:0 0 30px; text-wrap:pretty; }
 .hz-form{ display:flex; max-width:460px; border:1px solid var(--line-d); }
@@ -261,6 +261,8 @@ a{ color:inherit; }
 .hz-drop{ position:relative; }
 .hz-drop .lab{ display:flex; justify-content:space-between; margin-bottom:12px; font-family:var(--mono); font-size:10px; letter-spacing:.16em; color:rgba(245,245,243,.4); }
 .hz-drop .lab .lim{ color:var(--blue2); }
+.hz-droptag{ font-family:var(--mono); font-size:11px; line-height:1.6; letter-spacing:.02em; color:rgba(245,245,243,.45); margin:18px 2px 0; max-width:340px; }
+.riso .hz-droptag{ color:rgba(8,8,13,.5); }
 .hz-dropcard{ position:relative; background:var(--ink2); border:1px solid var(--line-d); padding:24px; transform:rotate(-1.5deg); transform-origin:50% 100%; box-shadow:14px 24px 60px rgba(0,0,0,.4); }
 .hz-dropcard .ed{ position:absolute; top:16px; right:16px; z-index:3; background:var(--blue); font-family:var(--mono); font-size:9px; letter-spacing:.22em; color:var(--paper); padding:5px 10px; }
 .hz-dropcard .pic{ background:#fff; aspect-ratio:3/4; display:flex; align-items:center; justify-content:center; overflow:hidden; margin-bottom:20px; }
@@ -268,6 +270,24 @@ a{ color:inherit; }
 .hz-dropcard .specs{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; padding-top:16px; border-top:1px solid var(--line-d); }
 .hz-dropcard .specs .k{ font-family:var(--mono); font-size:9px; letter-spacing:.16em; color:rgba(245,245,243,.35); margin-bottom:4px; }
 .hz-dropcard .specs .v{ font-family:var(--disp); font-weight:700; font-size:12px; }
+
+/* ── merch · capsule index (streetwear & accessories) ── */
+.hz-merch .lead-eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--blue2); margin:0 0 14px; }
+.hz-capsule{ margin:6px 0 30px; border-top:1px solid var(--line-d); }
+.hz-capsule .row{ display:grid; grid-template-columns:28px 1fr auto; align-items:baseline; gap:10px 18px; padding:15px 0; border-bottom:1px solid var(--line-d); }
+.hz-capsule .row .ix{ font-family:var(--mono); font-size:10px; letter-spacing:.12em; color:rgba(245,245,243,.35); }
+.hz-capsule .row .nm{ font-family:var(--disp); font-weight:700; font-size:clamp(16px,1.9vw,20px); letter-spacing:-.015em; line-height:1.1; }
+.hz-capsule .row .ds{ display:block; font-family:var(--mono); font-size:11px; letter-spacing:.02em; color:rgba(245,245,243,.5); margin-top:4px; line-height:1.5; }
+.hz-capsule .row .tg{ font-family:var(--mono); font-size:9px; letter-spacing:.18em; color:rgba(245,245,243,.4); white-space:nowrap; align-self:center; }
+.hz-capsule .row .tg.on{ color:var(--blue2); }
+/* light variant (riso / paper sections) */
+.riso .hz-capsule, .hz-merch[style*="--ink"] .hz-capsule{ border-top-color:var(--line-l); }
+.riso .hz-capsule .row{ border-bottom-color:var(--line-l); }
+.riso .hz-capsule .row .ix{ color:rgba(8,8,13,.4); }
+.riso .hz-capsule .row .ds{ color:rgba(8,8,13,.55); }
+.riso .hz-capsule .row .tg{ color:rgba(8,8,13,.45); }
+.riso .hz-capsule .row .tg.on{ color:var(--blue2); }
+@media (max-width:560px){ .hz-capsule .row{ grid-template-columns:24px 1fr; } .hz-capsule .row .tg{ grid-column:2; justify-self:start; margin-top:6px; } }
 
 /* ════════════════ FOOTER ════════════════ */
 .hz-coda{ background:var(--paper); color:var(--ink); padding:clamp(56px,10vh,100px) clamp(22px,5vw,80px); }

@@ -289,11 +289,18 @@ function MerchTeaser8() {
       <div className="hz-scanband" />
       <Reg8 />
       <div className="hz-wrap">
-        <IxHead8 num={'0<span class="sl">5</span>'} kick="// 05. DROP 01 · COMING SOON"
+        <IxHead8 num={'0<span class="sl">5</span>'} kick="// 05. HZ.SUPPLY · COMING SOON"
           title={'<span class="w2">Wear the</span> <span class="w9 it">frequency</span><span class="blue">.</span>'} />
         <R className="hz-merch">
           <div>
-            <p className="lede">A capsule built for the dancefloor. Limited numbered runs, no compromise. Coming soon — leave your address to know first.</p>
+            <p className="lede">Gear for the floor, not the feed. Streetwear and accessories made by clubbers, for clubbers — heavyweight cotton, technical fabrics, numbered runs. Designed on the dancefloor, worn until they fade.</p>
+            <div className="lead-eyebrow">// THE CAPSULE</div>
+            <div className="hz-capsule">
+              <div className="row"><span className="ix">01</span><span><span className="nm">Apparel</span><span className="ds">Heavyweight tees & hoodies — hand-screened, studio-grade cotton.</span></span><span className="tg">Soon</span></div>
+              <div className="row"><span className="ix">02</span><span><span className="nm">Outerwear</span><span className="ds">Shells & layers for the queue, the smoke area, the after.</span></span><span className="tg">Soon</span></div>
+              <div className="row"><span className="ix">03</span><span><span className="nm">Headwear</span><span className="ds">Caps & beanies — low-key, built for all-night.</span></span><span className="tg">Soon</span></div>
+              <div className="row"><span className="ix">04</span><span><span className="nm">Accessories</span><span className="ds">Lanyards, totes & stickers — the everyday club kit.</span></span><span className="tg on">Drop 01 ▸</span></div>
+            </div>
             {!joined ? (
               <form className="hz-form" onSubmit={submit}>
                 <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="your@email.cc" aria-label="Email" />
@@ -304,7 +311,7 @@ function MerchTeaser8() {
             )}
           </div>
           <div className="hz-drop">
-            <div className="lab"><span>HZ.MERCH / DROP 01</span><span className="lim">LIMITED ↗</span></div>
+            <div className="lab"><span>HZ.SUPPLY / DROP 01 · ACCESSORIES</span><span className="lim">LIMITED ↗</span></div>
             <div className="hz-dropcard">
               <div className="ed">001/200</div>
               <div className="pic"><img src="assets/merch-lanyard-drop01.png" alt="Hertz lanyard, Drop 01" /></div>
@@ -314,6 +321,7 @@ function MerchTeaser8() {
                 <div><div className="k">STATUS</div><div className="v blue">COMING SOON</div></div>
               </div>
             </div>
+            <p className="hz-droptag">The first piece — a woven lanyard built to be worn, not displayed. Apparel follows.</p>
           </div>
         </R>
       </div>
