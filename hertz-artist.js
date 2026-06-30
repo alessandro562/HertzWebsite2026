@@ -11,7 +11,7 @@
   var ARTISTS = {
     'federico-apadula': {
       name:'Federico Apadula', role:'Founder · Art Director · DJ &amp; Producer', n:'01', freq:'120 Hz',
-      origin:'Bologna, IT', since:'2023', sets:'Deep · Minimal · Atmospheric', img:'assets/dj-apadula.jpg',
+      origin:'Emilia-Romagna, IT', since:'2023', sets:'Deep · Minimal · Atmospheric', img:'assets/dj-apadula.jpg',
       gallery:['assets/federico-apadula-live-1.jpg','assets/federico-apadula-live-2.jpg','assets/federico-apadula-live-3.jpg','assets/federico-apadula-live-4.jpg'],
       bio:["Founder and Art Director of the Hertz collective, Federico Apadula has shaped the project's sonic identity for years, pursuing a precise artistic vision built on the centrality of musical selection.",
         "A Bologna-based DJ and producer born in 1995, he began playing in clubs at the age of 14, developing a deep understanding of dancefloor dynamics from the very start. Over the years he has performed at key venues across his home city and on national and international stages, including Amnesia Milano, Tantra Ibiza and City Hall Barcelona. He has also built an ongoing collaboration with Buongiorno Classic, where he performs regularly.",
@@ -33,7 +33,7 @@
     },
     'alberto-b': {
       name:'Alberto B', role:'DJ · Producer', n:'03', freq:'125 Hz',
-      origin:'Bologna, IT', since:'2024', sets:'Deep Tech · Groove', img:'assets/dj-alberto.jpg',
+      origin:'Emilia-Romagna, IT', since:'2024', sets:'Deep Tech · Groove', img:'assets/dj-alberto.jpg',
       gallery:['assets/alberto-b-live-1.jpg','assets/alberto-b-live-2.jpg','assets/alberto-b-live-3.jpg','assets/alberto-b-live-4.jpg'],
       bio:["Producer and DJ based in Bologna, Alberto B brings a producer's ear to every set: textured, layered, always searching. His sound moves through deep tech and groove with a level of detail that rewards close listening.",
         "Active with Hertz since 2024, he has played across the collective's residencies and collaborations, from the Kindergarten nights to the Buongiorno Classic dates. Alongside his DJ sets he produces his own material, with tracks like 'Hot Girl', 'In My Zone' and 'You Should B Dancing' already out on SoundCloud."],
@@ -44,7 +44,7 @@
     },
     'leonardo-giusti': {
       name:'Leonardo Giusti', role:'DJ · Resident', n:'04', freq:'126 Hz',
-      origin:'Bologna, IT', since:'2025', sets:'Tech House · Minimal Deep Tech', img:'assets/dj-giusti.jpg',
+      origin:'Emilia-Romagna, IT', since:'2025', sets:'Tech House · Minimal Deep Tech', img:'assets/dj-giusti.jpg',
       gallery:['assets/leonardo-giusti-live-1.jpg','assets/leonardo-giusti-live-2.jpg','assets/leonardo-giusti-live-3.jpg','assets/leonardo-giusti-live-4.jpg'],
       bio:["Born in Bologna in 2004, Leonardo Giusti was drawn to electronic music from a very young age, gradually shaping a sonic identity rooted in the more groove-driven shades of Tech House and Minimal Deep Tech.",
         "Despite his youth, he has already built experience across events and clubs on the Bologna scene, performing in venues such as Kindergarten and taking part in several Hertz nights. Since late 2025 he has been a Hertz resident DJ, a home in which he is consolidating his artistic path and refining an increasingly recognisable musical direction.",
