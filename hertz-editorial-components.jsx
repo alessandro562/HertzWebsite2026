@@ -269,6 +269,15 @@ function ArticleDetail({ slug }) {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
+    /* the server-rendered page embeds the article so the client doesn't
+       have to re-fetch (and so the SSR'd content above matches exactly) */
+    const embedded = document.getElementById('article-data');
+    if (embedded) {
+      try {
+        const data = JSON.parse(embedded.textContent);
+        if (data && data.slug === slug) { setArticle(data); setLoading(false); return; }
+      } catch (_) { /* fall through to fetch */ }
+    }
     fetch(`/api/articles?slug=${slug}`)
       .then(r => r.json())
       .then(d => { if (d.ok) setArticle(d.article); else setError(d.error || 'Not found'); })

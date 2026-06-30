@@ -241,6 +241,8 @@ const ARTICLES = [
     relatedArticles: ["music-on-pacha-long-residency", "two-speed-island-ibiza-2026"]
   }];
 
+export { ARTICLES };
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');

@@ -7,7 +7,7 @@
   "rewrites": [
     {
       "source": "/media/:slug",
-      "destination": "/media-article-template.html"
+      "destination": "/api/media-page?slug=:slug"
     }
   ],
   "headers": [

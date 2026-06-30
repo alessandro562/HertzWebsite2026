@@ -72,4 +72,29 @@
     var m1 = grids[1].closest('.hz-sec') && grids[1].closest('.hz-sec').querySelector('.hz-meta');
     if (m1) m1.innerHTML = 'PAST TRANSMISSIONS<br>2025 — 2026<br>' + past.length + ' NIGHTS';
   }
+
+  /* ── 3 · Event structured data (JSON-LD) — generated live from the
+     same single source, so it can never drift out of sync with the page ── */
+  if (upcoming.length) {
+    var graph = upcoming.map(function (e) {
+      var ev = {
+        '@type': 'Event',
+        name: e.title,
+        startDate: e.iso,
+        eventStatus: 'https://schema.org/EventScheduled',
+        eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+        location: { '@type': 'Place', name: e.venue, address: { '@type': 'PostalAddress', addressLocality: e.city, addressCountry: 'IT' } },
+        image: e.poster ? ('https://hertzclubbing.com/' + e.poster) : 'https://hertzclubbing.com/assets/hertz-logo-official.png',
+        url: 'https://hertzclubbing.com/events',
+        organizer: { '@type': 'Organization', name: 'Hertz Clubbing Collective', url: 'https://hertzclubbing.com' },
+      };
+      if (e.bill) ev.description = e.bill;
+      if (e.lineup && e.lineup.length) ev.performer = e.lineup.map(function (slug) { return { '@type': 'Person', name: HZ.residentName(slug) }; });
+      return ev;
+    });
+    var ld = document.createElement('script');
+    ld.type = 'application/ld+json';
+    ld.textContent = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph });
+    document.head.appendChild(ld);
+  }
 })();
