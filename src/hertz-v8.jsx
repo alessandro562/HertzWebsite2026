@@ -603,7 +603,7 @@ function Hero8({ countdown, primary, accent, tweaks }) {
           <p style={{
             ...mono, fontSize: 11, color: Cv8.gray, marginTop: 4,
             textTransform: 'uppercase', textAlign: 'center', lineHeight: 1.7,
-          }}>// from clubbers to clubbers<br />bologna est. 2023</p>
+          }}>// keep the groove<br />bologna est. 2023</p>
         </div>
 
         {/* flexible gap — absorbs ALL variation below the wordmark, so the
