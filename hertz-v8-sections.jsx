@@ -1012,7 +1012,6 @@ function Footer8() {
               { l: 'Instagram', href: 'https://instagram.com/hertz.cc' },
               { l: 'Spotify', href: '#' },
               { l: 'SoundCloud', href: '#' },
-              { l: 'Mixcloud', href: '#' },
             ].map(x => (
               <a key={x.l} href={x.href} target={x.href.startsWith('http') ? '_blank' : undefined} rel={x.href.startsWith('http') ? 'noopener noreferrer' : undefined} style={{
                 display: 'block', color: C.light + '99', textDecoration: 'none',
@@ -1041,8 +1040,8 @@ function Footer8() {
           fontFamily: "'JetBrains Mono', monospace",
           fontSize: 10, color: C.light + '40', letterSpacing: '0.1em',
         }}>
-          <span>© 2026 Hertz, from clubbers to clubbers</span>
-          <span>HZ.CC / V8</span>
+          <span>© 2026 Hertz Clubbing Collective</span>
+          
         </div>
       </div>
     </footer>

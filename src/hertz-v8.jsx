@@ -91,13 +91,13 @@ window.R8 = R8;
    one is the hero's NEXT event. No more manually moving events between lists. */
 const EVENT_POOL = [
   // ── scheduled / announced ──────────────────────────────────────────
-  { title: 'Hertz × Atrium', type: 'Guest', date: '28.06.26', day: 'SUN 28.06', time: 'H18 → late', venue: "Noah's Dream", city: 'Ortona', iso: '2026-06-28T18:00:00', lineup: ["Danilo D'Arrezzo", 'Federico Apadula', 'Adime'], poster: 'assets/poster-v3-28giu-atrium.jpg', n: '026', ctaLabel: 'Info', ctaLink: '#' },
-  { title: 'Hertz × Buongiorno Classic', type: 'Collaboration', date: '28.06.26', day: 'SUN 28.06', time: '17:00 → 00:00', venue: 'Buongiorno Classic', city: 'Rimini', iso: '2026-06-28T17:00:00', lineup: ['Tommaso Mancò', 'Alberto B'], poster: 'assets/poster-v3-28giu-buongiorno.jpg', n: '027', ctaLabel: 'Info', ctaLink: '#' },
-  { title: 'Hertz Downtown / Il Pallone', type: 'Downtown Gig', date: '04.07.26', day: 'SAT 04.07', time: '19:30 → 23:30', venue: 'Il Pallone', city: 'Bologna', iso: '2026-07-04T19:30:00', lineup: ['Federico Apadula', 'Leonardo Giusti', 'SeaRock'], poster: 'assets/poster-v3-04lug-pallone.jpg', n: '028', ctaLabel: 'Info', ctaLink: '#' },
-  { title: 'Hertz / Barracuda Club',     type: 'Collaboration', date: '25.07', day: 'SAT 25.07', city: 'Ferrara', iso: '2026-07-25T00:00:00', n: '029', comingSoon: true },
-  { title: 'Hertz × Buongiorno Classic', type: 'Collaboration', date: '26.07.26', day: 'SUN 26.07', time: '05:00 → 00:00', venue: 'Buongiorno Classic', city: 'Rimini', iso: '2026-07-26T05:00:00', lineup: ['Antonio Pica', 'Da Vid', 'Jay De Lys', 'Joey Daniel', 'Hertz'], poster: 'assets/poster-v3-26lug-buongiorno.jpg', n: '030', ctaLabel: 'Info', ctaLink: '#' },
-  { title: 'Hertz × Buongiorno Classic', type: 'Collaboration', date: '14.08', day: 'FRI 14.08', city: 'Rimini',  iso: '2026-08-14T00:00:00', n: '031', comingSoon: true },
-  { title: 'Hertz / Barracuda Club',     type: 'Collaboration', date: '15.08', day: 'SAT 15.08', city: 'Ferrara', iso: '2026-08-15T00:00:00', n: '032', comingSoon: true },
+  { title: 'Hertz at Atrium', type: 'Guest', date: '28.06.26', day: 'SUN 28.06', time: 'H18 → late', venue: "Noah's Dream", city: 'Ortona', iso: '2026-06-28T18:00:00', lineup: ["Danilo D'Arrezzo", 'Federico Apadula', 'Adime'], poster: 'assets/poster-v3-28giu-atrium.jpg', n: '026', ctaLabel: 'Info', ctaLink: '#' },
+  { title: 'Hertz at Buongiorno Classic', type: 'Collaboration', date: '28.06.26', day: 'SUN 28.06', time: '17:00 → 00:00', venue: 'Buongiorno Classic', city: 'Rimini', iso: '2026-06-28T17:00:00', lineup: ['Tommaso Mancò', 'Alberto B'], poster: 'assets/poster-v3-28giu-buongiorno.jpg', n: '027', ctaLabel: 'Info', ctaLink: '#' },
+  { title: 'Hertz Downtown', type: 'Downtown Gig', date: '04.07.26', day: 'SAT 04.07', time: '19:30 → 23:30', venue: 'Il Pallone', city: 'Bologna', iso: '2026-07-04T19:30:00', lineup: ['Federico Apadula', 'Leonardo Giusti', 'SeaRock'], poster: 'assets/poster-v3-04lug-pallone.jpg', n: '028', ctaLabel: 'Info', ctaLink: '#' },
+  { title: 'Hertz at Barracuda Club',     type: 'Collaboration', date: '25.07', day: 'SAT 25.07', city: 'Ferrara', iso: '2026-07-25T00:00:00', n: '029', comingSoon: true },
+  { title: 'Hertz at Buongiorno Classic', type: 'Collaboration', date: '26.07.26', day: 'SUN 26.07', time: '05:00 → 00:00', venue: 'Buongiorno Classic', city: 'Rimini', iso: '2026-07-26T05:00:00', lineup: ['Antonio Pica', 'Da Vid', 'Jay De Lys', 'Joey Daniel', 'Hertz'], poster: 'assets/poster-v3-26lug-buongiorno.jpg', n: '030', ctaLabel: 'Info', ctaLink: '#' },
+  { title: 'Hertz at Buongiorno Classic', type: 'Collaboration', date: '14.08', day: 'FRI 14.08', city: 'Rimini',  iso: '2026-08-14T00:00:00', n: '031', comingSoon: true },
+  { title: 'Hertz at Barracuda Club',     type: 'Collaboration', date: '15.08', day: 'SAT 15.08', city: 'Ferrara', iso: '2026-08-15T00:00:00', n: '032', comingSoon: true },
   // ── archive ────────────────────────────────────────────────────────
   {
     title: 'Take Notes × Buongiorno Classic',
@@ -603,7 +603,7 @@ function Hero8({ countdown, primary, accent, tweaks }) {
           <p style={{
             ...mono, fontSize: 11, color: Cv8.gray, marginTop: 4,
             textTransform: 'uppercase', textAlign: 'center', lineHeight: 1.7,
-          }}>// from clubbers to clubbers<br />bologna est. 2023</p>
+          }}>// keep the groove<br />bologna est. 2023</p>
         </div>
 
         {/* flexible gap — absorbs ALL variation below the wordmark, so the

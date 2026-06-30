@@ -289,7 +289,7 @@ function MerchTeaser8() {
       <div className="hz-scanband" />
       <Reg8 />
       <div className="hz-wrap">
-        <IxHead8 num={'0<span class="sl">5</span>'} kick="// 05. HZ.SUPPLY · COMING SOON"
+        <IxHead8 num={'0<span class="sl">5</span>'} kick="// 05. MERCH · COMING SOON"
           title={'<span class="w2">Wear the</span> <span class="w9 it">frequency</span><span class="blue">.</span>'} />
         <R className="hz-merch">
           <div>
@@ -311,7 +311,7 @@ function MerchTeaser8() {
             )}
           </div>
           <div className="hz-drop">
-            <div className="lab"><span>HZ.SUPPLY / DROP 01 · ACCESSORIES</span><span className="lim">LIMITED ↗</span></div>
+            <div className="lab"><span>DROP 01 · ACCESSORIES</span><span className="lim">LIMITED ↗</span></div>
             <div className="hz-dropcard">
               <div className="ed">001/200</div>
               <div className="pic"><img src="assets/merch-lanyard-drop01.png" alt="Hertz lanyard, Drop 01" /></div>
@@ -336,9 +336,9 @@ function CollabSection8() {
   const R = window.R8;
   const TICKETS = [
     { tilt: 'tilt-l', stub: 'ADMIT ONE · N°023', ser: 'SER. K—0001', logo: 'assets/collab-kindergarten.png',
-      name: 'Kindergarten', stamp: 'Resident', data: [['Venue', 'Kindergarten'], ['City', 'Bologna'], ['Coord', '44.4°N 11.3°E'], ['Since', '2023']] },
+      name: 'Kindergarten', stamp: 'Residency', data: [['Venue', 'Kindergarten'], ['City', 'Bologna'], ['Coord', '44.4°N 11.3°E'], ['Since', '2023']] },
     { tilt: 'tilt-r', stub: 'ADMIT ONE · N°030', ser: 'SER. B—0002', logo: 'assets/collab-buongiorno-classic.png',
-      name: 'Buongiorno Classic', stamp: 'Collab', data: [['Venue', 'Buongiorno Classic'], ['City', 'Rimini'], ['Coord', '44.0°N 12.5°E'], ['Since', '2025']] },
+      name: 'Buongiorno Classic', stamp: 'Partnership', data: [['Venue', 'Buongiorno Classic'], ['City', 'Rimini'], ['Coord', '44.0°N 12.5°E'], ['Since', '2025']] },
   ];
   return (
     <section id="partners" className="hz-sec hz-page riso">
@@ -373,7 +373,7 @@ function CollabSection8() {
    ═══════════════════════════════════════════ */
 function Footer8() {
   const NAV = [['Events', 'events.html'], ['Manifesto', 'manifesto.html'], ['Artists', 'artists.html'], ['Music', '#'], ['Merch', 'merch.html'], ['Media', 'media.html'], ['Archive', 'archive.html']];
-  const FREQ = [['Instagram', 'https://instagram.com/hertz.cc'], ['Spotify', '#'], ['SoundCloud', '#'], ['Mixcloud', '#']];
+  const FREQ = [['Instagram', 'https://instagram.com/hertz.cc'], ['Spotify', '#'], ['SoundCloud', '#']];
   return (
     <React.Fragment>
       <section className="hz-coda">
@@ -401,7 +401,7 @@ function Footer8() {
             <p className="safe">No harassment, no hate, no discrimination. Respect boundaries, yours and others'. The dancefloor is for everyone.</p>
           </div>
         </div>
-        <div className="legal"><span>© 2026 Hertz, from clubbers to clubbers</span><span>HZ.CC / V8 · WE LIVE IN FREQUENCY</span></div>
+        <div className="legal"><span>© 2026 Hertz Clubbing Collective</span></div>
       </footer>
     </React.Fragment>
   );

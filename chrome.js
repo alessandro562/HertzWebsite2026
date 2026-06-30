@@ -20,7 +20,7 @@
 
   /* footer */
   var foot=document.createElement('div');
-  var FREQ=[['Instagram','https://instagram.com/hertz.cc'],['Spotify','#'],['SoundCloud','#'],['Mixcloud','#']];
+  var FREQ=[['Instagram','https://instagram.com/hertz.cc'],['Spotify','#'],['SoundCloud','#']];
   foot.innerHTML=
     '<section class="hz-coda"><div style="max-width:1320px;margin:0 auto">'
     +'<div class="k">CLUBBING COLLECTIVE</div>'
@@ -31,7 +31,7 @@
     +'<div><h4>// NAVIGATE</h4>'+NAV.map(function(x){return '<a class="fl" href="'+x[1]+'">'+x[0]+' →</a>';}).join('')+'</div>'
     +'<div><h4>// FREQUENCIES</h4>'+FREQ.map(function(x){return '<a class="fl" href="'+x[1]+'"'+(x[1].indexOf('http')===0?' target="_blank" rel="noopener noreferrer"':'')+'>'+x[0]+' →</a>';}).join('')+'</div>'
     +'<div><h4>// SAFE SPACE</h4><p class="safe">No harassment, no hate, no discrimination. Respect boundaries, yours and others\'. The dancefloor is for everyone.</p></div>'
-    +'</div><div class="legal"><span>© 2026 Hertz, from clubbers to clubbers</span><span>HZ.CC / V8 · WE LIVE IN FREQUENCY</span></div></footer>';
+    +'</div><div class="legal"><span>© 2026 Hertz Clubbing Collective</span></div></footer>';
 
   document.body.insertBefore(menu, document.body.firstChild);
   document.body.insertBefore(nav, document.body.firstChild);

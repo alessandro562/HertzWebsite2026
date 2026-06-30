@@ -312,7 +312,7 @@ function Footer8({ banner = true, bannerLight = true }) {
           </div>
           <div>
             <h4 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.2em', color: C.light + '55', marginBottom: 16 }}>// FREQUENCIES</h4>
-            {[['Instagram','https://instagram.com/hertz.cc'],['Spotify','#'],['SoundCloud','#'],['Mixcloud','#']].map(([l,h]) => (
+            {[['Instagram','https://instagram.com/hertz.cc'],['Spotify','#'],['SoundCloud','#']].map(([l,h]) => (
               <a key={l} href={h} target={h.startsWith('http') ? '_blank' : undefined} rel={h.startsWith('http') ? 'noopener noreferrer' : undefined} style={{ display: 'block', color: C.light + '99', textDecoration: 'none', fontSize: 14, padding: '7px 0', fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif", fontWeight: 500, transition: 'color 0.2s' }}
               onMouseEnter={e => e.currentTarget.style.color = C.blue}
               onMouseLeave={e => e.currentTarget.style.color = C.light + '99'}>{l} →</a>
@@ -330,8 +330,8 @@ function Footer8({ banner = true, bannerLight = true }) {
           display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8,
           fontFamily: "'JetBrains Mono', monospace", fontSize: 10, color: C.light + '40', letterSpacing: '0.1em',
         }}>
-          <span>© 2026 Hertz, from clubbers to clubbers</span>
-          <span>HZ.CLUB / V8</span>
+          <span>© 2026 Hertz Clubbing Collective</span>
+          
         </div>
       </div>
     </footer>
