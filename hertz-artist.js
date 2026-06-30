@@ -105,10 +105,12 @@
 
   /* 4 · LISTEN — SoundCloud / Spotify (page / riso) */
   if((A.mixes && A.mixes.length) || A.social.soundcloud || A.social.spotify){
-    var scList = (A.mixes||[]).map(function(m){
-      return '<a class="hz-mixrow" href="'+m.url+'" target="_blank" rel="noopener noreferrer">'
-        + '<span class="ico">▶</span><span class="t">'+esc(m.t)+'</span>'
-        + (m.tag?'<span class="tag">'+esc(m.tag)+'</span>':'')+'<span class="ar">↗</span></a>';
+    var scTracks = (A.mixes||[]).map(function(m,i){
+      var num = (i+1<10?'0':'')+(i+1);
+      return '<li><a href="'+m.url+'" target="_blank" rel="noopener noreferrer">'
+        + '<span class="i">'+num+'</span>'
+        + '<span class="t">'+esc(m.t)+(m.tag?' <em>'+esc(m.tag)+'</em>':'')+'</span>'
+        + '<span class="go">Listen</span></a></li>';
     }).join('');
     html += '<section class="hz-sec hz-page riso"><span class="reg"><b class="a"></b><b class="b2"></b><b class="c"></b><b class="d"></b></span>'
       + '<div class="hz-wrap">'
@@ -117,13 +119,13 @@
       + '<div class="hz-meta">SOUNDCLOUD<br>SPOTIFY</div></div>'
       + '<div class="hz-listen">'
       + '<div class="hz-listcol">'
-      + '<div class="hz-listhead"><img src="assets/logo-soundcloud.svg" alt="SoundCloud"><div class="lx"><b>SoundCloud</b><span>Mixes, sets &amp; resident tracks</span></div></div>'
-      + (scList ? '<div class="hz-mixlist">'+scList+'</div>' : '<div class="hz-listempty">Selected mixes coming soon<span class="blue">.</span></div>')
-      + (A.social.soundcloud ? '<a class="hz-listmore" href="'+A.social.soundcloud+'" target="_blank" rel="noopener noreferrer">Open profile <span class="ar">↗</span></a>' : '')
+      + '<div class="hz-listhead"><img class="lg" src="assets/logo-soundcloud-dark.png" alt="SoundCloud"><span class="sub">Mixes, sets &amp; resident tracks</span></div>'
+      + (scTracks ? '<ol class="hz-trk">'+scTracks+'</ol>' : '<p class="hz-listempty">Selected mixes coming soon<span class="blue">.</span></p>')
+      + (A.social.soundcloud ? '<a class="hz-listmore" href="'+A.social.soundcloud+'" target="_blank" rel="noopener noreferrer">Open profile →</a>' : '')
       + '</div>'
       + '<div class="hz-listcol">'
-      + '<div class="hz-listhead"><img src="assets/logo-spotify.svg" alt="Spotify"><div class="lx"><b>Spotify</b><span>Tracks released on labels</span></div></div>'
-      + (A.social.spotify ? '<div class="hz-listempty">Original productions, out on label<span class="blue">.</span></div><a class="hz-listmore" href="'+A.social.spotify+'" target="_blank" rel="noopener noreferrer">Open profile <span class="ar">↗</span></a>' : '<div class="hz-listempty">Label releases coming soon<span class="blue">.</span></div>')
+      + '<div class="hz-listhead"><img class="lg" src="assets/logo-spotify-dark.png" alt="Spotify"><span class="sub">Tracks released on labels</span></div>'
+      + (A.social.spotify ? '<p class="hz-listempty">Original productions, out on label<span class="blue">.</span></p><a class="hz-listmore" href="'+A.social.spotify+'" target="_blank" rel="noopener noreferrer">Open profile →</a>' : '<p class="hz-listempty">Label releases coming soon<span class="blue">.</span></p>')
       + '</div>'
       + '</div>'
       + '</div></section>';
