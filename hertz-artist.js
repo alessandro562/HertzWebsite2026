@@ -102,7 +102,6 @@
     + '<div><div class="k">// origin</div><div class="v">'+esc(A.origin)+'</div></div>'
     + '<div><div class="k">// resident since</div><div class="v">'+esc(A.since)+'</div></div>'
     + '<div><div class="k">// signature</div><div class="v">'+A.sets+'</div></div>'
-    + '<div><div class="k">// frequency</div><div class="v blue">'+esc(A.freq)+'</div></div>'
     + '</div></div></div></div></section>';
 
   /* 2 · BIO (page / riso) */

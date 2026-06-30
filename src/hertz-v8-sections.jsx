@@ -336,9 +336,9 @@ function CollabSection8() {
   const R = window.R8;
   const TICKETS = [
     { tilt: 'tilt-l', stub: 'ADMIT ONE · N°023', ser: 'SER. K—0001', logo: 'assets/collab-kindergarten.png',
-      name: 'Kindergarten', stamp: 'Resident', data: [['Venue', 'Kindergarten'], ['City', 'Bologna'], ['Coord', '44.4°N 11.3°E'], ['Since', '2023']] },
+      name: 'Kindergarten', stamp: 'Residency', data: [['Venue', 'Kindergarten'], ['City', 'Bologna'], ['Coord', '44.4°N 11.3°E'], ['Since', '2023']] },
     { tilt: 'tilt-r', stub: 'ADMIT ONE · N°030', ser: 'SER. B—0002', logo: 'assets/collab-buongiorno-classic.png',
-      name: 'Buongiorno Classic', stamp: 'Collab', data: [['Venue', 'Buongiorno Classic'], ['City', 'Rimini'], ['Coord', '44.0°N 12.5°E'], ['Since', '2025']] },
+      name: 'Buongiorno Classic', stamp: 'Partnership', data: [['Venue', 'Buongiorno Classic'], ['City', 'Rimini'], ['Coord', '44.0°N 12.5°E'], ['Since', '2025']] },
   ];
   return (
     <section id="partners" className="hz-sec hz-page riso">

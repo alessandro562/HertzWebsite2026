@@ -44,7 +44,7 @@ const ARTICLES = [
       readingTimeMinutes: 6
     },
 
-    media: { heroImage: "/assets/art-trends.jpg", heroImageAlt: "A hyperclub crowd under stage lights", gallery: [] },
+    media: { heroImage: "/assets/media-unvrs.png", heroImageAlt: "A hyperclub crowd under stage lights", gallery: [] },
 
     metadata: {
       author: "Hertz Redazione",
@@ -59,7 +59,7 @@ const ARTICLES = [
 
     engagement: { shareCount: 0, viewCount: 0, featured: true },
 
-    relatedArticles: ["two-people-one-booth-b2b", "sunwaves-left-home-rominimal"]
+    relatedArticles: ["music-on-pacha-long-residency", "sunwaves-left-home-rominimal"]
   },
 
   {
@@ -101,7 +101,7 @@ const ARTICLES = [
       readingTimeMinutes: 6
     },
 
-    media: { heroImage: "/assets/floor-5.jpg", heroImageAlt: "A low-lit marathon floor", gallery: [] },
+    media: { heroImage: "/assets/media-sunwaves.png", heroImageAlt: "A low-lit marathon floor", gallery: [] },
 
     metadata: {
       author: "Hertz Redazione",
@@ -116,7 +116,7 @@ const ARTICLES = [
 
     engagement: { shareCount: 0, viewCount: 0, featured: false },
 
-    relatedArticles: ["two-speed-island-ibiza-2026", "two-people-one-booth-b2b"]
+    relatedArticles: ["two-speed-island-ibiza-2026", "music-on-pacha-long-residency"]
   },
 
   {
@@ -158,7 +158,7 @@ const ARTICLES = [
       readingTimeMinutes: 6
     },
 
-    media: { heroImage: "/assets/floor-2.jpg", heroImageAlt: "A packed floor deep into a residency night", gallery: [] },
+    media: { heroImage: "/assets/media-music-on-pacha.png", heroImageAlt: "A packed floor deep into a residency night", gallery: [] },
 
     metadata: {
       author: "Hertz Redazione",
@@ -223,7 +223,7 @@ const ARTICLES = [
       readingTimeMinutes: 7
     },
 
-    media: { heroImage: "/assets/art-warmup.jpg", heroImageAlt: "A DJ at the booth, close-up", gallery: [] },
+    media: { heroImage: "/assets/media-radar-vol-1.png", heroImageAlt: "A DJ at the booth, close-up", gallery: [] },
 
     metadata: {
       author: "Hertz Redazione",
@@ -239,143 +239,6 @@ const ARTICLES = [
     engagement: { shareCount: 0, viewCount: 0, featured: false },
 
     relatedArticles: ["music-on-pacha-long-residency", "two-speed-island-ibiza-2026"]
-  },
-
-  {
-    _id: "hertz-crossfade-01",
-    slug: "two-people-one-booth-b2b",
-    title: "Two People, One Booth: What the B2B Reveals About the Split",
-    subtitle: "Everything Always and RPR Soundsystem are both \"two artists, back to back.\" They are not the same thing, and the difference is the whole argument.",
-    excerpt: "The b2b has become the scene's basic unit. We pull apart two models — the American mainstage supergroup and the European b2b-as-conversation — and what each one says about where clubbing is going.",
-    rubric: "CROSSFADE",
-
-    content: {
-      body: `<p>The back-to-back is everywhere now. The b2b, the alias, the duo, the "supergroup" — two or more names sharing a booth has become one of the scene's basic units, on posters from Miami to Mamaia. Which is interesting, because the format hides a fault line. Two things both described as "a b2b" can be opposite in everything that matters. Pull two of them apart and you get the cleanest possible picture of the split this whole publication is about.</p>
-
-<h2>Exhibit A: the supergroup</h2>
-
-<p>In March 2025, John Summit and Dom Dolla debuted <strong>Everything Always</strong> on the Ultra Miami main stage. Two of the biggest names in American dance music, combining into a single brand-name project, built for the largest stage at the largest US festival.</p>
-
-<p>It works on its own terms, and those terms are specific. It's a team-up in the way a blockbuster crossover is a team-up — two franchises in one film, marketed as an event, engineered to read at scale. The set is a sequence of recognisable peaks, the records mostly built for exactly that. When Resident Advisor reviewed Summit's recent album, it reached for a label that's stuck: it placed him at the head of an "epoch of frat house," describing a kind of tech house assembled from its most festival-ready parts — the Ibiza-fied groove, a trance lift, the occasional bass wobble, a vapid vocal on top.</p>
-
-<p>We're not interested in trashing it. People love it; the craft of moving forty thousand people is real and rare. But be clear about what the b2b is doing here: it's a <strong>marketing combination</strong>. Two audiences fused into one ticket. The unit of value is the lineup, not the conversation.</p>
-
-<h2>Exhibit B: the conversation</h2>
-
-<p>Now the other kind. <strong>RPR Soundsystem</strong> — Rhadoo, Raresh and Petre Inspirescu, the three Romanians at the core of the [a:rpia:r] world. When they play back to back, it isn't a crossover event. It's a single organism playing a set that can run six, eight hours, with no setlist and no peaks engineered for distance. One selector lays a record, the next answers it, the groove gets handed around and slowly mutated. You can't tell, most of the time, who's playing what. That's the point.</p>
-
-<p>This is the b2b as <strong>conversation</strong> — the unit of value is the dialogue, the patience, the risk of two or three people improvising in public for half a night. You see the same logic in Apollonia's marathon sets, and in the long Music On pairings at Pacha, the kind of Capriati-and-Carola back-to-back that people remember a specific record from years later. The names matter less than the exchange between them.</p>
-
-<h2>The difference is duration and risk</h2>
-
-<p>Here's the test, and it's simple. A marketing b2b optimises for the moment of combination — the announcement, the poster, the first twenty minutes that confirm the hype. A conversation b2b optimises for duration — it's only any good if it can sustain itself for hours, because the whole form is about where two musicians can take each other when there's no clock and no script.</p>
-
-<p>One is built to be seen. The other is built to be inside of. One reads at two hundred metres. The other only really exists up close, in a room where the booth can hear the floor. That's not a coincidence — it's the same split as the hyperclub versus the ecosystem, just expressed through two people instead of two business models.</p>
-
-<h2>What we book, and why</h2>
-
-<p>When we put a b2b on, this is the distinction we're actually making, even if the flyer doesn't spell it out. We're not asking "which two names sell." We're asking "do these two have a conversation in them" — can they hand a groove back and forth for long enough that something happens neither would have reached alone. Sometimes that's two residents who've played together for years. Sometimes it's a careful pairing of a known head with someone from Radar. It's never just addition.</p>
-
-<p>The supergroup is a product. The conversation is a practice. Both are called a b2b. Only one of them needs the room we believe in — and that's the whole reason we keep building it.</p>`,
-      readingTimeMinutes: 6
-    },
-
-    media: { heroImage: "/assets/man-room.jpg", heroImageAlt: "Two selectors sharing one booth", gallery: [] },
-
-    metadata: {
-      author: "Hertz Redazione",
-      category: "Editorial",
-      rubric: "CROSSFADE",
-      tags: ["b2b", "collaboration", "everything-always", "rpr-soundsystem", "tech-house", "scene"],
-      publishedAt: new Date("2026-06-06"),
-      updatedAt: new Date("2026-06-06")
-    },
-
-    seo: { metaDescription: "The b2b has become the scene's basic unit. We pull apart two models — the American mainstage supergroup and the European b2b-as-conversation — and what each one says about where clubbing is going.", keywords: ["b2b", "collaboration", "everything-always", "rpr-soundsystem", "tech-house", "scene"] },
-
-    engagement: { shareCount: 0, viewCount: 0, featured: false },
-
-    relatedArticles: ["two-speed-island-ibiza-2026", "sunwaves-left-home-rominimal"]
-  },
-
-  {
-    _id: "hertz-002",
-    slug: "physics-deep-tech-128bpm",
-    title: "128 BPM: What the Number Means and Why It Isn't Arbitrary",
-    subtitle: "The physics and physiology behind deep tech's most persistent convention.",
-    excerpt: "128 beats per minute. If you've spent time in European clubs over the last fifteen years, this number has passed through your body more times than you've consciously noticed. It appears across deep tech, minimal, and the more considered end of techno with a consistency that looks like convention. It isn't.",
-
-    content: {
-      body: `<p>128 beats per minute. If you've spent time in European clubs over the last fifteen years, this number has passed through your body more times than you've consciously noticed. It appears across deep tech, minimal, and the more considered end of techno with a consistency that looks like convention. It isn't.</p>
-
-<h2>The Physiology of 128</h2>
-
-<p>The human resting heart rate sits between 60 and 100 BPM. During moderate physical activity—dancing, specifically—it rises to approximately 120–140 BPM. 128 sits in the middle of that range. This isn't coincidence.</p>
-
-<p>Entrainment is the phenomenon by which an external rhythmic stimulus gradually synchronizes with the body's internal rhythms—heartbeat, breathing, neural oscillations. It happens most reliably when the external stimulus is close to, but slightly above, the body's natural frequency. 128 BPM, for a dancing human, represents a tempo that the body will naturally try to match without strain. The effort is sustainable. You don't fatigue at 128 the way you do at 140.</p>
-
-<p>There is also an acoustic argument. At 128 BPM, a quarter note at 60Hz sub frequency—the fundamental of a standard kick drum—places the waveform's first half-cycle at approximately 235 milliseconds. This is long enough for the low end to develop fully in a room before the next beat arrives. The physiological and the acoustic coincide at 128.</p>
-
-<h2>The Architecture of the Kick</h2>
-
-<p>Deep tech kick drums are not simple objects. A standard deep tech kick has three distinct frequency regions that require independent management:</p>
-
-<p><strong>The fundamental</strong> sits at 55–65Hz. This is the tone of the kick—its pitch. Most producers tune their kick fundamentals to the root note of the track's harmonic content, which means the kick and the melodic elements share a tonal center. When this is done correctly, the kick doesn't fight the bass. When it's neglected, the low end turns to mud.</p>
-
-<p><strong>The body</strong> sits at 100–120Hz. This is the punch—the physicality that registers in the chest. Too much here and the kick becomes blunt. Too little and it disappears on small systems. The relationship between fundamental and body defines how "deep" a kick sounds in practice.</p>
-
-<p><strong>The transient</strong> sits at 2–5kHz. This is the click—the attack that registers in the ear before the low end develops. In minimal and deep tech production, this transient is often reduced to near-inaudibility. The kick is felt more than heard, particularly at the attack.</p>
-
-<h2>The Sub and the Kick Are Not the Same Thing</h2>
-
-<p>One of the most common production mistakes in deep tech is treating the sub and kick as the same object. They're not.</p>
-
-<p>The sub—the 35–50Hz signal that creates the physical sensation of pressure in the room—should be independent of the kick. The standard approach: a continuous sub oscillator, often a detuned sine or triangle wave on the root note, playing throughout the bar. The kick's fundamental at 60Hz sits above this. The result is a low end that has both ground (the sub) and pulse (the kick), rather than a single frequency event at each beat.</p>
-
-<p>Labels like Perlon and early Innervisions releases demonstrate this separation clearly. The kick creates rhythm; the sub creates pressure. The floor responds to both simultaneously rather than to a single low-frequency pulse.</p>
-
-<h2>The 303 Is Not a Lead Instrument</h2>
-
-<p>The Roland TB-303 is back in European club music this summer—but not in the way it appeared in the late '80s or the acid revival of the early 2000s. This time it is buried. Used as texture rather than lead voice, its characteristic squeal dialled back to a presence rather than a declaration.</p>
-
-<p>The 303's resonance filter produces a frequency curve that, when controlled, sits above the rhythmic action of the kick and sub. It adds organic instability to an otherwise rigid arrangement—a wet, slightly detuned element that sits just below the hi-hats and just above the harmonic content. The floor responds to it without quite knowing why. That ambiguity is the point.</p>
-
-<blockquote>"A 0.5dB cut at 800Hz in a calibrated mix does more than a 3dB boost anywhere else. The work of deep tech production is primarily removal."</blockquote>
-
-<h2>Subtraction as Technique</h2>
-
-<p>The deep tech aesthetic is, at its core, a philosophy of removal. This has acoustic roots.</p>
-
-<p>In a calibrated club sound system, the mid-range (200Hz–4kHz) carries most of the information: harmonic content, rhythmic texture, melodic movement simultaneously. A track that adds too much here creates a frequency conflict that the room's acoustic treatment cannot fully resolve. The result is ear fatigue, reduced dancing, a sense of being assaulted rather than moved.</p>
-
-<p>The Perlon approach—which defines the minimal strand of this music from the early 2000s onward—is to leave space. The 303 sits above the main rhythmic action. The kick sits below. The mid-range is occupied only by elements with a specific function. A 0.5dB cut at 800Hz in this context does more for the mix than a 3dB boost anywhere else.</p>
-
-<h2>The Room as Final Instrument</h2>
-
-<p>A track does not finish in the studio. The acoustic treatment of the room changes the frequency response of the playback system. The distance from the speaker to the listener changes phase relationships between frequencies. The bodies of the people dancing absorb specific frequencies, particularly in the mid-range. These are not variables the producer can control. They are the final step in the production process.</p>
-
-<p>The practical implication: producers who make deep tech music that works on club floors have tested their tracks in rooms with calibrated playback systems. The tracks that sound best at Kindergarten, at OHM in Berlin, at Fabric in London are tracks made by people who know what a proper room sounds like—and who designed the music to work within it.</p>`,
-      readingTimeMinutes: 7
-    },
-
-    media: { heroImage: "/assets/art-bpm.jpg", heroImageAlt: "Mixing console faders, close-up", gallery: [] },
-
-    metadata: {
-      author: "HERTZ Redazione",
-      category: "Technical",
-      tags: ["technical", "sound-design", "128bpm", "deep-tech", "production", "perlon"],
-      publishedAt: new Date("2026-05-20"),
-      updatedAt: new Date("2026-05-20")
-    },
-
-    seo: {
-      metaDescription: "The physics and physiology of 128 BPM: why the tempo is not arbitrary, how deep tech kicks are structured, and the Perlon philosophy of subtraction.",
-      keywords: ["128 bpm", "deep tech", "sound design", "kick drum", "perlon", "minimal techno"]
-    },
-
-    engagement: { shareCount: 0, viewCount: 0, featured: false },
-
-    relatedArticles: ["inside-kindergarten-bologna", "summer-2026-european-club-season"]
   }];
 
 export default async function handler(req, res) {
