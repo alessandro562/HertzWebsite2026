@@ -8,9 +8,12 @@
 
 /* ── shared builders ───────────────────────── */
 function hzWavePath(W, H, comps) {
-  var n = Math.max(40, Math.round(W / 5)), p = [];
+  var n = Math.max(60, Math.round(W / 3.5)), p = [];
   for (var i = 0; i <= n; i++) {
-    var x = i / n * W, y = H / 2, env = .5 + .5 * Math.abs(Math.sin(Math.PI * 2 * x / W));
+    var x = i / n * W, y = H / 2;
+    // gentle taper at the two ends ONLY — keeps a continuous, uniform signal
+    // (no full-width amplitude pulsing, so it reads as a waveform, not an ECG).
+    var edge = Math.min(x, W - x), env = Math.min(1, edge / (W * 0.05));
     for (var c = 0; c < comps.length; c++) { y += comps[c].a * env * Math.sin(2 * Math.PI * comps[c].k * x / W + comps[c].p); }
     p.push((i ? 'L' : 'M') + x.toFixed(1) + ',' + y.toFixed(1));
   }
@@ -19,8 +22,8 @@ function hzWavePath(W, H, comps) {
 function hzBuildWave(track) {
   if (!track) return;
   var W = 1440, H = 44,
-    d1 = hzWavePath(W, H, [{ a: H * .26, k: 3, p: 0 }, { a: H * .12, k: 7, p: 1.1 }, { a: H * .06, k: 13, p: .4 }]),
-    d2 = hzWavePath(W, H, [{ a: H * .16, k: 2, p: 2 }, { a: H * .08, k: 9, p: .2 }]),
+    d1 = hzWavePath(W, H, [{ a: H * .15, k: 6, p: 0 }, { a: H * .10, k: 11, p: 1.1 }, { a: H * .07, k: 17, p: .4 }, { a: H * .045, k: 24, p: 2.0 }]),
+    d2 = hzWavePath(W, H, [{ a: H * .12, k: 5, p: 2 }, { a: H * .075, k: 9, p: .2 }, { a: H * .05, k: 15, p: 1.5 }]),
     svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" fill="none">'
       + '<path d="' + d2 + '" stroke="rgba(20,72,137,.4)" stroke-width="1"/>'
       + '<path d="' + d1 + '" stroke="rgba(28,92,173,.7)" stroke-width="1.6"/></svg>';
@@ -56,7 +59,7 @@ function IxHead8({ num, kick, title, meta }) {
         <div className="hz-kick"><span className="ln" />{kick}</div>
         <h3 className="hz-h2" dangerouslySetInnerHTML={{ __html: title }} />
       </div>
-      <div className="hz-meta" dangerouslySetInnerHTML={{ __html: meta }} />
+      {meta ? <div className="hz-meta" dangerouslySetInnerHTML={{ __html: meta }} /> : null}
     </R>
   );
 }
@@ -64,11 +67,22 @@ function IxHead8({ num, kick, title, meta }) {
 /* ═══════════════════════════════════════════
    01 · EVENTS — poster rails (page / riso)
    ═══════════════════════════════════════════ */
+/* stable per-event id — must match the ids used on events.html so the
+   home and the events page write to the same Hertz list. */
+function hzEventId(c) {
+  if (!c) return 'general';
+  var t = (c.title || '').toLowerCase().replace(/×/g, 'x').replace(/\//g, ' ').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  var d = (c.date || '').replace(/\./g, '');
+  return d ? (t + '-' + d) : t;
+}
+window.hzEventId = hzEventId;
+
 function PosterCard8({ card, past }) {
   const cls = 'hz-poster' + (card.comingSoon ? ' coming' : '') + (past ? ' past' : '');
   const dcol = past ? { color: 'var(--gray)' } : null;
-  return (
-    <a className={cls} href={card.ctaLink || 'events.html'}>
+  const canRegister = !past && !card.comingSoon;
+  const inner = (
+    <React.Fragment>
       <div className="img">
         <span className="reg" style={{ color: '#fff' }}><b className="a" /><b className="d" /></span>
         {card.comingSoon
@@ -81,9 +95,22 @@ function PosterCard8({ card, past }) {
         <div className="d" style={dcol}>{past ? '// past' : '// upcoming'} · {card.date}</div>
         <div className="ti">{card.title}</div>
         <div className="v">{card.comingSoon ? card.city : (card.venue + ' · ' + card.city)}</div>
+        {canRegister && (
+          <button className="reg-cta"
+            data-register
+            data-event-id={hzEventId(card)}
+            data-event-title={card.title}
+            data-event-date={card.date}
+            data-event-venue={card.venue}
+            data-event-city={card.city}
+          >Join the Hertz list <span className="ar">→</span></button>
+        )}
       </div>
-    </a>
+    </React.Fragment>
   );
+  return canRegister
+    ? <div className={cls}>{inner}</div>
+    : <a className={cls} href={card.ctaLink || 'events.html'}>{inner}</a>;
 }
 function EventsHorizontal8() {
   const R = window.R8;
@@ -94,8 +121,7 @@ function EventsHorizontal8() {
       <Reg8 />
       <div className="hz-wrap hz-wide">
         <IxHead8 num={'0<span class="sl">1</span>'} kick="// 01. EVENTS"
-          title={'<span class="w2">What\'s</span> <span class="w9 it">next</span><span class="blue">.</span>'}
-          meta="UPCOMING + ARCHIVE<br>BO · RN · FE · ORTONA<br>SWIPE →" />
+          title={'<span class="w2">What\'s</span> <span class="w9 it">next</span><span class="blue">.</span>'} />
 
         <R><div className="hz-railtag"><span className="hz-dot" />UPCOMING</div></R>
         <R><div className="hz-rail">{UP.map((e, i) => <PosterCard8 key={i} card={e} />)}</div></R>
@@ -120,14 +146,9 @@ function Manifesto8() {
       <Reg8 />
       <div className="hz-wrap">
         <IxHead8 num={'0<span class="sl">2</span>'} kick="// 02. MANIFESTO"
-          title={'<span class="w2 it">live</span> <span class="w9">transmission</span><span class="blue">.</span>'}
-          meta="FROM CLUBBERS<br>TO CLUBBERS<br>©© HERTZ" />
+          title={'<span class="w2 it">Live</span> <span class="w9">transmission</span><span class="blue">.</span>'} />
 
         <R className="hz-trans">
-          <div className="hz-lnrail" aria-hidden="true">
-            {['01','02','03','04','05','06','07','08','09','10'].map((s, i) =>
-              <span key={s} className={i === 2 ? 'on' : ''}>{s}</span>)}
-          </div>
           <div className="hz-credo">
             <span className="hz-cghost">BO</span>
             <h2 className="hz-ch">
@@ -171,8 +192,7 @@ function BrandIdentity8() {
       <Reg8 />
       <div className="hz-wrap hz-wide">
         <IxHead8 num="+" kick="// VISUAL IDENTITY"
-          title={'<span class="w2">Clubbing</span> <span class="w9 it">Collective</span><span class="blue">.</span>'}
-          meta="+ POSITIVE ENERGY<br>+ QUALITY SOUND<br>©© MADE IN (BO)" />
+          title={'<span class="w2">Clubbing</span> <span class="w9 it">Collective</span><span class="blue">.</span>'} />
         <R><div className="hz-rail">
           {GRAPHICS.map((g, i) => (
             <figure key={i} className="hz-gfx">
@@ -199,12 +219,11 @@ function FamilySection8() {
       <Reg8 />
       <div className="hz-wrap">
         <IxHead8 num={'0<span class="sl">3</span>'} kick="// 03. THE RESIDENTS"
-          title={'<span class="w2">Four names.</span> <span class="w9 it">One direction</span><span class="blue">.</span>'}
-          meta="RESIDENT ROSTER<br>HERTZ.CC<br>EST. 2023" />
+          title={'<span class="w2">On the same</span> <span class="w9 it">frequency</span><span class="blue">.</span>'} />
         <R className="hz-res-grid">
           {RES.map((r) => (
             <a key={r.slug} className="hz-res" href={'artist-' + r.slug + '.html'}>
-              <div className="top"><span><b>{r.n}</b> · RESIDENT</span><span>{r.freq}</span></div>
+              <div className="top"><span><b>{r.n}</b> · RESIDENT</span></div>
               <div className="ph"><img src={r.img} alt={r.name} loading="lazy" /><span className="freq">{r.role.split('·')[0].trim()}</span></div>
               <div className="nm">{r.name}</div>
               <div className="role">{r.role}</div>
@@ -236,8 +255,7 @@ function GallerySection8() {
       <Reg8 />
       <div className="hz-wrap hz-wide">
         <IxHead8 num={'0<span class="sl">4</span>'} kick="// 04. THE ARCHIVE"
-          title={'<span class="w2">Nights on</span> <span class="w9 it">record</span><span class="blue">.</span>'}
-          meta="CONTACT SHEET<br>LOW-LIGHT · GRAIN<br>SCROLL →" />
+          title={'<span class="w2">Nights on</span> <span class="w9 it">record</span><span class="blue">.</span>'} />
         <R><div className="hz-rail">
           {IMGS.map((g, i) => (
             <div key={i} className="hz-shot" style={{ aspectRatio: g.r }}>
@@ -272,8 +290,7 @@ function MerchTeaser8() {
       <Reg8 />
       <div className="hz-wrap">
         <IxHead8 num={'0<span class="sl">5</span>'} kick="// 05. DROP 01 · COMING SOON"
-          title={'<span class="w2">Wear the</span> <span class="w9 it">frequency</span><span class="blue">.</span>'}
-          meta="HZ.MERCH<br>LIMITED RUN<br>001/200" />
+          title={'<span class="w2">Wear the</span> <span class="w9 it">frequency</span><span class="blue">.</span>'} />
         <R className="hz-merch">
           <div>
             <p className="lede">A capsule built for the dancefloor. Limited numbered runs, no compromise. Coming soon — leave your address to know first.</p>
@@ -313,15 +330,14 @@ function CollabSection8() {
     { tilt: 'tilt-l', stub: 'ADMIT ONE · N°023', ser: 'SER. K—0001', logo: 'assets/collab-kindergarten.png',
       name: 'Kindergarten', stamp: 'Resident', data: [['Venue', 'Kindergarten'], ['City', 'Bologna'], ['Coord', '44.4°N 11.3°E'], ['Since', '2023']] },
     { tilt: 'tilt-r', stub: 'ADMIT ONE · N°030', ser: 'SER. B—0002', logo: 'assets/collab-buongiorno-classic.png',
-      name: 'Buongiorno Classic', stamp: 'Guest', data: [['Venue', 'Buongiorno Cl.'], ['City', 'Rimini'], ['Coord', '44.0°N 12.5°E'], ['Type', 'Guest Room']] },
+      name: 'Buongiorno Classic', stamp: 'Collab', data: [['Venue', 'Buongiorno Classic'], ['City', 'Rimini'], ['Coord', '44.0°N 12.5°E'], ['Since', '2025']] },
   ];
   return (
     <section id="partners" className="hz-sec hz-page riso">
       <Reg8 />
       <div className="hz-wrap">
         <IxHead8 num="+" kick="// COLLABORIAMO CON"
-          title={'<span class="w2">Two rooms,</span> <span class="w9 it">one frequency</span><span class="blue">.</span>'}
-          meta="02 HOMES<br>RESIDENCY + GUEST<br>BO · RN" />
+          title={'<span class="w2">Two rooms,</span> <span class="w9 it">one frequency</span><span class="blue">.</span>'} />
         <R><div className="hz-ticketgrid">
           {TICKETS.map((t) => (
             <figure key={t.name} className={'hz-ticket ' + t.tilt}>
@@ -329,11 +345,11 @@ function CollabSection8() {
               <div className="perf" />
               <div className="body">
                 <div className="r1"><span>HERTZ PASS</span><span>{t.ser}</span></div>
-                <div className="win"><div className="rings" /><div className="lines" /><span className="hz">120 HZ · 128 BPM</span><img src={t.logo} alt={t.name} /></div>
+                <div className="win"><div className="rings" /><div className="lines" /><img src={t.logo} alt={t.name} /></div>
                 <div className="data">
                   {t.data.map(([k, v]) => <div key={k}><span className="k">{k}</span><span className="v">{v}</span></div>)}
                 </div>
-                <div className="tfoot"><HzBars8 n={22} /><div className="hz-stamp">{t.stamp}</div></div>
+                <div className="tfoot"><div className="hz-stamp">{t.stamp}</div></div>
                 <div className="name"><span className="tk" />{t.name}</div>
               </div>
             </figure>
@@ -362,7 +378,7 @@ function Footer8() {
         <div className="cols">
           <div>
             <img src="assets/hertz-logo-header.png" alt="Hertz" />
-            <p className="blurb">hertz.cc<br />info@hertz.cc<br />Bologna · IT</p>
+            <p className="blurb">hertz.cc<br />hertzbologna@gmail.com<br />Bologna · IT</p>
           </div>
           <div>
             <h4>// NAVIGATE</h4>

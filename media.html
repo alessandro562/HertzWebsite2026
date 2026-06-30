@@ -4,41 +4,36 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Media — Hertz Clubbing Collective</title>
-<meta name="description" content="Hertz photo archive, editorial and press kit.">
-<meta name="theme-color" content="#08080d">
-<link rel="canonical" href="https://hertzclubbing.com/media">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Hertz">
-<meta property="og:title" content="Media — Hertz">
-<meta property="og:description" content="Hertz photo archive, editorial and press kit.">
-<meta property="og:image" content="https://hertzclubbing.com/assets/hertz-logo-official.png">
-<meta property="og:url" content="https://hertzclubbing.com/media">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Media — Hertz">
-<meta name="twitter:image" content="https://hertzclubbing.com/assets/hertz-logo-official.png">
-<link rel="stylesheet" href="ds-base.css">
+<link rel="stylesheet" href="../styles.css">
 <link rel="stylesheet" href="hertz-system.css">
 <style> html,body{ margin:0; background:#08080d; } </style>
 </head>
 <body>
 
-<!-- ═══════════ INTRO (room / CRT) ═══════════ -->
-<section class="hz-sec hz-room crt flick hz-pageintro" style="padding-bottom:clamp(32px,5vh,56px)">
+<!-- ═══════════ MASTHEAD (room / CRT) ═══════════ -->
+<section class="hz-sec hz-room crt flick hz-pageintro" style="padding-bottom:clamp(30px,4.5vh,52px)">
   <div class="hz-scanband"></div>
   <span class="reg"><b class="a"></b><b class="b2"></b><b class="c"></b><b class="d"></b></span>
   <div class="hz-wrap hz-wide">
-    <div class="hz-kick" style="margin-bottom:18px"><span class="ln"></span>// THE EDITORIAL</div>
+    <div class="hz-kick" style="margin-bottom:18px"><span class="ln"></span>// THE EDITORIAL · ISSUE 01</div>
     <h1 style="font-family:var(--disp);font-size:clamp(2.6rem,8vw,6rem);line-height:.82;letter-spacing:-.055em;margin:0 0 18px"><span class="w2">Reading the</span> <span class="w9 it">signal</span><span class="blue">.</span></h1>
-    <p style="font-family:var(--disp);font-weight:300;font-size:clamp(15px,1.7vw,19px);line-height:1.6;max-width:60ch;color:rgba(245,245,243,.7);margin:0;text-wrap:pretty">Five recurring columns reading one split scene — where clubbing is structurally going, the artists we actually play, the labels and residencies that built the sound.</p>
+    <p style="font-family:var(--disp);font-weight:300;font-size:clamp(15px,1.7vw,19px);line-height:1.6;max-width:62ch;color:rgba(245,245,243,.7);margin:0;text-wrap:pretty">Long reads on a split scene — where clubbing is structurally going, the producers we actually play, the labels and residencies that built the sound. Five recurring columns, no filler.</p>
+    <div class="hz-maglegend">
+      <span>Signal</span><span>Radar</span><span>Resident</span><span>Crossfade</span><span>Dispatch</span>
+    </div>
   </div>
 </section>
 
-<!-- ═══════════ EDITORIAL GRID (page / riso) ═══════════ -->
+<!-- ═══════════ MAGAZINE (page / riso) ═══════════ -->
 <section class="hz-sec hz-page riso">
   <span class="reg"><b class="a"></b><b class="b2"></b><b class="c"></b><b class="d"></b></span>
   <div class="hz-wrap hz-wide">
-    <div class="hz-rubrics" id="rubrics" role="tablist" aria-label="Editorial columns"></div>
-    <div class="hz-artgrid" id="artgrid"></div>
+    <div id="feature-slot"></div>
+    <div class="hz-magbar">
+      <div class="lbl"><span class="ln"></span>// BROWSE THE EDITORIAL</div>
+      <div class="hz-rubrics" id="rubrics" role="tablist" aria-label="Editorial columns"></div>
+    </div>
+    <div class="hz-maggrid" id="artgrid"></div>
   </div>
 </section>
 
@@ -46,10 +41,10 @@
 
 <script type="application/json" id="articles-data">
 [
-  {"slug":"two-speed-island-ibiza-2026","title":"The Two-Speed Island: What Ibiza 2026 Is Actually Telling Us","excerpt":"UNVRS didn't just open big — it rewrote the rules in a single season. We read the 2026 Ibiza calendar as two scenes running on the same island at different speeds.","image":"assets/art-trends.jpg","rubric":"SIGNAL","author":"Hertz Redazione","date":"2026-06-26","rt":6,"lead":true},
-  {"slug":"sunwaves-left-home-rominimal","title":"Sunwaves Left Home: The Format That Refuses to Scale","excerpt":"After 18 years on the Black Sea, the cathedral of the marathon set was pushed out of Romania. What that says about the music we care about most.","image":"assets/floor-5.jpg","rubric":"DISPATCH","author":"Hertz Redazione","date":"2026-06-21","rt":6},
-  {"slug":"music-on-pacha-long-residency","title":"Music On at Pacha: The Case for the Long Residency","excerpt":"Eight years on the same Friday, despite every rumour of a move. In an age of one-off spectacles, that's not nostalgia — it's a different technology.","image":"assets/floor-2.jpg","rubric":"RESIDENT","author":"Hertz Redazione","date":"2026-06-16","rt":6},
-  {"slug":"radar-vol-1-eight-names","title":"Radar Vol. 1: Eight Names Moving the Groove Right Now","excerpt":"Not the most-streamed. The ones whose records keep ending up in our sets — across deep-tech, Latin tech, and the line where they cross.","image":"assets/art-warmup.jpg","rubric":"RADAR","author":"Hertz Redazione","date":"2026-06-11","rt":7},
+  {"slug":"two-speed-island-ibiza-2026","title":"The Two-Speed Island: What Ibiza 2026 Is Actually Telling Us","excerpt":"UNVRS didn't just open big — it rewrote the rules in a single season. We read the 2026 Ibiza calendar as two scenes running on the same island at different speeds.","image":"assets/media-unvrs.png","rubric":"SIGNAL","author":"Hertz Redazione","date":"2026-06-26","rt":6,"lead":true},
+  {"slug":"sunwaves-left-home-rominimal","title":"Sunwaves Left Home: The Format That Refuses to Scale","excerpt":"After 18 years on the Black Sea, the cathedral of the marathon set was pushed out of Romania. What that says about the music we care about most.","image":"assets/media-sunwaves.png","rubric":"DISPATCH","author":"Hertz Redazione","date":"2026-06-21","rt":6},
+  {"slug":"music-on-pacha-long-residency","title":"Music On at Pacha: The Case for the Long Residency","excerpt":"Eight years on the same Friday, despite every rumour of a move. In an age of one-off spectacles, that's not nostalgia — it's a different technology.","image":"assets/media-music-on-pacha.png","rubric":"RESIDENT","author":"Hertz Redazione","date":"2026-06-16","rt":6},
+  {"slug":"radar-vol-1-eight-names","title":"Radar Vol. 1: Eight Names Moving the Groove Right Now","excerpt":"Not the most-streamed. The ones whose records keep ending up in our sets — across deep-tech, Latin tech, and the line where they cross.","image":"assets/media-radar-vol-1.png","rubric":"RADAR","author":"Hertz Redazione","date":"2026-06-11","rt":7},
   {"slug":"two-people-one-booth-b2b","title":"Two People, One Booth: What the B2B Reveals About the Split","excerpt":"The b2b has become the scene's basic unit. We pull apart two models — the American mainstage supergroup and the European b2b-as-conversation.","image":"assets/man-room.jpg","rubric":"CROSSFADE","author":"Hertz Redazione","date":"2026-06-06","rt":6},
   {"slug":"physics-deep-tech-128bpm","title":"128 BPM: What the Number Means and Why It Isn't Arbitrary","excerpt":"The physics and physiology behind deep tech's most persistent convention. It looks like convention. It isn't.","image":"assets/art-bpm.jpg","rubric":null,"author":"Hertz Redazione","date":"2026-05-20","rt":7}
 ]
@@ -72,20 +67,37 @@
   try{ RUBS=JSON.parse(document.getElementById('rubrics-data').textContent); }catch(e){}
   var MONTHS=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
   function fdate(iso){ var d=new Date(iso); return d.getDate()+' '+MONTHS[d.getMonth()]+' '+d.getFullYear(); }
-  var grid=document.getElementById('artgrid'), rb=document.getElementById('rubrics'), active='ALL';
+  function esc(s){ return String(s).replace(/"/g,'&quot;'); }
+  function href(a){ return 'media/'+a.slug+'.html'; }
+  function chip(a){ return a.rubric ? '<span class="rub">'+a.rubric+'</span>' : '<span class="rub none">NOTE</span>'; }
+  function reg(){ return '<span class="reg" style="color:#fff"><b class="a"></b><b class="d"></b></span>'; }
+
+  var feat=document.getElementById('feature-slot'), grid=document.getElementById('artgrid'),
+      rb=document.getElementById('rubrics'), active='ALL';
 
   function card(a){
-    var lead=a.lead?' lead':'';
-    var rub=a.rubric?('<span class="rub">'+a.rubric+'</span>'):'<span class="rub none">NOTE</span>';
-    return '<a class="hz-art'+lead+'" href="#'+a.slug+'">'
-      +'<div class="img">'+rub+'<span class="reg" style="color:#fff"><b class="a"></b><b class="d"></b></span><img src="'+a.image+'" alt="'+a.title.replace(/"/g,'&quot;')+'" loading="lazy"></div>'
+    return '<a class="hz-mag" href="'+href(a)+'">'
+      +'<div class="ph">'+chip(a)+reg()+'<img src="'+a.image+'" alt="'+esc(a.title)+'" loading="lazy"><span class="rt">'+a.rt+' MIN</span></div>'
       +'<div class="meta"><span>'+(a.rubric||'EDITORIAL')+'</span><span class="dot">·</span><span>'+fdate(a.date)+'</span></div>'
       +'<h3>'+a.title+'</h3><p>'+a.excerpt+'</p>'
-      +'<div class="rt">'+a.rt+' MIN READ · '+a.author+'</div></a>';
+      +'<div class="by">'+a.author+' →</div></a>';
+  }
+  function feature(a){
+    return '<a class="hz-feature" href="'+href(a)+'">'
+      +'<div class="ph">'+chip(a)+reg()+'<img src="'+a.image+'" alt="'+esc(a.title)+'"><span class="rt">'+a.rt+' MIN READ</span></div>'
+      +'<div class="tx"><div class="meta"><span class="lead">Featured</span><span>'+(a.rubric||'EDITORIAL')+'</span><span class="dot">·</span><span>'+fdate(a.date)+'</span></div>'
+      +'<h3>'+a.title+'</h3><p>'+a.excerpt+'</p>'
+      +'<div class="by"><span>'+a.author+'</span><span class="go">Read the story →</span></div></div></a>';
   }
   function render(){
     var list=ARTS.filter(function(a){ return active==='ALL' || a.rubric===active; });
-    grid.innerHTML=list.map(function(a,i){ var c=Object.assign({},a); if(active!=='ALL'||i!==0) c.lead=false; return card(c); }).join('');
+    if(active==='ALL' && list.length){
+      feat.innerHTML=feature(list[0]);
+      grid.innerHTML=list.slice(1).map(card).join('');
+    } else {
+      feat.innerHTML='';
+      grid.innerHTML=list.map(card).join('');
+    }
   }
   rb.innerHTML=RUBS.map(function(r){ return '<button role="tab" data-k="'+r.key+'" aria-selected="'+(r.key==='ALL')+'">'+r.label+'</button>'; }).join('');
   rb.addEventListener('click',function(e){ var b=e.target.closest('button'); if(!b) return; active=b.dataset.k;

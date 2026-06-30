@@ -9,10 +9,6 @@
   var here = (location.pathname.split('/').pop()||'index.html');
   function active(h){ return h===here || (h==='artists.html' && here.indexOf('artist-')===0); }
 
-  /* accent toggle */
-  var acc=document.createElement('div'); acc.className='hz-acc'; acc.setAttribute('role','group'); acc.setAttribute('aria-label','Second signal');
-  acc.innerHTML='<button data-a="yellow" aria-selected="true"><span class="sw"></span>Yellow</button><button data-a="cyan" aria-selected="false"><span class="sw"></span>Cyan</button>';
-
   /* nav */
   var nav=document.createElement('nav'); nav.className='hz-nav';
   var links=NAV.map(function(x){ return '<a href="'+x[1]+'"'+(active(x[1])?' class="active"':'')+'>'+x[0]+'</a>'; }).join('');
@@ -31,7 +27,7 @@
     +'<h2><span class="w2">Groove is</span><br><span class="w9 it">the key</span><span class="blue">.</span></h2>'
     +'</div></section>'
     +'<footer class="hz-foot"><div class="cols">'
-    +'<div><img src="assets/hertz-logo-header.png" alt="Hertz"><p class="blurb">hertz.cc<br>info@hertz.cc<br>Bologna · IT</p></div>'
+    +'<div><img src="assets/hertz-logo-header.png" alt="Hertz"><p class="blurb">hertz.cc<br>hertzbologna@gmail.com<br>Bologna · IT</p></div>'
     +'<div><h4>// NAVIGATE</h4>'+NAV.map(function(x){return '<a class="fl" href="'+x[1]+'">'+x[0]+' →</a>';}).join('')+'</div>'
     +'<div><h4>// FREQUENCIES</h4>'+FREQ.map(function(x){return '<a class="fl" href="'+x[1]+'"'+(x[1].indexOf('http')===0?' target="_blank" rel="noopener noreferrer"':'')+'>'+x[0]+' →</a>';}).join('')+'</div>'
     +'<div><h4>// SAFE SPACE</h4><p class="safe">No harassment, no hate, no discrimination. Respect boundaries, yours and others\'. The dancefloor is for everyone.</p></div>'
@@ -39,7 +35,6 @@
 
   document.body.insertBefore(menu, document.body.firstChild);
   document.body.insertBefore(nav, document.body.firstChild);
-  document.body.insertBefore(acc, document.body.firstChild);
   var mount = document.getElementById('site-footer');
   if(mount) mount.appendChild(foot); else document.body.appendChild(foot);
 })();

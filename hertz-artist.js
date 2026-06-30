@@ -109,7 +109,7 @@
   if(A.gallery && A.gallery.length){
     html += '<section class="hz-sec hz-room crt flick"><div class="hz-scanband"></div><span class="reg"><b class="a"></b><b class="b2"></b><b class="c"></b><b class="d"></b></span>'
       + '<div class="hz-wrap hz-wide">'
-      + '<div class="hz-kick" style="margin-bottom:clamp(22px,3vw,36px)"><span class="ln"></span>// ON THE FLOOR · GALLERY</div>'
+      + '<div class="hz-kick" style="margin-bottom:clamp(22px,3vw,36px)"><span class="ln"></span>// THE MOVEMENT · GALLERY</div>'
       + '<div class="hz-galleryrail">'+A.gallery.map(function(g,i){return '<div class="g"><img src="'+g+'" alt="'+esc(A.name)+' live '+(i+1)+'" loading="lazy"></div>';}).join('')+'</div>'
       + '<div class="hz-railhint"><span>←</span><span>SWIPE</span><span>→</span></div>'
       + '</div></section>';
@@ -156,7 +156,7 @@
     + '<h3 class="hz-h2"><span class="w2">Book</span> <span class="w9 it">'+esc(A.name.split(' ')[0])+'</span><span class="blue">.</span></h3></div>'
     + '<div class="hz-meta">BOLOGNA · IT<br>WORLDWIDE</div></div>'
     + '<div class="hz-bookbar">'
-    + '<a class="hz-bookbtn primary" href="mailto:'+A.social.booking+'?subject=Booking%20enquiry%20·%20'+encodeURIComponent(A.name)+'">'+A.social.booking+' ↗</a>'
+    + '<a class="hz-bookbtn primary" href="bookings.html?resident='+slug+'#book">Request a booking →</a>'
     + links.join('')
     + '</div></div></section>';
 

@@ -120,7 +120,7 @@ const PAST_EVENTS = [
     n: '025',
   },
   {
-    title: 'Hertz × Undersound',
+    title: 'Hertz at Cassero',
     type: 'Collab',
     date: '29.05.26', day: 'FRI 29.05', time: '23:30 → LATE',
     venue: 'Cassero', city: 'Bologna',
@@ -129,7 +129,7 @@ const PAST_EVENTS = [
     n: '024',
   },
   {
-    title: 'Hertz / Kindergarten',
+    title: 'Hertz at Kindergarten',
     type: 'Hertz Event',
     date: '24.04.26', day: 'FRI 24.04', time: '23:59 → late',
     venue: 'Kindergarten', city: 'Bologna',
@@ -138,7 +138,7 @@ const PAST_EVENTS = [
     n: '023',
   },
   {
-    title: 'Hertz / Kindergarten',
+    title: 'Hertz at Kindergarten',
     type: 'Hertz Event',
     date: '27.02.26', day: 'FRI 27.02', time: '23:59 → late',
     venue: 'Kindergarten', city: 'Bologna',
@@ -147,7 +147,7 @@ const PAST_EVENTS = [
     n: '022',
   },
   {
-    title: 'Hertz / Kindergarten',
+    title: 'Hertz at Kindergarten',
     type: 'Hertz Event',
     date: '26.12.25', day: 'FRI 26.12', time: '23:59 → late',
     venue: 'Kindergarten', city: 'Bologna',
@@ -165,7 +165,7 @@ const PAST_EVENTS = [
     n: '020',
   },
   {
-    title: 'Hertz / Kindergarten',
+    title: 'Hertz at Kindergarten',
     type: 'Hertz Event',
     date: '24.10.25', day: 'FRI 24.10', time: '23:59 → late',
     venue: 'Kindergarten', city: 'Bologna',
@@ -174,7 +174,7 @@ const PAST_EVENTS = [
     n: '019',
   },
   {
-    title: 'Classic Airlines / Boarding Pass',
+    title: 'Classic Airlines',
     type: 'Collab',
     date: '21.09.25', day: 'SUN 21.09', time: '07:00 → 22:00',
     venue: 'Classic Airlines', city: 'Rimini',
@@ -536,7 +536,7 @@ function Hero8({ countdown, primary, accent, tweaks }) {
         position: 'relative', zIndex: 2,
         minHeight: '100vh',
         display: 'flex', flexDirection: 'column',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start',
         padding: 'clamp(96px, 12vh, 130px) clamp(20px, 4vw, 56px) clamp(40px, 6vh, 70px)',
       }}>
       {/* TOP, live transmission strip */}
@@ -560,12 +560,12 @@ function Hero8({ countdown, primary, accent, tweaks }) {
         </div>
       </div>
 
-      {/* CENTER, fills */}
-      <div style={{ flex: 1 }} />
-
-      {/* BOTTOM, tagline + next event + countdown */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 36 }}>
-        <div style={{ textAlign: 'center', maxWidth: 900, margin: 'clamp(28px, 7vh, 72px) auto 0' }}>
+      {/* WORDMARK — anchored to a FIXED band well below the 3D logo.
+         The flexible spacer now lives BELOW it (see further down), so the
+         next-event row can grow or shrink without ever pushing the wordmark
+         up into the rotating logo. This is the definitive lock — editing the
+         bottom content can no longer move this. */}
+      <div style={{ textAlign: 'center', maxWidth: 900, margin: 'clamp(176px, 37vh, 430px) auto 0', flex: '0 0 auto' }}>
           <h1 style={{
             fontFamily: "'HelveticaNeue', 'Helvetica Neue', Helvetica, sans-serif",
             fontSize: 'clamp(2rem, 4vw, 3.2rem)',
@@ -581,6 +581,10 @@ function Hero8({ countdown, primary, accent, tweaks }) {
             textTransform: 'uppercase',
           }}>// from clubbers to clubbers · bologna est. 2023</p>
         </div>
+
+        {/* flexible gap — absorbs ALL variation below the wordmark, so the
+           row below never shifts the wordmark. */}
+        <div style={{ flex: 1, minHeight: 'clamp(28px, 7vh, 80px)' }} />
 
         <div style={{
           display: 'flex', justifyContent: 'space-between',
@@ -599,6 +603,23 @@ function Hero8({ countdown, primary, accent, tweaks }) {
             <div style={{ ...mono, fontSize: 11, color: Cv8.gray }}>
               {NEXT_EVENT.day}{NEXT_EVENT.time ? ` · ${NEXT_EVENT.time}` : ''} · <span style={{ color: accent }}>@{NEXT_EVENT.venue}, {NEXT_EVENT.city}</span>
             </div>
+            <button
+              data-register
+              data-event-id={(window.hzEventId ? window.hzEventId(NEXT_EVENT) : 'general')}
+              data-event-title={NEXT_EVENT.title}
+              data-event-date={NEXT_EVENT.date}
+              data-event-venue={NEXT_EVENT.venue}
+              data-event-city={NEXT_EVENT.city}
+              style={{
+                marginTop: 14, display: 'inline-flex', alignItems: 'center', gap: 8,
+                fontFamily: "'JetBrains Mono', monospace", fontSize: 11, fontWeight: 600,
+                letterSpacing: '0.14em', textTransform: 'uppercase', color: '#fff',
+                background: Cv8.blue, border: `1px solid ${Cv8.blue}`, padding: '11px 16px',
+                cursor: 'pointer', transition: 'background 0.2s, transform 0.2s',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background = '#1c5cad'; e.currentTarget.style.transform = 'translateX(2px)'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = Cv8.blue; e.currentTarget.style.transform = 'translateX(0)'; }}
+            >Join the Hertz list →</button>
           </div>
 
           {/* countdown */}
@@ -633,7 +654,6 @@ function Hero8({ countdown, primary, accent, tweaks }) {
             </div>
           </div>
         </div>
-      </div>
 
       {/* BPM badge centered bottom */}
       <BeatBadge8 accent={accent} />

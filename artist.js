@@ -46,7 +46,7 @@
   if (A.gallery && A.gallery.length){
     var shots = A.gallery.map(function(src){ return '<div class="sh"><img src="'+esc(src)+'" alt="'+esc(A.name)+' live" loading="lazy"></div>'; }).join('');
     html += '<section class="hz-sec hz-room crt flick"><div class="hz-scanband"></div>' + reg()
-      + '<div class="hz-wrap hz-wide"><div class="hz-kick rise" style="margin-bottom:clamp(24px,4vw,40px)"><span class="ln"></span>// ON THE FLOOR</div>'
+      + '<div class="hz-wrap hz-wide"><div class="hz-kick rise" style="margin-bottom:clamp(24px,4vw,40px)"><span class="ln"></span>// THE MOVEMENT</div>'
       + '<div class="hz-livegrid rise">'+shots+'</div></div></section>';
   }
 

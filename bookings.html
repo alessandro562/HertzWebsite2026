@@ -6,18 +6,7 @@
 <meta name="description" content="Book the Hertz format or one of the Hertz residents for your event. Bologna, minimal and deep-tech.">
 <meta name="theme-color" content="#08080d">
 <title>Bookings — Hertz Clubbing Collective</title>
-<meta name="description" content="Book Hertz residents and the collective for your event.">
-<link rel="canonical" href="https://hertzclubbing.com/bookings">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Hertz">
-<meta property="og:title" content="Bookings — Hertz">
-<meta property="og:description" content="Book Hertz residents and the collective for your event.">
-<meta property="og:image" content="https://hertzclubbing.com/assets/hertz-logo-official.png">
-<meta property="og:url" content="https://hertzclubbing.com/bookings">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Bookings — Hertz">
-<meta name="twitter:image" content="https://hertzclubbing.com/assets/hertz-logo-official.png">
-<link rel="stylesheet" href="ds-base.css">
+<link rel="stylesheet" href="../styles.css">
 <link rel="stylesheet" href="hertz-system.css">
 <style> html,body{ margin:0; background:#08080d; } </style>
 </head>
@@ -44,7 +33,6 @@
         <div class="hz-kick"><span class="ln"></span>// TWO WAYS TO BOOK</div>
         <h3 class="hz-h2"><span class="w2">Pick your</span> <span class="w9 it">signal</span><span class="blue">.</span></h3>
       </div>
-      <div class="hz-meta">FORMAT<br>RESIDENT</div>
     </div>
 
     <div class="rise" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(16px,2.4vw,28px)">
@@ -62,7 +50,7 @@
           <span class="mono" style="font-size:9px;border:1px solid var(--line-l);padding:6px 10px;letter-spacing:.14em">B2B SETS</span>
         </div>
         <div class="hz-bookbar" style="position:relative;z-index:2;margin-top:auto">
-          <a class="hz-bookbtn primary" href="mailto:booking@hertz.cc?subject=Booking%20enquiry%20·%20Hertz%20format">Enquire about the format ↗</a>
+          <a class="hz-bookbtn primary" href="#book" data-book-type="format">Request the format →</a>
         </div>
       </div>
 
@@ -97,33 +85,32 @@
         <div class="hz-kick"><span class="ln"></span>// THE ROSTER</div>
         <h3 class="hz-h2"><span class="w2">Book a</span> <span class="w9 it">name</span><span class="blue">.</span></h3>
       </div>
-      <div class="hz-meta">FOUR RESIDENTS<br>ONE DIRECTION</div>
     </div>
 
     <div class="hz-res-grid rise">
-      <a class="hz-res" href="mailto:booking@hertz.cc?subject=Booking%20enquiry%20·%20Federico%20Apadula">
-        <div class="top"><span><b>01</b> · RESIDENT</span><span>120 Hz</span></div>
+      <a class="hz-res" href="#book" data-book-resident="Federico Apadula">
+        <div class="top"><span><b>01</b> · RESIDENT</span></div>
         <div class="ph"><img src="assets/dj-apadula.jpg" alt="Federico Apadula"><span class="freq">FOUNDER · ART DIR.</span></div>
         <div class="nm">Federico Apadula</div>
         <div class="role">Founder · Art Director · DJ &amp; Producer</div>
         <div class="go"><span>Book this resident</span><span>→</span></div>
       </a>
-      <a class="hz-res" href="mailto:booking@hertz.cc?subject=Booking%20enquiry%20·%20Tommaso%20Mancò">
-        <div class="top"><span><b>02</b> · RESIDENT</span><span>128 Hz</span></div>
+      <a class="hz-res" href="#book" data-book-resident="Tommaso Mancò">
+        <div class="top"><span><b>02</b> · RESIDENT</span></div>
         <div class="ph"><img src="assets/dj-manco.jpg" alt="Tommaso Mancò"><span class="freq">DJ</span></div>
         <div class="nm">Tommaso Mancò</div>
         <div class="role">DJ · Driving, technical minimal</div>
         <div class="go"><span>Book this resident</span><span>→</span></div>
       </a>
-      <a class="hz-res" href="mailto:booking@hertz.cc?subject=Booking%20enquiry%20·%20Alberto%20B">
-        <div class="top"><span><b>03</b> · RESIDENT</span><span>125 Hz</span></div>
+      <a class="hz-res" href="#book" data-book-resident="Alberto B">
+        <div class="top"><span><b>03</b> · RESIDENT</span></div>
         <div class="ph"><img src="assets/dj-alberto.jpg" alt="Alberto B"><span class="freq">DJ · PRODUCER</span></div>
         <div class="nm">Alberto B</div>
         <div class="role">DJ · Producer · Deep tech &amp; groove</div>
         <div class="go"><span>Book this resident</span><span>→</span></div>
       </a>
-      <a class="hz-res" href="mailto:booking@hertz.cc?subject=Booking%20enquiry%20·%20Leonardo%20Giusti">
-        <div class="top"><span><b>04</b> · RESIDENT</span><span>126 Hz</span></div>
+      <a class="hz-res" href="#book" data-book-resident="Leonardo Giusti">
+        <div class="top"><span><b>04</b> · RESIDENT</span></div>
         <div class="ph"><img src="assets/dj-giusti.jpg" alt="Leonardo Giusti"><span class="freq">DJ</span></div>
         <div class="nm">Leonardo Giusti</div>
         <div class="role">DJ · Tech house &amp; minimal deep tech</div>
@@ -137,57 +124,128 @@
   </div>
 </section>
 
-<!-- ═══════════ WHAT TO INCLUDE (page / riso) ═══════════ -->
-<section class="hz-sec hz-page riso">
-  <span class="reg"><b class="a"></b><b class="b2"></b><b class="c"></b><b class="d"></b></span>
-  <div class="hz-wrap">
-    <div class="hz-ix rise">
-      <h2 class="hz-num">+</h2>
-      <div>
-        <div class="hz-kick"><span class="ln"></span>// WHAT TO INCLUDE</div>
-        <h3 class="hz-h2"><span class="w2">Make it</span> <span class="w9 it">quick</span><span class="blue">.</span></h3>
-      </div>
-      <div class="hz-meta">FIVE LINES<br>ONE EMAIL</div>
-    </div>
-    <p class="rise" style="font-family:var(--disp);font-weight:300;font-size:clamp(15px,1.5vw,18px);line-height:1.7;max-width:52ch;color:rgba(8,8,13,.8);margin:0 0 clamp(28px,4vw,44px);text-wrap:pretty">Five lines get us to a yes faster. Drop these in your message and we'll come back with availability and a fee.</p>
-    <div class="hz-list rise">
-      <div class="row"><span class="l"><span class="idx">01</span><span class="ti">Date &amp; city</span></span><span class="meta">When &amp; where</span></div>
-      <div class="row"><span class="l"><span class="idx">02</span><span class="ti">Venue &amp; capacity</span></span><span class="meta">The room</span></div>
-      <div class="row"><span class="l"><span class="idx">03</span><span class="ti">Format &amp; set length</span></span><span class="meta">Solo · B2B · all-night</span></div>
-      <div class="row"><span class="l"><span class="idx">04</span><span class="ti">Budget range</span></span><span class="meta">The fee</span></div>
-      <div class="row"><span class="l"><span class="idx">05</span><span class="ti">Reference or vibe</span></span><span class="meta">The direction</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ CONTACT CTA (room / CRT) ═══════════ -->
-<section class="hz-sec hz-room crt flick">
+<!-- ═══════════ THE REQUEST FORM (page / riso) ═══════════ -->
+<section id="book" class="hz-sec hz-room crt flick" style="scroll-margin-top:80px">
   <div class="hz-scanband"></div>
   <span class="reg"><b class="a"></b><b class="b2"></b><b class="c"></b><b class="d"></b></span>
   <div class="hz-wrap">
     <div class="hz-ix rise">
       <h2 class="hz-num">+</h2>
       <div>
-        <div class="hz-kick"><span class="ln"></span>// MAKE CONTACT</div>
-        <h3 class="hz-h2"><span class="w2">Let's</span> <span class="w9 it">talk</span><span class="blue">.</span></h3>
+        <div class="hz-kick"><span class="ln"></span>// SEND A REQUEST</div>
+        <h3 class="hz-h2"><span class="w2">Make a booking</span> <span class="w9 it">request</span><span class="blue">.</span></h3>
       </div>
-      <div class="hz-meta">BOOKING@HERTZ.CC<br>BOLOGNA · IT</div>
     </div>
-    <p class="rise" style="font-family:var(--disp);font-weight:300;font-size:clamp(1.1rem,2vw,1.5rem);line-height:1.6;max-width:40ch;color:rgba(245,245,243,.82);margin:0 0 clamp(28px,4vw,40px);text-wrap:pretty">Tell us about the night. One email, real humans, an honest answer<span class="blue">.</span></p>
-    <div class="hz-bookbar rise">
-      <a class="hz-bookbtn primary" href="mailto:booking@hertz.cc?subject=Booking%20enquiry%20·%20Hertz">booking@hertz.cc ↗</a>
-      <a class="hz-bookbtn" href="https://instagram.com/hertz.cc" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
-    </div>
-    <div class="hz-statgrid rise">
-      <div><div class="k">// based in</div><div class="vv">Bologna, IT</div></div>
-      <div><div class="k">// sound</div><div class="vv">Minimal &amp; deep-tech</div></div>
-      <div><div class="k">// range</div><div class="vv">120–128 Hz</div></div>
-      <div><div class="k">// reach</div><div class="vv">Worldwide</div></div>
+    <p class="rise" style="font-family:var(--disp);font-weight:300;font-size:clamp(15px,1.5vw,18px);line-height:1.7;max-width:54ch;color:rgba(245,245,243,.8);margin:0 0 clamp(28px,4vw,42px);text-wrap:pretty">Send us the details of your event and we'll come back with availability and a fee. Every request is read directly by the Hertz team.</p>
+
+    <form class="hz-bookform rise" id="bookform" novalidate>
+      <div class="hz-bookfield">
+        <label>What are you booking?</label>
+        <div class="hz-bookseg" role="radiogroup" aria-label="Booking type">
+          <label><input type="radio" name="bookingType" value="format" checked> The format</label>
+          <label><input type="radio" name="bookingType" value="resident"> A resident</label>
+        </div>
+      </div>
+
+      <div class="hz-bookfield" id="resident-field" hidden>
+        <label for="bk-res">Which resident</label>
+        <select id="bk-res" name="resident">
+          <option value="No preference">No preference — match the room</option>
+          <option value="Federico Apadula">Federico Apadula</option>
+          <option value="Tommaso Mancò">Tommaso Mancò</option>
+          <option value="Alberto B">Alberto B</option>
+          <option value="Leonardo Giusti">Leonardo Giusti</option>
+        </select>
+      </div>
+
+      <div class="hz-bookgrid">
+        <div class="hz-bookfield"><label for="bk-name">Your name *</label><input id="bk-name" name="name" type="text" autocomplete="name" placeholder="Name + surname"></div>
+        <div class="hz-bookfield"><label for="bk-email">Email *</label><input id="bk-email" name="email" type="email" autocomplete="email" placeholder="your@email.cc"></div>
+        <div class="hz-bookfield"><label for="bk-org">Organisation / promoter</label><input id="bk-org" name="org" type="text" placeholder="Who's booking"></div>
+        <div class="hz-bookfield"><label for="bk-venue">Venue / event</label><input id="bk-venue" name="venue" type="text" placeholder="Where it happens"></div>
+        <div class="hz-bookfield"><label for="bk-city">City / country *</label><input id="bk-city" name="city" type="text" placeholder="e.g. Bologna, IT"></div>
+        <div class="hz-bookfield"><label for="bk-date">Event date</label><input id="bk-date" name="date" type="date"></div>
+        <div class="hz-bookfield"><label for="bk-cap">Expected capacity</label><input id="bk-cap" name="capacity" type="text" placeholder="e.g. 400"></div>
+        <div class="hz-bookfield"><label for="bk-budget">Budget range</label><input id="bk-budget" name="budget" type="text" placeholder="Helps us answer fast"></div>
+      </div>
+
+      <div class="hz-bookfield full">
+        <label for="bk-msg">Details *</label>
+        <textarea id="bk-msg" name="message" rows="4" placeholder="Tell us about the night — format, set length, line-up, the room, the direction you're after."></textarea>
+      </div>
+
+      <button class="hz-booksubmit" type="submit">Send request →</button>
+      <p class="hz-bookfine">The request is sent directly to the Hertz team — no email app, everything stays on this page. We reply by email.</p>
+    </form>
+
+    <div class="hz-bookdone rise" id="bookdone" hidden>
+      <span class="dot"></span>
+      <b>Request received.</b>
+      <p>Thanks — your booking request is with the Hertz team. We'll get back to you by email with availability and a fee.</p>
     </div>
   </div>
 </section>
 
 <div id="site-footer"></div>
+
+<script>
+(function(){
+  var form = document.getElementById('bookform');
+  if (!form) return;
+  var resWrap = document.getElementById('resident-field');
+  var resSel  = form.elements['resident'];
+  var SLUGS = { 'federico-apadula':'Federico Apadula', 'tommaso-manco':'Tommaso Mancò', 'alberto-b':'Alberto B', 'leonardo-giusti':'Leonardo Giusti' };
+
+  function currentType(){ var r = form.querySelector('input[name="bookingType"]:checked'); return r ? r.value : 'format'; }
+  function syncType(){ resWrap.hidden = (currentType() !== 'resident'); }
+  form.querySelectorAll('input[name="bookingType"]').forEach(function(r){ r.addEventListener('change', syncType); });
+
+  function setResident(name){
+    var rr = form.querySelector('input[name="bookingType"][value="resident"]'); if (rr) rr.checked = true; syncType();
+    if (name) for (var i=0;i<resSel.options.length;i++){ if (resSel.options[i].value === name){ resSel.selectedIndex = i; break; } }
+  }
+  function setFormat(){ var rf = form.querySelector('input[name="bookingType"][value="format"]'); if (rf) rf.checked = true; syncType(); }
+  function gotoForm(){ var el = document.getElementById('book'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 70, behavior:'smooth' }); }
+
+  document.addEventListener('click', function(e){
+    var rb = e.target.closest('[data-book-resident]');
+    if (rb){ e.preventDefault(); setResident(rb.getAttribute('data-book-resident')); gotoForm(); setTimeout(function(){ var n=form.elements['name']; if(n) n.focus(); }, 480); return; }
+    var fb = e.target.closest('[data-book-type="format"]');
+    if (fb){ e.preventDefault(); setFormat(); gotoForm(); return; }
+  });
+
+  // deep links from artist pages: bookings.html?resident=alberto-b#book
+  var q = new URLSearchParams(location.search);
+  if (q.get('type') === 'format') setFormat();
+  var rp = q.get('resident'); if (rp) setResident(SLUGS[rp] || rp);
+  syncType();
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var els = form.elements;
+    var payload = {
+      bookingType: currentType(),
+      resident: resWrap.hidden ? '' : (resSel.value || ''),
+      name: els['name'].value.trim(), email: els['email'].value.trim(),
+      org: els['org'].value.trim(), venue: els['venue'].value.trim(),
+      city: els['city'].value.trim(), date: els['date'].value.trim(),
+      capacity: els['capacity'].value.trim(), budget: els['budget'].value.trim(),
+      message: els['message'].value.trim()
+    };
+    if (payload.name.length < 2){ els['name'].focus(); return; }
+    if (payload.email.indexOf('@') < 1){ els['email'].focus(); return; }
+    if (payload.city.length < 2){ els['city'].focus(); return; }
+    if (payload.message.length < 10){ els['message'].focus(); return; }
+    var btn = form.querySelector('.hz-booksubmit'); btn.disabled = true; btn.textContent = 'Sending…';
+    fetch('/api/booking', { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify(payload) })
+      .catch(function(){})
+      .finally(function(){
+        form.hidden = true;
+        var done = document.getElementById('bookdone'); if (done){ done.hidden = false; window.scrollTo({ top: done.getBoundingClientRect().top + window.pageYOffset - 90, behavior:'smooth' }); }
+      });
+  });
+})();
+</script>
 <script src="chrome.js"></script>
 <script src="hertz-system.js"></script>
 </body>
