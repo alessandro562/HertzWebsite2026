@@ -74,7 +74,7 @@
     + '<div class="hz-wrap hz-wide">'
     + '<a href="artists.html" class="mono" style="display:inline-flex;gap:8px;font-size:10px;color:var(--gray);text-decoration:none;margin-bottom:clamp(24px,4vw,40px)">← ALL RESIDENTS</a>'
     + '<div class="hz-artisthero">'
-    + '<div class="ph"><span class="tag">RESIDENT FILE · N°0'+esc(A.n.replace(/^0/,''))+'</span><img src="'+A.img+'" alt="'+esc(A.name)+'"></div>'
+    + '<div class="ph"><img src="'+A.img+'" alt="'+esc(A.name)+'"></div>'
     + '<div class="meta">'
     + '<div class="role">// '+A.role+'</div>'
     + '<h1>'+esc(A.name)+'<span class="blue">.</span></h1>'
