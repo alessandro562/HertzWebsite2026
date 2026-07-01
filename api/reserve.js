@@ -74,11 +74,11 @@ module.exports = async function handler(req, res) {
       if (!r.ok) {
         const detail = await r.text().catch(() => '');
         console.error('[RESERVE] Resend error', r.status, detail);
-        return res.status(502).json({ ok: false, error: 'Could not send the reservation. Please try again.' });
+        return res.status(502).json({ ok: false, error: 'Could not send the reservation. Please try again.', debug: { status: r.status, detail: String(detail).slice(0, 400) } });
       }
     } catch (err) {
       console.error('[RESERVE] Resend exception', err && err.message);
-      return res.status(502).json({ ok: false, error: 'Could not send the reservation. Please try again.' });
+      return res.status(502).json({ ok: false, error: 'Could not send the reservation. Please try again.', debug: { exception: String(err && err.message) } });
     }
   }
 
