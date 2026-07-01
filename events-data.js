@@ -56,7 +56,7 @@
     /* ── archive ── */
     { n:'025', title:'Take Notes × Buongiorno Classic', venue:'Buongiorno Classic', city:'Rimini', iso:'2026-05-31',
       badge:'Guest / Showcase', poster:'assets/poster-v3-31mag-takenotes.jpg', bill:'', lineup:[] },
-    { n:'024', title:'Hertz at Undersound', venue:'Cassero', city:'Bologna', iso:'2026-05-29',
+    { n:'024', title:'Hertz at Cassero', venue:'Cassero', city:'Bologna', iso:'2026-05-29',
       badge:'Collab', poster:'assets/poster-v3-29mag-cassero.jpg', bill:'',
       lineup:['federico-apadula','tommaso-manco','alberto-b'] },
     { n:'023', title:'Hertz at Kindergarten', venue:'Kindergarten', city:'Bologna', iso:'2026-04-24',
