@@ -23,7 +23,7 @@
       social:{ soundcloud:'https://soundcloud.com/federico-apadula', spotify:'https://open.spotify.com/artist/0hS1cnWGJvml5gSHRKHtGi', booking:'booking@hertz.cc' },
     },
     'tommaso-manco': {
-      name:'Tommaso Mancò', role:'DJ', n:'02', freq:'128 Hz',
+      name:'Tommaso Mancò', role:'DJ &amp; Producer', n:'02', freq:'128 Hz',
       origin:'Abruzzo, IT', since:'2023', sets:'Tech House · Minimal Deep Tech', img:'assets/dj-manco.jpg',
       gallery:['assets/tommaso-manco-live-1.jpg','assets/tommaso-manco-live-2.jpg','assets/tommaso-manco-live-3.jpg','assets/tommaso-manco-live-4.jpg'],
       bio:["Born in 2001, Tommaso Mancò is a DJ from Abruzzo who discovered his passion for electronic music among the iconic parties of the Romagna riviera. It was there that he started building his musical culture and shaping his artistic identity.",
@@ -32,7 +32,7 @@
       social:{ booking:'booking@hertz.cc' },
     },
     'alberto-b': {
-      name:'Alberto B', role:'DJ · Producer', n:'03', freq:'125 Hz',
+      name:'Alberto B', role:'DJ &amp; Producer', n:'03', freq:'125 Hz',
       origin:'Emilia-Romagna, IT', since:'2024', sets:'Deep Tech · Groove', img:'assets/dj-alberto.jpg',
       gallery:['assets/alberto-b-live-1.jpg','assets/alberto-b-live-2.jpg','assets/alberto-b-live-3.jpg','assets/alberto-b-live-4.jpg'],
       bio:["Producer and DJ based in Bologna, Alberto B brings a producer's ear to every set: textured, layered, always searching. His sound moves through deep tech and groove with a level of detail that rewards close listening.",
@@ -43,7 +43,7 @@
       social:{ soundcloud:'https://soundcloud.com/alberto-baccianti', spotify:'https://open.spotify.com/artist/7kHLiQODROJuJtGEgAYd8d', booking:'booking@hertz.cc' },
     },
     'leonardo-giusti': {
-      name:'Leonardo Giusti', role:'DJ · Resident', n:'04', freq:'126 Hz',
+      name:'Leonardo Giusti', role:'DJ &amp; Producer', n:'04', freq:'126 Hz',
       origin:'Emilia-Romagna, IT', since:'2025', sets:'Tech House · Minimal Deep Tech', img:'assets/dj-giusti.jpg',
       gallery:['assets/leonardo-giusti-live-1.jpg','assets/leonardo-giusti-live-2.jpg','assets/leonardo-giusti-live-3.jpg','assets/leonardo-giusti-live-4.jpg'],
       bio:["Born in Bologna in 2004, Leonardo Giusti was drawn to electronic music from a very young age, gradually shaping a sonic identity rooted in the more groove-driven shades of Tech House and Minimal Deep Tech.",

@@ -211,9 +211,9 @@ window.NEXT_EVENT = NEXT_EVENT;
 
 const RESIDENTS_DATA = [
   { name: 'Federico Apadula', slug: 'federico-apadula', role: 'Founder · Art Director · DJ & Producer', img: 'assets/dj-apadula.jpg', n: '01', freq: '120 Hz' },
-  { name: 'Tommaso Mancò',    slug: 'tommaso-manco',    role: 'DJ',                                     img: 'assets/dj-manco.jpg',   n: '02', freq: '128 Hz' },
-  { name: 'Alberto B',         slug: 'alberto-b',        role: 'DJ · Producer',                         img: 'assets/dj-alberto.jpg', n: '03', freq: '125 Hz' },
-  { name: 'Leonardo Giusti',   slug: 'leonardo-giusti',  role: 'DJ',                                    img: 'assets/dj-giusti.jpg',  n: '04', freq: '126 Hz' },
+  { name: 'Tommaso Mancò',    slug: 'tommaso-manco',    role: 'DJ & Producer',                          img: 'assets/dj-manco.jpg',   n: '02', freq: '128 Hz' },
+  { name: 'Alberto B',         slug: 'alberto-b',        role: 'DJ & Producer',                         img: 'assets/dj-alberto.jpg', n: '03', freq: '125 Hz' },
+  { name: 'Leonardo Giusti',   slug: 'leonardo-giusti',  role: 'DJ & Producer',                          img: 'assets/dj-giusti.jpg',  n: '04', freq: '126 Hz' },
 ];
 window.RESIDENTS_DATA = RESIDENTS_DATA;
 
