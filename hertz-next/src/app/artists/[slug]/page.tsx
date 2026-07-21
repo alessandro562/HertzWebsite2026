@@ -7,6 +7,9 @@ import Button from '@/components/ui/Button'
 import ImageFrame from '@/components/ui/ImageFrame'
 import EventRow from '@/components/events/EventRow'
 import MixRow from '@/components/music/MixRow'
+import ViewMorph from '@/motion/ViewMorph'
+import Parallax from '@/motion/Parallax'
+import { Stagger, StaggerItem } from '@/motion/Reveal'
 import { ARTISTS } from '@/content/artists'
 import { forResident, type ResidentSlug } from '@/content/events'
 import styles from './artist.module.css'
@@ -53,10 +56,15 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           <span>{a.n}</span>
         </p>
 
-        <div className={styles.hero}>
+        <div className={styles.hero} data-alt={Number(a.n) % 2}>
+          <span className={styles.freqMark} aria-hidden="true">
+            {a.freq}
+          </span>
           <div className={styles.identity}>
             <span className={`${styles.freq} hz-mono`}>{a.freq}</span>
-            <h1 className={styles.name}>{a.name}</h1>
+            <ViewMorph name={`artist-name-${a.slug}`}>
+              <h1 className={styles.name}>{a.name}</h1>
+            </ViewMorph>
             <p className={styles.role}>{a.role}</p>
             <div className={styles.actions}>
               {socials.map((s) => (
@@ -69,13 +77,11 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
               </Button>
             </div>
           </div>
-          <ImageFrame
-            src={a.portrait}
-            alt={a.name}
-            ratio="4 / 5"
-            priority
-            className={styles.portrait}
-          />
+          <Parallax speed={38} className={styles.portrait}>
+            <ViewMorph name={`artist-portrait-${a.slug}`}>
+              <ImageFrame src={a.portrait} alt={a.name} ratio="4 / 5" priority />
+            </ViewMorph>
+          </Parallax>
         </div>
       </Section>
 
@@ -99,11 +105,13 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           link={a.social.soundcloud ? { href: a.social.soundcloud, label: 'SoundCloud ↗', external: true } : undefined}
         />
         {a.mixes.length > 0 ? (
-          <div>
+          <Stagger gap={0.06}>
             {a.mixes.map((m, i) => (
-              <MixRow key={m.url} mix={m} artist={a.name} index={i} />
+              <StaggerItem key={m.url} variant="up">
+                <MixRow mix={m} artist={a.name} index={i} />
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         ) : (
           <p className={styles.empty}>Mixes coming soon.</p>
         )}
@@ -113,16 +121,13 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
       {a.gallery.length > 0 && (
         <Section surface="white" space="lg">
           <SectionLabel kicker="Live" title="On the floor." />
-          <div className={styles.gallery}>
+          <Stagger className={styles.gallery} gap={0.08}>
             {a.gallery.map((src, i) => (
-              <ImageFrame
-                key={src}
-                src={src}
-                alt={`${a.name} live — ${i + 1}`}
-                ratio="3 / 2"
-              />
+              <StaggerItem key={src} variant="up">
+                <ImageFrame src={src} alt={`${a.name} live — ${i + 1}`} ratio="3 / 2" />
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </Section>
       )}
 

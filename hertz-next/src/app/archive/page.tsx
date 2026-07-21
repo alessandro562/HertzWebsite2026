@@ -4,8 +4,8 @@ import Section from '@/components/ui/Section'
 import PageHeader from '@/components/ui/PageHeader'
 import SectionLabel from '@/components/ui/SectionLabel'
 import ImageFrame from '@/components/ui/ImageFrame'
-import EventRow from '@/components/events/EventRow'
-import { archive, eventYear, eventSlug, shortDate } from '@/content/events'
+import ArchiveExplorer from '@/components/archive/ArchiveExplorer'
+import { archive, eventYear, eventSlug, shortDate, dowDate } from '@/content/events'
 import { galleryFor } from '@/content/galleries'
 import styles from './archive.module.css'
 
@@ -19,8 +19,16 @@ export const metadata: Metadata = {
 export default function ArchivePage() {
   const past = archive()
   const years = [...new Set(past.map(eventYear))]
-  const byYear = years.map((y) => ({ y, events: past.filter((e) => eventYear(e) === y) }))
   const withGalleries = past.filter((e) => galleryFor(e.n).length > 0)
+  const items = past.map((e) => ({
+    n: e.n,
+    title: e.title,
+    venue: e.venue,
+    city: e.city,
+    year: eventYear(e),
+    slug: eventSlug(e),
+    date: dowDate(e),
+  }))
 
   return (
     <main id="main">
@@ -41,15 +49,7 @@ export default function ArchivePage() {
               Photography stays raw; the interface supplies the rhythm.
             </p>
           }
-          aside={
-            <nav className={styles.years} aria-label="Jump to year">
-              {years.map((y) => (
-                <a key={y} href={`#y${y}`} className="hz-mono">
-                  {y}
-                </a>
-              ))}
-            </nav>
-          }
+          aside={<p className="hz-mono">{items.length} nights archived</p>}
         />
       </Section>
 
@@ -81,17 +81,11 @@ export default function ArchivePage() {
         </Section>
       )}
 
-      {/* ── by year ── */}
-      {byYear.map(({ y, events }, i) => (
-        <Section key={y} surface={i % 2 === 0 ? 'white' : 'paper'} space="md" id={`y${y}`}>
-          <SectionLabel kicker="Season" title={String(y)} />
-          <div>
-            {events.map((e) => (
-              <EventRow key={e.n} event={e} />
-            ))}
-          </div>
-        </Section>
-      ))}
+      {/* ── sessions: filtro anno + DISORDER ── */}
+      <Section surface="white" space="lg">
+        <SectionLabel kicker="Sessions" title="Every night." />
+        <ArchiveExplorer items={items} years={years} />
+      </Section>
     </main>
   )
 }

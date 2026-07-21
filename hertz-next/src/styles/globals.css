@@ -8,6 +8,7 @@
 
 @import './tokens.css';
 @import './surfaces.css';
+@import './motion.css';
 
 /* ── Font wiring (next/font/local, layout.tsx → var(--font-hz)) ──
    TODO(font-mono): agganciare ABC Monument Grotesk Semi-Mono / IBM Plex

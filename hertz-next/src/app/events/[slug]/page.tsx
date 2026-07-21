@@ -7,6 +7,8 @@ import Button from '@/components/ui/Button'
 import ImageFrame from '@/components/ui/ImageFrame'
 import StatusBadge, { type Status } from '@/components/ui/StatusBadge'
 import EventRow from '@/components/events/EventRow'
+import ViewMorph from '@/motion/ViewMorph'
+import { Stagger, StaggerItem } from '@/motion/Reveal'
 import {
   EVENTS,
   allEventSlugs,
@@ -74,7 +76,9 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
               <StatusBadge status={status} />
               {e.badge && <span className={`${styles.badge} hz-mono`}>{e.badge}</span>}
             </div>
-            <h1 className={styles.title}>{e.title}</h1>
+            <ViewMorph name={`event-title-${slug}`}>
+              <h1 className={styles.title}>{e.title}</h1>
+            </ViewMorph>
             <p className={styles.when}>
               {dowDate(e)}
               {e.time ? ` · ${e.time.replace(/^[A-Z]{3} · /, '')}` : ''}
@@ -111,13 +115,15 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
           </div>
 
           {e.poster ? (
-            <ImageFrame
-              src={e.poster}
-              alt={`Poster — ${e.title}`}
-              ratio="4 / 5"
-              priority
-              className={styles.poster}
-            />
+            <ViewMorph name={`event-poster-${slug}`}>
+              <ImageFrame
+                src={e.poster}
+                alt={`Poster — ${e.title}`}
+                ratio="4 / 5"
+                priority
+                className={styles.poster}
+              />
+            </ViewMorph>
           ) : (
             <div className={styles.posterMissing}>
               <span className="hz-mono">Poster</span>
@@ -140,13 +146,15 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
             {residents.length > 0 && (
               <div className={styles.residents}>
                 <span className={`${styles.residentsLabel} hz-mono`}>Hertz on this bill</span>
-                <div className={styles.residentChips}>
+                <Stagger className={styles.residentChips} gap={0.09}>
                   {residents.map((a) => (
-                    <Link key={a.slug} href={`/artists/${a.slug}`} className={styles.chip}>
-                      {a.name} ↗
-                    </Link>
+                    <StaggerItem key={a.slug} variant="up" style={{ display: 'inline-flex' }}>
+                      <Link href={`/artists/${a.slug}`} className={styles.chip}>
+                        {a.name} ↗
+                      </Link>
+                    </StaggerItem>
                   ))}
-                </div>
+                </Stagger>
               </div>
             )}
           </div>

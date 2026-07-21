@@ -138,6 +138,50 @@
   margin-top: var(--hz-space-sm);
 }
 
+/* apertura animata: le voci entrano in sequenza a ogni apertura */
+@keyframes hzMenuIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.menuNav > * {
+  animation: hzMenuIn 0.5s var(--hz-ease-out) both;
+}
+.menuNav > *:nth-child(1) {
+  animation-delay: 0.04s;
+}
+.menuNav > *:nth-child(2) {
+  animation-delay: 0.09s;
+}
+.menuNav > *:nth-child(3) {
+  animation-delay: 0.14s;
+}
+.menuNav > *:nth-child(4) {
+  animation-delay: 0.19s;
+}
+.menuNav > *:nth-child(5) {
+  animation-delay: 0.24s;
+}
+.menuNav > *:nth-child(6) {
+  animation-delay: 0.29s;
+}
+.menuNav > *:nth-child(7) {
+  animation-delay: 0.34s;
+}
+.menuNav > *:nth-child(8) {
+  animation-delay: 0.39s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .menuNav > * {
+    animation: none;
+  }
+}
+
 /* ── Desktop (≥1024): nav inline, niente burger/menu ── */
 @media (min-width: 1024px) {
   .inner {

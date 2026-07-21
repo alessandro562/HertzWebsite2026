@@ -2,6 +2,9 @@ import type { Metadata } from 'next'
 import Section from '@/components/ui/Section'
 import Button from '@/components/ui/Button'
 import ImageFrame from '@/components/ui/ImageFrame'
+import SignatureTitle from '@/motion/SignatureTitle'
+import Reveal from '@/motion/Reveal'
+import Parallax from '@/motion/Parallax'
 import { SITE } from '@/lib/site'
 import styles from './about.module.css'
 
@@ -20,11 +23,12 @@ export default function AboutPage() {
         <p className="hz-mono" style={{ color: 'var(--hz-ink-mute)', marginBottom: 'var(--hz-space-md)' }}>
           Manifesto · The floor is the medium
         </p>
-        <h1 className={styles.heroTitle}>
-          From clubbers,
-          <br />
-          <em>for clubbers.</em>
-        </h1>
+        <SignatureTitle as="h1" className={styles.heroTitle} trigger="mount" stagger={0.12}>
+          <span>From clubbers,</span>
+          <span>
+            <em>for clubbers.</em>
+          </span>
+        </SignatureTitle>
         <blockquote className={styles.heroQuote}>
           Too many nights were filling up with image and emptying out of listening.
         </blockquote>
@@ -36,7 +40,7 @@ export default function AboutPage() {
       {/* ── chapters (white, leggibili) ── */}
       <Section surface="white" space="lg">
         <div className={styles.chapter}>
-          <div className={styles.chapText}>
+          <Reveal variant="up" className={styles.chapText}>
             <span className={`${styles.chap} hz-mono`}>Chapter 01 · Origin</span>
             <p>
               The Hertz collective was born in Bologna in 2023, out of one simple conviction: the
@@ -49,23 +53,17 @@ export default function AboutPage() {
               where a good one can roll for nine minutes before anyone checks the time, and the only
               reason to leave the house is one — to let the sound take over.
             </p>
-          </div>
-          <ImageFrame
-            src="/assets/alberto-b-live-3.jpg"
-            alt="Hertz resident in the booth"
-            ratio="4 / 5"
-            className={styles.chapPhoto}
-          />
+          </Reveal>
+          <Parallax speed={44} className={styles.chapPhoto}>
+            <ImageFrame src="/assets/alberto-b-live-3.jpg" alt="Hertz resident in the booth" ratio="4 / 5" />
+          </Parallax>
         </div>
 
         <div className={`${styles.chapter} ${styles.reverse}`}>
-          <ImageFrame
-            src="/assets/tommaso-manco-live-2.jpg"
-            alt="Hertz booth and crowd"
-            ratio="4 / 5"
-            className={styles.chapPhoto}
-          />
-          <div className={styles.chapText}>
+          <Parallax speed={44} className={styles.chapPhoto}>
+            <ImageFrame src="/assets/tommaso-manco-live-2.jpg" alt="Hertz booth and crowd" ratio="4 / 5" />
+          </Parallax>
+          <Reveal variant="up" className={styles.chapText}>
             <span className={`${styles.chap} hz-mono`}>Chapter 02 · The room</span>
             <p className={styles.big}>
               A room. A system. A crowd that came to listen. The rest is just volume.
@@ -76,7 +74,7 @@ export default function AboutPage() {
               how big they look — small enough to feel the kick through the floor, big enough to
               disappear.
             </p>
-          </div>
+          </Reveal>
         </div>
       </Section>
 
@@ -85,10 +83,11 @@ export default function AboutPage() {
         <p className={`${styles.chap} hz-mono`} style={{ color: 'var(--hz-ink-mute)' }}>
           Chapter 03 · The floor
         </p>
-        <p className={styles.climax}>
+        <Reveal as="p" variant="mask" duration={1} className={styles.climax}>
           Turn the lights down, the system up, and let the record run. The floor knows what to do.
-        </p>
-        <dl className={styles.stats}>
+        </Reveal>
+        <Reveal variant="up" delay={0.1}>
+          <dl className={styles.stats}>
           <div>
             <dt className="hz-mono">Based in</dt>
             <dd>Bologna, IT</dd>
@@ -109,7 +108,8 @@ export default function AboutPage() {
             <dt className="hz-mono">Homes</dt>
             <dd>Kindergarten · Buongiorno Classic</dd>
           </div>
-        </dl>
+          </dl>
+        </Reveal>
       </Section>
 
       {/* ── policy / safe space (paper) ── */}
@@ -117,9 +117,12 @@ export default function AboutPage() {
         <div className={styles.policy}>
           <div>
             <span className={`${styles.chap} hz-mono`}>Hertz &amp; Kindergarten policy</span>
-            <h2 className={styles.policyTitle}>The dancefloor is for everyone.</h2>
+            <SignatureTitle as="h2" className={styles.policyTitle} stagger={0.1}>
+              <span>The dancefloor</span>
+              <span>is for everyone.</span>
+            </SignatureTitle>
           </div>
-          <div className={styles.policyBodyWrap}>
+          <Reveal variant="up" delay={0.15} className={styles.policyBodyWrap}>
             <p className={styles.policyBody}>
               No harassment, no hate, no discrimination. Respect boundaries — yours and others&rsquo;.
               We&rsquo;re here for the music and the people. The dancefloor is for everyone.
@@ -127,7 +130,7 @@ export default function AboutPage() {
             <span className="hz-mono" style={{ color: 'var(--hz-ink-mute)' }}>
               Safe space · Respect · Consent
             </span>
-          </div>
+          </Reveal>
         </div>
       </Section>
 

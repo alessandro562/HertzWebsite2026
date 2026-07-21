@@ -7,6 +7,12 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: __dirname,
   },
+  experimental: {
+    // React <ViewTransition> per i morph condivisi (calendario→evento,
+    // artisti→dettaglio). Progressive enhancement: senza supporto browser
+    // la navigazione resta normale.
+    viewTransition: true,
+  },
 }
 
 export default nextConfig

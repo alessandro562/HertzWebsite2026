@@ -57,7 +57,13 @@ export default function Header() {
   }, [open])
 
   return (
-    <header ref={ref} className={styles.header} data-surface={surface} data-scrolled={scrolled}>
+    <header
+      ref={ref}
+      className={styles.header}
+      data-surface={surface}
+      data-scrolled={scrolled}
+      style={{ viewTransitionName: 'site-header' }}
+    >
       <div className={styles.inner}>
         <Link href="/" className={styles.logo} aria-label="HERTZ — home">
           hertz

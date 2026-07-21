@@ -10,10 +10,40 @@
 
 /* ── identity hero ── */
 .hero {
+  position: relative;
+  overflow: hidden;
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--hz-space-lg);
   align-items: end;
+}
+
+/* watermark frequenza — trattamento leggermente diverso per artista */
+.freqMark {
+  position: absolute;
+  z-index: 0;
+  top: -0.18em;
+  right: -0.02em;
+  font-family: var(--hz-font-mono);
+  font-size: clamp(5rem, 20vw, 18rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.16);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+.hero[data-alt='1'] .freqMark {
+  top: auto;
+  right: auto;
+  bottom: -0.14em;
+  left: -0.02em;
+}
+.identity,
+.portrait {
+  position: relative;
+  z-index: 1;
 }
 @media (min-width: 820px) {
   .hero {

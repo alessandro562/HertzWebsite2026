@@ -6,6 +6,7 @@ import SectionLabel from '@/components/ui/SectionLabel'
 import Button from '@/components/ui/Button'
 import ImageFrame from '@/components/ui/ImageFrame'
 import EventRow from '@/components/events/EventRow'
+import ViewMorph from '@/motion/ViewMorph'
 import { upcoming, archive, dowDate, eventSlug } from '@/content/events'
 import styles from './events.module.css'
 
@@ -54,12 +55,14 @@ export default function EventsPage() {
         <Section surface="paper" space="lg">
           <SectionLabel index="02" kicker="Featured" title="Next poster." />
           <Link href={`/events/${eventSlug(feature)}`} className={styles.feature}>
-            <ImageFrame
-              src={feature.poster}
-              alt={`Poster — ${feature.title}`}
-              ratio="4 / 5"
-              className={styles.featureImg}
-            />
+            <ViewMorph name={`event-poster-${eventSlug(feature)}`}>
+              <ImageFrame
+                src={feature.poster}
+                alt={`Poster — ${feature.title}`}
+                ratio="4 / 5"
+                className={styles.featureImg}
+              />
+            </ViewMorph>
             <div className={styles.featureMeta}>
               <span className="hz-mono">
                 N°{feature.n} · {dowDate(feature)}
