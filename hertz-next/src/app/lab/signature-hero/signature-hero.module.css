@@ -1,0 +1,179 @@
+/* ───────────────────────────────────────────────────────────
+   /lab/signature-hero — composizione del momento firma.
+   Layer: [0] stub loop · [1] foto floor reale · [2] tipografia
+   HERTZ + logo 3D · [3] info evento + CTA.
+   Colori/spazi SOLO da tokens.css. HERTZ mai tagliato (tetto
+   --hz-t-hero). CTA sempre in flusso, mai coperta.
+   ─────────────────────────────────────────────────────────── */
+
+.hero {
+  position: relative;
+  min-height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--hz-space-md);
+  padding: var(--hz-space-lg) var(--hz-gutter);
+  background: var(--hz-bg);
+  color: var(--hz-ink);
+  text-align: center;
+}
+
+/* [0] slot loop video (STUB) — gradiente su token. Sostituire con
+   <video> Higgsfield quando l'asset è pronto (vedi TODO in page). */
+.loopSlot {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(60% 55% at 50% 42%, rgba(80, 119, 138, 0.18), transparent 70%),
+    linear-gradient(180deg, var(--hz-bg-2) 0%, var(--hz-bg) 60%);
+}
+
+/* [1] foto floor reale — offset, desaturata e scurita: texture, non hero image */
+.photo {
+  position: absolute;
+  z-index: 1;
+  inset: 0 -6% auto auto;
+  top: 8%;
+  width: min(52%, 640px);
+  height: 72%;
+  background-image: url('/assets/hero-booth.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(1) contrast(1.05) brightness(0.72);
+  opacity: 0.42;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 45%, #000 85%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 45%, #000 85%, transparent);
+  pointer-events: none;
+}
+
+/* velo scuro globale sopra la foto per garantire il contrasto del testo */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: radial-gradient(70% 60% at 50% 50%, transparent, rgba(21, 21, 21, 0.55));
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--hz-space-sm);
+  width: 100%;
+  max-width: var(--hz-maxw);
+}
+
+.kicker {
+  font-family: var(--hz-font-mono);
+  font-size: var(--hz-t-meta);
+  letter-spacing: var(--hz-tracking-mono);
+  text-transform: uppercase;
+  color: var(--hz-signal);
+}
+
+/* slot logo 3D (o PNG statico) — sopra, come la "wave" del logo ufficiale */
+.stage {
+  position: relative;
+  width: min(90vw, 600px);
+  height: min(36vh, 300px);
+  margin-bottom: calc(var(--hz-space-md) * -1); /* leggero overlap col wordmark */
+  pointer-events: none;
+}
+
+.staticLogo {
+  width: 100%;
+  height: 100%;
+  background-image: url('/assets/hertz-logo-official.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.wordmark {
+  margin: 0;
+  font-family: var(--hz-font-display);
+  font-weight: var(--hz-weight-display);
+  /* tetto = --hz-t-hero: mai tagliato a nessuna larghezza */
+  font-size: var(--hz-t-hero);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--hz-ink);
+  white-space: nowrap;
+}
+
+.info {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--hz-space-sm);
+  margin-top: var(--hz-space-sm);
+}
+
+.eventMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--hz-space-xs) var(--hz-space-sm);
+  font-family: var(--hz-font-mono);
+  font-size: var(--hz-t-meta);
+  letter-spacing: var(--hz-tracking-mono);
+  text-transform: uppercase;
+  color: var(--hz-ink-mute);
+}
+
+.cat { color: var(--hz-signal); }
+
+.badge {
+  padding: 0.2em 0.6em;
+  border: var(--hz-border);
+  color: var(--hz-ink);
+}
+
+.onsale {
+  color: var(--hz-accent);
+  font-weight: 700;
+}
+
+.eventTitle {
+  margin: 0;
+  font-family: var(--hz-font-display);
+  font-weight: var(--hz-weight-display);
+  font-size: var(--hz-t-card);
+  line-height: var(--hz-leading-tight);
+  color: var(--hz-ink);
+}
+
+/* CTA Tickets — sempre in flusso, mai coperta, alto contrasto */
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  margin-top: var(--hz-space-xs);
+  padding: 0.85em 1.6em;
+  background: var(--hz-ink);
+  color: var(--hz-bg);
+  font-family: var(--hz-font-mono);
+  font-size: var(--hz-t-meta);
+  letter-spacing: var(--hz-tracking-mono);
+  text-transform: uppercase;
+  border: var(--hz-border);
+  transition: opacity var(--hz-fast) var(--hz-ease-out);
+}
+.cta:hover { opacity: 0.85; }
+
+@media (max-width: 767px) {
+  .hero { padding: var(--hz-space-lg) var(--hz-space-sm); }
+  .photo { width: 80%; opacity: 0.3; }
+  .stage { height: min(28vh, 220px); margin-bottom: 0; }
+}
