@@ -3,6 +3,8 @@ import localFont from 'next/font/local'
 import 'lenis/dist/lenis.css'
 import '@/styles/globals.css'
 import SmoothScroll from '@/motion/SmoothScroll'
+import Header from '@/components/navigation/Header'
+import Footer from '@/components/navigation/Footer'
 
 /**
  * Helvetica Neue self-hosted via next/font/local (nessuna richiesta esterna).
@@ -47,7 +49,12 @@ export default function RootLayout({
   return (
     <html lang="it" className={helveticaNeue.variable}>
       <body>
-        <SmoothScroll>{children}</SmoothScroll>
+        <a href="#main" className="hz-skip">Vai al contenuto</a>
+        <SmoothScroll>
+          <Header />
+          {children}
+          <Footer />
+        </SmoothScroll>
       </body>
     </html>
   )
