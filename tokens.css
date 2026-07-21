@@ -1,0 +1,128 @@
+/* ────────────────────────────────────────────────────────────
+   HERTZ · DESIGN TOKENS · v2 — allineati al brand deck ufficiale
+   Sostituisce la v1 (che era basata sull'implementazione del
+   VECCHIO sito, non sul brand — vedi nota in fondo).
+
+   STRUTTURA A DUE LIVELLI, apposta per lasciare aperta la
+   direzione (editoriale-chiaro vs palco-scuro) finché il design
+   non è deciso:
+
+     1) PALETTE GREZZA  → i 7 colori del deck, fissi, non si toccano.
+     2) TOKEN SEMANTICI  → --hz-bg, --hz-ink, --hz-accent ecc.
+        mappati sulla palette grezza. Per cambiare direzione,
+        cambi SOLO il blocco semantico (o [data-theme]),
+        mai i componenti.
+
+   Nessun colore hard-coded nei componenti: sempre var(--hz-…).
+   ──────────────────────────────────────────────────────────── */
+
+:root {
+  /* ── 1 · PALETTE GREZZA (dal deck ufficiale — fissa) ── */
+  --raw-signal:  #A3B7B7;  /* Hertz Signal — colore distintivo, freddo/desaturato */
+  --raw-ink:     #151515;  /* Hertz Ink */
+  --raw-white:   #FFFFFF;  /* Pure White */
+  --raw-soft:    #DEDEDE;  /* Soft Grey */
+  --raw-bone:    #E9EBE4;  /* Bone */
+  --raw-cold:    #50778A;  /* Cold Blue — accento digitale */
+  --raw-olive:   #505145;  /* Olive Charcoal */
+
+  /* ── 2 · TOKEN SEMANTICI — TEMA PROVVISORIO: palco scuro ──
+     Cambia SOLO qui (o duplica in [data-theme="light"]) quando
+     la direzione è decisa. Vedi in fondo la variante editoriale. */
+  --hz-bg:        var(--raw-ink);
+  --hz-bg-2:      #1c1c1a;      /* superficie leggermente sopraelevata su Ink */
+  --hz-ink:       var(--raw-white);   /* testo primario */
+  --hz-ink-mute:  var(--raw-soft);    /* testo secondario / metadata */
+  --hz-line:      #2a2a27;      /* hairline, bordi su fondo scuro */
+  --hz-signal:    var(--raw-signal);  /* firma atmosferica — grafico, non testo piccolo */
+  --hz-accent:    var(--raw-cold);    /* accento digitale leggibile / link / stati attivi */
+  --hz-accent-2:  var(--raw-olive);   /* accento secondario, terroso, per contrasto quieto */
+
+  /* NIENTE blu elettrico, NIENTE neon: vietati esplicitamente dal deck.
+     Se un accento sembra "acceso", non è Hertz: torna a --raw-cold o --raw-signal. */
+
+  /* ── tipografia (ufficiale, non negoziabile) ──
+     I file font non sono inclusi: usare copie regolarmente licenziate.
+     Repo legacy ha già gli OTF Helvetica Neue in assets/fonts/. */
+  --hz-font-display: 'Helvetica Neue', Arial, sans-serif; /* Bold — headline, nomi evento */
+  --hz-font-body:    'Helvetica Neue', Arial, sans-serif; /* Medium — testi, secondarie */
+  --hz-font-mono:    'ABC Monument Grotesk Semi-Mono', ui-monospace, monospace; /* date, venue, lineup, metadata */
+
+  --hz-weight-display: 700; /* Bold */
+  --hz-weight-body:    500; /* Medium */
+
+  /* scala tipografica (fluida) */
+  --hz-t-hero:    clamp(3.5rem, 7vw, 7.5rem);
+  --hz-t-section: clamp(2rem, 4vw, 4.5rem);
+  --hz-t-card:    clamp(1.25rem, 2vw, 2rem);
+  --hz-t-body:    clamp(1rem, 1.1vw, 1.1875rem); /* 16–19px */
+  --hz-t-meta:    clamp(0.6875rem, 0.9vw, 0.8125rem); /* 11–13px */
+
+  --hz-leading-tight: 1.02;
+  --hz-leading-body:  1.55;
+  --hz-tracking-mono: 0.04em;
+
+  /* ── spazio ── */
+  --hz-space-xs: 0.5rem;
+  --hz-space-sm: 1rem;
+  --hz-space-md: 2rem;
+  --hz-space-lg: 4rem;
+  --hz-space-xl: 8rem;
+
+  /* ── forma ── */
+  --hz-radius: 0;            /* spigoli vivi, sempre — coerente col deck */
+  --hz-border: 1px solid var(--hz-line);
+
+  /* ── motion ── */
+  --hz-fast:      160ms;     /* microinterazioni UI */
+  --hz-ui:        320ms;     /* stati, comparse componenti */
+  --hz-section:   700ms;     /* reveal di sezione */
+  --hz-cinematic: 1200ms;    /* regia hero */
+
+  --hz-ease-out:    cubic-bezier(.16, 1, .3, 1);
+  --hz-ease-in-out: cubic-bezier(.65, 0, .35, 1);
+
+  /* ── layout ── */
+  --hz-maxw: 1440px;
+  --hz-gutter: clamp(1rem, 4vw, 4rem);
+  --hz-z-nav: 100;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   VARIANTE EDITORIALE-CHIARA — non attiva di default.
+   Per provarla: <html data-theme="editorial"> oppure sostituisci
+   il blocco "TEMA PROVVISORIO" sopra con questo.
+   Palette identica, solo la mappatura semantica cambia:
+   fondo Bone/White, Ink per il testo, Signal come firma atmosferica.
+   ───────────────────────────────────────────────────────────── */
+[data-theme="editorial"] {
+  --hz-bg:        var(--raw-bone);
+  --hz-bg-2:      var(--raw-white);
+  --hz-ink:       var(--raw-ink);
+  --hz-ink-mute:  #6b6d63;      /* derivato da olive, leggibile su Bone */
+  --hz-line:      var(--raw-soft);
+  --hz-signal:    var(--raw-signal);
+  --hz-accent:    var(--raw-cold);
+  --hz-accent-2:  var(--raw-olive);
+}
+
+/* utente sensibile al movimento: azzera le durate lunghe */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --hz-section: 1ms;
+    --hz-cinematic: 1ms;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   NOTA STORICA — perché questo file è cambiato
+   La v1 di questo token file era basata sull'implementazione
+   attuale di hertzclubbing.com (#08080d, #144889, #00d4ff cyan,
+   Bricolage Grotesque + JetBrains Mono). Verificando il brand
+   master pack ufficiale (deck), quel sistema risulta DIVERGENTE
+   dal brand: il deck vieta esplicitamente blu elettrico/neon e
+   specifica Hertz Signal / Ink / Cold Blue e Helvetica Neue +
+   ABC Monument Grotesk Semi-Mono. Questo file segue il deck.
+   Direzione chiaro/scuro volutamente NON bloccata: vedi i due
+   blocchi semantici sopra, entrambi pronti all'uso.
+   ───────────────────────────────────────────────────────────── */
