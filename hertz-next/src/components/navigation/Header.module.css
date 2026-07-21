@@ -3,11 +3,28 @@
   top: 0;
   z-index: var(--hz-z-nav);
   width: 100%;
-  color: var(--raw-ink);
-  transition: color var(--hz-ui) var(--hz-ease-out);
+  color: var(--hz-ink); /* dal data-surface: nero su chiare, bianco su scure */
+  background-color: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    color var(--hz-ui) var(--hz-ease-out),
+    background-color var(--hz-ui) var(--hz-ease-out),
+    border-color var(--hz-ui) var(--hz-ease-out);
 }
-.header[data-tone='dark'] {
-  color: var(--raw-white);
+/* l'header adotta il data-surface della sezione sotto (contrasto testo),
+   ma NON il suo background di base: resta trasparente in cima. */
+.header[data-surface] {
+  background-color: transparent;
+}
+/* backdrop leggero surface-matched SOLO dopo lo scroll — no glassmorphism */
+.header[data-scrolled='true'] {
+  background-color: color-mix(in srgb, var(--hz-bg) 90%, transparent);
+  border-bottom-color: var(--hz-line);
+}
+@supports not (background: color-mix(in srgb, white, black)) {
+  .header[data-scrolled='true'] {
+    background-color: var(--hz-bg);
+  }
 }
 
 .inner {

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
+import { IBM_Plex_Mono } from 'next/font/google'
 import 'lenis/dist/lenis.css'
 import '@/styles/globals.css'
 import SmoothScroll from '@/motion/SmoothScroll'
@@ -19,6 +20,18 @@ const helveticaNeue = localFont({
     { path: './fonts/HelveticaNeue-Medium.otf', weight: '500', style: 'normal' },
     { path: './fonts/HelveticaNeue-Bold.otf', weight: '700', style: 'normal' },
   ],
+})
+
+/**
+ * Mono per metadata (date/venue/status/label/archivio). IBM Plex Mono
+ * self-hosted da next/font/google (build-time, nessuna richiesta runtime).
+ * ABC Monument Grotesk Semi-Mono resta primo nello stack per quando licenziato.
+ */
+const mono = IBM_Plex_Mono({
+  variable: '--font-hz-mono',
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  display: 'swap',
 })
 
 const SITE_URL = 'https://hertzclubbing.com'
@@ -47,7 +60,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="it" className={helveticaNeue.variable}>
+    <html lang="it" className={`${helveticaNeue.variable} ${mono.variable}`}>
       <body>
         <a href="#main" className="hz-skip">Vai al contenuto</a>
         <SmoothScroll>

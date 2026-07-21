@@ -48,7 +48,7 @@
   min-height: calc(100svh - 64px);
   display: flex;
   align-items: center;
-  padding-block: var(--hz-section-sm);
+  padding-block: var(--hz-section-md);
   overflow: hidden;
 }
 .heroKicker {
@@ -67,11 +67,17 @@
   line-height: 0.96;
   letter-spacing: -0.03em;
 }
+/* seconda riga in outline (intenzionale, editoriale) — solida su mobile */
 .heroTitle em {
   font-style: normal;
-  color: var(--hz-bg-2);
-  -webkit-text-stroke: 1px var(--hz-ink);
   color: transparent;
+  -webkit-text-stroke: 1.4px var(--hz-ink);
+}
+@media (max-width: 640px) {
+  .heroTitle em {
+    color: var(--hz-ink);
+    -webkit-text-stroke: 0;
+  }
 }
 .heroSub {
   max-width: 42ch;
@@ -135,6 +141,41 @@
 @media (min-width: 900px) {
   .heroInner { grid-template-columns: 1.15fr 0.85fr; gap: var(--hz-space-xl); }
   .heroMedia { aspect-ratio: 3 / 4; }
+}
+
+/* ═══════════ 02 · INTRODUCTION (signal) ═══════════ */
+.introGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--hz-space-lg);
+  align-items: start;
+}
+.introLead {
+  font-size: var(--hz-t-body-lg);
+  max-width: 42ch;
+}
+.introStats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--hz-space-md);
+  margin: 0;
+}
+.introStats dt {
+  color: var(--hz-ink-mute);
+  margin-bottom: var(--hz-space-2xs);
+}
+.introStats dd {
+  font-size: var(--hz-t-body-lg);
+}
+@media (min-width: 768px) {
+  .introGrid {
+    grid-template-columns: 1.1fr 1fr;
+    gap: var(--hz-space-xl);
+    align-items: center;
+  }
+  .introStats {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 /* ── bottoni ── */

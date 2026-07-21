@@ -63,10 +63,10 @@ export default function Home() {
                     </span>
                   </div>
                   <div className={styles.heroActions}>
-                    <Link href="/events" className={`${styles.btn} ${styles.btnSolid}`}>
+                    <Link href="#events" className={`${styles.btn} ${styles.btnSolid}`}>
                       Tickets
                     </Link>
-                    <Link href="/events" className={`${styles.btn} ${styles.btnGhost}`}>
+                    <Link href="#events" className={`${styles.btn} ${styles.btnGhost}`}>
                       All events
                     </Link>
                   </div>
@@ -91,24 +91,48 @@ export default function Home() {
         </svg>
       </Section>
 
-      {/* ═══ 02 · EVENTS (white) ═══ */}
+      {/* ═══ 02 · INTRODUCTION (signal) ═══ */}
+      <Section surface="signal" space="lg" id="intro">
+        <div className={styles.introGrid}>
+          <p className={styles.introLead}>
+            Independent nights in Bologna and across Emilia-Romagna — minimal &amp; deep
+            tech, booked like we&rsquo;d pay to see them ourselves. The visual changes; the
+            information stays stable.
+          </p>
+          <dl className={styles.introStats}>
+            <div>
+              <dt className="hz-mono">Base</dt>
+              <dd>Bologna, IT</dd>
+            </div>
+            <div>
+              <dt className="hz-mono">Since</dt>
+              <dd>2023</dd>
+            </div>
+            <div>
+              <dt className="hz-mono">Sound</dt>
+              <dd>Minimal &amp; deep tech</dd>
+            </div>
+            <div>
+              <dt className="hz-mono">Homes</dt>
+              <dd>Kindergarten · Buongiorno Classic</dd>
+            </div>
+          </dl>
+        </div>
+      </Section>
+
+      {/* ═══ 03 · EVENTS (white) ═══ */}
       <Section surface="white" space="lg" id="events">
-        <p className={styles.intro}>
-          Independent nights in Bologna and across Emilia-Romagna — minimal &amp; deep
-          tech, booked like we&rsquo;d pay to see them ourselves. The visual changes; the
-          information stays stable.
-        </p>
         <div className={styles.secHead}>
           <span className={`${styles.secKicker} hz-mono`}>01 / Events</span>
           <h2 className={styles.secTitle}>On the calendar.</h2>
-          <Link href="/events" className={styles.secLink}>
+          <Link href="#events" className={styles.secLink}>
             Full calendar ↗
           </Link>
         </div>
         <div className={styles.eventsLayout}>
           <div className={styles.eventList}>
             {up.map((e) => (
-              <Link key={e.n} href="/events" className={styles.eventRow}>
+              <Link key={e.n} href="#events" className={styles.eventRow}>
                 <span className={styles.eRowDate}>{dowDate(e)}</span>
                 <span className={styles.eRowMain}>
                   <span className={styles.eRowTitle}>{e.title}</span>
@@ -128,7 +152,7 @@ export default function Home() {
                 </span>
               </Link>
             ))}
-            <Link href="/archive" className={styles.pastLink}>
+            <Link href="#archive" className={styles.pastLink}>
               <span>Past events</span>
               <span>Archive ↗</span>
             </Link>
@@ -169,7 +193,7 @@ export default function Home() {
               attention back on the selection, the dancefloor, and the energy shared
               between clubbers.
             </p>
-            <Link href="/about" className={`${styles.btn} ${styles.btnGhost} ${styles.manifestoLink}`}>
+            <Link href="#manifesto" className={`${styles.btn} ${styles.btnGhost} ${styles.manifestoLink}`}>
               Read the manifesto ↗
             </Link>
           </div>
@@ -194,7 +218,7 @@ export default function Home() {
           {ROSTER.map((slug, i) => {
             const a = ARTISTS[slug]
             return (
-              <Link key={slug} href={`/artists/${slug}`} className={styles.artistRow}>
+              <Link key={slug} href="#artists" className={styles.artistRow}>
                 <span className={styles.aNum}>{String(i + 1).padStart(2, '0')}</span>
                 <span className={styles.aName}>{a.name}</span>
                 <span className={styles.aRole}>{a.role}</span>
@@ -238,7 +262,7 @@ export default function Home() {
         <div className={styles.secHead}>
           <span className={`${styles.secKicker} hz-mono`}>05 / Media</span>
           <h2 className={styles.secTitle}>Reading the signal.</h2>
-          <Link href="/media" className={styles.secLink}>
+          <Link href="#media" className={styles.secLink}>
             All media ↗
           </Link>
         </div>
@@ -246,7 +270,7 @@ export default function Home() {
           {ARTICLES.map((a, i) => (
             <Link
               key={a.slug}
-              href={`/media/${a.slug}`}
+              href="#media"
               className={`${styles.mediaCard} ${i === 0 ? styles.mediaLead : ''}`}
             >
               <div className={styles.mcImg}>
@@ -294,7 +318,7 @@ export default function Home() {
           ))}
         </div>
         <Link
-          href="/archive"
+          href="#archive"
           className={`${styles.btn} ${styles.btnGhost}`}
           style={{ marginTop: 'var(--hz-space-lg)' }}
         >
@@ -307,7 +331,7 @@ export default function Home() {
         <div className={styles.secHead}>
           <span className={`${styles.secKicker} hz-mono`}>07 / Shop</span>
           <h2 className={styles.secTitle}>Hertz uniform.</h2>
-          <Link href="/shop" className={styles.secLink}>
+          <Link href="#shop" className={styles.secLink}>
             Visit shop ↗
           </Link>
         </div>
@@ -335,7 +359,7 @@ export default function Home() {
               <span className={styles.shopCat}>Headwear · soon</span>
             </div>
             <Link
-              href="/shop"
+              href="#shop"
               className={`${styles.btn} ${styles.btnSolid}`}
               style={{ marginTop: 'var(--hz-space-md)' }}
             >
@@ -352,15 +376,15 @@ export default function Home() {
         </p>
         <h2 className={styles.bookTitle}>Bring Hertz into your space.</h2>
         <div className={styles.bookActions}>
-          <Link href="/bookings" className={styles.bookRow}>
+          <Link href="#booking" className={styles.bookRow}>
             <span>Artist booking</span>
             <span aria-hidden="true">↗</span>
           </Link>
-          <Link href="/bookings" className={styles.bookRow}>
+          <Link href="#booking" className={styles.bookRow}>
             <span>Event collaboration</span>
             <span aria-hidden="true">↗</span>
           </Link>
-          <Link href="/bookings" className={styles.bookRow}>
+          <Link href="#booking" className={styles.bookRow}>
             <span>Press &amp; partnerships</span>
             <span aria-hidden="true">↗</span>
           </Link>

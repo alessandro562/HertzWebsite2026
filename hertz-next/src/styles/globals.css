@@ -17,6 +17,9 @@
 :root {
   --hz-font-display: var(--font-hz), 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --hz-font-body: var(--font-hz), 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  /* ABC Monument (quando licenziato) → IBM Plex Mono self-hosted → fallback */
+  --hz-font-mono: 'ABC Monument Grotesk Semi-Mono', var(--font-hz-mono),
+    'Space Mono', ui-monospace, monospace;
 }
 
 /* ── reset ── */
@@ -32,6 +35,7 @@ html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   scroll-behavior: auto; /* Lenis gestisce lo smooth scroll */
+  scroll-padding-top: 5rem; /* gli anchor atterrano sotto l'header sticky */
 }
 
 body {

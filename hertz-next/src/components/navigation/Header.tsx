@@ -5,16 +5,16 @@ import { useEffect, useRef, useState } from 'react'
 import { NAV_ITEMS } from './nav-items'
 import styles from './Header.module.css'
 
-const DARK_SURFACES = new Set(['cold-blue', 'ink'])
-
 /**
- * Header sticky con CONTRASTO ADATTIVO: legge la superficie della sezione
- * sotto la barra e imposta il tono (light/dark) del testo → sempre leggibile
- * su ogni superficie. Include MobileMenu full-screen (target ≥44px).
+ * Header sticky con CONTRASTO ADATTIVO: adotta il `data-surface` della sezione
+ * sotto la barra → testo sempre leggibile su ogni superficie, con un backdrop
+ * leggero (surface-matched, no glassmorphism) solo dopo lo scroll.
+ * Include MobileMenu full-screen (target ≥44px).
  */
 export default function Header() {
   const ref = useRef<HTMLElement>(null)
-  const [tone, setTone] = useState<'light' | 'dark'>('light')
+  const [surface, setSurface] = useState('signal')
+  const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
@@ -23,17 +23,18 @@ export default function Header() {
     let raf = 0
     const update = () => {
       raf = 0
+      setScrolled(window.scrollY > 8)
       const y = header.getBoundingClientRect().bottom - 1
       const sections = Array.from(document.querySelectorAll('main [data-surface]'))
-      let surf = 'white'
+      let surf = 'signal'
       for (const s of sections) {
         const r = s.getBoundingClientRect()
         if (r.top <= y && r.bottom > y) {
-          surf = s.getAttribute('data-surface') || 'white'
+          surf = s.getAttribute('data-surface') || 'signal'
           break
         }
       }
-      setTone(DARK_SURFACES.has(surf) ? 'dark' : 'light')
+      setSurface(surf)
     }
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(update)
@@ -56,7 +57,7 @@ export default function Header() {
   }, [open])
 
   return (
-    <header ref={ref} className={styles.header} data-tone={tone}>
+    <header ref={ref} className={styles.header} data-surface={surface} data-scrolled={scrolled}>
       <div className={styles.inner}>
         <Link href="/" className={styles.logo} aria-label="HERTZ — home">
           hertz
@@ -71,7 +72,7 @@ export default function Header() {
         </nav>
 
         <div className={styles.actions}>
-          <Link href="/events" className={styles.tickets}>
+          <Link href="#events" className={styles.tickets}>
             Tickets
           </Link>
           <button
@@ -105,7 +106,7 @@ export default function Header() {
             </Link>
           ))}
           <Link
-            href="/events"
+            href="#events"
             className={styles.menuTickets}
             onClick={() => setOpen(false)}
           >
