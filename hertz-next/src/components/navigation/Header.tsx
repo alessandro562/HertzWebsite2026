@@ -72,7 +72,7 @@ export default function Header() {
         </nav>
 
         <div className={styles.actions}>
-          <Link href="#events" className={styles.tickets}>
+          <Link href="/events" className={styles.tickets}>
             Tickets
           </Link>
           <button
@@ -106,7 +106,7 @@ export default function Header() {
             </Link>
           ))}
           <Link
-            href="#events"
+            href="/events"
             className={styles.menuTickets}
             onClick={() => setOpen(false)}
           >

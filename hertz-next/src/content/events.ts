@@ -140,3 +140,32 @@ export function archive(now: Date = new Date()): HertzEvent[] {
   return EVENTS.filter((e) => isPast(e, now))
     .sort((a, b) => (endOfDay(b.iso) ?? 0) - (endOfDay(a.iso) ?? 0));
 }
+
+/** slug URL-safe da testo libero */
+function slugify(s: string): string {
+  return s
+    .toLowerCase()
+    .normalize('NFKD')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+}
+
+/** slug stabile e univoco di un evento: numero di catalogo + titolo.
+ *  Il prefisso `n` garantisce unicità (più date condividono lo stesso titolo). */
+export function eventSlug(e: HertzEvent): string {
+  return `${e.n}-${slugify(e.title)}`;
+}
+
+export function findEventBySlug(slug: string): HertzEvent | undefined {
+  return EVENTS.find((e) => eventSlug(e) === slug);
+}
+
+/** anno (numero) di un evento, per raggruppare l'archivio */
+export function eventYear(e: HertzEvent): number {
+  return +e.iso.slice(0, 4);
+}
+
+/** tutti gli slug (per generateStaticParams) */
+export function allEventSlugs(): string[] {
+  return EVENTS.map(eventSlug);
+}

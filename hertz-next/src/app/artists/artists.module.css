@@ -1,0 +1,31 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--hz-gutter) var(--hz-gutter);
+}
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.booking {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--hz-space-md);
+}
+.bookingTitle {
+  font-size: var(--hz-t-section);
+}
+.bookingText {
+  margin-top: var(--hz-space-sm);
+  color: var(--hz-ink-mute);
+  max-width: 44ch;
+}

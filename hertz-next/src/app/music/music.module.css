@@ -1,0 +1,11 @@
+.follow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--hz-space-md);
+}
+.followTitle {
+  font-size: var(--hz-t-section);
+  max-width: 16ch;
+}

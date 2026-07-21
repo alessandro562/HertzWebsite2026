@@ -44,17 +44,17 @@ export default function Footer() {
             <a href={SOUNDCLOUD} target="_blank" rel="noreferrer" className={styles.fLink}>
               SoundCloud ↗
             </a>
-            <Link href="#booking" className={styles.fLink}>
+            <Link href="/bookings" className={styles.fLink}>
               Booking
             </Link>
           </div>
 
           <div className={styles.col}>
             <span className="hz-mono">Info</span>
-            <Link href="#manifesto" className={styles.fLink}>
+            <Link href="/about" className={styles.fLink}>
               About
             </Link>
-            <Link href="#manifesto" className={styles.fLink}>
+            <Link href="/about" className={styles.fLink}>
               Manifesto
             </Link>
             <span className={styles.fLink} aria-disabled="true" style={{ opacity: 0.5 }}>

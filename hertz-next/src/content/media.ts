@@ -80,6 +80,8 @@ export const ARTICLES: Article[] = [
   },
 ]
 
+import { ARTICLE_BODIES } from './article-bodies'
+
 /** dd.mm.yy da ISO */
 export function articleDate(a: Article): string {
   const p = a.date.split('-')
@@ -88,4 +90,34 @@ export function articleDate(a: Article): string {
 
 export function featuredArticle(): Article {
   return ARTICLES.find((a) => a.featured) ?? ARTICLES[0]
+}
+
+export function articleBySlug(slug: string): Article | undefined {
+  return ARTICLES.find((a) => a.slug === slug)
+}
+
+/** corpo HTML reale dell'articolo (da article-bodies.ts) */
+export function articleBody(slug: string): string {
+  return ARTICLE_BODIES[slug]?.body ?? ''
+}
+
+/** articoli correlati (oggetti Article), dai slug in article-bodies.ts */
+export function relatedArticles(slug: string): Article[] {
+  return (ARTICLE_BODIES[slug]?.related ?? [])
+    .map(articleBySlug)
+    .filter((a): a is Article => Boolean(a))
+}
+
+/** rubrica → superficie canonica (per accenti editoriali) */
+export function rubricSurface(r: Rubric): 'signal' | 'paper' | 'cold-blue' | 'white' {
+  switch (r) {
+    case 'SIGNAL':
+      return 'signal'
+    case 'RESIDENT':
+      return 'cold-blue'
+    case 'RADAR':
+      return 'paper'
+    default:
+      return 'white'
+  }
 }

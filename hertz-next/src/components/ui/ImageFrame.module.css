@@ -1,0 +1,36 @@
+.frame {
+  margin: 0;
+}
+
+.box {
+  position: relative;
+  overflow: hidden;
+  background: var(--hz-bg-2);
+}
+
+.img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* con aspect-ratio: l'immagine riempie la cornice (cover) */
+.box[data-ratio] .img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cap {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+  margin-top: var(--hz-space-xs);
+  font-family: var(--hz-font-mono);
+  font-size: var(--hz-t-meta);
+  letter-spacing: var(--hz-tracking-mono);
+  text-transform: uppercase;
+  color: var(--hz-ink-mute);
+}
