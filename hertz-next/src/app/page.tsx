@@ -4,6 +4,9 @@ import Section from '@/components/ui/Section'
 import HomeHero from '@/components/home/HomeHero'
 import HeroKinetic from '@/components/home/HeroKinetic'
 import KineticBand from '@/components/home/KineticBand'
+import BrandIdentity from '@/components/home/BrandIdentity'
+import Partners from '@/components/home/Partners'
+import MerchWaitlist from '@/components/home/MerchWaitlist'
 import Reveal, { Stagger, StaggerItem } from '@/motion/Reveal'
 import SignatureTitle from '@/motion/SignatureTitle'
 import MaskImage from '@/motion/MaskImage'
@@ -100,6 +103,13 @@ export default function Home() {
         labelRight="FROM CLUBBERS · FOR CLUBBERS"
       />
 
+      {/* ═══ 02b · VISUAL IDENTITY (paper) ═══ */}
+      <Section surface="paper" space="lg" id="identity">
+        <Reveal variant="up">
+          <BrandIdentity />
+        </Reveal>
+      </Section>
+
       {/* ═══ 03 · EVENTS (white) ═══ */}
       <Section surface="white" space="lg" id="events">
         <Reveal variant="up" className={styles.secHead}>
@@ -173,10 +183,11 @@ export default function Home() {
             </SignatureTitle>
             <Reveal variant="up" delay={0.2}>
               <p className={styles.manifestoBody}>
-                Hertz was born in Bologna in 2023, out of one conviction: the night was
-                turning into something to watch, and less something to live. So we put the
-                attention back on the selection, the dancefloor, and the energy shared
-                between clubbers.
+                Hertz was born in Bologna in 2023, out of one conviction: the night was turning
+                into something to watch, and less something to live. So we put the attention back
+                on what actually matters — the selection, the dancefloor, and the energy shared
+                between clubbers. A floor where the record does the talking, where a good one can
+                roll for nine minutes before anyone checks the time. The rest is just volume.
               </p>
               <Link href="/about" className={`${styles.btn} ${styles.btnGhost} ${styles.manifestoLink}`}>
                 Read the manifesto ↗
@@ -285,8 +296,8 @@ export default function Home() {
               06 / Archive
             </p>
             <SignatureTitle as="h2" className={styles.archiveTitle} stagger={0.1}>
-              <span>Wicked</span>
-              <span>nights.</span>
+              <span>Nights on</span>
+              <span>record.</span>
             </SignatureTitle>
           </div>
           <p className={styles.archiveIntro}>
@@ -361,6 +372,18 @@ export default function Home() {
             </Link>
           </div>
         </Reveal>
+        <div style={{ marginTop: 'var(--hz-space-xl)' }}>
+          <Reveal variant="up" delay={0.15}>
+            <MerchWaitlist />
+          </Reveal>
+        </div>
+      </Section>
+
+      {/* ═══ 08b · IN COLLABORATION WITH (white) ═══ */}
+      <Section surface="white" space="md" id="partners">
+        <Reveal variant="up">
+          <Partners />
+        </Reveal>
       </Section>
 
       {/* ═══ 09 · BOOKING (signal) ═══ */}
@@ -369,8 +392,8 @@ export default function Home() {
           08 / Connect
         </p>
         <SignatureTitle as="h2" className={styles.bookTitle} stagger={0.09}>
-          <span>Bring Hertz into</span>
-          <span>your space.</span>
+          <span>Bring Hertz to</span>
+          <span>your room.</span>
         </SignatureTitle>
         <Stagger className={styles.bookActions} gap={0.08}>
           <StaggerItem variant="up">

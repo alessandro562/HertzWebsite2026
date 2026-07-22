@@ -1,0 +1,46 @@
+.kicker {
+  color: var(--hz-ink-mute);
+  display: block;
+  margin-bottom: var(--hz-space-md);
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--hz-space-md);
+}
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16 / 7;
+  border: 1px solid var(--hz-line);
+  padding: var(--hz-space-lg);
+}
+.card img {
+  max-width: 62%;
+  max-height: 70%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.85;
+  transition: opacity var(--hz-ui) var(--hz-ease-out);
+  /* i loghi partner sono monocromi: li normalizzo sulla superficie chiara */
+  filter: grayscale(1);
+}
+.card:hover img {
+  opacity: 1;
+}
+.name {
+  position: absolute;
+  left: var(--hz-space-sm);
+  bottom: var(--hz-space-sm);
+  color: var(--hz-ink-mute);
+  font-size: var(--hz-t-meta);
+  letter-spacing: var(--hz-tracking-mono);
+}
