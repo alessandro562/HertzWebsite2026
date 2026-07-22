@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import type { CSSProperties } from 'react'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Section from '@/components/ui/Section'
@@ -7,16 +8,15 @@ import Button from '@/components/ui/Button'
 import ImageFrame from '@/components/ui/ImageFrame'
 import StatusBadge, { type Status } from '@/components/ui/StatusBadge'
 import EventPosterPortal from '@/components/events/EventPosterPortal'
+import TicketModule from '@/components/events/TicketModule'
 import TicketStickyBar from '@/components/events/TicketStickyBar'
 import ViewMorph from '@/motion/ViewMorph'
 import FrequencyCut from '@/motion/FrequencyCut'
-import WaveformPulse from '@/motion/WaveformPulse'
-import Reveal, { Stagger, StaggerItem } from '@/motion/Reveal'
+import { Stagger, StaggerItem } from '@/motion/Reveal'
 import {
   allEventSlugs,
   findEventBySlug,
   dowDate,
-  shortDate,
   isPast,
   adjacentEvents,
   eventSlug,
@@ -66,75 +66,94 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
       )
     : undefined
 
+  const ticketState = past ? 'archive' : e.onSale ? 'on-sale' : 'soon'
+
+  /* bill → righe numerate editoriali; i nomi che corrispondono a un resident
+     Hertz reale diventano link (frequency underline). Il campo lineup
+     (residents reali sul cartellone) è dato separato dal testo del bill:
+     eventuali resident non già citati testualmente vengono aggiunti in coda,
+     senza inventare nulla — sono dati reali del content layer. */
+  const billNames = e.bill
+    ? e.bill.split('·').map((s) => s.trim()).filter(Boolean)
+    : []
+  const billRows = billNames.map((name) => ({
+    name,
+    resident: residents.find((a) => a.name.toLowerCase() === name.toLowerCase()),
+  }))
+  const matchedSlugs = new Set(billRows.map((r) => r.resident?.slug).filter(Boolean))
+  const extraResidentRows = residents
+    .filter((a) => !matchedSlugs.has(a.slug))
+    .map((a) => ({ name: a.name, resident: a }))
+  const lineupRows = [...billRows, ...extraResidentRows]
+
   return (
     <main id="main">
-      {/* ── titolo compositivo + poster integrato nella griglia ── */}
-      <Section surface="white" space="md" style={{ paddingTop: 'var(--hz-section-sm)' }}>
+      {/* ── hero modulare 12-col: numero laterale · poster · contenuto+ticket ── */}
+      <Section
+        surface="white"
+        space="md"
+        style={{ paddingTop: 'var(--hz-section-sm)', paddingBottom: 0 }}
+      >
         <p className={`${styles.crumb} hz-mono`}>
           <Link href="/events">Events</Link>
           <span aria-hidden="true"> / </span>
           <span>N°{e.n}</span>
         </p>
 
-        <div className={styles.titleZone}>
-          <div className={styles.tags}>
-            <ViewMorph name={`event-status-${slug}`}>
-              <StatusBadge status={status} />
-            </ViewMorph>
-            {e.badge && <span className={`${styles.badge} hz-mono`}>{e.badge}</span>}
+        <div
+          className={styles.hero}
+          data-status={status}
+          style={{ viewTransitionName: `event-frame-${slug}` } as CSSProperties}
+        >
+          <div className={styles.heroNum} aria-hidden="true">
+            <span className="hz-mono">N°{e.n}</span>
           </div>
-          <ViewMorph name={`event-title-${slug}`}>
-            <h1 className={styles.title}>{e.title}</h1>
-          </ViewMorph>
-        </div>
 
-        <div className={styles.grid}>
-          <EventPosterPortal
-            image={e.poster}
-            n={e.n}
-            status={status}
-            date={dowDate(e)}
-            title={e.title}
-            venue={e.venue}
-            viewTransitionName={`event-poster-${slug}`}
-            priority
-            className={styles.posterSlot}
-          />
+          <div className={styles.heroPoster}>
+            <EventPosterPortal
+              image={e.poster}
+              n={e.n}
+              status={status}
+              date={dowDate(e)}
+              title={e.title}
+              venue={e.venue}
+              viewTransitionName={`event-poster-${slug}`}
+              priority
+              fill
+              className={styles.posterSlot}
+            />
+          </div>
 
-          <div className={styles.meta} id="ticket-cta">
-            <ViewMorph name={`event-date-${slug}`}>
-              <p className={styles.when}>
-                {dowDate(e)}
-                {e.time ? ` · ${e.time.replace(/^[A-Z]{3} · /, '')}` : ''}
-              </p>
-            </ViewMorph>
-            <p className={styles.where}>
-              {e.venue} · {e.city}
-            </p>
-
-            <dl className={styles.facts}>
-              <div>
-                <dt className="hz-mono">Date</dt>
-                <dd>{shortDate(e)}</dd>
-              </div>
-              <div>
-                <dt className="hz-mono">Catalogue</dt>
-                <dd>N°{e.n}</dd>
-              </div>
-            </dl>
-
-            <div className={styles.cta}>
-              {ticketAction && ticketHref && (
-                <span className={styles.ctaSignal}>
-                  <WaveformPulse state="active" className={styles.ctaWave} />
-                  <Button href={ticketHref} external arrow>
-                    Reserve by email
-                  </Button>
+          <div className={styles.heroContent}>
+            <div className={styles.heroTop}>
+              <ViewMorph name={`event-status-${slug}`}>
+                <StatusBadge status={status} />
+              </ViewMorph>
+              <ViewMorph name={`event-date-${slug}`}>
+                <span className={`${styles.when} hz-mono`}>
+                  {dowDate(e)}
+                  {e.time ? ` · ${e.time.replace(/^[A-Z]{3} · /, '')}` : ''}
                 </span>
-              )}
-              {!past && !e.onSale && (
-                <span className={styles.soonNote}>Line-up &amp; tickets announced soon.</span>
-              )}
+              </ViewMorph>
+            </div>
+
+            <FrequencyCut variant="editorial" trigger="inView" className={styles.heroCut} />
+
+            <div className={styles.heroMid}>
+              <ViewMorph name={`event-title-${slug}`}>
+                <h1 className={styles.title}>{e.title}</h1>
+              </ViewMorph>
+              <p className={styles.where}>
+                {e.venue} · {e.city}
+              </p>
+              {e.badge && <p className={`${styles.badge} hz-mono`}>{e.badge}</p>}
+            </div>
+
+            <div className={styles.heroTicket} id="ticket-cta">
+              <TicketModule state={ticketState} href={ticketHref} external={false} />
+            </div>
+
+            <div className={styles.heroFoot}>
               {past && gallery.length > 0 && (
                 <Button href="#gallery" variant="ghost">
                   View gallery
@@ -148,28 +167,33 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
         </div>
       </Section>
 
-      {/* ── line-up: gerarchia reale (bill → residents), niente reveal identici ── */}
-      <Section surface="paper" space="lg">
-        <SectionLabel kicker="Line-up" />
-        <FrequencyCut variant="editorial" trigger="inView" />
-
-        <Reveal as="p" variant="mask" duration={0.8} className={styles.bill}>
-          {e.bill || 'Line-up to be announced.'}
-        </Reveal>
-        {residents.length > 0 && (
-          <div className={styles.residents}>
-            <span className={`${styles.residentsLabel} hz-mono`}>Hertz on this bill</span>
-            <Stagger className={styles.residentChips} gap={0.09}>
-              {residents.map((a) => (
-                <StaggerItem key={a.slug} variant="up" style={{ display: 'inline-flex' }}>
-                  <Link href={`/artists/${a.slug}`} className={styles.chip}>
-                    {a.name} ↗
-                  </Link>
+      {/* ── line-up: righe editoriali numerate (bill → residents reali) ──
+         gap ridotto (96-120px desktop, 64-80px mobile): la Line-up è
+         continuazione dell'evento, non una pagina successiva. */}
+      <Section surface="paper" space="lg" style={{ paddingTop: 'clamp(64px, 9vw, 120px)' }}>
+        <SectionLabel kicker="02 / Line-up" />
+        <div className={styles.lineup}>
+          <FrequencyCut variant="editorial" trigger="inView" className={styles.lineupCut} />
+          {lineupRows.length > 0 ? (
+            <Stagger className={styles.lineupList} gap={0.07}>
+              {lineupRows.map((row, i) => (
+                <StaggerItem key={`${row.name}-${i}`} variant="up" className={styles.lineupRow}>
+                  <span className={`${styles.lineupIndex} hz-mono`}>{String(i + 1).padStart(2, '0')}</span>
+                  {row.resident ? (
+                    <Link href={`/artists/${row.resident.slug}`} className={styles.lineupName}>
+                      {row.name}
+                    </Link>
+                  ) : (
+                    <span className={styles.lineupNamePlain}>{row.name}</span>
+                  )}
+                  {row.resident && <span className={`${styles.lineupTag} hz-mono`}>Hertz resident</span>}
                 </StaggerItem>
               ))}
             </Stagger>
-          </div>
-        )}
+          ) : (
+            <p className={styles.bill}>Line-up to be announced.</p>
+          )}
+        </div>
       </Section>
 
       {/* ── gallery (solo eventi con servizio fotografico reale) ── */}

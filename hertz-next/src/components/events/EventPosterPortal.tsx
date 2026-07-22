@@ -6,6 +6,7 @@ import { useState, type PointerEvent, type ReactNode } from 'react'
 import { motion, useMotionValue, useTransform, useReducedMotion } from 'motion/react'
 import StatusBadge, { type Status } from '@/components/ui/StatusBadge'
 import ViewMorph from '@/motion/ViewMorph'
+import PosterFallback from './PosterFallback'
 import styles from './EventPosterPortal.module.css'
 
 interface EventPosterPortalProps {
@@ -23,6 +24,10 @@ interface EventPosterPortalProps {
   viewTransitionName?: string
   priority?: boolean
   className?: string
+  /** riempie l'altezza del contenitore (crop, meta in overlay) invece di
+   * un aspect-ratio fisso con meta sotto — usato nell'hero del dettaglio
+   * evento perché il contenuto testuale, non il poster, definisce l'altezza. */
+  fill?: boolean
 }
 
 /**
@@ -53,6 +58,7 @@ export default function EventPosterPortal({
   viewTransitionName,
   priority = false,
   className = '',
+  fill = false,
 }: EventPosterPortalProps) {
   const reduce = useReducedMotion()
   const [inView, setInView] = useState(false)
@@ -74,8 +80,8 @@ export default function EventPosterPortal({
 
   const surface: ReactNode = image ? (
     <motion.div
-      className={styles.frame}
-      style={{ aspectRatio }}
+      className={`${styles.frame} ${fill ? styles.frameFill : ''}`.trim()}
+      style={fill ? undefined : { aspectRatio }}
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, amount: 0.35 }}
@@ -84,8 +90,8 @@ export default function EventPosterPortal({
     >
       <motion.div
         className={styles.clipInner}
-        initial={reduce ? { clipPath: 'inset(0 0 0% 0)' } : { clipPath: 'inset(0 0 100% 0)' }}
-        animate={inView ? { clipPath: 'inset(0 0 0% 0)' } : undefined}
+        initial={{ clipPath: 'inset(0 0 100% 0)' }}
+        animate={reduce || inView ? { clipPath: 'inset(0 0 0% 0)' } : undefined}
         transition={{ duration: reduce ? 0 : 0.85, ease: [0.16, 1, 0.3, 1] }}
       >
         <img src={image} alt={`Poster — ${title}`} className={styles.img} loading={priority ? 'eager' : 'lazy'} decoding="async" />
@@ -95,24 +101,26 @@ export default function EventPosterPortal({
       </motion.div>
     </motion.div>
   ) : (
-    <div className={styles.fallback} style={{ aspectRatio }}>
-      <span className="hz-mono">Poster</span>
-      <span className="hz-mono">Coming soon</span>
+    <div className={`${styles.fallback} ${fill ? styles.frameFill : ''}`.trim()} style={fill ? undefined : { aspectRatio }}>
+      <PosterFallback n={n} date={date} city={venue} className={styles.fallbackInner} />
     </div>
   )
 
   const body = (
     <div
-      className={`${styles.portal} ${className}`.trim()}
+      className={`${styles.portal} ${fill ? styles.portalFill : ''} ${className}`.trim()}
       style={{ perspective: 1200 }}
       onPointerMove={onPointerMove}
       onPointerLeave={onPointerLeave}
     >
-      <motion.div className={styles.tilt} style={{ rotateX: rotX, rotateY: rotY }}>
+      <motion.div
+        className={`${styles.tilt} ${fill ? styles.tiltFill : ''}`.trim()}
+        style={{ rotateX: rotX, rotateY: rotY }}
+      >
         {viewTransitionName ? <ViewMorph name={viewTransitionName}>{surface}</ViewMorph> : surface}
-        <span className={styles.meta} aria-hidden="true">
+        <span className={`${styles.meta} ${fill ? styles.metaOverlay : ''}`.trim()} aria-hidden="true">
           <span className="hz-mono">N°{n}</span>
-          <StatusBadge status={status} />
+          {!fill && <StatusBadge status={status} />}
         </span>
       </motion.div>
     </div>

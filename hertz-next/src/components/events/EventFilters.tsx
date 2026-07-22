@@ -1,17 +1,16 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import { type HertzEvent, isPast } from '@/content/events'
-import EventRow from './EventRow'
+import { type HertzEvent } from '@/content/events'
+import EventModule from './EventModule'
 import styles from './EventFilters.module.css'
 
 type Filter = 'all' | 'on-sale' | 'soon'
 
 /**
- * Filtro di stato per il calendario upcoming — l'unico filtro davvero utile
- * dato il dataset reale (solo 2 anni, 4 città, poco affollato): "cosa posso
- * prenotare ORA" vs "date ancora da annunciare". Client-side, nessuna
- * richiesta di rete. Il calendario resta comprensibile anche senza motion.
+ * Header "Upcoming" + filtro di stato integrato + lista di EventModule.
+ * Il filtro (All / On sale / Coming soon) è l'unico utile sul dataset reale;
+ * client-side, nessuna richiesta di rete. Comprensibile anche senza motion.
  */
 export default function EventFilters({ events }: { events: HertzEvent[] }) {
   const [filter, setFilter] = useState<Filter>('all')
@@ -19,8 +18,8 @@ export default function EventFilters({ events }: { events: HertzEvent[] }) {
   const counts = useMemo(
     () => ({
       all: events.length,
-      'on-sale': events.filter((e) => !isPast(e) && e.onSale).length,
-      soon: events.filter((e) => !isPast(e) && !e.onSale).length,
+      'on-sale': events.filter((e) => e.onSale).length,
+      soon: events.filter((e) => !e.onSale).length,
     }),
     [events],
   )
@@ -33,24 +32,27 @@ export default function EventFilters({ events }: { events: HertzEvent[] }) {
 
   return (
     <div>
-      <div className={styles.chips} role="group" aria-label="Filter events by status">
-        {(['all', 'on-sale', 'soon'] as const).map((f) => (
-          <button
-            key={f}
-            type="button"
-            className={`${styles.chip} hz-mono`}
-            data-active={filter === f}
-            aria-pressed={filter === f}
-            onClick={() => setFilter(f)}
-          >
-            {f === 'all' ? 'All' : f === 'on-sale' ? 'On sale' : 'Coming soon'}
-            <span className={styles.count}>{counts[f]}</span>
-          </button>
-        ))}
+      <div className={styles.bar}>
+        <span className={`${styles.label} hz-mono`}>More upcoming</span>
+        <div className={styles.chips} role="group" aria-label="Filter events by status">
+          {(['all', 'on-sale', 'soon'] as const).map((f) => (
+            <button
+              key={f}
+              type="button"
+              className={`${styles.chip} hz-mono`}
+              data-active={filter === f}
+              aria-pressed={filter === f}
+              onClick={() => setFilter(f)}
+            >
+              {f === 'all' ? 'All' : f === 'on-sale' ? 'On sale' : 'Soon'}
+              <span className={styles.count}>{counts[f]}</span>
+            </button>
+          ))}
+        </div>
       </div>
       <div className={styles.list}>
         {filtered.length > 0 ? (
-          filtered.map((e) => <EventRow key={e.n} event={e} />)
+          filtered.map((e) => <EventModule key={e.n} event={e} />)
         ) : (
           <p className={styles.empty}>No dates match this filter right now.</p>
         )}

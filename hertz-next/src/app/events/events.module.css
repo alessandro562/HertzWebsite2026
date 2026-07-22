@@ -1,61 +1,90 @@
-.list {
-  margin-top: var(--hz-space-lg);
-}
-
-.empty {
-  padding: var(--hz-space-lg) 0;
-  color: var(--hz-ink-mute);
-  border-top: 1px solid var(--hz-line);
-  border-bottom: 1px solid var(--hz-line);
-}
-
-.more {
-  margin-top: var(--hz-space-lg);
-}
-
-/* ── featured poster ── */
-.feature {
+/* ── intro compatta: modulo bordato, titolo/descrizione/conteggio serrati ── */
+.intro {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--hz-space-lg);
-  align-items: center;
+  border: 1px solid var(--hz-ink);
 }
-@media (min-width: 768px) {
-  .feature {
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-    gap: clamp(2rem, 5vw, 5rem);
+@media (min-width: 820px) {
+  .intro {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
   }
 }
-
-.featureImg {
-  max-width: 460px;
-}
-
-.featureMeta {
+.introMain {
   display: flex;
   flex-direction: column;
-  gap: var(--hz-space-sm);
+  justify-content: center;
+  gap: 0.5rem;
+  padding: var(--hz-space-md);
 }
-.featureTitle {
-  font-size: var(--hz-t-section);
-  max-width: 16ch;
-}
-.featureVenue {
-  font-size: var(--hz-t-body-lg);
+.introKicker {
   color: var(--hz-ink-mute);
-}
-.featureBill {
-  color: var(--hz-ink-mute);
-  max-width: 40ch;
-}
-.featureCta {
-  margin-top: var(--hz-space-sm);
-  font-family: var(--hz-font-mono);
-  font-size: var(--hz-t-ui);
-  letter-spacing: var(--hz-tracking-mono);
   text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
-.feature:hover .featureCta {
-  text-decoration: underline;
-  text-underline-offset: 0.3em;
+.introTitle {
+  font-size: clamp(2.2rem, 4.5vw, 4rem);
+  letter-spacing: var(--hz-tracking-tight);
+  line-height: 0.95;
+}
+.introSide {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  border-top: 1px solid var(--hz-line);
+}
+@media (min-width: 820px) {
+  .introSide {
+    border-top: none;
+    border-left: 1px solid var(--hz-ink);
+  }
+}
+.introDesc {
+  padding: var(--hz-space-md);
+  color: var(--hz-ink-mute);
+  max-width: 46ch;
+}
+.introCount {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--hz-line);
+}
+.introCount > div {
+  padding: var(--hz-space-sm) var(--hz-space-md);
+}
+.introCount > div + div {
+  border-left: 1px solid var(--hz-line);
+}
+.introCount dt {
+  color: var(--hz-ink-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: var(--hz-t-meta);
+}
+.introCount dd {
+  font-size: var(--hz-t-section);
+  line-height: 1;
+  margin-top: 0.2rem;
+}
+
+.featuredWrap {
+  margin-top: var(--hz-space-md);
+}
+.upcoming {
+  margin-top: var(--hz-space-lg);
+}
+
+/* ── archive head ── */
+.archiveHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.75rem 1.5rem;
+  margin-bottom: var(--hz-space-md);
+}
+.archiveTitle {
+  font-size: var(--hz-t-section);
+  letter-spacing: var(--hz-tracking-tight);
+}
+.archiveCount {
+  color: var(--hz-ink-mute);
+  margin-left: auto;
 }

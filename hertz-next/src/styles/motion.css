@@ -12,6 +12,22 @@
   animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* niente full-page crossfade: il contenuto non nominato (root) scambia
+   senza dissolvenza — solo i gruppi nominati (poster/titolo/data/status)
+   morphano in modo continuo fra calendario ed evento. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* poster: crop continuo durante il morph (non uno stretch) — gli snapshot
+   dei gruppi nominati sono elementi "replaced", object-fit si applica */
+::view-transition-old(*),
+::view-transition-new(*) {
+  object-fit: cover;
+}
+
 /* header ancorato: non scivola/lampeggia durante le transizioni */
 ::view-transition-group(site-header) {
   animation: none;

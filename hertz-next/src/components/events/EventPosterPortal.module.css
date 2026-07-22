@@ -11,10 +11,16 @@
 .portal {
   position: relative;
 }
+.portalFill {
+  height: 100%;
+}
 
 .tilt {
   will-change: transform;
   transform-style: preserve-3d;
+}
+.tiltFill {
+  height: 100%;
 }
 
 /* ── frame: mask di ingresso + print bands + frequency cut ──
@@ -24,6 +30,9 @@
   position: relative;
   overflow: hidden;
   background: var(--hz-bg-2);
+}
+.frameFill {
+  height: 100%;
 }
 .clipInner {
   position: absolute;
@@ -91,14 +100,13 @@
 }
 
 .fallback {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
+  position: relative;
   border: 1px solid var(--hz-line);
-  background: var(--hz-bg-2);
-  color: var(--hz-ink-mute);
+  overflow: hidden;
+}
+.fallbackInner {
+  position: absolute;
+  inset: 0;
 }
 
 /* ── meta: N° + stato, SOTTO il poster (mai incorporato nell'artwork) ── */
@@ -108,5 +116,20 @@
   justify-content: space-between;
   gap: 0.6rem;
   margin-top: 0.6rem;
+  color: var(--hz-ink-mute);
+}
+/* ── variante fill: poster in bleed, meta in overlay sul bordo inferiore
+   (stesso linguaggio del posterTag di FeaturedEvent) ── */
+.metaOverlay {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 3;
+  margin-top: 0;
+  padding: 0.5rem 0.75rem;
+  background: color-mix(in srgb, var(--hz-bg) 84%, transparent);
+  backdrop-filter: blur(6px);
+  border-top: 1px solid var(--hz-line);
   color: var(--hz-ink-mute);
 }
