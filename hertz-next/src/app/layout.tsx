@@ -7,6 +7,7 @@ import SmoothScroll from '@/motion/SmoothScroll'
 import PageTransitionProvider from '@/motion/PageTransitionProvider'
 import Header from '@/components/navigation/Header'
 import Footer from '@/components/navigation/Footer'
+import { SITE } from '@/lib/site'
 
 /**
  * Helvetica Neue self-hosted via next/font/local (nessuna richiesta esterna).
@@ -35,7 +36,7 @@ const mono = IBM_Plex_Mono({
   display: 'swap',
 })
 
-const SITE_URL = 'https://hertzclubbing.com'
+const SITE_URL = SITE.url
 const DESCRIPTION =
   'HERTZ — collettivo clubbing minimal/deep-tech con base a Bologna.'
 

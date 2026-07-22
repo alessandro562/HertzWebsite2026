@@ -1,10 +1,11 @@
 import Link from 'next/link'
 import { NAV_ITEMS } from './nav-items'
+import { SITE } from '@/lib/site'
 import styles from './Footer.module.css'
 
-const EMAIL = 'hertzbologna@gmail.com'
-const INSTAGRAM = 'https://instagram.com/hertz.cc'
-const SOUNDCLOUD = 'https://soundcloud.com/hertzclubbingcollective'
+const EMAIL = SITE.email
+const INSTAGRAM = SITE.instagram
+const SOUNDCLOUD = SITE.soundcloud
 
 /**
  * Footer editoriale su superficie Signal (chiara). Solo canali/dati REALI

@@ -6,6 +6,14 @@
    dove manca il testo completo trovi // TODO:bio.
 
    Path immagine → /assets/... (public/assets nel nuovo progetto).
+
+   // TODO:data — `social.booking` usa 'booking@hertz.cc' su tutti e 4 i
+   // resident (valore ereditato dal sorgente legacy), mentre il dominio
+   // sitewide reale è hertzclubbing.com e l'email di contatto generale in
+   // src/lib/site.ts è hertzbologna@gmail.com. Non ho unificato questo
+   // campo perché non so se booking@hertz.cc è un alias attivo distinto
+   // (es. inbox booking dedicata) o un refuso del sito legacy: richiede
+   // conferma umana della fonte corretta prima di essere corretto o rimosso.
    ──────────────────────────────────────────────────────────── */
 
 import type { ResidentSlug } from './events';
