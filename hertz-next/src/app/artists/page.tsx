@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import Section from '@/components/ui/Section'
 import PageHeader from '@/components/ui/PageHeader'
-import Button from '@/components/ui/Button'
-import ArtistCard from '@/components/artists/ArtistCard'
+import ArtistIndexRow from '@/components/artists/ArtistIndexRow'
+import FrequencyCut from '@/motion/FrequencyCut'
 import { ARTISTS } from '@/content/artists'
 import styles from './artists.module.css'
 
@@ -31,26 +32,21 @@ export default function ArtistsPage() {
           }
           aside={<p className="hz-mono">{ROSTER.length} residents</p>}
         />
-        <div className={styles.grid}>
-          {ROSTER.map((a) => (
-            <ArtistCard key={a.slug} artist={a} />
+        <div className={styles.roster}>
+          {ROSTER.map((a, i) => (
+            <ArtistIndexRow key={a.slug} artist={a} first={i === 0} />
           ))}
         </div>
       </Section>
 
       <Section surface="white" space="md">
-        <div className={styles.booking}>
-          <div>
-            <h2 className={styles.bookingTitle}>Book the collective.</h2>
-            <p className={styles.bookingText}>
-              Residents and back-to-backs for your room, festival or showcase — we reply from
-              Bologna.
-            </p>
-          </div>
-          <Button href="/bookings" arrow>
-            Booking &amp; contact
-          </Button>
-        </div>
+        <FrequencyCut variant="editorial" trigger="inView" className={styles.closingCut} />
+        <p className={styles.closing}>
+          Residents and back-to-backs for your room, festival or showcase —{' '}
+          <Link href="/bookings" className={styles.closingLink}>
+            booking &amp; contact ↗
+          </Link>
+        </p>
       </Section>
     </main>
   )

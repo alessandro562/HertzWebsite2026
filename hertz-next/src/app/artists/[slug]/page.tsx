@@ -5,15 +5,22 @@ import Section from '@/components/ui/Section'
 import SectionLabel from '@/components/ui/SectionLabel'
 import Button from '@/components/ui/Button'
 import ImageFrame from '@/components/ui/ImageFrame'
-import EventRow from '@/components/events/EventRow'
 import MixRow from '@/components/music/MixRow'
+import ArtistSignalGlyph from '@/components/artists/ArtistSignalGlyph'
 import ViewMorph from '@/motion/ViewMorph'
 import ImageReveal from '@/motion/ImageReveal'
+import FrequencyCut from '@/motion/FrequencyCut'
+import WaveformPulse from '@/motion/WaveformPulse'
 import Parallax from '@/motion/Parallax'
 import { Stagger, StaggerItem } from '@/motion/Reveal'
 import { ARTISTS } from '@/content/artists'
-import { forResident, type ResidentSlug } from '@/content/events'
+import { forResident, eventSlug, isPast, dowDate, shortDate, type ResidentSlug } from '@/content/events'
+import { mailto } from '@/lib/site'
 import styles from './artist.module.css'
+
+/* etichette del profilo di frequenza — motivo grafico proprietario Hertz,
+   non una lettura tecnica reale (nessun dato di analisi audio esiste). */
+const SIGNAL_TRAITS = ['Peak', 'Pressure', 'Dynamics', 'Groove'] as const
 
 export function generateStaticParams() {
   return Object.keys(ARTISTS).map((slug) => ({ slug }))
@@ -41,16 +48,42 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
   if (!a) notFound()
 
   const events = forResident(a.slug)
+  const upcomingDates = events.filter((e) => !isPast(e))
+  const archiveDates = events.filter((e) => isPast(e))
   const socials = [
     a.social.soundcloud && { label: 'SoundCloud', href: a.social.soundcloud },
     a.social.spotify && { label: 'Spotify', href: a.social.spotify },
     a.social.instagram && { label: 'Instagram', href: a.social.instagram },
   ].filter((s): s is { label: string; href: string } => Boolean(s))
+  const bookingHref = a.social.booking
+    ? mailto(`Booking — ${a.name}`, `Hi Hertz, I'd like to book ${a.name}.`)
+    : '/bookings'
+  const [signalFrame, ...restGallery] = a.gallery
+
+  /* metadata editoriale — solo dati reali/derivati, nessuna invenzione */
+  const firstAppearance = events.length > 0 ? events[events.length - 1] : undefined
+  const meta = [
+    { label: 'Catalogue', value: `N°${a.n}` },
+    { label: 'Frequency', value: a.freq },
+    firstAppearance && { label: 'First appearance', value: shortDate(firstAppearance) },
+    events.length > 0 && { label: 'Sessions', value: String(events.length) },
+    a.mixes.length > 0 && { label: 'Mixes archived', value: String(a.mixes.length) },
+  ].filter((m): m is { label: string; value: string } => Boolean(m))
+
+  /* "played with" — co-resident reali dedotti dal lineup degli eventi condivisi */
+  const playedWith = Array.from(
+    new Map(
+      events
+        .flatMap((e) => e.lineup)
+        .filter((s) => s !== a.slug)
+        .map((s) => [s, ARTISTS[s]] as const),
+    ).values(),
+  ).filter(Boolean)
 
   return (
     <main id="main">
       {/* ── identity (cold-blue) ── */}
-      <Section surface="cold-blue" space="md">
+      <Section surface="cold-blue" space="md" style={{ paddingBottom: 'clamp(48px, 6vw, 96px)' }}>
         <p className={`${styles.crumb} hz-mono`}>
           <Link href="/artists">Artists</Link>
           <span aria-hidden="true"> / </span>
@@ -62,7 +95,10 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
             {a.freq}
           </span>
           <div className={styles.identity}>
-            <span className={`${styles.freq} hz-mono`}>{a.freq}</span>
+            <span className={styles.freqRow}>
+              <span className={`${styles.freq} hz-mono`}>{a.freq}</span>
+              <ArtistSignalGlyph n={a.n} freq={a.freq} sessions={events.length} size="md" />
+            </span>
             <ViewMorph name={`artist-name-${a.slug}`}>
               <h1 className={styles.name}>{a.name}</h1>
             </ViewMorph>
@@ -73,9 +109,17 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
                   {s.label}
                 </Button>
               ))}
-              <Button href="/bookings" variant="solid" arrow>
+              <Button href={bookingHref} external={Boolean(a.social.booking)} variant="text" arrow>
                 Booking
               </Button>
+            </div>
+            <div className={`${styles.meta} hz-mono`}>
+              {meta.map((m) => (
+                <span key={m.label} className={styles.metaItem}>
+                  <span className={styles.metaLabel}>{m.label}</span>
+                  <span className={styles.metaValue}>{m.value}</span>
+                </span>
+              ))}
             </div>
           </div>
           <Parallax speed={38} className={styles.portrait}>
@@ -87,7 +131,11 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
       </Section>
 
       {/* ── bio (white) ── */}
-      <Section surface="white" space="lg">
+      <Section
+        surface="white"
+        space="lg"
+        style={{ paddingTop: 'clamp(72px, 8vw, 130px)', paddingBottom: 'clamp(72px, 8vw, 130px)' }}
+      >
         <div className={styles.bioGrid}>
           <SectionLabel kicker="Profile" />
           <div className={styles.bio}>
@@ -98,8 +146,43 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
         </div>
       </Section>
 
+      {/* ── signal: proprietario Hertz — profilo di frequenza come motivo
+         grafico riconoscibile, non un readout tecnico reale ── */}
+      <Section
+        surface="signal"
+        space="lg"
+        style={{ paddingTop: 'clamp(72px, 8vw, 130px)', paddingBottom: 'clamp(56px, 7vw, 110px)' }}
+      >
+        <div className={styles.signal}>
+          <div className={styles.signalText}>
+            <span className={`${styles.signalKicker} hz-mono`}>Signal</span>
+            <span className={styles.signalFreqRow}>
+              <span className={styles.signalFreq}>{a.freq}</span>
+              <ArtistSignalGlyph n={a.n} freq={a.freq} sessions={events.length} size="lg" className={styles.signalGlyph} />
+            </span>
+            <span className={styles.signalSub}>Frequency profile</span>
+            <FrequencyCut variant="signature" trigger="inView" className={styles.signalCut} />
+            <ul className={styles.signalTraits}>
+              {SIGNAL_TRAITS.map((t) => (
+                <li key={t} className={styles.signalTrait}>
+                  <WaveformPulse state="idle" className={styles.signalWave} />
+                  <span className="hz-mono">{t}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          {signalFrame && (
+            <div className={styles.signalPhoto}>
+              <ImageReveal variant="frequency" duration="signature">
+                <ImageFrame src={signalFrame} alt={`${a.name} — frame`} ratio="4 / 3" />
+              </ImageReveal>
+            </div>
+          )}
+        </div>
+      </Section>
+
       {/* ── mixes (paper) ── */}
-      <Section surface="paper" space="lg">
+      <Section surface="paper" space="lg" style={{ paddingTop: 'clamp(72px, 8vw, 130px)' }}>
         <SectionLabel
           kicker="Selected mixes"
           title="On record."
@@ -119,11 +202,11 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
       </Section>
 
       {/* ── live gallery (white) ── */}
-      {a.gallery.length > 0 && (
+      {restGallery.length > 0 && (
         <Section surface="white" space="lg">
           <SectionLabel kicker="Live" title="On the floor." />
           <div className={styles.gallery}>
-            {a.gallery.map((src, i) => (
+            {restGallery.map((src, i) => (
               <ImageReveal key={src} variant={i % 2 === 0 ? 'print' : 'vertical'} duration="editorial">
                 <ImageFrame src={src} alt={`${a.name} live — ${i + 1}`} ratio="3 / 2" />
               </ImageReveal>
@@ -132,18 +215,66 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
         </Section>
       )}
 
-      {/* ── events (signal) ── */}
-      {events.length > 0 && (
-        <Section surface="signal" space="lg">
+      {/* ── played with: co-resident reali dedotti dal lineup, lista leggera ── */}
+      {playedWith.length > 0 && (
+        <Section surface="white" space="md">
+          <SectionLabel kicker="Played with" />
+          <div className={styles.playedWith}>
+            {playedWith.map((p, i) => (
+              <Link key={p.slug} href={`/artists/${p.slug}`} className={styles.playedWithLink}>
+                <span className={`${styles.playedWithIndex} hz-mono`}>{String(i + 1).padStart(2, '0')}</span>
+                {p.name}
+              </Link>
+            ))}
+          </div>
+        </Section>
+      )}
+
+      {/* ── date + archivio: lista compatta testuale, non EventModule ── */}
+      {(upcomingDates.length > 0 || archiveDates.length > 0) && (
+        <Section surface="paper" space="lg">
           <SectionLabel
             kicker="On the bill"
             title="Dates with the family."
             link={{ href: '/events', label: 'All events ↗' }}
           />
-          <div>
-            {events.slice(0, 6).map((e) => (
-              <EventRow key={e.n} event={e} />
-            ))}
+          <div className={styles.dateLists}>
+            {upcomingDates.length > 0 && (
+              <div className={styles.dateList}>
+                <span className={`${styles.dateListLabel} hz-mono`}>Upcoming</span>
+                <div className={styles.timeline}>
+                  {upcomingDates.map((e) => (
+                    <Link key={e.n} href={`/events/${eventSlug(e)}`} className={styles.timelineRow}>
+                      <span className={`${styles.timelineDate} hz-mono`}>{dowDate(e)}</span>
+                      <span className={styles.timelineVenue}>
+                        {e.venue} · {e.city}
+                      </span>
+                      <span
+                        className={styles.timelineDot}
+                        data-status={e.onSale ? 'on-sale' : 'soon'}
+                        aria-hidden="true"
+                      />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+            {archiveDates.length > 0 && (
+              <div className={styles.dateList}>
+                <span className={`${styles.dateListLabel} hz-mono`}>Archive</span>
+                <div className={styles.timeline}>
+                  {archiveDates.slice(0, 6).map((e) => (
+                    <Link key={e.n} href={`/events/${eventSlug(e)}`} className={styles.timelineRow}>
+                      <span className={`${styles.timelineDate} hz-mono`}>{dowDate(e)}</span>
+                      <span className={styles.timelineVenue}>
+                        {e.venue} · {e.city}
+                      </span>
+                      <span className={styles.timelineDot} data-status="archive" aria-hidden="true" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </Section>
       )}

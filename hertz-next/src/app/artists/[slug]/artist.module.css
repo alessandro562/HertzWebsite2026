@@ -75,9 +75,45 @@
   margin-top: var(--hz-space-md);
 }
 
+/* ── metadata editoriale: micro-informazioni reali, non decorative ── */
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin-top: var(--hz-space-md);
+  padding-top: var(--hz-space-sm);
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+}
+.metaItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.metaLabel {
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: var(--hz-t-meta);
+}
+.metaValue {
+  color: var(--hz-ink);
+}
+
 .portrait {
   max-width: 380px;
   width: 100%;
+}
+@media (min-width: 820px) {
+  /* tensione leggera: la foto esce di pochi pixel dalla colonna verso il nome */
+  .portrait {
+    margin-left: clamp(-1.5rem, -2vw, -0.75rem);
+  }
+}
+
+.freqRow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
 }
 
 /* ── bio ── */
@@ -118,4 +154,188 @@
   .gallery {
     grid-template-columns: repeat(4, 1fr);
   }
+}
+
+/* ── signal: secondo momento visivo forte (freq tipografica + FrequencyCut
+   + frammento fotografico reale) — non testo su testo dopo la hero ── */
+.signal {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--hz-space-lg);
+  align-items: center;
+}
+@media (min-width: 820px) {
+  .signal {
+    grid-template-columns: minmax(0, 0.55fr) minmax(0, 0.45fr);
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+}
+.signalText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.signalKicker {
+  color: var(--hz-ink-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.signalFreqRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.signalFreq {
+  font-family: var(--hz-font-mono);
+  font-size: clamp(3.2rem, 8vw, 6.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+.signalGlyph {
+  opacity: 0.8;
+}
+.signalSub {
+  color: var(--hz-ink-mute);
+  font-size: var(--hz-t-body);
+}
+.signalCut {
+  height: 4px;
+  margin-top: var(--hz-space-sm);
+  max-width: 320px;
+}
+.signalTraits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.6rem;
+  margin-top: var(--hz-space-md);
+  list-style: none;
+}
+.signalTrait {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--hz-ink-mute);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: var(--hz-t-meta);
+}
+.signalWave {
+  width: 1.8em;
+  height: 1em;
+  color: var(--hz-ink-mute);
+  flex: none;
+}
+.signalPhoto {
+  aspect-ratio: 4 / 3;
+}
+
+/* ── played with: composizione tipografica editoriale, non chip ── */
+.playedWith {
+  display: flex;
+  flex-direction: column;
+}
+.playedWithLink {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  border-top: 1px solid var(--hz-line);
+  font-family: var(--hz-font-display);
+  font-weight: var(--hz-weight-display);
+  font-size: clamp(1.3rem, 2.4vw, 2rem);
+  letter-spacing: var(--hz-tracking-tight);
+  position: relative;
+}
+.playedWith .playedWithLink:first-child {
+  border-top: none;
+}
+.playedWithIndex {
+  color: var(--hz-ink-mute);
+  font-size: var(--hz-t-meta);
+}
+.playedWithLink::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 3ch;
+  height: 1.5px;
+  background: var(--hz-cold, #50778a);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--hz-fast) var(--hz-ease-out);
+}
+.playedWithLink:hover::after,
+.playedWithLink:focus-visible::after {
+  transform: scaleX(1);
+}
+.playedWithLink:focus-visible {
+  outline: none;
+}
+
+/* ── date + archivio: lista compatta a timeline, non EventModule ── */
+.dateLists {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--hz-space-lg);
+}
+@media (min-width: 720px) {
+  .dateLists {
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 4vw, 4rem);
+  }
+}
+.dateList {
+  display: flex;
+  flex-direction: column;
+}
+.dateListLabel {
+  color: var(--hz-ink-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--hz-space-sm);
+}
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-left: 1.1rem;
+  border-left: 1px solid var(--hz-line-strong);
+}
+.timelineRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 0.8rem;
+  padding: 0.6rem 0;
+  color: inherit;
+}
+.timelineRow:not(:last-child) {
+  border-bottom: 1px solid var(--hz-line);
+}
+.timelineDate {
+  color: var(--hz-ink-mute);
+  min-width: 6.5ch;
+}
+.timelineVenue {
+  flex: 1 1 auto;
+}
+.timelineRow:hover .timelineVenue {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+.timelineDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--hz-ink);
+  flex: none;
+}
+.timelineDot[data-status='soon'] {
+  background: transparent;
+  border: 1px solid var(--hz-cold, #50778a);
+}
+.timelineDot[data-status='archive'] {
+  background: var(--hz-ink-mute);
 }

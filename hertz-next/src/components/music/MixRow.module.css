@@ -20,7 +20,7 @@
 }
 .play {
   flex: none;
-  font-size: 0.7rem;
+  width: 2.6em;
   color: var(--hz-accent);
 }
 

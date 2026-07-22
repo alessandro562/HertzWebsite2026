@@ -1,0 +1,349 @@
+/* ── ArtistIndexRow — ledger editoriale art-diretto artista per artista.
+   Nessun pattern ripetuto: lato/dimensione/crop della foto, posizione di
+   N°·freq, allineamento e trattamento del nome cambiano radicalmente per
+   ciascun n (01-04) — la fotografia guida la composizione, non la illustra. */
+.row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--hz-space-md);
+  border-top: 1px solid var(--hz-line);
+  padding: var(--hz-space-lg) 0;
+  color: inherit;
+  overflow: visible;
+}
+.row[data-first] {
+  border-top: none;
+}
+
+@media (min-width: 820px) {
+  .row {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    column-gap: clamp(1.5rem, 3.5vw, 3.5rem);
+    align-items: stretch;
+    padding: clamp(2.5rem, 5vw, 4.5rem) 0;
+  }
+}
+
+.photo {
+  position: relative;
+  height: clamp(260px, 24vw, 360px);
+}
+@media (max-width: 819px) {
+  .photo {
+    height: auto;
+  }
+}
+.photoReveal {
+  display: block;
+  height: 100%;
+}
+.photoFrame {
+  height: 100%;
+}
+/* la cornice usa aspect-ratio derivato dalla larghezza (ratio="4/5"): su
+   desktop l'altezza della riga è invece controllata dal contenitore, quindi
+   sostituiamo l'aspect-ratio con un cover a piena altezza (mobile mantiene
+   l'aspect-ratio naturale della cornice). */
+@media (min-width: 820px) {
+  .photo :global([data-ratio]) {
+    height: 100% !important;
+    aspect-ratio: auto !important;
+  }
+}
+.photo :global(img) {
+  transition:
+    transform var(--hz-editorial) var(--hz-ease-out),
+    object-position var(--hz-editorial) var(--hz-ease-out);
+}
+
+.text {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: center;
+}
+@media (min-width: 820px) {
+  .text {
+    justify-content: flex-end;
+    padding-bottom: var(--hz-space-sm);
+  }
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--hz-ink-mute);
+  order: -1;
+}
+.tagGlyph {
+  opacity: 0.7;
+}
+.name {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--hz-font-display);
+  font-weight: var(--hz-weight-display);
+  letter-spacing: var(--hz-tracking-tight);
+  line-height: 0.94;
+  font-size: clamp(1.9rem, 3.6vw, 3.4rem);
+}
+.nameLine {
+  display: block;
+}
+.row:hover .nameLine {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+.role {
+  color: var(--hz-ink-mute);
+  font-size: var(--hz-t-body);
+}
+.watermark {
+  display: none;
+}
+
+.sweep {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 3px;
+  pointer-events: none;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   N°01 — FEDERICO · l'anchor/founder · trattamento "poster": foto alta,
+   il nome invade il bordo inferiore della fotografia (overlap reale,
+   non solo affiancato), tag come credit-line stampato sulla foto stessa.
+   ══════════════════════════════════════════════════════════════════════ */
+@media (min-width: 820px) {
+  .row[data-n='01'] {
+    padding-bottom: clamp(4rem, 7vw, 6.5rem);
+  }
+  .row[data-n='01'] .photo {
+    height: clamp(340px, 30vw, 460px);
+  }
+  .row[data-n='01'] .photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      transparent 42%,
+      color-mix(in srgb, var(--hz-bg) 95%, transparent) 100%
+    );
+    pointer-events: none;
+  }
+  .row[data-n='01'] .tag {
+    position: absolute;
+    z-index: 2;
+    top: 1rem;
+    left: 1rem;
+    order: 0;
+    color: rgba(255, 255, 255, 0.75);
+  }
+  .row[data-n='01'] .text {
+    justify-content: flex-end;
+    margin-left: clamp(-9rem, -11vw, -6rem);
+    padding-bottom: 0;
+    transform: translateY(30%);
+  }
+  .row[data-n='01'] .name {
+    font-size: clamp(2.6rem, 5vw, 4.6rem);
+  }
+  .row[data-n='01'] .role {
+    margin-top: 0.3rem;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   N°02 — TOMMASO · spazio negativo estremo: foto piccola in alto a destra,
+   il resto della riga è vuoto. Nome enorme in outline, unico protagonista.
+   ══════════════════════════════════════════════════════════════════════ */
+@media (min-width: 820px) {
+  .row[data-n='02'] {
+    padding-block: clamp(3.5rem, 7vw, 6rem);
+  }
+  .row[data-n='02'] .text {
+    order: -1;
+    justify-content: flex-start;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .row[data-n='02'] .photo {
+    order: 1;
+    height: clamp(160px, 13vw, 210px);
+    max-width: 46%;
+    margin-left: auto;
+  }
+  .row[data-n='02'] .tag {
+    position: absolute;
+    left: -1.6rem;
+    top: 0;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    letter-spacing: 0.08em;
+  }
+  .row[data-n='02'] .tagGlyph {
+    display: none;
+  }
+  .row[data-n='02'] .name {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--hz-ink);
+    font-size: clamp(3.4rem, 7.2vw, 6.4rem);
+    margin-top: 1.5rem;
+  }
+  .row[data-n='02'] .role {
+    margin-top: 1rem;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   N°03 — ALBERTO · crop pesante + bleed marcato: la foto invade davvero
+   la colonna di testo, zoom stretto sul soggetto, nome a baseline
+   fortemente sfalsata (due scale diverse).
+   ══════════════════════════════════════════════════════════════════════ */
+@media (min-width: 820px) {
+  .row[data-n='03'] .photo {
+    margin-right: clamp(-7rem, -8vw, -4.5rem);
+  }
+  .row[data-n='03'] .text {
+    z-index: 2;
+  }
+  .row[data-n='03'] .photo :global(img) {
+    transform: scale(1.18);
+    object-position: 50% 30%;
+  }
+  .row[data-n='03']:hover .photo :global(img) {
+    transform: scale(1.24);
+  }
+  .row[data-n='03'] .text {
+    justify-content: flex-end;
+  }
+  .row[data-n='03'] .tag {
+    order: 2;
+  }
+  .row[data-n='03'] .nameLine:first-child {
+    font-size: 0.62em;
+  }
+  .row[data-n='03'] .nameLine:last-child {
+    font-size: 1.24em;
+    transform: translate(0.5em, 0.06em);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   N°04 — LEONARDO · chiusura forte, energia equivalente all'apertura:
+   foto quasi full-width (traccia invertita, dominante come N°01 ma
+   sull'altro lato), il nome invade il bordo sinistro della fotografia,
+   "126 Hz" attraversa davvero l'intera composizione dietro a tutto.
+   ══════════════════════════════════════════════════════════════════════ */
+@media (min-width: 820px) {
+  .row[data-n='04'] {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    padding-bottom: clamp(4rem, 7vw, 6.5rem);
+  }
+  .row[data-n='04'] .text {
+    order: -1;
+    justify-content: flex-end;
+    padding-bottom: 0;
+    margin-right: clamp(-9rem, -11vw, -6rem);
+    z-index: 2;
+    transform: translateY(30%);
+  }
+  .row[data-n='04'] .photo {
+    order: 1;
+    height: clamp(340px, 30vw, 460px);
+  }
+  .row[data-n='04'] .photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to left,
+      transparent 58%,
+      color-mix(in srgb, var(--hz-bg) 95%, transparent) 100%
+    );
+    pointer-events: none;
+  }
+  .row[data-n='04'] .watermark {
+    display: block;
+    position: absolute;
+    z-index: 0;
+    left: 42%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(-3deg);
+    font-family: var(--hz-font-mono);
+    font-size: clamp(5.5rem, 15vw, 13rem);
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--hz-line-strong);
+    letter-spacing: -0.03em;
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+  }
+  .row[data-n='04'] .name {
+    font-size: clamp(2.6rem, 5vw, 4.6rem);
+  }
+}
+
+/* ── mobile: foto sempre sopra, testo sotto, nessun bleed/dorsale/watermark ── */
+@media (max-width: 819px) {
+  .row {
+    padding-bottom: var(--hz-space-lg) !important;
+  }
+  .photo {
+    order: 0 !important;
+    margin: 0 !important;
+    max-width: none !important;
+    align-self: stretch !important;
+  }
+  .photo::after {
+    display: none !important;
+  }
+  .photo :global(img) {
+    transform: none !important;
+    object-position: center !important;
+  }
+  .text {
+    order: 1 !important;
+    justify-content: flex-start !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+  .tag {
+    position: static !important;
+    writing-mode: horizontal-tb !important;
+    transform: none !important;
+    color: var(--hz-ink-mute) !important;
+  }
+  .name {
+    color: var(--hz-ink) !important;
+    -webkit-text-stroke: 0 !important;
+    font-size: clamp(1.9rem, 7vw, 2.6rem) !important;
+    margin: 0 !important;
+  }
+  .nameLine {
+    font-size: 1em !important;
+    transform: none !important;
+  }
+  .watermark {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .row:hover .nameLine {
+    text-decoration: none;
+  }
+  .photo :global(img) {
+    transition: none;
+  }
+}

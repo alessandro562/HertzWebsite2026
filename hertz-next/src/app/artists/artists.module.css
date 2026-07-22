@@ -1,31 +1,21 @@
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--hz-gutter) var(--hz-gutter);
-}
-@media (min-width: 768px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-@media (min-width: 1200px) {
-  .grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
+.roster {
+  display: flex;
+  flex-direction: column;
 }
 
-.booking {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--hz-space-md);
+/* ── chiusura: riga testuale, non un banner ── */
+.closingCut {
+  height: 3px;
+  margin-bottom: var(--hz-space-md);
 }
-.bookingTitle {
-  font-size: var(--hz-t-section);
-}
-.bookingText {
-  margin-top: var(--hz-space-sm);
+.closing {
+  font-size: var(--hz-t-body-lg);
+  max-width: 56ch;
   color: var(--hz-ink-mute);
-  max-width: 44ch;
+}
+.closingLink {
+  color: var(--hz-ink);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
 }

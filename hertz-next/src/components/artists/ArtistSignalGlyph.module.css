@@ -1,0 +1,47 @@
+.glyph {
+  display: inline-flex;
+  width: 3.5em;
+  height: 1.5em;
+  color: currentColor;
+  vertical-align: middle;
+}
+.glyph[data-size='sm'] {
+  width: 2.6em;
+  height: 1.1em;
+}
+.glyph[data-size='lg'] {
+  width: 5em;
+  height: 2.2em;
+}
+
+.glyph svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.bar {
+  fill: currentColor;
+  opacity: 0.5;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    opacity var(--hz-ui, 0.2s) var(--hz-ease-out, ease),
+    transform var(--hz-fast, 0.18s) var(--hz-ease-out, ease);
+}
+
+/* risposta breve, causale — un solo assestamento, non un loop */
+.glyph[data-active] .bar {
+  opacity: 1;
+  transform: scaleY(1.15);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bar {
+    transition: none;
+  }
+  .glyph[data-active] .bar {
+    transform: none;
+  }
+}
