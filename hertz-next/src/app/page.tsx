@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-// deploy: hertzv2 preview build (Root Directory=hertz-next)
+// deploy: hertzv2 preview build (Root Directory=hertz-next, Output=.next)
 import Link from 'next/link'
 import Section from '@/components/ui/Section'
 import HomeHero from '@/components/home/HomeHero'
