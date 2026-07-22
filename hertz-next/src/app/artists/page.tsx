@@ -1,9 +1,7 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import Section from '@/components/ui/Section'
 import PageHeader from '@/components/ui/PageHeader'
 import ArtistIndexRow from '@/components/artists/ArtistIndexRow'
-import FrequencyCut from '@/motion/FrequencyCut'
 import { ARTISTS } from '@/content/artists'
 import styles from './artists.module.css'
 
@@ -21,15 +19,10 @@ export default function ArtistsPage() {
     <main id="main">
       <Section surface="cold-blue" space="lg">
         <PageHeader
-          index="02"
-          kicker="Residents"
-          title="The family."
-          intro={
-            <p>
-              A small roster we actually play alongside — selectors first, from Bologna and the
-              wider Emilia-Romagna scene. No guest-name inflation: the people who build the night.
-            </p>
-          }
+          index="03"
+          kicker="The family"
+          title="On the same frequency."
+          intro={<p className="hz-mono">Resident roster · Bologna · Keep the groove</p>}
           aside={<p className="hz-mono">{ROSTER.length} residents</p>}
         />
         <div className={styles.roster}>
@@ -37,16 +30,6 @@ export default function ArtistsPage() {
             <ArtistIndexRow key={a.slug} artist={a} first={i === 0} />
           ))}
         </div>
-      </Section>
-
-      <Section surface="white" space="md">
-        <FrequencyCut variant="editorial" trigger="inView" className={styles.closingCut} />
-        <p className={styles.closing}>
-          Residents and back-to-backs for your room, festival or showcase —{' '}
-          <Link href="/bookings" className={styles.closingLink}>
-            booking &amp; contact ↗
-          </Link>
-        </p>
       </Section>
     </main>
   )

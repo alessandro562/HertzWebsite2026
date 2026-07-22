@@ -17,6 +17,11 @@ export const SITE = {
   instagramHandle: '@hertz.cc',
   soundcloud: 'https://soundcloud.com/hertzclubbingcollective',
   soundcloudHandle: 'hertzclubbingcollective',
+  // Costanti editoriali reali (legacy): credito foto press, closer, safe-space.
+  pressCredit: '@HERTZ.CC',
+  closer: 'Keep the groove.',
+  safeSpace:
+    "No harassment, no hate, no discrimination. Respect boundaries, yours and others'. The dancefloor is for everyone.",
 } as const
 
 export const MAILTO = `mailto:${SITE.email}`

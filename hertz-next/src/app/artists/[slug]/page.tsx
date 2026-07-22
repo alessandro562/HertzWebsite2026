@@ -14,13 +14,8 @@ import WaveformPulse from '@/motion/WaveformPulse'
 import Parallax from '@/motion/Parallax'
 import { Stagger, StaggerItem } from '@/motion/Reveal'
 import { ARTISTS } from '@/content/artists'
-import { forResident, eventSlug, isPast, dowDate, shortDate, type ResidentSlug } from '@/content/events'
-import { mailto } from '@/lib/site'
+import { forResident, eventSlug, isPast, dowDate, type ResidentSlug } from '@/content/events'
 import styles from './artist.module.css'
-
-/* etichette del profilo di frequenza — motivo grafico proprietario Hertz,
-   non una lettura tecnica reale (nessun dato di analisi audio esiste). */
-const SIGNAL_TRAITS = ['Peak', 'Pressure', 'Dynamics', 'Groove'] as const
 
 export function generateStaticParams() {
   return Object.keys(ARTISTS).map((slug) => ({ slug }))
@@ -55,20 +50,25 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
     a.social.spotify && { label: 'Spotify', href: a.social.spotify },
     a.social.instagram && { label: 'Instagram', href: a.social.instagram },
   ].filter((s): s is { label: string; href: string } => Boolean(s))
-  const bookingHref = a.social.booking
-    ? mailto(`Booking — ${a.name}`, `Hi Hertz, I'd like to book ${a.name}.`)
-    : '/bookings'
+  const bookingHref = `/bookings?resident=${a.slug}`
   const [signalFrame, ...restGallery] = a.gallery
 
-  /* metadata editoriale — solo dati reali/derivati, nessuna invenzione */
-  const firstAppearance = events.length > 0 ? events[events.length - 1] : undefined
+  /* metadata editoriale — solo dati reali (origin / resident since / signature
+     dal legacy hertz-artist.js), nessuna invenzione */
   const meta = [
+    { label: 'Origin', value: a.origin },
+    { label: 'Resident since', value: a.since },
+    { label: 'Signature', value: a.sets },
     { label: 'Catalogue', value: `N°${a.n}` },
-    { label: 'Frequency', value: a.freq },
-    firstAppearance && { label: 'First appearance', value: shortDate(firstAppearance) },
     events.length > 0 && { label: 'Sessions', value: String(events.length) },
-    a.mixes.length > 0 && { label: 'Mixes archived', value: String(a.mixes.length) },
   ].filter((m): m is { label: string; value: string } => Boolean(m))
+
+  /* firma reale spezzata in tag (da a.sets) — sostituisce i tratti inventati */
+  const signatureTags = a.sets.split('·').map((s) => s.trim()).filter(Boolean)
+
+  /* navigazione ciclica al prossimo resident (per numero) */
+  const roster = Object.values(ARTISTS).sort((x, y) => x.n.localeCompare(y.n))
+  const nextArtist = roster[(roster.findIndex((x) => x.slug === a.slug) + 1) % roster.length]
 
   /* "played with" — co-resident reali dedotti dal lineup degli eventi condivisi */
   const playedWith = Array.from(
@@ -109,7 +109,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
                   {s.label}
                 </Button>
               ))}
-              <Button href={bookingHref} external={Boolean(a.social.booking)} variant="text" arrow>
+              <Button href={bookingHref} variant="text" arrow>
                 Booking
               </Button>
             </div>
@@ -160,10 +160,10 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
               <span className={styles.signalFreq}>{a.freq}</span>
               <ArtistSignalGlyph n={a.n} freq={a.freq} sessions={events.length} size="lg" className={styles.signalGlyph} />
             </span>
-            <span className={styles.signalSub}>Frequency profile</span>
+            <span className={styles.signalSub}>Signature</span>
             <FrequencyCut variant="signature" trigger="inView" className={styles.signalCut} />
             <ul className={styles.signalTraits}>
-              {SIGNAL_TRAITS.map((t) => (
+              {signatureTags.map((t) => (
                 <li key={t} className={styles.signalTrait}>
                   <WaveformPulse state="idle" className={styles.signalWave} />
                   <span className="hz-mono">{t}</span>
@@ -278,6 +278,36 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           </div>
         </Section>
       )}
+
+      {/* ── bookings dedicati (cold-blue) — deep-link pre-fill del form ── */}
+      <Section surface="cold-blue" space="lg">
+        <SectionLabel kicker="Bookings" title={`Book ${a.name.split(' ')[0]}.`} />
+        <div className={styles.bookBar}>
+          <Button href={`/bookings?resident=${a.slug}`} arrow>
+            Request a booking
+          </Button>
+          {a.social.soundcloud && (
+            <Button href={a.social.soundcloud} external variant="ghost" arrow>
+              SoundCloud
+            </Button>
+          )}
+          {a.social.spotify && (
+            <Button href={a.social.spotify} external variant="ghost" arrow>
+              Spotify
+            </Button>
+          )}
+        </div>
+        <p className={`${styles.bookMeta} hz-mono`}>Bologna · IT — worldwide</p>
+      </Section>
+
+      {/* ── next resident (ink) ── */}
+      <Section surface="ink" space="md">
+        <Link href={`/artists/${nextArtist.slug}`} className={styles.nextResident}>
+          <span className={`${styles.nextLabel} hz-mono`}>Next resident</span>
+          <span className={styles.nextName}>{nextArtist.name}.</span>
+          <span className={`${styles.nextGo} hz-mono`}>View profile →</span>
+        </Link>
+      </Section>
     </main>
   )
 }

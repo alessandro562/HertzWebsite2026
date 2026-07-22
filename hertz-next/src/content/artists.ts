@@ -1,22 +1,18 @@
 /* ────────────────────────────────────────────────────────────
    HERTZ · CONTENT LAYER · ARTISTS (resident)
-   Migrata da hertz-artist.js. I campi verificabili (nome, ruolo,
-   freq, social, portrait, gallery) sono completi. Le bio vanno
-   copiate integralmente dal sorgente legacy in fase di migrazione:
-   dove manca il testo completo trovi // TODO:bio.
+   Migrata 1:1 da hertz-artist.js (sorgente legacy). Bio COMPLETE,
+   campi reali origin / since (resident since) / sets (firma).
+   Contenuto reale, nessuna invenzione: dove il legacy non ha dati
+   (es. Tommaso non ha mixes né SoundCloud/Spotify) i campi restano
+   vuoti — non si inventano.
 
    Path immagine → /assets/... (public/assets nel nuovo progetto).
-
-   // TODO:data — `social.booking` usa 'booking@hertz.cc' su tutti e 4 i
-   // resident (valore ereditato dal sorgente legacy), mentre il dominio
-   // sitewide reale è hertzclubbing.com e l'email di contatto generale in
-   // src/lib/site.ts è hertzbologna@gmail.com. Non ho unificato questo
-   // campo perché non so se booking@hertz.cc è un alias attivo distinto
-   // (es. inbox booking dedicata) o un refuso del sito legacy: richiede
-   // conferma umana della fonte corretta prima di essere corretto o rimosso.
+   Email di contatto: hertzbologna@gmail.com (unica reale, vedi
+   src/lib/site.ts).
    ──────────────────────────────────────────────────────────── */
 
 import type { ResidentSlug } from './events';
+import { SITE } from '@/lib/site';
 
 export interface Mix {
   t: string;
@@ -37,6 +33,9 @@ export interface Artist {
   role: string;
   n: string;        // numero
   freq: string;     // "frequenza" identitaria, es. '120 Hz'
+  origin: string;   // provenienza — es. 'Emilia-Romagna, IT'
+  since: string;    // resident since — es. '2023'
+  sets: string;     // firma / generi — es. 'Deep · Minimal · Atmospheric'
   portrait: string;
   gallery: string[];
   bio: string[];
@@ -51,6 +50,9 @@ export const ARTISTS: Record<ResidentSlug, Artist> = {
     role: 'Founder · Art Director · DJ & Producer',
     n: '01',
     freq: '120 Hz',
+    origin: 'Emilia-Romagna, IT',
+    since: '2023',
+    sets: 'Deep · Minimal · Atmospheric',
     portrait: '/assets/dj-apadula.jpg',
     gallery: [
       '/assets/federico-apadula-live-1.jpg',
@@ -60,7 +62,9 @@ export const ARTISTS: Record<ResidentSlug, Artist> = {
     ],
     bio: [
       "Founder and Art Director of the Hertz collective, Federico Apadula has shaped the project's sonic identity for years, pursuing a precise artistic vision built on the centrality of musical selection.",
-      // TODO:bio — completa i paragrafi restanti da hertz-artist.js
+      'A Bologna-based DJ and producer born in 1995, he began playing in clubs at the age of 14, developing a deep understanding of dancefloor dynamics from the very start. Over the years he has performed at key venues across his home city and on national and international stages, including Amnesia Milano, Tantra Ibiza and City Hall Barcelona. He has also built an ongoing collaboration with Buongiorno Classic, where he performs regularly.',
+      'His sound is rooted in minimal tech with strong deep and house influences, incisive grooves, refined progressions and vibrant atmospheres woven into harmonic sets defined by a constant interplay of tension, release and dynamics.',
+      'His productions have been released on labels such as NoExcuse and Under No Illusion, cementing a solid and recognisable artistic identity across both the booth and the studio.',
     ],
     mixes: [
       { t: 'Tomi & Kesh × Federico Apadula', tag: 'Featured', url: 'https://soundcloud.com/tomi-and-kesh/tomi-kesh-federico-apadula' },
@@ -70,7 +74,7 @@ export const ARTISTS: Record<ResidentSlug, Artist> = {
     social: {
       soundcloud: 'https://soundcloud.com/federico-apadula',
       spotify: 'https://open.spotify.com/artist/0hS1cnWGJvml5gSHRKHtGi',
-      booking: 'booking@hertz.cc',
+      booking: SITE.email,
     },
   },
 
@@ -80,6 +84,9 @@ export const ARTISTS: Record<ResidentSlug, Artist> = {
     role: 'DJ & Producer',
     n: '02',
     freq: '128 Hz',
+    origin: 'Abruzzo, IT',
+    since: '2023',
+    sets: 'Tech House · Minimal Deep Tech',
     portrait: '/assets/dj-manco.jpg',
     gallery: [
       '/assets/tommaso-manco-live-1.jpg',
@@ -89,12 +96,13 @@ export const ARTISTS: Record<ResidentSlug, Artist> = {
     ],
     bio: [
       'Born in 2001, Tommaso Mancò is a DJ from Abruzzo who discovered his passion for electronic music among the iconic parties of the Romagna riviera. It was there that he started building his musical culture and shaping his artistic identity.',
-      // TODO:bio — completa da hertz-artist.js
+      "He later moved to Bologna, where he joined the Hertz collective and still plays as a resident DJ today. His sound lives in tech house and minimal deep tech — the register that defines his style. In recent years he has performed at some of the area's most important stages and clubs, including Cima Festival, Kindergarten and Numa Club, as well as Buongiorno Classic — a place he has always called home, and one that, over the years, gave him the inspiration to develop and define his musical identity.",
     ],
-    mixes: [], // TODO:mixes — verifica in hertz-artist.js
+    // Il sorgente legacy non elenca mix per Tommaso: campo realmente vuoto.
+    mixes: [],
     social: {
-      // TODO:social — soundcloud/spotify da verificare in hertz-artist.js
-      booking: 'booking@hertz.cc',
+      // Solo contatto booking nel legacy (nessun SoundCloud/Spotify pubblico).
+      booking: SITE.email,
     },
   },
 
@@ -104,6 +112,9 @@ export const ARTISTS: Record<ResidentSlug, Artist> = {
     role: 'DJ & Producer',
     n: '03',
     freq: '125 Hz',
+    origin: 'Emilia-Romagna, IT',
+    since: '2024',
+    sets: 'Deep Tech · Groove',
     portrait: '/assets/dj-alberto.jpg',
     gallery: [
       '/assets/alberto-b-live-1.jpg',
@@ -113,7 +124,7 @@ export const ARTISTS: Record<ResidentSlug, Artist> = {
     ],
     bio: [
       "Producer and DJ based in Bologna, Alberto B brings a producer's ear to every set: textured, layered, always searching. His sound moves through deep tech and groove with a level of detail that rewards close listening.",
-      // TODO:bio — completa da hertz-artist.js
+      "Active with Hertz since 2024, he has played across the collective's residencies and collaborations, from the Kindergarten nights to the Buongiorno Classic dates. Alongside his DJ sets he produces his own material, with tracks like 'Hot Girl', 'In My Zone' and 'You Should B Dancing' already out on SoundCloud.",
     ],
     mixes: [
       { t: 'Hot Girl', url: 'https://soundcloud.com/alberto-baccianti/alberto-b-hot-girl' },
@@ -123,7 +134,7 @@ export const ARTISTS: Record<ResidentSlug, Artist> = {
     social: {
       soundcloud: 'https://soundcloud.com/alberto-baccianti',
       spotify: 'https://open.spotify.com/artist/7kHLiQODROJuJtGEgAYd8d',
-      booking: 'booking@hertz.cc',
+      booking: SITE.email,
     },
   },
 
@@ -133,6 +144,9 @@ export const ARTISTS: Record<ResidentSlug, Artist> = {
     role: 'DJ & Producer',
     n: '04',
     freq: '126 Hz',
+    origin: 'Emilia-Romagna, IT',
+    since: '2025',
+    sets: 'Tech House · Minimal Deep Tech',
     portrait: '/assets/dj-giusti.jpg',
     gallery: [
       '/assets/leonardo-giusti-live-1.jpg',
@@ -141,7 +155,8 @@ export const ARTISTS: Record<ResidentSlug, Artist> = {
       '/assets/leonardo-giusti-live-4.jpg',
     ],
     bio: [
-      "Born in Bologna in 2004, Leonardo Giusti was drawn to electronic music from a very young age, gradually shaping a sonic identity rooted in the more groove-driven shades of Tech House and Minimal Deep Tech.",
+      'Born in Bologna in 2004, Leonardo Giusti was drawn to electronic music from a very young age, gradually shaping a sonic identity rooted in the more groove-driven shades of Tech House and Minimal Deep Tech.',
+      'Despite his youth, he has already built experience across events and clubs on the Bologna scene, performing in venues such as Kindergarten and taking part in several Hertz nights. Since late 2025 he has been a Hertz resident DJ, a home in which he is consolidating his artistic path and refining an increasingly recognisable musical direction.',
       "Ambitious, driven and constantly evolving, Leonardo is one of the emerging names of Bologna's new electronic scene: a young DJ with a clear vision, a strong desire to grow, and the goal of turning every set into a genuine experience for the floor.",
     ],
     mixes: [
@@ -151,7 +166,7 @@ export const ARTISTS: Record<ResidentSlug, Artist> = {
     ],
     social: {
       soundcloud: 'https://soundcloud.com/leonardo-giusti-286676267',
-      booking: 'booking@hertz.cc',
+      booking: SITE.email,
     },
   },
 };
