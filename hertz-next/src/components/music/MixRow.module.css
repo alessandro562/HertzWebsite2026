@@ -23,6 +23,10 @@
   width: 2.6em;
   color: var(--hz-accent);
 }
+.rowGlyph {
+  flex: none;
+  color: var(--hz-ink-mute);
+}
 
 .main {
   flex: 1 1 auto;
