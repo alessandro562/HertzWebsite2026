@@ -12,15 +12,19 @@ import hero from '../HomeHero.module.css'
 import s from './HeroIntroSequence.module.css'
 
 /** Foto SECONDARIE reali (retino PRE-BAKED): materia editoriale che il taglio
-   di frequenza seziona ed elimina. Il DJ non è qui: È la HeroImage (vedi sotto). */
+   di frequenza seziona ed elimina. Il DJ non è qui: È la HeroImage (vedi sotto).
+   Posizioni in CSS (responsive/SSR-safe); qui solo id, sorgente, cut, entrata. */
 const FRAGS = [
-  { id: 'human', src: '/assets/ident-human-ht.jpg', x: 4, y: 10, w: 40, h: 80, cut: 0.5, t: 0.2 },
-  { id: 'crowd', src: '/assets/ident-crowd-ht.jpg', x: 38, y: 6, w: 32, h: 60, cut: 0.72, t: 0.34 },
+  { id: 'human', src: '/assets/ident-human-ht.jpg', cut: 0.5, t: 0.2 },
+  { id: 'crowd', src: '/assets/ident-crowd-ht.jpg', cut: 0.72, t: 0.34 },
 ] as const
 
-// clip della HeroImage: frammento (crop coerente) → banda compressa dal taglio → frame pieno
+// clip della HeroImage: frammento (crop coerente) → banda compressa dal taglio → frame pieno.
+// Desktop = foto in colonna destra (crop verticale); Mobile = foto full-width bassa (crop centrale).
 const SLAB = 'inset(12% 26% 20% 42%)'
 const BAND = 'inset(46% 26% 46% 42%)'
+const SLAB_M = 'inset(22% 22% 22% 22%)'
+const BAND_M = 'inset(45% 22% 45% 22%)'
 const FULL = 'inset(0% 0% 0% 0%)'
 
 /**
@@ -47,6 +51,10 @@ export default function HeroIntroSequence({ next, staticGrid = false }: { next?:
       gsap.ticker.lagSmoothing(0)
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
       const seen = typeof sessionStorage !== 'undefined' && sessionStorage.getItem('hz_intro') === '1'
+      // clip del DJ tarato per la colonna singola (mobile) vs colonna destra (desktop)
+      const mobile = window.matchMedia('(max-width: 640px)').matches
+      const slab = mobile ? SLAB_M : SLAB
+      const band = mobile ? BAND_M : BAND
 
       // stato finale: hero a riposo (reduced-motion o visita successiva)
       const settle = () => {
@@ -72,7 +80,7 @@ export default function HeroIntroSequence({ next, staticGrid = false }: { next?:
       gsap.set(q(`.${s.band}`), { autoAlpha: 0, scaleX: 0.4, transformOrigin: 'left center' })
       gsap.set(q(`.${s.freqLine}`), { scaleX: 0, transformOrigin: 'left center', autoAlpha: 1 })
       gsap.set(q(`.${s.logo}`), { autoAlpha: 0, transformOrigin: 'left center' })
-      gsap.set(q(`.${s.heroFigure}`), { autoAlpha: 0, clipPath: SLAB })
+      gsap.set(q(`.${s.heroFigure}`), { autoAlpha: 0, clipPath: slab })
       gsap.set(q(`.${s.htOverlay}`), { autoAlpha: 1 })
       gsap.set([q(`.${s.contentReveal}`), q(`.${s.photoDetail}`), q(`.${s.wave}`)], { autoAlpha: 0 })
       gsap.set(q(`.${s.contentReveal}`), { y: 26 })
@@ -115,7 +123,7 @@ export default function HeroIntroSequence({ next, staticGrid = false }: { next?:
       tl.to(q(`.${s.top}`), { yPercent: -30, xPercent: -10, duration: 0.12, ease: 'power4.out' }, 1.4)
       tl.to(q(`.${s.bot}`), { yPercent: 32, xPercent: 11, duration: 0.12, ease: 'power4.out' }, 1.4)
       // il DJ viene compresso dal taglio (clip → banda sottile), ma sopravvive
-      tl.to(q(`.${s.heroFigure}`), { clipPath: BAND, duration: 0.13, ease: 'power3.inOut' }, 1.42)
+      tl.to(q(`.${s.heroFigure}`), { clipPath: band, duration: 0.13, ease: 'power3.inOut' }, 1.42)
 
       // ── 1.56–2.06 · compressione + cancellazione secondarie, il DJ si trasforma ──
       // human + crowd + bande: compresse verso un punto di fuga ed erase
@@ -157,10 +165,12 @@ export default function HeroIntroSequence({ next, staticGrid = false }: { next?:
         }
       }
       window.addEventListener('wheel', skip, { passive: true, once: true })
+      window.addEventListener('touchstart', skip, { passive: true, once: true })
       window.addEventListener('pointerdown', skip, { once: true })
       window.addEventListener('keydown', skip, { once: true })
       return () => {
         window.removeEventListener('wheel', skip)
+        window.removeEventListener('touchstart', skip)
         window.removeEventListener('pointerdown', skip)
         window.removeEventListener('keydown', skip)
       }
@@ -181,12 +191,7 @@ export default function HeroIntroSequence({ next, staticGrid = false }: { next?:
       <div className={s.print} aria-hidden="true">
         <div className={s.hair} />
         {FRAGS.map((f) => (
-          <div
-            key={f.id}
-            data-id={f.id}
-            className={s.frag}
-            style={{ left: `${f.x}%`, top: `${f.y}%`, width: `${f.w}%`, height: `${f.h}%` }}
-          >
+          <div key={f.id} data-id={f.id} className={s.frag}>
             <div
               className={s.top}
               style={{ backgroundImage: `url(${f.src})`, clipPath: `inset(0 0 ${(100 - f.cut * 100).toFixed(1)}% 0)` }}

@@ -45,6 +45,19 @@
   opacity: 0;
   will-change: transform, opacity;
 }
+/* posizioni della materia editoriale — in CSS (responsive, SSR-safe) */
+.frag[data-id='human'] {
+  left: 4%;
+  top: 10%;
+  width: 40%;
+  height: 80%;
+}
+.frag[data-id='crowd'] {
+  left: 38%;
+  top: 6%;
+  width: 32%;
+  height: 60%;
+}
 .top,
 .bot {
   position: absolute;
@@ -213,6 +226,38 @@
 }
 .wave path {
   stroke: rgba(255, 255, 255, 0.72);
+}
+
+/* ─── Mobile (portrait): materia editoriale ricomposta per la colonna singola.
+   La HeroImage vive nella metà bassa (foto full-width, niente tuck/print-mask);
+   i frammenti secondari diventano crop landscape impilati in alto; il lock-up
+   è più grande e centrato nello spazio liberato. Clip del DJ tarati in JS. ─── */
+@media (max-width: 640px) {
+  .hair {
+    left: 8%;
+    top: 22%;
+    width: 46%;
+  }
+  .frag[data-id='human'] {
+    left: 6%;
+    top: 7%;
+    width: 62%;
+    height: 30%;
+  }
+  .frag[data-id='crowd'] {
+    left: 30%;
+    top: 27%;
+    width: 60%;
+    height: 26%;
+  }
+  .freqLine {
+    top: 44%;
+  }
+  .logo {
+    left: 8%;
+    top: 27%;
+    width: 62%;
+  }
 }
 
 /* ─── Reduced-motion: nessuna sequenza, stato finale della hero direttamente
