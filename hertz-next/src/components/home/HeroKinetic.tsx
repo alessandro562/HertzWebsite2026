@@ -45,7 +45,7 @@ export default function HeroKinetic({ next }: { next?: NextEvent }) {
           <span className="hz-mono">44.49° N / 11.34° E</span>
         </motion.div>
 
-        <div className={styles.type} aria-label="Hertz — Clubbing Collective">
+        <h1 className={styles.type} aria-label="Hertz — Clubbing Collective, Bologna">
           <motion.span
             className={`${styles.word} ${styles.clubbing}`}
             style={enabled ? { x: xClub } : undefined}
@@ -75,7 +75,7 @@ export default function HeroKinetic({ next }: { next?: NextEvent }) {
             <span className={styles.logo}>hertz</span>
             <span className={styles.logoTail}>— from clubbers, for clubbers</span>
           </motion.div>
-        </div>
+        </h1>
 
         <motion.div className={styles.foot} style={enabled ? { opacity: fade } : undefined}>
           {next && (
@@ -90,7 +90,7 @@ export default function HeroKinetic({ next }: { next?: NextEvent }) {
             </div>
           )}
           <div className={styles.actions}>
-            <Button href={ticketsHref}>Tickets</Button>
+            <Button href={ticketsHref}>{next?.onSale ? 'Tickets' : 'Next event'}</Button>
             <a href="#events" className={`${styles.scrollCue} hz-mono`} aria-label="Scroll to events">
               Scroll ↓
             </a>

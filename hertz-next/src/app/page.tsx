@@ -66,9 +66,8 @@ export default function Home() {
       <Section surface="signal" space="lg" id="intro">
         <div className={styles.introGrid}>
           <Reveal as="p" variant="mask" duration={0.9} className={styles.introLead}>
-            Independent nights in Bologna and across Emilia-Romagna — minimal &amp; deep
-            tech, booked like we&rsquo;d pay to see them ourselves. The visual changes; the
-            information stays stable.
+            Independent nights across Bologna and central Italy — minimal &amp; deep tech,
+            booked like we&rsquo;d pay to see them ourselves.
           </Reveal>
           <Reveal variant="up" delay={0.15}>
             <dl className={styles.introStats}>
@@ -291,8 +290,8 @@ export default function Home() {
             </SignatureTitle>
           </div>
           <p className={styles.archiveIntro}>
-            A moving archive of faces, rooms and fragments — Kindergarten, Numa, Cassero
-            and more. Photography stays raw; the interface supplies the rhythm.
+            A moving archive of faces, rooms and fragments from the Hertz floor —
+            Kindergarten and beyond.
           </p>
         </div>
         <Stagger className={styles.archiveStrip} gap={0.07}>
