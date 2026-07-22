@@ -1,11 +1,11 @@
 .hero {
   position: relative;
   overflow: hidden;
-  min-height: min(94svh, 920px);
+  min-height: min(92svh, 880px);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-block: clamp(6rem, 12vh, 9rem) clamp(2.5rem, 6vh, 4rem);
+  padding-block: clamp(4.5rem, 9vh, 7rem) clamp(1.75rem, 4.5vh, 3rem);
 }
 
 /* grid ambientale ora animata via <HeroSignalGrid> (deformazione a frequenza) */
@@ -121,7 +121,7 @@
   align-items: flex-end;
   justify-content: space-between;
   gap: var(--hz-space-md);
-  margin-top: clamp(2.5rem, 6vh, 4.5rem);
+  margin-top: clamp(1.75rem, 4vh, 3rem);
 }
 .next {
   display: flex;

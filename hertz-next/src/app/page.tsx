@@ -2,6 +2,7 @@
 import Link from 'next/link'
 import Section from '@/components/ui/Section'
 import HomeHero from '@/components/home/HomeHero'
+import HeroIntroSequence from '@/components/home/hero-intro/HeroIntroSequence'
 import Reveal, { Stagger, StaggerItem } from '@/motion/Reveal'
 import SignatureTitle from '@/motion/SignatureTitle'
 import MaskImage from '@/motion/MaskImage'
@@ -50,10 +51,15 @@ export default function Home() {
       }
     : undefined
 
+  // Hero: la sequenza "Print Interruption" È il primo stato della hero e si
+  // trasforma nella hero runtime (stessa <section> Signal, nessun intro/preloader).
+  // Rollback semplice alla hero classica: build con NEXT_PUBLIC_HERO=classic.
+  const heroClassic = process.env.NEXT_PUBLIC_HERO === 'classic'
+
   return (
     <main id="main">
       {/* ═══ 01 · HERO (signal) ═══ */}
-      <HomeHero next={nextEvent} />
+      {heroClassic ? <HomeHero next={nextEvent} /> : <HeroIntroSequence next={nextEvent} />}
 
       {/* ═══ 02 · INTRODUCTION (signal) ═══ */}
       <Section surface="signal" space="lg" id="intro">

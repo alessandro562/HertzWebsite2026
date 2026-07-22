@@ -1,7 +1,8 @@
 /* La sequenza vive nella stessa <section> della hero (hero.hero); qui i layer
    dell'intro + i marcatori di reveal. Stato iniziale NASCOSTO via CSS (SSR-safe)
-   così non c'è flash prima che GSAP prenda il controllo. GSAP (autoAlpha/scaleX)
-   sovrascrive inline questi stati. */
+   così non c'è flash prima che GSAP prenda il controllo. GSAP (autoAlpha/clipPath)
+   sovrascrive inline questi stati. Palette: raw token (la <section> è
+   data-surface="signal", che rimappa i semantici — qui serve controllo esatto). */
 .stage {
   isolation: isolate;
 }
@@ -16,12 +17,12 @@
   position: absolute;
   inset: 0;
   background-image:
-    repeating-linear-gradient(90deg, color-mix(in srgb, var(--hz-ink) 15%, transparent) 0 1px, transparent 1px calc(100% / 12)),
-    repeating-linear-gradient(0deg, color-mix(in srgb, var(--hz-ink) 15%, transparent) 0 1px, transparent 1px calc(100% / 7));
-  opacity: 0.6;
+    repeating-linear-gradient(90deg, color-mix(in srgb, var(--raw-ink) 12%, transparent) 0 1px, transparent 1px calc(100% / 12)),
+    repeating-linear-gradient(0deg, color-mix(in srgb, var(--raw-ink) 12%, transparent) 0 1px, transparent 1px calc(100% / 7));
+  opacity: 0.55;
 }
 
-/* PrintComposition */
+/* ─── PrintComposition — materia editoriale (foto secondarie sezionate dal taglio) ─── */
 .print {
   position: absolute;
   inset: 0;
@@ -34,7 +35,7 @@
   top: 30%;
   width: 38%;
   height: 2px;
-  background: var(--hz-ink);
+  background: var(--raw-ink);
   transform: scaleX(0);
   transform-origin: left center;
 }
@@ -54,49 +55,153 @@
 }
 .band {
   position: absolute;
-  background: var(--hz-ink);
+  background: var(--raw-ink);
   opacity: 0;
   will-change: transform, opacity;
 }
 
-/* FrequencyCut */
+/* ─── FrequencyCut — la lama che seziona la composizione ─── */
 .freqLine {
   position: absolute;
   left: 0;
   top: 50%;
   width: 100%;
   height: 3px;
-  background: var(--hz-ink);
+  background: var(--raw-ink);
   z-index: 2;
   pointer-events: none;
   transform: scaleX(0);
   transform-origin: left center;
 }
 
-/* LogoLockup — file ufficiale reso Ink via brightness(0) su Signal */
+/* ─── LogoLockup — file ufficiale reso Ink via brightness(0) su Signal ─── */
 .logo {
   position: absolute;
   left: 6%;
   top: 21%;
   width: 40%;
   height: auto;
-  z-index: 3;
+  z-index: 4;
   filter: brightness(0);
   pointer-events: none;
   opacity: 0;
 }
 
-/* HeroContent / HeroImage — nascosti finché la sequenza non li rivela */
-.contentReveal {
-  opacity: 0;
-  will-change: transform, opacity;
+/* ─── HeroImage — È il frammento DJ: stessa immagine, continuità geometrica.
+   Layout gemello di HomeHero.photoWrap ma senza lo scrim a gradiente: il bordo
+   sinistro si dissolve in bande di stampa (print mask, coerente col sistema). ─── */
+.heroFigure {
+  position: relative;
+  z-index: 1;
+  margin: clamp(2rem, 5vw, 3rem) 0 0;
+  max-width: 460px;
+  opacity: 0; /* SSR: nascosta finché GSAP non prende il controllo */
 }
-.photoReveal {
+@media (min-width: 900px) {
+  .heroFigure {
+    margin: 0 0 0 -14%;
+    max-width: none;
+    /* print mask: il bordo che entra sotto il titolo si dissolve in bande
+       tonali dure (retino/registro di stampa), non un fade fotografico */
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0 5%,
+      rgba(0, 0, 0, 0.18) 5% 12%,
+      rgba(0, 0, 0, 0.44) 12% 20%,
+      rgba(0, 0, 0, 0.74) 20% 30%,
+      #000 38% 100%
+    );
+    mask-image: linear-gradient(
+      90deg,
+      transparent 0 5%,
+      rgba(0, 0, 0, 0.18) 5% 12%,
+      rgba(0, 0, 0, 0.44) 12% 20%,
+      rgba(0, 0, 0, 0.74) 20% 30%,
+      #000 38% 100%
+    );
+  }
+}
+/* overlay retino DJ: si dissolve rivelando il colore (stessa inquadratura →
+   trasformazione del trattamento, non crossfade tra elementi diversi) */
+.htOverlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  opacity: 0; /* GSAP lo porta a 1 all'avvio; reduced-motion lo lascia a 0 */
+  pointer-events: none;
+}
+.photoDetail {
   opacity: 0;
   will-change: opacity;
 }
 
-/* Waveform runtime */
+/* ─── HeroContent — nascosto finché la sequenza non lo rivela ─── */
+.contentReveal {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* ─── Zona editoriale prossimo evento (HTML reale, non rasterizzato) ─── */
+.nextZone {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  max-width: 30rem;
+}
+.nextTop {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--hz-ink-mute);
+}
+.nextDate {
+  color: var(--hz-ink);
+}
+.nextTitle {
+  font-family: var(--hz-font-display);
+  font-weight: var(--hz-weight-display);
+  font-size: var(--hz-t-card);
+  letter-spacing: var(--hz-tracking-tight);
+  line-height: 1.05;
+  width: fit-content;
+}
+.nextTitle:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+.nextMeta {
+  color: var(--hz-ink-mute);
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.24em 0.6em;
+  border: 1px solid var(--raw-ink);
+  border-radius: 2px;
+  font-size: var(--hz-t-meta);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--raw-ink);
+}
+.badge::before {
+  content: '';
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 50%;
+  background: currentColor;
+}
+.badgeOn {
+  background: var(--raw-ink);
+  color: var(--raw-paper);
+  border-color: var(--raw-ink);
+}
+
+/* ─── Waveform runtime — ciò in cui si assesta la linea di frequenza ─── */
 .wave {
   position: absolute;
   left: 6%;
@@ -110,19 +215,21 @@
   stroke: rgba(255, 255, 255, 0.72);
 }
 
-/* Reduced-motion: nessuna sequenza, stato finale della hero direttamente
-   (robusto anche senza JS). */
+/* ─── Reduced-motion: nessuna sequenza, stato finale della hero direttamente
+   (robusto anche senza JS). ─── */
 @media (prefers-reduced-motion: reduce) {
   .grid,
+  .heroFigure,
+  .photoDetail,
   .contentReveal,
-  .photoReveal,
   .wave {
     opacity: 1;
   }
   .print,
   .logo,
   .freqLine,
-  .hair {
+  .hair,
+  .htOverlay {
     opacity: 0 !important;
   }
 }

@@ -11,48 +11,51 @@ import type { NextEvent } from '../HomeHero'
 import hero from '../HomeHero.module.css'
 import s from './HeroIntroSequence.module.css'
 
-/** Fotografie reali (pulite dal watermark), monocromia + retino PRE-BAKED
-   (nessun filtro/mix-blend a runtime → leggero e fluido su device reali). */
+/** Foto SECONDARIE reali (retino PRE-BAKED): materia editoriale che il taglio
+   di frequenza seziona ed elimina. Il DJ non è qui: È la HeroImage (vedi sotto). */
 const FRAGS = [
-  { id: 'human', src: '/assets/ident-human-ht.jpg', x: 4, y: 10, w: 40, h: 80, cut: 0.5, t: 0.30 },
-  { id: 'crowd', src: '/assets/ident-crowd-ht.jpg', x: 40, y: 4, w: 34, h: 62, cut: 0.74, t: 0.46 },
-  { id: 'dj', src: '/assets/ident-dj-ht.jpg', x: 66, y: 26, w: 32, h: 64, cut: 0.375, t: 0.62 },
+  { id: 'human', src: '/assets/ident-human-ht.jpg', x: 4, y: 10, w: 40, h: 80, cut: 0.5, t: 0.2 },
+  { id: 'crowd', src: '/assets/ident-crowd-ht.jpg', x: 38, y: 6, w: 32, h: 60, cut: 0.72, t: 0.34 },
 ] as const
+
+// clip della HeroImage: frammento (crop coerente) → banda compressa dal taglio → frame pieno
+const SLAB = 'inset(12% 26% 20% 42%)'
+const BAND = 'inset(46% 26% 46% 42%)'
+const FULL = 'inset(0% 0% 0% 0%)'
 
 /**
  * HeroIntroSequence — B2 "Print Interruption" come PRIMO STATO della hero.
- * La sequenza non è un intro separato: si trasforma direttamente nella hero.
- * Continuità: il frammento DJ diventa la foto principale; la linea di frequenza
- * diventa la waveform runtime; il logo si ritrae verso l'angolo; headline /
- * prossimo evento / CTA entrano dallo spazio liberato; superficie Signal continua.
+ * Non è un intro separato: è la hero che si compone. Continuità geometrica: la
+ * foto del DJ È il frammento (stesso elemento, stesso pixel) — un clip lo apre
+ * dal crop al frame pieno mentre il retino si dissolve nel colore (nessun
+ * crossfade fra elementi diversi). Human + dancefloor vengono sezionati ed
+ * eliminati dal taglio; il DJ sopravvive e diventa la HeroImage. La linea di
+ * frequenza si assesta nella waveform; il logo fa lock-up nello spazio liberato
+ * e si ritrae in posizione di sistema mentre entra l'headline.
  * Reduced-motion e visite successive → stato finale diretto. Mai bloccante.
  */
 export default function HeroIntroSequence({ next, staticGrid = false }: { next?: NextEvent; staticGrid?: boolean }) {
   const root = useRef<HTMLElement>(null)
-  const djFrag = useRef<HTMLDivElement>(null)
-  const photoFig = useRef<HTMLElement>(null)
   const [done, setDone] = useState(false)
   const ticketsHref = next ? `/events/${next.slug}` : '/events'
+  const status = next?.onSale ? 'On sale' : next?.comingSoon ? 'Coming soon' : 'Soon'
 
   useGSAP(
     () => {
       const q = gsap.utils.selector(root)
-      // l'intro dura ~3s: niente lag-smoothing (timeline a wall-clock, coerente
-      // anche sotto carico di compositing) e nessun fast-forward al ritorno tab.
+      // wall-clock (niente lag-smoothing) → durata coerente anche sotto carico.
       gsap.ticker.lagSmoothing(0)
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
       const seen = typeof sessionStorage !== 'undefined' && sessionStorage.getItem('hz_intro') === '1'
 
       // stato finale: hero a riposo (reduced-motion o visita successiva)
       const settle = () => {
-        gsap.set(q(`.${s.print}`), { autoAlpha: 0 })
-        gsap.set(q(`.${s.logo}`), { autoAlpha: 0 })
-        gsap.set(q(`.${s.freqLine}`), { autoAlpha: 0 })
-        gsap.set([q(`.${s.contentReveal}`), q(`.${s.photoReveal}`), q(`.${s.wave}`), q(`.${s.grid}`)], {
+        gsap.set([q(`.${s.print}`), q(`.${s.logo}`), q(`.${s.freqLine}`), q(`.${s.htOverlay}`)], { autoAlpha: 0 })
+        gsap.set(q(`.${s.heroFigure}`), { autoAlpha: 1, clearProps: 'clipPath' })
+        gsap.set([q(`.${s.contentReveal}`), q(`.${s.photoDetail}`), q(`.${s.wave}`), q(`.${s.grid}`)], {
           autoAlpha: 1,
           x: 0,
           y: 0,
-          clearProps: 'clipPath',
         })
         setDone(true)
       }
@@ -61,26 +64,18 @@ export default function HeroIntroSequence({ next, staticGrid = false }: { next?:
         return
       }
 
-      // misura la posizione finale della foto → il frammento DJ ci atterra
-      const rootRect = root.current!.getBoundingClientRect()
-      const pr = photoFig.current!.getBoundingClientRect()
-      const dr = djFrag.current!.getBoundingClientRect()
-      const target = {
-        x: pr.left - dr.left,
-        y: pr.top - dr.top,
-        sx: pr.width / dr.width,
-        sy: pr.height / dr.height,
-      }
-
+      // ── stati iniziali (SSR è già nascosto via CSS; qui li posizioniamo) ──
       gsap.set(q(`.${s.grid}`), { autoAlpha: 0 })
       gsap.set(q(`.${s.hair}`), { scaleX: 0, transformOrigin: 'left center' })
       gsap.set(q(`.${s.frag}`), { autoAlpha: 0 })
+      gsap.set(q(`.${s.top}, .${s.bot}`), { xPercent: 0, yPercent: 0 })
       gsap.set(q(`.${s.band}`), { autoAlpha: 0, scaleX: 0.4, transformOrigin: 'left center' })
       gsap.set(q(`.${s.freqLine}`), { scaleX: 0, transformOrigin: 'left center', autoAlpha: 1 })
-      gsap.set(q(`.${s.logo}`), { autoAlpha: 0, scale: 1.04, transformOrigin: 'left center' })
-      gsap.set([q(`.${s.contentReveal}`), q(`.${s.wave}`)], { autoAlpha: 0 })
+      gsap.set(q(`.${s.logo}`), { autoAlpha: 0, transformOrigin: 'left center' })
+      gsap.set(q(`.${s.heroFigure}`), { autoAlpha: 0, clipPath: SLAB })
+      gsap.set(q(`.${s.htOverlay}`), { autoAlpha: 1 })
+      gsap.set([q(`.${s.contentReveal}`), q(`.${s.photoDetail}`), q(`.${s.wave}`)], { autoAlpha: 0 })
       gsap.set(q(`.${s.contentReveal}`), { y: 26 })
-      gsap.set(q(`.${s.photoReveal}`), { autoAlpha: 0 })
 
       const done1 = () => {
         try {
@@ -90,59 +85,64 @@ export default function HeroIntroSequence({ next, staticGrid = false }: { next?:
       }
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' }, onComplete: done1 })
 
-      // 0.00–0.30 · tensione
-      tl.to(q(`.${s.hair}`), { scaleX: 1, duration: 0.3 }, 0)
-      // 0.30–1.15 · i frammenti entrano come manifesto unico
+      // 0.00–0.22 · tensione
+      tl.to(q(`.${s.hair}`), { scaleX: 1, duration: 0.22 }, 0)
+
+      // 0.20–0.82 · i frammenti secondari entrano come manifesto unico
       FRAGS.forEach((f) => {
         tl.fromTo(
           q(`.${s.frag}[data-id="${f.id}"]`),
-          { autoAlpha: 0, xPercent: f.id === 'human' ? -14 : f.id === 'dj' ? 16 : 0, yPercent: f.id === 'crowd' ? -18 : 0, scale: 1.06 },
-          { autoAlpha: 1, xPercent: 0, yPercent: 0, scale: 1, duration: 0.42 },
+          { autoAlpha: 0, xPercent: f.id === 'human' ? -14 : 0, yPercent: f.id === 'crowd' ? -16 : 0, scale: 1.06 },
+          { autoAlpha: 1, xPercent: 0, yPercent: 0, scale: 1, duration: 0.34 },
           f.t,
         )
       })
-      tl.to(q(`.${s.band}`), { autoAlpha: 1, scaleX: 1, duration: 0.4, stagger: 0.1 }, 0.6)
-      tl.to(q(`.${s.hair}`), { autoAlpha: 0, duration: 0.3 }, 0.7)
+      // 0.48 · la HeroImage entra come frammento (crop, retino attivo)
+      tl.to(q(`.${s.heroFigure}`), { autoAlpha: 1, duration: 0.3 }, 0.48)
+      tl.to(q(`.${s.band}`), { autoAlpha: 1, scaleX: 1, duration: 0.28, stagger: 0.08 }, 0.6)
+      tl.to(q(`.${s.hair}`), { autoAlpha: 0, duration: 0.26 }, 0.55)
 
-      // 1.15–1.55 · densità massima (micro assestamento)
-      tl.to(q(`.${s.frag}`), { scale: '-=0.01', duration: 0.3 }, 1.15)
+      // 0.92–1.14 · densità massima (micro assestamento)
+      tl.to(q(`.${s.frag}`), { scale: '-=0.012', duration: 0.22 }, 0.92)
 
-      // 1.55–1.78 · la frequenza attraversa
-      tl.to(q(`.${s.freqLine}`), { scaleX: 1, duration: 0.23, ease: 'power2.in' }, 1.55)
+      // 1.18–1.40 · la frequenza attraversa (la lama)
+      tl.to(q(`.${s.freqLine}`), { scaleX: 1, duration: 0.22, ease: 'power2.in' }, 1.18)
 
-      // 1.78–2.02 · RUPTURE (~220ms): shear + frammenti in direzioni opposte
-      tl.to(q(`.${s.top}`), { xPercent: -6, duration: 0.11, ease: 'power4.out' }, 1.8)
-      tl.to(q(`.${s.bot}`), { xPercent: 8, duration: 0.11, ease: 'power4.out' }, 1.8)
-      tl.to(q(`.${s.frag}[data-id="human"]`), { xPercent: -5, duration: 0.12 }, 1.82)
-      tl.to(q(`.${s.frag}[data-id="crowd"]`), { xPercent: 6, duration: 0.12 }, 1.82)
+      // ── 1.40–1.62 · RUPTURE (~220ms): la composizione viene SEZIONATA ──
+      // la lama "morde": breve emphasis verticale al contatto (controllato, no glitch)
+      tl.to(q(`.${s.freqLine}`), { scaleY: 2.8, duration: 0.06, ease: 'power2.out', yoyo: true, repeat: 1 }, 1.4)
+      // metà-alte su, metà-basse giù → separazione reale, netta, attorno all'asse
+      tl.to(q(`.${s.top}`), { yPercent: -30, xPercent: -10, duration: 0.12, ease: 'power4.out' }, 1.4)
+      tl.to(q(`.${s.bot}`), { yPercent: 32, xPercent: 11, duration: 0.12, ease: 'power4.out' }, 1.4)
+      // il DJ viene compresso dal taglio (clip → banda sottile), ma sopravvive
+      tl.to(q(`.${s.heroFigure}`), { clipPath: BAND, duration: 0.13, ease: 'power3.inOut' }, 1.42)
 
-      // 2.02–2.42 · compressione verso l'asse + cancellazione (human/crowd) ;
-      // il frammento DJ atterra sulla foto della hero
+      // ── 1.56–2.06 · compressione + cancellazione secondarie, il DJ si trasforma ──
+      // human + crowd + bande: compresse verso un punto di fuga ed erase
       tl.to(
-        [q(`.${s.frag}[data-id="human"]`), q(`.${s.frag}[data-id="crowd"]`), q(`.${s.band}`)],
-        { xPercent: '+=120', scaleX: 0.05, autoAlpha: 0, transformOrigin: 'right center', duration: 0.38, ease: 'power3.in', stagger: 0.03 },
-        2.02,
+        [q(`.${s.frag}`), q(`.${s.band}`)],
+        { xPercent: '+=140', scaleX: 0.04, autoAlpha: 0, transformOrigin: 'right center', duration: 0.34, ease: 'power3.in', stagger: 0.03 },
+        1.56,
       )
-      tl.to(q(`.${s.top}, .${s.bot}`), { xPercent: 0, duration: 0.2 }, 2.02)
+      // il DJ: banda → frame pieno + retino che si dissolve nel colore (continuo)
+      tl.to(q(`.${s.heroFigure}`), { clipPath: FULL, duration: 0.48, ease: 'power2.inOut' }, 1.58)
+      tl.to(q(`.${s.htOverlay}`), { autoAlpha: 0, duration: 0.44, ease: 'power2.out' }, 1.6)
+      tl.to(q(`.${s.freqLine}`), { autoAlpha: 0, duration: 0.2 }, 1.56)
+
+      // ── 2.04–2.78 · LOGO LOCK-UP (presenza ~400ms) poi si ritrae ──
+      tl.set(q(`.${s.logo}`), { autoAlpha: 1, clipPath: 'inset(0 100% 0 0)' }, 2.04)
+      tl.to(q(`.${s.logo}`), { clipPath: 'inset(0 0% 0 0)', duration: 0.24, ease: 'power3.out' }, 2.04)
       tl.to(
-        q(`.${s.frag}[data-id="dj"]`),
-        { x: target.x, y: target.y, scaleX: target.sx, scaleY: target.sy, transformOrigin: 'top left', duration: 0.42, ease: 'power2.inOut' },
-        2.0,
+        q(`.${s.logo}`),
+        { x: -18, y: -140, scale: 0.2, autoAlpha: 0, transformOrigin: 'left center', duration: 0.36, ease: 'power2.inOut' },
+        2.42,
       )
-      // la foto reale della hero si rivela nello stesso punto (stessa immagine → continuo)
-      tl.to(q(`.${s.photoReveal}`), { autoAlpha: 1, duration: 0.25 }, 2.34)
-      tl.to(q(`.${s.frag}[data-id="dj"]`), { autoAlpha: 0, duration: 0.2 }, 2.42)
-      tl.to(q(`.${s.freqLine}`), { autoAlpha: 0, duration: 0.2 }, 2.42)
 
-      // 2.40–2.72 · lock-up logo grande nello spazio liberato, poi si ritrae
-      tl.set(q(`.${s.logo}`), { autoAlpha: 1, clipPath: 'inset(0 100% 0 0)' }, 2.4)
-      tl.to(q(`.${s.logo}`), { clipPath: 'inset(0 0% 0 0)', duration: 0.26 }, 2.4)
-      tl.to(q(`.${s.logo}`), { x: -18, y: -140, scale: 0.2, autoAlpha: 0, transformOrigin: 'left center', duration: 0.42, ease: 'power2.inOut' }, 2.74)
-
-      // 2.60–3.10 · headline / evento / CTA entrano dallo spazio liberato + grid + waveform runtime
-      tl.to(q(`.${s.grid}`), { autoAlpha: 1, duration: 0.5 }, 2.6)
-      tl.to(q(`.${s.contentReveal}`), { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.08 }, 2.62)
-      tl.to(q(`.${s.wave}`), { autoAlpha: 1, duration: 0.5 }, 2.7)
+      // ── 2.30–2.86 · hero a riposo: grid + waveform + contenuto entrano ──
+      tl.to(q(`.${s.grid}`), { autoAlpha: 1, duration: 0.5 }, 2.3)
+      tl.to(q(`.${s.photoDetail}`), { autoAlpha: 1, duration: 0.4 }, 2.32)
+      tl.to(q(`.${s.contentReveal}`), { autoAlpha: 1, y: 0, duration: 0.4, stagger: 0.04 }, 2.34)
+      tl.to(q(`.${s.wave}`), { autoAlpha: 1, duration: 0.4 }, 2.44)
 
       // hook di validazione: ?seek mette in pausa la timeline per screenshot per-fase
       if (new URLSearchParams(window.location.search).has('seek')) {
@@ -170,37 +170,35 @@ export default function HeroIntroSequence({ next, staticGrid = false }: { next?:
 
   return (
     <section ref={root} data-surface="signal" className={`${hero.hero} ${s.stage}`} id="top" data-intro-done={done}>
-      {/* grid runtime (A) — statica in modalità capture (screenshot WebGL bloccano) */}
+      {/* grid runtime (A): durante la sequenza resta statica (CSS, zero rAF → non
+         compete con la timeline); la griglia viva monta solo a Hero assestata.
+         In modalità capture (staticGrid) resta sempre statica. */}
       <div className={s.grid}>
-        {staticGrid ? <div className={s.gridStatic} aria-hidden="true" /> : <HeroSignalGrid />}
+        {staticGrid || !done ? <div className={s.gridStatic} aria-hidden="true" /> : <HeroSignalGrid />}
       </div>
 
-      {/* PrintComposition — materia editoriale */}
+      {/* PrintComposition — foto secondarie sezionate dal taglio */}
       <div className={s.print} aria-hidden="true">
         <div className={s.hair} />
-        {FRAGS.map((f) => {
-          const isDj = f.id === 'dj'
-          return (
+        {FRAGS.map((f) => (
+          <div
+            key={f.id}
+            data-id={f.id}
+            className={s.frag}
+            style={{ left: `${f.x}%`, top: `${f.y}%`, width: `${f.w}%`, height: `${f.h}%` }}
+          >
             <div
-              key={f.id}
-              ref={isDj ? djFrag : undefined}
-              data-id={f.id}
-              className={s.frag}
-              style={{ left: `${f.x}%`, top: `${f.y}%`, width: `${f.w}%`, height: `${f.h}%` }}
-            >
-              <div
-                className={s.top}
-                style={{ backgroundImage: `url(${f.src})`, clipPath: `inset(0 0 ${(100 - f.cut * 100).toFixed(1)}% 0)` }}
-              />
-              <div
-                className={s.bot}
-                style={{ backgroundImage: `url(${f.src})`, clipPath: `inset(${(f.cut * 100).toFixed(1)}% 0 0 0)` }}
-              />
-            </div>
-          )
-        })}
+              className={s.top}
+              style={{ backgroundImage: `url(${f.src})`, clipPath: `inset(0 0 ${(100 - f.cut * 100).toFixed(1)}% 0)` }}
+            />
+            <div
+              className={s.bot}
+              style={{ backgroundImage: `url(${f.src})`, clipPath: `inset(${(f.cut * 100).toFixed(1)}% 0 0 0)` }}
+            />
+          </div>
+        ))}
         <div className={s.band} style={{ left: '4%', top: '84%', width: '30%', height: '3.2%' }} />
-        <div className={s.band} style={{ left: '76%', top: '20%', width: '14%', height: '2.6%' }} />
+        <div className={s.band} style={{ left: '70%', top: '18%', width: '16%', height: '2.6%' }} />
       </div>
 
       {/* FrequencyCut */}
@@ -225,13 +223,15 @@ export default function HeroIntroSequence({ next, staticGrid = false }: { next?:
             </p>
           </div>
 
-          <figure className={`${hero.photoWrap} ${s.photoReveal}`} ref={photoFig}>
+          {/* HeroImage = il frammento DJ trasformato: stessa immagine, colore + retino overlay */}
+          <figure className={s.heroFigure}>
             <img src="/assets/ident-dj.jpg" alt="Hertz — the booth during an event" className={hero.photo} />
-            <figcaption className={`${hero.photoCap} hz-mono`}>
+            <img src="/assets/ident-dj-ht.jpg" alt="" aria-hidden="true" className={s.htOverlay} />
+            <figcaption className={`${hero.photoCap} hz-mono ${s.photoDetail}`}>
               <span>N°{next?.n ?? '—'}</span>
               <span>Bologna floor</span>
             </figcaption>
-            {/* waveform runtime — ciò in cui si trasforma la linea di frequenza */}
+            {/* waveform runtime — ciò in cui si assesta la linea di frequenza */}
             <svg className={s.wave} viewBox="0 0 600 60" preserveAspectRatio="none" aria-hidden="true">
               <path
                 d="M0,30 L150,30 C168,30 176,30 190,30 C205,30 208,8 222,6 C236,4 240,30 256,30 C270,30 360,30 600,30"
@@ -244,15 +244,19 @@ export default function HeroIntroSequence({ next, staticGrid = false }: { next?:
           </figure>
         </div>
 
+        {/* Zona editoriale prossimo evento — HTML reale, CMS-driven, subito usabile */}
         <div className={`${hero.foot} ${s.contentReveal}`}>
           {next && (
-            <div className={hero.next}>
-              <span className={`${hero.nextLabel} hz-mono`}>Next · N°{next.n}</span>
-              <Link href={`/events/${next.slug}`} className={hero.nextTitle}>
+            <div className={s.nextZone}>
+              <div className={s.nextTop}>
+                <span className="hz-mono">Next · N°{next.n}</span>
+                <span className={`${s.badge} ${next.onSale ? s.badgeOn : ''} hz-mono`.trim()}>{status}</span>
+              </div>
+              <Link href={`/events/${next.slug}`} className={s.nextTitle}>
                 {next.title}
               </Link>
-              <span className={`${hero.nextMeta} hz-mono`}>
-                {next.date} · {next.venue} · {next.city}
+              <span className={`${s.nextMeta} hz-mono`}>
+                <time className={s.nextDate}>{next.date}</time> · {next.venue} · {next.city}
               </span>
             </div>
           )}
