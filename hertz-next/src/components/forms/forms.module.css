@@ -108,6 +108,13 @@
   letter-spacing: var(--hz-tracking-mono);
 }
 
+.fine {
+  color: var(--hz-ink-mute);
+  font-size: var(--hz-t-meta);
+  line-height: var(--hz-leading-body);
+  max-width: 54ch;
+}
+
 .done {
   border: 1px solid var(--hz-line-strong);
   padding: var(--hz-space-lg);
