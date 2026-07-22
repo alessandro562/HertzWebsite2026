@@ -2,7 +2,7 @@
 
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import Button from '@/components/ui/Button'
@@ -42,6 +42,11 @@ const FULL = 'inset(0% 0% 0% 0%)'
 export default function HeroIntroSequence({ next, staticGrid = false }: { next?: NextEvent; staticGrid?: boolean }) {
   const root = useRef<HTMLElement>(null)
   const [done, setDone] = useState(false)
+  // Riferimento stabile alla timeline corrente, letto "fresh" dal listener di
+  // skip qui sotto: disaccoppiato dal ciclo di vita di useGSAP così l'evento
+  // di scroll/tap/click funziona in modo affidabile anche nel double-invoke
+  // di sviluppo di React (StrictMode) e non dipende dal cleanup di useGSAP.
+  const tlRef = useRef<gsap.core.Timeline | null>(null)
   const ticketsHref = next ? `/events/${next.slug}` : '/events'
   const status = next?.onSale ? 'On sale' : next?.comingSoon ? 'Coming soon' : 'Soon'
 
@@ -66,6 +71,7 @@ export default function HeroIntroSequence({ next, staticGrid = false }: { next?:
           x: 0,
           y: 0,
         })
+        tlRef.current = null
         setDone(true)
       }
       if (reduce || seen) {
@@ -207,31 +213,49 @@ export default function HeroIntroSequence({ next, staticGrid = false }: { next?:
         tl.to(q(`.${s.wave}`), { autoAlpha: 1, duration: 0.4 }, 2.44)
       }
 
+      tlRef.current = tl
+
       // hook di validazione: ?seek mette in pausa la timeline per screenshot per-fase
       if (new URLSearchParams(window.location.search).has('seek')) {
         tl.pause(0)
         ;(window as unknown as { __tl?: gsap.core.Timeline }).__tl = tl
       }
-
-      // skip implicito: qualsiasi interazione porta subito allo stato finale
-      const skip = () => {
-        if (tl.progress() > 0.02 && tl.progress() < 1) {
-          tl.progress(1)
-        }
-      }
-      window.addEventListener('wheel', skip, { passive: true, once: true })
-      window.addEventListener('touchstart', skip, { passive: true, once: true })
-      window.addEventListener('pointerdown', skip, { once: true })
-      window.addEventListener('keydown', skip, { once: true })
-      return () => {
-        window.removeEventListener('wheel', skip)
-        window.removeEventListener('touchstart', skip)
-        window.removeEventListener('pointerdown', skip)
-        window.removeEventListener('keydown', skip)
-      }
     },
     { scope: root },
   )
+
+  // Skip implicito: qualsiasi scroll / touchmove significativo / click / tasto
+  // porta subito allo stato finale. Volutamente FUORI da useGSAP e con un
+  // AbortController: la rimozione dei listener non dipende dall'identità delle
+  // funzioni né dal cleanup interno di useGSAP (che in dev, con React
+  // StrictMode, può invocare l'effetto due volte) — qui il ciclo di vita è
+  // quello standard di un useEffect, e trySkip legge sempre tlRef.current.
+  useEffect(() => {
+    const controller = new AbortController()
+    const { signal } = controller
+    let touchStartY = 0
+    const trySkip = () => {
+      const tl = tlRef.current
+      if (tl && tl.progress() > 0.02 && tl.progress() < 1) {
+        tl.progress(1)
+        controller.abort()
+      }
+    }
+    const onTouchStart = (e: TouchEvent) => {
+      touchStartY = e.touches[0]?.clientY ?? 0
+    }
+    const onTouchMove = (e: TouchEvent) => {
+      const y = e.touches[0]?.clientY ?? 0
+      if (Math.abs(y - touchStartY) > 10) trySkip()
+    }
+    window.addEventListener('wheel', trySkip, { passive: true, signal })
+    window.addEventListener('touchstart', onTouchStart, { passive: true, signal })
+    window.addEventListener('touchmove', onTouchMove, { passive: true, signal })
+    window.addEventListener('pointerdown', trySkip, { signal })
+    window.addEventListener('click', trySkip, { signal })
+    window.addEventListener('keydown', trySkip, { signal })
+    return () => controller.abort()
+  }, [])
 
   return (
     <section ref={root} data-surface="signal" className={`${hero.hero} ${s.stage}`} id="top" data-intro-done={done}>
