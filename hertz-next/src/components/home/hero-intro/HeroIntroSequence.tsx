@@ -20,11 +20,12 @@ const FRAGS = [
 ] as const
 
 // clip della HeroImage: frammento (crop coerente) → banda compressa dal taglio → frame pieno.
-// Desktop = foto in colonna destra (crop verticale); Mobile = foto full-width bassa (crop centrale).
+// Desktop = foto in colonna destra (crop verticale); Mobile = foto full-width bassa (crop centrale,
+// generoso fin dall'inizio: su mobile il DJ è LA fotografia dominante, non un frammento minuscolo).
 const SLAB = 'inset(12% 26% 20% 42%)'
 const BAND = 'inset(46% 26% 46% 42%)'
-const SLAB_M = 'inset(22% 22% 22% 22%)'
-const BAND_M = 'inset(45% 22% 45% 22%)'
+const SLAB_M = 'inset(13% 13% 13% 13%)'
+const BAND_M = 'inset(43% 13% 43% 13%)'
 const FULL = 'inset(0% 0% 0% 0%)'
 
 /**
@@ -93,64 +94,118 @@ export default function HeroIntroSequence({ next, staticGrid = false }: { next?:
       }
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' }, onComplete: done1 })
 
-      // 0.00–0.22 · tensione
-      tl.to(q(`.${s.hair}`), { scaleX: 1, duration: 0.22 }, 0)
+      if (mobile) {
+        // ── Mobile: coreografia dedicata (NON la stessa timeline del desktop
+        // riscalata) — 1 fotografia dominante (il DJ, ampio fin dall'inizio) +
+        // al massimo 1 frammento secondario. Durata totale ~1,82s, fasi non
+        // uniformi: manifesto → densità → taglio → espansione DJ → lock-up → Hero.
 
-      // 0.20–0.82 · i frammenti secondari entrano come manifesto unico
-      FRAGS.forEach((f) => {
+        // 0.00–0.16 · tensione (breve)
+        tl.to(q(`.${s.hair}`), { scaleX: 1, duration: 0.16 }, 0)
+        // 0.05–0.35 · manifesto: il DJ è già presente e ampio (nessun vuoto centrale)
+        tl.to(q(`.${s.heroFigure}`), { autoAlpha: 1, duration: 0.22 }, 0.05)
         tl.fromTo(
-          q(`.${s.frag}[data-id="${f.id}"]`),
-          { autoAlpha: 0, xPercent: f.id === 'human' ? -14 : 0, yPercent: f.id === 'crowd' ? -16 : 0, scale: 1.06 },
-          { autoAlpha: 1, xPercent: 0, yPercent: 0, scale: 1, duration: 0.34 },
-          f.t,
+          q(`.${s.frag}[data-id="crowd"]`),
+          { autoAlpha: 0, yPercent: -14, scale: 1.05 },
+          { autoAlpha: 1, yPercent: 0, scale: 1, duration: 0.2 },
+          0.12,
         )
-      })
-      // 0.48 · la HeroImage entra come frammento (crop, retino attivo)
-      tl.to(q(`.${s.heroFigure}`), { autoAlpha: 1, duration: 0.3 }, 0.48)
-      tl.to(q(`.${s.band}`), { autoAlpha: 1, scaleX: 1, duration: 0.28, stagger: 0.08 }, 0.6)
-      tl.to(q(`.${s.hair}`), { autoAlpha: 0, duration: 0.26 }, 0.55)
+        tl.to(q(`.${s.hair}`), { autoAlpha: 0, duration: 0.14 }, 0.3)
 
-      // 0.92–1.14 · densità massima (micro assestamento)
-      tl.to(q(`.${s.frag}`), { scale: '-=0.012', duration: 0.22 }, 0.92)
+        // 0.35–0.70 · densità (un solo accento grafico + micro respiro del DJ)
+        tl.to(q(`.${s.band}[data-idx="0"]`), { autoAlpha: 1, scaleX: 1, duration: 0.22 }, 0.38)
+        tl.to(q(`.${s.heroFigure}`), { scale: '-=0.01', duration: 0.16 }, 0.5)
 
-      // 1.18–1.40 · la frequenza attraversa (la lama)
-      tl.to(q(`.${s.freqLine}`), { scaleX: 1, duration: 0.22, ease: 'power2.in' }, 1.18)
+        // 0.70–0.95 · RUPTURE: la lama seziona, il secondario è cancellato, il DJ sopravvive
+        tl.to(q(`.${s.freqLine}`), { scaleX: 1, duration: 0.1, ease: 'power2.in' }, 0.7)
+        tl.to(q(`.${s.freqLine}`), { scaleY: 2.6, duration: 0.05, ease: 'power2.out', yoyo: true, repeat: 1 }, 0.8)
+        tl.to(
+          [q(`.${s.frag}[data-id="crowd"]`), q(`.${s.band}[data-idx="0"]`)],
+          { yPercent: -60, scaleY: 0.05, autoAlpha: 0, transformOrigin: 'top center', duration: 0.18, ease: 'power3.in' },
+          0.8,
+        )
+        tl.to(q(`.${s.heroFigure}`), { clipPath: band, duration: 0.1, ease: 'power3.inOut' }, 0.82)
+        tl.to(q(`.${s.freqLine}`), { autoAlpha: 0, duration: 0.14 }, 0.88)
 
-      // ── 1.40–1.62 · RUPTURE (~220ms): la composizione viene SEZIONATA ──
-      // la lama "morde": breve emphasis verticale al contatto (controllato, no glitch)
-      tl.to(q(`.${s.freqLine}`), { scaleY: 2.8, duration: 0.06, ease: 'power2.out', yoyo: true, repeat: 1 }, 1.4)
-      // metà-alte su, metà-basse giù → separazione reale, netta, attorno all'asse
-      tl.to(q(`.${s.top}`), { yPercent: -30, xPercent: -10, duration: 0.12, ease: 'power4.out' }, 1.4)
-      tl.to(q(`.${s.bot}`), { yPercent: 32, xPercent: 11, duration: 0.12, ease: 'power4.out' }, 1.4)
-      // il DJ viene compresso dal taglio (clip → banda sottile), ma sopravvive
-      tl.to(q(`.${s.heroFigure}`), { clipPath: band, duration: 0.13, ease: 'power3.inOut' }, 1.42)
+        // 0.95–1.25 · espansione: stessa continuità geometrica del desktop, ritmo compresso
+        tl.to(q(`.${s.heroFigure}`), { clipPath: FULL, duration: 0.28, ease: 'power2.inOut' }, 0.95)
+        tl.to(q(`.${s.htOverlay}`), { autoAlpha: 0, duration: 0.26, ease: 'power2.out' }, 0.97)
 
-      // ── 1.56–2.06 · compressione + cancellazione secondarie, il DJ si trasforma ──
-      // human + crowd + bande: compresse verso un punto di fuga ed erase
-      tl.to(
-        [q(`.${s.frag}`), q(`.${s.band}`)],
-        { xPercent: '+=140', scaleX: 0.04, autoAlpha: 0, transformOrigin: 'right center', duration: 0.34, ease: 'power3.in', stagger: 0.03 },
-        1.56,
-      )
-      // il DJ: banda → frame pieno + retino che si dissolve nel colore (continuo)
-      tl.to(q(`.${s.heroFigure}`), { clipPath: FULL, duration: 0.48, ease: 'power2.inOut' }, 1.58)
-      tl.to(q(`.${s.htOverlay}`), { autoAlpha: 0, duration: 0.44, ease: 'power2.out' }, 1.6)
-      tl.to(q(`.${s.freqLine}`), { autoAlpha: 0, duration: 0.2 }, 1.56)
+        // 1.25–1.55 · LOGO LOCK-UP: Ink su Signal, nello spazio libero SOPRA la foto
+        // (mai coperto: quella zona è sempre Signal puro finché il contenuto non entra)
+        tl.set(q(`.${s.logo}`), { autoAlpha: 1, clipPath: 'inset(0 100% 0 0)' }, 1.25)
+        tl.to(q(`.${s.logo}`), { clipPath: 'inset(0 0% 0 0)', duration: 0.14, ease: 'power3.out' }, 1.25)
+        tl.to(
+          q(`.${s.logo}`),
+          { x: -14, y: -60, scale: 0.32, autoAlpha: 0, transformOrigin: 'left center', duration: 0.16, ease: 'power2.inOut' },
+          1.39,
+        )
 
-      // ── 2.04–2.78 · LOGO LOCK-UP (presenza ~400ms) poi si ritrae ──
-      tl.set(q(`.${s.logo}`), { autoAlpha: 1, clipPath: 'inset(0 100% 0 0)' }, 2.04)
-      tl.to(q(`.${s.logo}`), { clipPath: 'inset(0 0% 0 0)', duration: 0.24, ease: 'power3.out' }, 2.04)
-      tl.to(
-        q(`.${s.logo}`),
-        { x: -18, y: -140, scale: 0.2, autoAlpha: 0, transformOrigin: 'left center', duration: 0.36, ease: 'power2.inOut' },
-        2.42,
-      )
+        // 1.55–1.88 · Hero completa
+        tl.to(q(`.${s.grid}`), { autoAlpha: 1, duration: 0.3 }, 1.55)
+        tl.to(q(`.${s.photoDetail}`), { autoAlpha: 1, duration: 0.22 }, 1.58)
+        tl.to(q(`.${s.contentReveal}`), { autoAlpha: 1, y: 0, duration: 0.22, stagger: 0.02 }, 1.6)
+        tl.to(q(`.${s.wave}`), { autoAlpha: 1, duration: 0.2 }, 1.6)
+      } else {
+        // 0.00–0.22 · tensione
+        tl.to(q(`.${s.hair}`), { scaleX: 1, duration: 0.22 }, 0)
 
-      // ── 2.30–2.86 · hero a riposo: grid + waveform + contenuto entrano ──
-      tl.to(q(`.${s.grid}`), { autoAlpha: 1, duration: 0.5 }, 2.3)
-      tl.to(q(`.${s.photoDetail}`), { autoAlpha: 1, duration: 0.4 }, 2.32)
-      tl.to(q(`.${s.contentReveal}`), { autoAlpha: 1, y: 0, duration: 0.4, stagger: 0.04 }, 2.34)
-      tl.to(q(`.${s.wave}`), { autoAlpha: 1, duration: 0.4 }, 2.44)
+        // 0.20–0.82 · i frammenti secondari entrano come manifesto unico
+        FRAGS.forEach((f) => {
+          tl.fromTo(
+            q(`.${s.frag}[data-id="${f.id}"]`),
+            { autoAlpha: 0, xPercent: f.id === 'human' ? -14 : 0, yPercent: f.id === 'crowd' ? -16 : 0, scale: 1.06 },
+            { autoAlpha: 1, xPercent: 0, yPercent: 0, scale: 1, duration: 0.34 },
+            f.t,
+          )
+        })
+        // 0.48 · la HeroImage entra come frammento (crop, retino attivo)
+        tl.to(q(`.${s.heroFigure}`), { autoAlpha: 1, duration: 0.3 }, 0.48)
+        tl.to(q(`.${s.band}`), { autoAlpha: 1, scaleX: 1, duration: 0.28, stagger: 0.08 }, 0.6)
+        tl.to(q(`.${s.hair}`), { autoAlpha: 0, duration: 0.26 }, 0.55)
+
+        // 0.92–1.14 · densità massima (micro assestamento)
+        tl.to(q(`.${s.frag}`), { scale: '-=0.012', duration: 0.22 }, 0.92)
+
+        // 1.18–1.40 · la frequenza attraversa (la lama)
+        tl.to(q(`.${s.freqLine}`), { scaleX: 1, duration: 0.22, ease: 'power2.in' }, 1.18)
+
+        // ── 1.40–1.62 · RUPTURE (~220ms): la composizione viene SEZIONATA ──
+        // la lama "morde": breve emphasis verticale al contatto (controllato, no glitch)
+        tl.to(q(`.${s.freqLine}`), { scaleY: 2.8, duration: 0.06, ease: 'power2.out', yoyo: true, repeat: 1 }, 1.4)
+        // metà-alte su, metà-basse giù → separazione reale, netta, attorno all'asse
+        tl.to(q(`.${s.top}`), { yPercent: -30, xPercent: -10, duration: 0.12, ease: 'power4.out' }, 1.4)
+        tl.to(q(`.${s.bot}`), { yPercent: 32, xPercent: 11, duration: 0.12, ease: 'power4.out' }, 1.4)
+        // il DJ viene compresso dal taglio (clip → banda sottile), ma sopravvive
+        tl.to(q(`.${s.heroFigure}`), { clipPath: band, duration: 0.13, ease: 'power3.inOut' }, 1.42)
+
+        // ── 1.56–2.06 · compressione + cancellazione secondarie, il DJ si trasforma ──
+        // human + crowd + bande: compresse verso un punto di fuga ed erase
+        tl.to(
+          [q(`.${s.frag}`), q(`.${s.band}`)],
+          { xPercent: '+=140', scaleX: 0.04, autoAlpha: 0, transformOrigin: 'right center', duration: 0.34, ease: 'power3.in', stagger: 0.03 },
+          1.56,
+        )
+        // il DJ: banda → frame pieno + retino che si dissolve nel colore (continuo)
+        tl.to(q(`.${s.heroFigure}`), { clipPath: FULL, duration: 0.48, ease: 'power2.inOut' }, 1.58)
+        tl.to(q(`.${s.htOverlay}`), { autoAlpha: 0, duration: 0.44, ease: 'power2.out' }, 1.6)
+        tl.to(q(`.${s.freqLine}`), { autoAlpha: 0, duration: 0.2 }, 1.56)
+
+        // ── 2.04–2.78 · LOGO LOCK-UP (presenza ~400ms) poi si ritrae ──
+        tl.set(q(`.${s.logo}`), { autoAlpha: 1, clipPath: 'inset(0 100% 0 0)' }, 2.04)
+        tl.to(q(`.${s.logo}`), { clipPath: 'inset(0 0% 0 0)', duration: 0.24, ease: 'power3.out' }, 2.04)
+        tl.to(
+          q(`.${s.logo}`),
+          { x: -18, y: -140, scale: 0.2, autoAlpha: 0, transformOrigin: 'left center', duration: 0.36, ease: 'power2.inOut' },
+          2.42,
+        )
+
+        // ── 2.30–2.86 · hero a riposo: grid + waveform + contenuto entrano ──
+        tl.to(q(`.${s.grid}`), { autoAlpha: 1, duration: 0.5 }, 2.3)
+        tl.to(q(`.${s.photoDetail}`), { autoAlpha: 1, duration: 0.4 }, 2.32)
+        tl.to(q(`.${s.contentReveal}`), { autoAlpha: 1, y: 0, duration: 0.4, stagger: 0.04 }, 2.34)
+        tl.to(q(`.${s.wave}`), { autoAlpha: 1, duration: 0.4 }, 2.44)
+      }
 
       // hook di validazione: ?seek mette in pausa la timeline per screenshot per-fase
       if (new URLSearchParams(window.location.search).has('seek')) {
@@ -202,8 +257,8 @@ export default function HeroIntroSequence({ next, staticGrid = false }: { next?:
             />
           </div>
         ))}
-        <div className={s.band} style={{ left: '4%', top: '84%', width: '30%', height: '3.2%' }} />
-        <div className={s.band} style={{ left: '70%', top: '18%', width: '16%', height: '2.6%' }} />
+        <div className={s.band} data-idx="0" style={{ left: '4%', top: '84%', width: '30%', height: '3.2%' }} />
+        <div className={s.band} data-idx="1" style={{ left: '70%', top: '18%', width: '16%', height: '2.6%' }} />
       </div>
 
       {/* FrequencyCut */}

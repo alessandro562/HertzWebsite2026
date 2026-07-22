@@ -228,35 +228,47 @@
   stroke: rgba(255, 255, 255, 0.72);
 }
 
-/* ─── Mobile (portrait): materia editoriale ricomposta per la colonna singola.
-   La HeroImage vive nella metà bassa (foto full-width, niente tuck/print-mask);
-   i frammenti secondari diventano crop landscape impilati in alto; il lock-up
-   è più grande e centrato nello spazio liberato. Clip del DJ tarati in JS. ─── */
+/* ─── Mobile (portrait): UNA fotografia dominante (il DJ/HeroImage, già ampia
+   e visibile dall'inizio) + AL MASSIMO un frammento secondario (crowd, piccolo
+   accento in alto) — non il collage desktop a tre foto impilate. Il DJ vive
+   nella metà bassa (posizione naturale del layout, invariata), quindi lo
+   spazio SOPRA di esso (dove kicker/titolo/sub sono ancora invisibili) è
+   sempre Signal pura: è lì che vive il lock-up, mai sovrapposto alla foto.
+   Clip del DJ tarati in JS (SLAB_M/BAND_M). ─── */
 @media (max-width: 640px) {
   .hair {
     left: 8%;
-    top: 22%;
-    width: 46%;
+    top: 15%;
+    width: 50%;
   }
+  /* mobile: una sola fotografia secondaria → "human" resta permanentemente fuori scena */
   .frag[data-id='human'] {
-    left: 6%;
-    top: 7%;
-    width: 62%;
-    height: 30%;
+    display: none;
   }
   .frag[data-id='crowd'] {
-    left: 30%;
-    top: 27%;
-    width: 60%;
-    height: 26%;
+    left: 48%;
+    top: 4%;
+    width: 46%;
+    height: 22%;
+  }
+  /* al massimo una banda grafica */
+  .band[data-idx='1'] {
+    display: none;
+  }
+  .band[data-idx='0'] {
+    left: 8%;
+    top: 21%;
+    width: 40%;
+    height: 2.4%;
   }
   .freqLine {
-    top: 44%;
+    top: 34%;
   }
+  /* lock-up: Ink su Signal, nella zona libera sopra la foto — mai coperto */
   .logo {
-    left: 8%;
-    top: 27%;
-    width: 62%;
+    left: 13%;
+    top: 6%;
+    width: 74%;
   }
 }
 
