@@ -54,7 +54,9 @@ export default function FeaturedEvent({ event }: { event: HertzEvent }) {
           </span>
         </div>
 
-        <FrequencyCut variant="editorial" trigger="inView" className={styles.cut} />
+        <div className={styles.cut}>
+          <FrequencyCut variant="editorial" trigger="inView" />
+        </div>
 
         <div className={styles.mid}>
           <h2 className={styles.title}>{event.title}</h2>
