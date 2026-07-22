@@ -15,6 +15,8 @@ export interface ArchiveItem {
   year: number
   slug: string
   date: string
+  lineup?: string[]
+  hasGallery?: boolean
 }
 
 /**
@@ -86,8 +88,10 @@ export default function ArchiveExplorer({ items, years }: { items: ArchiveItem[]
                   <span className={styles.title}>{it.title}</span>
                   <span className={styles.venue}>
                     {it.venue} · {it.city}
+                    {it.lineup && it.lineup.length > 0 && ` · ${it.lineup.join(' · ')}`}
                   </span>
                 </span>
+                {it.hasGallery && <span className={`${styles.galleryMark} hz-mono`}>{'▦'} gallery</span>}
                 <StatusBadge status="archive" />
                 <span className={styles.arrow} aria-hidden="true">
                   ↗
