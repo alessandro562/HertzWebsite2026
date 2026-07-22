@@ -8,19 +8,7 @@
   padding-block: clamp(6rem, 12vh, 9rem) clamp(2.5rem, 6vh, 4rem);
 }
 
-/* ── grid ambientale (hairline verticali) ── */
-.gridlines {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background-image: repeating-linear-gradient(
-    90deg,
-    color-mix(in srgb, var(--hz-ink) 12%, transparent) 0 1px,
-    transparent 1px calc(100% / 6)
-  );
-  opacity: 0.5;
-  pointer-events: none;
-}
+/* grid ambientale ora animata via <HeroSignalGrid> (deformazione a frequenza) */
 
 .inner {
   position: relative;
@@ -124,38 +112,6 @@
   justify-content: space-between;
   color: #fff;
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
-}
-
-/* ── waveform ── */
-.wave {
-  position: absolute;
-  left: -5%;
-  right: -5%;
-  top: 54%;
-  width: 110%;
-  height: 200px;
-  transform: translateY(-50%);
-  z-index: 2;
-  pointer-events: none;
-  overflow: visible;
-}
-.wavePath,
-.wavePath2 {
-  fill: none;
-  stroke: var(--hz-ink);
-  stroke-width: 1.5;
-  vector-effect: non-scaling-stroke;
-}
-.wavePath {
-  stroke-dasharray: 1600;
-}
-.wavePath2 {
-  opacity: 0.35;
-}
-@media (max-width: 900px) {
-  .wave {
-    display: none;
-  }
 }
 
 /* ── foot: prossimo evento + CTA ── */
