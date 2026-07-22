@@ -17,8 +17,10 @@
   color: var(--hz-ink-mute);
 }
 .secTitle {
-  font-size: var(--hz-t-section);
-  line-height: 0.98;
+  font-size: var(--hz-t-hero);
+  line-height: 0.88;
+  letter-spacing: var(--hz-tracking-mega);
+  text-transform: uppercase;
   grid-row: 2;
 }
 .secLink {
@@ -272,9 +274,10 @@
 .manifesto { position: relative; }
 .manifestoGrid { display: grid; grid-template-columns: 1fr; gap: var(--hz-space-lg); align-items: center; }
 .manifestoStatement {
-  font-size: var(--hz-t-hero);
-  line-height: 0.98;
-  letter-spacing: -0.03em;
+  font-size: clamp(2.6rem, 8.5vw, 9.5rem);
+  line-height: 0.86;
+  letter-spacing: var(--hz-tracking-mega);
+  text-transform: uppercase;
 }
 .manifestoStatement em { font-style: normal; color: var(--hz-signal); }
 .manifestoBody { max-width: 46ch; font-size: var(--hz-t-body-lg); color: var(--hz-ink-mute); margin-top: var(--hz-space-md); }
@@ -288,7 +291,7 @@
 
 /* ═══════════ 04 · ARTISTS (cold-blue) ═══════════ */
 .artistsHead { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: var(--hz-space-md); margin-bottom: var(--hz-space-lg); }
-.artistsTitle { font-size: var(--hz-t-hero); line-height: 0.94; }
+.artistsTitle { font-size: var(--hz-t-mega); line-height: var(--hz-leading-mega); letter-spacing: var(--hz-tracking-mega); text-transform: uppercase; }
 .artistsHint { font-family: var(--hz-font-mono); font-size: var(--hz-t-ui); text-transform: uppercase; letter-spacing: 0.04em; color: var(--hz-ink-mute); }
 .artistList { display: flex; flex-direction: column; border-top: 1px solid var(--hz-line); }
 .artistRow {
@@ -346,7 +349,7 @@
 
 /* ═══════════ 07 · ARCHIVE (white) ═══════════ */
 .archiveHead { display: grid; grid-template-columns: 1fr; gap: var(--hz-space-md); align-items: end; margin-bottom: var(--hz-space-lg); }
-.archiveTitle { font-size: var(--hz-t-hero); line-height: 0.9; }
+.archiveTitle { font-size: var(--hz-t-mega); line-height: var(--hz-leading-mega); letter-spacing: var(--hz-tracking-mega); text-transform: uppercase; }
 .archiveIntro { max-width: 40ch; font-size: var(--hz-t-body-lg); color: var(--hz-ink-mute); }
 .archiveStrip {
   display: grid;
@@ -375,7 +378,7 @@
 @media (min-width: 768px) { .shopCard { grid-template-columns: 0.9fr 1.1fr; } }
 
 /* ═══════════ 09 · BOOKING (signal) ═══════════ */
-.bookTitle { font-size: var(--hz-t-hero); line-height: 0.96; max-width: 14ch; }
+.bookTitle { font-size: var(--hz-t-mega); line-height: var(--hz-leading-mega); letter-spacing: var(--hz-tracking-mega); text-transform: uppercase; max-width: 16ch; }
 .bookActions { display: flex; flex-direction: column; border-top: 1px solid var(--hz-line-strong); margin-top: var(--hz-space-lg); }
 .bookRow { display: flex; justify-content: space-between; align-items: center; gap: var(--hz-space-md); padding: var(--hz-space-md) 0; border-bottom: 1px solid var(--hz-line-strong); font-size: var(--hz-t-card); font-family: var(--hz-font-display); font-weight: var(--hz-weight-display); transition: padding-inline var(--hz-ui) var(--hz-ease-out); }
 .bookRow:hover { padding-inline: var(--hz-space-sm); }

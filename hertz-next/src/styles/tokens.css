@@ -54,7 +54,12 @@
   --hz-weight-body:    500;
   --hz-weight-regular: 400;
 
-  /* scala fluida a 3 livelli — SIGNATURE / SECTION / CONTENT */
+  /* scala fluida — DISPLAY (mega/ultra) / SIGNATURE / SECTION / CONTENT.
+     Livello DISPLAY: maiuscolo gigante "poster" (ORDER/DISORDER, THE FAMILY,
+     WICKED NIGHTS). Calibrato per riempire la larghezza restando leggibile e
+     grid-locked — mai lettere che collidono. */
+  --hz-t-ultra:   clamp(3.75rem, 21vw, 22rem);    /* edge-to-edge: banda cinetica / hero statement */
+  --hz-t-mega:    clamp(2.85rem, 13vw, 13rem);    /* titoli-firma giganti di sezione */
   --hz-t-hero:    clamp(3rem, 6vw, 6.5rem);       /* signature: hero/manifesto/artist-intro/archive */
   --hz-t-page:    clamp(2.6rem, 5vw, 5rem);       /* titolo pagina */
   --hz-t-section: clamp(2rem, 3.8vw, 3.8rem);     /* titolo sezione */
@@ -67,8 +72,10 @@
   --hz-leading-tight: 1.0;
   --hz-leading-snug:  1.12;
   --hz-leading-body:  1.5;
+  --hz-leading-mega:  0.84;    /* leading serrato per il display maiuscolo */
   --hz-tracking-mono: 0.04em;
   --hz-tracking-tight: -0.02em;
+  --hz-tracking-mega: -0.022em; /* stretto ma senza far toccare i glifi */
 
   /* ── 5 · SPAZIO ── */
   --hz-space-2xs: 0.25rem;

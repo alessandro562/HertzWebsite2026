@@ -1,10 +1,12 @@
 .heroTitle {
-  font-size: var(--hz-t-hero);
-  line-height: var(--hz-leading-tight);
+  font-size: var(--hz-t-mega);
+  line-height: var(--hz-leading-mega);
+  letter-spacing: var(--hz-tracking-mega);
+  text-transform: uppercase;
   margin-bottom: var(--hz-space-lg);
 }
 .heroTitle em {
-  font-style: italic;
+  font-style: normal;
   color: var(--hz-signal);
 }
 .heroQuote {

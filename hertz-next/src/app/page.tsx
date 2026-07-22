@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Section from '@/components/ui/Section'
 import HomeHero from '@/components/home/HomeHero'
 import HeroIntroSequence from '@/components/home/hero-intro/HeroIntroSequence'
+import KineticBand from '@/components/home/KineticBand'
 import Reveal, { Stagger, StaggerItem } from '@/motion/Reveal'
 import SignatureTitle from '@/motion/SignatureTitle'
 import MaskImage from '@/motion/MaskImage'
@@ -91,6 +92,14 @@ export default function Home() {
           </Reveal>
         </div>
       </Section>
+
+      {/* ═══ ORDER / DISORDER — banda cinetica (ink, edge-to-edge) ═══ */}
+      <KineticBand
+        primary={['ORDER', 'DISORDER']}
+        secondary={['44.49° N', '11.34° E', 'BOLOGNA', 'MINIMAL', 'DEEP TECH']}
+        labelLeft="01 / SIGNAL"
+        labelRight="FROM CLUBBERS · FOR CLUBBERS"
+      />
 
       {/* ═══ 03 · EVENTS (white) ═══ */}
       <Section surface="white" space="lg" id="events">
@@ -188,8 +197,9 @@ export default function Home() {
             <p className="hz-mono" style={{ color: 'var(--hz-ink-mute)', marginBottom: 'var(--hz-space-sm)' }}>
               03 / Residents
             </p>
-            <SignatureTitle as="h2" className={styles.artistsTitle}>
-              <span>The family.</span>
+            <SignatureTitle as="h2" className={styles.artistsTitle} stagger={0.09}>
+              <span>The</span>
+              <span>Family.</span>
             </SignatureTitle>
           </div>
           <p className={styles.artistsHint}>Select an artist →</p>

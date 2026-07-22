@@ -25,8 +25,10 @@
 }
 
 .title {
-  font-size: var(--hz-t-page);
-  max-width: 18ch;
+  font-size: clamp(2.75rem, 8vw, 9rem);
+  line-height: 0.86;
+  letter-spacing: var(--hz-tracking-mega);
+  text-transform: uppercase;
 }
 
 .intro {
