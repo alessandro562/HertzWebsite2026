@@ -25,7 +25,7 @@ export default function EventsPage() {
 
   return (
     <main id="main">
-      <Section surface="white" space="lg">
+      <Section surface="white" space="lg" style={{ paddingTop: 'var(--hz-section-sm)' }}>
         <PageHeader
           index="01"
           kicker="Events"

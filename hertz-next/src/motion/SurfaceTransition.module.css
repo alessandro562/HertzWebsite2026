@@ -1,0 +1,74 @@
+/* Copre il TOP della sezione: una linea attraversa, poi una banda del colore
+   di superficie si comprime verso l'alto rivelando il contenuto sottostante. */
+.transition {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+  overflow: hidden;
+}
+.line {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 2px;
+  width: 100%;
+  background: var(--raw-ink, #151515);
+  transform: scaleX(0);
+  transform-origin: left center;
+  opacity: 0.6;
+}
+.band {
+  position: absolute;
+  inset: 0;
+  background: var(--hz-bg, #fff);
+  transform-origin: top center;
+}
+/* la banda eredita il colore della superficie dichiarata */
+.transition[data-surface='signal'] .band {
+  background: var(--raw-signal, #a3b7b7);
+}
+.transition[data-surface='paper'] .band {
+  background: var(--raw-paper, #e9ebe4);
+}
+.transition[data-surface='cold-blue'] .band {
+  background: var(--raw-cold, #50778a);
+}
+.transition[data-surface='ink'] .band {
+  background: var(--raw-ink, #151515);
+}
+.transition[data-surface='white'] .band {
+  background: #fff;
+}
+
+/* stato chiuso→aperto */
+.transition[data-state='closed'] {
+  transition: none;
+}
+.transition[data-state='open'] .line {
+  transform: scaleX(1);
+  opacity: 0;
+  transition:
+    transform var(--hz-content, 0.5s) var(--hz-ease-out, ease),
+    opacity var(--hz-content, 0.5s) var(--hz-ease-out, ease) var(--hz-content, 0.5s);
+}
+.transition[data-state='open'] .band {
+  transform: scaleY(0);
+  transition: transform var(--hz-content, 0.5s) cubic-bezier(0.7, 0, 0.84, 0) 0.06s;
+}
+/* quando è aperta, il layer non intercetta nulla e sparisce dal flusso visivo */
+.transition[data-state='open'] {
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .transition .band,
+  .transition .line {
+    transform: scaleY(0);
+    opacity: 0;
+    transition: none;
+  }
+}

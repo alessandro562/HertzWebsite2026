@@ -72,6 +72,9 @@
 }
 
 .tickets {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
   font-family: var(--hz-font-mono);
   font-size: var(--hz-t-ui);
   text-transform: uppercase;
@@ -82,6 +85,12 @@
   transition:
     background-color var(--hz-fast) var(--hz-ease-out),
     color var(--hz-fast) var(--hz-ease-out);
+}
+.ticketsWave {
+  width: 1.8em;
+  height: 1em;
+  color: currentColor;
+  flex: none;
 }
 .tickets:hover {
   background: currentColor;

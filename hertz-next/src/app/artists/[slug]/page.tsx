@@ -8,6 +8,7 @@ import ImageFrame from '@/components/ui/ImageFrame'
 import EventRow from '@/components/events/EventRow'
 import MixRow from '@/components/music/MixRow'
 import ViewMorph from '@/motion/ViewMorph'
+import ImageReveal from '@/motion/ImageReveal'
 import Parallax from '@/motion/Parallax'
 import { Stagger, StaggerItem } from '@/motion/Reveal'
 import { ARTISTS } from '@/content/artists'
@@ -121,13 +122,13 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
       {a.gallery.length > 0 && (
         <Section surface="white" space="lg">
           <SectionLabel kicker="Live" title="On the floor." />
-          <Stagger className={styles.gallery} gap={0.08}>
+          <div className={styles.gallery}>
             {a.gallery.map((src, i) => (
-              <StaggerItem key={src} variant="up">
+              <ImageReveal key={src} variant={i % 2 === 0 ? 'print' : 'vertical'} duration="editorial">
                 <ImageFrame src={src} alt={`${a.name} live — ${i + 1}`} ratio="3 / 2" />
-              </StaggerItem>
+              </ImageReveal>
             ))}
-          </Stagger>
+          </div>
         </Section>
       )}
 

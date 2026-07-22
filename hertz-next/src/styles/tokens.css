@@ -96,17 +96,26 @@
   --hz-border:        1px solid var(--hz-line);
   --hz-border-strong: 1px solid currentColor;
 
-  /* ── 8 · MOTION ── */
+  /* ── 8 · MOTION ──
+     Mirror CSS dei semantici in lib/motion/tokens.ts (Motion Kit). I nomi
+     legacy (fast/content/section/cinematic) restano per compatibilità; i
+     nomi del Kit (reveal/editorial/signature) sono la nuova sorgente. */
   --hz-instant:   120ms;
   --hz-fast:      180ms;
-  --hz-ui:        280ms;
-  --hz-content:   500ms;
-  --hz-section:   750ms;
-  --hz-cinematic: 1100ms;
+  --hz-ui:        200ms;
+  --hz-reveal:    420ms;
+  --hz-editorial: 750ms;
+  --hz-signature: 1400ms;
+  --hz-content:   500ms;   /* legacy */
+  --hz-section:   750ms;   /* legacy */
+  --hz-cinematic: 1100ms;  /* legacy */
 
-  --hz-ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
-  --hz-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-  --hz-ease-soft:   cubic-bezier(0.22, 1, 0.36, 1);
+  --hz-ease-out:         cubic-bezier(0.16, 1, 0.3, 1);   /* uiOut */
+  --hz-ease-in-out:      cubic-bezier(0.65, 0, 0.35, 1);  /* uiInOut */
+  --hz-ease-soft:        cubic-bezier(0.22, 1, 0.36, 1);  /* editorialOut */
+  --hz-ease-compression: cubic-bezier(0.7, 0, 0.84, 0);
+  --hz-ease-rupture:     cubic-bezier(0.12, 0.85, 0.25, 1);
+  --hz-ease-settle:      cubic-bezier(0.34, 1.12, 0.64, 1);
 
   /* ── 9 · Z-INDEX ── */
   --hz-z-base: 0;

@@ -1,0 +1,106 @@
+.wrap {
+  display: inline-flex;
+  width: 3.5em;
+  height: 1.2em;
+  color: currentColor;
+  vertical-align: middle;
+}
+.svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.path {
+  transition:
+    stroke-width var(--hz-ui, 0.2s) var(--hz-ease-out, ease),
+    opacity var(--hz-ui, 0.2s) var(--hz-ease-out, ease);
+}
+.travel {
+  transform-origin: center;
+}
+
+/* idle: sottile, statica */
+.wrap[data-state='idle'] .path {
+  opacity: 0.55;
+}
+
+/* hover: l'impulso cresce leggermente (one-shot, non loop) */
+.wrap[data-state='hover'] .path {
+  opacity: 1;
+  stroke-width: 1.8;
+}
+.wrap[data-state='hover'] .travel {
+  animation: hz-wave-bump var(--hz-content, 0.5s) var(--hz-ease-out, ease);
+}
+
+/* active: impulso presente, netto */
+.wrap[data-state='active'] .path {
+  opacity: 1;
+  stroke-width: 2;
+}
+
+/* playing: un singolo fronte d'onda che respira lentamente (non un EQ a barre) */
+.wrap[data-state='playing'] .path {
+  opacity: 1;
+}
+.wrap[data-state='playing'][data-visible='true'] .travel {
+  animation: hz-wave-travel 2.4s var(--hz-ease-in-out, ease) infinite;
+}
+
+/* loading: sweep indeterminato, sottile */
+.wrap[data-state='loading'] .path {
+  opacity: 0.7;
+}
+.wrap[data-state='loading'][data-visible='true'] .travel {
+  animation: hz-wave-sweep 1.4s var(--hz-ease-in-out, ease) infinite;
+}
+
+/* disabled: piatta, attenuata */
+.wrap[data-state='disabled'] .path {
+  opacity: 0.25;
+}
+
+@keyframes hz-wave-bump {
+  0% {
+    transform: scaleY(1);
+  }
+  40% {
+    transform: scaleY(1.5);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+@keyframes hz-wave-travel {
+  0%,
+  100% {
+    transform: translateX(-8%) scaleY(1);
+  }
+  50% {
+    transform: translateX(8%) scaleY(1.35);
+  }
+}
+@keyframes hz-wave-sweep {
+  0% {
+    transform: translateX(-14%);
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(14%);
+    opacity: 0.4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wrap .travel {
+    animation: none !important;
+    transform: none !important;
+  }
+  .wrap .path {
+    transition: none;
+  }
+}

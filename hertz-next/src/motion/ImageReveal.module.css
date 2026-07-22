@@ -1,0 +1,76 @@
+/* Stato BASE = rivelato (nessun data-state) → SSR/no-JS mostrano l'immagine.
+   Il JS aggiunge data-state="hidden" solo se l'elemento è fuori vista al mount;
+   la transizione parte solo dopo data-armed (evita un wipe inverso al setup). */
+.reveal {
+  position: relative;
+  overflow: hidden;
+  --ir-dur: 750ms;
+  --ir-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ir-delay: 0ms;
+}
+.reveal > :not(.grain) {
+  will-change: clip-path, transform;
+}
+.reveal[data-armed][data-state] > :not(.grain) {
+  transition:
+    clip-path var(--ir-dur) var(--ir-ease) var(--ir-delay),
+    transform var(--ir-dur) var(--ir-ease) var(--ir-delay);
+}
+
+/* ── stati nascosti per variante (data-state="hidden") ── */
+.reveal[data-state='hidden'][data-variant='vertical'] > :not(.grain),
+.reveal[data-state='hidden'][data-variant='print'] > :not(.grain) {
+  clip-path: inset(0 0 100% 0);
+}
+.reveal[data-state='hidden'][data-variant='print'] > :not(.grain) {
+  transform: translateY(6%);
+}
+.reveal[data-state='hidden'][data-variant='horizontal'] > :not(.grain) {
+  clip-path: inset(0 100% 0 0);
+}
+.reveal[data-state='hidden'][data-variant='frequency'] > :not(.grain) {
+  clip-path: inset(49.5% 0 49.5% 0);
+}
+.reveal[data-state='hidden'][data-variant='halftone'] > :not(.grain) {
+  transform: scale(1.04);
+}
+
+/* ── stato rivelato (data-state="shown") = clip pieno ── */
+.reveal[data-state='shown'] > :not(.grain) {
+  clip-path: inset(0 0 0 0);
+  transform: none;
+}
+
+/* ── grain / retino (print + halftone): overlay che si dissolve.
+   Base rivelato = opacity 0 (nessun overlay). Hidden = opacity 1. ── */
+.grain {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  background-image: radial-gradient(circle, rgba(21, 21, 21, 0.9) 34%, transparent 37%);
+  background-size: 4px 4px;
+}
+.reveal[data-armed][data-state] .grain {
+  transition: opacity var(--ir-dur) var(--ir-ease) var(--ir-delay);
+}
+.reveal[data-state='hidden'] .grain {
+  opacity: 0.55;
+}
+.reveal[data-variant='print'][data-state='hidden'] .grain {
+  opacity: 0.32;
+}
+.reveal[data-state='shown'] .grain {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal > :not(.grain) {
+    clip-path: none !important;
+    transform: none !important;
+  }
+  .grain {
+    opacity: 0 !important;
+  }
+}

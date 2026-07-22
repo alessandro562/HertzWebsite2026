@@ -1,0 +1,60 @@
+.print {
+  position: relative;
+}
+.dominant {
+  position: relative;
+  overflow: hidden;
+  background: var(--hz-bg-2);
+}
+.img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cut {
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  bottom: 12%;
+  width: auto;
+  z-index: 3;
+}
+.band1,
+.band2 {
+  position: absolute;
+  background: var(--raw-ink, #151515);
+  opacity: 0.14;
+  z-index: 3;
+  pointer-events: none;
+}
+.band1 {
+  left: 0;
+  top: 10%;
+  width: 18%;
+  height: 2px;
+}
+.band2 {
+  right: 8%;
+  bottom: 8%;
+  width: 2px;
+  height: 16%;
+}
+.fragment {
+  position: absolute;
+  top: -6%;
+  right: -4%;
+  width: 34%;
+  max-width: 220px;
+  aspect-ratio: 4 / 5;
+  z-index: 4;
+  overflow: hidden;
+  border: 1px solid var(--hz-line-strong);
+  background: var(--hz-bg-2);
+}
+.cap {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.6rem;
+  color: var(--hz-ink-mute);
+}

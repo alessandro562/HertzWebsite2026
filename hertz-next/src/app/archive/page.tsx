@@ -4,6 +4,7 @@ import Section from '@/components/ui/Section'
 import PageHeader from '@/components/ui/PageHeader'
 import SectionLabel from '@/components/ui/SectionLabel'
 import ImageFrame from '@/components/ui/ImageFrame'
+import ImageReveal from '@/motion/ImageReveal'
 import ArchiveExplorer from '@/components/archive/ArchiveExplorer'
 import { archive, eventYear, eventSlug, shortDate, dowDate } from '@/content/events'
 import { galleryFor } from '@/content/galleries'
@@ -63,8 +64,16 @@ export default function ArchivePage() {
               return (
                 <Link key={e.n} href={`/events/${eventSlug(e)}#gallery`} className={styles.galCard}>
                   <div className={styles.galThumbs}>
-                    {photos.slice(0, 3).map((src) => (
-                      <ImageFrame key={src} src={src} alt={`${e.title} archive`} ratio="1 / 1" className={styles.thumb} />
+                    {photos.slice(0, 3).map((src, i) => (
+                      <ImageReveal
+                        key={src}
+                        variant={i === 0 ? 'print' : 'horizontal'}
+                        duration="reveal"
+                        delay={i * 0.06}
+                        className={styles.thumb}
+                      >
+                        <ImageFrame src={src} alt={`${e.title} archive`} ratio="1 / 1" />
+                      </ImageReveal>
                     ))}
                   </div>
                   <div className={styles.galMeta}>

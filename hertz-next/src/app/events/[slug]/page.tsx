@@ -9,6 +9,8 @@ import StatusBadge, { type Status } from '@/components/ui/StatusBadge'
 import EventPosterPortal from '@/components/events/EventPosterPortal'
 import TicketStickyBar from '@/components/events/TicketStickyBar'
 import ViewMorph from '@/motion/ViewMorph'
+import FrequencyCut from '@/motion/FrequencyCut'
+import WaveformPulse from '@/motion/WaveformPulse'
 import Reveal, { Stagger, StaggerItem } from '@/motion/Reveal'
 import {
   allEventSlugs,
@@ -67,7 +69,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
   return (
     <main id="main">
       {/* ── titolo compositivo + poster integrato nella griglia ── */}
-      <Section surface="white" space="md">
+      <Section surface="white" space="md" style={{ paddingTop: 'var(--hz-section-sm)' }}>
         <p className={`${styles.crumb} hz-mono`}>
           <Link href="/events">Events</Link>
           <span aria-hidden="true"> / </span>
@@ -123,9 +125,12 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
 
             <div className={styles.cta}>
               {ticketAction && ticketHref && (
-                <Button href={ticketHref} external arrow>
-                  Reserve by email
-                </Button>
+                <span className={styles.ctaSignal}>
+                  <WaveformPulse state="active" className={styles.ctaWave} />
+                  <Button href={ticketHref} external arrow>
+                    Reserve by email
+                  </Button>
+                </span>
               )}
               {!past && !e.onSale && (
                 <span className={styles.soonNote}>Line-up &amp; tickets announced soon.</span>
@@ -146,6 +151,8 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
       {/* ── line-up: gerarchia reale (bill → residents), niente reveal identici ── */}
       <Section surface="paper" space="lg">
         <SectionLabel kicker="Line-up" />
+        <FrequencyCut variant="editorial" trigger="inView" />
+
         <Reveal as="p" variant="mask" duration={0.8} className={styles.bill}>
           {e.bill || 'Line-up to be announced.'}
         </Reveal>

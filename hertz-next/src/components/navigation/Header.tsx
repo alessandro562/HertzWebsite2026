@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { NAV_ITEMS } from './nav-items'
+import WaveformPulse from '@/motion/WaveformPulse'
 import styles from './Header.module.css'
 
 /**
@@ -79,6 +80,7 @@ export default function Header() {
 
         <div className={styles.actions}>
           <Link href="/events" className={styles.tickets}>
+            <WaveformPulse state="idle" className={styles.ticketsWave} />
             Tickets
           </Link>
           <button

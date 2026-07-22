@@ -1,0 +1,49 @@
+/* linea di navigazione: attraversa in alto e si dissolve. Breve (reveal). */
+.navLine {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 2px;
+  width: 100%;
+  z-index: var(--hz-z-overlay, 1000);
+  background: var(--raw-ink, #151515);
+  transform: scaleX(0);
+  transform-origin: left center;
+  opacity: 0;
+  pointer-events: none;
+}
+.play {
+  animation: hz-nav-cut var(--hz-content, 0.5s) var(--hz-ease-out, ease) forwards;
+}
+@keyframes hz-nav-cut {
+  0% {
+    transform: scaleX(0);
+    opacity: 0.8;
+    transform-origin: left center;
+  }
+  55% {
+    transform: scaleX(1);
+    opacity: 0.8;
+    transform-origin: left center;
+  }
+  56% {
+    transform-origin: right center;
+  }
+  100% {
+    transform: scaleX(0);
+    opacity: 0;
+    transform-origin: right center;
+  }
+}
+
+/* main non deve mostrare un outline quando riceve focus programmatico */
+:global(#main:focus) {
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navLine {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+}

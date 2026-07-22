@@ -86,6 +86,17 @@
   text-transform: uppercase;
   color: var(--hz-ink-mute);
 }
+.ctaSignal {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.ctaWave {
+  width: 3em;
+  height: 1.4em;
+  color: var(--hz-ink-mute);
+  flex: none;
+}
 
 /* ── line-up: gerarchia bill (headliner/guest) → residents ── */
 .bill {

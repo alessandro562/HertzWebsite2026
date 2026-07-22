@@ -4,6 +4,7 @@ import { IBM_Plex_Mono } from 'next/font/google'
 import 'lenis/dist/lenis.css'
 import '@/styles/globals.css'
 import SmoothScroll from '@/motion/SmoothScroll'
+import PageTransitionProvider from '@/motion/PageTransitionProvider'
 import Header from '@/components/navigation/Header'
 import Footer from '@/components/navigation/Footer'
 
@@ -65,7 +66,7 @@ export default function RootLayout({
         <a href="#main" className="hz-skip">Vai al contenuto</a>
         <SmoothScroll>
           <Header />
-          {children}
+          <PageTransitionProvider>{children}</PageTransitionProvider>
           <Footer />
         </SmoothScroll>
       </body>
