@@ -18,6 +18,9 @@ const helveticaNeue = localFont({
   variable: '--font-hz',
   display: 'swap',
   src: [
+    { path: './fonts/HelveticaNeue-UltraLight.otf', weight: '100', style: 'normal' },
+    { path: './fonts/HelveticaNeue-Thin.otf', weight: '200', style: 'normal' },
+    { path: './fonts/HelveticaNeue-Light.otf', weight: '300', style: 'normal' },
     { path: './fonts/HelveticaNeue-Roman.otf', weight: '400', style: 'normal' },
     { path: './fonts/HelveticaNeue-Medium.otf', weight: '500', style: 'normal' },
     { path: './fonts/HelveticaNeue-Bold.otf', weight: '700', style: 'normal' },

@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import Section from '@/components/ui/Section'
 import HomeHero from '@/components/home/HomeHero'
-import HeroIntroSequence from '@/components/home/hero-intro/HeroIntroSequence'
+import HeroKinetic from '@/components/home/HeroKinetic'
 import KineticBand from '@/components/home/KineticBand'
 import Reveal, { Stagger, StaggerItem } from '@/motion/Reveal'
 import SignatureTitle from '@/motion/SignatureTitle'
@@ -59,8 +59,8 @@ export default function Home() {
 
   return (
     <main id="main">
-      {/* ═══ 01 · HERO (signal) ═══ */}
-      {heroClassic ? <HomeHero next={nextEvent} /> : <HeroIntroSequence next={nextEvent} />}
+      {/* ═══ 01 · HERO (signal · solo tipografia cinetica, nessuna foto) ═══ */}
+      {heroClassic ? <HomeHero next={nextEvent} /> : <HeroKinetic next={nextEvent} />}
 
       {/* ═══ 02 · INTRODUCTION (signal) ═══ */}
       <Section surface="signal" space="lg" id="intro">

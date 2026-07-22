@@ -1,0 +1,133 @@
+/* ────────────────────────────────────────────────────────────
+   HERO KINETIC — solo tipografia (nessuna foto).
+   "CLUBBING COLLECTIVE" maiuscolo + logo hertz, che scorrono e
+   giocano tra SOTTILE (thin) e GRASSETTO (bold). Griglia Signal
+   ambientale dietro. Fatto bene: nessuna collisione, drift
+   clippato (niente scroll orizzontale della pagina), leggibile.
+   ──────────────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(6.5rem, 12vh, 9rem) 0 clamp(1.5rem, 4vh, 2.5rem);
+  overflow: hidden;               /* clip del drift orizzontale */
+  background: var(--hz-bg);       /* signal */
+  color: var(--hz-ink);
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.stage {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--hz-content-max);
+  margin-inline: auto;
+  padding-inline: var(--hz-gutter);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 3vw, 2.25rem);
+}
+
+/* ── riga superiore: kicker mono + logo ── */
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--hz-space-md);
+  color: var(--hz-ink-mute);
+}
+
+/* ── blocco tipografico centrale ── */
+.type {
+  display: flex;
+  flex-direction: column;
+  line-height: 0.8;
+  margin-block: auto;
+}
+.word {
+  font-family: var(--hz-font-display);
+  text-transform: uppercase;
+  letter-spacing: -0.035em;
+  white-space: nowrap;
+  display: block;
+  will-change: transform;
+}
+/* SOTTILE ↔ GRASSETTO: stesso corpo, peso opposto */
+.clubbing {
+  font-weight: 200;                                 /* thin */
+  font-size: clamp(2.9rem, 14vw, 15.5rem);
+  color: var(--hz-ink);
+}
+.collective {
+  font-weight: 700;                                 /* bold */
+  font-size: clamp(2.9rem, 14vw, 15.5rem);
+  color: var(--hz-ink);
+}
+/* logo hertz — wordmark grande, gioca con la scala del tipo */
+.logoLine {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.6ch;
+}
+.logo {
+  font-family: var(--hz-font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 6.5vw, 7rem);
+  letter-spacing: -0.04em;
+  line-height: 0.8;
+  color: var(--hz-ink);
+}
+.logoTail {
+  font-family: var(--hz-font-mono);
+  font-size: var(--hz-t-meta);
+  letter-spacing: var(--hz-tracking-mono);
+  text-transform: uppercase;
+  color: var(--hz-ink-mute);
+  padding-bottom: 0.6em;
+}
+
+/* ── riga inferiore: prossimo evento + CTA ── */
+.foot {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--hz-space-md);
+  align-items: end;
+  border-top: 1px solid var(--hz-line);
+  padding-top: var(--hz-space-md);
+}
+.next { display: flex; flex-direction: column; gap: 0.25rem; min-width: 0; }
+.nextLabel { color: var(--hz-ink-mute); }
+.nextTitle {
+  font-family: var(--hz-font-display);
+  font-weight: 500;
+  font-size: var(--hz-t-card);
+  line-height: 1.05;
+  transition: opacity var(--hz-ui) var(--hz-ease-out);
+}
+.nextTitle:hover { opacity: 0.6; }
+.nextMeta { color: var(--hz-ink-mute); }
+
+.actions { display: flex; flex-wrap: wrap; gap: var(--hz-space-sm); align-items: center; }
+.scrollCue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  color: var(--hz-ink-mute);
+  justify-self: start;
+}
+
+@media (min-width: 860px) {
+  .foot {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+  }
+  .actions { justify-content: flex-end; }
+}
