@@ -30,12 +30,6 @@
 .featureImg {
   max-width: 460px;
 }
-.feature:hover .featureImg :global(img) {
-  transform: scale(1.02);
-}
-.featureImg :global(img) {
-  transition: transform var(--hz-content) var(--hz-ease-out);
-}
 
 .featureMeta {
   display: flex;

@@ -1,6 +1,7 @@
 'use client'
 
-import { motion, type Variants } from 'motion/react'
+import { motion, useReducedMotion, type Variants } from 'motion/react'
+import { useState } from 'react'
 import type { CSSProperties, ReactNode } from 'react'
 
 /**
@@ -61,6 +62,40 @@ export default function Reveal({
   style,
 }: RevealProps) {
   const M = TAGS[as]
+  const [inView, setInView] = useState(false)
+  const reduce = useReducedMotion()
+
+  if (variant === 'mask') {
+    // Un clip-path animato sull'elemento OSSERVATO da whileInView ne azzera
+    // l'area visibile: IntersectionObserver non lo rileva mai come "in vista"
+    // e la reveal non scatta. Il trigger vive quindi su un livello che anima
+    // solo opacity (sicuro), il wipe a clip-path su un figlio guidato dallo
+    // stesso evento di ingresso in viewport.
+    return (
+      <M
+        className={className}
+        style={style}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once, amount }}
+        transition={{ duration, delay, ease: EASE }}
+        onViewportEnter={() => setInView(true)}
+        onViewportLeave={() => {
+          if (!once) setInView(false)
+        }}
+      >
+        <motion.span
+          style={{ display: 'block' }}
+          initial={reduce ? { clipPath: 'inset(0 0 0% 0)' } : { clipPath: 'inset(0 0 100% 0)' }}
+          animate={inView ? { clipPath: 'inset(0 0 0% 0)' } : undefined}
+          transition={{ duration: reduce ? 0 : duration, delay: reduce ? 0 : delay, ease: EASE }}
+        >
+          {children}
+        </motion.span>
+      </M>
+    )
+  }
+
   return (
     <M
       className={className}

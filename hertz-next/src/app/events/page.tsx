@@ -1,13 +1,14 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import Section from '@/components/ui/Section'
 import PageHeader from '@/components/ui/PageHeader'
 import SectionLabel from '@/components/ui/SectionLabel'
 import Button from '@/components/ui/Button'
-import ImageFrame from '@/components/ui/ImageFrame'
 import EventRow from '@/components/events/EventRow'
-import ViewMorph from '@/motion/ViewMorph'
+import EventFilters from '@/components/events/EventFilters'
+import EventPosterPortal from '@/components/events/EventPosterPortal'
+import Link from 'next/link'
 import { upcoming, archive, dowDate, eventSlug } from '@/content/events'
+import type { Status } from '@/components/ui/StatusBadge'
 import styles from './events.module.css'
 
 export const metadata: Metadata = {
@@ -42,39 +43,45 @@ export default function EventsPage() {
           }
         />
 
-        <div className={styles.list}>
-          {up.length > 0 ? (
-            up.map((e) => <EventRow key={e.n} event={e} />)
-          ) : (
-            <p className={styles.empty}>No dates on sale right now — new events announced soon.</p>
-          )}
-        </div>
+        {up.length > 0 ? (
+          <EventFilters events={up} />
+        ) : (
+          <p className={styles.empty}>No dates on sale right now — new events announced soon.</p>
+        )}
       </Section>
 
       {feature && (
         <Section surface="paper" space="lg">
           <SectionLabel index="02" kicker="Featured" title="Next poster." />
-          <Link href={`/events/${eventSlug(feature)}`} className={styles.feature}>
-            <ViewMorph name={`event-poster-${eventSlug(feature)}`}>
-              <ImageFrame
-                src={feature.poster}
-                alt={`Poster — ${feature.title}`}
-                ratio="4 / 5"
-                className={styles.featureImg}
-              />
-            </ViewMorph>
+          <div className={styles.feature}>
+            <EventPosterPortal
+              image={feature.poster}
+              n={feature.n}
+              status={(feature.onSale ? 'on-sale' : 'soon') as Status}
+              date={dowDate(feature)}
+              title={feature.title}
+              venue={feature.venue}
+              href={`/events/${eventSlug(feature)}`}
+              viewTransitionName={`event-poster-${eventSlug(feature)}`}
+              priority
+              className={styles.featureImg}
+            />
             <div className={styles.featureMeta}>
               <span className="hz-mono">
                 N°{feature.n} · {dowDate(feature)}
               </span>
-              <h3 className={styles.featureTitle}>{feature.title}</h3>
+              <h3 className={styles.featureTitle}>
+                <Link href={`/events/${eventSlug(feature)}`}>{feature.title}</Link>
+              </h3>
               <p className={styles.featureVenue}>
                 {feature.venue} · {feature.city}
               </p>
               {feature.bill && <p className={styles.featureBill}>{feature.bill}</p>}
-              <span className={styles.featureCta}>View event ↗</span>
+              <Link href={`/events/${eventSlug(feature)}`} className={styles.featureCta}>
+                View event ↗
+              </Link>
             </div>
-          </Link>
+          </div>
         </Section>
       )}
 

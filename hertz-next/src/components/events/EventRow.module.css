@@ -1,4 +1,5 @@
 .row {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
@@ -72,4 +73,47 @@
 .row:hover .arrow {
   opacity: 1;
   transform: translate(0.15em, -0.15em);
+}
+
+/* ── anteprima poster (desktop, hover/focus-within) ── */
+.preview {
+  display: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .preview {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    z-index: 4;
+    width: 128px;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: var(--hz-bg-2);
+    border: 1px solid var(--hz-line-strong);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-50%) translateX(0.5rem) scale(0.97);
+    transition:
+      opacity var(--hz-ui) var(--hz-ease-out),
+      transform var(--hz-ui) var(--hz-ease-out);
+  }
+  .row:hover .preview,
+  .row:focus-within .preview {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0) scale(1);
+  }
+  .preview img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .preview {
+    transition: opacity var(--hz-ui) linear;
+    transform: translateY(-50%) !important;
+  }
 }

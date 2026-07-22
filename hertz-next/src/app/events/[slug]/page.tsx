@@ -6,16 +6,18 @@ import SectionLabel from '@/components/ui/SectionLabel'
 import Button from '@/components/ui/Button'
 import ImageFrame from '@/components/ui/ImageFrame'
 import StatusBadge, { type Status } from '@/components/ui/StatusBadge'
-import EventRow from '@/components/events/EventRow'
+import EventPosterPortal from '@/components/events/EventPosterPortal'
+import TicketStickyBar from '@/components/events/TicketStickyBar'
 import ViewMorph from '@/motion/ViewMorph'
-import { Stagger, StaggerItem } from '@/motion/Reveal'
+import Reveal, { Stagger, StaggerItem } from '@/motion/Reveal'
 import {
-  EVENTS,
   allEventSlugs,
   findEventBySlug,
   dowDate,
   shortDate,
   isPast,
+  adjacentEvents,
+  eventSlug,
 } from '@/content/events'
 import { ARTISTS } from '@/content/artists'
 import { galleryFor } from '@/content/galleries'
@@ -52,17 +54,19 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
   const status: Status = past ? 'archive' : e.onSale ? 'on-sale' : 'soon'
   const residents = e.lineup.map((s) => ARTISTS[s]).filter(Boolean)
   const gallery = galleryFor(e.n)
+  const { prev, next: nextEvent } = adjacentEvents(e)
 
-  const more = [
-    ...EVENTS.filter((x) => x.n !== e.n && x.venue === e.venue),
-    ...EVENTS.filter((x) => x.n !== e.n && x.venue !== e.venue && isPast(x) === past),
-  ]
-    .filter((x, i, arr) => arr.findIndex((y) => y.n === x.n) === i)
-    .slice(0, 4)
+  const ticketAction = !past && e.onSale
+  const ticketHref = ticketAction
+    ? mailto(
+        `Reserve — ${e.title} (N°${e.n})`,
+        `Hi Hertz, I'd like to reserve for ${e.title} at ${e.venue}, ${e.city} on ${dowDate(e)}.`,
+      )
+    : undefined
 
   return (
     <main id="main">
-      {/* ── hero ── */}
+      {/* ── titolo compositivo + poster integrato nella griglia ── */}
       <Section surface="white" space="md">
         <p className={`${styles.crumb} hz-mono`}>
           <Link href="/events">Events</Link>
@@ -70,33 +74,56 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
           <span>N°{e.n}</span>
         </p>
 
-        <div className={styles.hero}>
-          <div className={styles.heroMeta}>
-            <div className={styles.heroTags}>
+        <div className={styles.titleZone}>
+          <div className={styles.tags}>
+            <ViewMorph name={`event-status-${slug}`}>
               <StatusBadge status={status} />
-              {e.badge && <span className={`${styles.badge} hz-mono`}>{e.badge}</span>}
-            </div>
-            <ViewMorph name={`event-title-${slug}`}>
-              <h1 className={styles.title}>{e.title}</h1>
             </ViewMorph>
-            <p className={styles.when}>
-              {dowDate(e)}
-              {e.time ? ` · ${e.time.replace(/^[A-Z]{3} · /, '')}` : ''}
-            </p>
+            {e.badge && <span className={`${styles.badge} hz-mono`}>{e.badge}</span>}
+          </div>
+          <ViewMorph name={`event-title-${slug}`}>
+            <h1 className={styles.title}>{e.title}</h1>
+          </ViewMorph>
+        </div>
+
+        <div className={styles.grid}>
+          <EventPosterPortal
+            image={e.poster}
+            n={e.n}
+            status={status}
+            date={dowDate(e)}
+            title={e.title}
+            venue={e.venue}
+            viewTransitionName={`event-poster-${slug}`}
+            priority
+            className={styles.posterSlot}
+          />
+
+          <div className={styles.meta} id="ticket-cta">
+            <ViewMorph name={`event-date-${slug}`}>
+              <p className={styles.when}>
+                {dowDate(e)}
+                {e.time ? ` · ${e.time.replace(/^[A-Z]{3} · /, '')}` : ''}
+              </p>
+            </ViewMorph>
             <p className={styles.where}>
               {e.venue} · {e.city}
             </p>
 
+            <dl className={styles.facts}>
+              <div>
+                <dt className="hz-mono">Date</dt>
+                <dd>{shortDate(e)}</dd>
+              </div>
+              <div>
+                <dt className="hz-mono">Catalogue</dt>
+                <dd>N°{e.n}</dd>
+              </div>
+            </dl>
+
             <div className={styles.cta}>
-              {!past && e.onSale && (
-                <Button
-                  href={mailto(
-                    `Reserve — ${e.title} (N°${e.n})`,
-                    `Hi Hertz, I'd like to reserve for ${e.title} at ${e.venue}, ${e.city} on ${dowDate(e)}.`,
-                  )}
-                  external
-                  arrow
-                >
+              {ticketAction && ticketHref && (
+                <Button href={ticketHref} external arrow>
                   Reserve by email
                 </Button>
               )}
@@ -108,84 +135,34 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
                   View gallery
                 </Button>
               )}
-              <Button href={past ? '/archive' : '/events'} variant="ghost" arrow>
+              <Button href={past ? '/archive' : '/events'} variant="text" arrow>
                 {past ? 'Back to archive' : 'All events'}
               </Button>
             </div>
           </div>
-
-          {e.poster ? (
-            <ViewMorph name={`event-poster-${slug}`}>
-              <ImageFrame
-                src={e.poster}
-                alt={`Poster — ${e.title}`}
-                ratio="4 / 5"
-                priority
-                className={styles.poster}
-              />
-            </ViewMorph>
-          ) : (
-            <div className={styles.posterMissing}>
-              <span className="hz-mono">Poster</span>
-              <span className="hz-mono">Coming soon</span>
-            </div>
-          )}
         </div>
       </Section>
 
-      {/* ── details + line-up ── */}
+      {/* ── line-up: gerarchia reale (bill → residents), niente reveal identici ── */}
       <Section surface="paper" space="lg">
-        <div className={styles.detailGrid}>
-          <div className={styles.lineup}>
-            <SectionLabel kicker="Line-up" />
-            {e.bill ? (
-              <p className={styles.bill}>{e.bill}</p>
-            ) : (
-              <p className={styles.bill}>Line-up to be announced.</p>
-            )}
-            {residents.length > 0 && (
-              <div className={styles.residents}>
-                <span className={`${styles.residentsLabel} hz-mono`}>Hertz on this bill</span>
-                <Stagger className={styles.residentChips} gap={0.09}>
-                  {residents.map((a) => (
-                    <StaggerItem key={a.slug} variant="up" style={{ display: 'inline-flex' }}>
-                      <Link href={`/artists/${a.slug}`} className={styles.chip}>
-                        {a.name} ↗
-                      </Link>
-                    </StaggerItem>
-                  ))}
-                </Stagger>
-              </div>
-            )}
+        <SectionLabel kicker="Line-up" />
+        <Reveal as="p" variant="mask" duration={0.8} className={styles.bill}>
+          {e.bill || 'Line-up to be announced.'}
+        </Reveal>
+        {residents.length > 0 && (
+          <div className={styles.residents}>
+            <span className={`${styles.residentsLabel} hz-mono`}>Hertz on this bill</span>
+            <Stagger className={styles.residentChips} gap={0.09}>
+              {residents.map((a) => (
+                <StaggerItem key={a.slug} variant="up" style={{ display: 'inline-flex' }}>
+                  <Link href={`/artists/${a.slug}`} className={styles.chip}>
+                    {a.name} ↗
+                  </Link>
+                </StaggerItem>
+              ))}
+            </Stagger>
           </div>
-
-          <dl className={styles.facts}>
-            <div>
-              <dt className="hz-mono">Date</dt>
-              <dd>
-                {dowDate(e)} · {shortDate(e)}
-              </dd>
-            </div>
-            {e.time && (
-              <div>
-                <dt className="hz-mono">Time</dt>
-                <dd>{e.time}</dd>
-              </div>
-            )}
-            <div>
-              <dt className="hz-mono">Venue</dt>
-              <dd>{e.venue}</dd>
-            </div>
-            <div>
-              <dt className="hz-mono">City</dt>
-              <dd>{e.city}</dd>
-            </div>
-            <div>
-              <dt className="hz-mono">Catalogue</dt>
-              <dd>N°{e.n}</dd>
-            </div>
-          </dl>
-        </div>
+        )}
       </Section>
 
       {/* ── gallery (solo eventi con servizio fotografico reale) ── */}
@@ -210,20 +187,37 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
         </Section>
       )}
 
-      {/* ── more dates ── */}
-      {more.length > 0 && (
+      {/* ── precedente / successivo (timeline cronologica reale) ── */}
+      {(prev || nextEvent) && (
         <Section surface="signal" space="lg">
-          <SectionLabel
-            kicker="More dates"
-            title={past ? 'From the archive.' : 'Keep the calendar.'}
-            link={{ href: '/events', label: 'All events ↗' }}
-          />
-          <div>
-            {more.map((x) => (
-              <EventRow key={x.n} event={x} />
-            ))}
+          <SectionLabel kicker="Timeline" title="Keep the calendar." />
+          <div className={styles.adjacent}>
+            {prev && (
+              <Link href={`/events/${eventSlug(prev)}`} className={styles.adjacentCard}>
+                <span className={`${styles.adjacentDir} hz-mono`}>← Previous</span>
+                <span className={styles.adjacentTitle}>{prev.title}</span>
+                <span className={`${styles.adjacentMeta} hz-mono`}>
+                  N°{prev.n} · {dowDate(prev)}
+                </span>
+              </Link>
+            )}
+            {nextEvent && (
+              <Link href={`/events/${eventSlug(nextEvent)}`} className={styles.adjacentCard}>
+                <span className={`${styles.adjacentDir} hz-mono`}>Next →</span>
+                <span className={styles.adjacentTitle}>{nextEvent.title}</span>
+                <span className={`${styles.adjacentMeta} hz-mono`}>
+                  N°{nextEvent.n} · {dowDate(nextEvent)}
+                </span>
+              </Link>
+            )}
           </div>
         </Section>
+      )}
+
+      {/* ── Tickets sticky mobile: appare solo quando il CTA inline è fuori
+         vista, non copre mai i contenuti (compare/scompare, non fissa) ── */}
+      {ticketAction && ticketHref && (
+        <TicketStickyBar targetId="ticket-cta" href={ticketHref} label="Reserve by email" />
       )}
     </main>
   )

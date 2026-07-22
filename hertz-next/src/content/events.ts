@@ -169,3 +169,12 @@ export function eventYear(e: HertzEvent): number {
 export function allEventSlugs(): string[] {
   return EVENTS.map(eventSlug);
 }
+
+/** evento precedente/successivo in ordine cronologico (tutta la timeline,
+ *  non solo upcoming o solo archive) — per la navigazione N°→N°±1 nella
+ *  pagina di dettaglio. */
+export function adjacentEvents(e: HertzEvent): { prev?: HertzEvent; next?: HertzEvent } {
+  const sorted = [...EVENTS].sort((a, b) => (endOfDay(a.iso) ?? 0) - (endOfDay(b.iso) ?? 0));
+  const i = sorted.findIndex((x) => x.n === e.n);
+  return { prev: i > 0 ? sorted[i - 1] : undefined, next: i >= 0 && i < sorted.length - 1 ? sorted[i + 1] : undefined };
+}
