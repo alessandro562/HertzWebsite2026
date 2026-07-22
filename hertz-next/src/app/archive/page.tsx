@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Section from '@/components/ui/Section'
@@ -10,21 +11,72 @@ import ArchiveExplorer from '@/components/archive/ArchiveExplorer'
 import { archive, eventYear, eventSlug, shortDate, dowDate } from '@/content/events'
 import { galleryFor } from '@/content/galleries'
 import { ARTISTS } from '@/content/artists'
+import { SITE, mailto } from '@/lib/site'
 import styles from './archive.module.css'
 
 export const metadata: Metadata = {
-  title: 'Archive',
+  title: 'Press & Archive',
   description:
-    'Le notti passate di Hertz — venue, line-up e servizi fotografici reali. Kindergarten, Numa, Cassero e altri.',
+    'Press kit e fotografia in alta risoluzione di Hertz: logo, foto degli eventi e materiali per promoter, locali e giornalisti. Uso libero con credito @hertz.cc.',
   alternates: { canonical: '/archive' },
+  openGraph: { title: 'Press & Archive — Hertz Clubbing Collective' },
 }
+
+/* Press kit — inventario reale (archive.html). Lo ZIP non è ancora nel repo:
+   il download è sostituito da una richiesta via email finché il file esiste. */
+const PRESS_KIT = [
+  'Logos — AI · SVG · PNG, light & dark',
+  'Hi-res live photography',
+  'Artist bios + booking contacts',
+  'Tech rider + stage plot',
+  'Brand guide — colours, type, usage',
+]
+
+/* Photo archive — 36 frame reali scaricabili (tutti presenti in public/). */
+const PHOTO_ARCHIVE = [
+  '/uploads/24.04_Hertz-95.jpg',
+  '/uploads/24.04_Hertz-17.jpg',
+  '/uploads/24.04_Hertz-58.jpg',
+  '/uploads/24.04_Hertz-62.jpg',
+  '/uploads/24.04_Hertz-73.jpg',
+  '/uploads/24.04_Hertz-86.jpg',
+  '/uploads/24.04_Hertz-129.jpg',
+  '/uploads/24.04_Hertz-18.jpg',
+  '/uploads/24.04_Hertz-24.jpg',
+  '/uploads/26.12_Hertz-86.jpg',
+  '/uploads/26.12_Hertz-28.jpg',
+  '/uploads/26.12_Hertz-55.jpg',
+  '/assets/archivio-web/26.12_Hertz-106.jpg',
+  '/assets/archivio-web/26.12_Hertz-109.jpg',
+  '/assets/archivio-web/26.12_Hertz-113.jpg',
+  '/assets/archivio-web/26.12_Hertz-181.jpg',
+  '/assets/archivio-web/26.12_Hertz-184.jpg',
+  '/assets/archivio-web/26.12_Hertz-71.jpg',
+  '/assets/archivio-web/26.12_Hertz-74.jpg',
+  '/assets/archivio-web/26.12_Hertz-82.jpg',
+  '/assets/archivio-web/26.12_Hertz-86.jpg',
+  '/assets/archivio-web/26.12_Hertz-92.jpg',
+  '/assets/archivio-web/26.12_Hertz-95.jpg',
+  '/assets/archivio-web/27.02_Hertz-105.jpg',
+  '/assets/archivio-web/27.02_Hertz-108.jpg',
+  '/assets/archivio-web/27.02_Hertz-141.jpg',
+  '/assets/archivio-web/27.02_Hertz-144.jpg',
+  '/assets/archivio-web/27.02_Hertz-173.jpg',
+  '/assets/archivio-web/27.02_Hertz-188.jpg',
+  '/assets/archivio-web/27.02_Hertz-191.jpg',
+  '/assets/archivio-web/27.02_Hertz-38.jpg',
+  '/assets/archivio-web/27.02_Hertz-41.jpg',
+  '/assets/archivio-web/27.02_Hertz-49.jpg',
+  '/assets/archivio-web/27.02_Hertz-52.jpg',
+  '/assets/archivio-web/27.02_Hertz-55.jpg',
+  '/assets/archivio-web/27.02_Hertz-74.jpg',
+]
 
 export default function ArchivePage() {
   const past = archive()
   const years = [...new Set(past.map(eventYear))]
   const venues = new Set(past.map((e) => e.venue))
   const withGalleries = past.filter((e) => galleryFor(e.n).length > 0)
-  const totalPhotos = withGalleries.reduce((sum, e) => sum + galleryFor(e.n).length, 0)
   const items = past.map((e) => ({
     n: e.n,
     title: e.title,
@@ -37,68 +89,136 @@ export default function ArchivePage() {
     hasGallery: galleryFor(e.n).length > 0,
   }))
 
-  /* featured spread: la sessione con più fotografie reali disponibili */
   const featured = [...withGalleries].sort((a, b) => galleryFor(b.n).length - galleryFor(a.n).length)[0]
   const featuredPhotos = featured ? galleryFor(featured.n) : []
   const featuredResidents = featured ? featured.lineup.map((s) => ARTISTS[s]?.name).filter(Boolean) : []
 
   return (
     <main id="main">
+      {/* ── header (white) — identità reale del /archive live: press ── */}
       <Section surface="white" space="lg">
         <PageHeader
           index="06"
-          kicker="Archive"
-          title={
-            <>
-              Wicked
-              <br />
-              nights.
-            </>
-          }
+          kicker="Press kit & photo archive"
+          title="For the press."
           intro={
             <p>
-              A moving record of faces, rooms and fragments — Kindergarten, Numa, Cassero and more.
-              Photography stays raw; the interface supplies the rhythm.
+              Logos, hi-res photography and everything a promoter or journalist needs to run Hertz.
+              Grab the full kit, or pull individual frames below.
             </p>
           }
           aside={
             <dl className={`${styles.stats} hz-mono`}>
               <div>
+                <dt>Frames</dt>
+                <dd>{PHOTO_ARCHIVE.length}</dd>
+              </div>
+              <div>
                 <dt>Nights</dt>
                 <dd>{items.length}</dd>
               </div>
               <div>
-                <dt>Years</dt>
-                <dd>{years.length}</dd>
-              </div>
-              <div>
                 <dt>Venues</dt>
                 <dd>{venues.size}</dd>
-              </div>
-              <div>
-                <dt>Frames</dt>
-                <dd>{totalPhotos}</dd>
               </div>
             </dl>
           }
         />
       </Section>
 
-      {/* ── featured spread: WICKED NIGHTS — la sessione con più fotografia reale ── */}
-      {featured && featuredPhotos.length > 0 && (
-        <Section surface="paper" space="lg">
+      {/* ── press kit (paper) ── */}
+      <Section surface="paper" space="lg" id="press-kit">
+        <SectionLabel index="A" kicker="The press kit" title="Everything in one folder." />
+        <div className={styles.pressKit}>
+          <div className={styles.pkMain}>
+            <p className={styles.pkLede}>
+              Hi-res photography, vector logos, artist bios and the tech rider — packaged for press,
+              promoters and venues. One request, ready to use.
+            </p>
+            <ul className={styles.pkList}>
+              {PRESS_KIT.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            <div className={styles.pkActions}>
+              <a
+                className={styles.pkDl}
+                href={mailto('Press kit — Hertz', 'Hi Hertz, could you send me the press kit?')}
+              >
+                Request the press kit <span aria-hidden="true">↓</span>
+              </a>
+              <a className={styles.pkMail} href={`mailto:${SITE.email}`}>
+                {SITE.email}
+              </a>
+            </div>
+          </div>
+          <div className={styles.pkSide}>
+            <div className={styles.pkCard}>
+              <div className={styles.pkCardTop}>
+                <span>HERTZ / PRESS</span>
+                <span>V1</span>
+              </div>
+              <div className={styles.pkLogo}>
+                <img src="/assets/hertz-logo-official.png" alt="Hertz official logo" />
+              </div>
+              <div className={styles.pkSpecs}>
+                <div>
+                  <div className={styles.pkK}>Format</div>
+                  <div className={styles.pkV}>.ZIP</div>
+                </div>
+                <div>
+                  <div className={styles.pkK}>Usage</div>
+                  <div className={styles.pkV}>Credit ©©</div>
+                </div>
+                <div>
+                  <div className={styles.pkK}>Updated</div>
+                  <div className={styles.pkV}>2026</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      {/* ── photo archive (ink) — frame scaricabili ── */}
+      <Section surface="ink" space="lg" id="photo-archive">
+        <SectionLabel
+          index="B"
+          kicker="Photo archive · free for press"
+          title="Shoot the room."
+        />
+        <div className={styles.photoGrid}>
+          {PHOTO_ARCHIVE.map((src, i) => (
+            <a key={src + i} className={styles.pressShot} href={src} download>
+              <span className={`${styles.pressIx} hz-mono`}>{String(i + 1).padStart(2, '0')}</span>
+              <img src={src} alt={`Hertz live — archive frame ${i + 1}`} loading="lazy" />
+              <span className={`${styles.pressDl} hz-mono`}>↓ JPG</span>
+            </a>
+          ))}
+        </div>
+        <p className={`${styles.pressHint} hz-mono`}>
+          Click any frame to download · Credit {SITE.pressCredit} · JPG · hi-res
+        </p>
+      </Section>
+
+      {/* ── nights on record (past events, dati reali) ── */}
+      <Section surface="white" space="lg" id="nights">
+        <SectionLabel index="C" kicker="Archive" title="Nights on record." />
+        {featured && featuredPhotos.length > 0 && (
           <div className={styles.featured}>
             <PrintInterruption
               image={featuredPhotos[0]}
               alt={`${featured.title} — archive`}
               aspectRatio="4 / 3"
-              fragment={featuredPhotos[1] ? { src: featuredPhotos[1], alt: `${featured.title} — frame 2` } : undefined}
+              fragment={
+                featuredPhotos[1] ? { src: featuredPhotos[1], alt: `${featured.title} — frame 2` } : undefined
+              }
               className={styles.featuredSpread}
             />
             <div className={styles.featuredText}>
               <span className={`${styles.featuredYear} hz-mono`}>{eventYear(featured)}</span>
               <span className={`${styles.featuredN} hz-mono`}>N°{featured.n}</span>
-              <h2 className={styles.featuredTitle}>{featured.title}</h2>
+              <h3 className={styles.featuredTitle}>{featured.title}</h3>
               <p className={styles.featuredVenue}>
                 {featured.venue} · {featured.city}
               </p>
@@ -110,12 +230,11 @@ export default function ArchivePage() {
               </Link>
             </div>
           </div>
-        </Section>
-      )}
+        )}
+      </Section>
 
-      {/* ── photo galleries (reali) ── */}
       {withGalleries.length > 0 && (
-        <Section surface="white" space="lg">
+        <Section surface="paper" space="lg">
           <SectionLabel kicker="Photo galleries" title="From the floor." />
           <div className={styles.galGrid}>
             {withGalleries.map((e) => {
@@ -149,8 +268,7 @@ export default function ArchivePage() {
         </Section>
       )}
 
-      {/* ── sessions: ledger denso, filtro anno + DISORDER ── */}
-      <Section surface="paper" space="lg">
+      <Section surface="white" space="lg">
         <SectionLabel kicker="Sessions" title="Every night." />
         <ArchiveExplorer items={items} years={years} />
       </Section>
