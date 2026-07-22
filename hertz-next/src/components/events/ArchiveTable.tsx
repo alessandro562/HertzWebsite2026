@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link'
-import { type HertzEvent, dowDate, eventSlug, eventYear, shortDate } from '@/content/events'
+import { type HertzEvent, dowDate, eventSlug, eventYear } from '@/content/events'
 import styles from './ArchiveTable.module.css'
 
 /**

@@ -91,7 +91,6 @@ export const EVENTS: HertzEvent[] = [
 
 /* ── helper puri (nessun side-effect, testabili) ── */
 
-const MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
 const DOW = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
 
 function endOfDay(iso: string): number | null {

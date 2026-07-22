@@ -60,7 +60,7 @@ export default function ImageReveal({
     el.style.setProperty('--ir-ease', EASE[variant === 'frequency' ? 'rupture' : 'editorialOut'].css)
     el.style.setProperty('--ir-delay', `${delay * 1000}ms`)
 
-    let raf = requestAnimationFrame(() => {
+    const raf = requestAnimationFrame(() => {
       el.dataset.armed = ''
     })
     const io = new IntersectionObserver(

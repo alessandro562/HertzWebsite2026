@@ -1,8 +1,22 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { useEffect, useState } from 'react'
+import { useSyncExternalStore } from 'react'
 import styles from './signature-hero.module.css'
+
+function subscribe() {
+  return () => {}
+}
+function getUse3DSnapshot() {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const coarseOrSmall =
+    window.matchMedia('(max-width: 767px)').matches ||
+    window.matchMedia('(pointer: coarse)').matches
+  return !reduce && !coarseOrSmall
+}
+function getUse3DServerSnapshot() {
+  return false
+}
 
 /**
  * Decide COSA montare nello slot del logo:
@@ -18,15 +32,7 @@ const SignatureCanvas = dynamic(() => import('@/scenes/SignatureCanvas'), {
 })
 
 export default function SignatureStage() {
-  const [use3D, setUse3D] = useState(false)
-
-  useEffect(() => {
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const coarseOrSmall =
-      window.matchMedia('(max-width: 767px)').matches ||
-      window.matchMedia('(pointer: coarse)').matches
-    setUse3D(!reduce && !coarseOrSmall)
-  }, [])
+  const use3D = useSyncExternalStore(subscribe, getUse3DSnapshot, getUse3DServerSnapshot)
 
   return (
     <div className={styles.stage} aria-hidden="true">

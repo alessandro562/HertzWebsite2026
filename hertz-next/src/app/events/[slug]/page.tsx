@@ -23,7 +23,7 @@ import {
 } from '@/content/events'
 import { ARTISTS } from '@/content/artists'
 import { galleryFor } from '@/content/galleries'
-import { mailto } from '@/lib/site'
+import { mailto, SITE } from '@/lib/site'
 import styles from './event.module.css'
 
 export function generateStaticParams() {
@@ -86,8 +86,31 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
     .map((a) => ({ name: a.name, resident: a }))
   const lineupRows = [...billRows, ...extraResidentRows]
 
+  /* structured data (schema.org Event) — solo campi reali già mostrati in
+     pagina (nome/data/venue/lineup/poster); nessun prezzo/orario inventato. */
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    name: e.title,
+    startDate: e.iso,
+    eventStatus: 'https://schema.org/EventScheduled',
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    location: {
+      '@type': 'Place',
+      name: e.venue,
+      address: { '@type': 'PostalAddress', addressLocality: e.city, addressCountry: 'IT' },
+    },
+    ...(e.poster ? { image: [`${SITE.url}${e.poster}`] } : {}),
+    url: `${SITE.url}/events/${slug}`,
+    ...(residents.length > 0
+      ? { performer: residents.map((a) => ({ '@type': 'MusicGroup', name: a.name })) }
+      : {}),
+    organizer: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+  }
+
   return (
     <main id="main">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* ── hero modulare 12-col: numero laterale · poster · contenuto+ticket ── */}
       <Section
         surface="white"

@@ -2,6 +2,7 @@
 
 /* eslint-disable @next/next/no-img-element */
 import { useState, type ReactNode } from 'react'
+import Link from 'next/link'
 import ImageReveal from '@/motion/ImageReveal'
 import FrequencyCut from '@/motion/FrequencyCut'
 import WaveformPulse from '@/motion/WaveformPulse'
@@ -289,7 +290,7 @@ export default function MotionKitLab() {
         avoid="Niente intro lunga ad ogni pagina; nessun morph pixel-perfect fragile; fallback = ImageReveal print."
       >
         <p className={s.note}>
-          Live sul sito: apri <a href="/events">/events</a> e seleziona un evento — la linea di navigazione
+          Live sul sito: apri <Link href="/events">/events</Link> e seleziona un evento — la linea di navigazione
           attraversa in alto, il poster in evidenza si espande, il focus passa a #main.
         </p>
       </Spec>

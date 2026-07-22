@@ -28,7 +28,7 @@ export default function SignatureHeroLab() {
 
       {/* [2] tipografia HERTZ (architettura) + logo 3D ufficiale */}
       <div className={styles.content}>
-        <p className={styles.kicker}>// signature · hertz</p>
+        <p className={styles.kicker}>signature · hertz</p>
         <SignatureStage />
         <h1 id="sig-wordmark" className={styles.wordmark}>HERTZ</h1>
       </div>

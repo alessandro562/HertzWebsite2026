@@ -3,10 +3,25 @@
 import { ReactLenis, useLenis } from 'lenis/react'
 import { MotionConfig } from 'motion/react'
 import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useSyncExternalStore } from 'react'
 import type { ReactNode } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+/** prefers-reduced-motion via useSyncExternalStore: sottoscrizione reale al
+ * media query change (non un setState sincrono dentro un effect), server
+ * snapshot = false (nessun mismatch di idratazione). */
+function subscribeReducedMotion(callback: () => void) {
+  const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+  mq.addEventListener('change', callback)
+  return () => mq.removeEventListener('change', callback)
+}
+function getReducedMotionSnapshot() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+}
+function getReducedMotionServerSnapshot() {
+  return false
+}
 
 /**
  * Runtime motion HERTZ (Fase 3).
@@ -43,15 +58,11 @@ function RouteRefresh() {
 }
 
 export default function SmoothScroll({ children }: { children: ReactNode }) {
-  const [reduced, setReduced] = useState(false)
-
-  useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
-    setReduced(mq.matches)
-    const onChange = () => setReduced(mq.matches)
-    mq.addEventListener('change', onChange)
-    return () => mq.removeEventListener('change', onChange)
-  }, [])
+  const reduced = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotionSnapshot,
+    getReducedMotionServerSnapshot,
+  )
 
   const inner = (
     <MotionConfig reducedMotion="user">

@@ -24,3 +24,21 @@
   gap: var(--hz-space-sm);
   margin-top: var(--hz-space-lg);
 }
+.retry {
+  font-family: var(--hz-font-mono);
+  font-size: var(--hz-t-ui);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.7em 1.2em;
+  border: 1px solid var(--hz-ink);
+  background: transparent;
+  color: var(--hz-ink);
+  cursor: pointer;
+  transition:
+    background-color var(--hz-ui) var(--hz-ease-out),
+    color var(--hz-ui) var(--hz-ease-out);
+}
+.retry:hover {
+  background: var(--hz-ink);
+  color: var(--hz-bg);
+}

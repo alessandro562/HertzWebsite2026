@@ -23,7 +23,10 @@ export default function HeroSignalGrid({
   const pathRef = useRef<SVGPathElement>(null)
   const wrapRef = useRef<HTMLDivElement>(null)
   const onWaveRef = useRef(onWave)
-  onWaveRef.current = onWave
+
+  useEffect(() => {
+    onWaveRef.current = onWave
+  })
 
   useEffect(() => {
     if (!pathRef.current || !wrapRef.current) return
