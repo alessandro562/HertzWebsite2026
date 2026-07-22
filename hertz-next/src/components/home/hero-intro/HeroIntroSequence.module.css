@@ -1,0 +1,128 @@
+/* La sequenza vive nella stessa <section> della hero (hero.hero); qui i layer
+   dell'intro + i marcatori di reveal. Stato iniziale NASCOSTO via CSS (SSR-safe)
+   così non c'è flash prima che GSAP prenda il controllo. GSAP (autoAlpha/scaleX)
+   sovrascrive inline questi stati. */
+.stage {
+  isolation: isolate;
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+}
+.gridStatic {
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(90deg, color-mix(in srgb, var(--hz-ink) 15%, transparent) 0 1px, transparent 1px calc(100% / 12)),
+    repeating-linear-gradient(0deg, color-mix(in srgb, var(--hz-ink) 15%, transparent) 0 1px, transparent 1px calc(100% / 7));
+  opacity: 0.6;
+}
+
+/* PrintComposition */
+.print {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.hair {
+  position: absolute;
+  left: 5%;
+  top: 30%;
+  width: 38%;
+  height: 2px;
+  background: var(--hz-ink);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+.frag {
+  position: absolute;
+  overflow: hidden;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+.top,
+.bot {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  will-change: transform;
+}
+.band {
+  position: absolute;
+  background: var(--hz-ink);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* FrequencyCut */
+.freqLine {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 3px;
+  background: var(--hz-ink);
+  z-index: 2;
+  pointer-events: none;
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+/* LogoLockup — file ufficiale reso Ink via brightness(0) su Signal */
+.logo {
+  position: absolute;
+  left: 6%;
+  top: 21%;
+  width: 40%;
+  height: auto;
+  z-index: 3;
+  filter: brightness(0);
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* HeroContent / HeroImage — nascosti finché la sequenza non li rivela */
+.contentReveal {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+.photoReveal {
+  opacity: 0;
+  will-change: opacity;
+}
+
+/* Waveform runtime */
+.wave {
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  bottom: 15%;
+  height: 46px;
+  z-index: 3;
+  opacity: 0;
+}
+.wave path {
+  stroke: rgba(255, 255, 255, 0.72);
+}
+
+/* Reduced-motion: nessuna sequenza, stato finale della hero direttamente
+   (robusto anche senza JS). */
+@media (prefers-reduced-motion: reduce) {
+  .grid,
+  .contentReveal,
+  .photoReveal,
+  .wave {
+    opacity: 1;
+  }
+  .print,
+  .logo,
+  .freqLine,
+  .hair {
+    opacity: 0 !important;
+  }
+}
