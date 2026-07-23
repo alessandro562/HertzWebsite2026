@@ -1,65 +1,67 @@
+/* FeaturedEvent — riga "lead" del prossimo evento: locandina PICCOLA laterale
+   (come nell'archivio/rewind), testo editoriale a destra. Niente locandina
+   grande: quella vive solo nella pagina dell'evento. */
 .featured {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr;
-  border: 1px solid var(--hz-ink);
-  background: var(--hz-bg);
+  grid-template-columns: clamp(84px, 13vw, 148px) minmax(0, 1fr);
+  gap: clamp(1rem, 3vw, 2.4rem);
+  align-items: start;
+  border-top: 2px solid var(--hz-ink);
+  border-bottom: 1px solid var(--hz-line);
+  padding: clamp(1.2rem, 3vw, 2.2rem) 0;
+  padding-left: clamp(0.6rem, 1.6vw, 1.1rem);
   color: inherit;
+  transition: padding-left var(--hz-ui) var(--hz-ease-out);
 }
-@media (min-width: 820px) {
-  .featured {
-    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
-    align-items: stretch;
-  }
+.featured:hover {
+  padding-left: clamp(1rem, 2.4vw, 1.6rem);
 }
 
-/* ── locandina verticale INTERA (mai croppata), nessuna etichetta sovrapposta ── */
+/* ── locandina piccola laterale 4:5, monocroma come nel rewind ── */
 .posterCell {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--hz-bg-2);
-  border-bottom: 1px solid var(--hz-line);
-}
-@media (min-width: 820px) {
-  .posterCell {
-    border-bottom: none;
-    border-right: 1px solid var(--hz-ink);
-  }
+  width: 100%;
 }
 .posterFig {
   position: relative;
   display: block;
   width: 100%;
+  aspect-ratio: 4 / 5;
   overflow: hidden;
   isolation: isolate;
   background: var(--hz-ink);
+  border: 1px solid var(--hz-line-strong);
 }
 .posterFig[data-fallback='true'] {
-  aspect-ratio: 4 / 5;
   background: var(--hz-bg-2);
 }
 .poster {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.05);
+  transition:
+    filter var(--hz-ui) var(--hz-ease-out),
+    transform var(--hz-content) var(--hz-ease-out);
+}
+.featured:hover .poster {
+  filter: grayscale(0);
+  transform: scale(1.04);
 }
 .posterSoon {
   position: absolute;
   inset: 0;
 }
 
-/* ── pannello contenuto: CENTRATO verticalmente, spazio bilanciato ── */
+/* ── contenuto editoriale ── */
 .content {
-  display: flex;
-  align-items: center;
-  padding: clamp(1.5rem, 3.2vw, 3rem);
+  min-width: 0;
 }
 .inner {
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
+  gap: 0.45rem;
   width: 100%;
 }
 .top {
@@ -73,18 +75,18 @@
   color: var(--hz-ink);
 }
 .cut {
-  width: 100%;
+  width: clamp(44px, 12vw, 92px);
   height: 3px;
-  margin: 0.15rem 0 0.4rem;
+  margin: 0.1rem 0 0.25rem;
 }
 .title {
-  font-size: clamp(2.2rem, 4.4vw, 4.2rem);
+  font-size: clamp(1.7rem, 4vw, 3.4rem);
   line-height: 0.98;
   letter-spacing: var(--hz-tracking-tight);
-  max-width: 20ch;
+  max-width: 24ch;
 }
 .venue {
-  font-size: var(--hz-t-body-lg);
+  font-size: var(--hz-t-body);
   color: var(--hz-ink-mute);
 }
 .when {
@@ -92,21 +94,23 @@
 }
 .bill {
   color: var(--hz-ink-mute);
-  max-width: 48ch;
-  margin-top: 0.15rem;
+  max-width: 54ch;
+  font-size: var(--hz-t-body);
+  margin-top: 0.1rem;
 }
 .foot {
-  margin-top: 1rem;
+  margin-top: 0.8rem;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 1.2rem;
+  gap: 0.7rem 1.2rem;
 }
 .cta {
   font-family: var(--hz-font-mono);
   font-size: var(--hz-t-ui);
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  padding: 0.7em 1.2em;
+  padding: 0.6em 1em;
   border: 1px solid var(--hz-ink);
   transition:
     background-color var(--hz-ui) var(--hz-ease-out),
@@ -128,7 +132,7 @@
   bottom: -1px;
   height: 2px;
   width: 100%;
-  background: var(--hz-ink);
+  background: var(--hz-accent);
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform var(--hz-reveal) var(--hz-ease-soft);
@@ -140,14 +144,18 @@
 }
 .featured:focus-visible {
   outline: none;
-  border-color: var(--hz-cold, #50778a);
+}
+.featured:focus-visible .cta {
+  outline: 2px solid var(--hz-cold, #50778a);
+  outline-offset: 3px;
 }
 .featured[data-status='soon'] .cta {
   border-color: var(--hz-cold, #50778a);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .sweep {
+  .sweep,
+  .poster {
     transition: none;
   }
 }

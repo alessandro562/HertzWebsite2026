@@ -3,14 +3,13 @@ import Link from 'next/link'
 import { type HertzEvent, dowDate, eventSlug, isPast } from '@/content/events'
 import StatusBadge, { type Status } from '@/components/ui/StatusBadge'
 import Arrow from '@/components/ui/Arrow'
-import PosterFX from '@/components/ui/PosterFX'
 import PosterFallback from './PosterFallback'
 import styles from './EventModule.module.css'
 
 /**
- * EventModule — card evento verticale per la griglia "More upcoming":
- * locandina 4:5 (post Instagram) con cornice print, poi data · titolo · venue.
- * Locandina mancante → fallback "coming soon" allo stesso rapporto.
+ * EventModule — riga evento della lista "More upcoming": locandina PICCOLA
+ * laterale (4:5 monocroma, come nel rewind) + data · titolo · venue · stato.
+ * La locandina grande vive solo nella pagina dell'evento.
  */
 export default function EventModule({ event }: { event: HertzEvent }) {
   const past = isPast(event)
@@ -18,37 +17,35 @@ export default function EventModule({ event }: { event: HertzEvent }) {
   const slug = eventSlug(event)
 
   return (
-    <Link href={`/events/${slug}`} className={`${styles.card} hz-cardfx`} data-status={status}>
-      <div className={styles.posterWrap}>
+    <Link href={`/events/${slug}`} className={`${styles.row} hz-rowfx`} data-status={status}>
+      <span className={styles.thumb} aria-hidden="true">
         {event.poster ? (
-          <>
-            <img
-              src={event.poster}
-              alt={`Poster: ${event.title}`}
-              className={styles.poster}
-              loading="lazy"
-              decoding="async"
-            />
-            <PosterFX tone="dark" />
-          </>
+          <img
+            src={event.poster}
+            alt=""
+            className={styles.thumbImg}
+            loading="lazy"
+            decoding="async"
+          />
         ) : (
-          <PosterFallback n={event.n} date={dowDate(event)} city={event.city} className={styles.posterSoon} />
+          <PosterFallback n={event.n} date={dowDate(event)} city={event.city} className={styles.thumbFallback} />
         )}
-        <div className={styles.tag}>
-          <span className="hz-mono">N°{event.n}</span>
-          <StatusBadge status={status} />
-        </div>
-        <span className={styles.arrow} aria-hidden="true">
-          <Arrow />
+      </span>
+      <span className={styles.body}>
+        <span className={`${styles.date} hz-mono`}>
+          {dowDate(event)} · N°{event.n}
         </span>
-      </div>
-      <div className={styles.meta}>
-        <span className={`${styles.date} hz-mono`}>{dowDate(event)}</span>
-        <h3 className={styles.title}>{event.title}</h3>
+        <span className={styles.title}>{event.title}</span>
         <span className={styles.venue}>
           {event.venue} · {event.city}
         </span>
-      </div>
+      </span>
+      <span className={styles.status}>
+        <StatusBadge status={status} />
+      </span>
+      <span className={`${styles.arrow} hz-fx-arrow`} aria-hidden="true">
+        <Arrow />
+      </span>
     </Link>
   )
 }

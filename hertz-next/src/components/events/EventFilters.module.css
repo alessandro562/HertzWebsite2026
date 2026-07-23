@@ -45,14 +45,13 @@
 }
 
 .list {
-  margin-top: var(--hz-space-lg);
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(clamp(220px, 24vw, 300px), 1fr));
-  gap: clamp(1rem, 2vw, 1.75rem);
+  margin-top: var(--hz-space-md);
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--hz-line);
 }
 
 .empty {
-  grid-column: 1 / -1;
   padding: var(--hz-space-lg) 0;
   color: var(--hz-ink-mute);
   border: 1px solid var(--hz-line);

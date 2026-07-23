@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link'
 import Section from '@/components/ui/Section'
-import PosterFX from '@/components/ui/PosterFX'
 import Arrow from '@/components/ui/Arrow'
 import Equalizer from '@/components/ui/Equalizer'
 import HomeHero from '@/components/home/HomeHero'
@@ -35,7 +34,7 @@ const ARCHIVE_PHOTOS = [
 export default function Home() {
   const up = upcoming()
   const next = up[0]
-  const feature = up.find((e) => e.poster) ?? next
+  const restGigs = up.slice(1)
 
   const mixes = ROSTER.flatMap((slug) =>
     ARTISTS[slug].mixes.map((m) => ({ ...m, artist: ARTISTS[slug].name })),
@@ -116,7 +115,7 @@ export default function Home() {
         </Reveal>
       </Section>
 
-      {/* ═══ 03 · EVENTS (white) ═══ */}
+      {/* ═══ 03 · EVENTS (white) — indice editoriale, nessuna locandina ═══ */}
       <Section surface="white" space="lg" id="events">
         <Reveal variant="up" className={styles.secHead}>
           <span className={`${styles.secKicker} hz-mono`}>01 / Events</span>
@@ -125,55 +124,63 @@ export default function Home() {
             Full calendar <Arrow />
           </Link>
         </Reveal>
-        <div className={styles.eventsLayout}>
-          <Stagger className={styles.eventList} gap={0.07}>
-            {up.map((e) => (
-              <StaggerItem key={e.n} variant="up">
-                <Link href={`/events/${eventSlug(e)}`} className={`${styles.eventRow} hz-rowfx`}>
-                  <span className={styles.eRowDate}>{dowDate(e)}</span>
-                  <span className={styles.eRowMain}>
-                    <span className={styles.eRowTitle}>{e.title}</span>
-                    <span className={styles.eRowVenue}>
-                      {e.venue} · {e.city}
-                    </span>
+
+        {next && (
+          <Reveal variant="up">
+            <Link href={`/events/${eventSlug(next)}`} className={`${styles.gigLead} hz-rowfx`}>
+              <span className={styles.gigLeadHead}>
+                <span className={`${styles.gigLeadKicker} hz-mono`}>Next event · N°{next.n}</span>
+                <span
+                  className={`${styles.status} ${next.onSale ? styles.statusOn : styles.statusSoon}`}
+                >
+                  {next.onSale ? 'On sale' : 'Soon'}
+                </span>
+              </span>
+              <span className={`${styles.gigLeadDate} hz-mono`}>{dowDate(next)}</span>
+              <span className={styles.gigLeadTitle}>{next.title}</span>
+              <span className={styles.gigLeadFoot}>
+                <span className={`${styles.gigLeadVenue} hz-mono`}>
+                  {next.venue} · {next.city}
+                </span>
+                <span className={`${styles.gigLeadCta} hz-mono hz-fx-arrow`}>
+                  View event <Arrow />
+                </span>
+              </span>
+            </Link>
+          </Reveal>
+        )}
+
+        <Stagger className={styles.eventList} gap={0.07}>
+          {restGigs.map((e) => (
+            <StaggerItem key={e.n} variant="up">
+              <Link href={`/events/${eventSlug(e)}`} className={`${styles.eventRow} hz-rowfx`}>
+                <span className={`${styles.eRowDate} hz-mono`}>{dowDate(e)}</span>
+                <span className={styles.eRowMain}>
+                  <span className={styles.eRowTitle}>{e.title}</span>
+                  <span className={styles.eRowVenue}>
+                    {e.venue} · {e.city}
                   </span>
-                  <span className={styles.eRowRight}>
-                    <span
-                      className={`${styles.status} ${e.onSale ? styles.statusOn : styles.statusSoon}`}
-                    >
-                      {e.onSale ? 'On sale' : 'Soon'}
-                    </span>
-                    <span className={`${styles.eRowArrow} hz-fx-arrow`} aria-hidden="true">
-                      <Arrow />
-                    </span>
+                </span>
+                <span className={styles.eRowRight}>
+                  <span
+                    className={`${styles.status} ${e.onSale ? styles.statusOn : styles.statusSoon}`}
+                  >
+                    {e.onSale ? 'On sale' : 'Soon'}
                   </span>
-                </Link>
-              </StaggerItem>
-            ))}
-            <StaggerItem variant="up">
-              <Link href="/archive" className={styles.pastLink}>
-                <span>Past events</span>
-                <span>Archive <Arrow /></span>
+                  <span className={`${styles.eRowArrow} hz-fx-arrow`} aria-hidden="true">
+                    <Arrow />
+                  </span>
+                </span>
               </Link>
             </StaggerItem>
-          </Stagger>
-          {feature && (
-            <Reveal as="figure" variant="mask" duration={1} className={styles.eventFeature}>
-              <span className={styles.eventFeatureFrame}>
-                <img
-                  src={feature.poster || '/assets/hero-booth.jpg'}
-                  alt={`Poster: ${feature.title}`}
-                  loading="lazy"
-                />
-                <PosterFX tone="dark" />
-              </span>
-              <figcaption className={styles.eventFeatureCap}>
-                <span>N°{feature.n}</span>
-                <span>{dowDate(feature)}</span>
-              </figcaption>
-            </Reveal>
-          )}
-        </div>
+          ))}
+          <StaggerItem variant="up">
+            <Link href="/archive" className={styles.pastLink}>
+              <span>Past events</span>
+              <span>Archive <Arrow /></span>
+            </Link>
+          </StaggerItem>
+        </Stagger>
       </Section>
 
       {/* ═══ 03 · MANIFESTO (ink — unico dark) ═══ */}

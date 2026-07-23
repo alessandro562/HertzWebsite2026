@@ -102,19 +102,6 @@
   flex-direction: column;
   overflow: hidden;
 }
-.pathNum {
-  position: absolute;
-  top: -0.18em;
-  right: 0.06em;
-  font-family: var(--hz-font-display);
-  font-weight: var(--hz-weight-display);
-  font-size: clamp(7rem, 13vw, 12rem);
-  line-height: 1;
-  letter-spacing: -0.06em;
-  color: transparent;
-  -webkit-text-stroke: 1px var(--hz-line);
-  pointer-events: none;
-}
 .pathKicker {
   position: relative;
   z-index: 2;

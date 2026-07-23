@@ -67,9 +67,6 @@ export default function BookingsPage() {
         <div className={styles.paths}>
           {PATHS.map((p) => (
             <article key={p.n} className={styles.path}>
-              <span className={styles.pathNum} aria-hidden="true">
-                {p.n}
-              </span>
               <span className={`${styles.pathKicker} hz-mono`}>
                 {p.n} · {p.kicker}
               </span>
