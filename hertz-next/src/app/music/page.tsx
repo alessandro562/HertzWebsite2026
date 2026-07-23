@@ -6,9 +6,7 @@ import SectionLabel from '@/components/ui/SectionLabel'
 import Button from '@/components/ui/Button'
 import ImageFrame from '@/components/ui/ImageFrame'
 import MixRow from '@/components/music/MixRow'
-import ArtistSignalGlyph from '@/components/artists/ArtistSignalGlyph'
 import WaveformPulse from '@/motion/WaveformPulse'
-import { forResident } from '@/content/events'
 import { ARTISTS } from '@/content/artists'
 import { SITE } from '@/lib/site'
 import styles from './music.module.css'
@@ -70,12 +68,6 @@ export default function MusicPage() {
                 <Link href={`/artists/${FEATURED.artist.slug}`} className={styles.featuredArtist}>
                   {FEATURED.artist.name}
                 </Link>
-                <ArtistSignalGlyph
-                  n={FEATURED.artist.n}
-                  freq={FEATURED.artist.freq}
-                  sessions={forResident(FEATURED.artist.slug).length}
-                  size="md"
-                />
               </div>
               <div className={styles.featuredAction}>
                 <WaveformPulse state="idle" className={styles.featuredWave} />
@@ -98,7 +90,7 @@ export default function MusicPage() {
           />
           <div>
             {a.mixes.map((m, j) => (
-              <MixRow key={m.url} mix={m} artist={a.name} index={j} artistN={a.n} artistFreq={a.freq} />
+              <MixRow key={m.url} mix={m} artist={a.name} index={j} />
             ))}
           </div>
         </Section>

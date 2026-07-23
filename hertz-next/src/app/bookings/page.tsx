@@ -30,8 +30,8 @@ const PATHS = [
     n: '02',
     kicker: 'A resident',
     title: 'Book a resident.',
-    body: "One of the four Hertz residents for a guest slot on your line-up — minimal & deep-tech, 120–128 Hz, the kind of groove that rolls for hours. Pick a name below, or tell us the date and we'll match the right hands to the room.",
-    chips: ['Guest slot', '120–128 Hz', 'Worldwide'],
+    body: "One of the four Hertz residents for a guest slot on your line-up — minimal & deep-tech, the kind of groove that rolls for hours. Pick a name below, or tell us the date and we'll match the right hands to the room.",
+    chips: ['Guest slot', 'Deep tech', 'Worldwide'],
     cta: { label: 'Pick a resident ↓', href: '#roster' },
   },
 ]
