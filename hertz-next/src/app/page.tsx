@@ -71,12 +71,11 @@ export default function Home() {
         <div className={styles.introGrid}>
           <div className={styles.introText}>
             <Reveal as="p" variant="mask" duration={0.9} className={styles.introLead}>
-              A clubbing collective from Bologna — the night is lived, not watched.
+              A clubbing collective from Bologna. We put the record and the dancefloor first.
             </Reveal>
             <Reveal as="p" variant="up" delay={0.12} className={styles.introSupport}>
-              Since 2023 we&rsquo;ve built our nights around the record, the system and the
-              floor: selection over spectacle, the dancefloor over the show. From clubbers,
-              for clubbers.
+              Since 2023 we&rsquo;ve booked the nights we&rsquo;d want to be at: minimal &amp;
+              deep tech, selection over spectacle, from clubbers, for clubbers.
             </Reveal>
           </div>
           <Reveal variant="up" delay={0.15}>
