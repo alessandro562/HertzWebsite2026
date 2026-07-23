@@ -2,7 +2,6 @@
 import Link from 'next/link'
 import Section from '@/components/ui/Section'
 import Arrow from '@/components/ui/Arrow'
-import Equalizer from '@/components/ui/Equalizer'
 import GlitchFX from '@/components/ui/GlitchFX'
 import HomeHero from '@/components/home/HomeHero'
 import HeroKinetic from '@/components/home/HeroKinetic'
@@ -36,12 +35,6 @@ export default function Home() {
   const up = upcoming()
   const next = up[0]
   const restGigs = up.slice(1)
-
-  const mixes = ROSTER.flatMap((slug) =>
-    ARTISTS[slug].mixes.map((m) => ({ ...m, artist: ARTISTS[slug].name })),
-  )
-    .sort((a, b) => (b.tag === 'Featured' ? 1 : 0) - (a.tag === 'Featured' ? 1 : 0))
-    .slice(0, 5)
 
   const nextEvent = next
     ? {
@@ -248,45 +241,6 @@ export default function Home() {
               </StaggerItem>
             )
           })}
-        </Stagger>
-      </Section>
-
-      {/* ═══ 05 · MUSIC (paper) ═══ */}
-      <Section surface="paper" space="lg" id="music">
-        <Reveal variant="up" className={styles.secHead}>
-          <span className={`${styles.secKicker} hz-mono`}>04 / Music</span>
-          <h2 className={styles.secTitle}>In the mix.</h2>
-          <a
-            href="https://soundcloud.com/hertzclubbingcollective"
-            target="_blank"
-            rel="noreferrer"
-            className={styles.secLink}
-          >
-            SoundCloud <Arrow />
-          </a>
-        </Reveal>
-        <Stagger className={styles.mixList} gap={0.06}>
-          {mixes.map((m, i) => (
-            <StaggerItem key={m.url} variant="up">
-              <a
-                href={m.url}
-                target="_blank"
-                rel="noreferrer"
-                className={`${styles.mixRow} hz-rowfx`}
-              >
-                <span className={styles.mixNum}>{String(i + 1).padStart(2, '0')}</span>
-                <Equalizer play={m.tag === 'Featured'} className={styles.mixEq} />
-                <span className={styles.mixMain}>
-                  <span className={styles.mixTitle}>{m.t}</span>
-                  <span className={styles.mixArtist}>{m.artist}</span>
-                </span>
-                <span className={styles.mixTag}>{m.tag ?? 'Mix'}</span>
-                <span className={`${styles.mixGo} hz-fx-arrow`} aria-hidden="true">
-                  <Arrow />
-                </span>
-              </a>
-            </StaggerItem>
-          ))}
         </Stagger>
       </Section>
 

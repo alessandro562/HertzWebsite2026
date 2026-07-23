@@ -263,15 +263,23 @@ button {
   .hz-scanband { display: none; }
 }
 
-/* ═══════════════════ GLITCH · texture per le FOTO (niente scan) ═══════════
-   Disturbo digitale breve e sobrio da appoggiare come ultimi figli di un
-   contenitore relative/overflow-hidden (o usare il wrapper .hz-glitch):
-   grana fine costante + micro-strappi RGB che scattano poche volte per ciclo.
-   NESSUNA banda che scende. Reduced-motion → solo grana statica. */
+/* ═══════════════════ GLITCH · texture INTEGRATA per le FOTO ════════════════
+   Effetto serio e moderno, dentro l'immagine (non sovrapposto): aberrazione
+   cromatica reale sui canali RGB della foto (filtro SVG #hz-chroma) + grana
+   fine analogica. Niente barre colorate, niente scan. Statico → reduced-motion
+   safe. Applicare .hz-glitch al contenitore e GlitchFX come ultimo figlio. */
+.hz-svg-filters {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
 .hz-glitch {
   position: relative;
   overflow: hidden;
   isolation: isolate;
+  filter: url(#hz-chroma);
 }
 /* grana fine analogica (noise fractale in data-uri, desaturato) */
 .hz-glitch-grain {
@@ -279,58 +287,10 @@ button {
   inset: 0;
   z-index: 2;
   pointer-events: none;
-  opacity: 0.1;
+  opacity: 0.09;
   mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
-  background-size: 140px 140px;
-}
-/* micro-strappi RGB: due bande sottili (cyan + magenta) per lo più invisibili,
-   che lampeggiano e scattano di lato pochi istanti per ciclo (glitch burst) */
-.hz-glitch-fx {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  pointer-events: none;
-}
-.hz-glitch-fx::before,
-.hz-glitch-fx::after {
-  content: '';
-  position: absolute;
-  left: -4%;
-  right: -4%;
-  height: 6%;
-  top: 40%;
-  opacity: 0;
-  pointer-events: none;
-  mix-blend-mode: screen;
-}
-.hz-glitch-fx::before {
-  background: color-mix(in srgb, #38e1ff 66%, transparent);
-  animation: hz-glitch-a 6s steps(1) infinite;
-}
-.hz-glitch-fx::after {
-  background: color-mix(in srgb, #ff3b6b 66%, transparent);
-  animation: hz-glitch-b 6s steps(1) infinite;
-}
-/* due cluster di burst per ciclo, ognuno con qualche scatto interno di banda */
-@keyframes hz-glitch-a {
-  0%, 13%, 19%, 61%, 66%, 100% { opacity: 0; }
-  14% { opacity: 0.7; top: 22%; transform: translateX(-5%); }
-  16% { opacity: 0.7; top: 58%; transform: translateX(4%); }
-  18% { opacity: 0.55; top: 34%; transform: translateX(-3%); }
-  62% { opacity: 0.7; top: 44%; transform: translateX(5%); }
-  64% { opacity: 0.6; top: 71%; transform: translateX(-4%); }
-}
-@keyframes hz-glitch-b {
-  0%, 14%, 19%, 61%, 66%, 100% { opacity: 0; }
-  14.5% { opacity: 0.66; top: 24%; transform: translateX(5%); }
-  16.5% { opacity: 0.66; top: 60%; transform: translateX(-5%); }
-  62.5% { opacity: 0.6; top: 46%; transform: translateX(-5%); }
-  64.5% { opacity: 0.6; top: 30%; transform: translateX(4%); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .hz-glitch-fx::before,
-  .hz-glitch-fx::after { animation: none; opacity: 0; }
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 150px 150px;
 }
 
 /* ═══════════════════ TEXTURE elegante · per le LOCANDINE ═══════════════════

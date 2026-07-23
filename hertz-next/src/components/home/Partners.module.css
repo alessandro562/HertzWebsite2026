@@ -6,7 +6,7 @@
 .grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--hz-space-sm);
+  gap: var(--hz-space-md);
 }
 @media (min-width: 640px) {
   .grid {
@@ -16,16 +16,46 @@
 .card {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: var(--hz-space-2xs);
-  min-height: 92px;
-  padding: var(--hz-space-md) var(--hz-space-lg);
-  border: 1px solid var(--hz-line);
-  transition: background-color var(--hz-ui) var(--hz-ease-out);
+  gap: var(--hz-space-sm);
 }
-.card:hover {
-  background: var(--hz-bg-2);
+
+/* pannello scuro: il marchio line-art chiaro diventa leggibile */
+.panel {
+  position: relative;
+  aspect-ratio: 16 / 7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.4rem, 4vw, 2.6rem);
+  background: var(--hz-bg);
+  border: 1px solid var(--hz-line-strong);
+  overflow: hidden;
+}
+.logo {
+  max-width: min(58%, 220px);
+  max-height: 74%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  transition: transform var(--hz-content) var(--hz-ease-out);
+}
+.card:hover .logo {
+  transform: scale(1.05);
+}
+.panelNum {
+  position: absolute;
+  top: clamp(0.6rem, 1.6vw, 1rem);
+  left: clamp(0.7rem, 1.8vw, 1.1rem);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.caption {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--hz-space-sm);
+  padding-top: var(--hz-space-2xs);
+  border-top: 1px solid var(--hz-line);
 }
 .name {
   font-family: var(--hz-font-display);

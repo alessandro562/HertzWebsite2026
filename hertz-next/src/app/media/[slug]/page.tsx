@@ -1,10 +1,13 @@
+/* eslint-disable @next/next/no-img-element */
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Section from '@/components/ui/Section'
-import SectionLabel from '@/components/ui/SectionLabel'
-import ImageFrame from '@/components/ui/ImageFrame'
-import ArticleCard from '@/components/media/ArticleCard'
+import Arrow from '@/components/ui/Arrow'
+import GlitchFX from '@/components/ui/GlitchFX'
+import Parallax from '@/motion/Parallax'
+import Reveal from '@/motion/Reveal'
+import ReadingProgress from '@/components/media/ReadingProgress'
 import {
   ARTICLES,
   articleBySlug,
@@ -44,48 +47,82 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const a = articleBySlug(slug)
   if (!a) notFound()
 
-  const body = articleBody(slug)
+  // enfasi *testo* legacy → <em> (fix di resa, non tocca la sorgente)
+  const body = articleBody(slug).replace(/\*([^*<>\n]+)\*/g, '<em>$1</em>')
   const related = relatedArticles(slug)
 
   return (
     <main id="main">
+      <ReadingProgress />
       <article>
+        {/* ── MASTHEAD editoriale ── */}
         <Section surface="white" space="md">
           <p className={`${styles.crumb} hz-mono`}>
             <Link href="/media">Media</Link>
-            <span aria-hidden="true"> / </span>
+            <span aria-hidden="true"> — </span>
             <span>{a.rubric}</span>
           </p>
 
           <header className={styles.head}>
-            <span className={`${styles.rubric} hz-mono`}>{a.rubric}</span>
+            <div className={styles.headTop}>
+              <span className={`${styles.rubric} hz-mono`}>{a.rubric}</span>
+              <span className={`${styles.headTime} hz-mono`}>{a.readingTimeMinutes} min read</span>
+            </div>
             <h1 className={styles.title}>{a.title}</h1>
-            <p className={styles.lead}>{a.subtitle}</p>
-            <p className={`${styles.meta} hz-mono`}>
-              {a.author} · {articleDate(a)} · {a.readingTimeMinutes} min read
-            </p>
+            <p className={styles.standfirst}>{a.subtitle}</p>
+            <div className={styles.byline}>
+              <span className={styles.bylineName}>{a.author}</span>
+              <span className={`${styles.bylineDate} hz-mono`}>{articleDate(a)}</span>
+            </div>
           </header>
-
-          <ImageFrame
-            src={a.heroImage}
-            alt={a.heroImageAlt}
-            ratio="16 / 9"
-            priority
-            className={styles.hero}
-          />
         </Section>
 
+        {/* ── HERO: parallax + glitch integrato ── */}
+        <Section surface="white" space="sm">
+          <figure className={styles.heroFig}>
+            <div className={`${styles.heroFrame} hz-glitch`}>
+              <Parallax speed={38} zoom className={styles.heroParallax}>
+                <img src={a.heroImage} alt={a.heroImageAlt} loading="eager" decoding="async" />
+              </Parallax>
+              <GlitchFX />
+            </div>
+            <figcaption className={`${styles.heroCap} hz-mono`}>{a.heroImageAlt}</figcaption>
+          </figure>
+        </Section>
+
+        {/* ── CORPO editoriale ── */}
         <Section surface="white" space="lg">
           <div className={styles.prose} dangerouslySetInnerHTML={{ __html: body }} />
+          <div className={styles.outro}>
+            <span className={styles.endMark} aria-hidden="true" />
+            <span className={`${styles.signoff} hz-mono`}>{a.author}</span>
+          </div>
         </Section>
       </article>
 
       {related.length > 0 && (
         <Section surface="paper" space="lg">
-          <SectionLabel kicker="Related" title="Keep reading." link={{ href: '/media', label: 'All media' }} />
+          <div className={styles.relHead}>
+            <span className={`${styles.relKicker} hz-mono`}>Keep reading</span>
+            <Link href="/media" className={`${styles.relAll} hz-mono`}>
+              All media <Arrow />
+            </Link>
+          </div>
           <div className={styles.related}>
-            {related.map((r) => (
-              <ArticleCard key={r.slug} article={r} />
+            {related.map((r, i) => (
+              <Reveal key={r.slug} variant="up" delay={i * 0.06}>
+                <Link href={`/media/${r.slug}`} className={`${styles.relCard} hz-rowfx`}>
+                  <span className={`${styles.relNum} hz-mono`}>{String(i + 1).padStart(2, '0')}</span>
+                  <div className={styles.relBody}>
+                    <span className={`${styles.relRubric} hz-mono`}>{r.rubric}</span>
+                    <span className={styles.relTitle}>{r.title}</span>
+                    <span className={styles.relSub}>{r.subtitle}</span>
+                  </div>
+                  <span className={`${styles.relArrow} hz-fx-arrow`} aria-hidden="true">
+                    <Arrow />
+                  </span>
+                </Link>
+              </Reveal>
             ))}
           </div>
         </Section>
