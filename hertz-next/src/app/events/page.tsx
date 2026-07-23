@@ -53,27 +53,20 @@ export default function EventsPage() {
       />
 
       <Section surface="white" space="md" style={{ paddingTop: 'var(--hz-section-sm)' }}>
-        {/* intro compatta come modulo bordato */}
+        {/* intro editoriale: titolo grande + voce reale del collettivo */}
         <div className={styles.intro}>
-          <div className={styles.introMain}>
+          <div className={styles.introHead}>
             <p className={`${styles.introKicker} hz-mono`}>01 / Events</p>
             <h1 className={styles.introTitle}>Next gigs.</h1>
           </div>
-          <div className={styles.introSide}>
-            <p className={styles.introDesc}>
+          <div className={styles.introAside}>
+            <p className={styles.introLede}>
               Independent nights across Bologna and central Italy — minimal &amp; deep tech, booked
               like we&rsquo;d pay to see them ourselves.
             </p>
-            <dl className={`${styles.introCount} hz-mono`}>
-              <div>
-                <dt>Upcoming</dt>
-                <dd>{up.length}</dd>
-              </div>
-              <div>
-                <dt>Archived</dt>
-                <dd>{past.length}</dd>
-              </div>
-            </dl>
+            <p className={`${styles.introMeta} hz-mono`}>
+              {up.length} upcoming · {past.length} in the archive · we run on the guest list
+            </p>
           </div>
         </div>
       </Section>

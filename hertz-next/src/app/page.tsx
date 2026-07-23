@@ -98,7 +98,7 @@ export default function Home() {
 
       {/* ═══ ORDER / DISORDER — banda cinetica (ink, edge-to-edge) ═══ */}
       <KineticBand
-        primary={['ORDER', 'DISORDER']}
+        primary={['CLUBBING', 'IDENTITY']}
         secondary={['44.49° N', '11.34° E', 'BOLOGNA', 'MINIMAL', 'DEEP TECH']}
         labelLeft="01 / SIGNAL"
         labelRight="FROM CLUBBERS · FOR CLUBBERS"

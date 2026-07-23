@@ -3,20 +3,16 @@ import type { CSSProperties } from 'react'
 import Link from 'next/link'
 import { type HertzEvent, dowDate, eventSlug, isPast } from '@/content/events'
 import StatusBadge, { type Status } from '@/components/ui/StatusBadge'
-import ImageReveal from '@/motion/ImageReveal'
 import FrequencyCut from '@/motion/FrequencyCut'
-import PosterMorph from '@/motion/PosterMorph'
 import PosterFX from '@/components/ui/PosterFX'
 import PosterFallback from './PosterFallback'
 import styles from './FeaturedEvent.module.css'
 
 /**
- * FeaturedEvent — il prossimo evento come modulo full-width fortemente
- * progettato (non una riga). Frame 1px, 12 colonne (poster 5 · contenuto 7),
- * keyline interne, event number grande, poster INTEGRATO nel modulo con
- * ImageReveal + PosterMorph, una FrequencyCut come apertura strutturale
- * (breve, all'ingresso in viewport), CTA agganciata al bordo inferiore.
- * Hover (CSS): keyline che attraversa, crop-shift del poster, CTA attiva.
+ * FeaturedEvent — il prossimo evento come modulo full-width. La LOCANDINA è
+ * verticale e mostrata INTERA (rapporto naturale, mai croppata), con la cornice
+ * print (PosterFX); il contenuto (titolo, venue, line-up, CTA) sta a fianco.
+ * Hover (CSS): keyline che attraversa, CTA attiva.
  */
 export default function FeaturedEvent({ event }: { event: HertzEvent }) {
   const past = isPast(event)
@@ -32,20 +28,31 @@ export default function FeaturedEvent({ event }: { event: HertzEvent }) {
     >
       <div className={styles.posterCell}>
         {event.poster ? (
-          <ImageReveal variant="print" duration="editorial" className={styles.posterReveal}>
-            <PosterMorph slug={slug}>
-              <img src={event.poster} alt={`Poster — ${event.title}`} className={styles.poster} loading="eager" decoding="async" />
-            </PosterMorph>
-          </ImageReveal>
+          <figure className={styles.posterFig}>
+            <img
+              src={event.poster}
+              alt={`Poster — ${event.title}`}
+              className={styles.poster}
+              loading="eager"
+              decoding="async"
+            />
+            <PosterFX tone="dark" />
+            <div className={styles.posterTag}>
+              <span className="hz-mono">N°{event.n}</span>
+              {event.badge && <span className={`${styles.badge} hz-mono`}>{event.badge}</span>}
+              <StatusBadge status={status} />
+            </div>
+          </figure>
         ) : (
-          <PosterFallback n={event.n} date={dowDate(event)} city={event.city} className={styles.posterSoon} />
+          <div className={styles.posterFig} data-fallback="true">
+            <PosterFallback n={event.n} date={dowDate(event)} city={event.city} className={styles.posterSoon} />
+            <div className={styles.posterTag}>
+              <span className="hz-mono">N°{event.n}</span>
+              {event.badge && <span className={`${styles.badge} hz-mono`}>{event.badge}</span>}
+              <StatusBadge status={status} />
+            </div>
+          </div>
         )}
-        {event.poster && <PosterFX tone="dark" />}
-        <div className={styles.posterTag}>
-          <span className="hz-mono">N°{event.n}</span>
-          {event.badge && <span className={`${styles.badge} hz-mono`}>{event.badge}</span>}
-          <StatusBadge status={status} />
-        </div>
       </div>
 
       <div className={styles.content}>
@@ -71,7 +78,7 @@ export default function FeaturedEvent({ event }: { event: HertzEvent }) {
 
         <div className={styles.foot}>
           <span className={`${styles.footLabel} hz-mono`}>
-            {status === 'on-sale' ? 'On sale now' : status === 'soon' ? 'Line-up soon' : 'Archived'}
+            {status === 'on-sale' ? 'Guest list open' : status === 'soon' ? 'Line-up soon' : 'Archived'}
           </span>
           <span className={styles.cta}>View event ↗</span>
         </div>

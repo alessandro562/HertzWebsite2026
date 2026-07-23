@@ -8,42 +8,42 @@
 }
 @media (min-width: 820px) {
   .featured {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    min-height: clamp(360px, 34vw, 440px);
+    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+    align-items: stretch;
   }
 }
 
-/* ── poster integrato: bleed fino al bordo, keyline a destra ── */
+/* ── locandina verticale INTERA (mai croppata) ── */
 .posterCell {
   position: relative;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: var(--hz-bg-2);
   border-bottom: 1px solid var(--hz-line);
-  min-height: 300px;
 }
 @media (min-width: 820px) {
   .posterCell {
     border-bottom: none;
     border-right: 1px solid var(--hz-ink);
-    min-height: 0;
   }
 }
-.posterReveal {
+.posterFig {
+  position: relative;
   display: block;
   width: 100%;
-  height: 100%;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--hz-ink);
+}
+.posterFig[data-fallback='true'] {
+  aspect-ratio: 4 / 5;
+  background: var(--hz-bg-2);
 }
 .poster {
-  position: absolute;
-  inset: 0;
+  display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 32%;
-  transition: object-position var(--hz-editorial) var(--hz-ease-out);
-}
-.featured:hover .poster {
-  object-position: center 52%;
+  height: auto;
 }
 .posterSoon {
   position: absolute;
@@ -72,7 +72,7 @@
   text-transform: uppercase;
 }
 
-/* ── contenuto: impilato, titolo sotto il cut, CTA agganciata al fondo ── */
+/* ── contenuto ── */
 .content {
   display: flex;
   flex-direction: column;
@@ -100,7 +100,7 @@
   gap: 0.5rem;
 }
 .title {
-  font-size: clamp(2rem, 4vw, 3.6rem);
+  font-size: clamp(2.2rem, 4vw, 3.8rem);
   line-height: 0.98;
   letter-spacing: var(--hz-tracking-tight);
   max-width: 16ch;
@@ -144,7 +144,6 @@
   color: var(--hz-bg);
 }
 
-/* keyline di frequenza sul bordo inferiore all'hover */
 .sweep {
   position: absolute;
   left: 0;
@@ -165,13 +164,11 @@
   outline: none;
   border-color: var(--hz-cold, #50778a);
 }
-
 .featured[data-status='soon'] .cta {
   border-color: var(--hz-cold, #50778a);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .poster,
   .sweep {
     transition: none;
   }

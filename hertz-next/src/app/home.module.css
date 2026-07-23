@@ -258,8 +258,8 @@
   letter-spacing: 0.04em;
 }
 .eventFeature { position: relative; }
-.eventFeatureFrame { position: relative; display: block; overflow: hidden; aspect-ratio: 3 / 4; border: 1px solid var(--hz-line-strong); isolation: isolate; }
-.eventFeatureFrame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.eventFeatureFrame { position: relative; display: block; overflow: hidden; border: 1px solid var(--hz-line-strong); isolation: isolate; background: var(--hz-ink); }
+.eventFeatureFrame img { width: 100%; height: auto; display: block; }
 .eventFeatureCap { display: flex; justify-content: space-between; padding-top: var(--hz-space-sm); font-family: var(--hz-font-mono); font-size: var(--hz-t-meta); letter-spacing: var(--hz-tracking-mono); text-transform: uppercase; color: var(--hz-ink-mute); }
 
 .status { font-family: var(--hz-font-mono); font-size: var(--hz-t-meta); letter-spacing: var(--hz-tracking-mono); text-transform: uppercase; white-space: nowrap; }

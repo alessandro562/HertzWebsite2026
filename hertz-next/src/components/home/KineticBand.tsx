@@ -11,7 +11,7 @@ interface Props {
   surface?: 'ink' | 'signal'
 }
 
-const DEF_PRIMARY = ['ORDER', 'DISORDER']
+const DEF_PRIMARY = ['CLUBBING', 'IDENTITY']
 const DEF_SECONDARY = ['44.49° N', '11.34° E', 'BOLOGNA', 'CLUBBING COLLECTIVE']
 
 /**
@@ -49,7 +49,7 @@ export default function KineticBand({
     <section
       className={styles.band}
       data-surface={surface}
-      aria-label="Hertz — order / disorder / Bologna clubbing collective"
+      aria-label="Hertz — clubbing identity · Bologna clubbing collective"
     >
       <div className={styles.labels}>
         <span className="hz-mono">

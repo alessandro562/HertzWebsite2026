@@ -34,8 +34,8 @@
   width: max-content;
   will-change: transform;
 }
-.inner[data-dir='left']  { animation: hz-band-left  var(--dur, 34s) linear infinite; }
-.inner[data-dir='right'] { animation: hz-band-right var(--dur, 44s) linear infinite; }
+.inner[data-dir='left']  { animation: hz-band-left  var(--dur, 68s) linear infinite; }
+.inner[data-dir='right'] { animation: hz-band-right var(--dur, 88s) linear infinite; }
 
 .track {
   display: flex;
