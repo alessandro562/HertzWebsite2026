@@ -11,7 +11,7 @@ export default function NotFound() {
         <h1 className={styles.title}>This frequency is off the air.</h1>
         <FrequencyCut variant="editorial" trigger="mount" className={styles.cut} />
         <p className={styles.text}>
-          The page you&rsquo;re looking for isn&rsquo;t here — wrong link, or the night moved on.
+          The page you&rsquo;re looking for isn&rsquo;t here: wrong link, or the night moved on.
         </p>
         <div className={styles.actions}>
           <Button href="/" arrow>

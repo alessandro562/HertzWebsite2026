@@ -47,14 +47,14 @@ export default function AboutPage() {
             <span className={`${styles.chap} hz-mono`}>Chapter 01 · Origin</span>
             <p>
               The Hertz collective was born in Bologna in 2023, out of one simple conviction: the
-              night was turning into something to watch, and less and less something to live — rooms
+              night was turning into something to watch, and less and less something to live: rooms
               built for the camera, with the music stuck somewhere in the background.
             </p>
             <p>
               So we put the attention back on what actually matters: the selection, the dancefloor,
               and the energy shared between clubbers. A floor where the record does the talking,
               where a good one can roll for nine minutes before anyone checks the time, and the only
-              reason to leave the house is one — to let the sound take over.
+              reason to leave the house is one: to let the sound take over.
             </p>
           </Reveal>
           <Parallax speed={44} className={styles.chapPhoto}>
@@ -74,7 +74,7 @@ export default function AboutPage() {
             <p>
               We book artists we&rsquo;d pay to see ourselves. Minimal, deep tech, the kind of groove
               that rolls for hours and never tips into noise. We pick rooms for how they sound, not
-              how big they look — small enough to feel the kick through the floor, big enough to
+              how big they look: small enough to feel the kick through the floor, big enough to
               disappear.
             </p>
           </Reveal>
@@ -127,7 +127,7 @@ export default function AboutPage() {
           </div>
           <Reveal variant="up" delay={0.15} className={styles.policyBodyWrap}>
             <p className={styles.policyBody}>
-              No harassment, no hate, no discrimination. Respect boundaries — yours and others&rsquo;.
+              No harassment, no hate, no discrimination. Respect boundaries, yours and others&rsquo;.
               We&rsquo;re here for the music and the people. The dancefloor is for everyone.
             </p>
             <span className="hz-mono" style={{ color: 'var(--hz-ink-mute)' }}>

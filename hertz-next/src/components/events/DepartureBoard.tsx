@@ -54,7 +54,7 @@ export default function DepartureBoard({ events }: { events: HertzEvent[] }) {
 
       <p className={`${styles.hint} hz-mono`}>
         <span className={styles.dot} aria-hidden="true" />
-        All upcoming Hertz nights — the next one is marked ▸
+        All upcoming Hertz nights · the next one is marked ▸
       </p>
     </div>
   )

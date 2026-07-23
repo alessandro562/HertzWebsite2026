@@ -40,7 +40,7 @@ export default function HeroKinetic() {
         </motion.div>
 
         <div className={styles.type}>
-          <h1 className={styles.words} aria-label="Hertz — Clubbing Collective, Bologna">
+          <h1 className={styles.words} aria-label="Hertz, Clubbing Collective, Bologna">
             <motion.span
               className={`${styles.word} ${styles.clubbing}`}
               style={enabled ? { x: xClub } : undefined}

@@ -20,17 +20,17 @@ export const metadata: Metadata = {
   description:
     'Press kit e fotografia in alta risoluzione di Hertz: logo, foto degli eventi e materiali per promoter, locali e giornalisti. Uso libero con credito @hertz.cc.',
   alternates: { canonical: '/archive' },
-  openGraph: { title: 'Press & Archive — Hertz Clubbing Collective' },
+  openGraph: { title: 'Press & Archive · Hertz Clubbing Collective' },
 }
 
 /* Press kit — inventario reale (archive.html). Lo ZIP non è ancora nel repo:
    il download è sostituito da una richiesta via email finché il file esiste. */
 const PRESS_KIT = [
-  'Logos — AI · SVG · PNG, light & dark',
+  'Logos: AI · SVG · PNG, light & dark',
   'Hi-res live photography',
   'Artist bios + booking contacts',
   'Tech rider + stage plot',
-  'Brand guide — colours, type, usage',
+  'Brand guide: colours, type, usage',
 ]
 
 /* Photo archive — 36 frame reali scaricabili (tutti presenti in public/). */
@@ -133,7 +133,7 @@ export default function ArchivePage() {
         <div className={styles.pressKit}>
           <div className={styles.pkMain}>
             <p className={styles.pkLede}>
-              Hi-res photography, vector logos, artist bios and the tech rider — packaged for press,
+              Hi-res photography, vector logos, artist bios and the tech rider, packaged for press,
               promoters and venues. One request, ready to use.
             </p>
             <ul className={styles.pkList}>
@@ -144,7 +144,7 @@ export default function ArchivePage() {
             <div className={styles.pkActions}>
               <a
                 className={styles.pkDl}
-                href={mailto('Press kit — Hertz', 'Hi Hertz, could you send me the press kit?')}
+                href={mailto('Press kit · Hertz', 'Hi Hertz, could you send me the press kit?')}
               >
                 Request the press kit <span aria-hidden="true">↓</span>
               </a>
@@ -192,7 +192,7 @@ export default function ArchivePage() {
           {PHOTO_ARCHIVE.map((src, i) => (
             <a key={src + i} className={styles.pressShot} href={src} download>
               <span className={`${styles.pressIx} hz-mono`}>{String(i + 1).padStart(2, '0')}</span>
-              <img src={src} alt={`Hertz live — archive frame ${i + 1}`} loading="lazy" />
+              <img src={src} alt={`Hertz live, archive frame ${i + 1}`} loading="lazy" />
               <span className={`${styles.pressDl} hz-mono`}>↓ JPG</span>
             </a>
           ))}
@@ -209,10 +209,10 @@ export default function ArchivePage() {
           <div className={styles.featured}>
             <PrintInterruption
               image={featuredPhotos[0]}
-              alt={`${featured.title} — archive`}
+              alt={`${featured.title}, archive`}
               aspectRatio="4 / 3"
               fragment={
-                featuredPhotos[1] ? { src: featuredPhotos[1], alt: `${featured.title} — frame 2` } : undefined
+                featuredPhotos[1] ? { src: featuredPhotos[1], alt: `${featured.title}, frame 2` } : undefined
               }
               className={styles.featuredSpread}
             />

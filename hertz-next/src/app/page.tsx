@@ -162,7 +162,7 @@ export default function Home() {
               <span className={styles.eventFeatureFrame}>
                 <img
                   src={feature.poster || '/assets/hero-booth.jpg'}
-                  alt={`Poster — ${feature.title}`}
+                  alt={`Poster: ${feature.title}`}
                   loading="lazy"
                 />
                 <PosterFX tone="dark" />
@@ -194,7 +194,7 @@ export default function Home() {
               <p className={styles.manifestoBody}>
                 Hertz was born in Bologna in 2023, out of one conviction: the night was turning
                 into something to watch, and less something to live. So we put the attention back
-                on what actually matters — the selection, the dancefloor, and the energy shared
+                on what actually matters: the selection, the dancefloor and the energy shared
                 between clubbers. A floor where the record does the talking, where a good one can
                 roll for nine minutes before anyone checks the time. The rest is just volume.
               </p>
@@ -293,7 +293,7 @@ export default function Home() {
             </SignatureTitle>
           </div>
           <p className={styles.archiveIntro}>
-            A moving archive of faces, rooms and fragments from the Hertz floor —
+            A moving archive of faces, rooms and fragments from the Hertz floor:
             Kindergarten and beyond.
           </p>
         </div>
@@ -301,7 +301,7 @@ export default function Home() {
           {ARCHIVE_PHOTOS.map((src, i) => (
             <StaggerItem key={src} variant="right">
               <figure className={`${styles.archiveCard} hz-cardfx`}>
-                <img src={src} alt="Hertz night — Kindergarten archive" loading="lazy" />
+                <img src={src} alt="Hertz night, Kindergarten archive" loading="lazy" />
                 <figcaption>
                   <span>Kindergarten</span>
                   <span>

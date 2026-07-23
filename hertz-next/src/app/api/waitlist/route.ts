@@ -14,7 +14,7 @@ export async function POST(req: Request) {
 
   const text = `${email} joined the drop waitlist at ${new Date().toISOString()}`
   try {
-    await notify({ subject: `Waitlist — ${email}`, text, replyTo: email })
+    await notify({ subject: `Waitlist · ${email}`, text, replyTo: email })
   } catch {
     return Response.json({ ok: false, error: 'Could not sign you up. Please try again.' }, { status: 502 })
   }

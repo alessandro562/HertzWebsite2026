@@ -14,7 +14,7 @@ import styles from './bookings.module.css'
 export const metadata: Metadata = {
   title: 'Bookings',
   description:
-    'Book the full Hertz format or a single resident — clubs, festivals and showcases. Based in Bologna, available worldwide.',
+    'Book the full Hertz format or a single resident: clubs, festivals and showcases. Based in Bologna, available worldwide.',
   alternates: { canonical: '/bookings' },
 }
 
@@ -23,7 +23,7 @@ const PATHS = [
     n: '01',
     kicker: 'The format',
     title: 'Book the night.',
-    body: 'The full Hertz curation, dropped into your room — selection, residents, sound direction and identity, built as one night. We treat the space as an instrument: the right system, the right tempo, a floor that came to listen.',
+    body: 'The full Hertz curation, dropped into your room: selection, residents, sound direction and identity, built as one night. We treat the space as an instrument: the right system, the right tempo, a floor that came to listen.',
     chips: ['Clubs', 'Festivals', 'Private', 'B2B sets'],
     cta: { label: 'Request the format →', href: '/bookings?type=format#book' },
   },
@@ -31,7 +31,7 @@ const PATHS = [
     n: '02',
     kicker: 'A resident',
     title: 'Book a resident.',
-    body: "One of the four Hertz residents for a guest slot on your line-up — minimal & deep-tech, the kind of groove that rolls for hours. Pick a name below, or tell us the date and we'll match the right hands to the room.",
+    body: "One of the four Hertz residents for a guest slot on your line-up, minimal & deep-tech, the kind of groove that rolls for hours. Pick a name below, or tell us the date and we'll match the right hands to the room.",
     chips: ['Guest slot', 'Deep tech', 'Worldwide'],
     cta: { label: 'Pick a resident ↓', href: '#roster' },
   },
@@ -49,7 +49,7 @@ export default function BookingsPage() {
           title="Bring Hertz to your room."
           intro={
             <p className="hz-mono">
-              Book the full Hertz format or a single resident — based in Bologna, available
+              Book the full Hertz format or a single resident, based in Bologna, available
               worldwide.
             </p>
           }

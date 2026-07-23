@@ -68,8 +68,8 @@ export const ARTISTS: Record<ResidentSlug, Artist> = {
     ],
     mixes: [
       { t: 'Tomi & Kesh × Federico Apadula', tag: 'Featured', url: 'https://soundcloud.com/tomi-and-kesh/tomi-kesh-federico-apadula' },
-      { t: 'Live @ Sonder — City Hall, Barcelona', url: 'https://soundcloud.com/hertzclubbingcollective/federico-apadula-sonder-city-hall-barcelona-16-03-24-opening-chicks-luv-us' },
-      { t: 'MMM077 — Special Guest Mix', url: 'https://soundcloud.com/lambertogabrieli/mmm077-federico-apadula-special-guest-mix-jun-2021' },
+      { t: 'Live @ Sonder · City Hall, Barcelona', url: 'https://soundcloud.com/hertzclubbingcollective/federico-apadula-sonder-city-hall-barcelona-16-03-24-opening-chicks-luv-us' },
+      { t: 'MMM077 · Special Guest Mix', url: 'https://soundcloud.com/lambertogabrieli/mmm077-federico-apadula-special-guest-mix-jun-2021' },
     ],
     social: {
       soundcloud: 'https://soundcloud.com/federico-apadula',
@@ -96,7 +96,7 @@ export const ARTISTS: Record<ResidentSlug, Artist> = {
     ],
     bio: [
       'Born in 2001, Tommaso Mancò is a DJ from Abruzzo who discovered his passion for electronic music among the iconic parties of the Romagna riviera. It was there that he started building his musical culture and shaping his artistic identity.',
-      "He later moved to Bologna, where he joined the Hertz collective and still plays as a resident DJ today. His sound lives in tech house and minimal deep tech — the register that defines his style. In recent years he has performed at some of the area's most important stages and clubs, including Cima Festival, Kindergarten and Numa Club, as well as Buongiorno Classic — a place he has always called home, and one that, over the years, gave him the inspiration to develop and define his musical identity.",
+      "He later moved to Bologna, where he joined the Hertz collective and still plays as a resident DJ today. His sound lives in tech house and minimal deep tech, the register that defines his style. In recent years he has performed at some of the area's most important stages and clubs, including Cima Festival, Kindergarten and Numa Club, as well as Buongiorno Classic, a place he has always called home, and one that, over the years, gave him the inspiration to develop and define his musical identity.",
     ],
     // Il sorgente legacy non elenca mix per Tommaso: campo realmente vuoto.
     mixes: [],
@@ -160,7 +160,7 @@ export const ARTISTS: Record<ResidentSlug, Artist> = {
       "Ambitious, driven and constantly evolving, Leonardo is one of the emerging names of Bologna's new electronic scene: a young DJ with a clear vision, a strong desire to grow, and the goal of turning every set into a genuine experience for the floor.",
     ],
     mixes: [
-      { t: 'Live @ Hertz / Kindergarten — 26.12.2025', tag: 'Featured', url: 'https://soundcloud.com/leonardo-giusti-286676267/leonardo-giusti-live-hertz-kindergarten-italy-26122025' },
+      { t: 'Live @ Hertz / Kindergarten · 26.12.2025', tag: 'Featured', url: 'https://soundcloud.com/leonardo-giusti-286676267/leonardo-giusti-live-hertz-kindergarten-italy-26122025' },
       { t: 'Live @ Zanzibar', url: 'https://soundcloud.com/leonardo-giusti-286676267/leonardo-giusti-live-zanzibar' },
       { t: 'REC013', url: 'https://soundcloud.com/leonardo-giusti-286676267/rec013' },
     ],

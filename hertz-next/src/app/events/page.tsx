@@ -61,7 +61,7 @@ export default function EventsPage() {
           </div>
           <div className={styles.introAside}>
             <p className={styles.introLede}>
-              Independent nights across Bologna and central Italy — minimal &amp; deep tech, booked
+              Independent nights across Bologna and central Italy: minimal &amp; deep tech, booked
               like we&rsquo;d pay to see them ourselves.
             </p>
             <p className={`${styles.introMeta} hz-mono`}>

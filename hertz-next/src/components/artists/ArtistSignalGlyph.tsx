@@ -46,7 +46,7 @@ export default function ArtistSignalGlyph({
       data-size={size}
       data-active={active || undefined}
       role="img"
-      aria-label={`Hertz signal signature — N°${n}, ${freq}`}
+      aria-label={`Hertz signal signature, N°${n}, ${freq}`}
       onMouseEnter={() => setActive(true)}
       onMouseLeave={() => setActive(false)}
       onFocus={() => setActive(true)}

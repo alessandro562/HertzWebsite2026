@@ -302,14 +302,14 @@ export default function HeroIntroSequence({ next, staticGrid = false }: { next?:
               <span className={hero.l2}>for clubbers.</span>
             </h1>
             <p className={`${hero.sub} ${s.contentReveal}`}>
-              A minimal / deep-tech clubbing collective in Bologna — a resident night, a roster, an editorial, built
+              A minimal / deep-tech clubbing collective in Bologna: a resident night, a roster, an editorial, built
               around the selection and the floor.
             </p>
           </div>
 
           {/* HeroImage = il frammento DJ trasformato: stessa immagine, colore + retino overlay */}
           <figure className={s.heroFigure}>
-            <img src="/assets/ident-dj.jpg" alt="Hertz — the booth during an event" className={hero.photo} />
+            <img src="/assets/ident-dj.jpg" alt="Hertz, the booth during an event" className={hero.photo} />
             <img src="/assets/ident-dj-ht.jpg" alt="" aria-hidden="true" className={s.htOverlay} />
             <figcaption className={`${hero.photoCap} hz-mono ${s.photoDetail}`}>
               <span>N°{next?.n ?? '—'}</span>

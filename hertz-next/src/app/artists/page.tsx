@@ -8,7 +8,7 @@ import styles from './artists.module.css'
 export const metadata: Metadata = {
   title: 'Artists',
   description:
-    'I resident del collettivo Hertz — DJ e producer di Bologna e dintorni, minimal & deep tech. Bio, mix e date.',
+    'I resident del collettivo Hertz: DJ e producer di Bologna e dintorni, minimal & deep tech. Bio, mix e date.',
   alternates: { canonical: '/artists' },
 }
 

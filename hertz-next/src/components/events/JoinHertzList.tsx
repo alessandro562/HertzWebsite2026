@@ -119,8 +119,8 @@ export default function JoinHertzList({ event, soon = false }: { event: ListEven
         </div>
         <p className={styles.note}>
           {soon
-            ? 'Line-up lands closer to the date — lock your spot on the Hertz list now.'
-            : 'Hertz runs on the guest list. Add your name — we confirm by email.'}
+            ? 'Line-up lands closer to the date. Lock your spot on the Hertz list now.'
+            : 'Hertz runs on the guest list. Add your name. We confirm by email.'}
         </p>
         <div className={styles.action}>
           <button type="button" className={styles.cta} onClick={openModal}>

@@ -27,7 +27,7 @@ export const ARTICLES: Article[] = [
     subtitle:
       'A €70 million hyperclub topped the world poll in year one. Read the rest of the calendar and the split becomes impossible to miss.',
     excerpt:
-      "UNVRS didn't just open big — it rewrote the rules in a single season. We read the 2026 Ibiza calendar as two scenes running on the same island at different speeds.",
+      "UNVRS didn't just open big. It rewrote the rules in a single season. We read the 2026 Ibiza calendar as two scenes running on the same island at different speeds.",
     rubric: 'SIGNAL',
     heroImage: '/assets/media-unvrs.png',
     heroImageAlt: 'A hyperclub crowd under stage lights',
@@ -42,7 +42,7 @@ export const ARTICLES: Article[] = [
     subtitle:
       'After 18 years on the Black Sea, the cathedral of the marathon set was pushed out of Romania.',
     excerpt:
-      'Sunwaves — no VIP, booth close, six-hour sets — just lost its home to permits and pressure and decamped to Spain. Why the most music-first format in our world is also the most fragile.',
+      'Sunwaves (no VIP, booth close, six-hour sets) just lost its home to permits and pressure and decamped to Spain. Why the most music-first format in our world is also the most fragile.',
     rubric: 'DISPATCH',
     heroImage: '/assets/media-sunwaves.png',
     heroImageAlt: 'A low-lit marathon floor',
@@ -54,9 +54,9 @@ export const ARTICLES: Article[] = [
     slug: 'music-on-pacha-long-residency',
     title: 'Music On at Pacha: The Case for the Long Residency',
     subtitle:
-      "Eight years on the same Friday, despite every rumour of a move. That's not nostalgia — it's a different technology.",
+      "Eight years on the same Friday, despite every rumour of a move. That's not nostalgia. It's a different technology.",
     excerpt:
-      'Music On stayed at Pacha for 2026. The long residency builds something a festival headline slot never can — a crowd, a sound, a room.',
+      'Music On stayed at Pacha for 2026. The long residency builds something a festival headline slot never can: a crowd, a sound, a room.',
     rubric: 'RESIDENT',
     heroImage: '/assets/media-music-on-pacha.png',
     heroImageAlt: 'A packed floor deep into a residency night',

@@ -49,7 +49,7 @@ export default function KineticBand({
     <section
       className={styles.band}
       data-surface={surface}
-      aria-label="Hertz — clubbing identity · Bologna clubbing collective"
+      aria-label="Hertz · clubbing identity · Bologna clubbing collective"
     >
       <div className={styles.labels}>
         <span className="hz-mono">

@@ -42,7 +42,7 @@ export async function POST(req: Request) {
 
   try {
     await notify({
-      subject: `Hertz list — ${title}${date ? ` · ${date}` : ''} · ${name}`,
+      subject: `Hertz list · ${title}${date ? ` · ${date}` : ''} · ${name}`,
       text,
       replyTo: email,
     })

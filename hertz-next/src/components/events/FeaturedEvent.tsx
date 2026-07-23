@@ -34,7 +34,7 @@ export default function FeaturedEvent({ event }: { event: HertzEvent }) {
           <figure className={styles.posterFig}>
             <img
               src={event.poster}
-              alt={`Poster — ${event.title}`}
+              alt={`Poster: ${event.title}`}
               className={styles.poster}
               loading="eager"
               decoding="async"

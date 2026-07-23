@@ -129,7 +129,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
                 <figure className={styles.posterFig}>
                   <img
                     src={e.poster}
-                    alt={`Poster — ${e.title}`}
+                    alt={`Poster: ${e.title}`}
                     className={styles.posterImg}
                     loading="eager"
                     decoding="async"

@@ -95,7 +95,7 @@ export default function EventPosterPortal({
         animate={reduce || inView ? { clipPath: 'inset(0 0 0% 0)' } : undefined}
         transition={{ duration: reduce ? 0 : 0.85, ease: [0.16, 1, 0.3, 1] }}
       >
-        <img src={image} alt={`Poster — ${title}`} className={styles.img} loading={priority ? 'eager' : 'lazy'} decoding="async" />
+        <img src={image} alt={`Poster: ${title}`} className={styles.img} loading={priority ? 'eager' : 'lazy'} decoding="async" />
         <span className={styles.band1} aria-hidden="true" />
         <span className={styles.band2} aria-hidden="true" />
         <span className={styles.cut} aria-hidden="true" />
@@ -130,7 +130,7 @@ export default function EventPosterPortal({
 
   if (href) {
     return (
-      <Link href={href} className={styles.link} aria-label={`${title} — ${date} — ${venue}`}>
+      <Link href={href} className={styles.link} aria-label={`${title}, ${date}, ${venue}`}>
         {body}
       </Link>
     )

@@ -26,7 +26,7 @@ export default function MediaPage() {
           title="Clubbing culture."
           intro={
             <p>
-              Our editorial desk — reportage and arguments about the music we care about, written
+              Our editorial desk: reportage and arguments about the music we care about, written
               from the floor rather than the press release. Signed Hertz Redazione.
             </p>
           }

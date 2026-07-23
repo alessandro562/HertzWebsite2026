@@ -71,7 +71,7 @@ export default function BookingForm() {
     return (
       <div className={styles.done}>
         <p className={styles.doneTitle}>
-          Thanks — your booking request is with the Hertz team.
+          Thanks, your booking request is with the Hertz team.
         </p>
         <p className={styles.doneSub}>
           We&rsquo;ll get back to you by email with availability and a fee.
@@ -167,12 +167,12 @@ export default function BookingForm() {
           required
           minLength={10}
           maxLength={2000}
-          placeholder="Tell us about the night — format, set length, line-up, the room, the direction you're after."
+          placeholder="Tell us about the night: format, set length, line-up, the room, the direction you're after."
         />
       </label>
 
       <p className={styles.fine}>
-        The request is sent directly to the Hertz team — no email app, everything stays on this
+        The request is sent directly to the Hertz team. No email app, everything stays on this
         page. We reply by email.
       </p>
 

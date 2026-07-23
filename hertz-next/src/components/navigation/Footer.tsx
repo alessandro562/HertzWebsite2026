@@ -57,14 +57,14 @@ export default function Footer() {
               Manifesto
             </Link>
             <span className={styles.fLink} aria-disabled="true" style={{ opacity: 0.5 }}>
-              Privacy — soon
+              Privacy · soon
             </span>
           </div>
         </div>
 
         <div className={styles.bottom}>
           <span className="hz-mono">© 2026 Hertz Clubbing Collective</span>
-          <span className="hz-mono">Bologna, IT — Minimal &amp; deep tech · since 2023</span>
+          <span className="hz-mono">Bologna, IT · Minimal &amp; deep tech · since 2023</span>
         </div>
       </div>
     </footer>

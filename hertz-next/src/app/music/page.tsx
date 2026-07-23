@@ -34,7 +34,7 @@ export default function MusicPage() {
           <h1 className={styles.title}>The selection.</h1>
           <div className={styles.headRow}>
             <p className={styles.intro}>
-              The records that build the Hertz floor — resident sets and studio cuts, minimal &amp;
+              The records that build the Hertz floor: resident sets and studio cuts, minimal &amp;
               deep tech, selection first. No autoplay, play on tap.
             </p>
             <div className={styles.platformBar}>
@@ -43,12 +43,12 @@ export default function MusicPage() {
                 target="_blank"
                 rel="noreferrer"
                 className={styles.chip}
-                aria-label={`SoundCloud — ${TOTAL} sets`}
+                aria-label={`SoundCloud, ${TOTAL} sets`}
               >
                 <img src={SC_LOGO} alt="SoundCloud" className={styles.chipLogo} />
                 <span className={`${styles.chipMeta} hz-mono`}>{TOTAL} sets <Arrow /></span>
               </a>
-              <a href="#spotify" className={styles.chip} aria-label={`Spotify — ${ON_SPOTIFY.length} residents`}>
+              <a href="#spotify" className={styles.chip} aria-label={`Spotify, ${ON_SPOTIFY.length} residents`}>
                 <img src={SP_LOGO} alt="Spotify" className={styles.chipLogo} />
                 <span className={`${styles.chipMeta} hz-mono`}>{ON_SPOTIFY.length} residents ↓</span>
               </a>
@@ -62,7 +62,7 @@ export default function MusicPage() {
         <div className={styles.platHead}>
           <img src={SC_LOGO} alt="SoundCloud" className={styles.platLogo} />
           <p className={styles.platSub}>
-            The collective and every resident&rsquo;s sets — {TOTAL} mixes, streamed straight from
+            The collective and every resident&rsquo;s sets, {TOTAL} mixes, streamed straight from
             SoundCloud.
           </p>
           <Button href={SITE.soundcloud} external variant="ghost" arrow>

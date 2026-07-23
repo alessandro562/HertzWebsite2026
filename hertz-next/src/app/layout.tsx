@@ -41,7 +41,7 @@ const mono = IBM_Plex_Mono({
 
 const SITE_URL = SITE.url
 const DESCRIPTION =
-  'HERTZ — collettivo clubbing minimal/deep-tech con base a Bologna.'
+  'HERTZ, collettivo clubbing minimal/deep-tech con base a Bologna.'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

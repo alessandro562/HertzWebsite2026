@@ -32,7 +32,7 @@ export async function POST(req: Request) {
     .join('\n')
 
   try {
-    await notify({ subject: `Reservation — ${item} ×${qty} · ${name}`, text, replyTo: email })
+    await notify({ subject: `Reservation · ${item} ×${qty} · ${name}`, text, replyTo: email })
   } catch {
     return Response.json({ ok: false, error: 'Could not send the reservation. Please try again.' }, { status: 502 })
   }

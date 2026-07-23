@@ -24,7 +24,7 @@ export default function EventModule({ event }: { event: HertzEvent }) {
           <>
             <img
               src={event.poster}
-              alt={`Poster — ${event.title}`}
+              alt={`Poster: ${event.title}`}
               className={styles.poster}
               loading="lazy"
               decoding="async"

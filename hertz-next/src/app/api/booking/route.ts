@@ -27,7 +27,7 @@ export async function POST(req: Request) {
     budget: clip(b.budget, 40),
   }
 
-  const subject = `Booking — ${e.bookingType === 'resident' ? e.resident || 'Resident' : 'Hertz format'} · ${name}`
+  const subject = `Booking · ${e.bookingType === 'resident' ? e.resident || 'Resident' : 'Hertz format'} · ${name}`
   const text = [
     `Type: ${e.bookingType || 'n/a'}`,
     ...(e.resident ? [`Resident: ${e.resident}`] : []),
@@ -42,7 +42,7 @@ export async function POST(req: Request) {
     '',
     message,
     '',
-    `— ${new Date().toISOString()}`,
+    `${new Date().toISOString()}`,
   ].join('\n')
 
   try {

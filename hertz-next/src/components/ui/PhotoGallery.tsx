@@ -87,10 +87,10 @@ export default function PhotoGallery({
             onClick={() => {
               if (!drag.current.moved) setOpen(i)
             }}
-            aria-label={`Open ${label} — frame ${i + 1}`}
+            aria-label={`Open ${label}, frame ${i + 1}`}
           >
             <span className={styles.frame}>
-              <img src={src} alt={`${label} — frame ${i + 1}`} loading="lazy" draggable={false} />
+              <img src={src} alt={`${label}, frame ${i + 1}`} loading="lazy" draggable={false} />
               <span className="hz-scanlines" aria-hidden="true" />
               <span className="hz-scanband" aria-hidden="true" />
               <span className={styles.grain} aria-hidden="true" />
@@ -128,11 +128,11 @@ export default function PhotoGallery({
             onClick={close}
             role="dialog"
             aria-modal="true"
-            aria-label={`${label} — gallery`}
+            aria-label={`${label}, gallery`}
           >
             <div className={`${styles.lbBar} hz-mono`}>
               <span>
-                {label} — {String(open + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
+                {label} · {String(open + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
               </span>
               <button type="button" className={styles.lbClose} onClick={close} aria-label="Close">
                 Close ✕
@@ -159,7 +159,7 @@ export default function PhotoGallery({
               transition={{ duration: 0.32, ease: EASE }}
               onClick={(e) => e.stopPropagation()}
             >
-              <img src={photos[open]} alt={`${label} — frame ${open + 1}`} draggable={false} />
+              <img src={photos[open]} alt={`${label}, frame ${open + 1}`} draggable={false} />
               <span className={`${styles.lbCap} hz-mono`}>{caption}</span>
             </motion.div>
 

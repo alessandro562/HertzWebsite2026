@@ -69,8 +69,8 @@ export default function Header() {
       style={{ viewTransitionName: 'site-header' }}
     >
       <div className={styles.inner}>
-        <Link href="/" className={styles.logo} aria-label="HERTZ — home">
-          <HertzLogo size={40} title="Hertz — home" />
+        <Link href="/" className={styles.logo} aria-label="HERTZ, home">
+          <HertzLogo size={40} title="Hertz, home" />
         </Link>
 
         <nav className={styles.nav} aria-label="Navigazione primaria">

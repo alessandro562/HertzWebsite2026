@@ -16,9 +16,9 @@ export async function POST(req: Request) {
   if (!isEmail(email)) return Response.json({ ok: false, error: 'Invalid email' }, { status: 400 })
   if (message.length < 10) return Response.json({ ok: false, error: 'Message too short' }, { status: 400 })
 
-  const text = `Name: ${name}\nEmail: ${email}\n\n${message}\n\n— ${new Date().toISOString()}`
+  const text = `Name: ${name}\nEmail: ${email}\n\n${message}\n\n${new Date().toISOString()}`
   try {
-    await notify({ subject: `Contact — ${name}`, text, replyTo: email })
+    await notify({ subject: `Contact · ${name}`, text, replyTo: email })
   } catch {
     return Response.json({ ok: false, error: 'Could not send the message. Please try again.' }, { status: 502 })
   }

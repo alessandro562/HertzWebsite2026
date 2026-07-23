@@ -29,7 +29,7 @@ export async function generateMetadata({
   if (!a) return {}
   return {
     title: a.name,
-    description: `${a.name} — ${a.role}. ${a.bio[0] ?? ''}`.trim(),
+    description: `${a.name}, ${a.role}. ${a.bio[0] ?? ''}`.trim(),
     alternates: { canonical: `/artists/${slug}` },
     openGraph: { images: [{ url: a.portrait }] },
   }
@@ -162,7 +162,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           {a.social.spotify && (
             <p className={styles.listenSpotify}>
               <a href={a.social.spotify} target="_blank" rel="noreferrer">
-                Spotify — original productions, out on label <Arrow />
+                Spotify: original productions, out on label <Arrow />
               </a>
             </p>
           )}
@@ -236,7 +236,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
             </Button>
           )}
         </div>
-        <p className={`${styles.bookMeta} hz-mono`}>Bologna · IT — worldwide</p>
+        <p className={`${styles.bookMeta} hz-mono`}>Bologna · IT · worldwide</p>
       </Section>
 
       {/* ── 7 · next resident (ink) ── */}

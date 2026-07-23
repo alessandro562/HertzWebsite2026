@@ -13,7 +13,7 @@ import styles from './TicketModule.module.css'
 type TicketState = 'on-sale' | 'soon' | 'sold-out' | 'external' | 'archive'
 
 const CONFIG: Record<TicketState, { label: string; glyph: ReactNode; note: string; wave: 'active' | 'idle' | 'disabled' | 'loading' }> = {
-  'on-sale': { label: 'On sale', glyph: '●', note: 'Reserve by email — we confirm shortly.', wave: 'active' },
+  'on-sale': { label: 'On sale', glyph: '●', note: 'Reserve by email. We confirm shortly.', wave: 'active' },
   soon: { label: 'Coming soon', glyph: '○', note: 'Line-up & tickets announced soon.', wave: 'loading' },
   'sold-out': { label: 'Sold out', glyph: '✕', note: 'No tickets available for this date.', wave: 'disabled' },
   external: { label: 'On sale', glyph: <Arrow />, note: 'Tickets on the venue’s platform.', wave: 'active' },
