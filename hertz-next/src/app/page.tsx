@@ -213,7 +213,7 @@ export default function Home() {
             </p>
             <SignatureTitle as="h2" className={styles.artistsTitle} stagger={0.09}>
               <span>The</span>
-              <span>Family.</span>
+              <span>collective.</span>
             </SignatureTitle>
           </div>
           <p className={styles.artistsHint}>Select an artist →</p>
@@ -300,8 +300,7 @@ export default function Home() {
               06 / Archive
             </p>
             <SignatureTitle as="h2" className={styles.archiveTitle} stagger={0.1}>
-              <span>Nights on</span>
-              <span>record.</span>
+              <span>Rewind.</span>
             </SignatureTitle>
           </div>
           <p className={styles.archiveIntro}>

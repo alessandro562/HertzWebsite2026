@@ -20,7 +20,7 @@ export default function ArtistsPage() {
       <Section surface="cold-blue" space="lg">
         <PageHeader
           index="03"
-          kicker="The family"
+          kicker="The collective"
           title="On the same frequency."
           intro={<p className="hz-mono">Resident roster · Bologna · Keep the groove</p>}
           aside={<p className="hz-mono">{ROSTER.length} residents</p>}

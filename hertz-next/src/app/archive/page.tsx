@@ -203,7 +203,7 @@ export default function ArchivePage() {
 
       {/* ── nights on record (past events, dati reali) ── */}
       <Section surface="white" space="lg" id="nights">
-        <SectionLabel index="C" kicker="Archive" title="Nights on record." />
+        <SectionLabel index="C" kicker="Archive" title="Rewind." />
         {featured && featuredPhotos.length > 0 && (
           <div className={styles.featured}>
             <PrintInterruption

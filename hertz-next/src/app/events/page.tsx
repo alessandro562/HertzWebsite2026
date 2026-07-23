@@ -102,7 +102,7 @@ export default function EventsPage() {
       <Section surface="paper" space="lg">
         <div className={styles.archiveHead}>
           <p className={`${styles.introKicker} hz-mono`}>02 / Archive</p>
-          <h2 className={styles.archiveTitle}>Nights on record.</h2>
+          <h2 className={styles.archiveTitle}>Rewind.</h2>
           <span className={`${styles.archiveCount} hz-mono`}>
             Past transmissions · {pastYears.join('–')} · {pastRange}
           </span>
