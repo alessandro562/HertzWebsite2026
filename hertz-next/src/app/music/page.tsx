@@ -22,8 +22,6 @@ const ROSTER = Object.values(ARTISTS)
   .sort((a, b) => a.n.localeCompare(b.n))
   .filter((a) => a.mixes.length > 0)
 
-const TOTAL = ROSTER.reduce((n, a) => n + a.mixes.length, 0)
-
 /* featured: il primo mix reale marcato "Featured" nel content layer (nessuna invenzione) */
 const FEATURED = ROSTER.map((a) => {
   const mix = a.mixes.find((m) => m.tag === 'Featured')
@@ -96,19 +94,6 @@ export default function MusicPage() {
         </Section>
       ))}
 
-      <Section surface="signal" space="lg">
-        <div className={styles.follow}>
-          <div>
-            <p className="hz-mono" style={{ color: 'var(--hz-ink-mute)', marginBottom: 'var(--hz-space-sm)' }}>
-              {TOTAL} mixes · {ROSTER.length} residents
-            </p>
-            <h2 className={styles.followTitle}>Follow the frequency.</h2>
-          </div>
-          <Button href={SITE.soundcloud} external arrow>
-            {SITE.soundcloudHandle}
-          </Button>
-        </div>
-      </Section>
     </main>
   )
 }

@@ -85,9 +85,9 @@
   --hz-space-lg:  4rem;
   --hz-space-xl:  8rem;
 
-  --hz-section-sm: clamp(64px, 8vw, 110px);
-  --hz-section-md: clamp(96px, 11vw, 170px);
-  --hz-section-lg: clamp(130px, 15vw, 240px);
+  --hz-section-sm: clamp(40px, 4.5vw, 64px);
+  --hz-section-md: clamp(52px, 6vw, 92px);
+  --hz-section-lg: clamp(68px, 8vw, 120px);
 
   /* ── 6 · GRID / LAYOUT ── */
   --hz-cols: 4;                                   /* mobile default; tablet/desktop sovrascritti */
