@@ -12,10 +12,13 @@
   height: 100%;
 }
 
+/* campo di PUNTI (non una rete): "l.1 0" + linecap round = punto pieno.
+   Su fondo bianco: punti freddi discreti che ondeggiano attorno al cursore. */
 .path {
   fill: none;
-  stroke: var(--hz-ink);
-  stroke-width: 1;
-  opacity: 0.15;
+  stroke: var(--hz-cold, #50778a);
+  stroke-width: 3.4;
+  stroke-linecap: round;
+  opacity: 0.32;
   vector-effect: non-scaling-stroke;
 }

@@ -31,7 +31,7 @@ export default function HeroKinetic({ next }: { next?: NextEvent }) {
   const ticketsHref = next ? `/events/${next.slug}` : '/events'
 
   return (
-    <section ref={root} data-surface="signal" className={styles.hero} id="top">
+    <section ref={root} data-surface="white" className={styles.hero} id="top">
       <HeroSignalGrid className={styles.grid} />
 
       <div className={styles.stage}>

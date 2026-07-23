@@ -36,8 +36,6 @@ export default function HeroSignalGrid({
 
     let W = 0
     let H = 0
-    const COLS = 12
-    const ROWS = 7
     let raf = 0
     let running = false
     let start = 0
@@ -73,32 +71,25 @@ export default function HeroSignalGrid({
       return band + ptr + scr
     }
 
+    // spaziatura del campo di punti (non una "rete": punti sparsi che ondeggiano)
+    const stepX = () => Math.max(38, W / 34)
+    const stepY = () => Math.max(38, H / 15)
+
     function build(t: number) {
-      const AX = W * 0.045 // ampiezza max spostamento colonne (X)
-      const AY = H * 0.05 // ampiezza max spostamento righe (Y)
-      const colW = W / COLS
-      const rowH = H / ROWS
-      const stepY = Math.max(20, H / 14)
+      const AX = W * 0.05 // ampiezza spostamento X del punto
+      const AY = H * 0.055 // ampiezza spostamento Y
+      const sx = stepX()
+      const sy = stepY()
       let d = ''
-      // colonne verticali (flettono in X dove il campo è attivo)
-      for (let i = 0; i <= COLS; i++) {
-        const x0 = i * colW
-        let seg = `M${x0.toFixed(1)},0 `
-        for (let y = stepY; y <= H; y += stepY) {
-          const x = x0 + disp(x0, y, t) * AX
-          seg += `L${x.toFixed(1)},${y.toFixed(1)} `
+      // matrice di punti: ogni punto scivola secondo il campo (bump attorno al cursore)
+      for (let x = sx / 2; x <= W; x += sx) {
+        for (let y = sy / 2; y <= H; y += sy) {
+          const f = disp(x, y, t)
+          const dx = x + f * AX
+          const dy = y + f * AY
+          // "l.1 0" = segmento nullo → con linecap round è un punto pieno
+          d += `M${dx.toFixed(1)},${dy.toFixed(1)}l.1 0`
         }
-        d += seg
-      }
-      // righe orizzontali (flettono in Y)
-      for (let j = 0; j <= ROWS; j++) {
-        const y0 = j * rowH
-        let seg = `M0,${y0.toFixed(1)} `
-        for (let x = 26; x <= W; x += 26) {
-          const y = y0 + disp(x, y0, t) * AY
-          seg += `L${x.toFixed(1)},${y.toFixed(1)} `
-        }
-        d += seg
       }
       path.setAttribute('d', d)
 
@@ -107,17 +98,14 @@ export default function HeroSignalGrid({
     }
 
     function buildStatic() {
-      // griglia rigorosamente dritta (nessuna deformazione)
-      const colW = W / COLS
-      const rowH = H / ROWS
+      // campo di punti perfettamente regolare (nessuna deformazione)
+      const sx = stepX()
+      const sy = stepY()
       let d = ''
-      for (let i = 0; i <= COLS; i++) {
-        const x = (i * colW).toFixed(1)
-        d += `M${x},0 L${x},${H.toFixed(1)} `
-      }
-      for (let j = 0; j <= ROWS; j++) {
-        const y = (j * rowH).toFixed(1)
-        d += `M0,${y} L${W.toFixed(1)},${y} `
+      for (let x = sx / 2; x <= W; x += sx) {
+        for (let y = sy / 2; y <= H; y += sy) {
+          d += `M${x.toFixed(1)},${y.toFixed(1)}l.1 0`
+        }
       }
       path.setAttribute('d', d)
     }
