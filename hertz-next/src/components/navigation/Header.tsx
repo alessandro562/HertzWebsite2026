@@ -3,7 +3,9 @@
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { NAV_ITEMS } from './nav-items'
+import { SITE } from '@/lib/site'
 import WaveformPulse from '@/motion/WaveformPulse'
+import Arrow from '@/components/ui/Arrow'
 import HertzLogo from '@/components/ui/HertzLogo'
 import styles from './Header.module.css'
 
@@ -119,9 +121,20 @@ export default function Header() {
             className={styles.menuTickets}
             onClick={() => setOpen(false)}
           >
-            Bookings ↗
+            Bookings <Arrow />
           </Link>
         </nav>
+        <div className={styles.menuConnect}>
+          <a href={`mailto:${SITE.email}`} className={styles.menuConnectLink}>
+            {SITE.email}
+          </a>
+          <a href={SITE.instagram} target="_blank" rel="noreferrer" className={styles.menuConnectLink}>
+            Instagram <Arrow />
+          </a>
+          <a href={SITE.soundcloud} target="_blank" rel="noreferrer" className={styles.menuConnectLink}>
+            SoundCloud <Arrow />
+          </a>
+        </div>
       </div>
     </header>
   )

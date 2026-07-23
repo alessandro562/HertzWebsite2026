@@ -67,7 +67,7 @@ export default function ReserveForm({ item = 'Lanyard · Drop 01' }: { item?: st
         <textarea className={styles.textarea} name="note" maxLength={600} placeholder="Anything we should know?" />
       </label>
       <button className={styles.submit} type="submit" disabled={state === 'sending'}>
-        {state === 'sending' ? 'Sending…' : 'Reserve ↗'}
+        {state === 'sending' ? 'Sending…' : 'Reserve'}
       </button>
       {state === 'error' && (
         <p className={styles.error} role="alert">

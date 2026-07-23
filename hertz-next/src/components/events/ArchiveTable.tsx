@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link'
 import { type HertzEvent, dowDate, eventSlug, eventYear } from '@/content/events'
+import Arrow from '@/components/ui/Arrow'
 import styles from './ArchiveTable.module.css'
 
 /**
@@ -32,7 +33,7 @@ export default function ArchiveTable({ events }: { events: HertzEvent[] }) {
           <span className={`${styles.date} hz-mono`}>{dowDate(e)}</span>
           <span className={`${styles.year} hz-mono`}>{eventYear(e)}</span>
           <span className={styles.arrow} aria-hidden="true">
-            ↗
+            <Arrow />
           </span>
         </Link>
       ))}

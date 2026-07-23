@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { type HertzEvent, dowDate, eventSlug, isPast } from '@/content/events'
 import StatusBadge, { type Status } from '@/components/ui/StatusBadge'
+import Arrow from '@/components/ui/Arrow'
 import ViewMorph from '@/motion/ViewMorph'
 import styles from './EventRow.module.css'
 
@@ -28,7 +29,7 @@ export default function EventRow({ event }: { event: HertzEvent }) {
         {event.badge && <span className={`${styles.badge} hz-mono`}>{event.badge}</span>}
         <StatusBadge status={status} />
         <span className={styles.arrow} aria-hidden="true">
-          ↗
+          <Arrow />
         </span>
       </span>
       {event.poster && (

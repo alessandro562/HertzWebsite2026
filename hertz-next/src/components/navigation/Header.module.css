@@ -18,7 +18,7 @@
 }
 /* backdrop leggero surface-matched SOLO dopo lo scroll — no glassmorphism */
 .header[data-scrolled='true'] {
-  background-color: color-mix(in srgb, var(--hz-bg) 90%, transparent);
+  background-color: color-mix(in srgb, var(--hz-bg) 96%, transparent);
   border-bottom-color: var(--hz-line);
 }
 @supports not (background: color-mix(in srgb, white, black)) {
@@ -117,9 +117,10 @@
   position: fixed;
   inset: 0;
   z-index: var(--hz-z-overlay);
-  padding: calc(64px + var(--hz-space-lg)) var(--hz-gutter) var(--hz-space-lg);
+  padding: calc(64px + var(--hz-space-md)) var(--hz-gutter) var(--hz-space-lg);
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 }
 .menu[hidden] {
   display: none;
@@ -128,8 +129,30 @@
 .menuNav {
   display: flex;
   flex-direction: column;
-  gap: var(--hz-space-xs);
+  gap: var(--hz-space-2xs);
+}
+
+/* blocco contatti in fondo — riempie lo spazio del menu full-screen */
+.menuConnect {
   margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--hz-space-sm) var(--hz-space-lg);
+  padding-top: var(--hz-space-lg);
+  border-top: 1px solid var(--hz-line);
+}
+.menuConnectLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-family: var(--hz-font-mono);
+  font-size: var(--hz-t-ui);
+  letter-spacing: 0.02em;
+  color: var(--hz-ink-mute);
+  transition: color var(--hz-fast) var(--hz-ease-out);
+}
+.menuConnectLink:hover {
+  color: var(--hz-ink);
 }
 
 .menuLink,

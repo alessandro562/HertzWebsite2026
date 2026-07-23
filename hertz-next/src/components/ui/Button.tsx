@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { ReactNode } from 'react'
+import Arrow from './Arrow'
 import styles from './Button.module.css'
 
 type Variant = 'solid' | 'ghost' | 'text'
@@ -32,7 +33,7 @@ export default function Button({
       <span>{children}</span>
       {arrow && (
         <span className={styles.arrow} aria-hidden="true">
-          ↗
+          <Arrow />
         </span>
       )}
     </>

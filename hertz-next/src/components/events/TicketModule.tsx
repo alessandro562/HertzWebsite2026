@@ -1,5 +1,7 @@
+import type { ReactNode } from 'react'
 import Button from '@/components/ui/Button'
 import WaveformPulse from '@/motion/WaveformPulse'
+import Arrow from '@/components/ui/Arrow'
 import styles from './TicketModule.module.css'
 
 /**
@@ -10,11 +12,11 @@ import styles from './TicketModule.module.css'
  */
 type TicketState = 'on-sale' | 'soon' | 'sold-out' | 'external' | 'archive'
 
-const CONFIG: Record<TicketState, { label: string; glyph: string; note: string; wave: 'active' | 'idle' | 'disabled' | 'loading' }> = {
+const CONFIG: Record<TicketState, { label: string; glyph: ReactNode; note: string; wave: 'active' | 'idle' | 'disabled' | 'loading' }> = {
   'on-sale': { label: 'On sale', glyph: '●', note: 'Reserve by email — we confirm shortly.', wave: 'active' },
   soon: { label: 'Coming soon', glyph: '○', note: 'Line-up & tickets announced soon.', wave: 'loading' },
   'sold-out': { label: 'Sold out', glyph: '✕', note: 'No tickets available for this date.', wave: 'disabled' },
-  external: { label: 'On sale', glyph: '↗', note: 'Tickets on the venue’s platform.', wave: 'active' },
+  external: { label: 'On sale', glyph: <Arrow />, note: 'Tickets on the venue’s platform.', wave: 'active' },
   archive: { label: 'Past event', glyph: '—', note: 'This night is in the archive.', wave: 'idle' },
 }
 

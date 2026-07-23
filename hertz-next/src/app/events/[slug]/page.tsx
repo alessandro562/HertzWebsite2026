@@ -253,7 +253,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
           <SectionLabel
             kicker="Gallery"
             title="From the night."
-            link={{ href: '/archive', label: `${gallery.length} frames ↗` }}
+            link={{ href: '/archive', label: `${gallery.length} frames` }}
           />
           <PhotoGallery photos={gallery} label={e.title} caption={`${e.venue} · ${e.city}`} />
         </Section>

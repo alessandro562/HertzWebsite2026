@@ -5,6 +5,7 @@ import Section from '@/components/ui/Section'
 import PageHeader from '@/components/ui/PageHeader'
 import SectionLabel from '@/components/ui/SectionLabel'
 import ImageFrame from '@/components/ui/ImageFrame'
+import Arrow from '@/components/ui/Arrow'
 import BookingForm from '@/components/forms/BookingForm'
 import { ARTISTS } from '@/content/artists'
 import { SITE } from '@/lib/site'
@@ -54,7 +55,7 @@ export default function BookingsPage() {
           }
           aside={
             <a href={`mailto:${SITE.email}`} className={`${styles.email} hz-mono`}>
-              {SITE.email} ↗
+              {SITE.email} <Arrow />
             </a>
           }
         />
@@ -129,10 +130,10 @@ export default function BookingsPage() {
                 Prefer email?
               </span>
               <a href={`mailto:${SITE.email}`} className={styles.directMail}>
-                {SITE.email} ↗
+                {SITE.email} <Arrow />
               </a>
               <a href={SITE.instagram} target="_blank" rel="noreferrer" className={styles.directMail}>
-                Instagram {SITE.instagramHandle} ↗
+                Instagram {SITE.instagramHandle} <Arrow />
               </a>
             </div>
           </aside>

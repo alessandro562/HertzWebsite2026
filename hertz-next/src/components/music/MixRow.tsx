@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import type { Mix } from '@/content/artists'
 import WaveformPulse from '@/motion/WaveformPulse'
+import Arrow from '@/components/ui/Arrow'
 import styles from './MixRow.module.css'
 
 /** Riga mix → SoundCloud (nuova scheda). Play on-action, nessun autoplay.
@@ -39,7 +40,7 @@ export default function MixRow({
       </span>
       <span className={`${styles.tag} hz-mono`}>{mix.tag ?? 'Mix'}</span>
       <span className={styles.arrow} aria-hidden="true">
-        ↗
+        <Arrow />
       </span>
     </a>
   )

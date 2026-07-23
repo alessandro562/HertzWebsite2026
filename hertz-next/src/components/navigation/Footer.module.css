@@ -35,8 +35,8 @@
 .grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--hz-space-lg) var(--hz-space-md);
-  margin-block: var(--hz-space-lg);
+  gap: var(--hz-space-md);
+  margin-block: var(--hz-space-md);
 }
 
 .col {

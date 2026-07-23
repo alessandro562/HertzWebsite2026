@@ -177,7 +177,7 @@ export default function BookingForm() {
       </p>
 
       <button className={styles.submit} type="submit" disabled={state === 'sending'}>
-        {state === 'sending' ? 'Sending…' : 'Send request ↗'}
+        {state === 'sending' ? 'Sending…' : 'Send request'}
       </button>
       {state === 'error' && (
         <p className={styles.error} role="alert">

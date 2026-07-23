@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { NAV_ITEMS } from './nav-items'
 import { SITE } from '@/lib/site'
+import Arrow from '@/components/ui/Arrow'
 import HertzLogo from '@/components/ui/HertzLogo'
 import styles from './Footer.module.css'
 
@@ -37,10 +38,10 @@ export default function Footer() {
               {EMAIL}
             </a>
             <a href={INSTAGRAM} target="_blank" rel="noreferrer" className={styles.fLink}>
-              Instagram ↗
+              Instagram <Arrow />
             </a>
             <a href={SOUNDCLOUD} target="_blank" rel="noreferrer" className={styles.fLink}>
-              SoundCloud ↗
+              SoundCloud <Arrow />
             </a>
             <Link href="/bookings" className={styles.fLink}>
               Booking

@@ -5,6 +5,7 @@ import Section from '@/components/ui/Section'
 import SectionLabel from '@/components/ui/SectionLabel'
 import Button from '@/components/ui/Button'
 import ImageFrame from '@/components/ui/ImageFrame'
+import Arrow from '@/components/ui/Arrow'
 import MixRow from '@/components/music/MixRow'
 import PhotoGallery from '@/components/ui/PhotoGallery'
 import ViewMorph from '@/motion/ViewMorph'
@@ -143,7 +144,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
             title="On record."
             link={
               a.social.soundcloud
-                ? { href: a.social.soundcloud, label: 'SoundCloud ↗', external: true }
+                ? { href: a.social.soundcloud, label: 'SoundCloud', external: true }
                 : undefined
             }
           />
@@ -161,7 +162,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           {a.social.spotify && (
             <p className={styles.listenSpotify}>
               <a href={a.social.spotify} target="_blank" rel="noreferrer">
-                Spotify — original productions, out on label ↗
+                Spotify — original productions, out on label <Arrow />
               </a>
             </p>
           )}
@@ -174,7 +175,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           <SectionLabel
             kicker="Appearances"
             title="Next gigs."
-            link={{ href: '/events', label: 'All events ↗' }}
+            link={{ href: '/events', label: 'All events' }}
           />
           <div className={styles.dateLists}>
             {upcomingDates.length > 0 && (

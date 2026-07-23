@@ -82,7 +82,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
       {related.length > 0 && (
         <Section surface="paper" space="lg">
-          <SectionLabel kicker="Related" title="Keep reading." link={{ href: '/media', label: 'All media ↗' }} />
+          <SectionLabel kicker="Related" title="Keep reading." link={{ href: '/media', label: 'All media' }} />
           <div className={styles.related}>
             {related.map((r) => (
               <ArticleCard key={r.slug} article={r} />

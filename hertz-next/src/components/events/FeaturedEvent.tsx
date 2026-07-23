@@ -3,6 +3,7 @@ import type { CSSProperties } from 'react'
 import Link from 'next/link'
 import { type HertzEvent, dowDate, eventSlug, isPast } from '@/content/events'
 import StatusBadge, { type Status } from '@/components/ui/StatusBadge'
+import Arrow from '@/components/ui/Arrow'
 import FrequencyCut from '@/motion/FrequencyCut'
 import PosterFX from '@/components/ui/PosterFX'
 import PosterFallback from './PosterFallback'
@@ -66,7 +67,7 @@ export default function FeaturedEvent({ event }: { event: HertzEvent }) {
           {event.bill && <p className={styles.bill}>{event.bill}</p>}
 
           <div className={styles.foot}>
-            <span className={styles.cta}>View event ↗</span>
+            <span className={styles.cta}>View event <Arrow /></span>
             <span className={`${styles.footLabel} hz-mono`}>
               {status === 'on-sale' ? 'Guest list open' : status === 'soon' ? 'Line-up soon' : 'Archived'}
             </span>

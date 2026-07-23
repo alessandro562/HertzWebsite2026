@@ -3,6 +3,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
+import Arrow from '@/components/ui/Arrow'
 import styles from './PhotoGallery.module.css'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -103,7 +104,7 @@ export default function PhotoGallery({
               <span className={styles.cap}>
                 <span className={styles.capName}>{label}</span>
                 <span className={`${styles.capMeta} hz-mono`}>{caption}</span>
-                <span className={`${styles.capGo} hz-mono`}>Expand ↗</span>
+                <span className={`${styles.capGo} hz-mono`}>Expand <Arrow /></span>
               </span>
             </span>
           </motion.button>

@@ -5,6 +5,7 @@ import Section from '@/components/ui/Section'
 import PageHeader from '@/components/ui/PageHeader'
 import SectionLabel from '@/components/ui/SectionLabel'
 import ImageFrame from '@/components/ui/ImageFrame'
+import Arrow from '@/components/ui/Arrow'
 import ImageReveal from '@/motion/ImageReveal'
 import PrintInterruption from '@/motion/PrintInterruption'
 import ArchiveExplorer from '@/components/archive/ArchiveExplorer'
@@ -226,7 +227,7 @@ export default function ArchivePage() {
                 <p className={styles.featuredLineup}>{featuredResidents.join(' · ')}</p>
               )}
               <Link href={`/events/${eventSlug(featured)}`} className={styles.featuredLink}>
-                View the night ↗
+                View the night <Arrow />
               </Link>
             </div>
           </div>
@@ -259,7 +260,7 @@ export default function ArchivePage() {
                       N°{e.n} · {shortDate(e)}
                     </span>
                     <span className={styles.galTitle}>{e.title}</span>
-                    <span className={`${styles.galCount} hz-mono`}>{photos.length} frames ↗</span>
+                    <span className={`${styles.galCount} hz-mono`}>{photos.length} frames <Arrow /></span>
                   </div>
                 </Link>
               )

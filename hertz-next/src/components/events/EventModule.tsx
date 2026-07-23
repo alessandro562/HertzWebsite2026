@@ -2,6 +2,7 @@
 import Link from 'next/link'
 import { type HertzEvent, dowDate, eventSlug, isPast } from '@/content/events'
 import StatusBadge, { type Status } from '@/components/ui/StatusBadge'
+import Arrow from '@/components/ui/Arrow'
 import PosterFX from '@/components/ui/PosterFX'
 import PosterFallback from './PosterFallback'
 import styles from './EventModule.module.css'
@@ -38,7 +39,7 @@ export default function EventModule({ event }: { event: HertzEvent }) {
           <StatusBadge status={status} />
         </div>
         <span className={styles.arrow} aria-hidden="true">
-          ↗
+          <Arrow />
         </span>
       </div>
       <div className={styles.meta}>

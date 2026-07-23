@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { AnimatePresence, motion } from 'motion/react'
 import StatusBadge from '@/components/ui/StatusBadge'
+import Arrow from '@/components/ui/Arrow'
 import { useEnableMotion } from '@/motion/useEnableMotion'
 import styles from './ArchiveExplorer.module.css'
 
@@ -94,7 +95,7 @@ export default function ArchiveExplorer({ items, years }: { items: ArchiveItem[]
                 {it.hasGallery && <span className={`${styles.galleryMark} hz-mono`}>{'▦'} gallery</span>}
                 <StatusBadge status="archive" />
                 <span className={styles.arrow} aria-hidden="true">
-                  ↗
+                  <Arrow />
                 </span>
               </Link>
             </motion.div>

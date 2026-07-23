@@ -2,18 +2,17 @@
 import Link from 'next/link'
 import Section from '@/components/ui/Section'
 import PosterFX from '@/components/ui/PosterFX'
+import Arrow from '@/components/ui/Arrow'
 import HomeHero from '@/components/home/HomeHero'
 import HeroKinetic from '@/components/home/HeroKinetic'
 import KineticBand from '@/components/home/KineticBand'
 import BrandIdentity from '@/components/home/BrandIdentity'
 import Partners from '@/components/home/Partners'
-import MerchWaitlist from '@/components/home/MerchWaitlist'
 import Reveal, { Stagger, StaggerItem } from '@/motion/Reveal'
 import SignatureTitle from '@/motion/SignatureTitle'
 import MaskImage from '@/motion/MaskImage'
 import { upcoming, dowDate, eventSlug, type ResidentSlug } from '@/content/events'
 import { ARTISTS } from '@/content/artists'
-import { ARTICLES } from '@/content/media'
 import styles from './home.module.css'
 
 const ROSTER: ResidentSlug[] = [
@@ -117,7 +116,7 @@ export default function Home() {
           <span className={`${styles.secKicker} hz-mono`}>01 / Events</span>
           <h2 className={styles.secTitle}>Next gigs.</h2>
           <Link href="/events" className={styles.secLink}>
-            Full calendar ↗
+            Full calendar <Arrow />
           </Link>
         </Reveal>
         <div className={styles.eventsLayout}>
@@ -139,7 +138,7 @@ export default function Home() {
                       {e.onSale ? 'On sale' : 'Soon'}
                     </span>
                     <span className={styles.eRowArrow} aria-hidden="true">
-                      ↗
+                      <Arrow />
                     </span>
                   </span>
                 </Link>
@@ -148,7 +147,7 @@ export default function Home() {
             <StaggerItem variant="up">
               <Link href="/archive" className={styles.pastLink}>
                 <span>Past events</span>
-                <span>Archive ↗</span>
+                <span>Archive <Arrow /></span>
               </Link>
             </StaggerItem>
           </Stagger>
@@ -194,7 +193,7 @@ export default function Home() {
                 roll for nine minutes before anyone checks the time. The rest is just volume.
               </p>
               <Link href="/about" className={`${styles.btn} ${styles.btnGhost} ${styles.manifestoLink}`}>
-                Read the manifesto ↗
+                Read the manifesto <Arrow />
               </Link>
             </Reveal>
           </div>
@@ -228,7 +227,7 @@ export default function Home() {
                   <span className={styles.aName}>{a.name}</span>
                   <span className={styles.aRole}>{a.role}</span>
                   <span className={styles.aArrow} aria-hidden="true">
-                    ↗
+                    <Arrow />
                   </span>
                 </Link>
               </StaggerItem>
@@ -248,7 +247,7 @@ export default function Home() {
             rel="noreferrer"
             className={styles.secLink}
           >
-            SoundCloud ↗
+            SoundCloud <Arrow />
           </a>
         </Reveal>
         <Stagger className={styles.mixList} gap={0.06}>
@@ -265,39 +264,12 @@ export default function Home() {
         </Stagger>
       </Section>
 
-      {/* ═══ 06 · MEDIA (white) ═══ */}
-      <Section surface="white" space="lg" id="media">
-        <Reveal variant="up" className={styles.secHead}>
-          <span className={`${styles.secKicker} hz-mono`}>05 / Media</span>
-          <h2 className={styles.secTitle}>Clubbing culture.</h2>
-          <Link href="/media" className={styles.secLink}>
-            All media ↗
-          </Link>
-        </Reveal>
-        <Stagger className={styles.mediaGrid} gap={0.1}>
-          {ARTICLES.map((a, i) => (
-            <StaggerItem key={a.slug} variant="blur" className={i === 0 ? styles.mediaLead : undefined}>
-              <Link href={`/media/${a.slug}`} className={styles.mediaCard}>
-                <div className={styles.mcImg}>
-                  <img src={a.heroImage} alt={a.heroImageAlt} loading="lazy" />
-                </div>
-                <span className={styles.mcRubric}>{a.rubric}</span>
-                <span className={styles.mcTitle}>{a.title}</span>
-                <span className={styles.mcMeta}>
-                  {a.author} · {a.readingTimeMinutes} min
-                </span>
-              </Link>
-            </StaggerItem>
-          ))}
-        </Stagger>
-      </Section>
-
-      {/* ═══ 07 · ARCHIVE (white) ═══ */}
+      {/* ═══ 05 · ARCHIVE (white) ═══ */}
       <Section surface="white" space="lg" id="archive">
         <div className={styles.archiveHead}>
           <div>
             <p className="hz-mono" style={{ color: 'var(--hz-ink-mute)', marginBottom: 'var(--hz-space-sm)' }}>
-              06 / Archive
+              05 / Archive
             </p>
             <SignatureTitle as="h2" className={styles.archiveTitle} stagger={0.1}>
               <span>Rewind.</span>
@@ -329,60 +301,36 @@ export default function Home() {
             className={`${styles.btn} ${styles.btnGhost}`}
             style={{ marginTop: 'var(--hz-space-lg)', display: 'inline-flex' }}
           >
-            Open archive ↗
+            Open archive <Arrow />
           </Link>
         </Reveal>
       </Section>
 
-      {/* ═══ 08 · SHOP (paper) ═══ */}
-      <Section surface="paper" space="lg" id="shop">
-        <Reveal variant="up" className={styles.secHead}>
-          <span className={`${styles.secKicker} hz-mono`}>07 / Shop</span>
-          <h2 className={styles.secTitle}>Clubber apparel.</h2>
-          <Link href="/shop" className={styles.secLink}>
-            Visit shop ↗
-          </Link>
-        </Reveal>
-        <Reveal variant="up" delay={0.1} className={styles.shopCard}>
-          <div className={styles.shopVisual}>
-            <img src="/assets/merch-lanyard-drop01.png" alt="Hertz lanyard, Drop 01" loading="lazy" />
-            <span className={`${styles.shopBadge} ${styles.status} ${styles.statusSoon}`}>
-              Coming soon
-            </span>
-          </div>
-          <div>
-            <h3 className={styles.shopTitle}>Drop 01 — Lanyard</h3>
-            <p className={styles.shopDesc}>
-              Woven nylon, 5 cm, black. 200 pieces per drop, numbered 001–200, ships from
-              Bologna. Reserve by email; we confirm shortly.
-            </p>
-            <div className={styles.shopSpecs}>
-              <span>001 / 200</span>
-              <span>Woven nylon</span>
-              <span>Black · 5 cm</span>
-            </div>
-            <div className={styles.shopCats}>
-              <span className={styles.shopCat}>Apparel · soon</span>
-              <span className={styles.shopCat}>Outerwear · soon</span>
-              <span className={styles.shopCat}>Headwear · soon</span>
-            </div>
-            <Link
-              href="/shop"
-              className={`${styles.btn} ${styles.btnSolid}`}
-              style={{ marginTop: 'var(--hz-space-md)' }}
-            >
-              Reserve ↗
+      {/* ═══ 06 · MORE (paper) — clubber apparel + clubbing culture: link alle pagine ═══ */}
+      <Section surface="paper" space="md" id="more">
+        <Stagger className={styles.moreGrid} gap={0.08}>
+          <StaggerItem variant="up">
+            <Link href="/shop" className={styles.moreCard}>
+              <span className={`${styles.moreKicker} hz-mono`}>Shop</span>
+              <span className={styles.moreTitle}>Clubber apparel.</span>
+              <span className={styles.moreMeta}>
+                Small numbered drops, made for the floor <Arrow />
+              </span>
             </Link>
-          </div>
-        </Reveal>
-        <div style={{ marginTop: 'var(--hz-space-xl)' }}>
-          <Reveal variant="up" delay={0.15}>
-            <MerchWaitlist />
-          </Reveal>
-        </div>
+          </StaggerItem>
+          <StaggerItem variant="up">
+            <Link href="/media" className={styles.moreCard}>
+              <span className={`${styles.moreKicker} hz-mono`}>Media</span>
+              <span className={styles.moreTitle}>Clubbing culture.</span>
+              <span className={styles.moreMeta}>
+                Reportage and reading, written from the floor <Arrow />
+              </span>
+            </Link>
+          </StaggerItem>
+        </Stagger>
       </Section>
 
-      {/* ═══ 08b · IN COLLABORATION WITH (white) ═══ */}
+      {/* ═══ 06b · IN COLLABORATION WITH (white) ═══ */}
       <Section surface="white" space="md" id="partners">
         <Reveal variant="up">
           <Partners />

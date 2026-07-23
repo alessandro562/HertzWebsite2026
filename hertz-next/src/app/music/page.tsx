@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Section from '@/components/ui/Section'
 import Button from '@/components/ui/Button'
+import Arrow from '@/components/ui/Arrow'
 import MixRow from '@/components/music/MixRow'
 import { ARTISTS } from '@/content/artists'
 import { SITE } from '@/lib/site'
@@ -45,7 +46,7 @@ export default function MusicPage() {
                 aria-label={`SoundCloud — ${TOTAL} sets`}
               >
                 <img src={SC_LOGO} alt="SoundCloud" className={styles.chipLogo} />
-                <span className={`${styles.chipMeta} hz-mono`}>{TOTAL} sets ↗</span>
+                <span className={`${styles.chipMeta} hz-mono`}>{TOTAL} sets <Arrow /></span>
               </a>
               <a href="#spotify" className={styles.chip} aria-label={`Spotify — ${ON_SPOTIFY.length} residents`}>
                 <img src={SP_LOGO} alt="Spotify" className={styles.chipLogo} />
@@ -75,7 +76,7 @@ export default function MusicPage() {
               <div className={styles.groupHead}>
                 <h3 className={styles.groupName}>{a.name}</h3>
                 <Link href={`/artists/${a.slug}`} className={styles.groupLink}>
-                  Profile ↗
+                  Profile <Arrow />
                 </Link>
               </div>
               <div className={styles.groupMixes}>
@@ -110,7 +111,7 @@ export default function MusicPage() {
                 </span>
                 <div className={styles.spotifyMeta}>
                   <span className={styles.spotifyName}>{a.name}</span>
-                  <span className={`${styles.spotifyGo} hz-mono`}>Open on Spotify ↗</span>
+                  <span className={`${styles.spotifyGo} hz-mono`}>Open on Spotify <Arrow /></span>
                 </div>
               </a>
             ))}
