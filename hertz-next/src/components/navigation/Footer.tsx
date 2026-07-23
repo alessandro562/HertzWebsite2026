@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { NAV_ITEMS } from './nav-items'
 import { SITE } from '@/lib/site'
+import HertzLogo from '@/components/ui/HertzLogo'
 import styles from './Footer.module.css'
 
 const EMAIL = SITE.email
@@ -19,9 +20,7 @@ export default function Footer() {
           <p className={styles.statement}>
             See you<br />on the floor.
           </p>
-          <span className={styles.logo} aria-hidden="true">
-            hertz
-          </span>
+          <HertzLogo size={72} className={styles.logo} title="Hertz Clubbing Collective" />
         </div>
 
         <div className={styles.grid}>

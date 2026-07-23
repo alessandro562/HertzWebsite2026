@@ -45,37 +45,39 @@ export default function HeroKinetic({ next }: { next?: NextEvent }) {
           <span className="hz-mono">44.49° N / 11.34° E</span>
         </motion.div>
 
-        <h1 className={styles.type} aria-label="Hertz — Clubbing Collective, Bologna">
-          <motion.span
-            className={`${styles.word} ${styles.clubbing}`}
-            style={enabled ? { x: xClub } : undefined}
-            initial={{ opacity: 0, y: '18%' }}
-            animate={{ opacity: 1, y: '0%' }}
-            transition={{ duration: 0.9, delay: 0.1, ease }}
-          >
-            Clubbing
-          </motion.span>
-          <motion.span
-            className={`${styles.word} ${styles.collective}`}
-            style={enabled ? { x: xColl } : undefined}
-            initial={{ opacity: 0, y: '18%' }}
-            animate={{ opacity: 1, y: '0%' }}
-            transition={{ duration: 0.9, delay: 0.22, ease }}
-          >
-            Collective
-          </motion.span>
+        <div className={styles.type}>
+          <h1 className={styles.words} aria-label="Hertz — Clubbing Collective, Bologna">
+            <motion.span
+              className={`${styles.word} ${styles.clubbing}`}
+              style={enabled ? { x: xClub } : undefined}
+              initial={{ opacity: 0, y: '18%' }}
+              animate={{ opacity: 1, y: '0%' }}
+              transition={{ duration: 0.9, delay: 0.1, ease }}
+            >
+              Clubbing
+            </motion.span>
+            <motion.span
+              className={`${styles.word} ${styles.collective}`}
+              style={enabled ? { x: xColl } : undefined}
+              initial={{ opacity: 0, y: '18%' }}
+              animate={{ opacity: 1, y: '0%' }}
+              transition={{ duration: 0.9, delay: 0.22, ease }}
+            >
+              Collective
+            </motion.span>
+          </h1>
 
-          <motion.div
-            className={styles.logoLine}
+          <motion.p
+            className={styles.tagline}
             style={enabled ? { x: xLogo } : undefined}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.5, ease }}
           >
-            <span className={styles.logo}>hertz</span>
-            <span className={styles.logoTail}>— from clubbers, for clubbers</span>
-          </motion.div>
-        </h1>
+            <span className={styles.tagThin}>Keep the</span>{' '}
+            <span className={styles.tagBold}>groove.</span>
+          </motion.p>
+        </div>
 
         <motion.div className={styles.foot} style={enabled ? { opacity: fade } : undefined}>
           {next && (

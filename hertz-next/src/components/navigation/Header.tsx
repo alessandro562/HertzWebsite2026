@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { NAV_ITEMS } from './nav-items'
 import WaveformPulse from '@/motion/WaveformPulse'
+import HertzLogo from '@/components/ui/HertzLogo'
 import styles from './Header.module.css'
 
 /**
@@ -67,7 +68,7 @@ export default function Header() {
     >
       <div className={styles.inner}>
         <Link href="/" className={styles.logo} aria-label="HERTZ — home">
-          hertz
+          <HertzLogo size={40} title="Hertz — home" />
         </Link>
 
         <nav className={styles.nav} aria-label="Navigazione primaria">
