@@ -11,12 +11,33 @@
   border-bottom: 1px solid var(--hz-line);
 }
 
+.lead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--hz-space-md);
+}
 .statement {
   font-family: var(--hz-font-display);
   font-weight: var(--hz-weight-display);
   font-size: var(--hz-t-section);
   line-height: 0.98;
   letter-spacing: var(--hz-tracking-tight);
+}
+/* tagline madre "KEEP THE GROOVE" — sempre sotto lo statement, maiuscolo,
+   stesso gioco sottile↔grassetto della hero */
+.groove {
+  font-family: var(--hz-font-display);
+  text-transform: uppercase;
+  font-size: clamp(1.1rem, 2.4vw, 2rem);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: var(--hz-ink);
+}
+.grooveThin {
+  font-weight: 200;
+}
+.grooveBold {
+  font-weight: 700;
 }
 
 .logo {

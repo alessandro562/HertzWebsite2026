@@ -234,7 +234,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
       {/* ── precedente / successivo (timeline cronologica reale) ── */}
       {(prev || nextEvent) && (
         <Section surface="signal" space="lg">
-          <SectionLabel kicker="Timeline" title="Keep the calendar." />
+          <SectionLabel kicker="Timeline" title="Nights either side." />
           <div className={styles.adjacent}>
             {prev && (
               <Link href={`/events/${eventSlug(prev)}`} className={styles.adjacentCard}>
