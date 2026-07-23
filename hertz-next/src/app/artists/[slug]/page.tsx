@@ -6,8 +6,8 @@ import SectionLabel from '@/components/ui/SectionLabel'
 import Button from '@/components/ui/Button'
 import ImageFrame from '@/components/ui/ImageFrame'
 import MixRow from '@/components/music/MixRow'
+import ArtistGallery from '@/components/artists/ArtistGallery'
 import ViewMorph from '@/motion/ViewMorph'
-import ImageReveal from '@/motion/ImageReveal'
 import Parallax from '@/motion/Parallax'
 import { Stagger, StaggerItem } from '@/motion/Reveal'
 import { ARTISTS } from '@/content/artists'
@@ -127,17 +127,11 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
         </div>
       </Section>
 
-      {/* ── 3 · gallery (paper) — foto verticali 4:5 ── */}
+      {/* ── 3 · gallery (paper) — carosello card + lightbox ── */}
       {a.gallery.length > 0 && (
         <Section surface="paper" space="lg">
           <SectionLabel kicker="Gallery" title="The movement." />
-          <div className={styles.gallery}>
-            {a.gallery.map((src, i) => (
-              <ImageReveal key={src} variant={i % 2 === 0 ? 'print' : 'vertical'} duration="editorial">
-                <ImageFrame src={src} alt={`${a.name} live — ${i + 1}`} ratio="4 / 5" />
-              </ImageReveal>
-            ))}
-          </div>
+          <ArtistGallery photos={a.gallery} name={a.name} />
         </Section>
       )}
 
