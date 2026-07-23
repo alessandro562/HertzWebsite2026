@@ -30,6 +30,7 @@
   position: relative;
   overflow: hidden;
   background: var(--hz-bg-2);
+  border: 1px solid var(--hz-line-strong);
 }
 .frameFill {
   height: 100%;

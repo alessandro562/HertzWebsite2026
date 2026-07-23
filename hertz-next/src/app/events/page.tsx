@@ -57,7 +57,7 @@ export default function EventsPage() {
         <div className={styles.intro}>
           <div className={styles.introMain}>
             <p className={`${styles.introKicker} hz-mono`}>01 / Events</p>
-            <h1 className={styles.introTitle}>On the calendar.</h1>
+            <h1 className={styles.introTitle}>Next gigs.</h1>
           </div>
           <div className={styles.introSide}>
             <p className={styles.introDesc}>

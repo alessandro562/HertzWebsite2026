@@ -6,6 +6,7 @@ import { useState, type PointerEvent, type ReactNode } from 'react'
 import { motion, useMotionValue, useTransform, useReducedMotion } from 'motion/react'
 import StatusBadge, { type Status } from '@/components/ui/StatusBadge'
 import ViewMorph from '@/motion/ViewMorph'
+import PosterFX from '@/components/ui/PosterFX'
 import PosterFallback from './PosterFallback'
 import styles from './EventPosterPortal.module.css'
 
@@ -98,6 +99,7 @@ export default function EventPosterPortal({
         <span className={styles.band1} aria-hidden="true" />
         <span className={styles.band2} aria-hidden="true" />
         <span className={styles.cut} aria-hidden="true" />
+        <PosterFX tone="dark" />
       </motion.div>
     </motion.div>
   ) : (

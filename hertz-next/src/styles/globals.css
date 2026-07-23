@@ -163,3 +163,102 @@ button {
   left: var(--hz-gutter);
   top: var(--hz-space-sm);
 }
+
+/* ═══════════════════ FX · CRT / PRINT TEXTURE KIT ═══════════════════
+   Overlay riutilizzabili — <span aria-hidden> da inserire come figli di un
+   qualsiasi contenitore in position:relative;overflow:hidden (poster eventi,
+   card gallery, archivio). Riprende il linguaggio "stampa/CRT" del sito
+   storico (scanline + banda che scorre + phosphor + registration marks),
+   ricolorato dai blu legacy (#144889 / #1c5cad) alla firma Signal.
+   Un solo set di regole, riusato ovunque — niente duplicazione per-modulo. */
+
+@keyframes hz-scanband {
+  0%   { transform: translateY(-160%); }
+  100% { transform: translateY(760%); }
+}
+@keyframes hz-crt-flick {
+  0%, 96%, 100% { opacity: 0.55; }
+  97% { opacity: 0.42; }
+  98% { opacity: 0.62; }
+  99% { opacity: 0.5; }
+}
+
+/* wrapper opzionale: garantisce contesto + isolamento blend per gli overlay */
+.hz-fx {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* scanline CRT — righe orizzontali finissime, BITONO (una riga chiara + una
+   scura per ogni passo) così restano leggibili sia sulle foto scure che su
+   quelle chiare, non solo sui mezzitoni. */
+.hz-scanlines {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.05) 0 1px,
+    rgba(0, 0, 0, 0) 1px 2px,
+    rgba(0, 0, 0, 0.22) 2px 3px
+  );
+  opacity: 0.55;
+  animation: hz-crt-flick 6s steps(30) infinite;
+}
+
+/* banda di scansione — sweep Signal che scorre in verticale (loop lento) */
+.hz-scanband {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 24%;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    color-mix(in srgb, var(--hz-signal, #a3b7b7) 30%, transparent),
+    transparent
+  );
+  mix-blend-mode: screen;
+  opacity: 0.85;
+  animation: hz-scanband 7.5s linear infinite;
+}
+
+/* phosphor glow Signal + vignette (bordo interno scuro, profondità "tubo") */
+.hz-phosphor {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(
+    82% 62% at 50% 26%,
+    color-mix(in srgb, var(--hz-signal, #a3b7b7) 18%, transparent),
+    transparent 70%
+  );
+  box-shadow: inset 0 0 170px 22px rgba(0, 0, 0, 0.46);
+}
+
+/* registration marks — 4 L-bracket agli angoli (currentColor: bianco su
+   poster scuri, ink su superfici chiare) */
+.hz-reg {
+  position: absolute;
+  z-index: 4;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  opacity: 0.55;
+  color: inherit;
+}
+.hz-reg-tl { top: 10px; left: 10px; border-top: 1px solid currentColor; border-left: 1px solid currentColor; }
+.hz-reg-tr { top: 10px; right: 10px; border-top: 1px solid currentColor; border-right: 1px solid currentColor; }
+.hz-reg-bl { bottom: 10px; left: 10px; border-bottom: 1px solid currentColor; border-left: 1px solid currentColor; }
+.hz-reg-br { bottom: 10px; right: 10px; border-bottom: 1px solid currentColor; border-right: 1px solid currentColor; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hz-scanlines { animation: none; }
+  .hz-scanband { display: none; }
+}

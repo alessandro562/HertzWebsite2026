@@ -6,6 +6,7 @@ import StatusBadge, { type Status } from '@/components/ui/StatusBadge'
 import ImageReveal from '@/motion/ImageReveal'
 import FrequencyCut from '@/motion/FrequencyCut'
 import PosterMorph from '@/motion/PosterMorph'
+import PosterFX from '@/components/ui/PosterFX'
 import PosterFallback from './PosterFallback'
 import styles from './FeaturedEvent.module.css'
 
@@ -39,6 +40,7 @@ export default function FeaturedEvent({ event }: { event: HertzEvent }) {
         ) : (
           <PosterFallback n={event.n} date={dowDate(event)} city={event.city} className={styles.posterSoon} />
         )}
+        {event.poster && <PosterFX tone="dark" />}
         <div className={styles.posterTag}>
           <span className="hz-mono">N°{event.n}</span>
           {event.badge && <span className={`${styles.badge} hz-mono`}>{event.badge}</span>}

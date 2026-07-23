@@ -173,7 +173,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
         <Section surface="paper" space="lg">
           <SectionLabel
             kicker="Appearances"
-            title="On the calendar."
+            title="Next gigs."
             link={{ href: '/events', label: 'All events ↗' }}
           />
           <div className={styles.dateLists}>

@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link'
 import Section from '@/components/ui/Section'
+import PosterFX from '@/components/ui/PosterFX'
 import HomeHero from '@/components/home/HomeHero'
 import HeroKinetic from '@/components/home/HeroKinetic'
 import KineticBand from '@/components/home/KineticBand'
@@ -114,7 +115,7 @@ export default function Home() {
       <Section surface="white" space="lg" id="events">
         <Reveal variant="up" className={styles.secHead}>
           <span className={`${styles.secKicker} hz-mono`}>01 / Events</span>
-          <h2 className={styles.secTitle}>On the calendar.</h2>
+          <h2 className={styles.secTitle}>Next gigs.</h2>
           <Link href="/events" className={styles.secLink}>
             Full calendar ↗
           </Link>
@@ -153,11 +154,14 @@ export default function Home() {
           </Stagger>
           {feature && (
             <Reveal as="figure" variant="mask" duration={1} className={styles.eventFeature}>
-              <img
-                src={feature.poster || '/assets/hero-booth.jpg'}
-                alt={`Poster — ${feature.title}`}
-                loading="lazy"
-              />
+              <span className={styles.eventFeatureFrame}>
+                <img
+                  src={feature.poster || '/assets/hero-booth.jpg'}
+                  alt={`Poster — ${feature.title}`}
+                  loading="lazy"
+                />
+                <PosterFX tone="dark" />
+              </span>
               <figcaption className={styles.eventFeatureCap}>
                 <span>N°{feature.n}</span>
                 <span>{dowDate(feature)}</span>

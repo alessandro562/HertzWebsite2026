@@ -90,6 +90,8 @@ export default function PhotoGallery({
           >
             <span className={styles.frame}>
               <img src={src} alt={`${label} — frame ${i + 1}`} loading="lazy" draggable={false} />
+              <span className="hz-scanlines" aria-hidden="true" />
+              <span className="hz-scanband" aria-hidden="true" />
               <span className={styles.grain} aria-hidden="true" />
               <span className={`${styles.tick} ${styles.tl}`} aria-hidden="true" />
               <span className={`${styles.tick} ${styles.tr}`} aria-hidden="true" />
