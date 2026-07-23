@@ -18,8 +18,8 @@ export async function POST(req: Request) {
   const name = clip(b.name, 120)
   const email = clip(b.email, 160).toLowerCase()
   const phone = clip(b.phone, 40)
-  if (name.length < 2) return Response.json({ ok: false, error: 'Please enter your full name.' }, { status: 400 })
-  if (!isEmail(email)) return Response.json({ ok: false, error: 'Please enter a valid email.' }, { status: 400 })
+  if (name.length < 2) return Response.json({ ok: false, error: 'Inserisci nome e cognome.' }, { status: 400 })
+  if (!isEmail(email)) return Response.json({ ok: false, error: 'Inserisci un\'email valida.' }, { status: 400 })
 
   const n = clip(b.n, 12)
   const title = clip(b.title, 160) || 'Hertz event'
@@ -48,9 +48,9 @@ export async function POST(req: Request) {
     })
   } catch {
     return Response.json(
-      { ok: false, error: 'Could not add you to the list. Please try again.' },
+      { ok: false, error: 'Non è stato possibile aggiungerti alla lista. Riprova.' },
       { status: 502 },
     )
   }
-  return Response.json({ ok: true, message: 'You’re on the list.' })
+  return Response.json({ ok: true, message: 'Sei sulla lista.' })
 }

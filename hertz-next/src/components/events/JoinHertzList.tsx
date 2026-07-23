@@ -91,14 +91,14 @@ export default function JoinHertzList({ event, soon = false }: { event: ListEven
       const j = await r.json()
       if (r.ok && j.ok) {
         setState('ok')
-        setMsg(j.message ?? 'You’re on the list.')
+        setMsg(j.message ?? 'Sei sulla lista.')
       } else {
         setState('error')
-        setMsg(j.error ?? 'Something went wrong.')
+        setMsg(j.error ?? 'Qualcosa è andato storto.')
       }
     } catch {
       setState('error')
-      setMsg('Network error. Please try again.')
+      setMsg('Errore di rete. Riprova.')
     }
   }
 
@@ -113,18 +113,18 @@ export default function JoinHertzList({ event, soon = false }: { event: ListEven
             <span className={styles.glyph} aria-hidden="true">
               {soon ? '○' : '●'}
             </span>
-            {soon ? 'List opens soon' : 'Guest list open'}
+            {soon ? 'Lista in apertura' : 'Guest list aperta'}
           </span>
           <WaveformPulse state={soon ? 'loading' : 'active'} className={styles.wave} label="Hertz list" />
         </div>
         <p className={styles.note}>
           {soon
-            ? 'Line-up lands closer to the date. Lock your spot on the Hertz list now.'
-            : 'Hertz runs on the guest list. Add your name. We confirm by email.'}
+            ? 'La line-up arriva più vicino alla data. Intanto blocca il tuo posto sulla lista Hertz.'
+            : 'Hertz funziona solo su lista. Aggiungi il tuo nome, confermiamo via email.'}
         </p>
         <div className={styles.action}>
           <button type="button" className={styles.cta} onClick={openModal}>
-            Join the Hertz list →
+            Entra nella lista Hertz →
           </button>
         </div>
       </div>
@@ -138,7 +138,7 @@ export default function JoinHertzList({ event, soon = false }: { event: ListEven
           tabIndex={showBar ? 0 : -1}
           aria-hidden={!showBar}
         >
-          Join the Hertz list →
+          Entra nella lista Hertz →
         </button>
       </div>
 
@@ -154,7 +154,7 @@ export default function JoinHertzList({ event, soon = false }: { event: ListEven
             onClick={close}
             role="dialog"
             aria-modal="true"
-            aria-label="Join the Hertz list"
+            aria-label="Entra nella lista Hertz"
           >
             <motion.div
               className={styles.card}
@@ -164,7 +164,7 @@ export default function JoinHertzList({ event, soon = false }: { event: ListEven
               exit={reduce ? { opacity: 0 } : { opacity: 0, y: 16, scale: 0.99 }}
               transition={{ duration: reduce ? 0 : 0.4, ease: EASE }}
             >
-              <button type="button" className={styles.x} onClick={close} aria-label="Close">
+              <button type="button" className={styles.x} onClick={close} aria-label="Chiudi">
                 ✕
               </button>
 
@@ -188,15 +188,15 @@ export default function JoinHertzList({ event, soon = false }: { event: ListEven
                       {event.title}
                       {event.date ? ` · ${event.date}` : ''}
                     </span>
-                    <p className={styles.doneSub}>Bring ID. We&rsquo;ll confirm by email.</p>
+                    <p className={styles.doneSub}>Porta un documento. Confermiamo via email.</p>
                     <button type="button" className={styles.submit} onClick={close}>
-                      Done
+                      Fatto
                     </button>
                   </div>
                 ) : (
                   <form className={styles.form} onSubmit={onSubmit} noValidate>
                     <label className={styles.field}>
-                      <span className={styles.label}>Full name</span>
+                      <span className={styles.label}>Nome e cognome</span>
                       <input
                         ref={nameRef}
                         className={styles.input}
@@ -205,7 +205,7 @@ export default function JoinHertzList({ event, soon = false }: { event: ListEven
                         required
                         minLength={2}
                         autoComplete="name"
-                        placeholder="Name + surname"
+                        placeholder="Nome e cognome"
                       />
                     </label>
                     <label className={styles.field}>
@@ -216,12 +216,12 @@ export default function JoinHertzList({ event, soon = false }: { event: ListEven
                         type="email"
                         required
                         autoComplete="email"
-                        placeholder="your@email.cc"
+                        placeholder="tua@email.com"
                       />
                     </label>
                     <label className={styles.field}>
                       <span className={styles.label}>
-                        Phone <i>optional</i>
+                        Telefono <i>facoltativo</i>
                       </span>
                       <input
                         className={styles.input}
@@ -232,9 +232,9 @@ export default function JoinHertzList({ event, soon = false }: { event: ListEven
                       />
                     </label>
                     <button className={styles.submit} type="submit" disabled={state === 'sending'}>
-                      {state === 'sending' ? 'Sending…' : 'Join the list →'}
+                      {state === 'sending' ? 'Invio…' : 'Entra in lista →'}
                     </button>
-                    <p className={styles.fine}>One name per person · you’ll get a confirmation by email.</p>
+                    <p className={styles.fine}>Un nome a persona · ricevi conferma via email.</p>
                     {state === 'error' && (
                       <p className={styles.error} role="alert">
                         {msg}

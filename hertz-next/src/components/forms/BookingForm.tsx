@@ -59,11 +59,11 @@ export default function BookingForm() {
         form.reset()
       } else {
         setState('error')
-        setMsg(data.error ?? 'Something went wrong.')
+        setMsg(data.error ?? 'Qualcosa è andato storto.')
       }
     } catch {
       setState('error')
-      setMsg('Network error. Please try again.')
+      setMsg('Errore di rete. Riprova.')
     }
   }
 
@@ -71,10 +71,10 @@ export default function BookingForm() {
     return (
       <div className={styles.done}>
         <p className={styles.doneTitle}>
-          Thanks, your booking request is with the Hertz team.
+          Grazie, la tua richiesta è arrivata al team Hertz.
         </p>
         <p className={styles.doneSub}>
-          We&rsquo;ll get back to you by email with availability and a fee.
+          Ti rispondiamo via email con disponibilità e cachet.
         </p>
       </div>
     )
@@ -84,27 +84,27 @@ export default function BookingForm() {
     <form onSubmit={onSubmit} className={styles.form} noValidate>
       <div className={styles.row2}>
         <label className={styles.field}>
-          <span className={styles.label}>What are you booking?</span>
+          <span className={styles.label}>Cosa vuoi prenotare?</span>
           <select
             className={styles.select}
             name="bookingType"
             value={bookingType}
             onChange={(e) => setBookingType(e.target.value as 'format' | 'resident')}
           >
-            <option value="format">The format / event</option>
-            <option value="resident">A resident</option>
+            <option value="format">Il format / evento</option>
+            <option value="resident">Un resident</option>
           </select>
         </label>
         {bookingType === 'resident' && (
           <label className={styles.field}>
-            <span className={styles.label}>Which resident</span>
+            <span className={styles.label}>Quale resident</span>
             <select
               className={styles.select}
               name="resident"
               value={resident}
               onChange={(e) => setResident(e.target.value)}
             >
-              <option value="">No preference</option>
+              <option value="">Nessuna preferenza</option>
               {RESIDENT_NAMES.map((n) => (
                 <option key={n} value={n}>
                   {n}
@@ -117,67 +117,67 @@ export default function BookingForm() {
 
       <div className={styles.row2}>
         <label className={styles.field}>
-          <span className={styles.label}>Your name *</span>
-          <input className={styles.input} name="name" type="text" required minLength={2} autoComplete="name" placeholder="Name + surname" />
+          <span className={styles.label}>Nome *</span>
+          <input className={styles.input} name="name" type="text" required minLength={2} autoComplete="name" placeholder="Nome e cognome" />
         </label>
         <label className={styles.field}>
           <span className={styles.label}>Email *</span>
-          <input className={styles.input} name="email" type="email" required autoComplete="email" placeholder="your@email.cc" />
+          <input className={styles.input} name="email" type="email" required autoComplete="email" placeholder="tua@email.com" />
         </label>
       </div>
 
       <div className={styles.row2}>
         <label className={styles.field}>
-          <span className={styles.label}>Organisation / promoter</span>
-          <input className={styles.input} name="org" type="text" placeholder="Who's booking" />
+          <span className={styles.label}>Organizzazione / promoter</span>
+          <input className={styles.input} name="org" type="text" placeholder="Chi prenota" />
         </label>
         <label className={styles.field}>
-          <span className={styles.label}>Venue / event</span>
-          <input className={styles.input} name="venue" type="text" placeholder="Where it happens" />
+          <span className={styles.label}>Venue / evento</span>
+          <input className={styles.input} name="venue" type="text" placeholder="Dove si svolge" />
         </label>
       </div>
 
       <div className={styles.row2}>
         <label className={styles.field}>
-          <span className={styles.label}>City / country *</span>
-          <input className={styles.input} name="city" type="text" required minLength={2} placeholder="e.g. Bologna, IT" />
+          <span className={styles.label}>Città / paese *</span>
+          <input className={styles.input} name="city" type="text" required minLength={2} placeholder="es. Bologna, IT" />
         </label>
         <label className={styles.field}>
-          <span className={styles.label}>Event date</span>
+          <span className={styles.label}>Data dell&rsquo;evento</span>
           <input className={styles.input} name="date" type="date" />
         </label>
       </div>
 
       <div className={styles.row2}>
         <label className={styles.field}>
-          <span className={styles.label}>Expected capacity</span>
-          <input className={styles.input} name="capacity" type="text" placeholder="e.g. 400" />
+          <span className={styles.label}>Capienza prevista</span>
+          <input className={styles.input} name="capacity" type="text" placeholder="es. 400" />
         </label>
         <label className={styles.field}>
-          <span className={styles.label}>Budget range</span>
-          <input className={styles.input} name="budget" type="text" placeholder="Helps us answer fast" />
+          <span className={styles.label}>Budget</span>
+          <input className={styles.input} name="budget" type="text" placeholder="Ci aiuta a risponderti in fretta" />
         </label>
       </div>
 
       <label className={styles.field}>
-        <span className={styles.label}>Details *</span>
+        <span className={styles.label}>Dettagli *</span>
         <textarea
           className={styles.textarea}
           name="message"
           required
           minLength={10}
           maxLength={2000}
-          placeholder="Tell us about the night: format, set length, line-up, the room, the direction you're after."
+          placeholder="Raccontaci la serata: format, durata del set, line-up, la sala, la direzione che cerchi."
         />
       </label>
 
       <p className={styles.fine}>
-        The request is sent directly to the Hertz team. No email app, everything stays on this
-        page. We reply by email.
+        La richiesta arriva direttamente al team Hertz. Nessuna app di posta, resta tutto su
+        questa pagina. Ti rispondiamo via email.
       </p>
 
       <button className={styles.submit} type="submit" disabled={state === 'sending'}>
-        {state === 'sending' ? 'Sending…' : 'Send request'}
+        {state === 'sending' ? 'Invio…' : 'Invia richiesta'}
       </button>
       {state === 'error' && (
         <p className={styles.error} role="alert">

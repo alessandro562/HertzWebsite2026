@@ -12,9 +12,9 @@ export async function POST(req: Request) {
   const name = clip(b.name, 120)
   const email = clip(b.email, 160)
   const message = clip(b.message, 2000)
-  if (name.length < 2) return Response.json({ ok: false, error: 'Invalid name' }, { status: 400 })
-  if (!isEmail(email)) return Response.json({ ok: false, error: 'Invalid email' }, { status: 400 })
-  if (message.length < 10) return Response.json({ ok: false, error: 'Message too short' }, { status: 400 })
+  if (name.length < 2) return Response.json({ ok: false, error: 'Nome non valido' }, { status: 400 })
+  if (!isEmail(email)) return Response.json({ ok: false, error: 'Email non valida' }, { status: 400 })
+  if (message.length < 10) return Response.json({ ok: false, error: 'Messaggio troppo corto' }, { status: 400 })
 
   const e = {
     bookingType: clip(b.bookingType, 40),
@@ -48,7 +48,7 @@ export async function POST(req: Request) {
   try {
     await notify({ subject, text, replyTo: email })
   } catch {
-    return Response.json({ ok: false, error: 'Could not send the request. Please try again.' }, { status: 502 })
+    return Response.json({ ok: false, error: 'Non è stato possibile inviare la richiesta. Riprova.' }, { status: 502 })
   }
-  return Response.json({ ok: true, message: 'Booking request received.' })
+  return Response.json({ ok: true, message: 'Richiesta di booking ricevuta.' })
 }

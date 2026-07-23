@@ -14,7 +14,7 @@ import styles from './bookings.module.css'
 export const metadata: Metadata = {
   title: 'Bookings',
   description:
-    'Book the full Hertz format or a single resident: clubs, festivals and showcases. Based in Bologna, available worldwide.',
+    'Prenota il format completo Hertz o un singolo resident: club, festival e showcase. Da Bologna, disponibili ovunque.',
   alternates: { canonical: '/bookings' },
 }
 
@@ -23,17 +23,17 @@ const PATHS = [
     n: '01',
     kicker: 'The format',
     title: 'Book the night.',
-    body: 'The full Hertz curation, dropped into your room: selection, residents, sound direction and identity, built as one night. We treat the space as an instrument: the right system, the right tempo, a floor that came to listen.',
-    chips: ['Clubs', 'Festivals', 'Private', 'B2B sets'],
-    cta: { label: 'Request the format →', href: '/bookings?type=format#book' },
+    body: "La curatela Hertz al completo, portata nel tuo spazio: selezione, resident, direzione sonora e identità, costruite come un'unica serata. Trattiamo la sala come uno strumento: l'impianto giusto, il tempo giusto, una pista venuta per ascoltare.",
+    chips: ['Club', 'Festival', 'Privati', 'B2B set'],
+    cta: { label: 'Richiedi il format →', href: '/bookings?type=format#book' },
   },
   {
     n: '02',
     kicker: 'A resident',
     title: 'Book a resident.',
-    body: "One of the four Hertz residents for a guest slot on your line-up, minimal & deep-tech, the kind of groove that rolls for hours. Pick a name below, or tell us the date and we'll match the right hands to the room.",
-    chips: ['Guest slot', 'Deep tech', 'Worldwide'],
-    cta: { label: 'Pick a resident ↓', href: '#roster' },
+    body: 'Uno dei quattro resident Hertz per un guest slot nella tua line-up: minimal e deep tech, il tipo di groove che gira per ore. Scegli un nome qui sotto, oppure dicci la data e troviamo le mani giuste per la sala.',
+    chips: ['Guest slot', 'Deep tech', 'Ovunque'],
+    cta: { label: 'Scegli un resident ↓', href: '#roster' },
   },
 ]
 
@@ -46,11 +46,11 @@ export default function BookingsPage() {
         <PageHeader
           index="09"
           kicker="Bookings"
-          title="Bring Hertz to your room."
+          title="Bring Hertz to your floor."
           intro={
             <p className="hz-mono">
-              Book the full Hertz format or a single resident, based in Bologna, available
-              worldwide.
+              Prenota il format completo Hertz o un singolo resident. Da Bologna, disponibili
+              ovunque.
             </p>
           }
           aside={
@@ -102,23 +102,23 @@ export default function BookingsPage() {
               </div>
               <span className={styles.resName}>{a.name}</span>
               <span className={styles.resRole}>{a.role}</span>
-              <span className={`${styles.resGo} hz-mono`}>Book this resident →</span>
+              <span className={`${styles.resGo} hz-mono`}>Prenota questo resident →</span>
             </Link>
           ))}
         </div>
         <Link href="/artists" className={`${styles.allResidents} hz-mono`}>
-          Want to know them first? → All residents
+          Vuoi conoscerli prima? → Tutti i resident
         </Link>
       </Section>
 
       {/* ── request form (white) ── */}
       <Section surface="white" space="lg" id="book">
-        <SectionLabel index="C" kicker="Send a request" title="Make a booking request." />
+        <SectionLabel index="C" kicker="Send a request" title="Send the request." />
         <div className={styles.grid}>
           <div className={styles.formCol}>
             <p className={styles.formIntro}>
-              Send us the details of your event and we&rsquo;ll come back with availability and a
-              fee. Every request is read directly by the Hertz team.
+              Mandaci i dettagli del tuo evento e ti rispondiamo con disponibilità e cachet.
+              Ogni richiesta la legge direttamente il team Hertz.
             </p>
             <Suspense fallback={<div />}>
               <BookingForm />
@@ -127,7 +127,7 @@ export default function BookingsPage() {
           <aside className={styles.aside}>
             <div className={styles.direct}>
               <span className="hz-mono" style={{ color: 'var(--hz-ink-mute)' }}>
-                Prefer email?
+                Preferisci l&rsquo;email?
               </span>
               <a href={`mailto:${SITE.email}`} className={styles.directMail}>
                 {SITE.email} <Arrow />
