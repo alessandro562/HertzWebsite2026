@@ -389,41 +389,6 @@ export default function Home() {
         </Reveal>
       </Section>
 
-      {/* ═══ 09 · BOOKING (signal) ═══ */}
-      <Section surface="signal" space="lg" id="booking">
-        <p className="hz-mono" style={{ color: 'var(--hz-ink-mute)', marginBottom: 'var(--hz-space-md)' }}>
-          08 / Connect
-        </p>
-        <SignatureTitle as="h2" className={styles.bookTitle} stagger={0.09}>
-          <span>Bring Hertz to</span>
-          <span>your room.</span>
-        </SignatureTitle>
-        <Stagger className={styles.bookActions} gap={0.08}>
-          <StaggerItem variant="up">
-            <Link href="/bookings" className={styles.bookRow}>
-              <span>Artist booking</span>
-              <span aria-hidden="true">↗</span>
-            </Link>
-          </StaggerItem>
-          <StaggerItem variant="up">
-            <Link href="/bookings" className={styles.bookRow}>
-              <span>Event collaboration</span>
-              <span aria-hidden="true">↗</span>
-            </Link>
-          </StaggerItem>
-          <StaggerItem variant="up">
-            <Link href="/bookings" className={styles.bookRow}>
-              <span>Press &amp; partnerships</span>
-              <span aria-hidden="true">↗</span>
-            </Link>
-          </StaggerItem>
-        </Stagger>
-        <Reveal variant="up" delay={0.1}>
-          <a href="mailto:hertzbologna@gmail.com" className={styles.bookEmail}>
-            hertzbologna@gmail.com ↗
-          </a>
-        </Reveal>
-      </Section>
     </main>
   )
 }

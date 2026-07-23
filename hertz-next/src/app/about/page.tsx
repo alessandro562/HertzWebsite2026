@@ -1,11 +1,9 @@
 import type { Metadata } from 'next'
 import Section from '@/components/ui/Section'
-import Button from '@/components/ui/Button'
 import ImageFrame from '@/components/ui/ImageFrame'
 import SignatureTitle from '@/motion/SignatureTitle'
 import Reveal from '@/motion/Reveal'
 import Parallax from '@/motion/Parallax'
-import { SITE } from '@/lib/site'
 import styles from './about.module.css'
 
 export const metadata: Metadata = {
@@ -134,26 +132,6 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      {/* ── CTA (white) ── */}
-      <Section surface="white" space="md">
-        <div className={styles.cta}>
-          <div>
-            <h2 className={styles.ctaTitle}>Come and hear it.</h2>
-            <p className={styles.ctaText}>The manifesto only means anything on the floor.</p>
-          </div>
-          <div className={styles.ctaActions}>
-            <Button href="/events" arrow>
-              See the calendar
-            </Button>
-            <Button href="/bookings" variant="ghost" arrow>
-              Book Hertz
-            </Button>
-          </div>
-        </div>
-        <p className={styles.ctaMail}>
-          <a href={`mailto:${SITE.email}`}>{SITE.email} ↗</a>
-        </p>
-      </Section>
     </main>
   )
 }
