@@ -80,9 +80,9 @@ export default function Header() {
         </nav>
 
         <div className={styles.actions}>
-          <Link href="/events" className={styles.tickets}>
+          <Link href="/bookings" className={styles.tickets}>
             <WaveformPulse state="idle" className={styles.ticketsWave} />
-            Tickets
+            Bookings
           </Link>
           <button
             type="button"
@@ -115,11 +115,11 @@ export default function Header() {
             </Link>
           ))}
           <Link
-            href="/events"
+            href="/bookings"
             className={styles.menuTickets}
             onClick={() => setOpen(false)}
           >
-            Tickets ↗
+            Bookings ↗
           </Link>
         </nav>
       </div>

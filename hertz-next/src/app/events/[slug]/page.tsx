@@ -10,7 +10,7 @@ import StatusBadge, { type Status } from '@/components/ui/StatusBadge'
 import PosterFX from '@/components/ui/PosterFX'
 import PosterFallback from '@/components/events/PosterFallback'
 import TicketModule from '@/components/events/TicketModule'
-import TicketStickyBar from '@/components/events/TicketStickyBar'
+import JoinHertzList from '@/components/events/JoinHertzList'
 import ViewMorph from '@/motion/ViewMorph'
 import FrequencyCut from '@/motion/FrequencyCut'
 import { Stagger, StaggerItem } from '@/motion/Reveal'
@@ -24,7 +24,7 @@ import {
 } from '@/content/events'
 import { ARTISTS } from '@/content/artists'
 import { galleryFor } from '@/content/galleries'
-import { mailto, SITE } from '@/lib/site'
+import { SITE } from '@/lib/site'
 import styles from './event.module.css'
 
 export function generateStaticParams() {
@@ -58,16 +58,6 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
   const residents = e.lineup.map((s) => ARTISTS[s]).filter(Boolean)
   const gallery = galleryFor(e.n)
   const { prev, next: nextEvent } = adjacentEvents(e)
-
-  const ticketAction = !past && e.onSale
-  const ticketHref = ticketAction
-    ? mailto(
-        `Reserve — ${e.title} (N°${e.n})`,
-        `Hi Hertz, I'd like to reserve for ${e.title} at ${e.venue}, ${e.city} on ${dowDate(e)}.`,
-      )
-    : undefined
-
-  const ticketState = past ? 'archive' : e.onSale ? 'on-sale' : 'soon'
 
   /* bill → righe numerate editoriali; i nomi che corrispondono a un resident
      Hertz reale diventano link (frequency underline). Il campo lineup
@@ -204,7 +194,14 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
             </div>
 
             <div className={styles.heroTicket} id="ticket-cta">
-              <TicketModule state={ticketState} href={ticketHref} external={false} />
+              {past ? (
+                <TicketModule state="archive" />
+              ) : (
+                <JoinHertzList
+                  event={{ n: e.n, title: e.title, date: dowDate(e), venue: e.venue, city: e.city }}
+                  soon={!e.onSale}
+                />
+              )}
             </div>
 
             <div className={styles.heroFoot}>
@@ -289,11 +286,6 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
         </Section>
       )}
 
-      {/* ── Tickets sticky mobile: appare solo quando il CTA inline è fuori
-         vista, non copre mai i contenuti (compare/scompare, non fissa) ── */}
-      {ticketAction && ticketHref && (
-        <TicketStickyBar targetId="ticket-cta" href={ticketHref} label="Reserve by email" />
-      )}
     </main>
   )
 }
