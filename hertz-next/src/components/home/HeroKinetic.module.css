@@ -29,10 +29,9 @@
    il tipo. Mobile: nascosta (hero già densa). */
 .wave {
   position: absolute;
-  top: clamp(8.5rem, 20vh, 14rem);
+  top: clamp(6rem, 14vh, 10rem);
   right: max(var(--hz-gutter), calc((100vw - var(--hz-content-max)) / 2 + var(--hz-gutter)));
-  width: min(44vw, 480px);
-  height: clamp(110px, 17vh, 190px);
+  width: min(27vw, 272px);
   z-index: 1;
   pointer-events: none;
 }
