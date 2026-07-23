@@ -24,6 +24,22 @@
   pointer-events: none;
 }
 
+/* sinusoide "firma" (l'impulso di frequenza del brand) — in alto a destra,
+   allineata al bordo destro del contenuto, sopra la griglia ma senza toccare
+   il tipo. Mobile: nascosta (hero già densa). */
+.wave {
+  position: absolute;
+  top: clamp(8.5rem, 20vh, 14rem);
+  right: max(var(--hz-gutter), calc((100vw - var(--hz-content-max)) / 2 + var(--hz-gutter)));
+  width: min(44vw, 480px);
+  height: clamp(110px, 17vh, 190px);
+  z-index: 1;
+  pointer-events: none;
+}
+@media (max-width: 859px) {
+  .wave { display: none; }
+}
+
 .stage {
   position: relative;
   z-index: 1;

@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform } from 'motion/react'
 import Button from '@/components/ui/Button'
 import { useEnableMotion } from '@/motion/useEnableMotion'
 import HeroSignalGrid from './HeroSignalGrid'
+import HeroWaveform from './HeroWaveform'
 import type { NextEvent } from './HomeHero'
 import styles from './HeroKinetic.module.css'
 
@@ -33,6 +34,7 @@ export default function HeroKinetic({ next }: { next?: NextEvent }) {
   return (
     <section ref={root} data-surface="white" className={styles.hero} id="top">
       <HeroSignalGrid className={styles.grid} />
+      <HeroWaveform className={styles.wave} />
 
       <div className={styles.stage}>
         <motion.div
