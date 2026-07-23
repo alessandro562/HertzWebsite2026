@@ -1,5 +1,6 @@
-/* La forma d'onda UFFICIALE (hertz-sinusoid.png) fa da maschera: tutto ciò che
-   sta dentro è ritagliato alla sua sagoma. Aspect ratio = quello del ritaglio. */
+/* La forma d'onda UFFICIALE (hertz-sinusoid.png) fa da maschera → la sagoma
+   viene riempita di NERO (ink). Micro-parallax sul puntatore per un filo di
+   vita, senza alterare colore/forma. */
 .wrap {
   position: relative;
   aspect-ratio: 1842 / 1340;
@@ -7,54 +8,18 @@
   pointer-events: none;
   -webkit-mask: url(/assets/hertz-sinusoid.png) center / contain no-repeat;
   mask: url(/assets/hertz-sinusoid.png) center / contain no-repeat;
-  transform: translateX(calc(var(--px, 0) * 12px));
+  transform: translateX(calc(var(--px, 0) * 10px));
   will-change: transform;
 }
-
-/* fill di base: la forma d'onda "a riposo" in Cold, sobria su bianco */
 .base {
   position: absolute;
   inset: 0;
-  background: var(--hz-cold, #50778a);
-  opacity: 0.5;
-}
-
-/* impulso di luce Signal che scorre lungo la forma (scan del segnale) */
-.sweep {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 52%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    color-mix(in srgb, var(--hz-signal, #a3b7b7) 92%, white) 48%,
-    color-mix(in srgb, var(--hz-signal, #a3b7b7) 92%, white) 56%,
-    transparent
-  );
-  opacity: 0.85;
-  animation: hz-wave-sweep 3.6s cubic-bezier(0.6, 0, 0.4, 1) infinite;
-}
-
-@keyframes hz-wave-sweep {
-  0% {
-    transform: translateX(-115%);
-  }
-  100% {
-    transform: translateX(320%);
-  }
+  background: var(--hz-ink);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .wrap {
     transform: none;
     will-change: auto;
-  }
-  .sweep {
-    display: none;
-  }
-  .base {
-    opacity: 0.62;
   }
 }

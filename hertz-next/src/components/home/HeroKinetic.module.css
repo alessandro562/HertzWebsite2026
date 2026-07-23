@@ -7,13 +7,13 @@
    ──────────────────────────────────────────────────────────── */
 .hero {
   position: relative;
-  min-height: 100svh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: clamp(6.5rem, 12vh, 9rem) 0 clamp(1.5rem, 4vh, 2.5rem);
+  /* niente 100svh: la hero abbraccia il contenuto → la sinusoide in fondo è
+     adiacente alla sezione sotto, nessuno spazio bianco. */
+  padding: clamp(5rem, 9vh, 7rem) 0 clamp(0.75rem, 2vh, 1.5rem);
   overflow: hidden;               /* clip del drift orizzontale */
-  background: var(--hz-bg);       /* signal */
+  background: var(--hz-bg);
   color: var(--hz-ink);
 }
 
@@ -24,19 +24,16 @@
   pointer-events: none;
 }
 
-/* sinusoide "firma" (l'impulso di frequenza del brand) — in alto a destra,
-   allineata al bordo destro del contenuto, sopra la griglia ma senza toccare
-   il tipo. Mobile: nascosta (hero già densa). */
+/* sinusoide UFFICIALE hertz — allineata a SINISTRA, in basso (dove prima c'era
+   il blocco next-event), in flusso: la spinge in fondo il margin-block:auto del
+   tipo. z-index 1 per stare sopra la griglia. */
 .wave {
-  position: absolute;
-  top: clamp(6rem, 14vh, 10rem);
-  right: max(var(--hz-gutter), calc((100vw - var(--hz-content-max)) / 2 + var(--hz-gutter)));
-  width: min(27vw, 272px);
+  align-self: start;
+  width: min(48vw, 280px);
+  margin-top: var(--hz-space-md);
+  position: relative;
   z-index: 1;
   pointer-events: none;
-}
-@media (max-width: 859px) {
-  .wave { display: none; }
 }
 
 .stage {
@@ -64,7 +61,6 @@
 .type {
   display: flex;
   flex-direction: column;
-  margin-block: auto;
 }
 .words {
   display: flex;
