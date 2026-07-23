@@ -20,8 +20,7 @@
 }
 @media (min-width: 720px) {
   .hero {
-    grid-template-columns: minmax(40px, 5%) minmax(0, 5fr) minmax(0, 7fr);
-    min-height: clamp(420px, 38vw, 560px);
+    grid-template-columns: 44px minmax(0, 0.8fr) minmax(0, 1.2fr);
     align-items: stretch;
   }
 }
@@ -46,21 +45,42 @@
   }
 }
 
+/* poster: locandina INTERA a rapporto naturale (mai croppata), con la cornice
+   print (PosterFX). Su desktop siede in alto nella colonna e la sua altezza
+   guida il modulo; il contenuto si allunga fino a pari altezza. */
 .heroPoster {
   border-bottom: 1px solid var(--hz-line);
-  min-height: 320px;
+  background: var(--hz-bg-2);
 }
 @media (min-width: 720px) {
   .heroPoster {
     border-bottom: none;
     border-right: 1px solid var(--hz-ink);
-    min-height: 0;
-    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
-.posterSlot {
+.posterFig {
+  position: relative;
+  display: block;
   width: 100%;
-  height: 100%;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--hz-ink);
+}
+.posterFig[data-fallback='true'] {
+  aspect-ratio: 1080 / 1523;
+  background: var(--hz-bg-2);
+}
+.posterImg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.posterFallbackInner {
+  position: absolute;
+  inset: 0;
 }
 
 .heroContent {
@@ -90,10 +110,10 @@
   gap: 0.4rem;
 }
 .title {
-  font-size: clamp(2.2rem, 4.4vw, 4rem);
-  line-height: 0.97;
+  font-size: clamp(2.6rem, 5.2vw, 4.8rem);
+  line-height: 0.94;
   letter-spacing: var(--hz-tracking-tight);
-  max-width: 18ch;
+  max-width: 16ch;
 }
 .where {
   font-size: var(--hz-t-body-lg);
@@ -102,6 +122,33 @@
 .badge {
   color: var(--hz-ink-mute);
   margin-top: 0.15rem;
+}
+
+/* line-up teaser nella hero — riga "cartellone" (nomi reali, resident linkati) */
+.heroBill {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-top: 0.75rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--hz-line);
+}
+.heroBillLabel {
+  color: var(--hz-ink-mute);
+}
+.heroBillNames {
+  font-size: var(--hz-t-body-lg);
+  line-height: 1.35;
+  color: var(--hz-ink);
+}
+.heroBillLink {
+  text-decoration: underline;
+  text-decoration-color: var(--hz-line-strong);
+  text-underline-offset: 3px;
+  transition: text-decoration-color var(--hz-ui) var(--hz-ease-out);
+}
+.heroBillLink:hover {
+  text-decoration-color: var(--hz-ink);
 }
 .heroTicket {
   border-top: 1px solid var(--hz-line);

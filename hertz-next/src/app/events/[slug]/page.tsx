@@ -7,7 +7,8 @@ import SectionLabel from '@/components/ui/SectionLabel'
 import Button from '@/components/ui/Button'
 import PhotoGallery from '@/components/ui/PhotoGallery'
 import StatusBadge, { type Status } from '@/components/ui/StatusBadge'
-import EventPosterPortal from '@/components/events/EventPosterPortal'
+import PosterFX from '@/components/ui/PosterFX'
+import PosterFallback from '@/components/events/PosterFallback'
 import TicketModule from '@/components/events/TicketModule'
 import TicketStickyBar from '@/components/events/TicketStickyBar'
 import ViewMorph from '@/motion/ViewMorph'
@@ -133,18 +134,29 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
           </div>
 
           <div className={styles.heroPoster}>
-            <EventPosterPortal
-              image={e.poster}
-              n={e.n}
-              status={status}
-              date={dowDate(e)}
-              title={e.title}
-              venue={e.venue}
-              viewTransitionName={`event-poster-${slug}`}
-              priority
-              fill
-              className={styles.posterSlot}
-            />
+            <ViewMorph name={`event-poster-${slug}`}>
+              {e.poster ? (
+                <figure className={styles.posterFig}>
+                  <img
+                    src={e.poster}
+                    alt={`Poster — ${e.title}`}
+                    className={styles.posterImg}
+                    loading="eager"
+                    decoding="async"
+                  />
+                  <PosterFX tone="dark" />
+                </figure>
+              ) : (
+                <div className={styles.posterFig} data-fallback="true">
+                  <PosterFallback
+                    n={e.n}
+                    date={dowDate(e)}
+                    city={e.city}
+                    className={styles.posterFallbackInner}
+                  />
+                </div>
+              )}
+            </ViewMorph>
           </div>
 
           <div className={styles.heroContent}>
@@ -170,6 +182,25 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
                 {e.venue} · {e.city}
               </p>
               {e.badge && <p className={`${styles.badge} hz-mono`}>{e.badge}</p>}
+              {lineupRows.length > 0 && (
+                <p className={styles.heroBill}>
+                  <span className={`${styles.heroBillLabel} hz-mono`}>Line-up</span>
+                  <span className={styles.heroBillNames}>
+                    {lineupRows.map((row, i) => (
+                      <span key={`${row.name}-${i}`}>
+                        {row.resident ? (
+                          <Link href={`/artists/${row.resident.slug}`} className={styles.heroBillLink}>
+                            {row.name}
+                          </Link>
+                        ) : (
+                          row.name
+                        )}
+                        {i < lineupRows.length - 1 && <span aria-hidden="true"> · </span>}
+                      </span>
+                    ))}
+                  </span>
+                </p>
+              )}
             </div>
 
             <div className={styles.heroTicket} id="ticket-cta">
