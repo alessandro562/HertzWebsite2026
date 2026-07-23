@@ -1,6 +1,12 @@
 .roster {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--hz-space-lg) var(--hz-space-md);
+}
+@media (min-width: 900px) {
+  .roster {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 /* ── chiusura: riga testuale, non un banner ── */
