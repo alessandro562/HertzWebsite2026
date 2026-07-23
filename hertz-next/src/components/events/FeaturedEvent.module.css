@@ -13,7 +13,7 @@
   }
 }
 
-/* ── locandina verticale INTERA (mai croppata) ── */
+/* ── locandina verticale INTERA (mai croppata), nessuna etichetta sovrapposta ── */
 .posterCell {
   position: relative;
   display: flex;
@@ -49,91 +49,64 @@
   position: absolute;
   inset: 0;
 }
-.posterTag {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  z-index: 5;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.5rem 0.75rem;
-  background: color-mix(in srgb, var(--hz-bg) 84%, transparent);
-  backdrop-filter: blur(6px);
-  border-top: 1px solid var(--hz-line);
-  border-right: 1px solid var(--hz-line);
-  color: var(--hz-ink-mute);
-}
-.badge {
-  padding: 0.15em 0.55em;
-  border: 1px solid var(--hz-line-strong);
-  color: var(--hz-ink);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
 
-/* ── contenuto ── */
+/* ── pannello contenuto: CENTRATO verticalmente, spazio bilanciato ── */
 .content {
   display: flex;
+  align-items: center;
+  padding: clamp(1.5rem, 3.2vw, 3rem);
+}
+.inner {
+  display: flex;
   flex-direction: column;
+  gap: 0.7rem;
+  width: 100%;
 }
 .top {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: var(--hz-space-md) var(--hz-space-md) var(--hz-space-sm);
   color: var(--hz-ink-mute);
 }
 .kicker {
   color: var(--hz-ink);
 }
 .cut {
-  width: calc(100% - 2 * var(--hz-space-md));
+  width: 100%;
   height: 3px;
-  margin: 0 var(--hz-space-md);
-}
-.mid {
-  padding: var(--hz-space-md);
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  margin: 0.15rem 0 0.4rem;
 }
 .title {
-  font-size: clamp(2.2rem, 4vw, 3.8rem);
+  font-size: clamp(2.2rem, 4.4vw, 4.2rem);
   line-height: 0.98;
   letter-spacing: var(--hz-tracking-tight);
-  max-width: 16ch;
+  max-width: 20ch;
 }
 .venue {
   font-size: var(--hz-t-body-lg);
   color: var(--hz-ink-mute);
 }
+.when {
+  color: var(--hz-ink-mute);
+}
 .bill {
   color: var(--hz-ink-mute);
-  max-width: 46ch;
-  margin-top: 0.25rem;
+  max-width: 48ch;
+  margin-top: 0.15rem;
 }
 .foot {
-  margin-top: auto;
+  margin-top: 1rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: var(--hz-space-sm) var(--hz-space-md);
-  border-top: 1px solid var(--hz-line);
-}
-.footLabel {
-  color: var(--hz-ink-mute);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  gap: 1.2rem;
 }
 .cta {
   font-family: var(--hz-font-mono);
   font-size: var(--hz-t-ui);
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  padding: 0.5em 1em;
+  padding: 0.7em 1.2em;
   border: 1px solid var(--hz-ink);
   transition:
     background-color var(--hz-ui) var(--hz-ease-out),
@@ -142,6 +115,11 @@
 .featured:hover .cta {
   background: var(--hz-ink);
   color: var(--hz-bg);
+}
+.footLabel {
+  color: var(--hz-ink-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .sweep {
