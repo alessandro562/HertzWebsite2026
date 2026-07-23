@@ -6,6 +6,7 @@ import PageHeader from '@/components/ui/PageHeader'
 import SectionLabel from '@/components/ui/SectionLabel'
 import ImageFrame from '@/components/ui/ImageFrame'
 import Arrow from '@/components/ui/Arrow'
+import GlitchFX from '@/components/ui/GlitchFX'
 import ImageReveal from '@/motion/ImageReveal'
 import PrintInterruption from '@/motion/PrintInterruption'
 import ArchiveExplorer from '@/components/archive/ArchiveExplorer'
@@ -190,9 +191,10 @@ export default function ArchivePage() {
         />
         <div className={styles.photoGrid}>
           {PHOTO_ARCHIVE.map((src, i) => (
-            <a key={src + i} className={styles.pressShot} href={src} download>
+            <a key={src + i} className={`${styles.pressShot} hz-glitch`} href={src} download>
               <span className={`${styles.pressIx} hz-mono`}>{String(i + 1).padStart(2, '0')}</span>
               <img src={src} alt={`Hertz live, archive frame ${i + 1}`} loading="lazy" />
+              <GlitchFX />
               <span className={`${styles.pressDl} hz-mono`}>↓ JPG</span>
             </a>
           ))}

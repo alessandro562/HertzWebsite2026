@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Section from '@/components/ui/Section'
 import Button from '@/components/ui/Button'
 import Arrow from '@/components/ui/Arrow'
+import GlitchFX from '@/components/ui/GlitchFX'
 import MixRow from '@/components/music/MixRow'
 import { ARTISTS } from '@/content/artists'
 import { SITE } from '@/lib/site'
@@ -106,8 +107,9 @@ export default function MusicPage() {
                 rel="noreferrer"
                 className={styles.spotifyCard}
               >
-                <span className={styles.spotifyArt}>
+                <span className={`${styles.spotifyArt} hz-glitch`}>
                   <img src={a.portrait} alt={a.name} loading="lazy" decoding="async" />
+                  <GlitchFX />
                 </span>
                 <div className={styles.spotifyMeta}>
                   <span className={styles.spotifyName}>{a.name}</span>

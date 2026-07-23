@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Section from '@/components/ui/Section'
 import Arrow from '@/components/ui/Arrow'
 import Equalizer from '@/components/ui/Equalizer'
+import GlitchFX from '@/components/ui/GlitchFX'
 import HomeHero from '@/components/home/HomeHero'
 import HeroKinetic from '@/components/home/HeroKinetic'
 import KineticBand from '@/components/home/KineticBand'
@@ -210,8 +211,9 @@ export default function Home() {
               </Link>
             </Reveal>
           </div>
-          <MaskImage direction="left" duration={1.1} className={styles.manifestoPhoto}>
+          <MaskImage direction="left" duration={1.1} className={`${styles.manifestoPhoto} hz-glitch`}>
             <img src="/assets/crowd-floor.jpg" alt="People on the Hertz dancefloor" loading="lazy" />
+            <GlitchFX />
           </MaskImage>
         </div>
       </Section>
@@ -307,8 +309,9 @@ export default function Home() {
         <Stagger className={styles.archiveStrip} gap={0.07}>
           {ARCHIVE_PHOTOS.map((src, i) => (
             <StaggerItem key={src} variant="right">
-              <figure className={`${styles.archiveCard} hz-cardfx`}>
+              <figure className={`${styles.archiveCard} hz-cardfx hz-glitch`}>
                 <img src={src} alt="Hertz night, Kindergarten archive" loading="lazy" />
+                <GlitchFX />
                 <figcaption>
                   <span>Kindergarten</span>
                   <span>

@@ -1,12 +1,10 @@
 /**
- * PosterFX — cluster di overlay "stampa/CRT" da appoggiare come ultimo figlio
- * di un contenitore in position:relative;overflow:hidden (poster evento, card
- * gallery, archivio). Nessun layout proprio: solo le texture (scanline + banda
- * Signal che scorre + phosphor + registration marks agli angoli), riprese dal
- * sito storico e ricolorate sulla firma Signal. Le classi vivono in globals.css
- * (`.hz-scanlines/.hz-scanband/.hz-phosphor/.hz-reg*`) così sono condivise da
- * tutti i punti del sito senza duplicare CSS per-modulo. Reduced-motion:
- * scanline statiche, banda nascosta (gestito in globals.css).
+ * PosterFX — texture ELEGANTE per le locandine, da appoggiare come ultimo figlio
+ * di un contenitore in position:relative;overflow:hidden (poster evento). Niente
+ * CRT/scan/glitch: solo grana fine da stampa + una vignette morbida con un velo
+ * Signal + registration marks agli angoli (linguaggio editoriale/print). Le
+ * classi vivono in globals.css (`.hz-print-grain / .hz-print-veil / .hz-reg*`),
+ * condivise senza duplicare CSS per-modulo. Reduced-motion safe (statiche).
  *
  * `tone` regola il colore dei registration marks via currentColor:
  *  - 'dark'  → poster/foto scure → marks bianchi.
@@ -24,9 +22,8 @@ export default function PosterFX({
   const color = tone === 'light' ? 'var(--hz-ink)' : 'rgba(255,255,255,0.82)'
   return (
     <>
-      <span className="hz-scanlines" aria-hidden="true" />
-      {phosphor && <span className="hz-phosphor" aria-hidden="true" />}
-      <span className="hz-scanband" aria-hidden="true" />
+      <span className="hz-print-grain" aria-hidden="true" />
+      {phosphor && <span className="hz-print-veil" aria-hidden="true" />}
       {reg && (
         <span aria-hidden="true" style={{ color }}>
           <span className="hz-reg hz-reg-tl" />

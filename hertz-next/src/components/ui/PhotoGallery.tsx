@@ -4,6 +4,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import Arrow from '@/components/ui/Arrow'
+import GlitchFX from '@/components/ui/GlitchFX'
 import styles from './PhotoGallery.module.css'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -89,10 +90,9 @@ export default function PhotoGallery({
             }}
             aria-label={`Open ${label}, frame ${i + 1}`}
           >
-            <span className={styles.frame}>
+            <span className={`${styles.frame} hz-glitch`}>
               <img src={src} alt={`${label}, frame ${i + 1}`} loading="lazy" draggable={false} />
-              <span className="hz-scanlines" aria-hidden="true" />
-              <span className="hz-scanband" aria-hidden="true" />
+              <GlitchFX />
               <span className={styles.grain} aria-hidden="true" />
               <span className={`${styles.tick} ${styles.tl}`} aria-hidden="true" />
               <span className={`${styles.tick} ${styles.tr}`} aria-hidden="true" />

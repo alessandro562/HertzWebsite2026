@@ -43,6 +43,7 @@ export default function ShopPage() {
             alt="Hertz lanyard, Drop 01"
             ratio="1 / 1"
             priority
+            glitch={false}
             className={styles.visual}
           />
           <div className={styles.info}>
