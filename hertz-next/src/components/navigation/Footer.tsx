@@ -17,15 +17,7 @@ export default function Footer() {
     <footer data-surface="signal" className={styles.footer}>
       <div className="hz-container">
         <div className={styles.top}>
-          <div className={styles.lead}>
-            <p className={styles.statement}>
-              See you<br />on the floor.
-            </p>
-            <p className={styles.groove} aria-label={SITE.closer}>
-              <span className={styles.grooveThin}>Keep the</span>{' '}
-              <span className={styles.grooveBold}>groove.</span>
-            </p>
-          </div>
+          <p className={styles.groove}>{SITE.closer}</p>
           <HertzLogo size={72} className={styles.logo} title="Hertz Clubbing Collective" />
         </div>
 

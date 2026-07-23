@@ -188,7 +188,7 @@ export default function JoinHertzList({ event, soon = false }: { event: ListEven
                       {event.title}
                       {event.date ? ` · ${event.date}` : ''}
                     </span>
-                    <p className={styles.doneSub}>See you on the floor. Bring ID.</p>
+                    <p className={styles.doneSub}>Bring ID. We&rsquo;ll confirm by email.</p>
                     <button type="button" className={styles.submit} onClick={close}>
                       Done
                     </button>
