@@ -3,30 +3,29 @@
 /* eslint-disable @next/next/no-img-element */
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
-import styles from './ArtistGallery.module.css'
+import styles from './PhotoGallery.module.css'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
 /**
- * Gallery resident — carosello editoriale di card fotografiche con dettagli
- * (indice, registration marks, caption in hover) + lightbox a schermo intero
- * con navigazione da tastiera. Foto verticali 4:5 (formato reale). Drag-to-
- * scroll sul rail; reduced-motion gestito da MotionConfig globale.
+ * Gallery fotografica riutilizzabile — carosello editoriale di card con
+ * dettagli (indice, registration marks, caption in hover) + lightbox a schermo
+ * intero con navigazione da tastiera. Usata su artisti, eventi, archivio.
+ * `label` = riga bold (nome artista / titolo evento); `caption` = meta line.
  */
-export default function ArtistGallery({
+export default function PhotoGallery({
   photos,
-  name,
+  label,
   caption = 'Live · Hertz floor',
 }: {
   photos: string[]
-  name: string
+  label: string
   caption?: string
 }) {
   const [open, setOpen] = useState<number | null>(null)
   const railRef = useRef<HTMLDivElement>(null)
   const total = photos.length
 
-  /* drag-to-scroll (desktop) */
   const drag = useRef({ down: false, startX: 0, startScroll: 0, moved: false })
   const onPointerDown = (e: React.PointerEvent) => {
     const el = railRef.current
@@ -50,7 +49,6 @@ export default function ArtistGallery({
     [total],
   )
 
-  /* keyboard nav nel lightbox */
   useEffect(() => {
     if (open === null) return
     const onKey = (e: KeyboardEvent) => {
@@ -88,10 +86,10 @@ export default function ArtistGallery({
             onClick={() => {
               if (!drag.current.moved) setOpen(i)
             }}
-            aria-label={`Open ${name} — frame ${i + 1}`}
+            aria-label={`Open ${label} — frame ${i + 1}`}
           >
             <span className={styles.frame}>
-              <img src={src} alt={`${name} live — frame ${i + 1}`} loading="lazy" draggable={false} />
+              <img src={src} alt={`${label} — frame ${i + 1}`} loading="lazy" draggable={false} />
               <span className={styles.grain} aria-hidden="true" />
               <span className={`${styles.tick} ${styles.tl}`} aria-hidden="true" />
               <span className={`${styles.tick} ${styles.tr}`} aria-hidden="true" />
@@ -101,7 +99,7 @@ export default function ArtistGallery({
                 {String(i + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
               </span>
               <span className={styles.cap}>
-                <span className={styles.capName}>{name}</span>
+                <span className={styles.capName}>{label}</span>
                 <span className={`${styles.capMeta} hz-mono`}>{caption}</span>
                 <span className={`${styles.capGo} hz-mono`}>Expand ↗</span>
               </span>
@@ -127,11 +125,11 @@ export default function ArtistGallery({
             onClick={close}
             role="dialog"
             aria-modal="true"
-            aria-label={`${name} — gallery`}
+            aria-label={`${label} — gallery`}
           >
             <div className={`${styles.lbBar} hz-mono`}>
               <span>
-                {name} — {String(open + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
+                {label} — {String(open + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
               </span>
               <button type="button" className={styles.lbClose} onClick={close} aria-label="Close">
                 Close ✕
@@ -158,7 +156,7 @@ export default function ArtistGallery({
               transition={{ duration: 0.32, ease: EASE }}
               onClick={(e) => e.stopPropagation()}
             >
-              <img src={photos[open]} alt={`${name} live — frame ${open + 1}`} draggable={false} />
+              <img src={photos[open]} alt={`${label} — frame ${open + 1}`} draggable={false} />
               <span className={`${styles.lbCap} hz-mono`}>{caption}</span>
             </motion.div>
 

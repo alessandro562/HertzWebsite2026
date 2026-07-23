@@ -6,7 +6,7 @@ import SectionLabel from '@/components/ui/SectionLabel'
 import Button from '@/components/ui/Button'
 import ImageFrame from '@/components/ui/ImageFrame'
 import MixRow from '@/components/music/MixRow'
-import ArtistGallery from '@/components/artists/ArtistGallery'
+import PhotoGallery from '@/components/ui/PhotoGallery'
 import ViewMorph from '@/motion/ViewMorph'
 import Parallax from '@/motion/Parallax'
 import { Stagger, StaggerItem } from '@/motion/Reveal'
@@ -131,7 +131,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
       {a.gallery.length > 0 && (
         <Section surface="paper" space="lg">
           <SectionLabel kicker="Gallery" title="The movement." />
-          <ArtistGallery photos={a.gallery} name={a.name} />
+          <PhotoGallery photos={a.gallery} label={a.name} />
         </Section>
       )}
 

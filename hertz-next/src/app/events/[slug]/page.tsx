@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Section from '@/components/ui/Section'
 import SectionLabel from '@/components/ui/SectionLabel'
 import Button from '@/components/ui/Button'
-import ImageFrame from '@/components/ui/ImageFrame'
+import PhotoGallery from '@/components/ui/PhotoGallery'
 import StatusBadge, { type Status } from '@/components/ui/StatusBadge'
 import EventPosterPortal from '@/components/events/EventPosterPortal'
 import TicketModule from '@/components/events/TicketModule'
@@ -227,17 +227,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
             title="From the night."
             link={{ href: '/archive', label: `${gallery.length} frames ↗` }}
           />
-          <div className={styles.gallery}>
-            {gallery.map((src, i) => (
-              <ImageFrame
-                key={src}
-                src={src}
-                alt={`${e.title} — frame ${i + 1}`}
-                ratio="3 / 2"
-                className={styles.galleryItem}
-              />
-            ))}
-          </div>
+          <PhotoGallery photos={gallery} label={e.title} caption={`${e.venue} · ${e.city}`} />
         </Section>
       )}
 
