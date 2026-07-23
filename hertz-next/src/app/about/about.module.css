@@ -9,14 +9,21 @@
   font-style: normal;
   color: var(--hz-signal);
 }
+.heroLead {
+  font-size: var(--hz-t-body-lg);
+  line-height: var(--hz-leading-body);
+  max-width: 48ch;
+  margin-bottom: var(--hz-space-lg);
+  color: var(--hz-ink);
+}
 .heroQuote {
   font-family: var(--hz-font-display);
   font-weight: var(--hz-weight-regular);
   font-size: var(--hz-t-body-lg);
   line-height: 1.4;
-  max-width: 32ch;
+  max-width: 34ch;
   margin-bottom: var(--hz-space-md);
-  color: var(--hz-ink);
+  color: var(--hz-ink-mute);
 }
 
 /* ── chapters ── */

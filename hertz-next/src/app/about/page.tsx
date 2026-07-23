@@ -27,6 +27,11 @@ export default function AboutPage() {
             <em>for clubbers.</em>
           </span>
         </SignatureTitle>
+        <p className={styles.heroLead}>
+          Hertz is a clubbing collective from Bologna, active since 2023. We build our
+          nights around the selection, the system and the dancefloor — and the people who
+          come to live them, not watch them.
+        </p>
         <blockquote className={styles.heroQuote}>
           Too many nights were filling up with image and emptying out of listening.
         </blockquote>

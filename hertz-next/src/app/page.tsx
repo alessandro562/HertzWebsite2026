@@ -69,10 +69,16 @@ export default function Home() {
       {/* ═══ 02 · INTRODUCTION (signal) ═══ */}
       <Section surface="signal" space="lg" id="intro">
         <div className={styles.introGrid}>
-          <Reveal as="p" variant="mask" duration={0.9} className={styles.introLead}>
-            Independent nights across Bologna and central Italy — minimal &amp; deep tech,
-            booked like we&rsquo;d pay to see them ourselves.
-          </Reveal>
+          <div className={styles.introText}>
+            <Reveal as="p" variant="mask" duration={0.9} className={styles.introLead}>
+              A clubbing collective from Bologna — the night is lived, not watched.
+            </Reveal>
+            <Reveal as="p" variant="up" delay={0.12} className={styles.introSupport}>
+              Since 2023 we&rsquo;ve built our nights around the record, the system and the
+              floor: selection over spectacle, the dancefloor over the show. From clubbers,
+              for clubbers.
+            </Reveal>
+          </div>
           <Reveal variant="up" delay={0.15}>
             <dl className={styles.introStats}>
               <div>
