@@ -30,11 +30,11 @@ export default function MusicPage() {
       <Section surface="paper" space="md">
         <div className={styles.head}>
           <p className={`${styles.kicker} hz-mono`}>03 / Music</p>
-          <h1 className={styles.title}>Transmissions.</h1>
+          <h1 className={styles.title}>The selection.</h1>
           <div className={styles.headRow}>
             <p className={styles.intro}>
-              Recorded sets and studio cuts from the residents — the sound of the night, kept where
-              it lives. No autoplay, play on tap.
+              The records that build the Hertz floor — resident sets and studio cuts, minimal &amp;
+              deep tech, selection first. No autoplay, play on tap.
             </p>
             <div className={styles.platformBar}>
               <a

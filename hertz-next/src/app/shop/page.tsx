@@ -25,7 +25,7 @@ export default function ShopPage() {
         <PageHeader
           index="07"
           kicker="Shop"
-          title="Hertz uniform."
+          title="Clubber apparel."
           intro={
             <p>
               Small, numbered drops — made for the floor, not the feed. Reserve by email; we confirm

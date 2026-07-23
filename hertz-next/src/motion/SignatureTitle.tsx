@@ -45,7 +45,12 @@ export default function SignatureTitle({
   const container: Variants = { hidden: {}, show: { transition: { staggerChildren: stagger } } }
 
   const rows = lines.map((line, i) => (
-    <span key={i} style={{ display: 'block', overflow: 'hidden', paddingBottom: '0.06em' }}>
+    // padding = spazio di clip sopra/sotto (evita il taglio degli ascendenti/
+    // maiuscole con leading serrato); margin negativo = layout invariato.
+    <span
+      key={i}
+      style={{ display: 'block', overflow: 'hidden', padding: '0.14em 0', margin: '-0.14em 0' }}
+    >
       <motion.span style={{ display: 'block' }} variants={LINE} transition={{ duration: 0.95, ease: EASE }}>
         {line}
       </motion.span>

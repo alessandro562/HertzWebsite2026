@@ -23,7 +23,7 @@ export default function MediaPage() {
         <PageHeader
           index="04"
           kicker="Media"
-          title="Reading the signal."
+          title="Clubbing culture."
           intro={
             <p>
               Our editorial desk — reportage and arguments about the music we care about, written

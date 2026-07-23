@@ -241,7 +241,7 @@ export default function Home() {
       <Section surface="paper" space="lg" id="music">
         <Reveal variant="up" className={styles.secHead}>
           <span className={`${styles.secKicker} hz-mono`}>04 / Music</span>
-          <h2 className={styles.secTitle}>Current transmission.</h2>
+          <h2 className={styles.secTitle}>In the mix.</h2>
           <a
             href="https://soundcloud.com/hertzclubbingcollective"
             target="_blank"
@@ -269,7 +269,7 @@ export default function Home() {
       <Section surface="white" space="lg" id="media">
         <Reveal variant="up" className={styles.secHead}>
           <span className={`${styles.secKicker} hz-mono`}>05 / Media</span>
-          <h2 className={styles.secTitle}>Reading the signal.</h2>
+          <h2 className={styles.secTitle}>Clubbing culture.</h2>
           <Link href="/media" className={styles.secLink}>
             All media ↗
           </Link>
@@ -338,7 +338,7 @@ export default function Home() {
       <Section surface="paper" space="lg" id="shop">
         <Reveal variant="up" className={styles.secHead}>
           <span className={`${styles.secKicker} hz-mono`}>07 / Shop</span>
-          <h2 className={styles.secTitle}>Hertz uniform.</h2>
+          <h2 className={styles.secTitle}>Clubber apparel.</h2>
           <Link href="/shop" className={styles.secLink}>
             Visit shop ↗
           </Link>
