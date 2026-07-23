@@ -14,7 +14,7 @@ export default function EventRow({ event }: { event: HertzEvent }) {
   const status: Status = isPast(event) ? 'archive' : event.onSale ? 'on-sale' : 'soon'
   const slug = eventSlug(event)
   return (
-    <Link href={`/events/${slug}`} className={styles.row}>
+    <Link href={`/events/${slug}`} className={`${styles.row} hz-rowfx`}>
       <span className={`${styles.n} hz-mono`}>N°{event.n}</span>
       <span className={`${styles.date} hz-mono`}>{dowDate(event)}</span>
       <span className={styles.main}>

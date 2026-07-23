@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Section from '@/components/ui/Section'
 import PosterFX from '@/components/ui/PosterFX'
 import Arrow from '@/components/ui/Arrow'
+import Equalizer from '@/components/ui/Equalizer'
 import HomeHero from '@/components/home/HomeHero'
 import HeroKinetic from '@/components/home/HeroKinetic'
 import KineticBand from '@/components/home/KineticBand'
@@ -123,7 +124,7 @@ export default function Home() {
           <Stagger className={styles.eventList} gap={0.07}>
             {up.map((e) => (
               <StaggerItem key={e.n} variant="up">
-                <Link href={`/events/${eventSlug(e)}`} className={styles.eventRow}>
+                <Link href={`/events/${eventSlug(e)}`} className={`${styles.eventRow} hz-rowfx`}>
                   <span className={styles.eRowDate}>{dowDate(e)}</span>
                   <span className={styles.eRowMain}>
                     <span className={styles.eRowTitle}>{e.title}</span>
@@ -137,7 +138,7 @@ export default function Home() {
                     >
                       {e.onSale ? 'On sale' : 'Soon'}
                     </span>
-                    <span className={styles.eRowArrow} aria-hidden="true">
+                    <span className={`${styles.eRowArrow} hz-fx-arrow`} aria-hidden="true">
                       <Arrow />
                     </span>
                   </span>
@@ -222,11 +223,11 @@ export default function Home() {
             const a = ARTISTS[slug]
             return (
               <StaggerItem key={slug} variant="left">
-                <Link href={`/artists/${slug}`} className={styles.artistRow}>
+                <Link href={`/artists/${slug}`} className={`${styles.artistRow} hz-rowfx`}>
                   <span className={styles.aNum}>{String(i + 1).padStart(2, '0')}</span>
                   <span className={styles.aName}>{a.name}</span>
                   <span className={styles.aRole}>{a.role}</span>
-                  <span className={styles.aArrow} aria-hidden="true">
+                  <span className={`${styles.aArrow} hz-fx-arrow`} aria-hidden="true">
                     <Arrow />
                   </span>
                 </Link>
@@ -253,11 +254,22 @@ export default function Home() {
         <Stagger className={styles.mixList} gap={0.06}>
           {mixes.map((m, i) => (
             <StaggerItem key={m.url} variant="up">
-              <a href={m.url} target="_blank" rel="noreferrer" className={styles.mixRow}>
+              <a
+                href={m.url}
+                target="_blank"
+                rel="noreferrer"
+                className={`${styles.mixRow} hz-rowfx`}
+              >
                 <span className={styles.mixNum}>{String(i + 1).padStart(2, '0')}</span>
-                <span className={styles.mixTitle}>{m.t}</span>
-                <span className={styles.mixArtist}>{m.artist}</span>
+                <Equalizer play={m.tag === 'Featured'} className={styles.mixEq} />
+                <span className={styles.mixMain}>
+                  <span className={styles.mixTitle}>{m.t}</span>
+                  <span className={styles.mixArtist}>{m.artist}</span>
+                </span>
                 <span className={styles.mixTag}>{m.tag ?? 'Mix'}</span>
+                <span className={`${styles.mixGo} hz-fx-arrow`} aria-hidden="true">
+                  <Arrow />
+                </span>
               </a>
             </StaggerItem>
           ))}
@@ -283,7 +295,7 @@ export default function Home() {
         <Stagger className={styles.archiveStrip} gap={0.07}>
           {ARCHIVE_PHOTOS.map((src, i) => (
             <StaggerItem key={src} variant="right">
-              <figure className={styles.archiveCard}>
+              <figure className={`${styles.archiveCard} hz-cardfx`}>
                 <img src={src} alt="Hertz night — Kindergarten archive" loading="lazy" />
                 <figcaption>
                   <span>Kindergarten</span>
@@ -310,20 +322,26 @@ export default function Home() {
       <Section surface="paper" space="md" id="more">
         <Stagger className={styles.moreGrid} gap={0.08}>
           <StaggerItem variant="up">
-            <Link href="/shop" className={styles.moreCard}>
+            <Link href="/shop" className={`${styles.moreCard} hz-cardfx`}>
               <span className={`${styles.moreKicker} hz-mono`}>Shop</span>
               <span className={styles.moreTitle}>Clubber apparel.</span>
               <span className={styles.moreMeta}>
-                Small numbered drops, made for the floor <Arrow />
+                Small numbered drops, made for the floor{' '}
+                <span className="hz-fx-arrow">
+                  <Arrow />
+                </span>
               </span>
             </Link>
           </StaggerItem>
           <StaggerItem variant="up">
-            <Link href="/media" className={styles.moreCard}>
+            <Link href="/media" className={`${styles.moreCard} hz-cardfx`}>
               <span className={`${styles.moreKicker} hz-mono`}>Media</span>
               <span className={styles.moreTitle}>Clubbing culture.</span>
               <span className={styles.moreMeta}>
-                Reportage and reading, written from the floor <Arrow />
+                Reportage and reading, written from the floor{' '}
+                <span className="hz-fx-arrow">
+                  <Arrow />
+                </span>
               </span>
             </Link>
           </StaggerItem>

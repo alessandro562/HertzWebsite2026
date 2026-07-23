@@ -6,7 +6,7 @@ import styles from './ArticleCard.module.css'
 /** Card articolo → pagina media. `feature` = variante grande con excerpt. */
 export default function ArticleCard({ article, feature = false }: { article: Article; feature?: boolean }) {
   return (
-    <Link href={`/media/${article.slug}`} className={`${styles.card} ${feature ? styles.feature : ''}`.trim()}>
+    <Link href={`/media/${article.slug}`} className={`${styles.card} ${feature ? styles.feature : ''} hz-cardfx`.trim()}>
       <ImageFrame
         src={article.heroImage}
         alt={article.heroImageAlt}

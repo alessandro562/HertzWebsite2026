@@ -18,7 +18,7 @@ export default function EventModule({ event }: { event: HertzEvent }) {
   const slug = eventSlug(event)
 
   return (
-    <Link href={`/events/${slug}`} className={styles.card} data-status={status}>
+    <Link href={`/events/${slug}`} className={`${styles.card} hz-cardfx`} data-status={status}>
       <div className={styles.posterWrap}>
         {event.poster ? (
           <>

@@ -262,3 +262,88 @@ button {
   .hz-scanlines { animation: none; }
   .hz-scanband { display: none; }
 }
+
+/* ═══════════════════ MOTION · righe / card / equalizer ═══════════════════
+   Micro-interazioni riutilizzabili via className (nessuna duplicazione per
+   modulo). Reduced-motion safe. Applicazione:
+   - righe tabella/lista → class `hz-rowfx` sul link/riga; `hz-fx-arrow` sulla
+     freccia interna (scorre in hover), `hz-eq` per l'equalizer audio.
+   - card → class `hz-cardfx` (lift + accent su hover).
+   L'accento parte SEMPRE dal linguaggio "segnale/frequenza" del brand. */
+
+/* --- equalizer audio (barre di frequenza) --- */
+@keyframes hz-eq {
+  0%, 100% { transform: scaleY(0.22); }
+  50%      { transform: scaleY(1); }
+}
+.hz-eq {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  width: 15px;
+  height: 14px;
+  flex: none;
+  color: var(--hz-accent);
+}
+.hz-eq i {
+  flex: 1;
+  height: 100%;
+  background: currentColor;
+  transform-origin: bottom;
+  transform: scaleY(0.3);
+  animation: hz-eq 0.85s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.hz-eq i:nth-child(1) { animation-delay: -0.20s; }
+.hz-eq i:nth-child(2) { animation-delay: -0.55s; }
+.hz-eq i:nth-child(3) { animation-delay: -0.05s; }
+.hz-eq i:nth-child(4) { animation-delay: -0.72s; }
+.hz-eq[data-play='true'] i { animation-play-state: running; }
+.hz-rowfx:hover .hz-eq i,
+.hz-rowfx:focus-visible .hz-eq i { animation-play-state: running; }
+
+/* --- row FX: barra d'accento a sinistra che cresce + freccia che scorre --- */
+.hz-rowfx { position: relative; }
+.hz-rowfx::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--hz-accent);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform var(--hz-ui, 0.3s) var(--hz-ease-out, ease);
+  pointer-events: none;
+}
+.hz-rowfx:hover::before,
+.hz-rowfx:focus-visible::before { transform: scaleY(1); }
+.hz-fx-arrow {
+  display: inline-flex;
+  transition:
+    transform var(--hz-ui, 0.3s) var(--hz-ease-out, ease),
+    opacity var(--hz-fast, 0.15s) var(--hz-ease-out, ease);
+}
+.hz-rowfx:hover .hz-fx-arrow,
+.hz-rowfx:focus-visible .hz-fx-arrow,
+.hz-cardfx:hover .hz-fx-arrow,
+.hz-cardfx:focus-visible .hz-fx-arrow { transform: translate(0.18em, -0.18em); }
+
+/* --- card FX: lift + accento su hover --- */
+.hz-cardfx {
+  transition:
+    transform var(--hz-ui, 0.3s) var(--hz-ease-out, ease),
+    border-color var(--hz-ui, 0.3s) var(--hz-ease-out, ease),
+    background-color var(--hz-ui, 0.3s) var(--hz-ease-out, ease);
+  will-change: transform;
+}
+.hz-cardfx:hover { transform: translateY(-4px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hz-eq i { animation: none; transform: scaleY(0.5); }
+  .hz-rowfx::before { transition: none; }
+  .hz-fx-arrow { transition: none; }
+  .hz-cardfx { will-change: auto; }
+  .hz-cardfx:hover { transform: none; }
+}

@@ -24,7 +24,7 @@ export default function MixRow({
       href={mix.url}
       target="_blank"
       rel="noreferrer"
-      className={styles.row}
+      className={`${styles.row} hz-rowfx`}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       onFocus={() => setHover(true)}
