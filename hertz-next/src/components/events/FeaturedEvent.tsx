@@ -41,6 +41,7 @@ export default function FeaturedEvent({ event }: { event: HertzEvent }) {
         )}
         <div className={styles.posterTag}>
           <span className="hz-mono">N°{event.n}</span>
+          {event.badge && <span className={`${styles.badge} hz-mono`}>{event.badge}</span>}
           <StatusBadge status={status} />
         </div>
       </div>

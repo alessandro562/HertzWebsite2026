@@ -63,6 +63,13 @@
   border-right: 1px solid var(--hz-line);
   color: var(--hz-ink-mute);
 }
+.badge {
+  padding: 0.15em 0.55em;
+  border: 1px solid var(--hz-line-strong);
+  color: var(--hz-ink);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
 
 /* ── contenuto: impilato, titolo sotto il cut, CTA agganciata al fondo ── */
 .content {
