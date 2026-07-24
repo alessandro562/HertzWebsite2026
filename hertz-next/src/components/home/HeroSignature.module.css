@@ -1,0 +1,71 @@
+/* ────────────────────────────────────────────────────────────
+   HERO SIGNATURE — firma di stampa in basso a destra.
+   Riga hairline (si disegna da sx) + lockup ufficiale hertz grande
+   (segno d'autore) a destra, dettaglio mono col prossimo evento a sx.
+   ──────────────────────────────────────────────────────────── */
+.signature {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  margin-top: clamp(2.5rem, 9vh, 6rem);
+}
+
+.rule {
+  display: block;
+  height: 1px;
+  width: 100%;
+  background: var(--hz-ink);
+  transform-origin: left center;
+  will-change: transform;
+}
+
+.row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--hz-space-md);
+  margin-top: clamp(0.9rem, 2.2vh, 1.5rem);
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+  color: var(--hz-ink-mute);
+  font-size: var(--hz-t-meta);
+}
+.metaLine {
+  letter-spacing: var(--hz-tracking-mono);
+  text-transform: uppercase;
+}
+.nextLink {
+  color: var(--hz-ink);
+  letter-spacing: var(--hz-tracking-mono);
+  text-transform: uppercase;
+  transition: color var(--hz-ui) var(--hz-ease-out);
+}
+.nextLink:hover {
+  color: var(--hz-accent);
+}
+
+/* lockup ufficiale (sinusoide + wordmark) come firma grande — stessa maschera
+   di HertzLogo, ma dimensione responsive dedicata alla hero. currentColor→ink. */
+.mark {
+  flex: none;
+  display: block;
+  height: clamp(2.6rem, 5vw, 4.5rem);
+  aspect-ratio: 600 / 444;
+  background-color: var(--hz-ink);
+  -webkit-mask: url(/assets/hertz-logo-header.png) center / contain no-repeat;
+  mask: url(/assets/hertz-logo-header.png) center / contain no-repeat;
+}
+
+@media (max-width: 480px) {
+  .meta {
+    font-size: 0.72rem;
+  }
+  .mark {
+    height: 2.4rem;
+  }
+}

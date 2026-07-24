@@ -57,7 +57,7 @@ export default function Home() {
   return (
     <main id="main">
       {/* ═══ 01 · HERO (signal · solo tipografia cinetica, nessuna foto) ═══ */}
-      {heroClassic ? <HomeHero next={nextEvent} /> : <HeroKinetic />}
+      {heroClassic ? <HomeHero next={nextEvent} /> : <HeroKinetic next={nextEvent} />}
 
       {/* ═══ 02 · INTRODUCTION (signal) ═══ */}
       <Section surface="signal" space="lg" id="intro">

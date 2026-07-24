@@ -24,18 +24,6 @@
   pointer-events: none;
 }
 
-/* sinusoide UFFICIALE hertz — allineata a SINISTRA, in basso (dove prima c'era
-   il blocco next-event), in flusso: la spinge in fondo il margin-block:auto del
-   tipo. z-index 1 per stare sopra la griglia. */
-.wave {
-  align-self: start;
-  width: min(48vw, 280px);
-  margin-top: var(--hz-space-md);
-  position: relative;
-  z-index: 1;
-  pointer-events: none;
-}
-
 .stage {
   position: relative;
   z-index: 1;
@@ -105,42 +93,4 @@
 }
 .tagBold {
   font-weight: 700;
-}
-
-/* ── riga inferiore: prossimo evento + CTA ── */
-.foot {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--hz-space-md);
-  align-items: end;
-  border-top: 1px solid var(--hz-line);
-  padding-top: var(--hz-space-md);
-}
-.next { display: flex; flex-direction: column; gap: 0.25rem; min-width: 0; }
-.nextLabel { color: var(--hz-ink-mute); }
-.nextTitle {
-  font-family: var(--hz-font-display);
-  font-weight: 500;
-  font-size: var(--hz-t-card);
-  line-height: 1.05;
-  transition: opacity var(--hz-ui) var(--hz-ease-out);
-}
-.nextTitle:hover { opacity: 0.6; }
-.nextMeta { color: var(--hz-ink-mute); }
-
-.actions { display: flex; flex-wrap: wrap; gap: var(--hz-space-sm); align-items: center; }
-.scrollCue {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6em;
-  color: var(--hz-ink-mute);
-  justify-self: start;
-}
-
-@media (min-width: 860px) {
-  .foot {
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: center;
-  }
-  .actions { justify-content: flex-end; }
 }

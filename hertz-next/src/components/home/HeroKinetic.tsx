@@ -4,16 +4,16 @@ import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'motion/react'
 import { useEnableMotion } from '@/motion/useEnableMotion'
 import HeroSignalGrid from './HeroSignalGrid'
-import HeroWaveform from './HeroWaveform'
+import HeroSignature, { type HeroSignatureEvent } from './HeroSignature'
 import styles from './HeroKinetic.module.css'
 
 /**
  * Hero SOLO tipografia (nessuna foto). "CLUBBING COLLECTIVE" maiuscolo che
  * gioca tra SOTTILE (thin 200) e GRASSETTO (bold 700), drift orizzontale su
- * scroll. Griglia Signal ambientale dietro; la sinusoide UFFICIALE hertz,
- * viva, allineata a sinistra in basso. Reduced-motion: statico.
+ * scroll. Griglia Signal ambientale dietro. In basso a destra il lockup
+ * ufficiale hertz FIRMA la composizione (HeroSignature). Reduced-motion: statico.
  */
-export default function HeroKinetic() {
+export default function HeroKinetic({ next }: { next?: HeroSignatureEvent }) {
   const root = useRef<HTMLElement>(null)
   const enabled = useEnableMotion()
   const { scrollYProgress } = useScroll({ target: root, offset: ['start start', 'end start'] })
@@ -71,9 +71,9 @@ export default function HeroKinetic() {
             <span className={styles.tagThin}>Keep the</span>{' '}
             <span className={styles.tagBold}>groove.</span>
           </motion.p>
-
-          <HeroWaveform className={styles.wave} />
         </div>
+
+        <HeroSignature next={next} />
       </div>
     </section>
   )
