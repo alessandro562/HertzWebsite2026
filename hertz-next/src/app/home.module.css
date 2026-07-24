@@ -219,102 +219,15 @@
   color: var(--hz-ink-mute);
   margin-bottom: var(--hz-section-sm);
 }
-/* lead prossimo evento — nessuna locandina, gerarchia tutta tipografica */
-.gigLead {
-  position: relative;
+/* prossimo evento + lista: riuso FeaturedEvent + EventModule (stesso design
+   curato della pagina /events — locandina reale, niente card a filo). */
+.featuredWrap {
+  margin-bottom: var(--hz-space-lg);
+}
+.eventList {
   display: flex;
   flex-direction: column;
-  padding: clamp(1.5rem, 3.6vw, 2.8rem) 0 clamp(1.4rem, 3vw, 2.4rem);
-  padding-left: clamp(0.9rem, 2.2vw, 1.5rem);
-  border-top: 2px solid var(--hz-ink);
-  border-bottom: 1px solid var(--hz-line);
-  margin-bottom: var(--hz-space-lg);
-  transition: padding-left var(--hz-ui) var(--hz-ease-out);
 }
-.gigLead:hover { padding-left: clamp(1.3rem, 3vw, 2rem); }
-.gigLeadHead {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--hz-space-md);
-  margin-bottom: var(--hz-space-sm);
-}
-.gigLeadKicker { color: var(--hz-ink-mute); }
-.gigLeadDate {
-  font-size: var(--hz-t-body-lg);
-  letter-spacing: var(--hz-tracking-mono);
-  text-transform: uppercase;
-  color: var(--hz-ink);
-  margin-bottom: var(--hz-space-xs);
-}
-.gigLeadTitle {
-  font-family: var(--hz-font-display);
-  font-weight: var(--hz-weight-display);
-  font-size: clamp(2.1rem, 6.2vw, 4.6rem);
-  line-height: 0.9;
-  letter-spacing: var(--hz-tracking-tight);
-  text-transform: uppercase;
-  max-width: 20ch;
-  transition: color var(--hz-fast) var(--hz-ease-out);
-}
-.gigLead:hover .gigLeadTitle { color: var(--hz-accent); }
-.gigLeadFoot {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--hz-space-xs) var(--hz-space-md);
-  margin-top: var(--hz-space-md);
-}
-.gigLeadVenue {
-  letter-spacing: var(--hz-tracking-mono);
-  text-transform: uppercase;
-  color: var(--hz-ink-mute);
-}
-.gigLeadCta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5em;
-  color: var(--hz-accent);
-}
-
-.eventList { display: flex; flex-direction: column; }
-.eventRow {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: var(--hz-space-sm) var(--hz-space-md);
-  padding: var(--hz-space-md) 0;
-  border-top: 1px solid var(--hz-line);
-  transition: padding-inline var(--hz-ui) var(--hz-ease-out);
-}
-/* grid item min-width:auto blocca lo shrink sotto la larghezza intrinseca del
-   contenuto: su viewport molto stretti (320px) questo spingeva la riga oltre
-   il bordo. min-width:0 permette a titolo/venue di andare a capo/troncare. */
-.eventRow > * {
-  min-width: 0;
-}
-@media (max-width: 360px) {
-  .eRowDate {
-    min-width: 0;
-  }
-  .eRowRight {
-    gap: var(--hz-space-sm);
-  }
-}
-.eventRow:hover { padding-inline: var(--hz-space-sm); background: var(--hz-bg-2); }
-.eRowDate {
-  font-family: var(--hz-font-mono);
-  font-size: var(--hz-t-meta);
-  letter-spacing: var(--hz-tracking-mono);
-  color: var(--hz-ink-mute);
-  min-width: 6.5em;
-}
-.eRowMain { display: flex; flex-direction: column; gap: 0.15em; }
-.eRowTitle { font-size: var(--hz-t-card); font-family: var(--hz-font-display); font-weight: var(--hz-weight-display); }
-.eRowVenue { font-family: var(--hz-font-mono); font-size: var(--hz-t-meta); letter-spacing: var(--hz-tracking-mono); color: var(--hz-ink-mute); text-transform: uppercase; }
-.eRowRight { display: flex; align-items: center; gap: var(--hz-space-md); }
-.eRowArrow { font-size: 1.2rem; }
 .pastLink {
   display: flex;
   justify-content: space-between;
@@ -325,10 +238,11 @@
   font-size: var(--hz-t-ui);
   text-transform: uppercase;
   letter-spacing: 0.04em;
+  transition: color var(--hz-ui) var(--hz-ease-out);
 }
-.status { font-family: var(--hz-font-mono); font-size: var(--hz-t-meta); letter-spacing: var(--hz-tracking-mono); text-transform: uppercase; white-space: nowrap; }
-.statusOn { color: var(--hz-onsale); font-weight: 700; }
-.statusSoon { color: var(--hz-soon); }
+.pastLink:hover {
+  color: var(--hz-accent);
+}
 
 /* ═══════════ 03 · MANIFESTO (ink) ═══════════ */
 .manifesto { position: relative; }

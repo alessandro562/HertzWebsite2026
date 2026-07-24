@@ -180,12 +180,15 @@
   text-decoration: underline;
   text-underline-offset: 0.25em;
 }
+/* card press-kit su fondo SCURO: il logo ufficiale è bianco → serve contrasto */
 .pkCard {
-  border: 1px solid var(--hz-line);
-  padding: var(--hz-space-md);
+  background: var(--raw-ink);
+  color: var(--raw-white);
+  border: 1px solid var(--raw-ink);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
   display: flex;
   flex-direction: column;
-  gap: var(--hz-space-md);
+  gap: var(--hz-space-lg);
 }
 .pkCardTop {
   display: flex;
@@ -193,13 +196,13 @@
   font-family: var(--hz-font-mono);
   font-size: var(--hz-t-meta);
   letter-spacing: var(--hz-tracking-mono);
-  color: var(--hz-ink-mute);
+  color: var(--raw-signal);
 }
 .pkLogo {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--hz-space-md) 0;
+  padding: clamp(1.5rem, 4vw, 3rem) 0;
 }
 .pkLogo img {
   width: min(220px, 70%);
@@ -209,7 +212,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--hz-space-sm);
-  border-top: 1px solid var(--hz-line);
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
   padding-top: var(--hz-space-md);
 }
 .pkK {
@@ -217,11 +220,12 @@
   font-size: var(--hz-t-meta);
   letter-spacing: var(--hz-tracking-mono);
   text-transform: uppercase;
-  color: var(--hz-ink-mute);
+  color: var(--raw-signal);
 }
 .pkV {
   font-family: var(--hz-font-mono);
   font-size: var(--hz-t-ui);
+  color: var(--raw-white);
   margin-top: 0.2rem;
 }
 

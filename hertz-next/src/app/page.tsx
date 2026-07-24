@@ -5,6 +5,8 @@ import Arrow from '@/components/ui/Arrow'
 import GlitchFX from '@/components/ui/GlitchFX'
 import HomeHero from '@/components/home/HomeHero'
 import HeroKinetic from '@/components/home/HeroKinetic'
+import FeaturedEvent from '@/components/events/FeaturedEvent'
+import EventModule from '@/components/events/EventModule'
 import KineticBand from '@/components/home/KineticBand'
 import BrandIdentity from '@/components/home/BrandIdentity'
 import Partners from '@/components/home/Partners'
@@ -120,61 +122,26 @@ export default function Home() {
         </Reveal>
 
         {next && (
-          <Reveal variant="up">
-            <Link href={`/events/${eventSlug(next)}`} className={`${styles.gigLead} hz-rowfx`}>
-              <span className={styles.gigLeadHead}>
-                <span className={`${styles.gigLeadKicker} hz-mono`}>Next event</span>
-                <span
-                  className={`${styles.status} ${next.onSale ? styles.statusOn : styles.statusSoon}`}
-                >
-                  {next.onSale ? 'On sale' : 'Soon'}
-                </span>
-              </span>
-              <span className={`${styles.gigLeadDate} hz-mono`}>{dowDate(next)}</span>
-              <span className={styles.gigLeadTitle}>{next.title}</span>
-              <span className={styles.gigLeadFoot}>
-                <span className={`${styles.gigLeadVenue} hz-mono`}>
-                  {next.venue} · {next.city}
-                </span>
-                <span className={`${styles.gigLeadCta} hz-mono hz-fx-arrow`}>
-                  View event <Arrow />
-                </span>
-              </span>
-            </Link>
+          <Reveal variant="up" className={styles.featuredWrap}>
+            <FeaturedEvent event={next} />
           </Reveal>
         )}
 
-        <Stagger className={styles.eventList} gap={0.07}>
-          {restGigs.map((e) => (
-            <StaggerItem key={e.n} variant="up">
-              <Link href={`/events/${eventSlug(e)}`} className={`${styles.eventRow} hz-rowfx`}>
-                <span className={`${styles.eRowDate} hz-mono`}>{dowDate(e)}</span>
-                <span className={styles.eRowMain}>
-                  <span className={styles.eRowTitle}>{e.title}</span>
-                  <span className={styles.eRowVenue}>
-                    {e.venue} · {e.city}
-                  </span>
-                </span>
-                <span className={styles.eRowRight}>
-                  <span
-                    className={`${styles.status} ${e.onSale ? styles.statusOn : styles.statusSoon}`}
-                  >
-                    {e.onSale ? 'On sale' : 'Soon'}
-                  </span>
-                  <span className={`${styles.eRowArrow} hz-fx-arrow`} aria-hidden="true">
-                    <Arrow />
-                  </span>
-                </span>
+        {restGigs.length > 0 && (
+          <Stagger className={styles.eventList} gap={0.07}>
+            {restGigs.map((e) => (
+              <StaggerItem key={e.n} variant="up">
+                <EventModule event={e} />
+              </StaggerItem>
+            ))}
+            <StaggerItem variant="up">
+              <Link href="/archive" className={styles.pastLink}>
+                <span>Past events</span>
+                <span>Archive <Arrow /></span>
               </Link>
             </StaggerItem>
-          ))}
-          <StaggerItem variant="up">
-            <Link href="/archive" className={styles.pastLink}>
-              <span>Past events</span>
-              <span>Archive <Arrow /></span>
-            </Link>
-          </StaggerItem>
-        </Stagger>
+          </Stagger>
+        )}
       </Section>
 
       {/* ═══ 03 · MANIFESTO (ink — unico dark) ═══ */}
