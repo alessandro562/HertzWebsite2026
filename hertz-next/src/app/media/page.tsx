@@ -6,6 +6,7 @@ import Arrow from '@/components/ui/Arrow'
 import GlitchFX from '@/components/ui/GlitchFX'
 import Parallax from '@/motion/Parallax'
 import Reveal, { Stagger, StaggerItem } from '@/motion/Reveal'
+import TiltCard from '@/motion/TiltCard'
 import { ARTICLES, featuredArticle, articleDate } from '@/content/media'
 import styles from './media.module.css'
 
@@ -45,26 +46,27 @@ export default function MediaPage() {
       {/* ── COVER STORY ── */}
       <Section surface="white" space="md">
         <Reveal variant="up">
-          <Link href={`/media/${feature.slug}`} className={styles.cover}>
-            <div className={`${styles.coverImg} hz-glitch`}>
-              <Parallax speed={28} zoom className={styles.coverParallax}>
-                <img src={feature.heroImage} alt={feature.heroImageAlt} loading="eager" decoding="async" />
-              </Parallax>
-              <GlitchFX />
-              <span className={`${styles.coverTag} hz-mono`}>Cover story</span>
-            </div>
-            <div className={styles.coverBody}>
-              <span className={`${styles.coverRubric} hz-mono`}>{feature.rubric}</span>
-              <h2 className={styles.coverTitle}>{feature.title}</h2>
-              <p className={styles.coverStand}>{feature.subtitle}</p>
-              <span className={`${styles.coverMeta} hz-mono`}>
-                {feature.author} · {feature.readingTimeMinutes} min · {articleDate(feature)}
-              </span>
-              <span className={`${styles.coverGo} hz-mono hz-fx-arrow`}>
-                Read the story <Arrow />
-              </span>
-            </div>
-          </Link>
+          <TiltCard>
+            <Link href={`/media/${feature.slug}`} className={styles.cover}>
+              <div className={`${styles.coverImg} hz-glitch`}>
+                <Parallax speed={28} zoom className={styles.coverParallax}>
+                  <img src={feature.heroImage} alt={feature.heroImageAlt} loading="eager" decoding="async" />
+                </Parallax>
+                <GlitchFX />
+              </div>
+              <div className={styles.coverBody}>
+                <span className={`${styles.coverRubric} hz-mono`}>{feature.rubric}</span>
+                <h2 className={styles.coverTitle}>{feature.title}</h2>
+                <p className={styles.coverStand}>{feature.subtitle}</p>
+                <span className={`${styles.coverMeta} hz-mono`}>
+                  {feature.author} · {feature.readingTimeMinutes} min · {articleDate(feature)}
+                </span>
+                <span className={`${styles.coverGo} hz-mono hz-fx-arrow`}>
+                  Read the story <Arrow />
+                </span>
+              </div>
+            </Link>
+          </TiltCard>
         </Reveal>
       </Section>
 

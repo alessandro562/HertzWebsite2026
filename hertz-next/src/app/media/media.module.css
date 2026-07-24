@@ -51,11 +51,17 @@
 }
 
 /* ── cover story: immagine + testo, asimmetrico ── */
+/* la card è avvolta da TiltCard (tilt 3D leggero guidato dal puntatore): qui
+   solo l'ombra di profondità che compare all'hover per accompagnare il tilt. */
 .cover {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--hz-space-md);
   color: inherit;
+  transition: box-shadow var(--hz-ui) var(--hz-ease-out);
+}
+.cover:hover {
+  box-shadow: 0 26px 55px -34px color-mix(in srgb, var(--hz-ink) 55%, transparent);
 }
 @media (min-width: 900px) {
   .cover {
@@ -80,16 +86,6 @@
   object-fit: cover;
   display: block;
 }
-.coverTag {
-  position: absolute;
-  z-index: 4;
-  top: 0;
-  left: 0;
-  padding: 0.5em 0.9em;
-  background: var(--hz-accent);
-  color: var(--hz-bg);
-  letter-spacing: 0.1em;
-}
 .coverBody {
   display: flex;
   flex-direction: column;
@@ -110,11 +106,6 @@
   letter-spacing: var(--hz-tracking-tight);
   text-wrap: balance;
   margin-top: var(--hz-space-2xs);
-}
-.cover:hover .coverTitle {
-  text-decoration: underline;
-  text-underline-offset: 0.22em;
-  text-decoration-thickness: 1px;
 }
 .coverStand {
   font-weight: 300; /* Light */
