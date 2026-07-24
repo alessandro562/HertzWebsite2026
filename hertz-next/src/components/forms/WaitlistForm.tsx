@@ -41,7 +41,10 @@ export default function WaitlistForm() {
   if (state === 'ok') {
     return (
       <p className="hz-mono" style={{ color: 'var(--hz-accent)' }}>
-        {msg}
+        {msg}{' '}
+        <button type="button" className={styles.doneReset} onClick={() => setState('idle')}>
+          Add another email
+        </button>
       </p>
     )
   }

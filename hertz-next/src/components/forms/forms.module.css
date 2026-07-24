@@ -129,6 +129,22 @@
 .doneSub {
   color: var(--hz-ink-mute);
 }
+.doneReset {
+  display: inline-block;
+  margin-top: var(--hz-space-md);
+  font: inherit;
+  font-size: var(--hz-t-meta);
+  color: var(--hz-ink);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.doneReset:hover {
+  color: var(--hz-accent);
+}
 
 /* mini inline (waitlist) */
 .mini {

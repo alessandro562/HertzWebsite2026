@@ -78,6 +78,9 @@ export default function BookingForm() {
         <p className={styles.doneSub}>
           Ti rispondiamo via email con disponibilità e cachet.
         </p>
+        <button type="button" className={styles.doneReset} onClick={() => setState('idle')}>
+          Invia un&rsquo;altra richiesta
+        </button>
       </div>
     )
   }

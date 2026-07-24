@@ -43,6 +43,9 @@ export default function ReserveForm({ item = 'Lanyard · Drop 01' }: { item?: st
       <div className={styles.done}>
         <p className={styles.doneTitle}>{msg}</p>
         <p className={styles.doneSub}>We&rsquo;ll confirm by email. Numbered 001–200, ships from Bologna.</p>
+        <button type="button" className={styles.doneReset} onClick={() => setState('idle')}>
+          Reserve another
+        </button>
       </div>
     )
   }
