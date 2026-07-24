@@ -95,11 +95,12 @@
   -webkit-mask: url(/assets/hertz-sinusoid.png) center / contain no-repeat;
   mask: url(/assets/hertz-sinusoid.png) center / contain no-repeat;
 }
+/* invertito all'hover: riempi con l'INK della superficie e porta testo +
+   sinusoide al colore di sfondo. NB: NON usare `currentColor` per il background —
+   verrebbe risolto col NUOVO color (--hz-bg) e sfondo/testo diventerebbero lo
+   stesso colore → il tasto "sparisce". */
 .tickets:hover {
-  background: currentColor;
-}
-/* invertito all'hover: usa un pseudo per non perdere il testo */
-.tickets:hover {
+  background-color: var(--hz-ink);
   color: var(--hz-bg, var(--raw-white));
 }
 
