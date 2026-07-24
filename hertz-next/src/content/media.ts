@@ -29,7 +29,7 @@ export const ARTICLES: Article[] = [
     excerpt:
       "UNVRS didn't just open big. It rewrote the rules in a single season. We read the 2026 Ibiza calendar as two scenes running on the same island at different speeds.",
     rubric: 'SIGNAL',
-    heroImage: '/assets/media-unvrs.png',
+    heroImage: '/assets/media-unvrs.webp',
     heroImageAlt: 'A hyperclub crowd under stage lights',
     author: 'Hertz Redazione',
     date: '2026-06-26',
@@ -44,7 +44,7 @@ export const ARTICLES: Article[] = [
     excerpt:
       'Sunwaves (no VIP, booth close, six-hour sets) just lost its home to permits and pressure and decamped to Spain. Why the most music-first format in our world is also the most fragile.',
     rubric: 'DISPATCH',
-    heroImage: '/assets/media-sunwaves.png',
+    heroImage: '/assets/media-sunwaves.webp',
     heroImageAlt: 'A low-lit marathon floor',
     author: 'Hertz Redazione',
     date: '2026-06-21',
@@ -58,7 +58,7 @@ export const ARTICLES: Article[] = [
     excerpt:
       'Music On stayed at Pacha for 2026. The long residency builds something a festival headline slot never can: a crowd, a sound, a room.',
     rubric: 'RESIDENT',
-    heroImage: '/assets/media-music-on-pacha.png',
+    heroImage: '/assets/media-music-on-pacha.webp',
     heroImageAlt: 'A packed floor deep into a residency night',
     author: 'Hertz Redazione',
     date: '2026-06-16',
@@ -72,7 +72,7 @@ export const ARTICLES: Article[] = [
     excerpt:
       "Our first artist column. Eight producers we're actually playing, from UK deep-tech and the Italian groove to Peru and the festival crossover.",
     rubric: 'RADAR',
-    heroImage: '/assets/media-radar-vol-1.png',
+    heroImage: '/assets/media-radar-vol-1.webp',
     heroImageAlt: 'A DJ at the booth, close-up',
     author: 'Hertz Redazione',
     date: '2026-06-11',

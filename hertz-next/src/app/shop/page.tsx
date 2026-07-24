@@ -39,7 +39,7 @@ export default function ShopPage() {
       <Section surface="white" space="lg">
         <div className={styles.product}>
           <ImageFrame
-            src="/assets/merch-lanyard-drop01.png"
+            src="/assets/merch-lanyard-drop01.webp"
             alt="Hertz lanyard, Drop 01"
             ratio="1 / 1"
             priority
