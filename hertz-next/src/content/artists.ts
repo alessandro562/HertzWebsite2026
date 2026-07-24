@@ -52,7 +52,7 @@ export const ARTISTS: Record<ResidentSlug, Artist> = {
     freq: '120 Hz',
     origin: 'Emilia-Romagna, IT',
     since: '2023',
-    sets: 'Deep · Minimal · Atmospheric',
+    sets: 'Minimal & Deep Tech',
     portrait: '/assets/dj-apadula.jpg',
     gallery: [
       '/assets/federico-apadula-live-1.jpg',

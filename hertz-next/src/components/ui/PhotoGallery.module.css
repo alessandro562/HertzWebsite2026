@@ -9,6 +9,9 @@
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
+  /* separa nettamente i gesti touch: orizzontale = drag del carosello,
+     verticale = scroll della pagina (delegato al browser, non intercettato) */
+  touch-action: pan-y;
 }
 .rail::-webkit-scrollbar {
   display: none;

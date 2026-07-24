@@ -81,10 +81,13 @@ export default function PhotoGallery({
             key={src}
             type="button"
             className={styles.card}
-            initial={{ opacity: 0, y: 26 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            /* solo fade in entrata — NIENTE offset verticale: il carosello è
+               orizzontale (drag/scroll a destra e sinistra), un reveal in Y
+               leggeva come "le foto si muovono su e giù" su mobile. */
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: '-10% 0px' }}
-            transition={{ duration: 0.7, delay: Math.min(i, 5) * 0.08, ease: EASE }}
+            transition={{ duration: 0.5, delay: Math.min(i, 5) * 0.06, ease: EASE }}
             onClick={() => {
               if (!drag.current.moved) setOpen(i)
             }}

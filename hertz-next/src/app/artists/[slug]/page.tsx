@@ -78,8 +78,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
     { label: 'Origin', value: a.origin },
     { label: 'Resident since', value: a.since },
     { label: 'Signature', value: a.sets },
-    events.length > 0 && { label: 'Sessions', value: String(events.length) },
-  ].filter((m): m is { label: string; value: string } => Boolean(m))
+  ]
 
   /* navigazione ciclica al prossimo resident (per numero) */
   const roster = Object.values(ARTISTS).sort((x, y) => x.n.localeCompare(y.n))
