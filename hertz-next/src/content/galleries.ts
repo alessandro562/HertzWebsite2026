@@ -8,6 +8,10 @@
 
 export const GALLERIES: Record<string, string[]> = {
   '021': [
+    /* crowd/floor in testa: queste aprono il featured spread e le preview card */
+    '/assets/archivio-web/26.12_Hertz-104.jpg',
+    '/assets/archivio-web/26.12_Hertz-105.jpg',
+    '/assets/archivio-web/26.12_Hertz-181.jpg',
     '/assets/archivio-web/26.12_Hertz-70.jpg',
     '/assets/archivio-web/26.12_Hertz-71.jpg',
     '/assets/archivio-web/26.12_Hertz-72.jpg',
@@ -26,8 +30,6 @@ export const GALLERIES: Record<string, string[]> = {
     '/assets/archivio-web/26.12_Hertz-94.jpg',
     '/assets/archivio-web/26.12_Hertz-95.jpg',
     '/assets/archivio-web/26.12_Hertz-96.jpg',
-    '/assets/archivio-web/26.12_Hertz-104.jpg',
-    '/assets/archivio-web/26.12_Hertz-105.jpg',
     '/assets/archivio-web/26.12_Hertz-106.jpg',
     '/assets/archivio-web/26.12_Hertz-107.jpg',
     '/assets/archivio-web/26.12_Hertz-108.jpg',
@@ -37,13 +39,16 @@ export const GALLERIES: Record<string, string[]> = {
     '/assets/archivio-web/26.12_Hertz-113.jpg',
     '/assets/archivio-web/26.12_Hertz-114.jpg',
     '/assets/archivio-web/26.12_Hertz-115.jpg',
-    '/assets/archivio-web/26.12_Hertz-181.jpg',
     '/assets/archivio-web/26.12_Hertz-182.jpg',
     '/assets/archivio-web/26.12_Hertz-183.jpg',
     '/assets/archivio-web/26.12_Hertz-184.jpg',
     '/assets/archivio-web/26.12_Hertz-185.jpg',
   ],
   '022': [
+    /* crowd/floor in testa: queste aprono il featured spread e le preview card */
+    '/assets/archivio-web/27.02_Hertz-104.jpg',
+    '/assets/archivio-web/27.02_Hertz-192.jpg',
+    '/assets/archivio-web/27.02_Hertz-171.jpg',
     '/assets/archivio-web/27.02_Hertz-38.jpg',
     '/assets/archivio-web/27.02_Hertz-39.jpg',
     '/assets/archivio-web/27.02_Hertz-40.jpg',
@@ -62,7 +67,6 @@ export const GALLERIES: Record<string, string[]> = {
     '/assets/archivio-web/27.02_Hertz-74.jpg',
     '/assets/archivio-web/27.02_Hertz-75.jpg',
     '/assets/archivio-web/27.02_Hertz-76.jpg',
-    '/assets/archivio-web/27.02_Hertz-104.jpg',
     '/assets/archivio-web/27.02_Hertz-105.jpg',
     '/assets/archivio-web/27.02_Hertz-106.jpg',
     '/assets/archivio-web/27.02_Hertz-107.jpg',
@@ -73,7 +77,6 @@ export const GALLERIES: Record<string, string[]> = {
     '/assets/archivio-web/27.02_Hertz-142.jpg',
     '/assets/archivio-web/27.02_Hertz-143.jpg',
     '/assets/archivio-web/27.02_Hertz-144.jpg',
-    '/assets/archivio-web/27.02_Hertz-171.jpg',
     '/assets/archivio-web/27.02_Hertz-172.jpg',
     '/assets/archivio-web/27.02_Hertz-173.jpg',
     '/assets/archivio-web/27.02_Hertz-174.jpg',
@@ -82,7 +85,6 @@ export const GALLERIES: Record<string, string[]> = {
     '/assets/archivio-web/27.02_Hertz-189.jpg',
     '/assets/archivio-web/27.02_Hertz-190.jpg',
     '/assets/archivio-web/27.02_Hertz-191.jpg',
-    '/assets/archivio-web/27.02_Hertz-192.jpg',
     '/assets/archivio-web/27.02_Hertz-193.jpg',
   ],
 }
