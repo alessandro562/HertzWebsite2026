@@ -41,12 +41,6 @@
   max-width: 34ch;
   text-wrap: pretty;
 }
-.introMeta {
-  color: var(--hz-ink-mute);
-  padding-top: var(--hz-space-sm);
-  border-top: 1px solid var(--hz-line);
-}
-
 .featuredWrap {
   margin-top: var(--hz-space-md);
 }

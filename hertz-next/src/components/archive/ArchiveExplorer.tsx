@@ -83,7 +83,6 @@ export default function ArchiveExplorer({ items, years }: { items: ArchiveItem[]
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             >
               <Link href={`/events/${it.slug}`} className={styles.row}>
-                <span className={`${styles.n} hz-mono`}>N°{it.n}</span>
                 <span className={`${styles.date} hz-mono`}>{it.date}</span>
                 <span className={styles.main}>
                   <span className={styles.title}>{it.title}</span>

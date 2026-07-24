@@ -22,9 +22,6 @@ export default function EventsPage() {
   const rest = up.filter((e) => e.n !== feature?.n)
 
   const pastYears = [...new Set(past.map(eventYear))]
-  const pastRange = past.length
-    ? `N°${past[past.length - 1].n} → ${past[0].n}`
-    : ''
 
   /* JSON-LD aggregato di tutte le date upcoming (parità SEO col vecchio /events) */
   const jsonLd = {
@@ -64,9 +61,6 @@ export default function EventsPage() {
               Independent nights across Bologna and central Italy: minimal &amp; deep tech, booked
               like we&rsquo;d pay to see them ourselves.
             </p>
-            <p className={`${styles.introMeta} hz-mono`}>
-              {up.length} upcoming · {past.length} in the archive · we run on the guest list
-            </p>
           </div>
         </div>
       </Section>
@@ -97,7 +91,7 @@ export default function EventsPage() {
           <p className={`${styles.introKicker} hz-mono`}>02 / Archive</p>
           <h2 className={styles.archiveTitle}>Rewind.</h2>
           <span className={`${styles.archiveCount} hz-mono`}>
-            Past transmissions · {pastYears.join('–')} · {pastRange}
+            Past transmissions · {pastYears.join('–')}
           </span>
         </div>
         <ArchiveTable events={past} />

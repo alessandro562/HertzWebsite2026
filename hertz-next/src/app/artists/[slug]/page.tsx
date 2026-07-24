@@ -14,6 +14,7 @@ import { Stagger, StaggerItem } from '@/motion/Reveal'
 import { ARTISTS } from '@/content/artists'
 import { forResident, eventSlug, isPast, dowDate, type ResidentSlug } from '@/content/events'
 import { SITE } from '@/lib/site'
+import { getArtwork } from '@/lib/soundcloud'
 import styles from './artist.module.css'
 
 export function generateStaticParams() {
@@ -63,6 +64,8 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
   const events = forResident(a.slug)
   const upcomingDates = events.filter((e) => !isPast(e))
   const archiveDates = events.filter((e) => isPast(e))
+  const artworks = await Promise.all(a.mixes.map((m) => getArtwork(m.url)))
+  const artByUrl = new Map(a.mixes.map((m, i) => [m.url, artworks[i]]))
   const socials = [
     a.social.soundcloud && { label: 'SoundCloud', href: a.social.soundcloud },
     a.social.spotify && { label: 'Spotify', href: a.social.spotify },
@@ -75,7 +78,6 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
     { label: 'Origin', value: a.origin },
     { label: 'Resident since', value: a.since },
     { label: 'Signature', value: a.sets },
-    { label: 'Catalogue', value: `N°${a.n}` },
     events.length > 0 && { label: 'Sessions', value: String(events.length) },
   ].filter((m): m is { label: string; value: string } => Boolean(m))
 
@@ -90,12 +92,12 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
         <p className={`${styles.crumb} hz-mono`}>
           <Link href="/artists">Artists</Link>
           <span aria-hidden="true"> / </span>
-          <span>{a.n}</span>
+          <span>{a.name}</span>
         </p>
 
         <div className={styles.hero}>
           <div className={styles.identity}>
-            <span className={`${styles.resTag} hz-mono`}>N°{a.n} · Resident</span>
+            <span className={`${styles.resTag} hz-mono`}>Resident</span>
             <ViewMorph name={`artist-name-${a.slug}`}>
               <h1 className={styles.name}>{a.name}</h1>
             </ViewMorph>
@@ -165,9 +167,9 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           />
           {a.mixes.length > 0 ? (
             <Stagger gap={0.06}>
-              {a.mixes.map((m, i) => (
+              {a.mixes.map((m) => (
                 <StaggerItem key={m.url} variant="up">
-                  <MixRow mix={m} artist={a.name} index={i} />
+                  <MixRow mix={m} artist={a.name} art={artByUrl.get(m.url)} />
                 </StaggerItem>
               ))}
             </Stagger>

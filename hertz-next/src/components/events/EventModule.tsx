@@ -28,13 +28,11 @@ export default function EventModule({ event }: { event: HertzEvent }) {
             decoding="async"
           />
         ) : (
-          <PosterFallback n={event.n} date={dowDate(event)} city={event.city} className={styles.thumbFallback} />
+          <PosterFallback date={dowDate(event)} city={event.city} className={styles.thumbFallback} />
         )}
       </span>
       <span className={styles.body}>
-        <span className={`${styles.date} hz-mono`}>
-          {dowDate(event)} · N°{event.n}
-        </span>
+        <span className={`${styles.date} hz-mono`}>{dowDate(event)}</span>
         <span className={styles.title}>{event.title}</span>
         <span className={styles.venue}>
           {event.venue} · {event.city}

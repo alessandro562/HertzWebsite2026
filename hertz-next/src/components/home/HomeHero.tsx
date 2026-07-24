@@ -93,7 +93,6 @@ export default function HomeHero({ next }: { next?: NextEvent }) {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/assets/hero-booth.jpg" alt="Hertz, the booth during an event" className={styles.photo} />
             <figcaption className={`${styles.photoCap} hz-mono`}>
-              <span>N°{next?.n ?? '—'}</span>
               <span>Bologna floor</span>
             </figcaption>
           </motion.figure>
@@ -102,7 +101,7 @@ export default function HomeHero({ next }: { next?: NextEvent }) {
         <motion.div className={styles.foot} style={enabled ? { y: contentY, opacity: fade } : undefined}>
           {next && (
             <motion.div className={styles.next} style={{ x: metaX }}>
-              <span className={`${styles.nextLabel} hz-mono`}>Next · N°{next.n}</span>
+              <span className={`${styles.nextLabel} hz-mono`}>Next</span>
               <Link href={`/events/${next.slug}`} className={styles.nextTitle}>
                 {next.title}
               </Link>

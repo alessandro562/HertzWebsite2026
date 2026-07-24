@@ -12,7 +12,6 @@ export default function DepartureBoard({ events }: { events: HertzEvent[] }) {
   return (
     <div className={styles.board}>
       <div className={styles.head}>
-        <span className={`${styles.kicker} hz-mono`}>Departures · Live board</span>
         <h2 className={styles.title}>What&rsquo;s next.</h2>
       </div>
 
@@ -51,11 +50,6 @@ export default function DepartureBoard({ events }: { events: HertzEvent[] }) {
           )
         })}
       </div>
-
-      <p className={`${styles.hint} hz-mono`}>
-        <span className={styles.dot} aria-hidden="true" />
-        All upcoming Hertz nights · the next one is marked ▸
-      </p>
     </div>
   )
 }

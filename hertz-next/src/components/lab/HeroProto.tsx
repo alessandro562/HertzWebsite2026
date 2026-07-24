@@ -61,7 +61,6 @@ export default function HeroProto({
             <figure className={hero.photoWrap} ref={photoRef as React.Ref<HTMLElement>}>
               <img src="/assets/hero-booth.jpg" alt="Hertz — the booth during an event" className={hero.photo} />
               <figcaption className={`${hero.photoCap} hz-mono`}>
-                <span>N°{next?.n ?? '—'}</span>
                 <span>Bologna floor</span>
               </figcaption>
             </figure>
@@ -71,7 +70,7 @@ export default function HeroProto({
         <div className={hero.foot}>
           {next && (
             <div className={hero.next}>
-              <span className={`${hero.nextLabel} hz-mono`}>Next · N°{next.n}</span>
+              <span className={`${hero.nextLabel} hz-mono`}>Next</span>
               <Link href={`/events/${next.slug}`} className={hero.nextTitle}>
                 {next.title}
               </Link>

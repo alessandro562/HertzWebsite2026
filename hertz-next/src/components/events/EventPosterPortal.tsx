@@ -104,7 +104,7 @@ export default function EventPosterPortal({
     </motion.div>
   ) : (
     <div className={`${styles.fallback} ${fill ? styles.frameFill : ''}`.trim()} style={fill ? undefined : { aspectRatio }}>
-      <PosterFallback n={n} date={date} city={venue} className={styles.fallbackInner} />
+      <PosterFallback date={date} city={venue} className={styles.fallbackInner} />
     </div>
   )
 
@@ -120,10 +120,11 @@ export default function EventPosterPortal({
         style={{ rotateX: rotX, rotateY: rotY }}
       >
         {viewTransitionName ? <ViewMorph name={viewTransitionName}>{surface}</ViewMorph> : surface}
-        <span className={`${styles.meta} ${fill ? styles.metaOverlay : ''}`.trim()} aria-hidden="true">
-          <span className="hz-mono">N°{n}</span>
-          {!fill && <StatusBadge status={status} />}
-        </span>
+        {!fill && (
+          <span className={`${styles.meta} ${fill ? styles.metaOverlay : ''}`.trim()} aria-hidden="true">
+            <StatusBadge status={status} />
+          </span>
+        )}
       </motion.div>
     </div>
   )

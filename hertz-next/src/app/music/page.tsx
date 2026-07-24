@@ -8,6 +8,7 @@ import GlitchFX from '@/components/ui/GlitchFX'
 import MixRow from '@/components/music/MixRow'
 import { ARTISTS } from '@/content/artists'
 import { SITE } from '@/lib/site'
+import { getArtwork } from '@/lib/soundcloud'
 import styles from './music.module.css'
 
 export const metadata: Metadata = {
@@ -20,12 +21,14 @@ export const metadata: Metadata = {
 const ROSTER = Object.values(ARTISTS).sort((a, b) => a.n.localeCompare(b.n))
 const WITH_MIXES = ROSTER.filter((a) => a.mixes.length > 0)
 const ON_SPOTIFY = ROSTER.filter((a) => a.social.spotify)
-const TOTAL = WITH_MIXES.reduce((n, a) => n + a.mixes.length, 0)
 
 const SC_LOGO = '/assets/logo-soundcloud-dark.png'
 const SP_LOGO = '/assets/logo-spotify-dark.png'
 
-export default function MusicPage() {
+export default async function MusicPage() {
+  const allMixes = WITH_MIXES.flatMap((a) => a.mixes)
+  const artworks = await Promise.all(allMixes.map((m) => getArtwork(m.url)))
+  const artByUrl = new Map(allMixes.map((m, i) => [m.url, artworks[i]]))
   return (
     <main id="main">
       {/* ── header editoriale + barra piattaforme ── */}
@@ -44,14 +47,14 @@ export default function MusicPage() {
                 target="_blank"
                 rel="noreferrer"
                 className={styles.chip}
-                aria-label={`SoundCloud, ${TOTAL} sets`}
+                aria-label="SoundCloud"
               >
                 <img src={SC_LOGO} alt="SoundCloud" className={styles.chipLogo} />
-                <span className={`${styles.chipMeta} hz-mono`}>{TOTAL} sets <Arrow /></span>
+                <span className={`${styles.chipMeta} hz-mono`}>Sets <Arrow /></span>
               </a>
-              <a href="#spotify" className={styles.chip} aria-label={`Spotify, ${ON_SPOTIFY.length} residents`}>
+              <a href="#spotify" className={styles.chip} aria-label="Spotify">
                 <img src={SP_LOGO} alt="Spotify" className={styles.chipLogo} />
-                <span className={`${styles.chipMeta} hz-mono`}>{ON_SPOTIFY.length} residents ↓</span>
+                <span className={`${styles.chipMeta} hz-mono`}>Residents ↓</span>
               </a>
             </div>
           </div>
@@ -63,8 +66,7 @@ export default function MusicPage() {
         <div className={styles.platHead}>
           <img src={SC_LOGO} alt="SoundCloud" className={styles.platLogo} />
           <p className={styles.platSub}>
-            The collective and every resident&rsquo;s sets, {TOTAL} mixes, streamed straight from
-            SoundCloud.
+            The collective and every resident&rsquo;s sets, streamed straight from SoundCloud.
           </p>
           <Button href={SITE.soundcloud} external variant="ghost" arrow>
             {SITE.soundcloudHandle}
@@ -81,8 +83,8 @@ export default function MusicPage() {
                 </Link>
               </div>
               <div className={styles.groupMixes}>
-                {a.mixes.map((m, j) => (
-                  <MixRow key={m.url} mix={m} artist={a.name} index={j} />
+                {a.mixes.map((m) => (
+                  <MixRow key={m.url} mix={m} artist={a.name} art={artByUrl.get(m.url)} />
                 ))}
               </div>
             </div>

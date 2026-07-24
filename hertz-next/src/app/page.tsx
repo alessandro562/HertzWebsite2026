@@ -123,7 +123,7 @@ export default function Home() {
           <Reveal variant="up">
             <Link href={`/events/${eventSlug(next)}`} className={`${styles.gigLead} hz-rowfx`}>
               <span className={styles.gigLeadHead}>
-                <span className={`${styles.gigLeadKicker} hz-mono`}>Next event · N°{next.n}</span>
+                <span className={`${styles.gigLeadKicker} hz-mono`}>Next event</span>
                 <span
                   className={`${styles.status} ${next.onSale ? styles.statusOn : styles.statusSoon}`}
                 >
@@ -179,9 +179,6 @@ export default function Home() {
 
       {/* ═══ 03 · MANIFESTO (ink — unico dark) ═══ */}
       <Section surface="ink" space="lg" id="manifesto">
-        <p className="hz-mono" style={{ color: 'var(--hz-ink-mute)', marginBottom: 'var(--hz-space-md)' }}>
-          02 / Manifesto · The floor is the medium
-        </p>
         <div className={styles.manifestoGrid}>
           <div>
             <SignatureTitle as="h2" className={styles.manifestoStatement} stagger={0.09} parallax={28}>

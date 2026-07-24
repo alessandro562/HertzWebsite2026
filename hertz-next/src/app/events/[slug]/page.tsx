@@ -41,7 +41,7 @@ export async function generateMetadata({
   if (!e) return {}
   const desc = [`${e.venue}, ${e.city}`, dowDate(e), e.bill].filter(Boolean).join(' · ')
   return {
-    title: `${e.title} · N°${e.n}`,
+    title: e.title,
     description: desc,
     alternates: { canonical: `/events/${slug}` },
     openGraph: {
@@ -49,13 +49,13 @@ export async function generateMetadata({
       siteName: 'HERTZ',
       locale: 'it_IT',
       url: `${SITE.url}/events/${slug}`,
-      title: `${e.title} · N°${e.n}`,
+      title: e.title,
       description: desc,
       ...(e.poster ? { images: [{ url: e.poster }] } : {}),
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${e.title} · N°${e.n}`,
+      title: e.title,
       description: desc,
     },
   }
@@ -124,7 +124,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
         <p className={`${styles.crumb} hz-mono`}>
           <Link href="/events">Events</Link>
           <span aria-hidden="true"> / </span>
-          <span>N°{e.n}</span>
+          <span>{e.title}</span>
         </p>
 
         <div
@@ -132,10 +132,6 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
           data-status={status}
           style={{ viewTransitionName: `event-frame-${slug}` } as CSSProperties}
         >
-          <div className={styles.heroNum} aria-hidden="true">
-            <span className="hz-mono">N°{e.n}</span>
-          </div>
-
           <div className={styles.heroPoster}>
             <ViewMorph name={`event-poster-${slug}`}>
               {e.poster ? (
@@ -152,7 +148,6 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
               ) : (
                 <div className={styles.posterFig} data-fallback="true">
                   <PosterFallback
-                    n={e.n}
                     date={dowDate(e)}
                     city={e.city}
                     className={styles.posterFallbackInner}
@@ -281,18 +276,14 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
               <Link href={`/events/${eventSlug(prev)}`} className={styles.adjacentCard}>
                 <span className={`${styles.adjacentDir} hz-mono`}>← Previous</span>
                 <span className={styles.adjacentTitle}>{prev.title}</span>
-                <span className={`${styles.adjacentMeta} hz-mono`}>
-                  N°{prev.n} · {dowDate(prev)}
-                </span>
+                <span className={`${styles.adjacentMeta} hz-mono`}>{dowDate(prev)}</span>
               </Link>
             )}
             {nextEvent && (
               <Link href={`/events/${eventSlug(nextEvent)}`} className={styles.adjacentCard}>
                 <span className={`${styles.adjacentDir} hz-mono`}>Next →</span>
                 <span className={styles.adjacentTitle}>{nextEvent.title}</span>
-                <span className={`${styles.adjacentMeta} hz-mono`}>
-                  N°{nextEvent.n} · {dowDate(nextEvent)}
-                </span>
+                <span className={`${styles.adjacentMeta} hz-mono`}>{dowDate(nextEvent)}</span>
               </Link>
             )}
           </div>

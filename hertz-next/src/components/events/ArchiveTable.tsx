@@ -13,7 +13,6 @@ export default function ArchiveTable({ events }: { events: HertzEvent[] }) {
   return (
     <div className={styles.table} role="table" aria-label="Archived events">
       <div className={`${styles.head} hz-mono`} role="row">
-        <span role="columnheader">N°</span>
         <span role="columnheader" />
         <span role="columnheader">Event</span>
         <span role="columnheader">Venue</span>
@@ -22,7 +21,6 @@ export default function ArchiveTable({ events }: { events: HertzEvent[] }) {
       </div>
       {events.map((e) => (
         <Link key={e.n} href={`/events/${eventSlug(e)}`} className={`${styles.row} hz-rowfx`} role="row">
-          <span className={`${styles.n} hz-mono`}>N°{e.n}</span>
           <span className={styles.thumb} aria-hidden="true">
             {e.poster ? <img src={e.poster} alt="" loading="lazy" decoding="async" /> : <span className={styles.thumbEmpty} />}
           </span>

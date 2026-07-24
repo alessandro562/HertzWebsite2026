@@ -72,18 +72,6 @@ export default function RootLayout({
   return (
     <html lang="it" className={`${helveticaNeue.variable} ${mono.variable}`}>
       <body>
-        {/* filtro chroma: aberrazione cromatica integrata nelle foto (.hz-glitch) */}
-        <svg className="hz-svg-filters" aria-hidden="true" focusable="false" width="0" height="0">
-          <filter id="hz-chroma" x="-6%" y="-6%" width="112%" height="112%" colorInterpolationFilters="sRGB">
-            <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r" />
-            <feOffset in="r" dx="-2" dy="0" result="ro" />
-            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g" />
-            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b" />
-            <feOffset in="b" dx="2" dy="0" result="bo" />
-            <feBlend in="ro" in2="g" mode="screen" result="rg" />
-            <feBlend in="rg" in2="bo" mode="screen" />
-          </filter>
-        </svg>
         <a href="#main" className="hz-skip">Vai al contenuto</a>
         <SmoothScroll>
           <Header />

@@ -264,22 +264,30 @@ button {
 }
 
 /* ═══════════════════ GLITCH · texture INTEGRATA per le FOTO ════════════════
-   Effetto serio e moderno, dentro l'immagine (non sovrapposto): aberrazione
-   cromatica reale sui canali RGB della foto (filtro SVG #hz-chroma) + grana
-   fine analogica. Niente barre colorate, niente scan. Statico → reduced-motion
-   safe. Applicare .hz-glitch al contenitore e GlitchFX come ultimo figlio. */
-.hz-svg-filters {
-  position: absolute;
-  width: 0;
-  height: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
+   Effetto serio e moderno, dentro l'immagine (non sovrapposto): righe fini da
+   retinatura di stampa + grana analogica. Niente aberrazione cromatica, niente
+   glitch colorato laterale. Statico → reduced-motion safe. Applicare .hz-glitch
+   al contenitore e GlitchFX come ultimo figlio. */
 .hz-glitch {
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  filter: url(#hz-chroma);
+}
+/* righe fini stile retinatura da stampa: disturbano la foto senza aggiungere colore */
+.hz-glitch-lines {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.16;
+  mix-blend-mode: multiply;
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.6) 0px,
+    rgba(0, 0, 0, 0.6) 1px,
+    transparent 1px,
+    transparent 4px
+  );
 }
 /* grana fine analogica (noise fractale in data-uri, desaturato) */
 .hz-glitch-grain {

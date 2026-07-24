@@ -15,7 +15,6 @@ export default function EventRow({ event }: { event: HertzEvent }) {
   const slug = eventSlug(event)
   return (
     <Link href={`/events/${slug}`} className={`${styles.row} hz-rowfx`}>
-      <span className={`${styles.n} hz-mono`}>N°{event.n}</span>
       <span className={`${styles.date} hz-mono`}>{dowDate(event)}</span>
       <span className={styles.main}>
         <ViewMorph name={`event-title-${slug}`}>

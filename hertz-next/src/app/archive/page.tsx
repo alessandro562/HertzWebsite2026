@@ -211,7 +211,6 @@ export default function ArchivePage() {
             />
             <div className={styles.featuredText}>
               <span className={`${styles.featuredYear} hz-mono`}>{eventYear(featured)}</span>
-              <span className={`${styles.featuredN} hz-mono`}>N°{featured.n}</span>
               <h3 className={styles.featuredTitle}>{featured.title}</h3>
               <p className={styles.featuredVenue}>
                 {featured.venue} · {featured.city}
@@ -249,9 +248,7 @@ export default function ArchivePage() {
                     ))}
                   </div>
                   <div className={styles.galMeta}>
-                    <span className="hz-mono">
-                      N°{e.n} · {shortDate(e)}
-                    </span>
+                    <span className="hz-mono">{shortDate(e)}</span>
                     <span className={styles.galTitle}>{e.title}</span>
                     <span className={`${styles.galCount} hz-mono`}>{photos.length} frames <Arrow /></span>
                   </div>

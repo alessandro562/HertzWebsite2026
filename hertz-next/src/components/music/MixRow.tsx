@@ -1,5 +1,6 @@
 'use client'
 
+/* eslint-disable @next/next/no-img-element */
 import { useState } from 'react'
 import type { Mix } from '@/content/artists'
 import WaveformPulse from '@/motion/WaveformPulse'
@@ -7,16 +8,17 @@ import Arrow from '@/components/ui/Arrow'
 import styles from './MixRow.module.css'
 
 /** Riga mix → SoundCloud (nuova scheda). Play on-action, nessun autoplay.
- *  WaveformPulse sostituisce il glifo play: idle a riposo, un impulso singolo
+ *  Copertina reale della traccia (via oEmbed, presa dal genitore) se
+ *  disponibile; altrimenti WaveformPulse: idle a riposo, un impulso singolo
  *  all'hover/focus (non un loop) — segnala "contenuto audio" senza player. */
 export default function MixRow({
   mix,
   artist,
-  index,
+  art,
 }: {
   mix: Mix
   artist: string
-  index?: number
+  art?: string | null
 }) {
   const [hover, setHover] = useState(false)
   return (
@@ -30,10 +32,11 @@ export default function MixRow({
       onFocus={() => setHover(true)}
       onBlur={() => setHover(false)}
     >
-      {typeof index === 'number' && (
-        <span className={`${styles.n} hz-mono`}>{String(index + 1).padStart(2, '0')}</span>
+      {art ? (
+        <img src={art} alt="" className={styles.art} loading="lazy" />
+      ) : (
+        <WaveformPulse state={hover ? 'hover' : 'idle'} className={styles.play} />
       )}
-      <WaveformPulse state={hover ? 'hover' : 'idle'} className={styles.play} />
       <span className={styles.main}>
         <span className={styles.title}>{mix.t}</span>
         <span className={styles.artist}>{artist}</span>

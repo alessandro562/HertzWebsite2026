@@ -43,7 +43,7 @@ export default function FeaturedEvent({ event }: { event: HertzEvent }) {
           </figure>
         ) : (
           <div className={styles.posterFig} data-fallback="true">
-            <PosterFallback n={event.n} date={dowDate(event)} city={event.city} className={styles.posterSoon} />
+            <PosterFallback date={dowDate(event)} city={event.city} className={styles.posterSoon} />
           </div>
         )}
       </div>
@@ -51,7 +51,7 @@ export default function FeaturedEvent({ event }: { event: HertzEvent }) {
       <div className={styles.content}>
         <div className={styles.inner}>
           <div className={styles.top}>
-            <span className={`${styles.kicker} hz-mono`}>Next event · N°{event.n}</span>
+            <span className={`${styles.kicker} hz-mono`}>Next event</span>
             <StatusBadge status={status} />
           </div>
 

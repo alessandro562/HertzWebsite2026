@@ -18,9 +18,6 @@ export default function AboutPage() {
     <main id="main">
       {/* ── hero (ink · unico dark del percorso) ── */}
       <Section surface="ink" space="lg">
-        <p className="hz-mono" style={{ color: 'var(--hz-ink-mute)', marginBottom: 'var(--hz-space-md)' }}>
-          Manifesto · The floor is the medium
-        </p>
         <SignatureTitle as="h1" className={styles.heroTitle} trigger="mount" stagger={0.12}>
           <span>From clubbers,</span>
           <span>

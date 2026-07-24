@@ -312,7 +312,6 @@ export default function HeroIntroSequence({ next, staticGrid = false }: { next?:
             <img src="/assets/ident-dj.jpg" alt="Hertz, the booth during an event" className={hero.photo} />
             <img src="/assets/ident-dj-ht.jpg" alt="" aria-hidden="true" className={s.htOverlay} />
             <figcaption className={`${hero.photoCap} hz-mono ${s.photoDetail}`}>
-              <span>N°{next?.n ?? '—'}</span>
               <span>Bologna floor</span>
             </figcaption>
             {/* waveform runtime — ciò in cui si assesta la linea di frequenza */}
@@ -333,7 +332,7 @@ export default function HeroIntroSequence({ next, staticGrid = false }: { next?:
           {next && (
             <div className={s.nextZone}>
               <div className={s.nextTop}>
-                <span className="hz-mono">Next · N°{next.n}</span>
+                <span className="hz-mono">Next</span>
                 <span className={`${s.badge} ${next.onSale ? s.badgeOn : ''} hz-mono`.trim()}>{status}</span>
               </div>
               <Link href={`/events/${next.slug}`} className={s.nextTitle}>
