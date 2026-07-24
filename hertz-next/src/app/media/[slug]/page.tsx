@@ -86,7 +86,6 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               </Parallax>
               <GlitchFX />
             </div>
-            <figcaption className={`${styles.heroCap} hz-mono`}>{a.heroImageAlt}</figcaption>
           </figure>
         </Section>
 

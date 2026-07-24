@@ -94,11 +94,6 @@
   object-fit: cover;
   display: block;
 }
-.heroCap {
-  margin-top: var(--hz-space-xs);
-  color: var(--hz-ink-mute);
-  text-align: right;
-}
 
 /* ── prosa editoriale ── */
 .prose {
