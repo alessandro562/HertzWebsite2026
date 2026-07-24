@@ -9,9 +9,10 @@
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
-  /* separa nettamente i gesti touch: orizzontale = drag del carosello,
-     verticale = scroll della pagina (delegato al browser, non intercettato) */
-  touch-action: pan-y;
+  /* NIENTE touch-action qui: il default `auto` lascia al browser la
+     disambiguazione nativa orizzontale/verticale, comportamento verificato
+     funzionante. Un `touch-action: pan-y` introdotto per errore aveva
+     BLOCCATO lo scroll orizzontale del carosello (regressione, rollback). */
 }
 .rail::-webkit-scrollbar {
   display: none;
