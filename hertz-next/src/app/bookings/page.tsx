@@ -46,7 +46,7 @@ export default function BookingsPage() {
         <PageHeader
           index="09"
           kicker="Bookings"
-          title="Bring Hertz to your floor."
+          title="Bring Hertz to your venue."
           intro={
             <p className="hz-mono">
               Prenota il format completo Hertz o un singolo resident. Da Bologna, disponibili

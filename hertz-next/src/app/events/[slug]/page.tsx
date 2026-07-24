@@ -208,6 +208,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
                 <JoinHertzList
                   event={{ n: e.n, title: e.title, date: dowDate(e), venue: e.venue, city: e.city }}
                   soon={!e.onSale}
+                  lineupReady={lineupRows.length > 0}
                 />
               )}
             </div>

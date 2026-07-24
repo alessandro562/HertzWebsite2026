@@ -30,7 +30,16 @@ const EASE = [0.16, 1, 0.3, 1] as const
  * due trigger. Submit → POST /api/register (notifica il crew). Esc/backdrop
  * chiudono, scroll bloccato, focus sul nome, reduced-motion sicuro.
  */
-export default function JoinHertzList({ event, soon = false }: { event: ListEvent; soon?: boolean }) {
+export default function JoinHertzList({
+  event,
+  soon = false,
+  lineupReady = false,
+}: {
+  event: ListEvent
+  soon?: boolean
+  /** true quando la line-up è già annunciata: il copy non promette più "arriva vicino alla data" */
+  lineupReady?: boolean
+}) {
   const [open, setOpen] = useState(false)
   const [state, setState] = useState<State>('idle')
   const [msg, setMsg] = useState('')
@@ -121,7 +130,9 @@ export default function JoinHertzList({ event, soon = false }: { event: ListEven
         </div>
         <p className={styles.note}>
           {soon
-            ? 'La line-up arriva più vicino alla data. Intanto blocca il tuo posto sulla lista Hertz.'
+            ? lineupReady
+              ? 'Line-up confermata. Blocca il tuo posto sulla lista Hertz prima che si riempia.'
+              : 'La line-up arriva più vicino alla data. Intanto blocca il tuo posto sulla lista Hertz.'
             : 'Hertz funziona solo su lista. Aggiungi il tuo nome, confermiamo via email.'}
         </p>
         <div className={styles.action}>
