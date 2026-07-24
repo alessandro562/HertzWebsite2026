@@ -18,30 +18,12 @@
   border: 1px solid var(--hz-ink);
   background: var(--hz-bg);
 }
+/* locandina PROTAGONISTA: colonna maggiore per il poster, contenuto editoriale
+   accanto. La locandina resta intera (mai croppata) e domina l'hero. */
 @media (min-width: 720px) {
   .hero {
-    grid-template-columns: 44px minmax(0, 0.8fr) minmax(0, 1.2fr);
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
     align-items: stretch;
-  }
-}
-
-/* numero evento come elemento laterale/verticale */
-.heroNum {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  border-right: 1px solid var(--hz-line);
-  color: var(--hz-ink-mute);
-  padding: var(--hz-space-sm) 0;
-}
-@media (min-width: 720px) {
-  .heroNum {
-    display: flex;
-  }
-  .heroNum span {
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-    letter-spacing: 0.08em;
   }
 }
 
