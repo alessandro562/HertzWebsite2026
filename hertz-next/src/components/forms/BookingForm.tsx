@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { RESIDENTS, type ResidentSlug } from '@/content/events'
 import ConsentField from './ConsentField'
+import HoneypotField from './HoneypotField'
 import styles from './forms.module.css'
 
 type State = 'idle' | 'sending' | 'ok' | 'error'
@@ -177,6 +178,7 @@ export default function BookingForm() {
         questa pagina. Ti rispondiamo via email.
       </p>
 
+      <HoneypotField />
       <ConsentField />
 
       <button className={styles.submit} type="submit" disabled={state === 'sending'}>

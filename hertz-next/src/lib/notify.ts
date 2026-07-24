@@ -18,6 +18,11 @@ export function clip(s: unknown, max: number): string {
   return (s ?? '').toString().trim().slice(0, max)
 }
 
+/** honeypot: se il campo nascosto `website` è valorizzato → probabile bot. */
+export function looksLikeBot(b: Record<string, unknown>): boolean {
+  return clip(b.website, 200).length > 0
+}
+
 export interface Notice {
   subject: string
   text: string

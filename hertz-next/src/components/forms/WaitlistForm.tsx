@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import ConsentField from './ConsentField'
+import HoneypotField from './HoneypotField'
 import styles from './forms.module.css'
 
 type State = 'idle' | 'sending' | 'ok' | 'error'
@@ -54,6 +55,7 @@ export default function WaitlistForm() {
       <button className={styles.submit} type="submit" disabled={state === 'sending'}>
         {state === 'sending' ? '…' : 'Notify me'}
       </button>
+      <HoneypotField />
       <span style={{ flexBasis: '100%' }}>
         <ConsentField />
       </span>

@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react'
 import WaveformPulse from '@/motion/WaveformPulse'
 import ConsentField from '@/components/forms/ConsentField'
+import HoneypotField from '@/components/forms/HoneypotField'
 import styles from './JoinHertzList.module.css'
 
 export interface ListEvent {
@@ -232,6 +233,7 @@ export default function JoinHertzList({ event, soon = false }: { event: ListEven
                         placeholder="+39 …"
                       />
                     </label>
+                    <HoneypotField />
                     <ConsentField />
                     <button className={styles.submit} type="submit" disabled={state === 'sending'}>
                       {state === 'sending' ? 'Invio…' : 'Entra in lista →'}

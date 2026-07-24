@@ -1,4 +1,4 @@
-import { notify, isEmail, clip } from '@/lib/notify'
+import { notify, isEmail, clip, looksLikeBot } from '@/lib/notify'
 
 /** POST /api/booking — richieste di booking (resident o format Hertz). */
 export async function POST(req: Request) {
@@ -8,6 +8,9 @@ export async function POST(req: Request) {
   } catch {
     return Response.json({ ok: false, error: 'Invalid request' }, { status: 400 })
   }
+
+  // honeypot: probabile bot → finge successo, scarta silenziosamente
+  if (looksLikeBot(b)) return Response.json({ ok: true, message: 'Richiesta di booking ricevuta.' })
 
   const name = clip(b.name, 120)
   const email = clip(b.email, 160)
