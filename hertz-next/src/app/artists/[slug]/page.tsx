@@ -13,6 +13,7 @@ import Parallax from '@/motion/Parallax'
 import { Stagger, StaggerItem } from '@/motion/Reveal'
 import { ARTISTS } from '@/content/artists'
 import { forResident, eventSlug, isPast, dowDate, type ResidentSlug } from '@/content/events'
+import { SITE } from '@/lib/site'
 import styles from './artist.module.css'
 
 export function generateStaticParams() {
@@ -31,7 +32,21 @@ export async function generateMetadata({
     title: a.name,
     description: `${a.name}, ${a.role}. ${a.bio[0] ?? ''}`.trim(),
     alternates: { canonical: `/artists/${slug}` },
-    openGraph: { images: [{ url: a.portrait }] },
+    openGraph: {
+      type: 'website',
+      siteName: 'HERTZ',
+      locale: 'it_IT',
+      url: `${SITE.url}/artists/${slug}`,
+      title: a.name,
+      description: `${a.name}, ${a.role}. ${a.bio[0] ?? ''}`.trim(),
+      images: [{ url: a.portrait }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: a.name,
+      description: `${a.name}, ${a.role}.`,
+      images: [a.portrait],
+    },
   }
 }
 

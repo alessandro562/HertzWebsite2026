@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HERTZ — hertzclubbing.com
 
-## Getting Started
+Sito del collettivo clubbing Hertz (Bologna, minimal & deep tech). Next.js 16
+(App Router, Turbopack, React 19, TypeScript), CSS Modules, motion/react + Lenis,
+font self-hosted (Helvetica Neue + IBM Plex Mono).
 
-First, run the development server:
+L'app vive in questa cartella (`hertz-next/`). Buildare e sviluppare **sempre da
+qui** (la root del repo contiene il sito legacy).
+
+## Sviluppo
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev        # http://localhost:3000
+pnpm build      # build di produzione
+pnpm start      # serve la build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Copia `.env.example` → `.env.local` e compila le variabili (vedi sotto).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Variabili d'ambiente
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variabile | Obbligatoria | Note |
+|---|---|---|
+| `NEXT_PUBLIC_SITE_URL` | consigliata | Dominio canonico (canonical, sitemap, OG). Default `https://hertzclubbing.com`. |
+| `RESEND_API_KEY` | per ricevere i lead | Senza, i form loggano soltanto (nessuna email). Da resend.com. |
+| `RESEND_FROM` | con Resend | Mittente su **dominio verificato**. Senza, l'invio a Gmail fallisce. |
+| `NOTIFY_TO` | no | Destinatario notifiche. Default `hertzbologna@gmail.com`. |
+| `NEXT_PUBLIC_HERO` | no | `classic` per la hero con foto; vuoto = hero cinetica. |
 
-## Learn More
+## Deploy (Vercel)
 
-To learn more about Next.js, take a look at the following resources:
+- **Root Directory** del progetto Vercel = `hertz-next`.
+- Build command / output: default Next.js.
+- Imposta le variabili d'ambiente sopra (Production + Preview).
+- I prototipi `/lab/*` sono `noindex`, esclusi dalla sitemap e restituiscono 404
+  in produzione (`src/middleware.ts`).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Note pre-lancio
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Licenza font**: gli OTF di Helvetica Neue in `src/app/fonts/` sono a licenza
+  desktop, serviti come webfont. Da regolarizzare con una licenza webfont per un
+  uso pubblico.
+- **Privacy/GDPR**: i form raccolgono dati personali. Vedi `/privacy` (bozza) e
+  completa i dati del titolare del trattamento.

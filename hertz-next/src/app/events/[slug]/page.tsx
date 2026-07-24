@@ -44,7 +44,20 @@ export async function generateMetadata({
     title: `${e.title} · N°${e.n}`,
     description: desc,
     alternates: { canonical: `/events/${slug}` },
-    openGraph: e.poster ? { images: [{ url: e.poster }] } : undefined,
+    openGraph: {
+      type: 'website',
+      siteName: 'HERTZ',
+      locale: 'it_IT',
+      url: `${SITE.url}/events/${slug}`,
+      title: `${e.title} · N°${e.n}`,
+      description: desc,
+      ...(e.poster ? { images: [{ url: e.poster }] } : {}),
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${e.title} · N°${e.n}`,
+      description: desc,
+    },
   }
 }
 

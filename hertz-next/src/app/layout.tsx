@@ -59,6 +59,11 @@ export const metadata: Metadata = {
     description: DESCRIPTION,
     locale: 'it_IT',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'HERTZ',
+    description: DESCRIPTION,
+  },
 }
 
 export default function RootLayout({

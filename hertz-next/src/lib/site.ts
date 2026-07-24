@@ -4,14 +4,19 @@
    invece di ripetere stringhe o esporre drift morti (es. booking@hertz.cc).
    ──────────────────────────────────────────────────────────── */
 
+/* Dominio canonico: override via NEXT_PUBLIC_SITE_URL (es. preview deploy),
+   default sul dominio di lancio. Da qui derivano metadataBase, canonical,
+   sitemap, robots e i link OG assoluti. */
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://hertzclubbing.com').replace(/\/$/, '')
+
 export const SITE = {
   name: 'Hertz Clubbing Collective',
   shortName: 'Hertz',
   city: 'Bologna, IT',
   since: 2023,
   sound: 'Minimal & deep tech',
-  domain: 'hertzclubbing.com',
-  url: 'https://hertzclubbing.com',
+  domain: SITE_URL.replace(/^https?:\/\//, ''),
+  url: SITE_URL,
   email: 'hertzbologna@gmail.com',
   instagram: 'https://instagram.com/hertz.cc',
   instagramHandle: '@hertz.cc',

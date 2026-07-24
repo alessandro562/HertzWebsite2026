@@ -21,7 +21,15 @@ export const metadata: Metadata = {
   description:
     'Press kit e fotografia in alta risoluzione di Hertz: logo, foto degli eventi e materiali per promoter, locali e giornalisti. Uso libero con credito @hertz.cc.',
   alternates: { canonical: '/archive' },
-  openGraph: { title: 'Press & Archive · Hertz Clubbing Collective' },
+  openGraph: {
+    type: 'website',
+    siteName: 'HERTZ',
+    locale: 'it_IT',
+    url: `${SITE.url}/archive`,
+    title: 'Press & Archive · Hertz Clubbing Collective',
+    description:
+      'Press kit e fotografia in alta risoluzione di Hertz: logo, foto degli eventi e materiali per promoter, locali e giornalisti.',
+  },
 }
 
 /* Press kit — inventario reale (archive.html). Lo ZIP non è ancora nel repo:
@@ -170,7 +178,7 @@ export default function ArchivePage() {
                 </div>
                 <div>
                   <div className={styles.pkK}>Usage</div>
-                  <div className={styles.pkV}>Credit ©©</div>
+                  <div className={styles.pkV}>Credit {SITE.pressCredit}</div>
                 </div>
                 <div>
                   <div className={styles.pkK}>Updated</div>
