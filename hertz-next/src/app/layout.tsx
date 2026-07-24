@@ -46,7 +46,7 @@ const DESCRIPTION =
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'HERTZ',
+    default: 'Hertz Clubbing Collective',
     template: '%s · HERTZ',
   },
   description: DESCRIPTION,
@@ -55,13 +55,13 @@ export const metadata: Metadata = {
     type: 'website',
     siteName: 'HERTZ',
     url: SITE_URL,
-    title: 'HERTZ',
+    title: 'Hertz Clubbing Collective',
     description: DESCRIPTION,
     locale: 'it_IT',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'HERTZ',
+    title: 'Hertz Clubbing Collective',
     description: DESCRIPTION,
   },
 }
