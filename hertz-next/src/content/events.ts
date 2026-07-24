@@ -58,9 +58,9 @@ export const EVENTS: HertzEvent[] = [
     bill: 'Antonio Pica · Da Vid · Jay De Lys · Joey Daniel · Hertz',
     lineup: ['federico-apadula', 'tommaso-manco', 'alberto-b'], onSale: true,
     regId: 'hertz-x-buongiorno-classic-260726' },
-  { n: '031', title: 'Hertz at Buongiorno Classic', venue: 'Buongiorno Classic', city: 'Rimini', iso: '2026-08-14',
+  { n: '031', title: 'Hertz at Buongiorno Classic', venue: 'Buongiorno Classic', city: 'Rimini', iso: '2026-08-15',
     badge: 'Collaboration', poster: '', lineup: ['federico-apadula', 'tommaso-manco', 'alberto-b'], comingSoon: true },
-  { n: '032', title: 'Hertz at Barracuda Club', venue: 'Barracuda', city: 'Ferrara', iso: '2026-08-15',
+  { n: '032', title: 'Hertz at Barracuda Club', venue: 'Barracuda', city: 'Ferrara', iso: '2026-08-14',
     badge: 'Collaboration', poster: '', lineup: [], comingSoon: true },
 
   // ── archive ──
