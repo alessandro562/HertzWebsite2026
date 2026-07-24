@@ -98,13 +98,32 @@
   .head {
     display: none;
   }
+  /* thumb · titolo (flessibile, va a capo) · anno · freccia. Le colonne
+     venue/date sono nascoste: senza ridefinire il template il titolo finiva
+     nella colonna stretta e si troncava a "H…". */
   .row {
-    grid-template-columns: 3.5rem 1.6rem minmax(0, 1fr) 4rem;
-    height: 52px;
-    gap: 0.6rem;
+    grid-template-columns: 2.75rem minmax(0, 1fr) auto 1rem;
+    height: auto;
+    min-height: 60px;
+    gap: 0.85rem;
+    padding-block: 0.7rem;
   }
   .venue,
   .date {
     display: none;
+  }
+  .thumb {
+    align-self: center;
+  }
+  .title {
+    white-space: normal;
+    font-size: var(--hz-t-body);
+    line-height: 1.16;
+  }
+  .year {
+    align-self: center;
+  }
+  .arrow {
+    align-self: center;
   }
 }

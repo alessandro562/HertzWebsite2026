@@ -21,21 +21,43 @@
 .table {
   border-top: 1px solid var(--hz-line-strong);
 }
+/* mobile: data (mono) SOPRA il titolo a piena larghezza, stato a destra —
+   niente titolo spremuto in una colonna stretta che va a capo 3 volte. */
 .row {
   display: grid;
-  grid-template-columns: 118px minmax(0, 1fr) auto;
-  gap: var(--hz-space-sm) var(--hz-space-md);
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    'date   status'
+    'event  status';
+  column-gap: var(--hz-space-md);
+  row-gap: 0.3rem;
   align-items: center;
-  padding: clamp(0.7rem, 1.4vw, 1rem) 0;
+  padding: clamp(0.85rem, 3.2vw, 1rem) 0;
   border-bottom: 1px solid var(--hz-line);
   color: var(--hz-ink);
   transition:
     padding-inline var(--hz-ui) var(--hz-ease-out),
     background var(--hz-ui) var(--hz-ease-out);
 }
+.date {
+  grid-area: date;
+}
+.event {
+  grid-area: event;
+}
+.stat {
+  grid-area: status;
+}
 @media (min-width: 760px) {
   .row {
     grid-template-columns: 150px minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 0.7fr) 96px;
+    grid-template-areas: none;
+    gap: var(--hz-space-sm) var(--hz-space-md);
+  }
+  .date,
+  .event,
+  .stat {
+    grid-area: auto;
   }
 }
 a.row:hover {
@@ -43,12 +65,20 @@ a.row:hover {
   background: color-mix(in srgb, var(--hz-ink) 6%, transparent);
 }
 
+/* intestazione colonne: solo da tablet in su (su mobile è ridondante e non
+   combacia con la griglia ad aree impilate) */
 .headerRow {
+  display: none;
   color: var(--hz-ink-mute);
   font-size: var(--hz-t-meta);
   letter-spacing: var(--hz-tracking-mono);
   text-transform: uppercase;
   padding: var(--hz-space-sm) 0;
+}
+@media (min-width: 760px) {
+  .headerRow {
+    display: grid;
+  }
 }
 .headerRow:hover {
   background: none;
