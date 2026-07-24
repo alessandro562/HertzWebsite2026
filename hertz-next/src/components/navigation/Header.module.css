@@ -86,11 +86,14 @@
     background-color var(--hz-fast) var(--hz-ease-out),
     color var(--hz-fast) var(--hz-ease-out);
 }
+/* sinusoide UFFICIALE del logo hertz (solo la sinusoide), non la grafichetta */
 .ticketsWave {
-  width: 1.8em;
-  height: 1em;
-  color: currentColor;
+  width: 1.7em;
+  height: 1.1em;
   flex: none;
+  background-color: currentColor;
+  -webkit-mask: url(/assets/hertz-sinusoid.png) center / contain no-repeat;
+  mask: url(/assets/hertz-sinusoid.png) center / contain no-repeat;
 }
 .tickets:hover {
   background: currentColor;

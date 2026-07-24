@@ -241,18 +241,23 @@
 }
 
 /* ── precedente / successivo ── */
+/* flex, non grid-con-sfondo: se manca prev o next NON resta una cella vuota
+   scura. Il divisore è un bordo SOLO tra due card adiacenti. */
 .adjacent {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1px;
-  background: var(--hz-line-strong);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--hz-line-strong);
 }
 @media (min-width: 640px) {
   .adjacent {
-    grid-template-columns: 1fr 1fr;
+    flex-direction: row;
+  }
+  .adjacentCard + .adjacentCard {
+    border-left: 1px solid var(--hz-line-strong);
   }
 }
 .adjacentCard {
+  flex: 1 1 0;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;

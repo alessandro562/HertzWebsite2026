@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { NAV_ITEMS } from './nav-items'
 import { SITE } from '@/lib/site'
-import WaveformPulse from '@/motion/WaveformPulse'
 import Arrow from '@/components/ui/Arrow'
 import HertzLogo from '@/components/ui/HertzLogo'
 import styles from './Header.module.css'
@@ -83,7 +82,7 @@ export default function Header() {
 
         <div className={styles.actions}>
           <Link href="/bookings" className={styles.tickets}>
-            <WaveformPulse state="idle" className={styles.ticketsWave} />
+            <span className={styles.ticketsWave} aria-hidden="true" />
             Bookings
           </Link>
           <button
