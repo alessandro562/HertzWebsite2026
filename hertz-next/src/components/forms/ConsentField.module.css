@@ -1,0 +1,26 @@
+.consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6em;
+  cursor: pointer;
+}
+.box {
+  flex: none;
+  width: 1.05em;
+  height: 1.05em;
+  margin-top: 0.15em;
+  accent-color: var(--hz-accent);
+}
+.text {
+  font-size: var(--hz-t-meta);
+  line-height: var(--hz-leading-body);
+  color: var(--hz-ink-mute);
+}
+.link {
+  color: var(--hz-ink);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.link:hover {
+  color: var(--hz-accent);
+}

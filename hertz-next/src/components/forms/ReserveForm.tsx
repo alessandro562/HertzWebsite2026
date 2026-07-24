@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import ConsentField from './ConsentField'
 import styles from './forms.module.css'
 
 type State = 'idle' | 'sending' | 'ok' | 'error'
@@ -66,6 +67,7 @@ export default function ReserveForm({ item = 'Lanyard · Drop 01' }: { item?: st
         <span className={styles.label}>Note (optional)</span>
         <textarea className={styles.textarea} name="note" maxLength={600} placeholder="Anything we should know?" />
       </label>
+      <ConsentField />
       <button className={styles.submit} type="submit" disabled={state === 'sending'}>
         {state === 'sending' ? 'Sending…' : 'Reserve'}
       </button>

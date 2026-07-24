@@ -56,9 +56,9 @@ export default function Footer() {
             <Link href="/about" className={styles.fLink}>
               Manifesto
             </Link>
-            <span className={styles.fLink} aria-disabled="true" style={{ opacity: 0.5 }}>
-              Privacy · soon
-            </span>
+            <Link href="/privacy" className={styles.fLink}>
+              Privacy
+            </Link>
           </div>
         </div>
 

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { RESIDENTS, type ResidentSlug } from '@/content/events'
+import ConsentField from './ConsentField'
 import styles from './forms.module.css'
 
 type State = 'idle' | 'sending' | 'ok' | 'error'
@@ -175,6 +176,8 @@ export default function BookingForm() {
         La richiesta arriva direttamente al team Hertz. Nessuna app di posta, resta tutto su
         questa pagina. Ti rispondiamo via email.
       </p>
+
+      <ConsentField />
 
       <button className={styles.submit} type="submit" disabled={state === 'sending'}>
         {state === 'sending' ? 'Invio…' : 'Invia richiesta'}

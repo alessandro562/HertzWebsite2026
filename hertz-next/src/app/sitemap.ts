@@ -14,6 +14,7 @@ const STATIC_ROUTES = [
   '/archive',
   '/shop',
   '/bookings',
+  '/privacy',
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {
