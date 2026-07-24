@@ -65,6 +65,9 @@ export const EVENTS: HertzEvent[] = [
     lineup: ['federico-apadula', 'tommaso-manco', 'alberto-b'] },
   { n: '032', title: 'Hertz at Barracuda Club', venue: 'Barracuda', city: 'Ferrara', iso: '2026-08-14',
     badge: 'Collaboration', poster: '', lineup: [], comingSoon: true },
+  { n: '033', title: 'Hertz at earWorm', venue: 'earWorm · Boat Party (3 Years)', city: 'Lake Iseo', iso: '2026-08-01',
+    time: 'SAT · 17:30 → 22:30', badge: 'Guest', poster: '/assets/poster-v3-01ago-earworm.jpg',
+    bill: 'Federico Apadula · Krusty · Mae · Massi ISX', lineup: ['federico-apadula'] },
 
   // ── archive ──
   { n: '025', title: 'Take Notes × Buongiorno Classic', venue: 'Buongiorno Classic', city: 'Rimini', iso: '2026-05-31',
