@@ -85,7 +85,6 @@ const PHOTO_ARCHIVE = [
 export default function ArchivePage() {
   const past = archive()
   const years = [...new Set(past.map(eventYear))]
-  const venues = new Set(past.map((e) => e.venue))
   const withGalleries = past.filter((e) => galleryFor(e.n).length > 0)
   const items = past.map((e) => ({
     n: e.n,
@@ -116,22 +115,6 @@ export default function ArchivePage() {
               Logos, hi-res photography and everything a promoter or journalist needs to run Hertz.
               Grab the full kit, or pull individual frames below.
             </p>
-          }
-          aside={
-            <dl className={`${styles.stats} hz-mono`}>
-              <div>
-                <dt>Frames</dt>
-                <dd>{PHOTO_ARCHIVE.length}</dd>
-              </div>
-              <div>
-                <dt>Nights</dt>
-                <dd>{items.length}</dd>
-              </div>
-              <div>
-                <dt>Venues</dt>
-                <dd>{venues.size}</dd>
-              </div>
-            </dl>
           }
         />
       </Section>

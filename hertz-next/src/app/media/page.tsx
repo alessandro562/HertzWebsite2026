@@ -38,7 +38,6 @@ export default function MediaPage() {
             <span className={`${styles.mastRubrics} hz-mono`}>
               SIGNAL · DISPATCH · RESIDENT · RADAR
             </span>
-            <span className="hz-mono">{ARTICLES.length} pieces</span>
           </div>
         </div>
       </Section>

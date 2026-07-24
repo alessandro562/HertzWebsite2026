@@ -21,9 +21,9 @@ export default function ArtistsPage() {
         <PageHeader
           index="03"
           kicker="The collective"
-          title="On the same frequency."
+          title="The residents."
           intro={<p className="hz-mono">Resident roster · Bologna · Keep the groove</p>}
-          aside={<p className="hz-mono">{ROSTER.length} residents</p>}
+          noDivider
         />
         <div className={styles.roster}>
           {ROSTER.map((a, i) => (

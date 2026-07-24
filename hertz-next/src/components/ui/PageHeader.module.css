@@ -5,6 +5,9 @@
   padding-bottom: var(--hz-space-lg);
   border-bottom: 1px solid var(--hz-line);
 }
+.noDivider {
+  border-bottom: 0;
+}
 @media (min-width: 1024px) {
   .head {
     grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
