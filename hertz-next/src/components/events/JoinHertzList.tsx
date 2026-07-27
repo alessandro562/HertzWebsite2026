@@ -3,8 +3,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react'
 import WaveformPulse from '@/motion/WaveformPulse'
+import LangToggle from '@/components/ui/LangToggle'
 import ConsentField from '@/components/forms/ConsentField'
 import HoneypotField from '@/components/forms/HoneypotField'
+import type { Lang } from '@/lib/i18n'
 import styles from './JoinHertzList.module.css'
 
 export interface ListEvent {
@@ -19,16 +21,72 @@ type State = 'idle' | 'sending' | 'ok' | 'error'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
+/** PR di riferimento selezionabili in fase di registrazione (guest list). */
+const PR_OPTIONS = ['Giacomo Toscani', 'Lorenzo Camiti', 'Andrea Tedeschi', 'Nicola Armanini'] as const
+
+const T = {
+  en: {
+    open: 'Guest list open',
+    soon: 'List opening soon',
+    noteOpen: 'Hertz runs on the list only. Add your name, we confirm by email.',
+    noteSoon: 'Line-up lands closer to the date. Lock your spot on the Hertz list now.',
+    noteSoonReady: 'Line-up confirmed. Lock your spot on the Hertz list before it fills up.',
+    cta: 'Join the Hertz list',
+    guestList: 'Guest list',
+    name: 'Full name',
+    namePh: 'Full name',
+    email: 'Email',
+    emailPh: 'you@email.com',
+    phone: 'Phone',
+    optional: 'optional',
+    pr: 'Guest-list PR',
+    prPlaceholder: 'Select a PR',
+    prNone: 'No PR',
+    submit: 'Join the list',
+    sending: 'Sending',
+    fine: 'One name per person. You get a confirmation by email.',
+    okTitle: "You're on the list.",
+    okSub: 'Bring an ID. We confirm by email.',
+    done: 'Done',
+    errGeneric: 'Something went wrong.',
+    errNet: 'Network error. Try again.',
+    close: 'Close',
+    aria: 'Join the Hertz list',
+  },
+  it: {
+    open: 'Guest list aperta',
+    soon: 'Lista in apertura',
+    noteOpen: 'Hertz funziona solo su lista. Aggiungi il tuo nome, confermiamo via email.',
+    noteSoon: 'La line-up arriva più vicino alla data. Intanto blocca il tuo posto sulla lista Hertz.',
+    noteSoonReady: 'Line-up confermata. Blocca il tuo posto sulla lista Hertz prima che si riempia.',
+    cta: 'Entra nella lista Hertz',
+    guestList: 'Guest list',
+    name: 'Nome e cognome',
+    namePh: 'Nome e cognome',
+    email: 'Email',
+    emailPh: 'tua@email.com',
+    phone: 'Telefono',
+    optional: 'facoltativo',
+    pr: 'PR di riferimento',
+    prPlaceholder: 'Seleziona un PR',
+    prNone: 'Nessun PR',
+    submit: 'Entra in lista',
+    sending: 'Invio',
+    fine: 'Un nome a persona. Ricevi conferma via email.',
+    okTitle: 'Sei sulla lista.',
+    okSub: 'Porta un documento. Confermiamo via email.',
+    done: 'Fatto',
+    errGeneric: 'Qualcosa è andato storto.',
+    errNet: 'Errore di rete. Riprova.',
+    close: 'Chiudi',
+    aria: 'Entra nella lista Hertz',
+  },
+} as const
+
 /**
- * JoinHertzList — sostituisce il vecchio "biglietto": Hertz lavora SOLO con le
- * liste, quindi ogni evento (non passato) ha la sua guest list. Riprende la
- * struttura del modale legacy ("HERTZ LIST" / // GUEST LIST / nome·email·phone
- * / "Join the list") aggiornata al nuovo design editoriale.
- *
- * Rende: il modulo inline (stato + azione), una barra sticky solo-mobile che
- * appare dopo che il modulo esce dalla vista, e UN solo modale condiviso dai
- * due trigger. Submit → POST /api/register (notifica il crew). Esc/backdrop
- * chiudono, scroll bloccato, focus sul nome, reduced-motion sicuro.
+ * JoinHertzList — guest list per ogni evento (non passato). Hertz lavora solo
+ * con le liste. Bilingue EN/IT (default EN) tramite LangToggle locale, con
+ * campo "PR di riferimento" obbligatorio. Submit → POST /api/register.
  */
 export default function JoinHertzList({
   event,
@@ -40,6 +98,7 @@ export default function JoinHertzList({
   /** true quando la line-up è già annunciata: il copy non promette più "arriva vicino alla data" */
   lineupReady?: boolean
 }) {
+  const [lang, setLang] = useState<Lang>('en')
   const [open, setOpen] = useState(false)
   const [state, setState] = useState<State>('idle')
   const [msg, setMsg] = useState('')
@@ -47,6 +106,7 @@ export default function JoinHertzList({
   const moduleRef = useRef<HTMLDivElement>(null)
   const nameRef = useRef<HTMLInputElement>(null)
   const reduce = useReducedMotion()
+  const t = T[lang]
 
   /* sticky bar (mobile): appare quando il modulo inline è scrollato sopra la vista */
   useEffect(() => {
@@ -73,11 +133,11 @@ export default function JoinHertzList({
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && close()
     document.addEventListener('keydown', onKey)
     document.body.style.overflow = 'hidden'
-    const t = setTimeout(() => nameRef.current?.focus(), 80)
+    const timer = setTimeout(() => nameRef.current?.focus(), 80)
     return () => {
       document.removeEventListener('keydown', onKey)
       document.body.style.overflow = ''
-      clearTimeout(t)
+      clearTimeout(timer)
     }
   }, [open, close])
 
@@ -97,19 +157,19 @@ export default function JoinHertzList({
           date: event.date,
           venue: event.venue,
           city: event.city,
+          lang,
         }),
       })
       const j = await r.json()
       if (r.ok && j.ok) {
         setState('ok')
-        setMsg(j.message ?? 'Sei sulla lista.')
       } else {
         setState('error')
-        setMsg(j.error ?? 'Qualcosa è andato storto.')
+        setMsg(t.errGeneric)
       }
     } catch {
       setState('error')
-      setMsg('Errore di rete. Riprova.')
+      setMsg(t.errNet)
     }
   }
 
@@ -124,20 +184,17 @@ export default function JoinHertzList({
             <span className={styles.glyph} aria-hidden="true">
               {soon ? '○' : '●'}
             </span>
-            {soon ? 'Lista in apertura' : 'Guest list aperta'}
+            {soon ? t.soon : t.open}
           </span>
-          <WaveformPulse state={soon ? 'loading' : 'active'} className={styles.wave} label="Hertz list" />
+          <div className={styles.headRight}>
+            <WaveformPulse state={soon ? 'loading' : 'active'} className={styles.wave} label="Hertz list" />
+            <LangToggle value={lang} onChange={setLang} />
+          </div>
         </div>
-        <p className={styles.note}>
-          {soon
-            ? lineupReady
-              ? 'Line-up confermata. Blocca il tuo posto sulla lista Hertz prima che si riempia.'
-              : 'La line-up arriva più vicino alla data. Intanto blocca il tuo posto sulla lista Hertz.'
-            : 'Hertz funziona solo su lista. Aggiungi il tuo nome, confermiamo via email.'}
-        </p>
+        <p className={styles.note}>{soon ? (lineupReady ? t.noteSoonReady : t.noteSoon) : t.noteOpen}</p>
         <div className={styles.action}>
           <button type="button" className={styles.cta} onClick={openModal}>
-            Entra nella lista Hertz →
+            {t.cta} →
           </button>
         </div>
       </div>
@@ -151,7 +208,7 @@ export default function JoinHertzList({
           tabIndex={showBar ? 0 : -1}
           aria-hidden={!showBar}
         >
-          Entra nella lista Hertz →
+          {t.cta} →
         </button>
       </div>
 
@@ -167,7 +224,7 @@ export default function JoinHertzList({
             onClick={close}
             role="dialog"
             aria-modal="true"
-            aria-label="Entra nella lista Hertz"
+            aria-label={t.aria}
           >
             <motion.div
               className={styles.card}
@@ -177,18 +234,19 @@ export default function JoinHertzList({
               exit={reduce ? { opacity: 0 } : { opacity: 0, y: 16, scale: 0.99 }}
               transition={{ duration: reduce ? 0 : 0.4, ease: EASE }}
             >
-              <button type="button" className={styles.x} onClick={close} aria-label="Chiudi">
+              <button type="button" className={styles.x} onClick={close} aria-label={t.close}>
                 ✕
               </button>
 
               <div className={styles.stub}>
                 <span className="hz-mono">HERTZ LIST</span>
+                <LangToggle value={lang} onChange={setLang} />
               </div>
 
               <div className={styles.body}>
                 <p className={`${styles.kick} hz-mono`}>
                   <span className={styles.kickLine} aria-hidden="true" />
-                  Guest list
+                  {t.guestList}
                 </p>
                 <p className={styles.evTitle}>{event.title}</p>
                 {meta && <p className={`${styles.evMeta} hz-mono`}>{meta}</p>}
@@ -196,20 +254,20 @@ export default function JoinHertzList({
                 {state === 'ok' ? (
                   <div className={styles.done}>
                     <span className={styles.doneDot} aria-hidden="true" />
-                    <b className={styles.doneTitle}>{msg}</b>
+                    <b className={styles.doneTitle}>{t.okTitle}</b>
                     <span className={`${styles.doneEv} hz-mono`}>
                       {event.title}
                       {event.date ? ` · ${event.date}` : ''}
                     </span>
-                    <p className={styles.doneSub}>Porta un documento. Confermiamo via email.</p>
+                    <p className={styles.doneSub}>{t.okSub}</p>
                     <button type="button" className={styles.submit} onClick={close}>
-                      Fatto
+                      {t.done}
                     </button>
                   </div>
                 ) : (
                   <form className={styles.form} onSubmit={onSubmit} noValidate>
                     <label className={styles.field}>
-                      <span className={styles.label}>Nome e cognome</span>
+                      <span className={styles.label}>{t.name}</span>
                       <input
                         ref={nameRef}
                         className={styles.input}
@@ -218,23 +276,23 @@ export default function JoinHertzList({
                         required
                         minLength={2}
                         autoComplete="name"
-                        placeholder="Nome e cognome"
+                        placeholder={t.namePh}
                       />
                     </label>
                     <label className={styles.field}>
-                      <span className={styles.label}>Email</span>
+                      <span className={styles.label}>{t.email}</span>
                       <input
                         className={styles.input}
                         name="email"
                         type="email"
                         required
                         autoComplete="email"
-                        placeholder="tua@email.com"
+                        placeholder={t.emailPh}
                       />
                     </label>
                     <label className={styles.field}>
                       <span className={styles.label}>
-                        Telefono <i>facoltativo</i>
+                        {t.phone} <i>{t.optional}</i>
                       </span>
                       <input
                         className={styles.input}
@@ -244,12 +302,26 @@ export default function JoinHertzList({
                         placeholder="+39 …"
                       />
                     </label>
+                    <label className={styles.field}>
+                      <span className={styles.label}>{t.pr}</span>
+                      <select className={styles.select} name="pr" required defaultValue="">
+                        <option value="" disabled>
+                          {t.prPlaceholder}
+                        </option>
+                        {PR_OPTIONS.map((p) => (
+                          <option key={p} value={p}>
+                            {p}
+                          </option>
+                        ))}
+                        <option value="none">{t.prNone}</option>
+                      </select>
+                    </label>
                     <HoneypotField />
                     <ConsentField />
                     <button className={styles.submit} type="submit" disabled={state === 'sending'}>
-                      {state === 'sending' ? 'Invio…' : 'Entra in lista →'}
+                      {state === 'sending' ? `${t.sending}…` : `${t.submit} →`}
                     </button>
-                    <p className={styles.fine}>Un nome a persona · ricevi conferma via email.</p>
+                    <p className={styles.fine}>{t.fine}</p>
                     {state === 'error' && (
                       <p className={styles.error} role="alert">
                         {msg}

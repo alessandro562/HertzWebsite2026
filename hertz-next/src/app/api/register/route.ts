@@ -29,6 +29,8 @@ export async function POST(req: Request) {
   const date = clip(b.date, 60)
   const venue = clip(b.venue, 120)
   const city = clip(b.city, 80)
+  const prRaw = clip(b.pr, 60)
+  const pr = prRaw === 'none' ? 'Nessun PR' : prRaw
   const where = [venue, city].filter(Boolean).join(', ')
 
   const text = [
@@ -38,6 +40,7 @@ export async function POST(req: Request) {
     `Name: ${name}`,
     `Email: ${email}`,
     phone && `Phone: ${phone}`,
+    pr && `PR: ${pr}`,
     `When: ${new Date().toISOString()}`,
   ]
     .filter(Boolean)

@@ -1,0 +1,31 @@
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15em;
+  border: 1px solid currentColor;
+  border-radius: var(--hz-radius-control, 2px);
+  padding: 0.15em;
+  opacity: 0.85;
+}
+.btn {
+  font-family: var(--hz-font-mono);
+  font-size: var(--hz-t-meta);
+  letter-spacing: var(--hz-tracking-mono);
+  line-height: 1;
+  padding: 0.35em 0.55em;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity var(--hz-ui, 0.2s) var(--hz-ease-out, ease);
+}
+.btn:hover {
+  opacity: 0.8;
+}
+.btn[data-active] {
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  text-decoration-thickness: 1.5px;
+}
