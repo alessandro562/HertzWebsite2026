@@ -47,8 +47,22 @@
 
 /* ── blocco tipografico centrale ── */
 .type {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
+}
+/* velo: attutisce la griglia Signal SOLO dietro al titolo (leggibilità),
+   la lascia viva ovunque altro nella hero. Colore = sfondo della superficie
+   (nessuna tinta nuova), bordi sfumati (nessun box visibile), statico. */
+.type::before {
+  content: '';
+  position: absolute;
+  inset: -12% -6%;
+  z-index: -1;
+  background: radial-gradient(ellipse at center, var(--hz-bg) 0%, var(--hz-bg) 45%, transparent 78%);
+  opacity: 0.6;
+  pointer-events: none;
 }
 .words {
   display: flex;
