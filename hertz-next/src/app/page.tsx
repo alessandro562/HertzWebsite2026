@@ -66,11 +66,11 @@ export default function Home() {
         <div className={styles.introGrid}>
           <div className={styles.introText}>
             <Reveal as="p" variant="mask" duration={0.9} className={styles.introLead}>
-              A clubbing collective from Bologna. We put the record and the dancefloor first.
+              A clubbing collective from Bologna. Minimal and deep tech, since 2023.
             </Reveal>
             <Reveal as="p" variant="up" delay={0.12} className={styles.introSupport}>
-              Since 2023 we&rsquo;ve booked the nights we&rsquo;d want to be at: minimal &amp;
-              deep tech, selection over spectacle, from clubbers, for clubbers.
+              The nights we wanted to be at. Real rooms, proper systems, grooves that roll for
+              hours. From clubbers, for clubbers.
             </Reveal>
           </div>
           <Reveal variant="up" delay={0.15}>
@@ -152,16 +152,13 @@ export default function Home() {
               <span>A room. A system.</span>
               <span>A crowd that came</span>
               <span>
-                to <em>listen.</em>
+                to <em>dance.</em>
               </span>
             </SignatureTitle>
             <Reveal variant="up" delay={0.2}>
               <p className={styles.manifestoBody}>
-                Hertz was born in Bologna in 2023, out of one conviction: the night was turning
-                into something to watch, and less something to live. So we put the attention back
-                on what actually matters: the selection, the dancefloor and the energy shared
-                between clubbers. A floor where the record does the talking, where a good one can
-                roll for nine minutes before anyone checks the time. The rest is just volume.
+                Bologna, 2023. Records. A system. A room that works. No spectacle. Music first,
+                the floor does the rest.
               </p>
               <Link href="/about" className={`${styles.btn} ${styles.btnGhost} ${styles.manifestoLink}`}>
                 Read the manifesto <Arrow />
