@@ -25,12 +25,12 @@ export default function AboutPage() {
           </span>
         </SignatureTitle>
         <p className={styles.heroLead}>
-          Hertz is a clubbing collective from Bologna, active since 2023. We build our
-          nights around the selection, the system and the dancefloor, and the people who
-          fill them.
+          Hertz è un collettivo clubbing di Bologna, attivo dal 2023. Costruiamo le nostre
+          notti intorno alla selezione, all&rsquo;impianto e al dancefloor &mdash; e alle
+          persone che li riempiono.
         </p>
         <blockquote className={styles.heroQuote}>
-          Too many nights were filling up with image and emptying out of listening.
+          Troppe notti si riempivano di immagine e si svuotavano di musica.
         </blockquote>
         <span className="hz-mono" style={{ color: 'var(--hz-ink-mute)' }}>
           Bologna · 2023
@@ -43,15 +43,14 @@ export default function AboutPage() {
           <Reveal variant="up" className={styles.chapText}>
             <span className={`${styles.chap} hz-mono`}>Chapter 01 · Origin</span>
             <p>
-              The Hertz collective was born in Bologna in 2023, out of one simple conviction: the
-              night was turning into something to watch, and less and less something to live: rooms
-              built for the camera, with the music stuck somewhere in the background.
+              Il collettivo Hertz nasce a Bologna nel 2023 da un&rsquo;idea semplice: la notte stava
+              diventando qualcosa da guardare, sempre meno qualcosa da vivere &mdash; sale costruite
+              per la telecamera, con la musica relegata sullo sfondo.
             </p>
             <p>
-              So we put the attention back on what actually matters: the selection, the dancefloor,
-              and the energy shared between clubbers. A floor where the record does the talking,
-              where a good one can roll for nine minutes before anyone checks the time, and the only
-              reason to leave the house is one: to let the sound take over.
+              Così abbiamo rimesso il focus dove deve stare: la selezione, il dancefloor e
+              l&rsquo;energia che costruisce la gente. Quando il groove si incastra e la bassline fa
+              il suo lavoro, nessuno filma &mdash; si balla. È la notte che volevamo indietro.
             </p>
           </Reveal>
           <Parallax speed={44} className={styles.chapPhoto}>
@@ -66,13 +65,13 @@ export default function AboutPage() {
           <Reveal variant="up" className={styles.chapText}>
             <span className={`${styles.chap} hz-mono`}>Chapter 02 · The room</span>
             <p className={styles.big}>
-              A room. A system. A crowd that came to listen. The rest is just volume.
+              A room. A system. A crowd that came to dance. The rest is just volume.
             </p>
             <p>
-              We book artists we&rsquo;d pay to see ourselves. Minimal, deep tech, the kind of groove
-              that rolls for hours and never tips into noise. We pick rooms for how they sound, not
-              how big they look: small enough to feel the kick through the floor, big enough to
-              disappear.
+              Prenotiamo artisti che pagheremmo per vedere noi stessi. Minimal, deep tech &mdash; il
+              tipo di groove che gira per ore senza mai diventare rumore. Scegliamo le sale per come
+              suonano, non per quanto sono grandi: abbastanza piccole da sentire il kick attraverso
+              il pavimento, abbastanza grandi da sparirci dentro.
             </p>
           </Reveal>
         </div>
@@ -84,7 +83,7 @@ export default function AboutPage() {
           Chapter 03 · The floor
         </p>
         <Reveal as="p" variant="mask" duration={1} className={styles.climax}>
-          Turn the lights down, the system up, and let the record run. The floor knows what to do.
+          Luci giù, impianto su, lascia correre il disco. La pista sa cosa fare.
         </Reveal>
         <Reveal variant="up" delay={0.1}>
           <dl className={styles.stats}>
@@ -124,8 +123,8 @@ export default function AboutPage() {
           </div>
           <Reveal variant="up" delay={0.15} className={styles.policyBodyWrap}>
             <p className={styles.policyBody}>
-              No harassment, no hate, no discrimination. Respect boundaries, yours and others&rsquo;.
-              We&rsquo;re here for the music and the people. The dancefloor is for everyone.
+              Niente molestie, niente odio, niente discriminazioni. Rispetta i confini, i tuoi e
+              quelli degli altri. Siamo qui per la musica e per le persone. Il dancefloor è di tutti.
             </p>
             <span className="hz-mono" style={{ color: 'var(--hz-ink-mute)' }}>
               Safe space · Respect · Consent

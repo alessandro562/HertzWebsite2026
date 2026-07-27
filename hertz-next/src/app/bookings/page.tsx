@@ -23,7 +23,7 @@ const PATHS = [
     n: '01',
     kicker: 'The format',
     title: 'Book the night.',
-    body: "La curatela Hertz al completo, portata nel tuo spazio: selezione, resident, direzione sonora e identità, costruite come un'unica serata. Trattiamo la sala come uno strumento: l'impianto giusto, il tempo giusto, una pista venuta per ascoltare.",
+    body: "La curatela Hertz al completo, portata nel tuo spazio: selezione, resident, direzione sonora e identità, costruite come un'unica serata. Trattiamo la sala come uno strumento: l'impianto giusto, il tempo giusto, una pista venuta per ballare.",
     chips: ['Club', 'Festival', 'Privati', 'B2B set'],
     cta: { label: 'Richiedi il format →', href: '/bookings?type=format#book' },
   },
