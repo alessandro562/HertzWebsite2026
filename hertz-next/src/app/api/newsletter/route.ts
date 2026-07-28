@@ -1,9 +1,9 @@
 import { notify, isEmail, clip, looksLikeBot } from '@/lib/notify'
-import { saveSubscriber } from '@/lib/supabase'
+import { saveSubscriber } from '@/lib/newsletter-db'
 
 /**
  * POST /api/newsletter — iscrizione newsletter (pop-up di benvenuto + eventuali form).
- * Salva l'iscritto su Supabase (se configurato) e notifica il crew (log sempre,
+ * Salva l'iscritto su Postgres/Neon (se configurato) e notifica il crew (log sempre,
  * email se Resend è configurato). Idempotente sulle email duplicate.
  * Payload: { email, consent, source?, website(honeypot) }.
  */
@@ -47,8 +47,8 @@ export async function POST(req: Request) {
         saved.stored
           ? saved.duplicate
             ? 'DB: already subscribed'
-            : 'DB: stored in Supabase'
-          : 'DB: NOT stored (Supabase not configured yet)',
+            : 'DB: stored'
+          : 'DB: NOT stored (database not connected yet)',
         `When: ${new Date().toISOString()}`,
       ].join('\n'),
       replyTo: email,

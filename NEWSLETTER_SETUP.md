@@ -1,20 +1,49 @@
-# HERTZ · Newsletter → Supabase (setup)
+# HERTZ · Newsletter → database (Neon via Vercel)
 
-Il pop-up newsletter raccoglie già le email (`POST /api/newsletter`), ma per
-**salvarle nel database** serve collegare Supabase. Finché non lo colleghi, gli
-iscritti vengono solo loggati nei Runtime Logs di Vercel (non persistiti).
+Il pop-up newsletter raccoglie le email (`POST /api/newsletter`). Per **salvarle
+in un database** basta collegare un DB Neon dal pannello di Vercel: le variabili
+d'ambiente le mette Vercel **in automatico** e la tabella si **crea da sola** al
+primo iscritto. Nessuna chiave da copiare a mano, nessuno SQL da eseguire.
 
-> Lo schema SQL vive anche in [`hertz-next/supabase/newsletter.sql`](hertz-next/supabase/newsletter.sql).
-> Qui sotto è ripetuto per comodità: puoi copiarlo e incollarlo così com'è.
+Finché non colleghi il DB, il pop-up funziona ma gli iscritti restano solo nei
+Runtime Logs di Vercel (non persistiti).
 
-## 1. Crea un progetto Supabase
-Vai su https://supabase.com → **New project** (piano gratuito ok).
+## 1. Crea il database (dentro Vercel)
+1. Vai su **vercel.com** → apri il progetto **`hertzv2`**.
+2. Tab **Storage** → **Create Database** (o **Connect Store**).
+3. Scegli **Neon** (Postgres serverless, free tier) → **Continue** e conferma.
+4. Quando chiede a quale progetto collegarlo, seleziona **hertzv2** e ambiente
+   **Production** (puoi includere anche Preview/Development).
 
-## 2. Crea la tabella
-Supabase dashboard → **SQL Editor** → incolla ed esegui:
+Vercel aggiunge da solo la connection string come **`DATABASE_URL`** (più altre
+`POSTGRES_*`): il codice le legge automaticamente, non devi copiare nulla.
+
+## 2. Redeploy
+Le variabili valgono dai deploy successivi:
+**Deployments → ⋯ (sul deploy più recente) → Redeploy**.
+
+Fatto: al primo che si iscrive, la tabella `newsletter_subscribers` viene creata
+in automatico e ogni iscritto viene salvato (email unica, niente doppioni).
+
+## Dove vedere gli iscritti
+- Da **Vercel → Storage → (il tuo DB Neon) → Open in Neon**, oppure sulla
+  dashboard **neon.tech** → progetto → **SQL Editor / Tables**.
 
 ```sql
-create table if not exists public.newsletter_subscribers (
+-- Primi 100 iscritti (gadget alla prima data 26/27 al Kindergarten)
+select email, created_at
+from newsletter_subscribers
+order by created_at asc
+limit 100;
+
+-- Totale iscritti
+select count(*) from newsletter_subscribers;
+```
+
+## Schema (creato automaticamente dal codice)
+Per riferimento, la tabella che l'app crea da sola:
+```sql
+create table if not exists newsletter_subscribers (
   id          bigint generated always as identity primary key,
   email       text        not null unique,
   consent     boolean     not null default true,
@@ -22,41 +51,6 @@ create table if not exists public.newsletter_subscribers (
   user_agent  text,
   created_at  timestamptz not null default now()
 );
-
--- ordine d'iscrizione (per la promo "primi 100")
-create index if not exists newsletter_subscribers_created_at_idx
-  on public.newsletter_subscribers (created_at);
-
--- RLS attiva senza policy pubbliche: si scrive SOLO dal server con la
--- service-role key (che bypassa RLS). La anon key non può leggere/scrivere.
-alter table public.newsletter_subscribers enable row level security;
-```
-
-## 3. Imposta le variabili d'ambiente
-Supabase → **Settings → API**: copia `Project URL` e la `service_role` key.
-
-Poi su **Vercel** (progetto `hertzv2`) → **Settings → Environment Variables**
-(e in locale in `.env.local`):
-
-```
-SUPABASE_URL=https://<project>.supabase.co
-SUPABASE_SERVICE_ROLE_KEY=<service_role key>
-```
-
-⚠️ Usa la **service_role** key (segreta, solo server). NON la `anon` key,
-NON prefissare con `NEXT_PUBLIC`. Dopo averle aggiunte su Vercel, fai un
-**Redeploy**.
-
-## Query utili
-```sql
--- Primi 100 iscritti (gadget alla prima data 26/27 al Kindergarten)
-select email, created_at
-from public.newsletter_subscribers
-order by created_at asc
-limit 100;
-
--- Totale iscritti
-select count(*) from public.newsletter_subscribers;
 ```
 
 ## Test rapido
@@ -64,6 +58,6 @@ select count(*) from public.newsletter_subscribers;
 curl -X POST https://hertzclubbing.com/api/newsletter \
   -H "Content-Type: application/json" \
   -d '{"email":"test@example.com","consent":"yes"}'
-# → {"ok":true,"message":"You're on the list."}
+# → {"ok":true,"message":"You're on the list.","duplicate":false}
+# ripetendo la STESSA email → "duplicate":true  (prova che sta salvando)
 ```
-Poi controlla la tabella `newsletter_subscribers` su Supabase (Table Editor).
