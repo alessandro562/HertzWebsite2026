@@ -11,7 +11,7 @@ import styles from './events.module.css'
 export const metadata: Metadata = {
   title: 'Events',
   description:
-    'Il calendario Hertz: date minimal & deep tech a Bologna e in Italia. Line-up, venue e stato biglietti.',
+    'The Hertz calendar: minimal and deep tech nights in Bologna and across Italy. Line-up, venue and ticket status.',
   alternates: { canonical: '/events' },
 }
 

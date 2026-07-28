@@ -47,7 +47,7 @@ export async function generateMetadata({
     openGraph: {
       type: 'website',
       siteName: 'HERTZ',
-      locale: 'it_IT',
+      locale: 'en_GB',
       url: `${SITE.url}/events/${slug}`,
       title: e.title,
       description: desc,

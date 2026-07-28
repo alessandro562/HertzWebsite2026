@@ -14,7 +14,7 @@ import styles from './music.module.css'
 export const metadata: Metadata = {
   title: 'Music',
   description:
-    'Le trasmissioni Hertz: set e mix dei resident su SoundCloud, e i resident da seguire su Spotify. Minimal & deep tech.',
+    'The Hertz transmissions: resident sets and mixes on SoundCloud, plus the residents to follow on Spotify. Minimal and deep tech.',
   alternates: { canonical: '/music' },
 }
 
@@ -39,7 +39,7 @@ export default async function MusicPage() {
           <div className={styles.headRow}>
             <p className={styles.intro}>
               The records that build the Hertz floor: resident sets and studio cuts, minimal &amp;
-              deep tech, selection first. No autoplay, play on tap.
+              deep tech, selection first. Nothing plays on its own, so just tap to listen.
             </p>
             <div className={styles.platformBar}>
               <a

@@ -41,7 +41,7 @@ const mono = IBM_Plex_Mono({
 
 const SITE_URL = SITE.url
 const DESCRIPTION =
-  'HERTZ, collettivo clubbing minimal/deep-tech con base a Bologna.'
+  'HERTZ, a minimal and deep tech clubbing collective based in Bologna.'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     url: SITE_URL,
     title: 'Hertz Clubbing Collective',
     description: DESCRIPTION,
-    locale: 'it_IT',
+    locale: 'en_GB',
   },
   twitter: {
     card: 'summary_large_image',
@@ -70,9 +70,9 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="it" className={`${helveticaNeue.variable} ${mono.variable}`}>
+    <html lang="en" className={`${helveticaNeue.variable} ${mono.variable}`}>
       <body>
-        <a href="#main" className="hz-skip">Vai al contenuto</a>
+        <a href="#main" className="hz-skip">Skip to content</a>
         <SmoothScroll>
           <Header />
           <PageTransitionProvider>{children}</PageTransitionProvider>

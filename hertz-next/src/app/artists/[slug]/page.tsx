@@ -36,7 +36,7 @@ export async function generateMetadata({
     openGraph: {
       type: 'website',
       siteName: 'HERTZ',
-      locale: 'it_IT',
+      locale: 'en_GB',
       url: `${SITE.url}/artists/${slug}`,
       title: a.name,
       description: `${a.name}, ${a.role}. ${a.bio[0] ?? ''}`.trim(),

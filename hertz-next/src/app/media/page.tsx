@@ -13,7 +13,7 @@ import styles from './media.module.css'
 export const metadata: Metadata = {
   title: 'Media',
   description:
-    "L'editoriale Hertz: reportage e letture sulla scena minimal & deep tech, firmati Hertz Redazione.",
+    'The Hertz editorial desk: reportage and reads on the minimal and deep tech scene, signed Hertz Redazione.',
   alternates: { canonical: '/media' },
 }
 

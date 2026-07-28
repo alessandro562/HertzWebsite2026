@@ -11,7 +11,7 @@ import styles from './shop.module.css'
 export const metadata: Metadata = {
   title: 'Shop',
   description:
-    'Hertz uniform: Drop 01 Lanyard, nylon intrecciato, numerato 001–200, spedito da Bologna. Prenotazione via email.',
+    'Hertz uniform: Drop 01 Lanyard, woven nylon, numbered 001-200, shipped from Bologna. Reserve by email.',
   alternates: { canonical: '/shop' },
 }
 
@@ -50,7 +50,7 @@ export default function ShopPage() {
             <span className={`${styles.dropTag} hz-mono`}>Drop 01</span>
             <h2 className={styles.title}>Lanyard</h2>
             <p className={styles.desc}>
-              Woven nylon, 5 cm, black. 200 pieces per drop, numbered 001–200, ships from Bologna.
+              Woven nylon, 5 cm, black. 200 pieces per drop, numbered 001-200, ships from Bologna.
               Reserve now. We confirm as soon as the run is ready.
             </p>
             <ul className={styles.specs}>

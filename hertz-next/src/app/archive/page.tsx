@@ -19,16 +19,16 @@ import styles from './archive.module.css'
 export const metadata: Metadata = {
   title: 'Press & Archive',
   description:
-    'Press kit e fotografia in alta risoluzione di Hertz: logo, foto degli eventi e materiali per promoter, locali e giornalisti. Uso libero con credito @hertz.cc.',
+    'The Hertz press kit and hi-res photography: logo, event photos and materials for promoters, venues and journalists. Free to use with credit.',
   alternates: { canonical: '/archive' },
   openGraph: {
     type: 'website',
     siteName: 'HERTZ',
-    locale: 'it_IT',
+    locale: 'en_GB',
     url: `${SITE.url}/archive`,
     title: 'Press & Archive · Hertz Clubbing Collective',
     description:
-      'Press kit e fotografia in alta risoluzione di Hertz: logo, foto degli eventi e materiali per promoter, locali e giornalisti.',
+      'The Hertz press kit and hi-res photography: logo, event photos and materials for promoters, venues and journalists.',
   },
 }
 
