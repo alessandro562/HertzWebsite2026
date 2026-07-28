@@ -67,7 +67,7 @@
   .cover {
     grid-template-columns: 1.35fr 1fr;
     gap: clamp(1.5rem, 4vw, 3.5rem);
-    align-items: center;
+    align-items: start;
   }
 }
 .coverImg {
@@ -91,6 +91,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: var(--hz-space-sm);
+  padding-top: clamp(0.25rem, 1.5vw, 1rem);
 }
 .coverRubric {
   color: var(--hz-accent);
@@ -102,7 +103,7 @@
   font-family: var(--hz-font-display);
   font-weight: 700;
   font-size: clamp(1.9rem, 3.6vw, 3.4rem);
-  line-height: 0.98;
+  line-height: 1.04;
   letter-spacing: var(--hz-tracking-tight);
   text-wrap: balance;
   margin-top: var(--hz-space-2xs);
