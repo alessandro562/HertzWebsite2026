@@ -35,9 +35,9 @@
   padding: clamp(0.85rem, 3.2vw, 1rem) 0;
   border-bottom: 1px solid var(--hz-line);
   color: var(--hz-ink);
-  transition:
-    padding-inline var(--hz-ui) var(--hz-ease-out),
-    background var(--hz-ui) var(--hz-ease-out);
+  /* solo il colore cambia in hover: niente shift orizzontale, così la colonna
+     STATUS a destra resta allineata su tutte le righe. */
+  transition: background var(--hz-ui) var(--hz-ease-out);
 }
 .date {
   grid-area: date;
@@ -60,9 +60,9 @@
     grid-area: auto;
   }
 }
+/* si illumina SOLO la riga sotto il puntatore/dito */
 a.row:hover {
-  padding-inline: var(--hz-space-sm);
-  background: color-mix(in srgb, var(--hz-ink) 6%, transparent);
+  background: color-mix(in srgb, var(--hz-ink) 9%, transparent);
 }
 
 /* intestazione colonne: solo da tablet in su (su mobile è ridondante e non
@@ -105,9 +105,8 @@ a.row:hover {
     opacity: 0.35;
   }
 }
-.row[data-next] {
-  background: color-mix(in srgb, var(--hz-signal, #a3b7b7) 12%, transparent);
-}
+/* la prossima data è marcata solo dal ▸ pulsante e dal titolo in bold,
+   NESSUN fondo permanente: così l'unica riga "illuminata" è quella in hover. */
 .row[data-next] .event {
   font-weight: 700;
 }
