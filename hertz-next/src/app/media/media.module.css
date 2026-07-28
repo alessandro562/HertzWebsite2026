@@ -58,6 +58,9 @@
   grid-template-columns: 1fr;
   gap: var(--hz-space-md);
   color: inherit;
+  /* padding interno: il contenuto sta staccato dai bordi su TUTTI i lati, così
+     l'ombra/lift dell'hover (tilt) non tocca mai foto, titolo o CTA. */
+  padding: clamp(1.5rem, 3.4vw, 2.75rem);
   transition: box-shadow var(--hz-ui) var(--hz-ease-out);
 }
 .cover:hover {
@@ -91,10 +94,6 @@
   flex-direction: column;
   align-items: flex-start;
   gap: var(--hz-space-sm);
-  padding-top: clamp(0.25rem, 1.5vw, 1rem);
-  /* respiro sotto la CTA DENTRO la card: così il bordo sollevato in hover
-     (tilt + ombra) resta sotto uno spazio vuoto, non attaccato a "Read the story". */
-  padding-bottom: clamp(2rem, 5vw, 3.25rem);
 }
 .coverRubric {
   color: var(--hz-accent);
