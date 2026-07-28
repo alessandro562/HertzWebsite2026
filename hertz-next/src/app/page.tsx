@@ -98,25 +98,10 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* ═══ ORDER / DISORDER — banda cinetica (ink, edge-to-edge) ═══ */}
-      <KineticBand
-        primary={['CLUBBING', 'IDENTITY']}
-        secondary={['44.49° N', '11.34° E', 'BOLOGNA', 'MINIMAL', 'DEEP TECH']}
-        labelLeft="01 / SIGNAL"
-        labelRight="FROM CLUBBERS · FOR CLUBBERS"
-      />
-
-      {/* ═══ 02b · VISUAL IDENTITY (paper) ═══ */}
-      <Section surface="paper" space="lg" id="identity">
-        <Reveal variant="up">
-          <BrandIdentity />
-        </Reveal>
-      </Section>
-
-      {/* ═══ 03 · EVENTS (white) — indice editoriale, nessuna locandina ═══ */}
+      {/* ═══ EVENTS (white) — Next gigs, indice editoriale ═══ */}
       <Section surface="white" space="lg" id="events">
         <Reveal variant="up" className={styles.secHead}>
-          <span className={`${styles.secKicker} hz-mono`}>01 / Events</span>
+          <span className={`${styles.secKicker} hz-mono`}>Events</span>
           <h2 className={styles.secTitle}>Next gigs.</h2>
           <Link href="/events" className={styles.secLink}>
             Full calendar <Arrow />
@@ -146,7 +131,22 @@ export default function Home() {
         )}
       </Section>
 
-      {/* ═══ 03 · MANIFESTO (ink — unico dark) ═══ */}
+      {/* ═══ ORDER / DISORDER — banda cinetica · SIGNAL (ink, edge-to-edge) ═══ */}
+      <KineticBand
+        primary={['CLUBBING', 'IDENTITY']}
+        secondary={['44.49° N', '11.34° E', 'BOLOGNA', 'MINIMAL', 'DEEP TECH']}
+        labelLeft="SIGNAL"
+        labelRight="FROM CLUBBERS · FOR CLUBBERS"
+      />
+
+      {/* ═══ VISUAL IDENTITY (paper) ═══ */}
+      <Section surface="paper" space="lg" id="identity">
+        <Reveal variant="up">
+          <BrandIdentity />
+        </Reveal>
+      </Section>
+
+      {/* ═══ MANIFESTO (ink — unico dark) ═══ */}
       <Section surface="ink" space="lg" id="manifesto">
         <div className={styles.manifestoGrid}>
           <div>
@@ -183,7 +183,7 @@ export default function Home() {
         <div className={styles.artistsHead}>
           <div>
             <p className="hz-mono" style={{ color: 'var(--hz-ink-mute)', marginBottom: 'var(--hz-space-sm)' }}>
-              03 / Residents
+              Residents
             </p>
             <SignatureTitle as="h2" className={styles.artistsTitle} stagger={0.09}>
               <span>The</span>
@@ -216,7 +216,7 @@ export default function Home() {
         <div className={styles.archiveHead}>
           <div>
             <p className="hz-mono" style={{ color: 'var(--hz-ink-mute)', marginBottom: 'var(--hz-space-sm)' }}>
-              05 / Archive
+              Archive
             </p>
             <SignatureTitle as="h2" className={styles.archiveTitle} stagger={0.1}>
               <span>Rewind.</span>
