@@ -28,12 +28,33 @@
 }
 
 .meta {
+  position: relative;
+  /* stacking context proprio: così lo scrim ::before (z-index -1) sta DIETRO al
+     testo ma sopra la griglia. Senza isolamento un pseudo assoluto verrebbe
+     dipinto sopra il testo inline e lo coprirebbe. */
+  isolation: isolate;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
   min-width: 0;
   color: var(--hz-ink-mute);
   font-size: var(--hz-t-meta);
+}
+/* alone morbido nel colore della hero: sfuma i punti della signal grid sotto le
+   due righe mono (metaLine + nextLink) così il testo non ci "sbatte" contro.
+   Localizzato: la griglia ambientale resta intatta altrove. */
+.meta::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: -1.1em -1.7em -0.9em -1.3em;
+  background: radial-gradient(
+    125% 140% at 30% 50%,
+    var(--hz-bg) 46%,
+    color-mix(in srgb, var(--hz-bg) 55%, transparent) 70%,
+    transparent 88%
+  );
+  pointer-events: none;
 }
 .metaLine {
   letter-spacing: var(--hz-tracking-mono);
