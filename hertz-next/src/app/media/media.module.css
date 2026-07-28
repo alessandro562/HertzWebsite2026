@@ -61,7 +61,7 @@
   transition: box-shadow var(--hz-ui) var(--hz-ease-out);
 }
 .cover:hover {
-  box-shadow: 0 26px 55px -34px color-mix(in srgb, var(--hz-ink) 55%, transparent);
+  box-shadow: 0 30px 66px -30px color-mix(in srgb, var(--hz-ink) 36%, transparent);
 }
 @media (min-width: 900px) {
   .cover {
@@ -92,6 +92,9 @@
   align-items: flex-start;
   gap: var(--hz-space-sm);
   padding-top: clamp(0.25rem, 1.5vw, 1rem);
+  /* respiro sotto la CTA DENTRO la card: così il bordo sollevato in hover
+     (tilt + ombra) resta sotto uno spazio vuoto, non attaccato a "Read the story". */
+  padding-bottom: clamp(2rem, 5vw, 3.25rem);
 }
 .coverRubric {
   color: var(--hz-accent);
