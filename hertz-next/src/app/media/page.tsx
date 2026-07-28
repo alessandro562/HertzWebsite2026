@@ -44,7 +44,7 @@ export default function MediaPage() {
       </Section>
 
       {/* ── COVER STORY ── */}
-      <Section surface="white" space="md">
+      <Section surface="white" space="md" style={{ paddingBottom: 'clamp(4rem, 9vw, 7rem)' }}>
         <Reveal variant="up">
           <TiltCard>
             <Link href={`/media/${feature.slug}`} className={styles.cover}>
