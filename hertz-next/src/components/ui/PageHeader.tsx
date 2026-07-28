@@ -2,7 +2,6 @@ import type { ReactNode } from 'react'
 import styles from './PageHeader.module.css'
 
 interface Props {
-  index?: string
   kicker?: string
   title: ReactNode
   intro?: ReactNode
@@ -16,7 +15,6 @@ interface Props {
  * misurata, con colonna aside opzionale. Superficie ereditata dalla Section.
  */
 export default function PageHeader({
-  index,
   kicker,
   title,
   intro,
@@ -29,12 +27,7 @@ export default function PageHeader({
       className={`${styles.head} ${noDivider ? styles.noDivider : ''} ${className}`.trim()}
     >
       <div className={styles.main}>
-        {(index || kicker) && (
-          <p className={`${styles.kicker} hz-mono`}>
-            {index && <span className={styles.idx}>{index}</span>}
-            {kicker}
-          </p>
-        )}
+        {kicker && <p className={`${styles.kicker} hz-mono`}>{kicker}</p>}
         <h1 className={styles.title}>{title}</h1>
         {intro && <div className={styles.intro}>{intro}</div>}
       </div>

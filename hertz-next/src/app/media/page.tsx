@@ -77,10 +77,9 @@ export default function MediaPage() {
           <h2 className={styles.indexTitle}>More reading.</h2>
         </div>
         <Stagger className={styles.index} gap={0.07}>
-          {rest.map((a, i) => (
+          {rest.map((a) => (
             <StaggerItem key={a.slug} variant="up">
               <Link href={`/media/${a.slug}`} className={`${styles.entry} hz-rowfx`}>
-                <span className={`${styles.entryNum} hz-mono`}>{String(i + 1).padStart(2, '0')}</span>
                 <div className={`${styles.entryThumb} hz-glitch`}>
                   <img src={a.heroImage} alt={a.heroImageAlt} loading="lazy" decoding="async" />
                   <GlitchFX />

@@ -109,7 +109,6 @@ export default function BookingsClient() {
     <main id="main">
       <Section surface="signal" space="lg">
         <PageHeader
-          index="09"
           kicker={t.kicker}
           title={t.title}
           intro={<p className="hz-mono">{t.intro}</p>}
@@ -126,13 +125,11 @@ export default function BookingsClient() {
 
       {/* ── two ways to book (white) ── */}
       <Section surface="white" space="lg">
-        <SectionLabel index="A" kicker={t.twoWays} title={t.pickSignal} />
+        <SectionLabel kicker={t.twoWays} title={t.pickSignal} />
         <div className={styles.paths}>
           {paths.map((p) => (
             <article key={p.n} className={styles.path}>
-              <span className={`${styles.pathKicker} hz-mono`}>
-                {p.n} · {p.kicker}
-              </span>
+              <span className={`${styles.pathKicker} hz-mono`}>{p.kicker}</span>
               <h3 className={styles.pathTitle}>{p.title}</h3>
               <p className={styles.pathBody}>{p.body}</p>
               <div className={styles.chips}>
@@ -152,13 +149,11 @@ export default function BookingsClient() {
 
       {/* ── roster (cold-blue) ── */}
       <Section surface="cold-blue" space="lg" id="roster">
-        <SectionLabel index="B" kicker={t.rosterKicker} title={t.rosterTitle} />
+        <SectionLabel kicker={t.rosterKicker} title={t.rosterTitle} />
         <div className={styles.roster}>
           {ROSTER.map((a) => (
             <Link key={a.slug} href={`/bookings?resident=${a.slug}#book`} className={styles.resCard}>
-              <span className={`${styles.resNum} hz-mono`}>
-                {a.n} · {t.resident}
-              </span>
+              <span className={`${styles.resNum} hz-mono`}>{t.resident}</span>
               <div className={styles.resPh}>
                 <ImageFrame src={a.portrait} alt={a.name} ratio="4 / 5" />
               </div>
@@ -175,7 +170,7 @@ export default function BookingsClient() {
 
       {/* ── request form (white) ── */}
       <Section surface="white" space="lg" id="book">
-        <SectionLabel index="C" kicker={t.sendKicker} title={t.sendTitle} />
+        <SectionLabel kicker={t.sendKicker} title={t.sendTitle} />
         <div className={styles.grid}>
           <div className={styles.formCol}>
             <p className={styles.formIntro}>{t.formIntro}</p>

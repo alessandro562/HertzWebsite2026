@@ -13,7 +13,7 @@ import styles from './ArtistIndexRow.module.css'
 export default function ArtistIndexRow({ artist }: { artist: Artist; first?: boolean }) {
   return (
     <Link href={`/artists/${artist.slug}`} className={`${styles.card} hz-cardfx`}>
-      <span className={`${styles.top} hz-mono`}>{artist.n} · Resident</span>
+      <span className={`${styles.top} hz-mono`}>Resident</span>
       <div className={styles.photo}>
         <ViewMorph name={`artist-portrait-${artist.slug}`}>
           <ImageFrame src={artist.portrait} alt={artist.name} ratio="4 / 5" className={styles.photoFrame} />

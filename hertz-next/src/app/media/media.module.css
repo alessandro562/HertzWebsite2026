@@ -157,7 +157,7 @@
 }
 .entry {
   display: grid;
-  grid-template-columns: auto clamp(96px, 14vw, 168px) minmax(0, 1fr) auto auto;
+  grid-template-columns: clamp(96px, 14vw, 168px) minmax(0, 1fr) auto auto;
   align-items: center;
   gap: var(--hz-space-sm) clamp(1rem, 2.5vw, 2rem);
   padding: var(--hz-space-md) 0;
@@ -173,11 +173,6 @@
 }
 .entry > * {
   min-width: 0;
-}
-.entryNum {
-  color: var(--hz-ink-mute);
-  align-self: start;
-  padding-top: 0.3em;
 }
 .entryThumb {
   position: relative;
@@ -237,7 +232,7 @@
 
 @media (max-width: 720px) {
   .entry {
-    grid-template-columns: auto clamp(72px, 22vw, 110px) minmax(0, 1fr) auto;
+    grid-template-columns: clamp(72px, 22vw, 110px) minmax(0, 1fr) auto;
     gap: var(--hz-space-sm) var(--hz-space-md);
   }
   .entryMeta {

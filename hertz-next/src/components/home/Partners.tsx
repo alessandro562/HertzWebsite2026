@@ -24,13 +24,10 @@ export default function Partners() {
     <div>
       <span className={`${styles.kicker} hz-mono`}>In collaboration with</span>
       <div className={styles.grid}>
-        {PARTNERS.map((p, i) => (
+        {PARTNERS.map((p) => (
           <div key={p.name} className={`${styles.card} hz-cardfx`}>
             <div className={styles.panel} data-surface="ink">
               <img src={p.logo} alt={`${p.name} logo`} className={styles.logo} loading="lazy" />
-              <span className={`${styles.panelNum} hz-mono`} aria-hidden="true">
-                {String(i + 1).padStart(2, '0')}
-              </span>
             </div>
             <div className={styles.caption}>
               <span className={styles.name}>{p.name}</span>

@@ -16,7 +16,6 @@ export default function PrivacyPage() {
     <main id="main">
       <Section surface="white" space="lg">
         <PageHeader
-          index="—"
           kicker="Legal"
           title="Informativa privacy."
           intro={

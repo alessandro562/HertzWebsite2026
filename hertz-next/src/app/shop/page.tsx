@@ -23,7 +23,6 @@ export default function ShopPage() {
     <main id="main">
       <Section surface="paper" space="lg">
         <PageHeader
-          index="07"
           kicker="Shop"
           title="Clubber apparel."
           intro={
@@ -68,7 +67,7 @@ export default function ShopPage() {
       </Section>
 
       <Section surface="paper" space="md">
-        <SectionLabel index="08" kicker="More soon" title="The rest of the kit." />
+        <SectionLabel kicker="More soon" title="The rest of the kit." />
         <ul className={styles.cats}>
           {CATEGORIES.map((c) => (
             <li key={c} className={styles.cat}>

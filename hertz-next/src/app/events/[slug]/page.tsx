@@ -231,14 +231,13 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
          gap ridotto (96-120px desktop, 64-80px mobile): la Line-up è
          continuazione dell'evento, non una pagina successiva. */}
       <Section surface="paper" space="lg" style={{ paddingTop: 'clamp(64px, 9vw, 120px)' }}>
-        <SectionLabel kicker="02 / Line-up" />
+        <SectionLabel kicker="Line-up" />
         <div className={styles.lineup}>
           <FrequencyCut variant="editorial" trigger="inView" className={styles.lineupCut} />
           {lineupRows.length > 0 ? (
             <Stagger className={styles.lineupList} gap={0.07}>
               {lineupRows.map((row, i) => (
                 <StaggerItem key={`${row.name}-${i}`} variant="up" className={styles.lineupRow}>
-                  <span className={`${styles.lineupIndex} hz-mono`}>{String(i + 1).padStart(2, '0')}</span>
                   {row.resident ? (
                     <Link href={`/artists/${row.resident.slug}`} className={styles.lineupName}>
                       {row.name}

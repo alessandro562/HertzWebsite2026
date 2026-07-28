@@ -101,9 +101,6 @@ export default function PhotoGallery({
               <span className={`${styles.tick} ${styles.tr}`} aria-hidden="true" />
               <span className={`${styles.tick} ${styles.bl}`} aria-hidden="true" />
               <span className={`${styles.tick} ${styles.br}`} aria-hidden="true" />
-              <span className={`${styles.idx} hz-mono`}>
-                {String(i + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
-              </span>
               <span className={styles.cap}>
                 <span className={styles.capName}>{label}</span>
                 <span className={`${styles.capMeta} hz-mono`}>{caption}</span>

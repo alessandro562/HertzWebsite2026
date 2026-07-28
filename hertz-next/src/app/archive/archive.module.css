@@ -262,14 +262,6 @@
   filter: grayscale(0);
   transform: scale(1.05);
 }
-.pressIx {
-  position: absolute;
-  top: 6px;
-  left: 8px;
-  color: #fff;
-  mix-blend-mode: difference;
-  z-index: 4;
-}
 .pressDl {
   position: absolute;
   z-index: 4;

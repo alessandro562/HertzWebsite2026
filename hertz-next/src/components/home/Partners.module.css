@@ -42,13 +42,6 @@
 .card:hover .logo {
   transform: scale(1.05);
 }
-.panelNum {
-  position: absolute;
-  top: clamp(0.6rem, 1.6vw, 1rem);
-  left: clamp(0.7rem, 1.8vw, 1.1rem);
-  color: rgba(255, 255, 255, 0.5);
-}
-
 .caption {
   display: flex;
   align-items: baseline;

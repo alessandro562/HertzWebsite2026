@@ -14,9 +14,6 @@
   margin-bottom: var(--hz-space-sm);
   color: var(--hz-ink-mute);
 }
-.idx {
-  color: var(--hz-ink);
-}
 
 .title {
   font-size: clamp(1.9rem, 4.8vw, 4.8rem);

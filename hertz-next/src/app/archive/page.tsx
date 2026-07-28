@@ -107,7 +107,6 @@ export default function ArchivePage() {
       {/* ── header (white) — identità reale del /archive live: press ── */}
       <Section surface="white" space="lg">
         <PageHeader
-          index="06"
           kicker="Press kit & photo archive"
           title="For the press."
           intro={
@@ -121,7 +120,7 @@ export default function ArchivePage() {
 
       {/* ── press kit (paper) ── */}
       <Section surface="paper" space="lg" id="press-kit">
-        <SectionLabel index="A" kicker="The press kit" title="Everything in one folder." />
+        <SectionLabel kicker="The press kit" title="Everything in one folder." />
         <div className={styles.pressKit}>
           <div className={styles.pkMain}>
             <p className={styles.pkLede}>
@@ -176,14 +175,12 @@ export default function ArchivePage() {
       {/* ── photo archive (ink) — frame scaricabili ── */}
       <Section surface="ink" space="lg" id="photo-archive">
         <SectionLabel
-          index="B"
           kicker="Photo archive · free for press"
           title="Shoot the room."
         />
         <div className={styles.photoGrid}>
           {PHOTO_ARCHIVE.map((src, i) => (
             <a key={src + i} className={`${styles.pressShot} hz-glitch`} href={src} download>
-              <span className={`${styles.pressIx} hz-mono`}>{String(i + 1).padStart(2, '0')}</span>
               <img src={src} alt={`Hertz live, archive frame ${i + 1}`} loading="lazy" />
               <GlitchFX />
               <span className={`${styles.pressDl} hz-mono`}>↓ JPG</span>
@@ -197,7 +194,7 @@ export default function ArchivePage() {
 
       {/* ── nights on record (past events, dati reali) ── */}
       <Section surface="white" space="lg" id="nights">
-        <SectionLabel index="C" kicker="Archive" title="Rewind." />
+        <SectionLabel kicker="Archive" title="Rewind." />
         {featured && featuredPhotos.length > 0 && (
           <div className={styles.featured}>
             <PrintInterruption

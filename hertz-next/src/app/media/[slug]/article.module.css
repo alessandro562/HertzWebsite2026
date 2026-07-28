@@ -216,7 +216,7 @@
 }
 .relCard {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 1fr auto;
   align-items: start;
   gap: var(--hz-space-sm) var(--hz-space-md);
   padding: var(--hz-space-md) 0;
@@ -226,10 +226,6 @@
 }
 .relCard:hover {
   padding-left: clamp(0.9rem, 2vw, 1.4rem);
-}
-.relNum {
-  color: var(--hz-ink-mute);
-  padding-top: 0.35em;
 }
 .relBody {
   display: flex;

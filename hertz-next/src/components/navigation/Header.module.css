@@ -174,12 +174,6 @@
 .menuTickets:hover {
   padding-left: var(--hz-space-sm);
 }
-.menuNum {
-  flex: none;
-  width: 2em;
-  color: var(--hz-ink-mute);
-  font-size: var(--hz-t-meta);
-}
 .menuLabel {
   flex: 1;
   font-family: var(--hz-font-display), 'Helvetica Neue', Helvetica, Arial, sans-serif;

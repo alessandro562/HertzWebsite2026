@@ -111,7 +111,6 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             {related.map((r, i) => (
               <Reveal key={r.slug} variant="up" delay={i * 0.06}>
                 <Link href={`/media/${r.slug}`} className={`${styles.relCard} hz-rowfx`}>
-                  <span className={`${styles.relNum} hz-mono`}>{String(i + 1).padStart(2, '0')}</span>
                   <div className={styles.relBody}>
                     <span className={`${styles.relRubric} hz-mono`}>{r.rubric}</span>
                     <span className={styles.relTitle}>{r.title}</span>

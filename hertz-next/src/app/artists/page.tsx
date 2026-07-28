@@ -19,7 +19,6 @@ export default function ArtistsPage() {
     <main id="main">
       <Section surface="cold-blue" space="lg">
         <PageHeader
-          index="03"
           kicker="The collective"
           title="The residents."
           intro={<p className="hz-mono">Resident roster · Bologna · Keep the groove</p>}

@@ -21,11 +21,10 @@ export default function BrandIdentity() {
         </p>
       </div>
       <div className={styles.strip}>
-        {CARDS.map((c, i) => (
+        {CARDS.map((c) => (
           <figure key={c.src} className={styles.card}>
             <img src={c.src} alt={c.cap} loading="lazy" />
             <figcaption className="hz-mono">
-              <span>{String(i + 1).padStart(2, '0')}</span>
               <span>{c.cap}</span>
             </figcaption>
           </figure>

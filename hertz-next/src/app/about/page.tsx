@@ -40,7 +40,7 @@ export default function AboutPage() {
       <Section surface="white" space="lg">
         <div className={styles.chapter}>
           <Reveal variant="up" className={styles.chapText}>
-            <span className={`${styles.chap} hz-mono`}>Chapter 01 · Origin</span>
+            <span className={`${styles.chap} hz-mono`}>Origin</span>
             <p>
               It began in Bologna, in 2023. Going out had become more about being seen than being
               there: rooms lit for the camera, with the music pushed somewhere into the background.
@@ -61,7 +61,7 @@ export default function AboutPage() {
             <ImageFrame src="/assets/tommaso-manco-live-2.jpg" alt="Hertz booth and crowd" ratio="4 / 5" />
           </Parallax>
           <Reveal variant="up" className={styles.chapText}>
-            <span className={`${styles.chap} hz-mono`}>Chapter 02 · The room</span>
+            <span className={`${styles.chap} hz-mono`}>The room</span>
             <p className={styles.big}>
               A room. A system. A crowd that came to dance. The rest is just volume.
             </p>
@@ -78,7 +78,7 @@ export default function AboutPage() {
       {/* ── floor climax + stats (signal) ── */}
       <Section surface="signal" space="lg">
         <p className={`${styles.chap} hz-mono`} style={{ color: 'var(--hz-ink-mute)' }}>
-          Chapter 03 · The floor
+          The floor
         </p>
         <Reveal as="p" variant="mask" duration={1} className={styles.climax}>
           Lights down, sound up, and let the record run. The floor takes it from there.

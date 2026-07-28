@@ -105,16 +105,13 @@ export default function Header() {
         hidden={!open}
       >
         <nav className={styles.menuNav} aria-label="Menu">
-          {NAV_ITEMS.map((i, idx) => (
+          {NAV_ITEMS.map((i) => (
             <Link
               key={i.href}
               href={i.href}
               className={styles.menuLink}
               onClick={() => setOpen(false)}
             >
-              <span className={`${styles.menuNum} hz-mono`} aria-hidden="true">
-                {String(idx + 1).padStart(2, '0')}
-              </span>
               <span className={styles.menuLabel}>{i.label}</span>
             </Link>
           ))}
@@ -123,7 +120,6 @@ export default function Header() {
             className={styles.menuTickets}
             onClick={() => setOpen(false)}
           >
-            <span className={`${styles.menuNum} hz-mono`} aria-hidden="true" />
             <span className={styles.menuLabel}>Bookings</span>
             <Arrow />
           </Link>

@@ -34,7 +34,7 @@ export default async function MusicPage() {
       {/* ── header editoriale + barra piattaforme ── */}
       <Section surface="paper" space="md">
         <div className={styles.head}>
-          <p className={`${styles.kicker} hz-mono`}>03 / Music</p>
+          <p className={`${styles.kicker} hz-mono`}>Music</p>
           <h1 className={styles.title}>The selection.</h1>
           <div className={styles.headRow}>
             <p className={styles.intro}>

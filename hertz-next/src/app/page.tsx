@@ -193,12 +193,11 @@ export default function Home() {
           <p className={styles.artistsHint}>Select an artist →</p>
         </div>
         <Stagger className={styles.artistList} gap={0.08}>
-          {ROSTER.map((slug, i) => {
+          {ROSTER.map((slug) => {
             const a = ARTISTS[slug]
             return (
               <StaggerItem key={slug} variant="left">
                 <Link href={`/artists/${slug}`} className={`${styles.artistRow} hz-rowfx`}>
-                  <span className={styles.aNum}>{String(i + 1).padStart(2, '0')}</span>
                   <span className={styles.aName}>{a.name}</span>
                   <span className={styles.aRole}>{a.role}</span>
                   <span className={`${styles.aArrow} hz-fx-arrow`} aria-hidden="true">
@@ -228,16 +227,13 @@ export default function Home() {
           </p>
         </div>
         <Stagger className={styles.archiveStrip} gap={0.07}>
-          {ARCHIVE_PHOTOS.map((src, i) => (
+          {ARCHIVE_PHOTOS.map((src) => (
             <StaggerItem key={src} variant="right">
               <figure className={`${styles.archiveCard} hz-cardfx hz-glitch`}>
                 <img src={src} alt="Hertz night, Kindergarten archive" loading="lazy" />
                 <GlitchFX />
                 <figcaption>
                   <span>Kindergarten</span>
-                  <span>
-                    {String(i + 1).padStart(2, '0')} / {ARCHIVE_PHOTOS.length}
-                  </span>
                 </figcaption>
               </figure>
             </StaggerItem>

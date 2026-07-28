@@ -177,10 +177,6 @@
 .lineupRow:first-child {
   border-top: none;
 }
-.lineupIndex {
-  color: var(--hz-ink-mute);
-  min-width: 2ch;
-}
 .lineupName,
 .lineupNamePlain {
   font-family: var(--hz-font-display);

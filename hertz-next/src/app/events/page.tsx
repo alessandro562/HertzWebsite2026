@@ -53,7 +53,7 @@ export default function EventsPage() {
         {/* intro editoriale: titolo grande + voce reale del collettivo */}
         <div className={styles.intro}>
           <div className={styles.introHead}>
-            <p className={`${styles.introKicker} hz-mono`}>01 / Events</p>
+            <p className={`${styles.introKicker} hz-mono`}>Events</p>
             <h1 className={styles.introTitle}>Next gigs.</h1>
           </div>
           <div className={styles.introAside}>
@@ -88,7 +88,7 @@ export default function EventsPage() {
 
       <Section surface="paper" space="lg">
         <div className={styles.archiveHead}>
-          <p className={`${styles.introKicker} hz-mono`}>02 / Archive</p>
+          <p className={`${styles.introKicker} hz-mono`}>Archive</p>
           <h2 className={styles.archiveTitle}>Rewind.</h2>
           <span className={`${styles.archiveCount} hz-mono`}>
             Past transmissions · {pastYears.join('–')}
