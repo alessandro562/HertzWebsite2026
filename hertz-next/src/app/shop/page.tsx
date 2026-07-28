@@ -2,21 +2,20 @@ import type { Metadata } from 'next'
 import Section from '@/components/ui/Section'
 import PageHeader from '@/components/ui/PageHeader'
 import SectionLabel from '@/components/ui/SectionLabel'
-import ImageFrame from '@/components/ui/ImageFrame'
 import StatusBadge from '@/components/ui/StatusBadge'
-import ReserveForm from '@/components/forms/ReserveForm'
 import WaitlistForm from '@/components/forms/WaitlistForm'
 import styles from './shop.module.css'
 
 export const metadata: Metadata = {
   title: 'Shop',
   description:
-    'Hertz uniform: Drop 01 Lanyard, woven nylon, numbered 001-200, shipped from Bologna. Reserve by email.',
+    'Hertz clubber apparel and gadgets: small, numbered drops made for the floor, shipped from Bologna. Coming soon.',
   alternates: { canonical: '/shop' },
 }
 
-const SPECS = ['001 / 200', 'Woven nylon', 'Black · 5 cm', 'Ships from Bologna']
-const CATEGORIES = ['Apparel', 'Outerwear', 'Headwear']
+/* Cosa arriverà: categorie reali del merch Hertz (nessun prodotto ancora
+   ufficiale → tutto "coming soon", nessun form di prenotazione). */
+const CATEGORIES = ['Apparel', 'Outerwear', 'Headwear', 'Accessories']
 
 export default function ShopPage() {
   return (
@@ -27,8 +26,9 @@ export default function ShopPage() {
           title="Clubber apparel."
           intro={
             <p>
-              Small, numbered drops made for the floor, not the feed. Reserve by email; we confirm
-              and ship from Bologna. First object below.
+              Clubber apparel and gadgets, made for the floor rather than the feed: small, numbered
+              drops in limited runs, shipped from Bologna. We&rsquo;re still putting the first pieces
+              together, so nothing is on sale just yet.
             </p>
           }
           aside={<StatusBadge status="soon" label="Coming soon" />}
@@ -36,38 +36,13 @@ export default function ShopPage() {
       </Section>
 
       <Section surface="white" space="lg">
-        <div className={styles.product}>
-          <ImageFrame
-            src="/assets/merch-lanyard-drop01.webp"
-            alt="Hertz lanyard, Drop 01"
-            ratio="1 / 1"
-            priority
-            glitch={false}
-            className={styles.visual}
-          />
-          <div className={styles.info}>
-            <span className={`${styles.dropTag} hz-mono`}>Drop 01</span>
-            <h2 className={styles.title}>Lanyard</h2>
-            <p className={styles.desc}>
-              Woven nylon, 5 cm, black. 200 pieces per drop, numbered 001-200, ships from Bologna.
-              Reserve now. We confirm as soon as the run is ready.
-            </p>
-            <ul className={styles.specs}>
-              {SPECS.map((s) => (
-                <li key={s} className="hz-mono">
-                  {s}
-                </li>
-              ))}
-            </ul>
-            <div className={styles.form}>
-              <ReserveForm item="Lanyard · Drop 01" />
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      <Section surface="paper" space="md">
-        <SectionLabel kicker="More soon" title="The rest of the kit." />
+        <SectionLabel kicker="What's coming" title="Apparel & gadgets." />
+        <p className={styles.lede}>
+          T-shirts and hoodies, outerwear, headwear and small accessories built around the Hertz
+          identity: minimal, numbered and made to wear on the floor and off it. Every drop stays
+          limited and ships from Bologna. The actual pieces, prices and how to buy will land here
+          once the first run is ready.
+        </p>
         <ul className={styles.cats}>
           {CATEGORIES.map((c) => (
             <li key={c} className={styles.cat}>
@@ -76,6 +51,13 @@ export default function ShopPage() {
             </li>
           ))}
         </ul>
+      </Section>
+
+      <Section surface="paper" space="md">
+        <SectionLabel kicker="Stay in the loop" title="Get the first drop." />
+        <p className={styles.lede}>
+          Leave your email and we&rsquo;ll let you know the moment the first drop goes live.
+        </p>
         <div className={styles.waitlist}>
           <WaitlistForm />
         </div>

@@ -1,50 +1,9 @@
-.product {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--hz-space-lg);
-  align-items: start;
-}
-@media (min-width: 820px) {
-  .product {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: clamp(2rem, 5vw, 5rem);
-  }
-}
-
-.visual {
-  max-width: 520px;
-}
-
-.info {
-  display: flex;
-  flex-direction: column;
-  gap: var(--hz-space-sm);
-}
-.dropTag {
-  color: var(--hz-ink-mute);
-}
-.title {
-  font-size: var(--hz-t-section);
-}
-.desc {
+.lede {
+  max-width: var(--hz-text-max);
   font-size: var(--hz-t-body-lg);
   color: var(--hz-ink-mute);
-  max-width: 44ch;
-  margin-top: var(--hz-space-xs);
-}
-.specs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1.5rem;
-  list-style: none;
-  padding: var(--hz-space-md) 0;
-  margin: var(--hz-space-sm) 0;
-  border-top: 1px solid var(--hz-line);
-  border-bottom: 1px solid var(--hz-line);
-  color: var(--hz-ink-mute);
-}
-.form {
-  margin-top: var(--hz-space-md);
+  line-height: var(--hz-leading-body);
+  margin-bottom: var(--hz-space-lg);
 }
 
 /* ── categories ── */
