@@ -66,11 +66,13 @@ export default function Home() {
         <div className={styles.introGrid}>
           <div className={styles.introText}>
             <Reveal as="p" variant="mask" duration={0.9} className={styles.introLead}>
-              A clubbing collective from Bologna. Minimal and deep tech, since 2023.
+              Hertz is a clubbing collective from Bologna.
             </Reveal>
             <Reveal as="p" variant="up" delay={0.12} className={styles.introSupport}>
-              The nights we wanted to be at. Real rooms, proper systems, grooves that roll for
-              hours. From clubbers, for clubbers.
+              Since 2023 we&rsquo;ve worked to put music selection back at the center of the night,
+              and to bring back the idea of real clubbing: the kind made of moments you actually
+              remember, the ones only a real dancefloor can give. Minimal and deep tech, done
+              properly, from clubbers for clubbers.
             </Reveal>
           </div>
           <Reveal variant="up" delay={0.15}>
@@ -157,8 +159,12 @@ export default function Home() {
             </SignatureTitle>
             <Reveal variant="up" delay={0.2}>
               <p className={styles.manifestoBody}>
-                Bologna, 2023. Records. A system. A room that works. No spectacle. Music first,
-                the floor does the rest.
+                Hertz started in Bologna in 2023, when going out had started to feel more about
+                being seen than being there. We wanted the opposite: nights built around the music,
+                the sound system and the people on the floor. Real clubbing isn&rsquo;t a show you
+                watch, it&rsquo;s something you live, the kind of night that only happens when the
+                right room, the right sound and the right crowd come together. That&rsquo;s what we
+                set out to bring back.
               </p>
               <Link href="/about" className={`${styles.btn} ${styles.btnGhost} ${styles.manifestoLink}`}>
                 Read the manifesto <Arrow />

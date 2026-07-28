@@ -25,8 +25,8 @@ export default function AboutPage() {
           </span>
         </SignatureTitle>
         <p className={styles.heroLead}>
-          A clubbing collective from Bologna, since 2023. Records, a system, the floor. And
-          the people who fill it.
+          Hertz is a clubbing collective from Bologna, active since 2023. We build our nights
+          around the music, the sound system and the people on the floor.
         </p>
         <blockquote className={styles.heroQuote}>
           Too many nights were built for the camera, not for the floor.
@@ -42,12 +42,13 @@ export default function AboutPage() {
           <Reveal variant="up" className={styles.chapText}>
             <span className={`${styles.chap} hz-mono`}>Chapter 01 · Origin</span>
             <p>
-              Bologna, 2023. The night was turning into something to film, not something to live.
-              Rooms built for the camera, the music stuck in the back.
+              It began in Bologna, in 2023. Going out had become more about being seen than being
+              there: rooms lit for the camera, with the music pushed somewhere into the background.
             </p>
             <p>
-              So we stripped it back. Records first, proper systems, the right rooms. No spectacle,
-              no filler. The floor does the rest.
+              We wanted the opposite. Nights built around the music, the sound system and the people
+              on the floor, where the selection leads and the crowd does the rest. That&rsquo;s the
+              kind of clubbing we set out to bring back.
             </p>
           </Reveal>
           <Parallax speed={44} className={styles.chapPhoto}>
@@ -65,9 +66,10 @@ export default function AboutPage() {
               A room. A system. A crowd that came to dance. The rest is just volume.
             </p>
             <p>
-              Artists we&rsquo;d pay to see ourselves. Minimal and deep tech, grooves that roll for
-              hours and never turn to noise. Rooms picked for how they sound, not how they look.
-              Small enough to feel the kick, big enough to disappear.
+              We book the artists we&rsquo;d pay to see ourselves: minimal and deep tech, the kind
+              of groove that can roll for hours without ever turning into noise. And we choose rooms
+              for how they sound rather than how they look, small enough to feel the kick through the
+              floor, big enough to lose yourself in.
             </p>
           </Reveal>
         </div>
@@ -79,7 +81,7 @@ export default function AboutPage() {
           Chapter 03 · The floor
         </p>
         <Reveal as="p" variant="mask" duration={1} className={styles.climax}>
-          Lights down, system up, let the record run. The floor knows what to do.
+          Lights down, sound up, and let the record run. The floor takes it from there.
         </Reveal>
         <Reveal variant="up" delay={0.1}>
           <dl className={styles.stats}>
