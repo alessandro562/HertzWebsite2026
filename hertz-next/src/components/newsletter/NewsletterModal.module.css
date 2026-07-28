@@ -1,0 +1,221 @@
+/* ────────────────────────────────────────────────────────────
+   HERTZ · NEWSLETTER MODAL — pop-up di benvenuto, design editoriale.
+   Superficie Signal (token via [data-surface]), logo ufficiale, registration
+   marks agli angoli, type display + label mono. Scrim ink + blur dietro.
+   ──────────────────────────────────────────────────────────── */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--hz-z-modal, 1000);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 2rem);
+  overflow-y: auto;
+  background: color-mix(in srgb, var(--raw-ink, #151515) 58%, transparent);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  max-height: calc(100dvh - 2rem);
+  overflow-y: auto;
+  margin: auto;
+  padding: clamp(1.75rem, 5vw, 2.75rem);
+  border: 1px solid var(--hz-line-strong);
+  border-radius: var(--hz-radius-card, 4px);
+  box-shadow: 0 40px 90px -32px rgba(0, 0, 0, 0.55);
+}
+
+/* registration marks (linguaggio print del brand) */
+.reg {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  color: var(--hz-ink);
+  opacity: 0.5;
+  pointer-events: none;
+}
+.regTl { top: 12px; left: 12px; border-top: 1px solid currentColor; border-left: 1px solid currentColor; }
+.regTr { top: 12px; right: 12px; border-top: 1px solid currentColor; border-right: 1px solid currentColor; }
+.regBl { bottom: 12px; left: 12px; border-bottom: 1px solid currentColor; border-left: 1px solid currentColor; }
+.regBr { bottom: 12px; right: 12px; border-bottom: 1px solid currentColor; border-right: 1px solid currentColor; }
+
+.close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--hz-font-mono);
+  font-size: 0.95rem;
+  color: var(--hz-ink-mute);
+  transition: color var(--hz-fast, 0.15s) var(--hz-ease-out, ease);
+}
+.close:hover {
+  color: var(--hz-ink);
+}
+
+.logo {
+  --logo-h: 44px;
+  color: var(--hz-ink);
+  margin-bottom: clamp(1rem, 3vw, 1.5rem);
+}
+
+.kicker {
+  color: var(--hz-ink-mute);
+  margin-bottom: var(--hz-space-sm, 0.75rem);
+}
+
+.title {
+  font-family: var(--hz-font-display);
+  font-weight: var(--hz-weight-display, 700);
+  font-size: clamp(2rem, 6vw, 2.7rem);
+  line-height: 0.94;
+  letter-spacing: var(--hz-tracking-tight, -0.02em);
+  text-transform: uppercase;
+}
+
+.body {
+  margin-top: var(--hz-space-sm, 0.75rem);
+  color: var(--hz-ink-mute);
+  font-size: var(--hz-t-body, 1rem);
+  line-height: var(--hz-leading-body, 1.5);
+  max-width: 40ch;
+}
+
+/* callout "primi 100" — bordo accent, mono, in evidenza */
+.promo {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6em;
+  margin-top: clamp(1rem, 3vw, 1.4rem);
+  padding: 0.85em 1em;
+  border: 1px solid var(--hz-accent);
+  color: var(--hz-accent);
+  line-height: 1.45;
+  text-transform: none;
+  letter-spacing: 0.01em;
+}
+.promoDot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  margin-top: 0.35em;
+  border-radius: 50%;
+  background: var(--hz-accent);
+}
+
+.form {
+  margin-top: clamp(1.15rem, 3.5vw, 1.6rem);
+  display: flex;
+  flex-direction: column;
+  gap: var(--hz-space-md, 1rem);
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.label {
+  color: var(--hz-ink-mute);
+}
+.input {
+  font: inherit;
+  font-size: var(--hz-t-body, 1rem);
+  color: var(--hz-ink);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--hz-line-strong);
+  border-radius: 0;
+  padding: 0.55em 0;
+  width: 100%;
+}
+.input::placeholder {
+  color: var(--hz-ink-mute);
+  opacity: 0.7;
+}
+.input:focus {
+  outline: none;
+  border-bottom-color: var(--hz-ink);
+}
+
+.submit {
+  align-self: stretch;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  min-height: 48px;
+  padding: 0.8em 1.6em;
+  font-family: var(--hz-font-mono);
+  font-size: var(--hz-t-ui, 0.82rem);
+  letter-spacing: var(--hz-tracking-mono, 0.04em);
+  text-transform: uppercase;
+  line-height: 1;
+  border: 1px solid var(--hz-ink);
+  border-radius: var(--hz-radius-control, 2px);
+  background: var(--hz-ink);
+  color: var(--hz-bg);
+  cursor: pointer;
+  transition:
+    background-color var(--hz-ui, 0.3s) var(--hz-ease-out, ease),
+    color var(--hz-ui, 0.3s) var(--hz-ease-out, ease);
+}
+.submit:hover:not(:disabled) {
+  background: var(--hz-accent);
+  border-color: var(--hz-accent);
+  color: var(--raw-white, #fff);
+}
+.submit:disabled {
+  opacity: 0.55;
+  cursor: progress;
+}
+
+.consent {
+  display: flex;
+  gap: 0.6em;
+  align-items: flex-start;
+  font-size: var(--hz-t-meta, 0.78rem);
+  line-height: 1.45;
+  color: var(--hz-ink-mute);
+}
+.check {
+  flex: none;
+  margin-top: 0.15em;
+  accent-color: var(--hz-ink);
+}
+.link {
+  color: var(--hz-ink);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.link:hover {
+  color: var(--hz-accent);
+}
+
+.error {
+  color: var(--hz-soldout, #b23b3b);
+}
+
+/* honeypot: fuori schermo, non tabbabile */
+.hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+@media (max-width: 420px) {
+  .title {
+    font-size: clamp(1.7rem, 8vw, 2.1rem);
+  }
+}

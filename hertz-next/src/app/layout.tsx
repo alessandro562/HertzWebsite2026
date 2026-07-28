@@ -7,6 +7,7 @@ import SmoothScroll from '@/motion/SmoothScroll'
 import PageTransitionProvider from '@/motion/PageTransitionProvider'
 import Header from '@/components/navigation/Header'
 import Footer from '@/components/navigation/Footer'
+import NewsletterModal from '@/components/newsletter/NewsletterModal'
 import { SITE } from '@/lib/site'
 
 /**
@@ -78,6 +79,7 @@ export default function RootLayout({
           <PageTransitionProvider>{children}</PageTransitionProvider>
           <Footer />
         </SmoothScroll>
+        <NewsletterModal />
       </body>
     </html>
   )
