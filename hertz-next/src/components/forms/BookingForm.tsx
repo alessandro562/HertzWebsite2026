@@ -242,7 +242,7 @@ export default function BookingForm({ lang = 'en' }: { lang?: Lang }) {
       <p className={styles.fine}>{t.fine}</p>
 
       <HoneypotField />
-      <ConsentField />
+      <ConsentField lang={lang} />
 
       <button className={styles.submit} type="submit" disabled={state === 'sending'}>
         {state === 'sending' ? t.sending : t.submit}

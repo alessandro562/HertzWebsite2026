@@ -79,11 +79,13 @@
 .tickets {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5em;
+  min-height: 44px; /* CTA principale: target touch pieno anche su mobile */
   font-family: var(--hz-font-mono);
   font-size: var(--hz-t-ui);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: var(--hz-tracking-mono);
   padding: 0.55em 1.1em;
   border: 1px solid currentColor;
   white-space: nowrap;

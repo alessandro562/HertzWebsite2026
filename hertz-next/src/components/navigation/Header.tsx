@@ -114,7 +114,7 @@ export default function Header() {
           <HertzLogo size={40} title="Hertz, home" />
         </Link>
 
-        <nav className={styles.nav} aria-label="Navigazione primaria">
+        <nav className={styles.nav} aria-label="Primary">
           {NAV_ITEMS.map((i) => (
             <Link key={i.href} href={i.href} className={styles.link}>
               {i.label}

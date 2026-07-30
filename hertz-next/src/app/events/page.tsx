@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import Section from '@/components/ui/Section'
 import DepartureBoard from '@/components/events/DepartureBoard'
 import FeaturedEvent from '@/components/events/FeaturedEvent'
-import EventFilters from '@/components/events/EventFilters'
 import ArchiveTable from '@/components/events/ArchiveTable'
 import { upcoming, archive, eventSlug, eventYear } from '@/content/events'
 import { SITE } from '@/lib/site'
@@ -19,7 +18,6 @@ export default function EventsPage() {
   const up = upcoming()
   const past = archive()
   const feature = up.find((e) => e.poster) ?? up[0]
-  const rest = up.filter((e) => e.n !== feature?.n)
 
   const pastYears = [...new Set(past.map(eventYear))]
 
@@ -49,8 +47,11 @@ export default function EventsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
+      {/* Intro + prossima data in evidenza sulla STESSA superficie: la locandina
+          sale in alto, subito dopo il titolo. Il calendario completo arriva
+          sotto (DepartureBoard), che elenca già tutto con lo stato: prima
+          queste due sezioni ripetevano gli stessi eventi due volte. */}
       <Section surface="white" space="md" style={{ paddingTop: 'var(--hz-section-sm)' }}>
-        {/* intro editoriale: titolo grande + voce reale del collettivo */}
         <div className={styles.intro}>
           <div className={styles.introHead}>
             <p className={`${styles.introKicker} hz-mono`}>Events</p>
@@ -63,28 +64,20 @@ export default function EventsPage() {
             </p>
           </div>
         </div>
-      </Section>
 
-      {/* ── DEPARTURES · live board (ink) ── */}
-      {up.length > 0 && (
-        <Section surface="ink" space="lg">
-          <DepartureBoard events={up} />
-        </Section>
-      )}
-
-      <Section surface="white" space="lg">
         {feature && (
           <div className={styles.featuredWrap}>
             <FeaturedEvent event={feature} />
           </div>
         )}
-
-        {rest.length > 0 && (
-          <div className={styles.upcoming}>
-            <EventFilters events={rest} />
-          </div>
-        )}
       </Section>
+
+      {/* ── DEPARTURES · calendario completo delle date in arrivo (ink) ── */}
+      {up.length > 0 && (
+        <Section surface="ink" space="lg">
+          <DepartureBoard events={up} />
+        </Section>
+      )}
 
       <Section surface="paper" space="lg">
         <div className={styles.archiveHead}>

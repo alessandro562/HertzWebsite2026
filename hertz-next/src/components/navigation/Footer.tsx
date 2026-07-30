@@ -23,7 +23,7 @@ export default function Footer() {
         </div>
 
         <div className={styles.grid}>
-          <nav className={styles.col} aria-label="Navigazione footer">
+          <nav className={styles.col} aria-label="Footer">
             <span className="hz-mono">Navigate</span>
             {NAV_ITEMS.map((i) => (
               <Link key={i.href} href={i.href} className={styles.fLink}>

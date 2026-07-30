@@ -106,7 +106,8 @@ export default function BookingsClient() {
   ]
 
   return (
-    <main id="main">
+    /* lang segue il LangToggle di pagina */
+    <main id="main" lang={lang}>
       <Section surface="signal" space="lg">
         <PageHeader
           kicker={t.kicker}

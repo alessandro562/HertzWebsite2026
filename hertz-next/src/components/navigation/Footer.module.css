@@ -51,7 +51,12 @@
   margin-bottom: var(--hz-space-xs);
 }
 
+/* target touch: le voci del footer sono la nav secondaria del sito, servono
+   almeno 44px di altezza cliccabile senza allargare visivamente la colonna. */
 .fLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   font-size: var(--hz-t-body);
   line-height: 1.35;
   transition: opacity var(--hz-fast) var(--hz-ease-out);

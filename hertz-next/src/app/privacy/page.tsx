@@ -13,7 +13,8 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <main id="main">
+    /* pagina interamente in italiano sotto <html lang="en"> */
+    <main id="main" lang="it">
       <Section surface="white" space="lg">
         <PageHeader
           kicker="Legal"

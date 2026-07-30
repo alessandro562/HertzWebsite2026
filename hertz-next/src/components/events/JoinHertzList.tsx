@@ -178,7 +178,9 @@ export default function JoinHertzList({
   return (
     <>
       {/* ── modulo inline ── */}
-      <div className={styles.module} ref={moduleRef} data-soon={soon || undefined}>
+      {/* lang segue il LangToggle: senza, uno screen reader legge l'italiano
+          con voce inglese (la pagina è <html lang="en">). */}
+      <div className={styles.module} ref={moduleRef} data-soon={soon || undefined} lang={lang}>
         <div className={styles.header}>
           <span className={`${styles.status} hz-mono`}>
             <span className={styles.glyph} aria-hidden="true">
@@ -225,6 +227,7 @@ export default function JoinHertzList({
             role="dialog"
             aria-modal="true"
             aria-label={t.aria}
+            lang={lang}
           >
             <motion.div
               className={styles.card}
@@ -317,7 +320,7 @@ export default function JoinHertzList({
                       </select>
                     </label>
                     <HoneypotField />
-                    <ConsentField />
+                    <ConsentField lang={lang} />
                     <button className={styles.submit} type="submit" disabled={state === 'sending'}>
                       {state === 'sending' ? `${t.sending}…` : `${t.submit} →`}
                     </button>
