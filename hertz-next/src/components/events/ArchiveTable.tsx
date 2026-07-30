@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image'
 import Link from 'next/link'
 import { type HertzEvent, dowDate, eventSlug, eventYear } from '@/content/events'
 import Arrow from '@/components/ui/Arrow'
@@ -22,7 +22,13 @@ export default function ArchiveTable({ events }: { events: HertzEvent[] }) {
       {events.map((e) => (
         <Link key={e.n} href={`/events/${eventSlug(e)}`} className={`${styles.row} hz-rowfx`} role="row">
           <span className={styles.thumb} aria-hidden="true">
-            {e.poster ? <img src={e.poster} alt="" loading="lazy" decoding="async" /> : <span className={styles.thumbEmpty} />}
+            {/* miniatura 28x34: prima serviva la locandina intera (~300KB l'una,
+                13 righe). */}
+            {e.poster ? (
+              <Image src={e.poster} alt="" fill sizes="28px" />
+            ) : (
+              <span className={styles.thumbEmpty} />
+            )}
           </span>
           <span className={styles.title}>{e.title}</span>
           <span className={styles.venue}>

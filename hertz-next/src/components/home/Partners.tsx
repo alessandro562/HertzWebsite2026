@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image'
 import styles from './Partners.module.css'
 
 /**
@@ -27,7 +27,14 @@ export default function Partners() {
         {PARTNERS.map((p) => (
           <div key={p.name} className={`${styles.card} hz-cardfx`}>
             <div className={styles.panel} data-surface="ink">
-              <img src={p.logo} alt={`${p.name} logo`} className={styles.logo} loading="lazy" />
+              <Image
+                src={p.logo}
+                alt={`${p.name} logo`}
+                className={styles.logo}
+                width={440}
+                height={437}
+                sizes="220px"
+              />
             </div>
             <div className={styles.caption}>
               <span className={styles.name}>{p.name}</span>

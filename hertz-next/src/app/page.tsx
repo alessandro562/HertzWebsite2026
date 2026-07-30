@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image'
 import Link from 'next/link'
 import Section from '@/components/ui/Section'
 import Arrow from '@/components/ui/Arrow'
@@ -179,7 +179,12 @@ export default function Home() {
             duration="editorial"
             className={`${styles.manifestoPhoto} hz-glitch`}
           >
-            <img src="/assets/crowd-floor.jpg" alt="People on the Hertz dancefloor" loading="lazy" />
+            <Image
+              src="/assets/crowd-floor.jpg"
+              alt="People on the Hertz dancefloor"
+              fill
+              sizes="(max-width: 900px) 100vw, 40vw"
+            />
             <GlitchFX />
           </ImageReveal>
         </div>
@@ -237,7 +242,15 @@ export default function Home() {
           {ARCHIVE_PHOTOS.map((src) => (
             <StaggerItem key={src} variant="right">
               <figure className={`${styles.archiveCard} hz-cardfx hz-glitch`}>
-                <img src={src} alt="Hertz night, Kindergarten archive" loading="lazy" />
+                {/* strip decorativa: alt vuoto, la figcaption dice già
+                    "Kindergarten" e sei alt identici sono solo rumore per
+                    uno screen reader. */}
+                <Image
+                  src={src}
+                  alt=""
+                  fill
+                  sizes="(max-width: 640px) 60vw, (max-width: 1024px) 33vw, 22vw"
+                />
                 <GlitchFX />
                 <figcaption>
                   <span>Kindergarten</span>

@@ -7,6 +7,11 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: __dirname,
   },
+  images: {
+    // copertine delle tracce servite da SoundCloud (oEmbed, build-time):
+    // senza questo next/image le rifiuta e restano originali da 500x500.
+    remotePatterns: [{ protocol: 'https', hostname: 'i1.sndcdn.com' }],
+  },
   experimental: {
     // React <ViewTransition> per i morph condivisi (calendario→evento,
     // artisti→dettaglio). Progressive enhancement: senza supporto browser

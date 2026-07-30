@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image'
 import styles from './BrandIdentity.module.css'
 
 /** Identità visiva "Clubbing Collective" — strip di 4 frame brand reali. */
@@ -23,7 +23,12 @@ export default function BrandIdentity() {
       <div className={styles.strip}>
         {CARDS.map((c) => (
           <figure key={c.src} className={styles.card}>
-            <img src={c.src} alt={c.cap} loading="lazy" />
+            <Image
+              src={c.src}
+              alt={c.cap}
+              fill
+              sizes="(max-width: 640px) 70vw, (max-width: 1024px) 40vw, 32vw"
+            />
             <figcaption className="hz-mono">
               <span>{c.cap}</span>
             </figcaption>

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image'
 import Link from 'next/link'
 import Section from '@/components/ui/Section'
 import Button from '@/components/ui/Button'
@@ -49,11 +49,11 @@ export default async function MusicPage() {
                 className={styles.chip}
                 aria-label="SoundCloud"
               >
-                <img src={SC_LOGO} alt="SoundCloud" className={styles.chipLogo} />
+                <Image src={SC_LOGO} alt="SoundCloud" className={styles.chipLogo} width={104} height={36} sizes="52px" />
                 <span className={`${styles.chipMeta} hz-mono`}>Sets <Arrow /></span>
               </a>
               <a href="#spotify" className={styles.chip} aria-label="Spotify">
-                <img src={SP_LOGO} alt="Spotify" className={styles.chipLogo} />
+                <Image src={SP_LOGO} alt="Spotify" className={styles.chipLogo} width={104} height={36} sizes="52px" />
                 <span className={`${styles.chipMeta} hz-mono`}>Residents ↓</span>
               </a>
             </div>
@@ -64,7 +64,7 @@ export default async function MusicPage() {
       {/* ── SOUNDCLOUD ── */}
       <Section surface="white" space="md" id="soundcloud">
         <div className={styles.platHead}>
-          <img src={SC_LOGO} alt="SoundCloud" className={styles.platLogo} />
+          <Image src={SC_LOGO} alt="SoundCloud" className={styles.platLogo} width={240} height={84} sizes="120px" />
           <p className={styles.platSub}>
             The collective and every resident&rsquo;s sets, streamed straight from SoundCloud.
           </p>
@@ -96,7 +96,7 @@ export default async function MusicPage() {
       {ON_SPOTIFY.length > 0 && (
         <Section surface="paper" space="md" id="spotify">
           <div className={styles.platHead}>
-            <img src={SP_LOGO} alt="Spotify" className={styles.platLogo} />
+            <Image src={SP_LOGO} alt="Spotify" className={styles.platLogo} width={240} height={84} sizes="120px" />
             <p className={styles.platSub}>Residents you can follow and stream on Spotify.</p>
           </div>
 
@@ -110,7 +110,7 @@ export default async function MusicPage() {
                 className={styles.spotifyCard}
               >
                 <span className={`${styles.spotifyArt} hz-glitch`}>
-                  <img src={a.portrait} alt={a.name} loading="lazy" decoding="async" />
+                  <Image src={a.portrait} alt={a.name} fill sizes="96px" />
                   <GlitchFX />
                 </span>
                 <div className={styles.spotifyMeta}>

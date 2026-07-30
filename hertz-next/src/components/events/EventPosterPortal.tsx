@@ -1,6 +1,6 @@
 'use client'
 
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image'
 import Link from 'next/link'
 import { useState, type PointerEvent, type ReactNode } from 'react'
 import { motion, useMotionValue, useTransform, useReducedMotion } from 'motion/react'
@@ -95,7 +95,14 @@ export default function EventPosterPortal({
         animate={reduce || inView ? { clipPath: 'inset(0 0 0% 0)' } : undefined}
         transition={{ duration: reduce ? 0 : 0.85, ease: [0.16, 1, 0.3, 1] }}
       >
-        <img src={image} alt={`Poster: ${title}`} className={styles.img} loading={priority ? 'eager' : 'lazy'} decoding="async" />
+        <Image
+          src={image}
+          alt={`Poster: ${title}`}
+          className={styles.img}
+          fill
+          sizes="(max-width: 720px) 100vw, 50vw"
+          priority={priority}
+        />
         <span className={styles.band1} aria-hidden="true" />
         <span className={styles.band2} aria-hidden="true" />
         <span className={styles.cut} aria-hidden="true" />

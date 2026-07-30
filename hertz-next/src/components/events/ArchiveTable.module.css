@@ -34,6 +34,7 @@
   color: var(--hz-ink-mute);
 }
 .thumb {
+  position: relative;
   width: 28px;
   height: 34px;
   overflow: hidden;

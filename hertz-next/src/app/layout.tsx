@@ -18,13 +18,16 @@ import { SITE } from '@/lib/site'
 const helveticaNeue = localFont({
   variable: '--font-hz',
   display: 'swap',
+  /* WOFF2, non OTF: l'OTF non ha compressione interna e i sei pesi pesavano
+     2318 KB preloadati su OGNI pagina. Convertiti (senza subsetting, così
+     accenti e simboli restano) e senza UltraLight, che nessuna regola CSS
+     usa: 688 KB. */
   src: [
-    { path: './fonts/HelveticaNeue-UltraLight.otf', weight: '100', style: 'normal' },
-    { path: './fonts/HelveticaNeue-Thin.otf', weight: '200', style: 'normal' },
-    { path: './fonts/HelveticaNeue-Light.otf', weight: '300', style: 'normal' },
-    { path: './fonts/HelveticaNeue-Roman.otf', weight: '400', style: 'normal' },
-    { path: './fonts/HelveticaNeue-Medium.otf', weight: '500', style: 'normal' },
-    { path: './fonts/HelveticaNeue-Bold.otf', weight: '700', style: 'normal' },
+    { path: './fonts/HelveticaNeue-Thin.woff2', weight: '200', style: 'normal' },
+    { path: './fonts/HelveticaNeue-Light.woff2', weight: '300', style: 'normal' },
+    { path: './fonts/HelveticaNeue-Roman.woff2', weight: '400', style: 'normal' },
+    { path: './fonts/HelveticaNeue-Medium.woff2', weight: '500', style: 'normal' },
+    { path: './fonts/HelveticaNeue-Bold.woff2', weight: '700', style: 'normal' },
   ],
 })
 

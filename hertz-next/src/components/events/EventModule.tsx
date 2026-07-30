@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image'
 import Link from 'next/link'
 import { type HertzEvent, dowDate, eventSlug, isPast } from '@/content/events'
 import StatusBadge, { type Status } from '@/components/ui/StatusBadge'
@@ -20,12 +20,12 @@ export default function EventModule({ event }: { event: HertzEvent }) {
     <Link href={`/events/${slug}`} className={`${styles.row} hz-rowfx`} data-status={status}>
       <span className={styles.thumb} aria-hidden="true">
         {event.poster ? (
-          <img
+          <Image
             src={event.poster}
             alt=""
+            fill
+            sizes="(max-width: 640px) 30vw, 160px"
             className={styles.thumbImg}
-            loading="lazy"
-            decoding="async"
           />
         ) : (
           <PosterFallback date={dowDate(event)} city={event.city} className={styles.thumbFallback} />

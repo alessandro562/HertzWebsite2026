@@ -1,6 +1,6 @@
 'use client'
 
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import Arrow from '@/components/ui/Arrow'
@@ -26,6 +26,7 @@ export default function PhotoGallery({
 }) {
   const [open, setOpen] = useState<number | null>(null)
   const railRef = useRef<HTMLDivElement>(null)
+  const closeRef = useRef<HTMLButtonElement>(null)
   const total = photos.length
 
   const drag = useRef({ down: false, startX: 0, startScroll: 0, moved: false })
@@ -60,9 +61,16 @@ export default function PhotoGallery({
     }
     document.addEventListener('keydown', onKey)
     document.body.style.overflow = 'hidden'
+    /* il dialog dichiara aria-modal ma il focus restava sulla miniatura dietro
+       l'overlay: si portava il focus nel nulla. Entra sul Close, e alla
+       chiusura torna alla miniatura da cui si è partiti. */
+    const opener = document.activeElement as HTMLElement | null
+    const t = setTimeout(() => closeRef.current?.focus(), 60)
     return () => {
       document.removeEventListener('keydown', onKey)
       document.body.style.overflow = ''
+      clearTimeout(t)
+      opener?.focus?.()
     }
   }, [open, close, go])
 
@@ -94,7 +102,13 @@ export default function PhotoGallery({
             aria-label={`Open ${label}, frame ${i + 1}`}
           >
             <span className={`${styles.frame} hz-glitch`}>
-              <img src={src} alt={`${label}, frame ${i + 1}`} loading="lazy" draggable={false} />
+              <Image
+                src={src}
+                alt={`${label}, frame ${i + 1}`}
+                fill
+                sizes="(max-width: 640px) 70vw, (max-width: 1024px) 40vw, 26vw"
+                draggable={false}
+              />
               <GlitchFX />
               <span className={styles.grain} aria-hidden="true" />
               <span className={`${styles.tick} ${styles.tl}`} aria-hidden="true" />
@@ -134,7 +148,13 @@ export default function PhotoGallery({
               <span>
                 {label} · {String(open + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
               </span>
-              <button type="button" className={styles.lbClose} onClick={close} aria-label="Close">
+              <button
+                ref={closeRef}
+                type="button"
+                className={styles.lbClose}
+                onClick={close}
+                aria-label="Close"
+              >
                 Close ✕
               </button>
             </div>
@@ -159,7 +179,17 @@ export default function PhotoGallery({
               transition={{ duration: 0.32, ease: EASE }}
               onClick={(e) => e.stopPropagation()}
             >
-              <img src={photos[open]} alt={`${label}, frame ${open + 1}`} draggable={false} />
+              {/* la lightbox usava lo STESSO file della miniatura: ora è la
+                  variante grande, e la miniatura una piccola. */}
+              <Image
+                src={photos[open]}
+                alt={`${label}, frame ${open + 1}`}
+                width={1280}
+                height={1600}
+                sizes="(max-width: 720px) 90vw, 640px"
+                draggable={false}
+                priority
+              />
               <span className={`${styles.lbCap} hz-mono`}>{caption}</span>
             </motion.div>
 

@@ -1,6 +1,6 @@
 'use client'
 
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image'
 import { useState } from 'react'
 import type { Mix } from '@/content/artists'
 import WaveformPulse from '@/motion/WaveformPulse'
@@ -33,7 +33,7 @@ export default function MixRow({
       onBlur={() => setHover(false)}
     >
       {art ? (
-        <img src={art} alt="" className={styles.art} loading="lazy" />
+        <Image src={art} alt="" className={styles.art} width={96} height={96} sizes="48px" />
       ) : (
         <WaveformPulse state={hover ? 'hover' : 'idle'} className={styles.play} />
       )}

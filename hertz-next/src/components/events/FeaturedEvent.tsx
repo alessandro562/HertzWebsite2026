@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image'
 import type { CSSProperties } from 'react'
 import Link from 'next/link'
 import { type HertzEvent, dowDate, eventSlug, isPast } from '@/content/events'
@@ -32,12 +32,13 @@ export default function FeaturedEvent({ event }: { event: HertzEvent }) {
       <div className={styles.posterCell}>
         {event.poster ? (
           <figure className={styles.posterFig}>
-            <img
+            <Image
               src={event.poster}
               alt={`Poster: ${event.title}`}
               className={styles.poster}
-              loading="eager"
-              decoding="async"
+              fill
+              sizes="(max-width: 720px) 100vw, 40vw"
+              priority
             />
             <PosterFX tone="dark" />
           </figure>

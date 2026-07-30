@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import Section from '@/components/ui/Section'
 import PageHeader from '@/components/ui/PageHeader'
@@ -151,7 +152,15 @@ export default function ArchivePage() {
                 <span>V1</span>
               </div>
               <div className={styles.pkLogo}>
-                <img src="/assets/hertz-logo-official.png" alt="Hertz official logo" />
+                {/* sorgente 5444x4032 resa a 220px: lasciamo scegliere la
+                    variante all'ottimizzatore */}
+                <Image
+                  src="/assets/hertz-logo-official.png"
+                  alt="Hertz official logo"
+                  width={440}
+                  height={326}
+                  sizes="220px"
+                />
               </div>
               <div className={styles.pkSpecs}>
                 <div>
@@ -180,8 +189,16 @@ export default function ArchivePage() {
         />
         <div className={styles.photoGrid}>
           {PHOTO_ARCHIVE.map((src, i) => (
+            /* href resta l'originale hi-res (è un download stampa); solo la
+               miniatura passa dall'ottimizzatore, prima erano 36 JPEG da
+               1280x1600 renderizzati in una griglia di quadratini. */
             <a key={src + i} className={`${styles.pressShot} hz-glitch`} href={src} download>
-              <img src={src} alt={`Hertz live, archive frame ${i + 1}`} loading="lazy" />
+              <Image
+                src={src}
+                alt={`Hertz live, archive frame ${i + 1}`}
+                fill
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 16vw"
+              />
               <GlitchFX />
               <span className={`${styles.pressDl} hz-mono`}>↓ JPG</span>
             </a>
