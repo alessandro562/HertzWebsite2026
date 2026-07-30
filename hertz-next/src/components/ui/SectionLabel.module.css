@@ -16,7 +16,7 @@
 }
 
 .title {
-  font-size: clamp(1.9rem, 4.8vw, 4.8rem);
+  font-size: var(--hz-t-section-lead);
   line-height: 0.9;
   letter-spacing: var(--hz-tracking-mega);
   text-transform: uppercase;

@@ -33,6 +33,11 @@ export default function HeroSignalGrid({
     const path = pathRef.current
     const wrap = wrapRef.current
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    // Su puntatore grosso (touch) il bump del cursore non esiste e resta solo
+    // l'onda da scroll: non vale un rAF che ricompone ~500 segmenti di path per
+    // frame proprio dove la GPU costa di più. La griglia resta, ferma.
+    const coarse = window.matchMedia('(pointer: coarse)').matches
+    const still = reduce || coarse
 
     let W = 0
     let H = 0
@@ -93,8 +98,10 @@ export default function HeroSignalGrid({
       }
       path.setAttribute('d', d)
 
-      // coupling contenuto: campionato a metà altezza → a riposo ≈ 0 (leggibile)
-      onWaveRef.current?.((x01: number) => disp(x01 * W, H * 0.5, t))
+      // coupling contenuto: campionato a metà altezza → a riposo ≈ 0 (leggibile).
+      // Il check evita di allocare la closure a ogni frame quando nessuno ascolta
+      // (la hero di produzione monta la griglia senza `onWave`).
+      if (onWaveRef.current) onWaveRef.current((x01: number) => disp(x01 * W, H * 0.5, t))
     }
 
     function buildStatic() {
@@ -149,13 +156,13 @@ export default function HeroSignalGrid({
       W = Math.max(1, r.width)
       H = Math.max(1, r.height)
       wrap.querySelector('svg')?.setAttribute('viewBox', `0 0 ${W} ${H}`)
-      if (reduce) buildStatic()
+      if (still) buildStatic()
     }
 
     resize()
     const ro = new ResizeObserver(resize)
     ro.observe(wrap)
-    if (reduce) {
+    if (still) {
       buildStatic()
       return () => ro.disconnect()
     }
@@ -177,9 +184,9 @@ export default function HeroSignalGrid({
       },
       { threshold: 0 },
     )
+    // il loop parte SOLO dalla callback dell'observer: se la hero monta già
+    // fuori vista (ritorno indietro a metà pagina) non gira nemmeno un frame.
     io.observe(wrap)
-    running = true
-    raf = requestAnimationFrame(loop)
     return () => {
       running = false
       if (raf) cancelAnimationFrame(raf)

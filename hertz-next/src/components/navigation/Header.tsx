@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { NAV_ITEMS } from './nav-items'
 import { SITE } from '@/lib/site'
@@ -15,6 +16,7 @@ import styles from './Header.module.css'
  * Include MobileMenu full-screen (target ≥44px).
  */
 export default function Header() {
+  const pathname = usePathname()
   const ref = useRef<HTMLElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
   const burgerRef = useRef<HTMLButtonElement>(null)
@@ -22,37 +24,51 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
 
+  /* stato "scrollato": controllo a buon mercato, coalescato in rAF */
   useEffect(() => {
-    const header = ref.current
-    if (!header) return
     let raf = 0
     const update = () => {
       raf = 0
       setScrolled(window.scrollY > 8)
-      const y = header.getBoundingClientRect().bottom - 1
-      const sections = Array.from(document.querySelectorAll('main [data-surface]'))
-      let surf = 'signal'
-      for (const s of sections) {
-        const r = s.getBoundingClientRect()
-        if (r.top <= y && r.bottom > y) {
-          surf = s.getAttribute('data-surface') || 'signal'
-          break
-        }
-      }
-      setSurface(surf)
     }
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(update)
     }
     update()
     window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', onScroll)
     return () => {
       window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', onScroll)
       if (raf) cancelAnimationFrame(raf)
     }
   }, [])
+
+  /* Superficie sotto la barra via IntersectionObserver.
+     Prima girava a ogni frame di scroll (con Lenis: di continuo, coda di
+     decelerazione inclusa) e faceva una querySelectorAll + un
+     getBoundingClientRect per sezione, cioè 9 letture di layout sincrone a
+     60fps sulla home. Ora il browser ci avvisa solo quando una sezione
+     attraversa la fascia di 1px subito sotto l'header. */
+  useEffect(() => {
+    const header = ref.current
+    if (!header || typeof IntersectionObserver === 'undefined') return
+
+    const sections = Array.from(document.querySelectorAll<HTMLElement>('main [data-surface]'))
+    if (sections.length === 0) return
+
+    const h = header.getBoundingClientRect().height || 64
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            setSurface(e.target.getAttribute('data-surface') || 'signal')
+          }
+        }
+      },
+      { rootMargin: `-${Math.round(h)}px 0px -${Math.max(0, window.innerHeight - h - 1)}px 0px` },
+    )
+    sections.forEach((s) => io.observe(s))
+    return () => io.disconnect()
+  }, [pathname])
 
   /* Menu mobile: scroll-lock + ESC + gestione del focus (entra nel menu
      all'apertura, ciclo Tab confinato, ritorno al burger alla chiusura). */

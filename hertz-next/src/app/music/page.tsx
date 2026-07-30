@@ -41,18 +41,16 @@ export default async function MusicPage() {
               The records that build the Hertz floor: resident sets and studio cuts, minimal &amp;
               deep tech, selection first. Nothing plays on its own, so just tap to listen.
             </p>
+            {/* niente aria-label sui chip: sostituiva il testo visibile
+                ("Sets", "Residents") con il solo nome della piattaforma, che
+                l'alt del logo già fornisce. Ora il nome accessibile contiene
+                l'etichetta che si legge a schermo. */}
             <div className={styles.platformBar}>
-              <a
-                href={SITE.soundcloud}
-                target="_blank"
-                rel="noreferrer"
-                className={styles.chip}
-                aria-label="SoundCloud"
-              >
+              <a href={SITE.soundcloud} target="_blank" rel="noreferrer" className={styles.chip}>
                 <Image src={SC_LOGO} alt="SoundCloud" className={styles.chipLogo} width={104} height={36} sizes="52px" />
                 <span className={`${styles.chipMeta} hz-mono`}>Sets <Arrow /></span>
               </a>
-              <a href="#spotify" className={styles.chip} aria-label="Spotify">
+              <a href="#spotify" className={styles.chip}>
                 <Image src={SP_LOGO} alt="Spotify" className={styles.chipLogo} width={104} height={36} sizes="52px" />
                 <span className={`${styles.chipMeta} hz-mono`}>Residents ↓</span>
               </a>
@@ -63,8 +61,12 @@ export default async function MusicPage() {
 
       {/* ── SOUNDCLOUD ── */}
       <Section surface="white" space="md" id="soundcloud">
+        {/* il logo È il titolo di sezione: incapsularlo in un h2 ripristina il
+            livello mancante (la pagina saltava da h1 ai nomi degli artisti) */}
         <div className={styles.platHead}>
-          <Image src={SC_LOGO} alt="SoundCloud" className={styles.platLogo} width={240} height={84} sizes="120px" />
+          <h2 className={styles.platHeading}>
+            <Image src={SC_LOGO} alt="SoundCloud" className={styles.platLogo} width={240} height={84} sizes="120px" />
+          </h2>
           <p className={styles.platSub}>
             The collective and every resident&rsquo;s sets, streamed straight from SoundCloud.
           </p>
@@ -96,7 +98,9 @@ export default async function MusicPage() {
       {ON_SPOTIFY.length > 0 && (
         <Section surface="paper" space="md" id="spotify">
           <div className={styles.platHead}>
-            <Image src={SP_LOGO} alt="Spotify" className={styles.platLogo} width={240} height={84} sizes="120px" />
+            <h2 className={styles.platHeading}>
+              <Image src={SP_LOGO} alt="Spotify" className={styles.platLogo} width={240} height={84} sizes="120px" />
+            </h2>
             <p className={styles.platSub}>Residents you can follow and stream on Spotify.</p>
           </div>
 

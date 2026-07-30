@@ -399,14 +399,15 @@ button {
     transform var(--hz-ui, 0.3s) var(--hz-ease-out, ease),
     border-color var(--hz-ui, 0.3s) var(--hz-ease-out, ease),
     background-color var(--hz-ui, 0.3s) var(--hz-ease-out, ease);
-  will-change: transform;
 }
-.hz-cardfx:hover { transform: translateY(-4px); }
+/* `will-change` solo mentre il puntatore è sulla card: da statico erano ~20
+   layer promossi in GPU sulla sola home, per un translateY di 4px che il
+   compositor gestisce comunque. */
+.hz-cardfx:hover { transform: translateY(-4px); will-change: transform; }
 
 @media (prefers-reduced-motion: reduce) {
   .hz-eq i { animation: none; transform: scaleY(0.5); }
   .hz-rowfx::before { transition: none; }
   .hz-fx-arrow { transition: none; }
-  .hz-cardfx { will-change: auto; }
-  .hz-cardfx:hover { transform: none; }
+  .hz-cardfx:hover { transform: none; will-change: auto; }
 }

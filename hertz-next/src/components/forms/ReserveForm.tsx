@@ -51,7 +51,7 @@ export default function ReserveForm({ item = 'Lanyard · Drop 01' }: { item?: st
   }
 
   return (
-    <form onSubmit={onSubmit} className={styles.form} noValidate>
+    <form onSubmit={onSubmit} className={styles.form}>
       <input type="hidden" name="item" value={item} />
       <div className={styles.row2}>
         <label className={styles.field}>
@@ -73,11 +73,16 @@ export default function ReserveForm({ item = 'Lanyard · Drop 01' }: { item?: st
       </label>
       <HoneypotField />
       <ConsentField />
-      <button className={styles.submit} type="submit" disabled={state === 'sending'}>
+      <button
+        className={styles.submit}
+        type="submit"
+        disabled={state === 'sending'}
+        aria-describedby={state === 'error' ? 'reserve-error' : undefined}
+      >
         {state === 'sending' ? 'Sending…' : 'Reserve'}
       </button>
       {state === 'error' && (
-        <p className={styles.error} role="alert">
+        <p id="reserve-error" className={styles.error} role="alert">
           {msg}
         </p>
       )}

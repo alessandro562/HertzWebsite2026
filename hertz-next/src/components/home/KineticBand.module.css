@@ -32,10 +32,18 @@
 .inner {
   display: flex;
   width: max-content;
-  will-change: transform;
 }
-.inner[data-dir='left']  { animation: hz-band-left  var(--dur, 130s) linear infinite; }
-.inner[data-dir='right'] { animation: hz-band-right var(--dur, 168s) linear infinite; }
+/* durata definita solo qui: prima viveva anche in uno style inline che
+   vinceva sempre, lasciando i fallback CSS a raccontare valori mai usati */
+.inner[data-dir='left']  { animation: hz-band-left  34s linear infinite; }
+.inner[data-dir='right'] { animation: hz-band-right 46s linear infinite; }
+
+/* In pausa finché la banda non entra in viewport (data-run dal componente).
+   Le due regole vanno DOPO le shorthand qui sopra: `animation` resetta
+   animation-play-state a `running`, quindi una pausa dichiarata prima
+   verrebbe cancellata. */
+.band .inner { animation-play-state: paused; }
+.band[data-run='true'] .inner { animation-play-state: running; }
 
 .track {
   display: flex;

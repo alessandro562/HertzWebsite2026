@@ -61,8 +61,16 @@
   --hz-t-ultra:   clamp(3.75rem, 21vw, 22rem);    /* edge-to-edge: banda cinetica / hero statement */
   --hz-t-mega:    clamp(2.85rem, 13vw, 13rem);    /* titoli-firma giganti di sezione */
   --hz-t-hero:    clamp(3rem, 6vw, 6.5rem);       /* signature: hero/manifesto/artist-intro/archive */
-  --hz-t-page:    clamp(2.6rem, 5vw, 5rem);       /* titolo pagina */
-  --hz-t-section: clamp(2rem, 3.8vw, 3.8rem);     /* titolo sezione */
+  /* titolo pagina (PageHeader, l'h1 di /events /artists /music /archive …).
+     Il valore era un segnaposto mai consumato: PageHeader portava il proprio
+     clamp nel modulo CSS. Qui c'è ora la misura reale che il sito rende, così
+     la scala tipografica ha un solo posto in cui vive. */
+  --hz-t-page:    clamp(2.75rem, 8vw, 9rem);
+  /* titolo di sezione in-pagina (SectionLabel): un gradino sotto il titolo di
+     pagina e sopra --hz-t-section, che serve le intestazioni minori (footer,
+     sotto-titoli di /about, /media). Stessa storia: era un clamp locale. */
+  --hz-t-section-lead: clamp(1.9rem, 4.8vw, 4.8rem);
+  --hz-t-section: clamp(2rem, 3.8vw, 3.8rem);     /* intestazione minore */
   --hz-t-card:    clamp(1.2rem, 1.8vw, 1.8rem);   /* titolo card */
   --hz-t-body-lg: clamp(1.05rem, 1.4vw, 1.3rem);  /* body large */
   --hz-t-body:    clamp(1rem, 1.05vw, 1.1875rem); /* body 16–19 */

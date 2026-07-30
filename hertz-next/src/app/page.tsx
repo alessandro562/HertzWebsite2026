@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import Section from '@/components/ui/Section'
+import Button from '@/components/ui/Button'
 import Arrow from '@/components/ui/Arrow'
 import GlitchFX from '@/components/ui/GlitchFX'
 import HomeHero from '@/components/home/HomeHero'
@@ -166,9 +167,9 @@ export default function Home() {
                 right room, the right sound and the right crowd come together. That&rsquo;s what we
                 set out to bring back.
               </p>
-              <Link href="/about" className={`${styles.btn} ${styles.btnGhost} ${styles.manifestoLink}`}>
-                Read the manifesto <Arrow />
-              </Link>
+              <Button href="/about" variant="ghost" arrow className={styles.manifestoLink}>
+                Read the manifesto
+              </Button>
             </Reveal>
           </div>
           {/* ImageReveal, NON MaskImage: quest'ultimo animava il clip-path con
@@ -260,13 +261,9 @@ export default function Home() {
           ))}
         </Stagger>
         <Reveal variant="up">
-          <Link
-            href="/archive"
-            className={`${styles.btn} ${styles.btnGhost}`}
-            style={{ marginTop: 'var(--hz-space-lg)', display: 'inline-flex' }}
-          >
-            Open archive <Arrow />
-          </Link>
+          <Button href="/archive" variant="ghost" arrow className={styles.archiveLink}>
+            Open archive
+          </Button>
         </Reveal>
       </Section>
 

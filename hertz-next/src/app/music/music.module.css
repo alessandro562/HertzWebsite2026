@@ -72,6 +72,14 @@
   margin-bottom: var(--hz-space-md);
   border-bottom: 1px solid var(--hz-ink);
 }
+/* h2 che contiene solo il logo della piattaforma: nessuna resa tipografica
+   propria, serve a dare alla pagina il livello di intestazione che le mancava */
+.platHeading {
+  margin: 0;
+  font-size: 0;
+  line-height: 0;
+  flex: none;
+}
 .platLogo {
   height: clamp(30px, 4vw, 42px);
   width: auto;

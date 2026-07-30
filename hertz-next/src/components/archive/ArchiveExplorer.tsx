@@ -34,11 +34,16 @@ export default function ArchiveExplorer({ items, years }: { items: ArchiveItem[]
   return (
     <div>
       <div className={styles.controls}>
-        <div className={styles.years} role="tablist" aria-label="Filter by year">
+        {/* role="group", non "tablist": questi non sono tab (niente tabpanel,
+            niente navigazione con le frecce, il focus non si sposta). Lo stato
+            attivo passa da aria-pressed, che è quello che un toggle button
+            annuncia davvero. */}
+        <div className={styles.years} role="group" aria-label="Filter by year">
           <button
             type="button"
             className={styles.chip}
             data-active={year === 'all'}
+            aria-pressed={year === 'all'}
             onClick={() => setYear('all')}
           >
             All <span className="hz-mono">{items.length}</span>
@@ -49,6 +54,7 @@ export default function ArchiveExplorer({ items, years }: { items: ArchiveItem[]
               type="button"
               className={styles.chip}
               data-active={year === y}
+              aria-pressed={year === y}
               onClick={() => setYear(y)}
             >
               {y} <span className="hz-mono">{items.filter((i) => i.year === y).length}</span>

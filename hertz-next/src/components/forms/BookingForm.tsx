@@ -149,7 +149,7 @@ export default function BookingForm({ lang = 'en' }: { lang?: Lang }) {
   }
 
   return (
-    <form onSubmit={onSubmit} className={styles.form} noValidate>
+    <form onSubmit={onSubmit} className={styles.form}>
       <div className={styles.row2}>
         <label className={styles.field}>
           <span className={styles.label}>{t.what}</span>
@@ -244,11 +244,16 @@ export default function BookingForm({ lang = 'en' }: { lang?: Lang }) {
       <HoneypotField />
       <ConsentField lang={lang} />
 
-      <button className={styles.submit} type="submit" disabled={state === 'sending'}>
+      <button
+        className={styles.submit}
+        type="submit"
+        disabled={state === 'sending'}
+        aria-describedby={state === 'error' ? 'booking-error' : undefined}
+      >
         {state === 'sending' ? t.sending : t.submit}
       </button>
       {state === 'error' && (
-        <p className={styles.error} role="alert">
+        <p id="booking-error" className={styles.error} role="alert">
           {msg}
         </p>
       )}

@@ -104,6 +104,7 @@ export default function JoinHertzList({
   const [msg, setMsg] = useState('')
   const [showBar, setShowBar] = useState(false)
   const moduleRef = useRef<HTMLDivElement>(null)
+  const cardRef = useRef<HTMLDivElement>(null)
   const nameRef = useRef<HTMLInputElement>(null)
   const reduce = useReducedMotion()
   const t = T[lang]
@@ -127,10 +128,44 @@ export default function JoinHertzList({
     setOpen(true)
   }
 
-  /* Esc + blocco scroll + focus sul nome all'apertura */
+  /* Esc + blocco scroll + focus sul nome all'apertura + Tab confinato nella
+     scheda (senza, il tab usciva dalla modale e girava per la pagina sotto,
+     che è comunque inerte) + ritorno del focus al pulsante alla chiusura */
   useEffect(() => {
     if (!open) return
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && close()
+    const restore = document.activeElement as HTMLElement | null
+
+    const focusables = () =>
+      Array.from(
+        cardRef.current?.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), input:not([disabled]):not([tabindex="-1"]), select:not([disabled]), textarea:not([disabled])',
+        ) ?? [],
+      ).filter((el) => el.offsetParent !== null)
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        close()
+        return
+      }
+      if (e.key !== 'Tab') return
+      const items = focusables()
+      if (items.length === 0) return
+      const first = items[0]
+      const last = items[items.length - 1]
+      const active = document.activeElement as HTMLElement | null
+      if (!e.shiftKey && active === last) {
+        e.preventDefault()
+        first.focus()
+      } else if (e.shiftKey && active === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (active && !items.includes(active)) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
+
     document.addEventListener('keydown', onKey)
     document.body.style.overflow = 'hidden'
     const timer = setTimeout(() => nameRef.current?.focus(), 80)
@@ -138,6 +173,7 @@ export default function JoinHertzList({
       document.removeEventListener('keydown', onKey)
       document.body.style.overflow = ''
       clearTimeout(timer)
+      restore?.focus?.()
     }
   }, [open, close])
 
@@ -230,6 +266,7 @@ export default function JoinHertzList({
             lang={lang}
           >
             <motion.div
+              ref={cardRef}
               className={styles.card}
               onClick={(e) => e.stopPropagation()}
               initial={reduce ? { opacity: 0 } : { opacity: 0, y: 24, scale: 0.98 }}
@@ -268,7 +305,7 @@ export default function JoinHertzList({
                     </button>
                   </div>
                 ) : (
-                  <form className={styles.form} onSubmit={onSubmit} noValidate>
+                  <form className={styles.form} onSubmit={onSubmit}>
                     <label className={styles.field}>
                       <span className={styles.label}>{t.name}</span>
                       <input
@@ -321,12 +358,17 @@ export default function JoinHertzList({
                     </label>
                     <HoneypotField />
                     <ConsentField lang={lang} />
-                    <button className={styles.submit} type="submit" disabled={state === 'sending'}>
+                    <button
+        className={styles.submit}
+        type="submit"
+        disabled={state === 'sending'}
+        aria-describedby={state === 'error' ? 'join-error' : undefined}
+      >
                       {state === 'sending' ? `${t.sending}…` : `${t.submit} →`}
                     </button>
                     <p className={styles.fine}>{t.fine}</p>
                     {state === 'error' && (
-                      <p className={styles.error} role="alert">
+                      <p id="join-error" className={styles.error} role="alert">
                         {msg}
                       </p>
                     )}

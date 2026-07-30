@@ -50,12 +50,17 @@ export default function WaitlistForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className={styles.mini} noValidate>
+    <form onSubmit={onSubmit} className={styles.mini}>
       <label className={`${styles.field} ${styles.miniField}`}>
         <span className={styles.label}>Get notified about the next drop</span>
         <input className={styles.input} name="email" type="email" required placeholder="you@email.com" autoComplete="email" />
       </label>
-      <button className={styles.submit} type="submit" disabled={state === 'sending'}>
+      <button
+        className={styles.submit}
+        type="submit"
+        disabled={state === 'sending'}
+        aria-describedby={state === 'error' ? 'waitlist-error' : undefined}
+      >
         {state === 'sending' ? '…' : 'Notify me'}
       </button>
       <HoneypotField />
@@ -63,7 +68,7 @@ export default function WaitlistForm() {
         <ConsentField />
       </span>
       {state === 'error' && (
-        <p className={styles.error} role="alert" style={{ flexBasis: '100%' }}>
+        <p id="waitlist-error" className={styles.error} role="alert" style={{ flexBasis: '100%' }}>
           {msg}
         </p>
       )}
