@@ -26,7 +26,7 @@ export default function MediaPage() {
       {/* ── MASTHEAD ── */}
       <Section surface="white" space="lg">
         <div className={styles.masthead}>
-          <span className={`${styles.mastKicker} hz-mono`}>Media — the editorial desk</span>
+          <span className={`${styles.mastKicker} hz-mono`}>Media · the editorial desk</span>
           <h1 className={styles.mastTitle}>
             <span className={styles.mastThin}>Clubbing</span>{' '}
             <span className={styles.mastBold}>culture.</span>

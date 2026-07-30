@@ -4,7 +4,7 @@
 }
 .link:focus-visible .frame,
 .link:focus-visible .fallback {
-  outline: 2px solid var(--hz-focus, var(--hz-ink));
+  outline: 2px solid var(--hz-focus-ring);
   outline-offset: 3px;
 }
 

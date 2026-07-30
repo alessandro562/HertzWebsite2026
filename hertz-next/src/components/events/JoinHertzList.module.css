@@ -84,7 +84,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: var(--hz-z-sticky, 80);
+  z-index: var(--hz-z-sticky);
   padding: 0.7rem var(--hz-gutter) calc(0.7rem + env(safe-area-inset-bottom, 0px));
   background: color-mix(in srgb, var(--raw-ink, #151515) 92%, transparent);
   backdrop-filter: blur(8px);
@@ -174,7 +174,7 @@
   display: flex;
   align-items: center;
   gap: 0.6em;
-  color: var(--hz-cold, #50778a);
+  color: var(--raw-cold);
   margin-bottom: 0.9rem;
 }
 .kickLine {
@@ -281,8 +281,8 @@
     color var(--hz-ui) var(--hz-ease-out);
 }
 .submit:hover:not(:disabled) {
-  background: var(--hz-cold, #50778a);
-  border-color: var(--hz-cold, #50778a);
+  background: var(--raw-cold);
+  border-color: var(--raw-cold);
 }
 .submit:disabled {
   opacity: 0.55;

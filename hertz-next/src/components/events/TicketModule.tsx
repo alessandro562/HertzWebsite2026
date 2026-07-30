@@ -17,7 +17,7 @@ const CONFIG: Record<TicketState, { label: string; glyph: ReactNode; note: strin
   soon: { label: 'Coming soon', glyph: '○', note: 'Line-up & tickets announced soon.', wave: 'loading' },
   'sold-out': { label: 'Sold out', glyph: '✕', note: 'No tickets available for this date.', wave: 'disabled' },
   external: { label: 'On sale', glyph: <Arrow />, note: 'Tickets on the venue’s platform.', wave: 'active' },
-  archive: { label: 'Past event', glyph: '—', note: 'This night is in the archive.', wave: 'idle' },
+  archive: { label: 'Past event', glyph: '·', note: 'This night is in the archive.', wave: 'idle' },
 }
 
 export default function TicketModule({

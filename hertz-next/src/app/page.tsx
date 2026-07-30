@@ -12,7 +12,7 @@ import BrandIdentity from '@/components/home/BrandIdentity'
 import Partners from '@/components/home/Partners'
 import Reveal, { Stagger, StaggerItem } from '@/motion/Reveal'
 import SignatureTitle from '@/motion/SignatureTitle'
-import MaskImage from '@/motion/MaskImage'
+import ImageReveal from '@/motion/ImageReveal'
 import { upcoming, dowDate, eventSlug, type ResidentSlug } from '@/content/events'
 import { ARTISTS } from '@/content/artists'
 import styles from './home.module.css'
@@ -171,10 +171,17 @@ export default function Home() {
               </Link>
             </Reveal>
           </div>
-          <MaskImage direction="left" duration={1.1} className={`${styles.manifestoPhoto} hz-glitch`}>
+          {/* ImageReveal, NON MaskImage: quest'ultimo animava il clip-path con
+              whileInView, ma un elemento clippato a zero area non viene mai
+              rilevato dall'observer → la foto restava invisibile per sempre. */}
+          <ImageReveal
+            variant="horizontal"
+            duration="editorial"
+            className={`${styles.manifestoPhoto} hz-glitch`}
+          >
             <img src="/assets/crowd-floor.jpg" alt="People on the Hertz dancefloor" loading="lazy" />
             <GlitchFX />
-          </MaskImage>
+          </ImageReveal>
         </div>
       </Section>
 

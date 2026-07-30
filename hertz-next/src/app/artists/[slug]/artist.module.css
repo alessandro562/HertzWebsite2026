@@ -275,7 +275,7 @@
   bottom: -1px;
   width: 3ch;
   height: 1.5px;
-  background: var(--hz-cold, #50778a);
+  background: var(--raw-cold);
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform var(--hz-fast) var(--hz-ease-out);
@@ -349,7 +349,7 @@
 }
 .timelineDot[data-status='soon'] {
   background: transparent;
-  border: 1px solid var(--hz-cold, #50778a);
+  border: 1px solid var(--raw-cold);
 }
 .timelineDot[data-status='archive'] {
   background: var(--hz-ink-mute);

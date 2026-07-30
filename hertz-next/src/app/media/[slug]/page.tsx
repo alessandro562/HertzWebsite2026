@@ -59,7 +59,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         <Section surface="white" space="md">
           <p className={`${styles.crumb} hz-mono`}>
             <Link href="/media">Media</Link>
-            <span aria-hidden="true"> — </span>
+            <span aria-hidden="true"> · </span>
             <span>{a.rubric}</span>
           </p>
 

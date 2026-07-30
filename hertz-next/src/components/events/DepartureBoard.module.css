@@ -155,7 +155,7 @@ a.row:hover {
   white-space: nowrap;
 }
 .stat[data-status='on-sale'] {
-  color: var(--hz-on-sale, #7fa88c);
+  color: var(--hz-onsale);
 }
 .stat[data-status='soon'] {
   color: var(--hz-ink-mute);

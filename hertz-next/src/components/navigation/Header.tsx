@@ -16,6 +16,8 @@ import styles from './Header.module.css'
  */
 export default function Header() {
   const ref = useRef<HTMLElement>(null)
+  const menuRef = useRef<HTMLDivElement>(null)
+  const burgerRef = useRef<HTMLButtonElement>(null)
   const [surface, setSurface] = useState('signal')
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
@@ -52,10 +54,50 @@ export default function Header() {
     }
   }, [])
 
+  /* Menu mobile: scroll-lock + ESC + gestione del focus (entra nel menu
+     all'apertura, ciclo Tab confinato, ritorno al burger alla chiusura). */
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : ''
+    if (!open) return
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    const focusables = () =>
+      Array.from(
+        menuRef.current?.querySelectorAll<HTMLElement>('a[href], button:not([disabled])') ?? [],
+      ).filter((el) => el.offsetParent !== null)
+
+    focusables()[0]?.focus()
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        setOpen(false)
+        return
+      }
+      if (e.key !== 'Tab') return
+      // il burger/Close resta raggiungibile: fa parte del ciclo
+      const items = [...focusables(), burgerRef.current].filter(Boolean) as HTMLElement[]
+      if (items.length === 0) return
+      const first = items[0]
+      const last = items[items.length - 1]
+      const active = document.activeElement as HTMLElement | null
+      if (!e.shiftKey && active === last) {
+        e.preventDefault()
+        first.focus()
+      } else if (e.shiftKey && active === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (active && !items.includes(active)) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
+
+    document.addEventListener('keydown', onKey)
     return () => {
-      document.body.style.overflow = ''
+      document.body.style.overflow = prev
+      document.removeEventListener('keydown', onKey)
+      burgerRef.current?.focus()
     }
   }, [open])
 
@@ -86,6 +128,7 @@ export default function Header() {
             Bookings
           </Link>
           <button
+            ref={burgerRef}
             type="button"
             className={styles.burger}
             aria-expanded={open}
@@ -98,6 +141,7 @@ export default function Header() {
       </div>
 
       <div
+        ref={menuRef}
         id="mobile-menu"
         className={styles.menu}
         data-surface="paper"

@@ -16,7 +16,7 @@
    Su fondo bianco: punti freddi discreti che ondeggiano attorno al cursore. */
 .path {
   fill: none;
-  stroke: var(--hz-cold, #50778a);
+  stroke: var(--raw-cold);
   stroke-width: 3.4;
   stroke-linecap: round;
   opacity: 0.32;

@@ -29,6 +29,9 @@
   --hz-line-strong: rgba(21, 21, 21, 0.34);
   --hz-signal: var(--raw-signal);
   --hz-accent: var(--raw-cold);
+  --hz-focus-ring: var(--raw-cold);
+  --hz-onsale: var(--raw-cold);
+  --hz-soldout: #8a3a3a;
 }
 
 [data-surface='paper'] {
@@ -39,7 +42,11 @@
   --hz-line: rgba(21, 21, 21, 0.16);
   --hz-line-strong: rgba(21, 21, 21, 0.36);
   --hz-signal: var(--raw-signal);
-  --hz-accent: var(--raw-cold);
+  /* cold blue scurito: su paper il raw-cold dà 4.02:1, sotto il minimo testo */
+  --hz-accent: #456a7c;
+  --hz-focus-ring: var(--raw-cold);
+  --hz-onsale: #456a7c;
+  --hz-soldout: #8a3a3a;
 }
 
 [data-surface='signal'] {
@@ -51,17 +58,26 @@
   --hz-line-strong: rgba(21, 21, 21, 0.45);
   --hz-signal: var(--raw-ink);
   --hz-accent: #274550; /* cold blue scuro, leggibile su Signal */
+  /* il ring di default (raw-cold) su Signal dà 2.30:1 → si usa l'ink */
+  --hz-focus-ring: var(--raw-ink);
+  --hz-onsale: #274550;
+  --hz-soldout: #6e2626;
 }
 
 [data-surface='cold-blue'] {
   --hz-bg: var(--raw-cold);
   --hz-bg-2: #5b8397;
   --hz-ink: var(--raw-white); /* testo BIANCO su Cold Blue */
-  --hz-ink-mute: #d1dde2;
+  /* schiarito: #d1dde2 dava 3.49:1, sotto il minimo per i metadati */
+  --hz-ink-mute: #e8eef1;
   --hz-line: rgba(255, 255, 255, 0.28);
   --hz-line-strong: rgba(255, 255, 255, 0.5);
   --hz-signal: var(--raw-signal);
   --hz-accent: var(--raw-white);
+  /* il ring di default coincideva col fondo (1.00:1): invisibile */
+  --hz-focus-ring: var(--raw-ink);
+  --hz-onsale: var(--raw-white);
+  --hz-soldout: #ffd9d9;
 }
 
 [data-surface='ink'] {
@@ -73,4 +89,7 @@
   --hz-line-strong: rgba(255, 255, 255, 0.4);
   --hz-signal: var(--raw-signal);
   --hz-accent: var(--raw-signal);
+  --hz-focus-ring: var(--raw-signal);
+  --hz-onsale: #7fa88c;
+  --hz-soldout: #e08a8a;
 }

@@ -201,7 +201,7 @@
   right: 0;
   bottom: -0.14em;
   height: 1.5px;
-  background: var(--hz-cold, #50778a);
+  background: var(--raw-cold);
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform var(--hz-fast) var(--hz-ease-out);

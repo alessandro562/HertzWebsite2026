@@ -27,7 +27,12 @@
   }
 }
 
+/* La barra sta SOPRA l'overlay del menu: `.menu` è un figlio fixed con fondo
+   opaco, senza questo z-index coprirebbe il proprio bottone Close rendendo
+   impossibile chiudere il menu (l'unica uscita sarebbe navigare via). */
 .inner {
+  position: relative;
+  z-index: calc(var(--hz-z-overlay) + 1);
   max-width: var(--hz-content-max);
   margin-inline: auto;
   padding-inline: var(--hz-gutter);

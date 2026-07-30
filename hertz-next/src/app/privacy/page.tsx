@@ -35,7 +35,7 @@ export default function PrivacyPage() {
           <h2>1. Titolare del trattamento</h2>
           <p>
             Il titolare del trattamento è{' '}
-            <mark className={styles.ph}>[Hertz — ragione sociale / nome del titolare]</mark>,{' '}
+            <mark className={styles.ph}>[Hertz · ragione sociale / nome del titolare]</mark>,{' '}
             <mark className={styles.ph}>[indirizzo]</mark>,{' '}
             <mark className={styles.ph}>[P.IVA / C.F.]</mark>. Per qualsiasi richiesta relativa ai
             tuoi dati puoi scrivere a{' '}

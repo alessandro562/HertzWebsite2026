@@ -73,7 +73,7 @@
   font-size: var(--hz-t-body);
 }
 .avoid {
-  color: var(--hz-cold, #50778a);
+  color: var(--raw-cold);
 }
 
 .replay {

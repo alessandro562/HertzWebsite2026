@@ -127,6 +127,7 @@
   /* ── 9 · Z-INDEX ── */
   --hz-z-base: 0;
   --hz-z-raised: 10;
+  --hz-z-sticky: 80; /* barre sticky di pagina: sopra il contenuto, sotto la nav */
   --hz-z-nav: 100;
   --hz-z-overlay: 1000;
   --hz-z-modal: 2000;
