@@ -4,13 +4,25 @@ import PageHeader from '@/components/ui/PageHeader'
 import SectionLabel from '@/components/ui/SectionLabel'
 import StatusBadge from '@/components/ui/StatusBadge'
 import WaitlistForm from '@/components/forms/WaitlistForm'
+import JsonLd from '@/components/seo/JsonLd'
+import { SITE } from '@/lib/site'
+import { DEFAULT_OG_IMAGE, breadcrumbNode } from '@/lib/seo'
 import styles from './shop.module.css'
 
 export const metadata: Metadata = {
-  title: 'Shop',
+  title: 'Clubber Apparel & Gadgets',
   description:
-    'Hertz clubber apparel and gadgets: small, numbered drops made for the floor, shipped from Bologna. Coming soon.',
+    'Hertz clubber apparel and gadgets: small numbered drops made for the floor, shipped from Bologna. The first drop is coming soon — join the list.',
+  keywords: ['merch', 'clubber apparel', 'gadget', 'drop', 'Bologna', 'clubbing'],
   alternates: { canonical: '/shop' },
+  openGraph: {
+    type: 'website',
+    url: `${SITE.url}/shop`,
+    title: 'Clubber Apparel & Gadgets · Hertz Clubbing Collective',
+    description:
+      'Small numbered drops made for the floor, shipped from Bologna. The first Hertz drop is coming soon.',
+    images: [DEFAULT_OG_IMAGE],
+  },
 }
 
 /* Cosa arriverà: categorie reali del merch Hertz (nessun prodotto ancora
@@ -20,6 +32,8 @@ const CATEGORIES = ['Apparel', 'Outerwear', 'Headwear', 'Accessories']
 export default function ShopPage() {
   return (
     <main id="main">
+      <JsonLd data={breadcrumbNode([{ name: 'Shop', path: '/shop' }])} />
+
       <Section surface="paper" space="lg">
         <PageHeader
           kicker="Shop"

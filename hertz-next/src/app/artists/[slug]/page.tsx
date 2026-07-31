@@ -13,7 +13,9 @@ import Parallax from '@/motion/Parallax'
 import { Stagger, StaggerItem } from '@/motion/Reveal'
 import { ARTISTS } from '@/content/artists'
 import { forResident, eventSlug, isPast, dowDate, type ResidentSlug } from '@/content/events'
+import JsonLd from '@/components/seo/JsonLd'
 import { SITE } from '@/lib/site'
+import { artistDescription, artistNode, breadcrumbNode } from '@/lib/seo'
 import { getArtwork } from '@/lib/soundcloud'
 import styles from './artist.module.css'
 
@@ -29,23 +31,32 @@ export async function generateMetadata({
   const { slug } = await params
   const a = ARTISTS[slug as ResidentSlug]
   if (!a) return {}
+  /* Prima era `nome, ruolo. + prima riga di bio`: superava i 300 caratteri e
+     Google la tagliava a metà frase. Ora una descrizione costruita e clampata. */
+  const desc = artistDescription(a)
+  /* "DJ & Producer" nel titolo: è il termine con cui si cerca una persona in
+     questo contesto, e distingue l'omonimo che non fa questo mestiere. Corto
+     apposta — col suffisso del template resta sotto i ~60 caratteri, cioè
+     dentro quello che Google mostra davvero. */
+  const title = `${a.name} — DJ & Producer`
   return {
-    title: a.name,
-    description: `${a.name}, ${a.role}. ${a.bio[0] ?? ''}`.trim(),
+    title,
+    description: desc,
+    keywords: [a.name, 'dj', 'dj set', 'produzioni', 'resident', a.sets, a.origin, 'clubbing'],
     alternates: { canonical: `/artists/${slug}` },
     openGraph: {
-      type: 'website',
-      siteName: 'HERTZ',
+      type: 'profile',
+      siteName: SITE.name,
       locale: 'en_GB',
       url: `${SITE.url}/artists/${slug}`,
-      title: a.name,
-      description: `${a.name}, ${a.role}. ${a.bio[0] ?? ''}`.trim(),
+      title,
+      description: desc,
       images: [{ url: a.portrait }],
     },
     twitter: {
       card: 'summary_large_image',
-      title: a.name,
-      description: `${a.name}, ${a.role}.`,
+      title,
+      description: desc,
       images: [a.portrait],
     },
   }
@@ -86,6 +97,16 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
 
   return (
     <main id="main">
+      {/* Person con sameAs verso SoundCloud/Spotify reali: è il segnale che
+          distingue questo DJ da un omonimo qualsiasi, per Google e per gli AI. */}
+      <JsonLd data={artistNode(a, upcomingDates)} />
+      <JsonLd
+        data={breadcrumbNode([
+          { name: 'Artists', path: '/artists' },
+          { name: a.name, path: `/artists/${a.slug}` },
+        ])}
+      />
+
       {/* ── 1 · intro + ritratto (cold-blue) ── */}
       <Section surface="cold-blue" space="md" style={{ paddingBottom: 'clamp(48px, 6vw, 96px)' }}>
         <p className={`${styles.crumb} hz-mono`}>

@@ -6,16 +6,27 @@ import Button from '@/components/ui/Button'
 import Arrow from '@/components/ui/Arrow'
 import GlitchFX from '@/components/ui/GlitchFX'
 import MixRow from '@/components/music/MixRow'
+import JsonLd from '@/components/seo/JsonLd'
 import { ARTISTS } from '@/content/artists'
 import { SITE } from '@/lib/site'
+import { DEFAULT_OG_IMAGE, breadcrumbNode, itemListNode } from '@/lib/seo'
 import { getArtwork } from '@/lib/soundcloud'
 import styles from './music.module.css'
 
 export const metadata: Metadata = {
-  title: 'Music',
+  title: 'DJ Sets, Mixes & Productions',
   description:
-    'The Hertz transmissions: resident sets and mixes on SoundCloud, plus the residents to follow on Spotify. Minimal and deep tech.',
+    'Hertz DJ sets, mixes and productions on SoundCloud and Spotify: minimal and deep tech, long grooves and basslines recorded from the floor.',
+  keywords: ['dj set', 'mix', 'produzioni', 'soundcloud', 'groove', 'bassline', 'minimal', 'deep tech'],
   alternates: { canonical: '/music' },
+  openGraph: {
+    type: 'website',
+    url: `${SITE.url}/music`,
+    title: 'DJ Sets, Mixes & Productions · Hertz Clubbing Collective',
+    description:
+      'Hertz DJ sets, mixes and productions on SoundCloud and Spotify: minimal and deep tech, groove and bassline.',
+    images: [DEFAULT_OG_IMAGE],
+  },
 }
 
 const ROSTER = Object.values(ARTISTS).sort((a, b) => a.n.localeCompare(b.n))
@@ -29,8 +40,43 @@ export default async function MusicPage() {
   const allMixes = WITH_MIXES.flatMap((a) => a.mixes)
   const artworks = await Promise.all(allMixes.map((m) => getArtwork(m.url)))
   const artByUrl = new Map(allMixes.map((m, i) => [m.url, artworks[i]]))
+
+  /* La selezione come playlist: nome del set + autore reale, così una query
+     tipo "mix minimal Hertz" trova le tracce e non solo la pagina. */
+  const selection = {
+    '@context': 'https://schema.org',
+    '@type': 'MusicPlaylist',
+    name: 'Hertz — the selection',
+    description:
+      'Resident DJ sets, mixes and productions from the Hertz clubbing collective: minimal and deep tech.',
+    numTracks: allMixes.length,
+    url: `${SITE.url}/music`,
+    track: WITH_MIXES.flatMap((a) =>
+      a.mixes.map((m) => ({
+        '@type': 'MusicRecording',
+        name: m.t,
+        url: m.url,
+        byArtist: {
+          '@type': 'Person',
+          '@id': `${SITE.url}/artists/${a.slug}#person`,
+          name: a.name,
+        },
+        ...(m.tag ? { genre: m.tag } : {}),
+      })),
+    ),
+  }
+
   return (
     <main id="main">
+      <JsonLd data={selection} />
+      <JsonLd
+        data={itemListNode(
+          'Hertz residents on streaming',
+          ROSTER.map((a) => ({ name: a.name, url: `${SITE.url}/artists/${a.slug}` })),
+        )}
+      />
+      <JsonLd data={breadcrumbNode([{ name: 'Music', path: '/music' }])} />
+
       {/* ── header editoriale + barra piattaforme ── */}
       <Section surface="paper" space="md">
         <div className={styles.head}>

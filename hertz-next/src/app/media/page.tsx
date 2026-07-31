@@ -7,22 +7,68 @@ import GlitchFX from '@/components/ui/GlitchFX'
 import Parallax from '@/motion/Parallax'
 import Reveal, { Stagger, StaggerItem } from '@/motion/Reveal'
 import TiltCard from '@/motion/TiltCard'
+import JsonLd from '@/components/seo/JsonLd'
 import { ARTICLES, featuredArticle, articleDate } from '@/content/media'
+import { SITE } from '@/lib/site'
+import { DEFAULT_OG_IMAGE, ORG_ID, WEBSITE_ID, breadcrumbNode, itemListNode } from '@/lib/seo'
 import styles from './media.module.css'
 
 export const metadata: Metadata = {
-  title: 'Media',
+  title: 'Clubbing Culture Magazine',
   description:
-    'The Hertz editorial desk: reportage and reads on the minimal and deep tech scene, signed Hertz Redazione.',
+    'Clubbing culture from Hertz Redazione: reportage and arguments on the minimal and deep tech scene, written from the floor, not from the press release.',
+  keywords: ['clubbing culture', 'magazine clubbing', 'scena minimal', 'deep tech', 'reportage', 'dj'],
   alternates: { canonical: '/media' },
+  openGraph: {
+    type: 'website',
+    url: `${SITE.url}/media`,
+    title: 'Clubbing Culture Magazine · Hertz Clubbing Collective',
+    description:
+      'Reportage and arguments on the minimal and deep tech scene, written from the floor. Signed Hertz Redazione.',
+    images: [DEFAULT_OG_IMAGE],
+  },
 }
 
 export default function MediaPage() {
   const feature = featuredArticle()
   const rest = ARTICLES.filter((a) => a.slug !== feature.slug)
 
+  /* Blog dichiarato: rende esplicito che Hertz pubblica editoriale proprio,
+     non solo date. È il segnale che porta le citazioni sugli articoli. */
+  const desk = {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    '@id': `${SITE.url}/media#blog`,
+    name: 'Hertz — clubbing culture',
+    description:
+      'The Hertz editorial desk: reportage and arguments on clubbing culture and the minimal and deep tech scene.',
+    url: `${SITE.url}/media`,
+    inLanguage: 'en',
+    publisher: { '@id': ORG_ID },
+    isPartOf: { '@id': WEBSITE_ID },
+    blogPost: ARTICLES.map((a) => ({
+      '@type': 'Article',
+      '@id': `${SITE.url}/media/${a.slug}#article`,
+      headline: a.title,
+      description: a.excerpt,
+      datePublished: a.date,
+      url: `${SITE.url}/media/${a.slug}`,
+      image: `${SITE.url}${a.heroImage}`,
+      author: { '@type': 'Organization', '@id': ORG_ID, name: a.author },
+    })),
+  }
+
   return (
     <main id="main">
+      <JsonLd data={desk} />
+      <JsonLd
+        data={itemListNode(
+          'Hertz editorial',
+          ARTICLES.map((a) => ({ name: a.title, url: `${SITE.url}/media/${a.slug}` })),
+        )}
+      />
+      <JsonLd data={breadcrumbNode([{ name: 'Media', path: '/media' }])} />
+
       {/* ── MASTHEAD ── */}
       <Section surface="white" space="lg">
         <div className={styles.masthead}>

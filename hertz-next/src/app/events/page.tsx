@@ -3,15 +3,27 @@ import Section from '@/components/ui/Section'
 import DepartureBoard from '@/components/events/DepartureBoard'
 import FeaturedEvent from '@/components/events/FeaturedEvent'
 import ArchiveTable from '@/components/events/ArchiveTable'
-import { upcoming, archive, eventSlug, eventYear } from '@/content/events'
+import { upcoming, archive, eventSlug, eventYear, dowDate } from '@/content/events'
+import { ARTISTS } from '@/content/artists'
+import JsonLd from '@/components/seo/JsonLd'
 import { SITE } from '@/lib/site'
+import { DEFAULT_OG_IMAGE, breadcrumbNode, eventNode, itemListNode } from '@/lib/seo'
 import styles from './events.module.css'
 
 export const metadata: Metadata = {
-  title: 'Events',
+  title: 'Events, Parties & Club Nights',
   description:
-    'The Hertz calendar: minimal and deep tech nights in Bologna and across Italy. Line-up, venue and ticket status.',
+    'Every Hertz party: upcoming club nights and past events in Bologna and across Italy. Line-up, venue and ticket status — minimal and deep tech, groove first.',
+  keywords: ['eventi clubbing Bologna', 'party Bologna', 'club night', 'dj set', 'minimal', 'deep tech'],
   alternates: { canonical: '/events' },
+  openGraph: {
+    type: 'website',
+    url: `${SITE.url}/events`,
+    title: 'Events, Parties & Club Nights · Hertz Clubbing Collective',
+    description:
+      'Every Hertz party: upcoming club nights and past events in Bologna and across Italy. Line-up, venue and ticket status.',
+    images: [DEFAULT_OG_IMAGE],
+  },
 }
 
 export default function EventsPage() {
@@ -21,31 +33,33 @@ export default function EventsPage() {
 
   const pastYears = [...new Set(past.map(eventYear))]
 
-  /* JSON-LD aggregato di tutte le date upcoming (parità SEO col vecchio /events) */
+  /* Un grafo solo: le date upcoming come Event completi (line-up reale come
+     performer, agganciata alle pagine resident via @id), più il calendario in
+     forma di ItemList e la briciola di navigazione. */
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@graph': up.map((e) => ({
-      '@type': 'Event',
-      name: e.title,
-      startDate: e.iso,
-      eventStatus: 'https://schema.org/EventScheduled',
-      eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-      location: {
-        '@type': 'Place',
-        name: e.venue,
-        address: { '@type': 'PostalAddress', addressLocality: e.city, addressCountry: 'IT' },
-      },
-      organizer: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+    '@graph': up.map((e) =>
+      eventNode(
+        e,
+        e.lineup.map((s) => ARTISTS[s]).filter(Boolean),
+      ),
+    ),
+  }
+
+  const calendar = itemListNode(
+    'Hertz event calendar',
+    up.map((e) => ({
+      name: `${e.title} — ${e.venue}, ${e.city}, ${dowDate(e)}`,
       url: `${SITE.url}/events/${eventSlug(e)}`,
     })),
-  }
+    'Upcoming Hertz parties and club nights.',
+  )
 
   return (
     <main id="main">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
+      <JsonLd data={calendar} />
+      <JsonLd data={breadcrumbNode([{ name: 'Events', path: '/events' }])} />
 
       {/* Intro + prossima data in evidenza sulla STESSA superficie: la locandina
           sale in alto, subito dopo il titolo. Il calendario completo arriva

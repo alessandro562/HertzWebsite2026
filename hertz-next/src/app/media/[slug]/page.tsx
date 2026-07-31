@@ -15,6 +15,9 @@ import {
   relatedArticles,
   articleDate,
 } from '@/content/media'
+import JsonLd from '@/components/seo/JsonLd'
+import { SITE } from '@/lib/site'
+import { articleNode, brandTitle, breadcrumbNode, clamp } from '@/lib/seo'
 import styles from './article.module.css'
 
 export function generateStaticParams() {
@@ -29,16 +32,29 @@ export async function generateMetadata({
   const { slug } = await params
   const a = articleBySlug(slug)
   if (!a) return {}
+  const desc = clamp(a.excerpt || a.subtitle)
+  /* I titoli editoriali sono lunghi di natura: col suffisso pieno si andava
+     oltre gli 85 caratteri. Suffisso corto, così a essere mostrata è la testata
+     del pezzo — che è ciò su cui si clicca. */
   return {
-    title: a.title,
-    description: a.subtitle,
+    title: { absolute: brandTitle(a.title) },
+    description: desc,
+    keywords: ['clubbing culture', 'clubbing', 'dj', 'party', 'minimal', 'deep tech', a.rubric.toLowerCase()],
+    authors: [{ name: a.author }],
     alternates: { canonical: `/media/${slug}` },
     openGraph: {
       type: 'article',
+      siteName: SITE.name,
+      locale: 'en_GB',
+      url: `${SITE.url}/media/${slug}`,
       title: a.title,
-      description: a.subtitle,
+      description: desc,
+      publishedTime: a.date,
+      authors: [a.author],
+      section: a.rubric,
       images: [{ url: a.heroImage }],
     },
+    twitter: { card: 'summary_large_image', title: a.title, description: desc, images: [a.heroImage] },
   }
 }
 
@@ -53,6 +69,15 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
   return (
     <main id="main">
+      {/* Senza Article + author/publisher un pezzo editoriale non viene mai
+          attribuito a Hertz nelle risposte generative: resta testo orfano. */}
+      <JsonLd data={articleNode(a)} />
+      <JsonLd
+        data={breadcrumbNode([
+          { name: 'Media', path: '/media' },
+          { name: a.title, path: `/media/${a.slug}` },
+        ])}
+      />
       <ReadingProgress />
       <article>
         {/* ── MASTHEAD editoriale ── */}

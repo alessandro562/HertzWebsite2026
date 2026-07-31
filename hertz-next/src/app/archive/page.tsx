@@ -14,22 +14,26 @@ import ArchiveExplorer from '@/components/archive/ArchiveExplorer'
 import { archive, eventYear, eventSlug, shortDate, dowDate } from '@/content/events'
 import { galleryFor } from '@/content/galleries'
 import { ARTISTS } from '@/content/artists'
+import JsonLd from '@/components/seo/JsonLd'
 import { SITE, mailto } from '@/lib/site'
+import { DEFAULT_OG_IMAGE, ORG_ID, WEBSITE_ID, breadcrumbNode } from '@/lib/seo'
 import styles from './archive.module.css'
 
 export const metadata: Metadata = {
-  title: 'Press & Archive',
+  title: 'Press Kit & Photo Archive',
   description:
-    'The Hertz press kit and hi-res photography: logo, event photos and materials for promoters, venues and journalists. Free to use with credit.',
+    'Hertz press kit and hi-res club photography: logo, party photos and materials for promoters, venues and journalists. Free to use with credit.',
+  keywords: ['press kit', 'archivio foto', 'clubbing photography', 'party Bologna', 'dj', 'collettivo'],
   alternates: { canonical: '/archive' },
   openGraph: {
     type: 'website',
-    siteName: 'HERTZ',
+    siteName: SITE.name,
     locale: 'en_GB',
     url: `${SITE.url}/archive`,
-    title: 'Press & Archive · Hertz Clubbing Collective',
+    title: 'Press Kit & Photo Archive · Hertz Clubbing Collective',
     description:
-      'The Hertz press kit and hi-res photography: logo, event photos and materials for promoters, venues and journalists.',
+      'Hertz press kit and hi-res club photography: logo, party photos and materials for promoters, venues and journalists.',
+    images: [DEFAULT_OG_IMAGE],
   },
 }
 
@@ -103,8 +107,32 @@ export default function ArchivePage() {
   const featuredPhotos = featured ? galleryFor(featured.n) : []
   const featuredResidents = featured ? featured.lineup.map((s) => ARTISTS[s]?.name).filter(Boolean) : []
 
+  /* La galleria dichiarata come ImageGallery: 36 frame reali che oggi Google
+     Immagini non associa a nulla. Con il nodo diventano risultati con licenza
+     e attribuzione, che è esattamente ciò che il press kit promette. */
+  const gallery = {
+    '@context': 'https://schema.org',
+    '@type': 'ImageGallery',
+    name: 'Hertz photo archive',
+    description:
+      'Hi-res photography from Hertz club nights in Bologna and across Italy. Free to use with credit.',
+    url: `${SITE.url}/archive`,
+    isPartOf: { '@id': WEBSITE_ID },
+    associatedMedia: PHOTO_ARCHIVE.map((src) => ({
+      '@type': 'ImageObject',
+      contentUrl: `${SITE.url}${src}`,
+      creditText: SITE.pressCredit,
+      copyrightNotice: `© ${SITE.name}`,
+      creator: { '@id': ORG_ID },
+      acquireLicensePage: `${SITE.url}/archive`,
+    })),
+  }
+
   return (
     <main id="main">
+      <JsonLd data={gallery} />
+      <JsonLd data={breadcrumbNode([{ name: 'Press & Archive', path: '/archive' }])} />
+
       {/* ── header (white) — identità reale del /archive live: press ── */}
       <Section surface="white" space="lg">
         <PageHeader

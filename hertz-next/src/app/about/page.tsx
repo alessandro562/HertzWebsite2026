@@ -4,18 +4,47 @@ import ImageFrame from '@/components/ui/ImageFrame'
 import SignatureTitle from '@/motion/SignatureTitle'
 import Reveal from '@/motion/Reveal'
 import Parallax from '@/motion/Parallax'
+import JsonLd from '@/components/seo/JsonLd'
+import { SITE } from '@/lib/site'
+import { DEFAULT_OG_IMAGE, ORG_ID, breadcrumbNode } from '@/lib/seo'
 import styles from './about.module.css'
 
 export const metadata: Metadata = {
-  title: 'Manifesto',
+  /* Assoluto con suffisso corto: col template pieno il titolo arrivava a 67
+     caratteri e Google tagliava proprio la firma del collettivo. */
+  title: { absolute: 'Manifesto — From Clubbers, For Clubbers · Hertz' },
   description:
-    'The Hertz manifesto: why a Bologna collective chose the floor and the selection over spectacle. From clubbers, for clubbers.',
+    'Why a Bologna collective builds parties around the music: the Hertz manifesto, active since 2023. Selection, sound system and the floor, groove first.',
+  keywords: ['collettivo clubbing', 'clubbing collective', 'manifesto', 'Bologna', 'clubbing', 'party'],
   alternates: { canonical: '/about' },
+  openGraph: {
+    type: 'website',
+    url: `${SITE.url}/about`,
+    title: 'Manifesto · Hertz Clubbing Collective',
+    description:
+      'Why a Bologna collective builds parties around the music, since 2023. From clubbers, for clubbers.',
+    images: [DEFAULT_OG_IMAGE],
+  },
 }
 
 export default function AboutPage() {
+  /* Questa è la pagina che risponde a "chi è Hertz": la lego esplicitamente
+     all'entità del collettivo, così un motore generativo cita questa e non
+     una pagina evento a caso. */
+  const aboutPage = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: 'Hertz manifesto',
+    url: `${SITE.url}/about`,
+    description:
+      'The manifesto of Hertz, the clubbing collective founded in Bologna in 2023: nights built around the selection, the sound system and the people on the floor.',
+    mainEntity: { '@id': ORG_ID },
+  }
+
   return (
     <main id="main">
+      <JsonLd data={aboutPage} />
+      <JsonLd data={breadcrumbNode([{ name: 'Manifesto', path: '/about' }])} />
       {/* ── hero (ink · unico dark del percorso) ── */}
       <Section surface="ink" space="lg">
         <SignatureTitle as="h1" className={styles.heroTitle} trigger="mount" stagger={0.12}>

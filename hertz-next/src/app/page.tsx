@@ -14,8 +14,11 @@ import Partners from '@/components/home/Partners'
 import Reveal, { Stagger, StaggerItem } from '@/motion/Reveal'
 import SignatureTitle from '@/motion/SignatureTitle'
 import ImageReveal from '@/motion/ImageReveal'
+import JsonLd from '@/components/seo/JsonLd'
 import { upcoming, dowDate, eventSlug, type ResidentSlug } from '@/content/events'
 import { ARTISTS } from '@/content/artists'
+import { SITE } from '@/lib/site'
+import { itemListNode } from '@/lib/seo'
 import styles from './home.module.css'
 
 const ROSTER: ResidentSlug[] = [
@@ -57,8 +60,21 @@ export default function Home() {
   // Rollback semplice alla hero classica: build con NEXT_PUBLIC_HERO=classic.
   const heroClassic = process.env.NEXT_PUBLIC_HERO === 'classic'
 
+  /* Il calendario in forma di lista: un motore generativo a cui viene chiesto
+     "quando suona Hertz" trova le date qui, senza doverle dedurre dal markup. */
+  const nextDates = itemListNode(
+    'Hertz upcoming parties',
+    up.map((e) => ({
+      name: `${e.title} — ${e.venue}, ${e.city}, ${dowDate(e)}`,
+      url: `${SITE.url}/events/${eventSlug(e)}`,
+    })),
+    'Upcoming Hertz club nights in Bologna and across Italy.',
+  )
+
   return (
     <main id="main">
+      <JsonLd data={nextDates} />
+
       {/* ═══ 01 · HERO (signal · solo tipografia cinetica, nessuna foto) ═══ */}
       {heroClassic ? <HomeHero next={nextEvent} /> : <HeroKinetic next={nextEvent} />}
 

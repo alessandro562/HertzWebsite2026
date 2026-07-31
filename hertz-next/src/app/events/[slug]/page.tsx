@@ -18,13 +18,16 @@ import {
   allEventSlugs,
   findEventBySlug,
   dowDate,
+  shortDate,
   isPast,
   adjacentEvents,
   eventSlug,
 } from '@/content/events'
 import { ARTISTS } from '@/content/artists'
 import { galleryFor } from '@/content/galleries'
+import JsonLd from '@/components/seo/JsonLd'
 import { SITE } from '@/lib/site'
+import { DEFAULT_OG_IMAGE, brandTitle, breadcrumbNode, eventDescription, eventNode } from '@/lib/seo'
 import styles from './event.module.css'
 
 export function generateStaticParams() {
@@ -39,23 +42,41 @@ export async function generateMetadata({
   const { slug } = await params
   const e = findEventBySlug(slug)
   if (!e) return {}
-  const desc = [`${e.venue}, ${e.city}`, dowDate(e), e.bill].filter(Boolean).join(' · ')
+  /* Descrizione come frase intera, non come elenco di campi: è quella che
+     Google mostra sotto il titolo e che un LLM riusa per riassumere la data. */
+  const desc = eventDescription(e)
+  /* Il titolo porta già città e data: sono le due cose che si cercano
+     ("hertz bologna agosto"), e nella SERP distinguono date omonime. Titolo
+     assoluto: col suffisso pieno del template si arrivava a 74 caratteri e
+     Google tagliava proprio città e data. */
+  const title = brandTitle(`${e.title} — ${e.city}, ${shortDate(e)}`)
   return {
-    title: e.title,
+    title: { absolute: title },
     description: desc,
+    keywords: [
+      'party',
+      'clubbing',
+      'dj set',
+      e.city,
+      e.venue,
+      ...(e.bill ? e.bill.split('·').map((s) => s.trim()) : []),
+    ],
     alternates: { canonical: `/events/${slug}` },
     openGraph: {
       type: 'website',
-      siteName: 'HERTZ',
+      siteName: SITE.name,
       locale: 'en_GB',
       url: `${SITE.url}/events/${slug}`,
-      title: e.title,
+      title,
       description: desc,
-      ...(e.poster ? { images: [{ url: e.poster }] } : {}),
+      /* Le date TBA non hanno ancora la locandina: senza fallback l'anteprima
+         del link usciva completamente vuota proprio sull'evento più condiviso,
+         quello appena annunciato. */
+      images: e.poster ? [{ url: e.poster }] : [DEFAULT_OG_IMAGE],
     },
     twitter: {
       card: 'summary_large_image',
-      title: e.title,
+      title,
       description: desc,
     },
   }
@@ -91,30 +112,20 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
   const lineupRows = [...billRows, ...extraResidentRows]
 
   /* structured data (schema.org Event) — solo campi reali già mostrati in
-     pagina (nome/data/venue/lineup/poster); nessun prezzo/orario inventato. */
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Event',
-    name: e.title,
-    startDate: e.iso,
-    eventStatus: 'https://schema.org/EventScheduled',
-    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-    location: {
-      '@type': 'Place',
-      name: e.venue,
-      address: { '@type': 'PostalAddress', addressLocality: e.city, addressCountry: 'IT' },
-    },
-    ...(e.poster ? { image: [`${SITE.url}${e.poster}`] } : {}),
-    url: `${SITE.url}/events/${slug}`,
-    ...(residents.length > 0
-      ? { performer: residents.map((a) => ({ '@type': 'MusicGroup', name: a.name })) }
-      : {}),
-    organizer: { '@type': 'Organization', name: SITE.name, url: SITE.url },
-  }
+     pagina (nome/data/venue/lineup/poster); nessun prezzo/orario inventato.
+     I performer sono Person con @id: la stessa entità della pagina resident,
+     così i motori collegano il DJ alla data e viceversa. */
+  const jsonLd = { '@context': 'https://schema.org', ...eventNode(e, residents) }
 
   return (
     <main id="main">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd data={jsonLd} />
+      <JsonLd
+        data={breadcrumbNode([
+          { name: 'Events', path: '/events' },
+          { name: e.title, path: `/events/${slug}` },
+        ])}
+      />
       {/* ── hero modulare 12-col: numero laterale · poster · contenuto+ticket ── */}
       <Section
         surface="white"
