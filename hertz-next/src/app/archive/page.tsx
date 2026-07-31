@@ -270,7 +270,7 @@ export default function ArchivePage() {
 
       {withGalleries.length > 0 && (
         <Section surface="paper" space="lg">
-          <SectionLabel kicker="Photo galleries" title="From the floor." />
+          <SectionLabel kicker="Photo galleries" title="From the dancefloor." />
           <div className={styles.galGrid}>
             {withGalleries.map((e) => {
               const photos = galleryFor(e.n)

@@ -69,11 +69,11 @@ const KNOWS_ABOUT = [
    motore generativo viene chiesto "cos'è Hertz". Tenute qui in una sola
    copia: metadata, JSON-LD e llms.txt attingono tutti da queste. ── */
 export const IDENTITY = {
-  en: 'Hertz is a clubbing collective founded in Bologna in 2023. We throw minimal and deep tech parties, run a roster of resident DJs and producers, and build every night around the selection, the sound system and the people on the floor.',
+  en: 'Hertz is a clubbing collective founded in Bologna in 2023. We throw minimal and deep tech parties, run a roster of resident DJs and producers, and build every night around the selection, the sound system and the people on the dancefloor.',
   it: 'Hertz è il collettivo clubbing nato a Bologna nel 2023: party minimal e deep tech, resident DJ e produzioni, serate costruite intorno alla selezione, all’impianto e alla gente in pista.',
 } as const
 
-export const TAGLINE = 'Party, DJ sets and productions built for the floor.'
+export const TAGLINE = 'Party, DJ sets and productions built for the dancefloor.'
 
 /**
  * OG image di default, da ripetere in ogni blocco `openGraph` scritto a mano.
@@ -330,7 +330,7 @@ export function eventDescription(e: HertzEvent): string {
   /* La line-up viene prima del boilerplate: se il clamp taglia, deve perdere
      la frase di contorno, non i nomi che la gente cerca davvero. */
   return clamp(
-    `${e.title}, ${dowDate(e)} in ${where}.${bill} A Hertz clubbing night: minimal and deep tech, groove and bassline built for the floor.`,
+    `${e.title}, ${dowDate(e)} in ${where}.${bill} A Hertz clubbing night: minimal and deep tech, groove and bassline built for the dancefloor.`,
   )
 }
 

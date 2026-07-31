@@ -74,7 +74,7 @@ export default function EventsPage() {
           <div className={styles.introAside}>
             <p className={styles.introLede}>
               Every Hertz night, past and upcoming. Minimal &amp; deep tech across Bologna and
-              central Italy, made for the floor first.
+              central Italy, made for the dancefloor first.
             </p>
           </div>
         </div>

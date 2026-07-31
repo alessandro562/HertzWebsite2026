@@ -79,7 +79,7 @@ export default function HomeHero({ next }: { next?: NextEvent }) {
               transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
             >
               A minimal / deep-tech clubbing collective in Bologna: a resident night, a roster, an
-              editorial, built around the selection and the floor.
+              editorial, built around the selection and the dancefloor.
             </motion.p>
           </motion.div>
 
@@ -93,7 +93,7 @@ export default function HomeHero({ next }: { next?: NextEvent }) {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/assets/hero-booth.jpg" alt="Hertz, the booth during an event" className={styles.photo} />
             <figcaption className={`${styles.photoCap} hz-mono`}>
-              <span>Bologna floor</span>
+              <span>Bologna · the booth</span>
             </figcaption>
           </motion.figure>
         </div>

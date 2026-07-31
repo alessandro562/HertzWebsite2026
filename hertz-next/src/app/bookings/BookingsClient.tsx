@@ -26,7 +26,7 @@ const T = {
     formatKicker: 'The format',
     formatTitle: 'Book the night.',
     formatBody:
-      'The full Hertz curation brought to your space: selection, residents, sound direction and identity, all built into a single night. We treat the room like an instrument, with the right system, the right timing and a floor that came to dance.',
+      'The full Hertz curation brought to your space: selection, residents, sound direction and identity, all built into a single night. We treat the room like an instrument, with the right system, the right timing and a crowd that came to dance.',
     formatChips: ['Club', 'Festival', 'Private', 'B2B set'],
     formatCta: 'Request the format →',
     residentKicker: 'A resident',

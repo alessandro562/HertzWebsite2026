@@ -18,7 +18,7 @@ const EASE = [0.16, 1, 0.3, 1] as const
 export default function PhotoGallery({
   photos,
   label,
-  caption = 'Live · Hertz floor',
+  caption = 'Live · Hertz dancefloor',
 }: {
   photos: string[]
   label: string

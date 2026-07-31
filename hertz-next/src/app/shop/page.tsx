@@ -12,7 +12,7 @@ import styles from './shop.module.css'
 export const metadata: Metadata = {
   title: 'Clubber Apparel & Gadgets',
   description:
-    'Hertz clubber apparel and gadgets: small numbered drops made for the floor, shipped from Bologna. The first drop is coming soon — join the list.',
+    'Hertz clubber apparel and gadgets: small numbered drops made for the dancefloor, shipped from Bologna. The first drop is coming soon — join the list.',
   keywords: ['merch', 'clubber apparel', 'gadget', 'drop', 'Bologna', 'clubbing'],
   alternates: { canonical: '/shop' },
   openGraph: {
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     url: `${SITE.url}/shop`,
     title: 'Clubber Apparel & Gadgets · Hertz Clubbing Collective',
     description:
-      'Small numbered drops made for the floor, shipped from Bologna. The first Hertz drop is coming soon.',
+      'Small numbered drops made for the dancefloor, shipped from Bologna. The first Hertz drop is coming soon.',
     images: [DEFAULT_OG_IMAGE],
   },
 }
@@ -40,7 +40,7 @@ export default function ShopPage() {
           title="Clubber apparel."
           intro={
             <p>
-              Clubber apparel and gadgets, made for the floor rather than the feed: small, numbered
+              Clubber apparel and gadgets, made for the dancefloor rather than the feed: small, numbered
               drops in limited runs, shipped from Bologna. We&rsquo;re still putting the first pieces
               together, so nothing is on sale just yet.
             </p>
@@ -53,7 +53,7 @@ export default function ShopPage() {
         <SectionLabel kicker="What's coming" title="Apparel & gadgets." />
         <p className={styles.lede}>
           T-shirts and hoodies, outerwear, headwear and small accessories built around the Hertz
-          identity: minimal, numbered and made to wear on the floor and off it. Every drop stays
+          identity: minimal, numbered and made to wear on the dancefloor and off it. Every drop stays
           limited and ships from Bologna. The actual pieces, prices and how to buy will land here
           once the first run is ready.
         </p>

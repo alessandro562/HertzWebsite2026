@@ -303,7 +303,7 @@ export default function HeroIntroSequence({ next, staticGrid = false }: { next?:
             </h1>
             <p className={`${hero.sub} ${s.contentReveal}`}>
               A minimal / deep-tech clubbing collective in Bologna: a resident night, a roster, an editorial, built
-              around the selection and the floor.
+              around the selection and the dancefloor.
             </p>
           </div>
 
@@ -312,7 +312,7 @@ export default function HeroIntroSequence({ next, staticGrid = false }: { next?:
             <img src="/assets/ident-dj.jpg" alt="Hertz, the booth during an event" className={hero.photo} />
             <img src="/assets/ident-dj-ht.jpg" alt="" aria-hidden="true" className={s.htOverlay} />
             <figcaption className={`${hero.photoCap} hz-mono ${s.photoDetail}`}>
-              <span>Bologna floor</span>
+              <span>Bologna · the booth</span>
             </figcaption>
             {/* waveform runtime — ciò in cui si assesta la linea di frequenza */}
             <svg className={s.wave} viewBox="0 0 600 60" preserveAspectRatio="none" aria-hidden="true">

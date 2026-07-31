@@ -16,7 +16,7 @@ import styles from './media.module.css'
 export const metadata: Metadata = {
   title: 'Clubbing Culture Magazine',
   description:
-    'Clubbing culture from Hertz Redazione: reportage and arguments on the minimal and deep tech scene, written from the floor, not from the press release.',
+    'Clubbing culture from Hertz Redazione: reportage and arguments on the minimal and deep tech scene, written from the dancefloor, not from the press release.',
   keywords: ['clubbing culture', 'magazine clubbing', 'scena minimal', 'deep tech', 'reportage', 'dj'],
   alternates: { canonical: '/media' },
   openGraph: {
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     url: `${SITE.url}/media`,
     title: 'Clubbing Culture Magazine · Hertz Clubbing Collective',
     description:
-      'Reportage and arguments on the minimal and deep tech scene, written from the floor. Signed Hertz Redazione.',
+      'Reportage and arguments on the minimal and deep tech scene, written from the dancefloor. Signed Hertz Redazione.',
     images: [DEFAULT_OG_IMAGE],
   },
 }
@@ -78,7 +78,7 @@ export default function MediaPage() {
             <span className={styles.mastBold}>culture.</span>
           </h1>
           <p className={styles.mastStand}>
-            Reportage and arguments about the music we care about, written from the floor rather
+            Reportage and arguments about the music we care about, written from the dancefloor rather
             than the press release. Signed Hertz Redazione.
           </p>
           <div className={styles.mastMeta}>

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
      caratteri e Google tagliava proprio la firma del collettivo. */
   title: { absolute: 'Manifesto — From Clubbers, For Clubbers · Hertz' },
   description:
-    'Why a Bologna collective builds parties around the music: the Hertz manifesto, active since 2023. Selection, sound system and the floor, groove first.',
+    'Why a Bologna collective builds parties around the music: the Hertz manifesto, active since 2023. Selection, sound system and the dancefloor, groove first.',
   keywords: ['collettivo clubbing', 'clubbing collective', 'manifesto', 'Bologna', 'clubbing', 'party'],
   alternates: { canonical: '/about' },
   openGraph: {
@@ -37,7 +37,7 @@ export default function AboutPage() {
     name: 'Hertz manifesto',
     url: `${SITE.url}/about`,
     description:
-      'The manifesto of Hertz, the clubbing collective founded in Bologna in 2023: nights built around the selection, the sound system and the people on the floor.',
+      'The manifesto of Hertz, the clubbing collective founded in Bologna in 2023: nights built around the selection, the sound system and the people on the dancefloor.',
     mainEntity: { '@id': ORG_ID },
   }
 
@@ -55,10 +55,10 @@ export default function AboutPage() {
         </SignatureTitle>
         <p className={styles.heroLead}>
           Hertz is a clubbing collective from Bologna, active since 2023. We build our nights
-          around the music, the sound system and the people on the floor.
+          around the music, the sound system and the people on the dancefloor.
         </p>
         <blockquote className={styles.heroQuote}>
-          Too many nights were built for the camera, not for the floor.
+          Too many nights were built for the camera, not for the dancefloor.
         </blockquote>
         <span className="hz-mono" style={{ color: 'var(--hz-ink-mute)' }}>
           Bologna · 2023
@@ -76,7 +76,7 @@ export default function AboutPage() {
             </p>
             <p>
               We wanted the opposite. Nights built around the music, the sound system and the people
-              on the floor, where the selection leads and the crowd does the rest. That&rsquo;s the
+              on the dancefloor, where the selection leads and the crowd does the rest. That&rsquo;s the
               kind of clubbing we set out to bring back.
             </p>
           </Reveal>
@@ -98,19 +98,19 @@ export default function AboutPage() {
               We book the artists we&rsquo;d pay to see ourselves: minimal and deep tech, the kind
               of groove that can roll for hours without ever turning into noise. And we choose rooms
               for how they sound rather than how they look, small enough to feel the kick through the
-              floor, big enough to lose yourself in.
+              dancefloor, big enough to lose yourself in.
             </p>
           </Reveal>
         </div>
       </Section>
 
-      {/* ── floor climax + stats (signal) ── */}
+      {/* ── dancefloor climax + stats (signal) ── */}
       <Section surface="signal" space="lg">
         <p className={`${styles.chap} hz-mono`} style={{ color: 'var(--hz-ink-mute)' }}>
-          The floor
+          The dancefloor
         </p>
         <Reveal as="p" variant="mask" duration={1} className={styles.climax}>
-          Lights down, sound up, and let the record run. The floor takes it from there.
+          Lights down, sound up, and let the record run. The dancefloor takes it from there.
         </Reveal>
         <Reveal variant="up" delay={0.1}>
           <dl className={styles.stats}>

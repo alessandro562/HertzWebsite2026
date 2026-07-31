@@ -16,7 +16,7 @@ import styles from './music.module.css'
 export const metadata: Metadata = {
   title: 'DJ Sets, Mixes & Productions',
   description:
-    'Hertz DJ sets, mixes and productions on SoundCloud and Spotify: minimal and deep tech, long grooves and basslines recorded from the floor.',
+    'Hertz DJ sets, mixes and productions on SoundCloud and Spotify: minimal and deep tech, long grooves and basslines recorded from the dancefloor.',
   keywords: ['dj set', 'mix', 'produzioni', 'soundcloud', 'groove', 'bassline', 'minimal', 'deep tech'],
   alternates: { canonical: '/music' },
   openGraph: {
@@ -84,7 +84,7 @@ export default async function MusicPage() {
           <h1 className={styles.title}>The selection.</h1>
           <div className={styles.headRow}>
             <p className={styles.intro}>
-              The records that build the Hertz floor: resident sets and studio cuts, minimal &amp;
+              The records that build the Hertz dancefloor: resident sets and studio cuts, minimal &amp;
               deep tech, selection first. Nothing plays on its own, so just tap to listen.
             </p>
             {/* niente aria-label sui chip: sostituiva il testo visibile

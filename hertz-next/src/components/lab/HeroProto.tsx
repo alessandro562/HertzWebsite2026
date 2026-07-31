@@ -53,7 +53,7 @@ export default function HeroProto({
             )}
             <p className={hero.sub}>
               A minimal / deep-tech clubbing collective in Bologna — a resident night, a roster, an
-              editorial, built around the selection and the floor.
+              editorial, built around the selection and the dancefloor.
             </p>
           </div>
 
@@ -61,7 +61,7 @@ export default function HeroProto({
             <figure className={hero.photoWrap} ref={photoRef as React.Ref<HTMLElement>}>
               <img src="/assets/hero-booth.jpg" alt="Hertz — the booth during an event" className={hero.photo} />
               <figcaption className={`${hero.photoCap} hz-mono`}>
-                <span>Bologna floor</span>
+                <span>Bologna · the booth</span>
               </figcaption>
             </figure>
           ))}

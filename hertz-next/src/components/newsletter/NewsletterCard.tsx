@@ -155,7 +155,7 @@ export default function NewsletterCard({
               <>
                 <p className={`${styles.kicker} hz-mono`}>You&rsquo;re in</p>
                 <h2 id="nl-title" className={styles.title}>
-                  See you on the floor.
+                  See you on the dancefloor.
                 </h2>
                 <p className={styles.body}>
                   You&rsquo;re on the list. Watch your inbox for the next Hertz night. If you&rsquo;re
@@ -173,7 +173,7 @@ export default function NewsletterCard({
                   Join the list.
                 </h2>
                 <p className={styles.body}>
-                  Dates, drops and stories from the floor, straight to your inbox. No noise, just the
+                  Dates, drops and stories from the dancefloor, straight to your inbox. No noise, just the
                   signal.
                 </p>
 

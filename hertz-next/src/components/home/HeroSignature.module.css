@@ -18,6 +18,14 @@
   background: var(--hz-ink);
   transform-origin: left center;
   will-change: transform;
+  /* Sopra a .row: lo scrim di .next::before sale di 1.1em sopra il blocco,
+     e sotto gli ~880px di viewport lo stacco (2.2vh) si accorcia abbastanza
+     da farglielo scavalcare — con `isolation: isolate` su .next il suo
+     z-index:-1 resta nel proprio contesto e finiva a dipingere il colore di
+     fondo SOPRA la riga, che si vedeva sfumata a sinistra. La riga è la firma
+     della composizione: sta sopra a tutto, sempre piena. */
+  position: relative;
+  z-index: 1;
 }
 
 .row {

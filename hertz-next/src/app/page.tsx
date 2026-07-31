@@ -178,7 +178,7 @@ export default function Home() {
               <p className={styles.manifestoBody}>
                 Hertz started in Bologna in 2023, when going out had started to feel more about
                 being seen than being there. We wanted the opposite: nights built around the music,
-                the sound system and the people on the floor. Real clubbing isn&rsquo;t a show you
+                the sound system and the people on the dancefloor. Real clubbing isn&rsquo;t a show you
                 watch, it&rsquo;s something you live, the kind of night that only happens when the
                 right room, the right sound and the right crowd come together. That&rsquo;s what we
                 set out to bring back.
@@ -251,8 +251,8 @@ export default function Home() {
             </SignatureTitle>
           </div>
           <p className={styles.archiveIntro}>
-            A moving archive of faces, rooms and fragments from the Hertz floor:
-            Kindergarten and beyond.
+            Every edition, shot as it happened. The room, the crowd and the hours in
+            between &mdash; Kindergarten and everywhere since.
           </p>
         </div>
         <Stagger className={styles.archiveStrip} gap={0.07}>
@@ -291,7 +291,7 @@ export default function Home() {
               <span className={`${styles.moreKicker} hz-mono`}>Shop</span>
               <span className={styles.moreTitle}>Clubber apparel.</span>
               <span className={styles.moreMeta}>
-                Small numbered drops, made for the floor{' '}
+                Small numbered drops, made for the dancefloor{' '}
                 <span className="hz-fx-arrow">
                   <Arrow />
                 </span>
@@ -303,7 +303,7 @@ export default function Home() {
               <span className={`${styles.moreKicker} hz-mono`}>Media</span>
               <span className={styles.moreTitle}>Clubbing culture.</span>
               <span className={styles.moreMeta}>
-                Reportage and reading, written from the floor{' '}
+                Reportage and reading, written from the dancefloor{' '}
                 <span className="hz-fx-arrow">
                   <Arrow />
                 </span>

@@ -157,7 +157,7 @@ export const ARTISTS: Record<ResidentSlug, Artist> = {
     bio: [
       'Born in Bologna in 2004, Leonardo Giusti was drawn to electronic music from a very young age, gradually shaping a sonic identity rooted in the more groove-driven shades of Tech House and Minimal Deep Tech.',
       'Despite his youth, he has already built experience across events and clubs on the Bologna scene, performing in venues such as Kindergarten and taking part in several Hertz nights. Since late 2025 he has been a Hertz resident DJ, a home in which he is consolidating his artistic path and refining an increasingly recognisable musical direction.',
-      "Ambitious, driven and constantly evolving, Leonardo is one of the emerging names of Bologna's new electronic scene: a young DJ with a clear vision, a strong desire to grow, and the goal of turning every set into a genuine experience for the floor.",
+      "Ambitious, driven and constantly evolving, Leonardo is one of the emerging names of Bologna's new electronic scene: a young DJ with a clear vision, a strong desire to grow, and the goal of turning every set into a genuine experience for the dancefloor.",
     ],
     mixes: [
       { t: 'Live @ Hertz / Kindergarten · 26.12.2025', tag: 'Featured', url: 'https://soundcloud.com/leonardo-giusti-286676267/leonardo-giusti-live-hertz-kindergarten-italy-26122025' },
