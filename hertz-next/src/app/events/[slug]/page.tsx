@@ -30,6 +30,14 @@ import { SITE } from '@/lib/site'
 import { DEFAULT_OG_IMAGE, brandTitle, breadcrumbNode, eventDescription, eventNode } from '@/lib/seo'
 import styles from './event.module.css'
 
+/* Il calendario dipende da "oggi": upcoming()/archive()/isPast() leggono
+   new Date(). Senza questo, quella data resta quella del BUILD e la pagina
+   continua a mostrare come prossimo un evento già passato finché non si
+   rideploya. Con l'ISR la pagina si rigenera da sola: al massimo un'ora di
+   ritardo sul cambio di giorno (che cade alle 02:00 italiane, quindi a
+   serata finita, non nel mezzo). */
+export const revalidate = 3600
+
 export function generateStaticParams() {
   return allEventSlugs().map((slug) => ({ slug }))
 }
