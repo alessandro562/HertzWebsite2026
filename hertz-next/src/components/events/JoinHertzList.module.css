@@ -129,8 +129,14 @@
   position: relative;
   width: 100%;
   max-width: 440px;
-  max-height: calc(100dvh - 2rem);
+  /* 100% dell'overlay, NON `100dvh - 2rem`: l'overlay ha fino a 2.5rem di
+     padding per lato, quindi la card poteva risultare 48px più alta dello
+     spazio in cui è centrata. Quei 48px finivano metà sopra e metà sotto il
+     bordo dello schermo, irraggiungibili — l'overlay è fixed e non scrolla —
+     e su finestre basse ci finiva dentro il pulsante di invio. */
+  max-height: 100%;
   overflow: auto;
+  overscroll-behavior: contain;
   background: var(--raw-white, #fff);
   color: var(--raw-ink, #151515);
   border: 1px solid var(--raw-ink, #151515);
@@ -161,6 +167,9 @@
   justify-content: space-between;
   gap: 0.6em;
   padding: 0.7rem clamp(1.2rem, 4vw, 1.8rem);
+  /* spazio per la ✕, che è assoluta in alto a destra e altrimenti coprirebbe
+     il lato destro del LangToggle rendendo "IT" mezzo incliccabile */
+  padding-right: 3rem;
   border-bottom: 1px solid rgba(21, 21, 21, 0.14);
   color: rgba(21, 21, 21, 0.55);
 }

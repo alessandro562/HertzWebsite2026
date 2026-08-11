@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react'
 import WaveformPulse from '@/motion/WaveformPulse'
 import LangToggle from '@/components/ui/LangToggle'
@@ -100,6 +101,9 @@ export default function JoinHertzList({
 }) {
   const [lang, setLang] = useState<Lang>('en')
   const [open, setOpen] = useState(false)
+  /* La modale va montata in <body> (vedi il portal in fondo), ma createPortal
+     ha bisogno del document: in SSR non esiste. Monta al primo effetto. */
+  const [mounted, setMounted] = useState(false)
   const [state, setState] = useState<State>('idle')
   const [msg, setMsg] = useState('')
   const [showBar, setShowBar] = useState(false)
@@ -108,6 +112,8 @@ export default function JoinHertzList({
   const nameRef = useRef<HTMLInputElement>(null)
   const reduce = useReducedMotion()
   const t = T[lang]
+
+  useEffect(() => setMounted(true), [])
 
   /* sticky bar (mobile): appare quando il modulo inline è scrollato sopra la vista */
   useEffect(() => {
@@ -250,9 +256,17 @@ export default function JoinHertzList({
         </button>
       </div>
 
-      {/* ── modale ── */}
-      <AnimatePresence>
-        {open && (
+      {/* ── modale ──
+          Montata in <body>, non qui dove vive il componente. Il contenitore
+          della pagina evento porta un `view-transition-name` (il morph
+          calendario→evento) e quello crea un contesto di impilamento: lasciata
+          in loco, la modale restava intrappolata lì dentro e la nav — che ha uno
+          z-index molto più basso — le finiva sopra. Nessun z-index può
+          rimediarci dall'interno, l'unica soluzione è uscire dal contesto. */}
+      {mounted &&
+        createPortal(
+          <AnimatePresence>
+            {open && (
           <motion.div
             className={styles.overlay}
             initial={{ opacity: 0 }}
@@ -377,8 +391,10 @@ export default function JoinHertzList({
               </div>
             </motion.div>
           </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body,
         )}
-      </AnimatePresence>
     </>
   )
 }
