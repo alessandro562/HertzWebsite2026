@@ -119,6 +119,7 @@ export default function NewsletterCard({
       {open && (
         <motion.div
           className={styles.overlay}
+          data-lenis-prevent
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

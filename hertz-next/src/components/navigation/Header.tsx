@@ -160,6 +160,7 @@ export default function Header() {
         ref={menuRef}
         id="mobile-menu"
         className={styles.menu}
+        data-lenis-prevent
         data-surface="paper"
         data-open={open}
         hidden={!open}
