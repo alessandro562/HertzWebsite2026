@@ -1,0 +1,160 @@
+/* FeaturedEvent — riga "lead" del prossimo evento: locandina PICCOLA laterale
+   (come nell'archivio/rewind), testo editoriale a destra. Niente locandina
+   grande: quella vive solo nella pagina dell'evento. */
+.featured {
+  position: relative;
+  display: grid;
+  grid-template-columns: clamp(84px, 13vw, 148px) minmax(0, 1fr);
+  gap: clamp(1rem, 3vw, 2.4rem);
+  align-items: start;
+  border-top: 2px solid var(--hz-ink);
+  border-bottom: 1px solid var(--hz-line);
+  padding: clamp(1.2rem, 3vw, 2.2rem) 0;
+  padding-left: clamp(0.6rem, 1.6vw, 1.1rem);
+  color: inherit;
+  transition: padding-left var(--hz-ui) var(--hz-ease-out);
+}
+.featured:hover {
+  padding-left: clamp(1rem, 2.4vw, 1.6rem);
+}
+
+/* ── locandina piccola laterale 4:5, monocroma come nel rewind ── */
+.posterCell {
+  width: 100%;
+}
+.posterFig {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--hz-ink);
+  border: 1px solid var(--hz-line-strong);
+}
+.posterFig[data-fallback='true'] {
+  background: var(--hz-bg-2);
+}
+.poster {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: contrast(1.05);
+  transition:
+    filter var(--hz-ui) var(--hz-ease-out),
+    transform var(--hz-content) var(--hz-ease-out);
+}
+.featured:hover .poster {
+  transform: scale(1.04);
+}
+.posterSoon {
+  position: absolute;
+  inset: 0;
+}
+
+/* ── contenuto editoriale ── */
+.content {
+  min-width: 0;
+}
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  width: 100%;
+}
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--hz-ink-mute);
+}
+.kicker {
+  color: var(--hz-ink);
+}
+.cut {
+  width: clamp(44px, 12vw, 92px);
+  height: 3px;
+  margin: 0.1rem 0 0.25rem;
+}
+.title {
+  font-size: clamp(1.7rem, 4vw, 3.4rem);
+  line-height: 0.98;
+  letter-spacing: var(--hz-tracking-tight);
+  max-width: 24ch;
+}
+.venue {
+  font-size: var(--hz-t-body);
+  color: var(--hz-ink-mute);
+}
+.when {
+  color: var(--hz-ink-mute);
+}
+.bill {
+  color: var(--hz-ink-mute);
+  max-width: 54ch;
+  font-size: var(--hz-t-body);
+  margin-top: 0.1rem;
+}
+.foot {
+  margin-top: 0.8rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.7rem 1.2rem;
+}
+.cta {
+  font-family: var(--hz-font-mono);
+  font-size: var(--hz-t-ui);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.6em 1em;
+  border: 1px solid var(--hz-ink);
+  transition:
+    background-color var(--hz-ui) var(--hz-ease-out),
+    color var(--hz-ui) var(--hz-ease-out);
+}
+.featured:hover .cta {
+  background: var(--hz-ink);
+  color: var(--hz-bg);
+}
+.footLabel {
+  color: var(--hz-ink-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sweep {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 2px;
+  width: 100%;
+  background: var(--hz-accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--hz-reveal) var(--hz-ease-soft);
+  pointer-events: none;
+}
+.featured:hover .sweep,
+.featured:focus-visible .sweep {
+  transform: scaleX(1);
+}
+.featured:focus-visible {
+  outline: none;
+}
+.featured:focus-visible .cta {
+  outline: 2px solid var(--raw-cold);
+  outline-offset: 3px;
+}
+.featured[data-status='soon'] .cta {
+  border-color: var(--raw-cold);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sweep,
+  .poster {
+    transition: none;
+  }
+}

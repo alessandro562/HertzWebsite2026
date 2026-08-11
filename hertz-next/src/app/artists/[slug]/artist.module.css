@@ -1,0 +1,390 @@
+.crumb {
+  display: flex;
+  gap: 0.4em;
+  color: var(--hz-ink-mute);
+  margin-bottom: var(--hz-space-lg);
+}
+.crumb a:hover {
+  color: var(--hz-ink);
+}
+
+/* ── identity hero ── */
+.hero {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--hz-space-lg);
+  align-items: end;
+}
+
+/* watermark frequenza — trattamento leggermente diverso per artista */
+.freqMark {
+  position: absolute;
+  z-index: 0;
+  top: -0.18em;
+  right: -0.02em;
+  font-family: var(--hz-font-mono);
+  font-size: clamp(5rem, 20vw, 18rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.16);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+.hero[data-alt='1'] .freqMark {
+  top: auto;
+  right: auto;
+  bottom: -0.14em;
+  left: -0.02em;
+}
+.identity,
+.portrait {
+  position: relative;
+  z-index: 1;
+}
+@media (min-width: 820px) {
+  .hero {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+    gap: clamp(2rem, 5vw, 5rem);
+  }
+}
+
+.identity {
+  display: flex;
+  flex-direction: column;
+  gap: var(--hz-space-sm);
+}
+.freq {
+  color: var(--hz-ink-mute);
+}
+.name {
+  font-size: var(--hz-t-hero);
+  line-height: var(--hz-leading-tight);
+}
+.resTag {
+  color: rgba(255, 255, 255, 0.6);
+  order: -1;
+}
+.role {
+  font-size: var(--hz-t-body-lg);
+  color: var(--hz-ink-mute);
+}
+.listenSpotify {
+  margin-top: var(--hz-space-md);
+  font-family: var(--hz-font-mono);
+  font-size: var(--hz-t-ui);
+  color: var(--hz-ink-mute);
+}
+.listenSpotify a {
+  color: var(--hz-ink);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--hz-space-sm);
+  margin-top: var(--hz-space-md);
+}
+
+/* ── metadata editoriale: micro-informazioni reali, non decorative ── */
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin-top: var(--hz-space-md);
+  padding-top: var(--hz-space-sm);
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+}
+.metaItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.metaLabel {
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: var(--hz-t-meta);
+}
+.metaValue {
+  color: var(--hz-ink);
+}
+
+.portrait {
+  max-width: 380px;
+  width: 100%;
+}
+@media (min-width: 820px) {
+  /* tensione leggera: la foto esce di pochi pixel dalla colonna verso il nome */
+  .portrait {
+    margin-left: clamp(-1.5rem, -2vw, -0.75rem);
+  }
+}
+
+.freqRow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* ── bio ── */
+.bioGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--hz-space-md);
+}
+@media (min-width: 900px) {
+  .bioGrid {
+    grid-template-columns: minmax(0, 0.4fr) minmax(0, 1fr);
+    gap: clamp(2rem, 6vw, 6rem);
+  }
+}
+.bio {
+  display: flex;
+  flex-direction: column;
+  gap: var(--hz-space-md);
+  max-width: var(--hz-text-max);
+  font-size: var(--hz-t-body-lg);
+  line-height: var(--hz-leading-body);
+}
+
+.empty {
+  padding: var(--hz-space-lg) 0;
+  color: var(--hz-ink-mute);
+  border-top: 1px solid var(--hz-line);
+  border-bottom: 1px solid var(--hz-line);
+}
+
+/* ── gallery ── */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--hz-gutter);
+}
+@media (min-width: 768px) {
+  .gallery {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ── signal: secondo momento visivo forte (freq tipografica + FrequencyCut
+   + frammento fotografico reale) — non testo su testo dopo la hero ── */
+.signal {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--hz-space-lg);
+  align-items: center;
+}
+@media (min-width: 820px) {
+  .signal {
+    grid-template-columns: minmax(0, 0.55fr) minmax(0, 0.45fr);
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+}
+.signalText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.signalKicker {
+  color: var(--hz-ink-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.signalFreqRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.signalFreq {
+  font-family: var(--hz-font-mono);
+  font-size: clamp(3.2rem, 8vw, 6.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+.signalGlyph {
+  opacity: 0.8;
+}
+.signalSub {
+  color: var(--hz-ink-mute);
+  font-size: var(--hz-t-body);
+}
+.signalCut {
+  height: 4px;
+  margin-top: var(--hz-space-sm);
+  max-width: 320px;
+}
+.signalTraits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.6rem;
+  margin-top: var(--hz-space-md);
+  list-style: none;
+}
+.signalTrait {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--hz-ink-mute);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: var(--hz-t-meta);
+}
+.signalWave {
+  width: 1.8em;
+  height: 1em;
+  color: var(--hz-ink-mute);
+  flex: none;
+}
+.signalPhoto {
+  aspect-ratio: 4 / 3;
+}
+
+/* ── played with: composizione tipografica editoriale, non chip ── */
+.playedWith {
+  display: flex;
+  flex-direction: column;
+}
+.playedWithLink {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  border-top: 1px solid var(--hz-line);
+  font-family: var(--hz-font-display);
+  font-weight: var(--hz-weight-display);
+  font-size: clamp(1.3rem, 2.4vw, 2rem);
+  letter-spacing: var(--hz-tracking-tight);
+  position: relative;
+}
+.playedWith .playedWithLink:first-child {
+  border-top: none;
+}
+.playedWithIndex {
+  color: var(--hz-ink-mute);
+  font-size: var(--hz-t-meta);
+}
+.playedWithLink::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 3ch;
+  height: 1.5px;
+  background: var(--raw-cold);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--hz-fast) var(--hz-ease-out);
+}
+.playedWithLink:hover::after,
+.playedWithLink:focus-visible::after {
+  transform: scaleX(1);
+}
+.playedWithLink:focus-visible {
+  outline: none;
+}
+
+/* ── date + archivio: lista compatta a timeline, non EventModule ── */
+.dateLists {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--hz-space-lg);
+}
+@media (min-width: 720px) {
+  .dateLists {
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 4vw, 4rem);
+  }
+}
+.dateList {
+  display: flex;
+  flex-direction: column;
+}
+.dateListLabel {
+  color: var(--hz-ink-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--hz-space-sm);
+}
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-left: 1.1rem;
+  border-left: 1px solid var(--hz-line-strong);
+}
+.timelineRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 0.8rem;
+  padding: 0.6rem 0;
+  color: inherit;
+}
+.timelineRow:not(:last-child) {
+  border-bottom: 1px solid var(--hz-line);
+}
+.timelineDate {
+  color: var(--hz-ink-mute);
+  min-width: 6.5ch;
+}
+.timelineVenue {
+  flex: 1 1 auto;
+}
+.timelineRow:hover .timelineVenue {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+.timelineDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--hz-ink);
+  flex: none;
+}
+.timelineDot[data-status='soon'] {
+  background: transparent;
+  border: 1px solid var(--raw-cold);
+}
+.timelineDot[data-status='archive'] {
+  background: var(--hz-ink-mute);
+}
+
+/* ── bookings dedicati ── */
+.bookBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--hz-space-sm);
+  align-items: center;
+}
+.bookMeta {
+  margin-top: var(--hz-space-md);
+  color: var(--hz-ink-mute);
+}
+
+/* ── next resident ── */
+.nextResident {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--hz-space-sm) var(--hz-space-md);
+  padding: var(--hz-space-sm) 0;
+  transition: padding-inline var(--hz-ui) var(--hz-ease-out);
+}
+.nextResident:hover { padding-inline: var(--hz-space-sm); }
+.nextLabel { color: var(--hz-ink-mute); }
+.nextName {
+  font-family: var(--hz-font-display);
+  font-weight: var(--hz-weight-display);
+  font-size: clamp(2rem, 6vw, 5rem);
+  line-height: 0.9;
+  letter-spacing: var(--hz-tracking-mega);
+  text-transform: uppercase;
+}
+.nextGo { color: var(--hz-signal); }

@@ -1,0 +1,95 @@
+/* ────────────────────────────────────────────────────────────
+   HERTZ · SURFACES — section-theme system
+
+   Ogni sezione dichiara la propria superficie con [data-surface].
+   La superficie rimappa SOLO i token semantici (--hz-bg/ink/line/
+   accent…): i componenti restano invariati.
+
+   Superfici (dagli screenshot canonici):
+     white     · base editoriale (calendario, media, archive)
+     paper     · aree di contenuto quiete (music, shop)
+     signal    · ambientale distintiva (hero, booking, utility) — type NERO
+     cold-blue · artisti "THE FAMILY" — type BIANCO
+     ink       · SOLO manifesto + chiusura — type BIANCO
+
+   Default (:root, senza data-surface) = White. MAI ink di default.
+   ──────────────────────────────────────────────────────────── */
+
+[data-surface] {
+  background-color: var(--hz-bg);
+  color: var(--hz-ink);
+}
+
+[data-surface='white'] {
+  --hz-bg: var(--raw-white);
+  --hz-bg-2: #f6f7f4;
+  --hz-ink: var(--raw-ink);
+  --hz-ink-mute: #5c5f57;
+  --hz-line: rgba(21, 21, 21, 0.14);
+  --hz-line-strong: rgba(21, 21, 21, 0.34);
+  --hz-signal: var(--raw-signal);
+  --hz-accent: var(--raw-cold);
+  --hz-focus-ring: var(--raw-cold);
+  --hz-onsale: var(--raw-cold);
+  --hz-soldout: #8a3a3a;
+}
+
+[data-surface='paper'] {
+  --hz-bg: var(--raw-paper);
+  --hz-bg-2: var(--raw-white);
+  --hz-ink: var(--raw-ink);
+  --hz-ink-mute: #565950;
+  --hz-line: rgba(21, 21, 21, 0.16);
+  --hz-line-strong: rgba(21, 21, 21, 0.36);
+  --hz-signal: var(--raw-signal);
+  /* cold blue scurito: su paper il raw-cold dà 4.02:1, sotto il minimo testo */
+  --hz-accent: #456a7c;
+  --hz-focus-ring: var(--raw-cold);
+  --hz-onsale: #456a7c;
+  --hz-soldout: #8a3a3a;
+}
+
+[data-surface='signal'] {
+  --hz-bg: var(--raw-signal);
+  --hz-bg-2: #b1c2c2;
+  --hz-ink: var(--raw-ink); /* testo NERO su Signal */
+  --hz-ink-mute: #38433f;
+  --hz-line: rgba(21, 21, 21, 0.22);
+  --hz-line-strong: rgba(21, 21, 21, 0.45);
+  --hz-signal: var(--raw-ink);
+  --hz-accent: #274550; /* cold blue scuro, leggibile su Signal */
+  /* il ring di default (raw-cold) su Signal dà 2.30:1 → si usa l'ink */
+  --hz-focus-ring: var(--raw-ink);
+  --hz-onsale: #274550;
+  --hz-soldout: #6e2626;
+}
+
+[data-surface='cold-blue'] {
+  --hz-bg: var(--raw-cold);
+  --hz-bg-2: #5b8397;
+  --hz-ink: var(--raw-white); /* testo BIANCO su Cold Blue */
+  /* schiarito: #d1dde2 dava 3.49:1, sotto il minimo per i metadati */
+  --hz-ink-mute: #e8eef1;
+  --hz-line: rgba(255, 255, 255, 0.28);
+  --hz-line-strong: rgba(255, 255, 255, 0.5);
+  --hz-signal: var(--raw-signal);
+  --hz-accent: var(--raw-white);
+  /* il ring di default coincideva col fondo (1.00:1): invisibile */
+  --hz-focus-ring: var(--raw-ink);
+  --hz-onsale: var(--raw-white);
+  --hz-soldout: #ffd9d9;
+}
+
+[data-surface='ink'] {
+  --hz-bg: var(--raw-ink);
+  --hz-bg-2: #1e1e1c;
+  --hz-ink: var(--raw-white);
+  --hz-ink-mute: var(--raw-signal); /* Signal come muted su dark */
+  --hz-line: rgba(255, 255, 255, 0.16);
+  --hz-line-strong: rgba(255, 255, 255, 0.4);
+  --hz-signal: var(--raw-signal);
+  --hz-accent: var(--raw-signal);
+  --hz-focus-ring: var(--raw-signal);
+  --hz-onsale: #7fa88c;
+  --hz-soldout: #e08a8a;
+}

@@ -1,0 +1,95 @@
+/* ────────────────────────────────────────────────────────────
+   HERTZ · CONTENT LAYER · GALLERIES (archivio fotografico reale)
+   Manifest generato dai file reali in public/assets/archivio-web/.
+   Chiave = numero di catalogo evento (events.ts). Solo eventi con
+   servizio fotografico esistente: #021 (26.12 Kindergarten, 34 foto)
+   e #022 (27.02 Kindergarten, 40 foto). Nessuna foto inventata.
+   ──────────────────────────────────────────────────────────── */
+
+export const GALLERIES: Record<string, string[]> = {
+  '021': [
+    /* crowd/floor in testa: queste aprono il featured spread e le preview card */
+    '/assets/archivio-web/26.12_Hertz-104.jpg',
+    '/assets/archivio-web/26.12_Hertz-105.jpg',
+    '/assets/archivio-web/26.12_Hertz-181.jpg',
+    '/assets/archivio-web/26.12_Hertz-70.jpg',
+    '/assets/archivio-web/26.12_Hertz-71.jpg',
+    '/assets/archivio-web/26.12_Hertz-72.jpg',
+    '/assets/archivio-web/26.12_Hertz-73.jpg',
+    '/assets/archivio-web/26.12_Hertz-74.jpg',
+    '/assets/archivio-web/26.12_Hertz-77.jpg',
+    '/assets/archivio-web/26.12_Hertz-78.jpg',
+    '/assets/archivio-web/26.12_Hertz-82.jpg',
+    '/assets/archivio-web/26.12_Hertz-84.jpg',
+    '/assets/archivio-web/26.12_Hertz-85.jpg',
+    '/assets/archivio-web/26.12_Hertz-86.jpg',
+    '/assets/archivio-web/26.12_Hertz-90.jpg',
+    '/assets/archivio-web/26.12_Hertz-91.jpg',
+    '/assets/archivio-web/26.12_Hertz-92.jpg',
+    '/assets/archivio-web/26.12_Hertz-93.jpg',
+    '/assets/archivio-web/26.12_Hertz-94.jpg',
+    '/assets/archivio-web/26.12_Hertz-95.jpg',
+    '/assets/archivio-web/26.12_Hertz-96.jpg',
+    '/assets/archivio-web/26.12_Hertz-106.jpg',
+    '/assets/archivio-web/26.12_Hertz-107.jpg',
+    '/assets/archivio-web/26.12_Hertz-108.jpg',
+    '/assets/archivio-web/26.12_Hertz-109.jpg',
+    '/assets/archivio-web/26.12_Hertz-110.jpg',
+    '/assets/archivio-web/26.12_Hertz-111.jpg',
+    '/assets/archivio-web/26.12_Hertz-113.jpg',
+    '/assets/archivio-web/26.12_Hertz-114.jpg',
+    '/assets/archivio-web/26.12_Hertz-115.jpg',
+    '/assets/archivio-web/26.12_Hertz-182.jpg',
+    '/assets/archivio-web/26.12_Hertz-183.jpg',
+    '/assets/archivio-web/26.12_Hertz-184.jpg',
+    '/assets/archivio-web/26.12_Hertz-185.jpg',
+  ],
+  '022': [
+    /* crowd/floor in testa: queste aprono il featured spread e le preview card */
+    '/assets/archivio-web/27.02_Hertz-104.jpg',
+    '/assets/archivio-web/27.02_Hertz-192.jpg',
+    '/assets/archivio-web/27.02_Hertz-171.jpg',
+    '/assets/archivio-web/27.02_Hertz-38.jpg',
+    '/assets/archivio-web/27.02_Hertz-39.jpg',
+    '/assets/archivio-web/27.02_Hertz-40.jpg',
+    '/assets/archivio-web/27.02_Hertz-41.jpg',
+    '/assets/archivio-web/27.02_Hertz-47.jpg',
+    '/assets/archivio-web/27.02_Hertz-48.jpg',
+    '/assets/archivio-web/27.02_Hertz-49.jpg',
+    '/assets/archivio-web/27.02_Hertz-50.jpg',
+    '/assets/archivio-web/27.02_Hertz-51.jpg',
+    '/assets/archivio-web/27.02_Hertz-52.jpg',
+    '/assets/archivio-web/27.02_Hertz-53.jpg',
+    '/assets/archivio-web/27.02_Hertz-54.jpg',
+    '/assets/archivio-web/27.02_Hertz-55.jpg',
+    '/assets/archivio-web/27.02_Hertz-72.jpg',
+    '/assets/archivio-web/27.02_Hertz-73.jpg',
+    '/assets/archivio-web/27.02_Hertz-74.jpg',
+    '/assets/archivio-web/27.02_Hertz-75.jpg',
+    '/assets/archivio-web/27.02_Hertz-76.jpg',
+    '/assets/archivio-web/27.02_Hertz-105.jpg',
+    '/assets/archivio-web/27.02_Hertz-106.jpg',
+    '/assets/archivio-web/27.02_Hertz-107.jpg',
+    '/assets/archivio-web/27.02_Hertz-108.jpg',
+    '/assets/archivio-web/27.02_Hertz-109.jpg',
+    '/assets/archivio-web/27.02_Hertz-110.jpg',
+    '/assets/archivio-web/27.02_Hertz-141.jpg',
+    '/assets/archivio-web/27.02_Hertz-142.jpg',
+    '/assets/archivio-web/27.02_Hertz-143.jpg',
+    '/assets/archivio-web/27.02_Hertz-144.jpg',
+    '/assets/archivio-web/27.02_Hertz-172.jpg',
+    '/assets/archivio-web/27.02_Hertz-173.jpg',
+    '/assets/archivio-web/27.02_Hertz-174.jpg',
+    '/assets/archivio-web/27.02_Hertz-175.jpg',
+    '/assets/archivio-web/27.02_Hertz-188.jpg',
+    '/assets/archivio-web/27.02_Hertz-189.jpg',
+    '/assets/archivio-web/27.02_Hertz-190.jpg',
+    '/assets/archivio-web/27.02_Hertz-191.jpg',
+    '/assets/archivio-web/27.02_Hertz-193.jpg',
+  ],
+}
+
+/** Foto della gallery di un evento (per numero di catalogo). [] se assente. */
+export function galleryFor(n: string): string[] {
+  return GALLERIES[n] ?? []
+}

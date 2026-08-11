@@ -1,0 +1,136 @@
+.link {
+  display: block;
+  color: inherit;
+}
+.link:focus-visible .frame,
+.link:focus-visible .fallback {
+  outline: 2px solid var(--hz-focus-ring);
+  outline-offset: 3px;
+}
+
+.portal {
+  position: relative;
+}
+.portalFill {
+  height: 100%;
+}
+
+.tilt {
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+.tiltFill {
+  height: 100%;
+}
+
+/* ── frame: mask di ingresso + print bands + frequency cut ──
+   .frame è l'elemento osservato da whileInView (anima solo opacity).
+   .clipInner porta il wipe a clip-path, disaccoppiato dall'observer. */
+.frame {
+  position: relative;
+  overflow: hidden;
+  background: var(--hz-bg-2);
+  border: 1px solid var(--hz-line-strong);
+}
+.frameFill {
+  height: 100%;
+}
+.clipInner {
+  position: absolute;
+  inset: 0;
+}
+.img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--hz-content, 0.6s) var(--hz-ease-out, ease);
+}
+.link:hover .img {
+  transform: scale(1.015);
+}
+
+/* bande di stampa — stesso linguaggio grafico della Hero, statiche/decorative */
+.band1,
+.band2 {
+  position: absolute;
+  background: var(--raw-ink);
+  opacity: 0.12;
+  pointer-events: none;
+}
+.band1 {
+  left: 0;
+  top: 12%;
+  width: 22%;
+  height: 2px;
+}
+.band2 {
+  right: 6%;
+  bottom: 9%;
+  width: 2px;
+  height: 14%;
+}
+
+/* la frequenza che attraversa la stampa — un solo sweep, non un loop */
+.cut {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 1.5px;
+  background: var(--raw-ink);
+  opacity: 0.22;
+  transform: scaleX(0);
+  transform-origin: left center;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .cut {
+    animation: hz-poster-cut 0.6s var(--hz-ease-out, ease) 0.3s forwards;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cut {
+    transform: scaleX(1);
+  }
+}
+@keyframes hz-poster-cut {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.fallback {
+  position: relative;
+  border: 1px solid var(--hz-line);
+  overflow: hidden;
+}
+.fallbackInner {
+  position: absolute;
+  inset: 0;
+}
+
+/* ── meta: N° + stato, SOTTO il poster (mai incorporato nell'artwork) ── */
+.meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-top: 0.6rem;
+  color: var(--hz-ink-mute);
+}
+/* ── variante fill: poster in bleed, meta in overlay sul bordo inferiore
+   (stesso linguaggio del posterTag di FeaturedEvent) ── */
+.metaOverlay {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 3;
+  margin-top: 0;
+  padding: 0.5rem 0.75rem;
+  background: color-mix(in srgb, var(--hz-bg) 84%, transparent);
+  backdrop-filter: blur(6px);
+  border-top: 1px solid var(--hz-line);
+  color: var(--hz-ink-mute);
+}

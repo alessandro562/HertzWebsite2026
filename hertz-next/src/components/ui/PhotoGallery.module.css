@@ -1,0 +1,270 @@
+/* ── carosello ── */
+.rail {
+  display: flex;
+  gap: clamp(0.75rem, 1.4vw, 1.25rem);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: var(--hz-space-sm);
+  cursor: grab;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  /* NIENTE touch-action qui: il default `auto` lascia al browser la
+     disambiguazione nativa orizzontale/verticale, comportamento verificato
+     funzionante. Un `touch-action: pan-y` introdotto per errore aveva
+     BLOCCATO lo scroll orizzontale del carosello (regressione, rollback). */
+}
+.rail::-webkit-scrollbar {
+  display: none;
+}
+.rail:active {
+  cursor: grabbing;
+}
+
+.card {
+  flex: 0 0 auto;
+  width: clamp(230px, 26vw, 330px);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  scroll-snap-align: start;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.frame {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--hz-ink);
+  border: 1px solid var(--hz-line-strong);
+}
+.frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.05);
+  transition:
+    filter var(--hz-content, 0.6s) var(--hz-ease-out, ease),
+    transform 0.7s var(--hz-ease-out, ease);
+}
+.card:hover .frame img,
+.card:focus-visible .frame img {
+  filter: grayscale(0);
+  transform: scale(1.06);
+}
+.card:focus-visible .frame {
+  outline: 2px solid var(--hz-signal, #a3b7b7);
+  outline-offset: 2px;
+}
+
+/* vignette per leggibilità di indice/caption */
+.grain {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.34), transparent 28%);
+}
+
+/* registration marks (dettaglio editoriale, in hover) */
+.tick {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity var(--hz-ui, 0.3s) var(--hz-ease-out, ease);
+}
+.card:hover .tick,
+.card:focus-visible .tick {
+  opacity: 0.85;
+}
+.tl {
+  top: 9px;
+  left: 9px;
+  border-top: 1px solid #fff;
+  border-left: 1px solid #fff;
+}
+.tr {
+  top: 9px;
+  right: 9px;
+  border-top: 1px solid #fff;
+  border-right: 1px solid #fff;
+}
+.bl {
+  bottom: 9px;
+  left: 9px;
+  border-bottom: 1px solid #fff;
+  border-left: 1px solid #fff;
+}
+.br {
+  bottom: 9px;
+  right: 9px;
+  border-bottom: 1px solid #fff;
+  border-right: 1px solid #fff;
+}
+
+.idx {
+  position: absolute;
+  top: 12px;
+  left: 14px;
+  z-index: 3;
+  color: #fff;
+  mix-blend-mode: difference;
+  font-size: var(--hz-t-meta);
+  letter-spacing: var(--hz-tracking-mono);
+}
+
+/* caption in hover */
+.cap {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: clamp(1rem, 2vw, 1.4rem) clamp(0.85rem, 1.6vw, 1.1rem) clamp(0.85rem, 1.6vw, 1.1rem);
+  background: linear-gradient(transparent, rgba(10, 10, 12, 0.82));
+  transform: translateY(101%);
+  transition: transform 0.5s var(--hz-ease-out, cubic-bezier(0.16, 1, 0.3, 1));
+}
+.card:hover .cap,
+.card:focus-visible .cap {
+  transform: translateY(0);
+}
+.capName {
+  font-family: var(--hz-font-display);
+  font-weight: var(--hz-weight-display, 700);
+  font-size: var(--hz-t-body-lg);
+  line-height: 1;
+  letter-spacing: var(--hz-tracking-tight, -0.02em);
+  text-transform: uppercase;
+  color: #fff;
+}
+.capMeta {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: var(--hz-t-meta);
+}
+.capGo {
+  margin-top: 0.35rem;
+  color: var(--hz-signal, #a3b7b7);
+  font-size: var(--hz-t-meta);
+}
+
+.hint {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--hz-space-md);
+  margin-top: var(--hz-space-md);
+  color: var(--hz-ink-mute);
+  font-size: var(--hz-t-meta);
+}
+
+/* ── lightbox ── */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(3.5rem, 8vh, 6rem) clamp(1rem, 6vw, 5rem);
+  background: rgba(8, 8, 11, 0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.lbBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--hz-space-md);
+  padding: clamp(1rem, 2.4vw, 1.6rem) clamp(1rem, 4vw, 2.4rem);
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: var(--hz-tracking-mono);
+  font-size: var(--hz-t-meta);
+}
+.lbClose {
+  background: none;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  transition: opacity var(--hz-ui, 0.2s) var(--hz-ease-out, ease);
+}
+.lbClose:hover {
+  opacity: 0.6;
+}
+.lbStage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  max-height: 100%;
+}
+.lbStage img {
+  max-width: min(90vw, 640px);
+  max-height: 80vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+.lbCap {
+  position: absolute;
+  left: 0;
+  bottom: -1.8rem;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: var(--hz-t-meta);
+}
+.lbNav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  background: none;
+  border: 0;
+  color: #fff;
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  cursor: pointer;
+  padding: 0.4em 0.6em;
+  transition:
+    opacity var(--hz-ui, 0.2s) var(--hz-ease-out, ease),
+    transform var(--hz-ui, 0.2s) var(--hz-ease-out, ease);
+  opacity: 0.7;
+}
+.lbNav:hover {
+  opacity: 1;
+}
+.lbPrev {
+  left: clamp(0.5rem, 2vw, 2rem);
+}
+.lbPrev:hover {
+  transform: translateY(-50%) translateX(-3px);
+}
+.lbNext {
+  right: clamp(0.5rem, 2vw, 2rem);
+}
+.lbNext:hover {
+  transform: translateY(-50%) translateX(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frame img,
+  .cap,
+  .tick,
+  .lbNav {
+    transition: none;
+  }
+}

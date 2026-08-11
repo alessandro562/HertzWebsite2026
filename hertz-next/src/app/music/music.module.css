@@ -1,0 +1,193 @@
+/* ── header editoriale (stacked, nessuna sovrapposizione) ── */
+.head {
+  display: flex;
+  flex-direction: column;
+}
+.kicker {
+  color: var(--hz-ink-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--hz-space-sm);
+}
+.title {
+  font-size: clamp(2.6rem, 8vw, 6.5rem);
+  letter-spacing: var(--hz-tracking-mega);
+  line-height: 0.86;
+  text-transform: uppercase;
+}
+.headRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--hz-space-md) var(--hz-space-lg);
+  margin-top: var(--hz-space-md);
+  padding-top: var(--hz-space-md);
+  border-top: 1px solid var(--hz-line);
+}
+.intro {
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  line-height: 1.4;
+  color: var(--hz-ink-mute);
+  max-width: 44ch;
+}
+
+/* barra piattaforme (chip con logo ufficiale) */
+.platformBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--hz-space-sm);
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--hz-line-strong);
+  color: var(--hz-ink);
+  transition:
+    border-color var(--hz-ui) var(--hz-ease-out),
+    background-color var(--hz-ui) var(--hz-ease-out);
+}
+.chip:hover {
+  border-color: var(--hz-ink);
+  background: color-mix(in srgb, var(--hz-ink) 5%, transparent);
+}
+.chipLogo {
+  height: 18px;
+  width: auto;
+  display: block;
+}
+.chipMeta {
+  color: var(--hz-ink-mute);
+}
+
+/* ── header di piattaforma (logo grande ufficiale) ── */
+.platHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--hz-space-md);
+  padding-bottom: var(--hz-space-md);
+  margin-bottom: var(--hz-space-md);
+  border-bottom: 1px solid var(--hz-ink);
+}
+/* h2 che contiene solo il logo della piattaforma: nessuna resa tipografica
+   propria, serve a dare alla pagina il livello di intestazione che le mancava */
+.platHeading {
+  margin: 0;
+  font-size: 0;
+  line-height: 0;
+  flex: none;
+}
+.platLogo {
+  height: clamp(30px, 4vw, 42px);
+  width: auto;
+  display: block;
+  flex: none;
+}
+.platSub {
+  flex: 1 1 20ch;
+  min-width: 16ch;
+  color: var(--hz-ink-mute);
+  max-width: 52ch;
+}
+
+/* ── gruppi mix per resident ── */
+.groups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--hz-space-lg);
+}
+.groupHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: var(--hz-space-sm);
+}
+.groupName {
+  font-family: var(--hz-font-display);
+  font-weight: var(--hz-weight-display);
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  line-height: 1;
+  letter-spacing: var(--hz-tracking-tight);
+  text-transform: uppercase;
+}
+.groupLink {
+  font-family: var(--hz-font-mono);
+  font-size: var(--hz-t-meta);
+  letter-spacing: var(--hz-tracking-mono);
+  text-transform: uppercase;
+  color: var(--hz-ink-mute);
+  white-space: nowrap;
+  transition: color var(--hz-ui) var(--hz-ease-out);
+}
+.groupLink:hover {
+  color: var(--hz-ink);
+}
+
+/* ── griglia Spotify (card artista) ── */
+.spotifyGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(clamp(240px, 30vw, 340px), 1fr));
+  gap: clamp(1rem, 2vw, 1.75rem);
+}
+.spotifyCard {
+  display: flex;
+  align-items: center;
+  gap: var(--hz-space-md);
+  padding: var(--hz-space-sm);
+  border: 1px solid var(--hz-line-strong);
+  color: inherit;
+  transition:
+    border-color var(--hz-ui) var(--hz-ease-out),
+    background-color var(--hz-ui) var(--hz-ease-out);
+}
+.spotifyCard:hover {
+  border-color: var(--hz-ink);
+  background: color-mix(in srgb, var(--hz-ink) 5%, transparent);
+}
+.spotifyArt {
+  position: relative;
+  display: block;
+  width: clamp(72px, 9vw, 96px);
+  aspect-ratio: 1 / 1;
+  flex: none;
+  overflow: hidden;
+  background: var(--hz-ink);
+  border: 1px solid var(--hz-line-strong);
+}
+.spotifyArt img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1);
+  transition: filter var(--hz-ui) var(--hz-ease-out);
+}
+.spotifyCard:hover .spotifyArt img {
+  filter: grayscale(0);
+}
+.spotifyMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
+.spotifyName {
+  font-family: var(--hz-font-display);
+  font-weight: var(--hz-weight-display);
+  font-size: var(--hz-t-body-lg);
+  line-height: 1.05;
+  letter-spacing: var(--hz-tracking-tight);
+  text-transform: uppercase;
+}
+.spotifyGo {
+  color: var(--hz-ink-mute);
+  transition: color var(--hz-ui) var(--hz-ease-out);
+}
+.spotifyCard:hover .spotifyGo {
+  color: var(--hz-ink);
+}

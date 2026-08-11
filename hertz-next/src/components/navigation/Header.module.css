@@ -1,0 +1,254 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: var(--hz-z-nav);
+  width: 100%;
+  color: var(--hz-ink); /* dal data-surface: nero su chiare, bianco su scure */
+  background-color: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    color var(--hz-ui) var(--hz-ease-out),
+    background-color var(--hz-ui) var(--hz-ease-out),
+    border-color var(--hz-ui) var(--hz-ease-out);
+}
+/* l'header adotta il data-surface della sezione sotto (contrasto testo),
+   ma NON il suo background di base: resta trasparente in cima. */
+.header[data-surface] {
+  background-color: transparent;
+}
+/* backdrop leggero surface-matched SOLO dopo lo scroll — no glassmorphism */
+.header[data-scrolled='true'] {
+  background-color: color-mix(in srgb, var(--hz-bg) 96%, transparent);
+  border-bottom-color: var(--hz-line);
+}
+@supports not (background: color-mix(in srgb, white, black)) {
+  .header[data-scrolled='true'] {
+    background-color: var(--hz-bg);
+  }
+}
+
+/* La barra sta SOPRA l'overlay del menu: `.menu` è un figlio fixed con fondo
+   opaco, senza questo z-index coprirebbe il proprio bottone Close rendendo
+   impossibile chiudere il menu (l'unica uscita sarebbe navigare via). */
+.inner {
+  position: relative;
+  z-index: calc(var(--hz-z-overlay) + 1);
+  max-width: var(--hz-content-max);
+  margin-inline: auto;
+  padding-inline: var(--hz-gutter);
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--hz-space-md);
+}
+
+.logo {
+  font-family: var(--hz-font-display);
+  font-weight: var(--hz-weight-display);
+  font-size: 1.45rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-transform: lowercase;
+}
+
+.nav {
+  display: none;
+  align-items: center;
+  gap: clamp(1rem, 1.8vw, 2rem);
+}
+
+.link {
+  font-size: var(--hz-t-ui);
+  font-weight: var(--hz-weight-body);
+  letter-spacing: 0.01em;
+  padding-block: 0.5rem;
+  position: relative;
+  transition: opacity var(--hz-fast) var(--hz-ease-out);
+}
+.link:hover {
+  opacity: 0.62;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--hz-space-sm);
+}
+
+.tickets {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  min-height: 44px; /* CTA principale: target touch pieno anche su mobile */
+  font-family: var(--hz-font-mono);
+  font-size: var(--hz-t-ui);
+  text-transform: uppercase;
+  letter-spacing: var(--hz-tracking-mono);
+  padding: 0.55em 1.1em;
+  border: 1px solid currentColor;
+  white-space: nowrap;
+  transition:
+    background-color var(--hz-fast) var(--hz-ease-out),
+    color var(--hz-fast) var(--hz-ease-out);
+}
+/* sinusoide UFFICIALE del logo hertz (solo la sinusoide), non la grafichetta */
+.ticketsWave {
+  width: 1.7em;
+  height: 1.1em;
+  flex: none;
+  background-color: currentColor;
+  -webkit-mask: url(/assets/hertz-sinusoid.png) center / contain no-repeat;
+  mask: url(/assets/hertz-sinusoid.png) center / contain no-repeat;
+}
+/* invertito all'hover: riempi con l'INK della superficie e porta testo +
+   sinusoide al colore di sfondo. NB: NON usare `currentColor` per il background —
+   verrebbe risolto col NUOVO color (--hz-bg) e sfondo/testo diventerebbero lo
+   stesso colore → il tasto "sparisce". */
+.tickets:hover {
+  background-color: var(--hz-ink);
+  color: var(--hz-bg, var(--raw-white));
+}
+
+.burger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  font-family: var(--hz-font-mono);
+  font-size: var(--hz-t-ui);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ── Mobile menu (full-screen) ── */
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: var(--hz-z-overlay);
+  padding: calc(64px + var(--hz-space-md)) var(--hz-gutter) var(--hz-space-lg);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+.menu[hidden] {
+  display: none;
+}
+
+.menuNav {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--hz-line);
+}
+
+/* blocco contatti in fondo — riempie lo spazio del menu full-screen */
+.menuConnect {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--hz-space-sm) var(--hz-space-lg);
+  padding-top: var(--hz-space-lg);
+  border-top: 1px solid var(--hz-line);
+}
+.menuConnectLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-family: var(--hz-font-mono);
+  font-size: var(--hz-t-ui);
+  letter-spacing: 0.02em;
+  color: var(--hz-ink-mute);
+  transition: color var(--hz-fast) var(--hz-ease-out);
+}
+.menuConnectLink:hover {
+  color: var(--hz-ink);
+}
+
+/* indice editoriale: numero mono + voce nel grotesk del brand, hairline per riga */
+.menuLink,
+.menuTickets {
+  display: flex;
+  align-items: baseline;
+  gap: var(--hz-space-md);
+  padding-block: clamp(0.55rem, 2.6vw, 1.05rem);
+  border-bottom: 1px solid var(--hz-line);
+  min-height: 44px;
+  transition: padding-left var(--hz-ui) var(--hz-ease-out);
+}
+.menuLink:hover,
+.menuTickets:hover {
+  padding-left: var(--hz-space-sm);
+}
+.menuLabel {
+  flex: 1;
+  font-family: var(--hz-font-display), 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: var(--hz-weight-display);
+  font-size: clamp(1.9rem, 9vw, 2.9rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.menuTickets .menuLabel {
+  color: var(--hz-accent);
+}
+
+/* apertura animata: le voci entrano in sequenza a ogni apertura */
+@keyframes hzMenuIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.menuNav > * {
+  animation: hzMenuIn 0.5s var(--hz-ease-out) both;
+}
+.menuNav > *:nth-child(1) {
+  animation-delay: 0.04s;
+}
+.menuNav > *:nth-child(2) {
+  animation-delay: 0.09s;
+}
+.menuNav > *:nth-child(3) {
+  animation-delay: 0.14s;
+}
+.menuNav > *:nth-child(4) {
+  animation-delay: 0.19s;
+}
+.menuNav > *:nth-child(5) {
+  animation-delay: 0.24s;
+}
+.menuNav > *:nth-child(6) {
+  animation-delay: 0.29s;
+}
+.menuNav > *:nth-child(7) {
+  animation-delay: 0.34s;
+}
+.menuNav > *:nth-child(8) {
+  animation-delay: 0.39s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .menuNav > * {
+    animation: none;
+  }
+}
+
+/* ── Desktop (≥1024): nav inline, niente burger/menu ── */
+@media (min-width: 1024px) {
+  .inner {
+    min-height: 72px;
+  }
+  .nav {
+    display: flex;
+  }
+  .burger {
+    display: none;
+  }
+  .menu {
+    display: none !important;
+  }
+}

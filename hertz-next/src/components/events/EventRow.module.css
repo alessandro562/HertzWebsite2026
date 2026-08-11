@@ -1,0 +1,119 @@
+.row {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 1.4rem;
+  padding: var(--hz-space-md) 0;
+  border-top: 1px solid var(--hz-line);
+  transition: padding-left var(--hz-ui) var(--hz-ease-out);
+}
+.row:last-child {
+  border-bottom: 1px solid var(--hz-line);
+}
+.row:hover {
+  padding-left: 0.6rem;
+}
+
+.n {
+  width: 3.4rem;
+  flex: none;
+  color: var(--hz-ink-mute);
+}
+.date {
+  width: 6rem;
+  flex: none;
+  color: var(--hz-ink-mute);
+}
+
+.main {
+  flex: 1 1 14rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.title {
+  font-family: var(--hz-font-display);
+  font-weight: var(--hz-weight-display);
+  font-size: var(--hz-t-card);
+  line-height: var(--hz-leading-snug);
+  letter-spacing: var(--hz-tracking-tight);
+}
+.row:hover .title {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  text-decoration-thickness: 1px;
+}
+.venue {
+  font-size: var(--hz-t-body);
+  color: var(--hz-ink-mute);
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: auto;
+}
+.badge {
+  color: var(--hz-ink-mute);
+}
+@media (max-width: 560px) {
+  .badge {
+    display: none;
+  }
+}
+.arrow {
+  font-size: 1.1rem;
+  opacity: 0.35;
+  transition:
+    opacity var(--hz-ui) var(--hz-ease-out),
+    transform var(--hz-fast) var(--hz-ease-out);
+}
+.row:hover .arrow {
+  opacity: 1;
+  transform: translate(0.15em, -0.15em);
+}
+
+/* ── anteprima poster (desktop, hover/focus-within) ── */
+.preview {
+  display: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .preview {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    z-index: 4;
+    width: 128px;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: var(--hz-bg-2);
+    border: 1px solid var(--hz-line-strong);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-50%) translateX(0.5rem) scale(0.97);
+    transition:
+      opacity var(--hz-ui) var(--hz-ease-out),
+      transform var(--hz-ui) var(--hz-ease-out);
+  }
+  .row:hover .preview,
+  .row:focus-within .preview {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0) scale(1);
+  }
+  .preview img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .preview {
+    transition: opacity var(--hz-ui) linear;
+    transform: translateY(-50%) !important;
+  }
+}

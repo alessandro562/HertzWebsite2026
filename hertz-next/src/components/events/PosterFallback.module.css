@@ -1,0 +1,103 @@
+/* Mini-poster tipografico: font fluidi in cqi (scala col contenitore) con
+   layout fisso e robusto → elegante sia nel thumb piccolo di riga sia nel
+   poster grande della pagina evento. wordmark in alto, data protagonista in
+   basso, sinusoide Hertz come texture d'identità. */
+.fallback {
+  container-type: inline-size;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  overflow: hidden;
+  isolation: isolate;
+  color: var(--hz-ink);
+  background:
+    radial-gradient(
+      130% 92% at 50% -12%,
+      color-mix(in srgb, var(--raw-signal) 34%, var(--hz-bg)) 0%,
+      color-mix(in srgb, var(--raw-signal) 12%, var(--hz-bg)) 74%
+    );
+}
+
+/* righe print sottili, spaziate in proporzione, dissolte ai bordi */
+.texture {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--hz-ink) 7%, transparent) 0 1px,
+    transparent 1px 7cqi
+  );
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+}
+
+/* sinusoide Hertz che attraversa la card: identità, non icona buttata lì */
+.wave {
+  position: absolute;
+  z-index: 0;
+  top: 38%;
+  left: -8cqi;
+  width: calc(100% + 16cqi);
+  height: auto;
+  pointer-events: none;
+  color: color-mix(in srgb, var(--raw-cold) 55%, var(--hz-ink));
+  opacity: 0.16;
+}
+
+/* wordmark: elemento corto → sicuro a ogni dimensione */
+.brand {
+  position: absolute;
+  z-index: 1;
+  top: 9cqi;
+  left: 9cqi;
+  font-family: var(--hz-font-display);
+  font-weight: 500;
+  font-size: max(9px, 4.6cqi);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--hz-ink);
+}
+
+/* blocco data ancorato in basso a sinistra (posizionamento assoluto: robusto
+   a ogni dimensione, niente collasso flex sotto container-type) */
+.info {
+  position: absolute;
+  z-index: 1;
+  left: 9cqi;
+  right: 9cqi;
+  bottom: 9cqi;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.dow {
+  font-size: max(8px, 4.6cqi);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--hz-ink-mute);
+  margin-bottom: 2cqi;
+}
+.day {
+  font-family: var(--hz-font-display);
+  font-weight: 700;
+  font-size: max(18px, 26cqi);
+  line-height: 0.84;
+  letter-spacing: -0.045em;
+  color: var(--hz-ink);
+}
+.city {
+  margin-top: 4.5cqi;
+  padding-top: 4cqi;
+  border-top: 1px solid color-mix(in srgb, var(--hz-ink) 20%, transparent);
+  align-self: stretch;
+  font-size: max(8px, 4.4cqi);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--hz-ink-mute);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

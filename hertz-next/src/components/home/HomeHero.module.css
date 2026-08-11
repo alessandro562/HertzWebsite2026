@@ -1,0 +1,190 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  min-height: min(92svh, 880px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: clamp(4.5rem, 9vh, 7rem) clamp(1.75rem, 4.5vh, 3rem);
+}
+
+/* grid ambientale ora animata via <HeroSignalGrid> (deformazione a frequenza) */
+
+.inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.kicker {
+  color: var(--hz-ink-mute);
+  margin-bottom: clamp(1.5rem, 4vh, 3rem);
+}
+
+/* ── stage: titolo + foto in layering ── */
+.stage {
+  position: relative;
+}
+@media (min-width: 900px) {
+  .stage {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    align-items: center;
+  }
+}
+
+.titleCol {
+  position: relative;
+  z-index: 3;
+}
+
+.title {
+  font-size: clamp(3rem, 9vw, 8rem);
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+  text-wrap: nowrap;
+}
+.l1,
+.l2 {
+  display: block;
+}
+.l2 {
+  color: transparent;
+  -webkit-text-stroke: 1.6px var(--hz-ink);
+  margin-left: clamp(0.5rem, 6vw, 5rem); /* off-grid, intenzionale */
+}
+@media (max-width: 640px) {
+  .title {
+    font-size: clamp(2rem, 11vw, 3.4rem);
+  }
+  .l2 {
+    color: var(--hz-ink); /* pieno su mobile: contrasto garantito */
+    -webkit-text-stroke: 0;
+    margin-left: 0;
+  }
+}
+
+.sub {
+  max-width: 34ch;
+  margin-top: clamp(1.5rem, 4vh, 2.5rem);
+  font-size: var(--hz-t-body-lg);
+  color: var(--hz-ink-mute);
+}
+
+/* ── foto: cornice ritratto, tuck sotto il titolo ── */
+.photoWrap {
+  position: relative;
+  z-index: 1;
+  margin: clamp(2rem, 5vw, 3rem) 0 0;
+  max-width: 460px;
+}
+@media (min-width: 900px) {
+  .photoWrap {
+    margin: 0 0 0 -14%;
+    max-width: none;
+  }
+  /* scrim: il bordo sinistro della foto sfuma nel Signal → il testo che
+     lo attraversa resta leggibile */
+  .photoWrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(90deg, var(--hz-bg) 0%, transparent 40%);
+    pointer-events: none;
+  }
+}
+
+.photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  background: var(--hz-bg-2);
+}
+.photoCap {
+  position: absolute;
+  z-index: 3;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* ── foot: prossimo evento + CTA ── */
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--hz-space-md);
+  margin-top: clamp(1.75rem, 4vh, 3rem);
+}
+.next {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.nextLabel {
+  color: var(--hz-ink-mute);
+}
+.nextTitle {
+  font-family: var(--hz-font-display);
+  font-weight: var(--hz-weight-display);
+  font-size: var(--hz-t-card);
+  letter-spacing: var(--hz-tracking-tight);
+  width: fit-content;
+}
+.nextTitle:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+.nextMeta {
+  color: var(--hz-ink-mute);
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* ── mobile: verticale compatto — headline, foto, prossimo evento e Tickets
+   devono stare above-the-fold su un viewport standard (390×844) ── */
+@media (max-width: 640px) {
+  .hero {
+    padding-block: clamp(1.5rem, 5vh, 2.75rem) clamp(1rem, 3vh, 1.75rem);
+  }
+  .kicker {
+    margin-bottom: clamp(0.75rem, 2.5vh, 1.5rem);
+  }
+  .sub {
+    margin-top: clamp(0.75rem, 2vh, 1.25rem);
+  }
+  .photoWrap {
+    margin-top: clamp(1rem, 3vw, 1.5rem);
+  }
+  .photo {
+    aspect-ratio: 4 / 3.3; /* più corta della colonna desktop: non deve occupare tutto lo spazio utile */
+    object-position: center 32%;
+  }
+  .foot {
+    margin-top: clamp(1rem, 2.5vh, 1.5rem);
+    gap: 0.5rem;
+  }
+}
+
+/* ── scroll cue ── */
+.scrollCue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  margin-top: clamp(1.5rem, 4vh, 2.5rem);
+  color: var(--hz-ink-mute);
+  width: fit-content;
+}
+.scrollDot {
+  display: inline-block;
+}

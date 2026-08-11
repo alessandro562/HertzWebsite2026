@@ -1,0 +1,24 @@
+.wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* campo di PUNTI (non una rete): "l.1 0" + linecap round = punto pieno.
+   Su fondo bianco: punti freddi discreti che ondeggiano attorno al cursore. */
+.path {
+  fill: none;
+  stroke: var(--raw-cold);
+  stroke-width: 3.4;
+  stroke-linecap: round;
+  opacity: 0.32;
+  vector-effect: non-scaling-stroke;
+}

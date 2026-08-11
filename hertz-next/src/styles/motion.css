@@ -1,0 +1,51 @@
+/* ────────────────────────────────────────────────────────────
+   HERTZ · MOTION — view transitions + reduced-motion + keyframe base
+
+   Il motion runtime (Lenis/Motion/GSAP) vive nei componenti; qui stanno
+   solo le regole globali dei View Transition e il rispetto di
+   prefers-reduced-motion (regola permanente del brand).
+   ──────────────────────────────────────────────────────────── */
+
+/* ── morph condivisi: durata/easing coerenti coi token ── */
+::view-transition-group(*) {
+  animation-duration: 460ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* niente full-page crossfade: il contenuto non nominato (root) scambia
+   senza dissolvenza — solo i gruppi nominati (poster/titolo/data/status)
+   morphano in modo continuo fra calendario ed evento. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* poster: crop continuo durante il morph (non uno stretch) — gli snapshot
+   dei gruppi nominati sono elementi "replaced", object-fit si applica */
+::view-transition-old(*),
+::view-transition-new(*) {
+  object-fit: cover;
+}
+
+/* header ancorato: non scivola/lampeggia durante le transizioni */
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 120;
+}
+::view-transition-old(site-header) {
+  display: none;
+}
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+/* ── reduced-motion: azzera le transizioni (swap istantaneo) ── */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 1ms !important;
+    animation-delay: 0s !important;
+  }
+}

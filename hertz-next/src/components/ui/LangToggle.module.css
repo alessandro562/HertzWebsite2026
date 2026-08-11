@@ -1,0 +1,37 @@
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15em;
+  border: 1px solid currentColor;
+  border-radius: var(--hz-radius-control, 2px);
+  padding: 0.15em;
+}
+/* target touch pieno (erano 26x19px) e nessuna opacità annidata: la lingua
+   inattiva restava a 2.37:1 di contrasto. Attivo/inattivo si distinguono con
+   il colore pieno + underline, non con la trasparenza. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  font-family: var(--hz-font-mono);
+  font-size: var(--hz-t-meta);
+  letter-spacing: var(--hz-tracking-mono);
+  line-height: 1;
+  padding: 0.35em 0.55em;
+  border: 0;
+  background: transparent;
+  color: var(--hz-ink-mute);
+  cursor: pointer;
+  transition: color var(--hz-ui, 0.2s) var(--hz-ease-out, ease);
+}
+.btn:hover {
+  color: var(--hz-ink);
+}
+.btn[data-active] {
+  color: var(--hz-ink);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  text-decoration-thickness: 1.5px;
+}

@@ -1,0 +1,159 @@
+/* ────────────────────────────────────────────────────────────
+   HERTZ · DESIGN TOKENS · v3 — sistema editoriale CHIARO multi-surface
+
+   Fonte di verità cromatica = brand deck + screenshot di riferimento
+   canonici: mondo editoriale CHIARO (Signal / White / Paper / Cold Blue),
+   Ink usato come TIPOGRAFIA / bordi / contrasto e solo come SFONDO nel
+   momento manifesto e nella chiusura. MAI nero come default.
+
+   Due livelli:
+     1) PALETTE GREZZA  → i 7 colori del deck, fissi.
+     2) TOKEN SEMANTICI → --hz-bg/ink/line/accent… default CHIARO (White).
+        Le superfici si cambiano via [data-surface] (vedi surfaces.css),
+        mai toccando i componenti. Nessun colore hard-coded nei componenti.
+   ──────────────────────────────────────────────────────────── */
+
+:root {
+  /* ── 1 · PALETTE GREZZA (dal deck — fissa) ── */
+  --raw-signal: #a3b7b7; /* Hertz Signal — colore ambientale distintivo */
+  --raw-ink:    #151515; /* Hertz Ink */
+  --raw-white:  #ffffff; /* Pure White */
+  --raw-soft:   #dedede; /* Soft Grey */
+  --raw-paper:  #e9ebe4; /* Paper / Bone */
+  --raw-cold:   #50778a; /* Cold Blue — accento digitale */
+  --raw-olive:  #505145; /* Olive Charcoal */
+
+  /* ── 2 · TOKEN SEMANTICI — DEFAULT CHIARO (superficie White) ──
+     Le altre superfici (signal/paper/cold-blue/ink) sono in surfaces.css.
+     Il default NON è mai ink. */
+  --hz-bg:       var(--raw-white);
+  --hz-bg-2:     #f6f7f4;                 /* superficie leggermente sopra il bianco */
+  --hz-ink:      var(--raw-ink);          /* testo primario = nero */
+  --hz-ink-mute: #5c5f57;                 /* testo secondario / metadata (derivato olive) */
+  --hz-line:     rgba(21, 21, 21, 0.14);  /* hairline su fondo chiaro */
+  --hz-line-strong: rgba(21, 21, 21, 0.34);
+  --hz-signal:   var(--raw-signal);       /* firma atmosferica */
+  --hz-accent:   var(--raw-cold);         /* link / stati attivi */
+  --hz-accent-2: var(--raw-olive);        /* accento secondario terroso */
+
+  /* NIENTE blu elettrico, NIENTE neon: vietati dal deck. */
+
+  /* ── 3 · TOKEN FUNZIONALI (stati) ── */
+  --hz-onsale:      var(--raw-cold);      /* biglietti disponibili */
+  --hz-soon:        var(--hz-ink-mute);   /* announcement / TBA */
+  --hz-soldout:     #8a3a3a;              /* sold out (rosso desaturato, unico uso funzionale) */
+  --hz-focus-ring:  var(--raw-cold);
+  --hz-disabled:    rgba(21, 21, 21, 0.35);
+
+  /* ── 4 · TIPOGRAFIA ── */
+  --hz-font-display: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Bold — headline */
+  --hz-font-body:    'Helvetica Neue', Helvetica, Arial, sans-serif; /* Medium/Regular — testi */
+  --hz-font-mono:    'ABC Monument Grotesk Semi-Mono', 'IBM Plex Mono', 'Space Mono', ui-monospace, monospace;
+
+  --hz-weight-display: 700;
+  --hz-weight-body:    500;
+  --hz-weight-regular: 400;
+
+  /* scala fluida — DISPLAY (mega/ultra) / SIGNATURE / SECTION / CONTENT.
+     Livello DISPLAY: maiuscolo gigante "poster" (ORDER/DISORDER, THE FAMILY,
+     WICKED NIGHTS). Calibrato per riempire la larghezza restando leggibile e
+     grid-locked — mai lettere che collidono. */
+  --hz-t-ultra:   clamp(3.75rem, 21vw, 22rem);    /* edge-to-edge: banda cinetica / hero statement */
+  --hz-t-mega:    clamp(2.85rem, 13vw, 13rem);    /* titoli-firma giganti di sezione */
+  --hz-t-hero:    clamp(3rem, 6vw, 6.5rem);       /* signature: hero/manifesto/artist-intro/archive */
+  /* titolo pagina (PageHeader, l'h1 di /events /artists /music /archive …).
+     Il valore era un segnaposto mai consumato: PageHeader portava il proprio
+     clamp nel modulo CSS. Qui c'è ora la misura reale che il sito rende, così
+     la scala tipografica ha un solo posto in cui vive. */
+  --hz-t-page:    clamp(2.75rem, 8vw, 9rem);
+  /* titolo di sezione in-pagina (SectionLabel): un gradino sotto il titolo di
+     pagina e sopra --hz-t-section, che serve le intestazioni minori (footer,
+     sotto-titoli di /about, /media). Stessa storia: era un clamp locale. */
+  --hz-t-section-lead: clamp(1.9rem, 4.8vw, 4.8rem);
+  --hz-t-section: clamp(2rem, 3.8vw, 3.8rem);     /* intestazione minore */
+  --hz-t-card:    clamp(1.2rem, 1.8vw, 1.8rem);   /* titolo card */
+  --hz-t-body-lg: clamp(1.05rem, 1.4vw, 1.3rem);  /* body large */
+  --hz-t-body:    clamp(1rem, 1.05vw, 1.1875rem); /* body 16–19 */
+  --hz-t-meta:    clamp(0.6875rem, 0.85vw, 0.8125rem); /* metadata 11–13 */
+  --hz-t-ui:      clamp(0.75rem, 0.9vw, 0.9375rem);    /* nav/bottoni 12–15 */
+
+  --hz-leading-tight: 1.0;
+  --hz-leading-snug:  1.12;
+  --hz-leading-body:  1.5;
+  --hz-leading-mega:  0.84;    /* leading serrato per il display maiuscolo */
+  --hz-tracking-mono: 0.04em;
+  --hz-tracking-tight: -0.02em;
+  --hz-tracking-mega: -0.022em; /* stretto ma senza far toccare i glifi */
+
+  /* ── 5 · SPAZIO ── */
+  --hz-space-2xs: 0.25rem;
+  --hz-space-xs:  0.5rem;
+  --hz-space-sm:  1rem;
+  --hz-space-md:  2rem;
+  --hz-space-lg:  4rem;
+  --hz-space-xl:  8rem;
+
+  --hz-section-sm: clamp(40px, 4.5vw, 64px);
+  --hz-section-md: clamp(52px, 6vw, 92px);
+  --hz-section-lg: clamp(68px, 8vw, 120px);
+
+  /* ── 6 · GRID / LAYOUT ── */
+  --hz-cols: 4;                                   /* mobile default; tablet/desktop sovrascritti */
+  --hz-gutter: 20px;                              /* mobile; tablet/desktop sotto */
+  --hz-content-max: 1600px;
+  --hz-text-max: 72ch;
+  --hz-maxw: var(--hz-content-max);
+
+  /* ── 7 · FORMA ── */
+  --hz-radius-control: 3px;   /* piccoli controlli */
+  --hz-radius-card: 0px;      /* card editoriali: spigoli vivi */
+  --hz-radius: 0px;
+  --hz-border:        1px solid var(--hz-line);
+  --hz-border-strong: 1px solid currentColor;
+
+  /* ── 8 · MOTION ──
+     Mirror CSS dei semantici in lib/motion/tokens.ts (Motion Kit). I nomi
+     legacy (fast/content/section/cinematic) restano per compatibilità; i
+     nomi del Kit (reveal/editorial/signature) sono la nuova sorgente. */
+  --hz-instant:   120ms;
+  --hz-fast:      180ms;
+  --hz-ui:        200ms;
+  --hz-reveal:    420ms;
+  --hz-editorial: 750ms;
+  --hz-signature: 1400ms;
+  --hz-content:   500ms;   /* legacy */
+  --hz-section:   750ms;   /* legacy */
+  --hz-cinematic: 1100ms;  /* legacy */
+
+  --hz-ease-out:         cubic-bezier(0.16, 1, 0.3, 1);   /* uiOut */
+  --hz-ease-in-out:      cubic-bezier(0.65, 0, 0.35, 1);  /* uiInOut */
+  --hz-ease-soft:        cubic-bezier(0.22, 1, 0.36, 1);  /* editorialOut */
+  --hz-ease-compression: cubic-bezier(0.7, 0, 0.84, 0);
+  --hz-ease-rupture:     cubic-bezier(0.12, 0.85, 0.25, 1);
+  --hz-ease-settle:      cubic-bezier(0.34, 1.12, 0.64, 1);
+
+  /* ── 9 · Z-INDEX ── */
+  --hz-z-base: 0;
+  --hz-z-raised: 10;
+  --hz-z-sticky: 80; /* barre sticky di pagina: sopra il contenuto, sotto la nav */
+  --hz-z-nav: 100;
+  --hz-z-overlay: 1000;
+  --hz-z-modal: 2000;
+}
+
+/* Grid responsive: 4 → 8 → 12 colonne, gutter crescente */
+@media (min-width: 768px) {
+  :root { --hz-cols: 8; --hz-gutter: 32px; }
+}
+@media (min-width: 1024px) {
+  :root { --hz-cols: 12; --hz-gutter: clamp(40px, 5vw, 80px); }
+}
+
+/* Reduced motion: azzera le durate lunghe */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --hz-content: 1ms;
+    --hz-section: 1ms;
+    --hz-cinematic: 1ms;
+  }
+}

@@ -1,0 +1,57 @@
+import { notify, isEmail, clip, looksLikeBot } from '@/lib/notify'
+
+/** POST /api/booking — richieste di booking (resident o format Hertz). */
+export async function POST(req: Request) {
+  let b: Record<string, unknown>
+  try {
+    b = await req.json()
+  } catch {
+    return Response.json({ ok: false, error: 'Invalid request' }, { status: 400 })
+  }
+
+  // honeypot: probabile bot → finge successo, scarta silenziosamente
+  if (looksLikeBot(b)) return Response.json({ ok: true, message: 'Richiesta di booking ricevuta.' })
+
+  const name = clip(b.name, 120)
+  const email = clip(b.email, 160)
+  const message = clip(b.message, 2000)
+  if (name.length < 2) return Response.json({ ok: false, error: 'Nome non valido' }, { status: 400 })
+  if (!isEmail(email)) return Response.json({ ok: false, error: 'Email non valida' }, { status: 400 })
+  if (message.length < 10) return Response.json({ ok: false, error: 'Messaggio troppo corto' }, { status: 400 })
+
+  const e = {
+    bookingType: clip(b.bookingType, 40),
+    resident: clip(b.resident, 80),
+    org: clip(b.org, 160),
+    venue: clip(b.venue, 160),
+    city: clip(b.city, 80),
+    date: clip(b.date, 40),
+    capacity: clip(b.capacity, 40),
+    budget: clip(b.budget, 40),
+  }
+
+  const subject = `Booking · ${e.bookingType === 'resident' ? e.resident || 'Resident' : 'Hertz format'} · ${name}`
+  const text = [
+    `Type: ${e.bookingType || 'n/a'}`,
+    ...(e.resident ? [`Resident: ${e.resident}`] : []),
+    `Name: ${name}`,
+    `Email: ${email}`,
+    ...(e.org ? [`Org/Promoter: ${e.org}`] : []),
+    ...(e.venue ? [`Venue/Event: ${e.venue}`] : []),
+    ...(e.city ? [`City: ${e.city}`] : []),
+    ...(e.date ? [`Date: ${e.date}`] : []),
+    ...(e.capacity ? [`Capacity: ${e.capacity}`] : []),
+    ...(e.budget ? [`Budget: ${e.budget}`] : []),
+    '',
+    message,
+    '',
+    `${new Date().toISOString()}`,
+  ].join('\n')
+
+  try {
+    await notify({ subject, text, replyTo: email })
+  } catch {
+    return Response.json({ ok: false, error: 'Non è stato possibile inviare la richiesta. Riprova.' }, { status: 502 })
+  }
+  return Response.json({ ok: true, message: 'Richiesta di booking ricevuta.' })
+}

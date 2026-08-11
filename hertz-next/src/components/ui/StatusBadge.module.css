@@ -1,0 +1,36 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.35em 0.65em;
+  font-family: var(--hz-font-mono);
+  font-size: var(--hz-t-meta);
+  letter-spacing: var(--hz-tracking-mono);
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+  border: 1px solid currentColor;
+  border-radius: var(--hz-radius-control);
+}
+.badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+
+.onSale {
+  color: var(--hz-onsale);
+}
+.soon {
+  color: var(--hz-ink-mute);
+}
+.soldOut {
+  color: var(--hz-soldout);
+}
+.archive {
+  color: var(--hz-ink-mute);
+  opacity: 0.85;
+}

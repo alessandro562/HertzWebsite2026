@@ -1,0 +1,130 @@
+.table {
+  border: 1px solid var(--hz-line);
+}
+.head,
+.row {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr) minmax(0, 0.8fr) 6.5rem 3.5rem 1.5rem;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 var(--hz-space-sm);
+}
+.head {
+  height: 40px;
+  border-bottom: 1px solid var(--hz-ink);
+  color: var(--hz-ink-mute);
+  font-size: var(--hz-t-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.row {
+  height: 56px;
+  border-top: 1px solid var(--hz-line);
+  color: inherit;
+  transition: background-color var(--hz-fast) var(--hz-ease-out);
+}
+.row:first-of-type {
+  border-top: none;
+}
+.row:hover {
+  background: var(--hz-bg-2);
+}
+
+.n {
+  color: var(--hz-ink-mute);
+}
+.thumb {
+  position: relative;
+  width: 28px;
+  height: 34px;
+  overflow: hidden;
+  background: var(--hz-bg-2);
+  border: 1px solid var(--hz-line);
+}
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.05);
+  transition: filter var(--hz-ui) var(--hz-ease-out);
+}
+.row:hover .thumb img {
+  filter: grayscale(0) contrast(1);
+}
+.thumbEmpty {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-image: repeating-linear-gradient(-45deg, transparent 0 4px, color-mix(in srgb, var(--hz-ink) 10%, transparent) 4px 5px);
+}
+.title {
+  font-family: var(--hz-font-display);
+  font-weight: var(--hz-weight-display);
+  font-size: var(--hz-t-body-lg);
+  letter-spacing: var(--hz-tracking-tight);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.row:hover .title {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+.venue {
+  color: var(--hz-ink-mute);
+  font-size: var(--hz-t-body);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.date,
+.year {
+  color: var(--hz-ink-mute);
+  font-size: var(--hz-t-meta);
+}
+.year {
+  color: var(--hz-ink);
+}
+.arrow {
+  opacity: 0.35;
+  text-align: right;
+  transition: opacity var(--hz-fast) var(--hz-ease-out);
+}
+.row:hover .arrow {
+  opacity: 1;
+}
+
+@media (max-width: 720px) {
+  .head {
+    display: none;
+  }
+  /* thumb · titolo (flessibile, va a capo) · anno · freccia. Le colonne
+     venue/date sono nascoste: senza ridefinire il template il titolo finiva
+     nella colonna stretta e si troncava a "H…". */
+  .row {
+    grid-template-columns: 2.75rem minmax(0, 1fr) auto 1rem;
+    height: auto;
+    min-height: 60px;
+    gap: 0.85rem;
+    padding-block: 0.7rem;
+  }
+  .venue,
+  .date {
+    display: none;
+  }
+  .thumb {
+    align-self: center;
+  }
+  .title {
+    white-space: normal;
+    font-size: var(--hz-t-body);
+    line-height: 1.16;
+  }
+  .year {
+    align-self: center;
+  }
+  .arrow {
+    align-self: center;
+  }
+}

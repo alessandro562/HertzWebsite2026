@@ -1,0 +1,413 @@
+/* ────────────────────────────────────────────────────────────
+   HERTZ · globals.css — reset + base editoriale CHIARA + wiring font.
+
+   tokens.css = palette + token semantici (default chiaro).
+   surfaces.css = section-theme system [data-surface].
+   Qui: reset, tipografia base, utilities, wiring del font caricato.
+   ──────────────────────────────────────────────────────────── */
+
+@import './tokens.css';
+@import './surfaces.css';
+@import './motion.css';
+
+/* ── Font wiring (next/font/local, layout.tsx → var(--font-hz)) ──
+   TODO(font-mono): agganciare ABC Monument Grotesk Semi-Mono / IBM Plex
+   Mono via next/font quando licenziato; per ora fallback ui-monospace.
+   TODO(font-license): OTF Helvetica Neue = licenza DESKTOP → licenza
+   WEBFONT prima di deploy pubblico. */
+:root {
+  --hz-font-display: var(--font-hz), 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --hz-font-body: var(--font-hz), 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  /* ABC Monument (quando licenziato) → IBM Plex Mono self-hosted → fallback */
+  --hz-font-mono: 'ABC Monument Grotesk Semi-Mono', var(--font-hz-mono),
+    'Space Mono', ui-monospace, monospace;
+}
+
+/* ── reset ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: auto; /* Lenis gestisce lo smooth scroll */
+  scroll-padding-top: 5rem; /* gli anchor atterrano sotto l'header sticky */
+}
+
+body {
+  min-height: 100dvh;
+  background: var(--hz-bg); /* default CHIARO (White) */
+  color: var(--hz-ink);
+  font-family: var(--hz-font-body);
+  font-weight: var(--hz-weight-body);
+  font-size: var(--hz-t-body);
+  line-height: var(--hz-leading-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── tipografia base ── */
+h1, h2, h3, h4 {
+  font-family: var(--hz-font-display);
+  font-weight: var(--hz-weight-display);
+  line-height: var(--hz-leading-tight);
+  letter-spacing: var(--hz-tracking-tight);
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* ── focus visibile (accessibilità) ── */
+:focus-visible {
+  outline: 2px solid var(--hz-focus-ring);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--raw-cold);
+  color: var(--raw-white);
+}
+
+/* ── utilities ── */
+.hz-container {
+  width: 100%;
+  max-width: var(--hz-content-max);
+  margin-inline: auto;
+  padding-inline: var(--hz-gutter);
+}
+
+.hz-mono {
+  font-family: var(--hz-font-mono);
+  font-size: var(--hz-t-meta);
+  letter-spacing: var(--hz-tracking-mono);
+  text-transform: uppercase;
+  font-weight: var(--hz-weight-regular);
+}
+
+/* ── DISPLAY maiuscolo gigante ("poster") ──
+   Trattamento firma R1: potente, edge-to-edge, MA fatto bene — leading serrato
+   senza far toccare le righe, tracking negativo calibrato per non far collidere
+   i glifi, wrap bilanciato. text-box-trim ritaglia lo spazio sopra/sotto i
+   maiuscoli così l'allineamento alla griglia è ottico, non nominale. */
+.hz-mega,
+.hz-ultra {
+  font-family: var(--hz-font-display);
+  font-weight: var(--hz-weight-display);
+  text-transform: uppercase;
+  line-height: var(--hz-leading-mega);
+  letter-spacing: var(--hz-tracking-mega);
+  text-wrap: balance;
+  margin: 0;
+  hyphens: none;
+}
+.hz-mega { font-size: var(--hz-t-mega); }
+.hz-ultra {
+  font-size: var(--hz-t-ultra);
+  line-height: 0.8;
+  letter-spacing: -0.028em;
+}
+/* accento inline dentro un titolo display (una parola in Signal, ecc.) */
+.hz-mega em,
+.hz-ultra em { font-style: normal; color: var(--hz-signal); }
+
+.hz-measure {
+  max-width: var(--hz-text-max);
+}
+
+.hz-hairline {
+  border: 0;
+  border-top: 1px solid var(--hz-line);
+}
+
+/* skip-link accessibilità */
+.hz-skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: var(--hz-z-modal);
+  background: var(--raw-ink);
+  color: var(--raw-white);
+  padding: 0.75rem 1rem;
+  font-family: var(--hz-font-mono);
+  font-size: var(--hz-t-meta);
+}
+.hz-skip:focus {
+  left: var(--hz-gutter);
+  top: var(--hz-space-sm);
+}
+
+/* ═══════════════════ FX · CRT / PRINT TEXTURE KIT ═══════════════════
+   Overlay riutilizzabili — <span aria-hidden> da inserire come figli di un
+   qualsiasi contenitore in position:relative;overflow:hidden (poster eventi,
+   card gallery, archivio). Riprende il linguaggio "stampa/CRT" del sito
+   storico (scanline + banda che scorre + phosphor + registration marks),
+   ricolorato dai blu legacy (#144889 / #1c5cad) alla firma Signal.
+   Un solo set di regole, riusato ovunque — niente duplicazione per-modulo. */
+
+@keyframes hz-scanband {
+  0%   { transform: translateY(-160%); }
+  100% { transform: translateY(760%); }
+}
+@keyframes hz-crt-flick {
+  0%, 96%, 100% { opacity: 0.55; }
+  97% { opacity: 0.42; }
+  98% { opacity: 0.62; }
+  99% { opacity: 0.5; }
+}
+
+/* wrapper opzionale: garantisce contesto + isolamento blend per gli overlay */
+.hz-fx {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* scanline CRT — righe orizzontali finissime, BITONO (una riga chiara + una
+   scura per ogni passo) così restano leggibili sia sulle foto scure che su
+   quelle chiare, non solo sui mezzitoni. */
+.hz-scanlines {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.05) 0 1px,
+    rgba(0, 0, 0, 0) 1px 2px,
+    rgba(0, 0, 0, 0.22) 2px 3px
+  );
+  opacity: 0.55;
+  animation: hz-crt-flick 6s steps(30) infinite;
+}
+
+/* banda di scansione — sweep Signal che scorre in verticale (loop lento) */
+.hz-scanband {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 24%;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    color-mix(in srgb, var(--hz-signal, #a3b7b7) 30%, transparent),
+    transparent
+  );
+  mix-blend-mode: screen;
+  opacity: 0.85;
+  animation: hz-scanband 7.5s linear infinite;
+}
+
+/* phosphor glow Signal + vignette (bordo interno scuro, profondità "tubo") */
+.hz-phosphor {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(
+    82% 62% at 50% 26%,
+    color-mix(in srgb, var(--hz-signal, #a3b7b7) 18%, transparent),
+    transparent 70%
+  );
+  box-shadow: inset 0 0 170px 22px rgba(0, 0, 0, 0.46);
+}
+
+/* registration marks — 4 L-bracket agli angoli (currentColor: bianco su
+   poster scuri, ink su superfici chiare) */
+.hz-reg {
+  position: absolute;
+  z-index: 4;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  opacity: 0.55;
+  color: inherit;
+}
+.hz-reg-tl { top: 10px; left: 10px; border-top: 1px solid currentColor; border-left: 1px solid currentColor; }
+.hz-reg-tr { top: 10px; right: 10px; border-top: 1px solid currentColor; border-right: 1px solid currentColor; }
+.hz-reg-bl { bottom: 10px; left: 10px; border-bottom: 1px solid currentColor; border-left: 1px solid currentColor; }
+.hz-reg-br { bottom: 10px; right: 10px; border-bottom: 1px solid currentColor; border-right: 1px solid currentColor; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hz-scanlines { animation: none; }
+  .hz-scanband { display: none; }
+}
+
+/* ═══════════════════ GLITCH · texture INTEGRATA per le FOTO ════════════════
+   Effetto serio e moderno, dentro l'immagine (non sovrapposto): righe fini da
+   retinatura di stampa + grana analogica. Niente aberrazione cromatica, niente
+   glitch colorato laterale. Statico → reduced-motion safe. Applicare .hz-glitch
+   al contenitore e GlitchFX come ultimo figlio. */
+.hz-glitch {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+/* righe fini stile retinatura da stampa: disturbano la foto senza aggiungere colore */
+.hz-glitch-lines {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.16;
+  mix-blend-mode: multiply;
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.6) 0px,
+    rgba(0, 0, 0, 0.6) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+}
+/* grana fine analogica (noise fractale in data-uri, desaturato) */
+.hz-glitch-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.09;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 150px 150px;
+}
+
+/* ═══════════════════ TEXTURE elegante · per le LOCANDINE ═══════════════════
+   Niente CRT/scan/glitch: grana fine da stampa + vignette morbida con un velo
+   Signal + registration marks (linguaggio editoriale/print). Reduced-motion
+   safe (statiche). Le .hz-reg* sono condivise col vecchio cluster. */
+.hz-print-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.08;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+.hz-print-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 88% at 50% 6%, color-mix(in srgb, var(--hz-signal, #a3b7b7) 12%, transparent), transparent 62%),
+    linear-gradient(180deg, transparent 62%, rgba(0, 0, 0, 0.22));
+  box-shadow: inset 0 0 90px 8px rgba(0, 0, 0, 0.24);
+}
+
+/* ═══════════════════ MOTION · righe / card / equalizer ═══════════════════
+   Micro-interazioni riutilizzabili via className (nessuna duplicazione per
+   modulo). Reduced-motion safe. Applicazione:
+   - righe tabella/lista → class `hz-rowfx` sul link/riga; `hz-fx-arrow` sulla
+     freccia interna (scorre in hover), `hz-eq` per l'equalizer audio.
+   - card → class `hz-cardfx` (lift + accent su hover).
+   L'accento parte SEMPRE dal linguaggio "segnale/frequenza" del brand. */
+
+/* --- equalizer audio (barre di frequenza) --- */
+@keyframes hz-eq {
+  0%, 100% { transform: scaleY(0.22); }
+  50%      { transform: scaleY(1); }
+}
+.hz-eq {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  width: 15px;
+  height: 14px;
+  flex: none;
+  color: var(--hz-accent);
+}
+.hz-eq i {
+  flex: 1;
+  height: 100%;
+  background: currentColor;
+  transform-origin: bottom;
+  transform: scaleY(0.3);
+  animation: hz-eq 0.85s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.hz-eq i:nth-child(1) { animation-delay: -0.20s; }
+.hz-eq i:nth-child(2) { animation-delay: -0.55s; }
+.hz-eq i:nth-child(3) { animation-delay: -0.05s; }
+.hz-eq i:nth-child(4) { animation-delay: -0.72s; }
+.hz-eq[data-play='true'] i { animation-play-state: running; }
+.hz-rowfx:hover .hz-eq i,
+.hz-rowfx:focus-visible .hz-eq i { animation-play-state: running; }
+
+/* --- row FX: barra d'accento a sinistra che cresce + freccia che scorre --- */
+.hz-rowfx { position: relative; }
+.hz-rowfx::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--hz-accent);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform var(--hz-ui, 0.3s) var(--hz-ease-out, ease);
+  pointer-events: none;
+}
+.hz-rowfx:hover::before,
+.hz-rowfx:focus-visible::before { transform: scaleY(1); }
+.hz-fx-arrow {
+  display: inline-flex;
+  transition:
+    transform var(--hz-ui, 0.3s) var(--hz-ease-out, ease),
+    opacity var(--hz-fast, 0.15s) var(--hz-ease-out, ease);
+}
+.hz-rowfx:hover .hz-fx-arrow,
+.hz-rowfx:focus-visible .hz-fx-arrow,
+.hz-cardfx:hover .hz-fx-arrow,
+.hz-cardfx:focus-visible .hz-fx-arrow { transform: translate(0.18em, -0.18em); }
+
+/* --- card FX: lift + accento su hover --- */
+.hz-cardfx {
+  transition:
+    transform var(--hz-ui, 0.3s) var(--hz-ease-out, ease),
+    border-color var(--hz-ui, 0.3s) var(--hz-ease-out, ease),
+    background-color var(--hz-ui, 0.3s) var(--hz-ease-out, ease);
+}
+/* `will-change` solo mentre il puntatore è sulla card: da statico erano ~20
+   layer promossi in GPU sulla sola home, per un translateY di 4px che il
+   compositor gestisce comunque. */
+.hz-cardfx:hover { transform: translateY(-4px); will-change: transform; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hz-eq i { animation: none; transform: scaleY(0.5); }
+  .hz-rowfx::before { transition: none; }
+  .hz-fx-arrow { transition: none; }
+  .hz-cardfx:hover { transform: none; will-change: auto; }
+}

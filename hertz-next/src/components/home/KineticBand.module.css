@@ -1,0 +1,106 @@
+/* ────────────────────────────────────────────────────────────
+   KINETIC BAND — "ORDER / DISORDER" (R1, ripulito)
+   Edge-to-edge su superficie Ink. Due righe che scorrono in senso
+   opposto, seamless. Fatto bene: separatori spaziati, nessuna
+   collisione di glifi, crop pulito, fallback statico reduced-motion.
+   ──────────────────────────────────────────────────────────── */
+.band {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: clamp(2.25rem, 5vw, 4.5rem) 0 clamp(2.5rem, 5.5vw, 5rem);
+  background: var(--hz-bg);      /* ereditato da data-surface="ink" */
+  color: var(--hz-ink);
+  border-block: 1px solid var(--hz-line);
+}
+
+.labels {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--hz-space-md);
+  padding-inline: var(--hz-gutter);
+  margin-bottom: clamp(1.25rem, 2.5vw, 2.25rem);
+  color: var(--hz-ink-mute);
+}
+.labels .idx { color: var(--hz-ink); }
+
+.marquee {
+  overflow: hidden;
+  width: 100%;
+}
+
+.inner {
+  display: flex;
+  width: max-content;
+}
+/* durata definita solo qui: prima viveva anche in uno style inline che
+   vinceva sempre, lasciando i fallback CSS a raccontare valori mai usati */
+.inner[data-dir='left']  { animation: hz-band-left  34s linear infinite; }
+.inner[data-dir='right'] { animation: hz-band-right 46s linear infinite; }
+
+/* In pausa finché la banda non entra in viewport (data-run dal componente).
+   Le due regole vanno DOPO le shorthand qui sopra: `animation` resetta
+   animation-play-state a `running`, quindi una pausa dichiarata prima
+   verrebbe cancellata. */
+.band .inner { animation-play-state: paused; }
+.band[data-run='true'] .inner { animation-play-state: running; }
+
+.track {
+  display: flex;
+  flex: none;
+  align-items: baseline;
+}
+
+.word {
+  display: inline-flex;
+  align-items: baseline;
+  white-space: nowrap;
+  padding-inline: 0;
+}
+
+/* riga 1 — bianco pieno */
+.rowPrimary .word {
+  font-family: var(--hz-font-display);
+  font-weight: var(--hz-weight-display);
+  text-transform: uppercase;
+  font-size: var(--hz-t-ultra);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--hz-ink);
+}
+/* riga 2 — Signal, leggermente più piccola, in scorrimento opposto */
+.rowSecondary {
+  margin-top: clamp(0.15rem, 0.6vw, 0.6rem);
+}
+.rowSecondary .word {
+  font-family: var(--hz-font-display);
+  font-weight: var(--hz-weight-display);
+  text-transform: uppercase;
+  font-size: calc(var(--hz-t-ultra) * 0.62);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: var(--hz-signal);
+}
+
+/* separatore " / " spaziato — impedisce le collisioni tra parole */
+.sep {
+  font-style: normal;
+  padding-inline: clamp(0.25em, 0.5vw, 0.4em);
+  color: var(--hz-ink-mute);
+  opacity: 0.7;
+}
+.rowSecondary .sep { color: var(--hz-signal); opacity: 0.55; }
+
+@keyframes hz-band-left {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+@keyframes hz-band-right {
+  from { transform: translate3d(-50%, 0, 0); }
+  to   { transform: translate3d(0, 0, 0); }
+}
+
+/* reduced-motion: niente scorrimento, resta statico e leggibile */
+@media (prefers-reduced-motion: reduce) {
+  .inner { animation: none !important; }
+}

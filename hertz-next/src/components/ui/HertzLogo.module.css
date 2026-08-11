@@ -1,0 +1,9 @@
+.mark {
+  display: inline-block;
+  flex: none;
+  height: var(--logo-h, 40px);
+  aspect-ratio: 600 / 444; /* lockup ufficiale: sinusoide + wordmark */
+  background-color: currentColor;
+  -webkit-mask: url(/assets/hertz-logo-header.png) center / contain no-repeat;
+  mask: url(/assets/hertz-logo-header.png) center / contain no-repeat;
+}

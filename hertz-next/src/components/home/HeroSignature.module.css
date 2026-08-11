@@ -1,0 +1,127 @@
+/* ────────────────────────────────────────────────────────────
+   HERO SIGNATURE — firma di stampa in fondo alla hero.
+   Riga hairline (si disegna da sx) + lockup ufficiale hertz a destra.
+   A sinistra il prossimo evento: kicker mono, titolo nel display del brand,
+   meta mono, CTA da 44px. È l'unica azione above the fold.
+   ──────────────────────────────────────────────────────────── */
+.signature {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  margin-top: clamp(1.5rem, 5vh, 3rem);
+}
+
+.rule {
+  display: block;
+  height: 1px;
+  width: 100%;
+  background: var(--hz-ink);
+  transform-origin: left center;
+  will-change: transform;
+  /* Sopra a .row: lo scrim di .next::before sale di 1.1em sopra il blocco,
+     e sotto gli ~880px di viewport lo stacco (2.2vh) si accorcia abbastanza
+     da farglielo scavalcare — con `isolation: isolate` su .next il suo
+     z-index:-1 resta nel proprio contesto e finiva a dipingere il colore di
+     fondo SOPRA la riga, che si vedeva sfumata a sinistra. La riga è la firma
+     della composizione: sta sopra a tutto, sempre piena. */
+  position: relative;
+  z-index: 1;
+}
+
+.row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--hz-space-md);
+  margin-top: clamp(0.9rem, 2.2vh, 1.5rem);
+}
+
+.next {
+  position: relative;
+  /* stacking context proprio: lo scrim ::before sta DIETRO al testo ma sopra
+     la griglia di punti della hero. */
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+  min-width: 0;
+}
+/* alone morbido nel colore della hero: sfuma i punti della signal grid sotto
+   il blocco, così il testo non ci sbatte contro. */
+.next::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: -1.1em -1.7em -0.9em -1.3em;
+  background: radial-gradient(
+    125% 140% at 30% 50%,
+    var(--hz-bg) 46%,
+    color-mix(in srgb, var(--hz-bg) 55%, transparent) 70%,
+    transparent 88%
+  );
+  pointer-events: none;
+}
+
+.kicker {
+  color: var(--hz-ink-mute);
+}
+
+.title {
+  font-family: var(--hz-font-display);
+  font-weight: var(--hz-weight-display);
+  font-size: clamp(1.25rem, 2.2vw, 1.9rem);
+  line-height: 1.05;
+  letter-spacing: var(--hz-tracking-tight);
+  color: var(--hz-ink);
+  text-wrap: balance;
+}
+.title:hover {
+  color: var(--hz-accent);
+}
+
+.meta {
+  color: var(--hz-ink-mute);
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  min-height: 44px;
+  margin-top: 0.35rem;
+  padding: 0.6em 1.15em;
+  border: 1px solid var(--hz-ink);
+  border-radius: var(--hz-radius-control);
+  color: var(--hz-ink);
+  transition:
+    background-color var(--hz-ui) var(--hz-ease-out),
+    color var(--hz-ui) var(--hz-ease-out);
+}
+.cta:hover {
+  background: var(--hz-ink);
+  color: var(--hz-bg);
+}
+
+/* lockup ufficiale (sinusoide + wordmark) come firma grande — stessa maschera
+   di HertzLogo, con dimensione responsive dedicata alla hero. */
+.mark {
+  flex: none;
+  display: block;
+  height: clamp(2.6rem, 5vw, 4.5rem);
+  aspect-ratio: 600 / 444;
+  background-color: var(--hz-ink);
+  -webkit-mask: url(/assets/hertz-logo-header.png) center / contain no-repeat;
+  mask: url(/assets/hertz-logo-header.png) center / contain no-repeat;
+}
+
+@media (max-width: 480px) {
+  .kicker,
+  .meta {
+    font-size: 0.72rem;
+  }
+  .mark {
+    height: 2.2rem;
+    align-self: flex-end;
+  }
+}
