@@ -63,8 +63,13 @@ export const EVENTS: HertzEvent[] = [
     time: 'SAT · 05:00 → 06:00', badge: 'Collaboration', poster: '/assets/poster-v3-15ago-buongiorno.jpg',
     bill: 'Bartolomeo · Isaac Carter · Raresh · Tania Vulcano · Gibo · Federico Apadula · Tommaso Mancò · Alberto B · Emkey · Materia Sonora · Mattia Santandrea · Michele Preda · Neghesti',
     lineup: ['federico-apadula', 'tommaso-manco', 'alberto-b'] },
-  { n: '032', title: 'Hertz at Barracuda Club', venue: 'Barracuda', city: 'Ferrara', iso: '2026-08-14',
-    badge: 'Collaboration', poster: '', lineup: [], comingSoon: true },
+  // città corretta da 'Ferrara' a 'Lido di Spina' (frazione di Comacchio, prov.
+  // di Ferrara): è l'indirizzo sulla locandina — Viale Raffaello Sanzio 109 —
+  // ed è già come indichiamo la 029, stesso venue.
+  { n: '032', title: 'Hertz at Barracuda Club', venue: 'Barracuda', city: 'Lido di Spina', iso: '2026-08-14',
+    time: 'FRI · 23:30 → LATE', badge: 'Collaboration', poster: '/assets/poster-v3-14ago-barracuda.jpg',
+    bill: 'Federico Apadula · Iari Santi · Tommaso Mancò · Alberto B · Alex VLT · Nelly',
+    lineup: ['federico-apadula', 'tommaso-manco', 'alberto-b'] },
   { n: '033', title: 'Hertz at earWorm', venue: 'earWorm · Boat Party (3 Years)', city: 'Lake Iseo', iso: '2026-08-01',
     time: 'SAT · 17:30 → 22:30', badge: 'Guest', poster: '/assets/poster-v3-01ago-earworm.jpg',
     bill: 'Federico Apadula · Krusty · Mae · Massi ISX', lineup: ['federico-apadula'] },
